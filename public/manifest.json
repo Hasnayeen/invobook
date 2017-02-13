@@ -1,0 +1,5 @@
+{
+  "login.css": "/css/app.css",
+  "login.js": "/js/auth/login.js",
+  "register.js": "/js/auth/register.js"
+}
