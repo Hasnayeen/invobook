@@ -1,0 +1,15 @@
+body {
+    margin-bottom: 25px;
+}
+
+nav, .nav {
+    margin-bottom: 20px;
+    a {
+        font-weight: 700;
+        font-size: $size-5;
+    }
+}
+
+.card {
+    box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1);
+}
