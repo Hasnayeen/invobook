@@ -6,3 +6,6 @@
 Homestead.json
 Homestead.yaml
 .env
+.env.testing
+.phpintel
+composer.lock
