@@ -15,6 +15,7 @@ class CreateOfficeSettingsTable extends Migration
     {
         Schema::create('office_settings', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('office_id')->unsigned();
             $table->timestamps();
         });
     }
