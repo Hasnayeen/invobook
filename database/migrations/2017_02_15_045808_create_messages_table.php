@@ -17,7 +17,9 @@ class CreateMessagesTable extends Migration
             $table->increments('id');
             $table->string('body')->nullable();
             $table->integer('user_id')->unsigned();
-            $table->integer('attachment')->unsigned()->nullable()->comment('id of files table');
+            $table->integer('attachment_id')->unsigned()->nullable()->comment('id of files table');
+            $table->string('messageable_type')->comment('office, team or projects');
+            $table->integer('messageable_id')->unsigned();
             $table->timestamps();
         });
     }

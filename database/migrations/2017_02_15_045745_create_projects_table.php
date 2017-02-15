@@ -17,8 +17,9 @@ class CreateProjectsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('slug');
-            $table->integer('office')->unsigned()->nullable()->comment('id of office, if any, under which this project operates');
-            $table->integer('team')->unsigned()->nullable()->comment('id of team, if any, under which this project operates');
+            $table->string('description');
+            $table->integer('office_id')->unsigned()->nullable()->comment('id of office, if any, under which this project operates');
+            $table->integer('team_id')->unsigned()->nullable()->comment('id of team, if any, under which this project operates');
             $table->timestamps();
         });
     }

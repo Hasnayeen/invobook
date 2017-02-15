@@ -16,8 +16,10 @@ class CreateDiscussionsTable extends Migration
         Schema::create('discussions', function (Blueprint $table) {
             $table->increments('id');
             $table->text('content');
-            $table->integer('user_id')->unsigned();
+            $table->integer('posted_by')->unsigned();
             $table->boolean('archived')->default(false);
+            $table->string('discussionable_type')->comment('office, team or projects');
+            $table->integer('discussionable_id')->unsigned();
             $table->timestamps();
         });
     }

@@ -18,6 +18,8 @@ class CreateNotificationsTable extends Migration
             $table->string('text');
             $table->string('url');
             $table->boolean('seen')->default(false);
+            $table->string('notifiable_type')->comment('user, office, team or projects');
+            $table->integer('notifiable_id')->unsigned();
             $table->timestamps();
         });
     }

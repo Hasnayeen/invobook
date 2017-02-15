@@ -15,6 +15,7 @@ class CreateTeamSettingsTable extends Migration
     {
         Schema::create('team_settings', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('team_id')->unsigned();
             $table->timestamps();
         });
     }

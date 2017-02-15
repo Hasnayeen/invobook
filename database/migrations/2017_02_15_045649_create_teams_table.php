@@ -17,7 +17,8 @@ class CreateTeamsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('slug');
-            $table->integer('office')->unsigned()->nullable()->comment('id of office, if any, under which this team operates');
+            $table->string('description');
+            $table->integer('office_id')->unsigned()->nullable()->comment('id of office, if any, under which this team operates');
             $table->timestamps();
         });
     }

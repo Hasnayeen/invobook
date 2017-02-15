@@ -15,6 +15,8 @@ class CreateOfficeTeamTable extends Migration
     {
         Schema::create('office_team', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('office_id')->unsigned();
+            $table->integer('team_id')->unsigned();
             $table->timestamps();
         });
     }
