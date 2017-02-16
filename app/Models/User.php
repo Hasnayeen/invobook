@@ -26,4 +26,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    const ADMIN  = 1;
+    const MEMBER = 2;
 }
