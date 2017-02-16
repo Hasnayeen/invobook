@@ -41,8 +41,8 @@
     export default {
         data: () => ({
             token: Laravel.csrfToken,
-            errors: errors,
-            url: url
+            errors: data.errors,
+            url: 'login'
         })
     }
 </script>
