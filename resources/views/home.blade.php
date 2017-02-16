@@ -5,7 +5,14 @@
 <home></home>
 
 @slot('script')
-<script src="/js/app.js"></script>
+<script type="text/javascript">
+    window.data = @php echo json_encode([
+            'errors' => $errors,
+            'guest' => !Auth::check(),
+        ]);
+        @endphp;
+</script>
+<script src="/js/home.js"></script>
 @endslot
 
 @endcomponent
