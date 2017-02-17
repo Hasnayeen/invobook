@@ -12,9 +12,7 @@
       <span></span>
     </span>
     <div class="nav-right nav-menu">
-        @if (Auth::guest())
-            <a class="nav-item is-tab" href="{{ url('/login') }}">Login</a>
-        @else
+        @if (!Auth::guest())
             <a class="nav-item is-tab" href="">{{ Auth::user()->username }}</a>
             <a class="nav-item is-tab" href="{{ url('/logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
             <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">

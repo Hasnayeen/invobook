@@ -2,26 +2,42 @@
 ## Git workflow
 
 ### First time setup
-1. Fork the repo https://github.com/iluminar/goodwork.
+[Fork the repo if you are outside collaborator https://github.com/iluminar/goodwork. ]
 
-2. Clone the project to your local pc
+1. Clone the project to your local pc
 ``` bash
 $ git clone git@github.com:iluminar/goodwork.git
 ```
+for outside collaborator
+``` bash
+$ git clone git@github.com:{yourusername}/goodwork.git
+```
 
-3. Configure remotes:
+2. Configure remotes:
 ``` bash
 $ cd goodwork
 $ git remote add origin git@github.com:iluminar/goodwork.git
 ```
 
-4. Setup application
+3. Setup application
 ``` bash
 $ git checkout dev
 $ git pull origin dev
 $ composer install
+$ cp .env.example .env
 $ php artisan key:generate
-$npm install
+$ npm install
+```
+
+N.B: If you get this error
+```
+[Symfony\Component\Debug\Exception\FatalErrorException]
+Class 'Laravel\Dusk\DuskServiceProvider' not found"
+```
+
+run this command
+``` bash
+$ composer update
 ```
 
 ### Regular workflow
@@ -61,8 +77,9 @@ $ git checkout issue[number]
 $ git rebase dev
 ```
 
-10. In the process of the rebase, it may discover conflicts. In that case it will stop and allow you to fix the conflicts. After fixing conflicts,run all test to ensure nothing breaks and then use git add . to update the index with those contents, and then just run:
+10. In the process of the rebase, it may discover conflicts. In that case it will stop and allow you to fix the conflicts. After fixing conflicts,run all test to ensure nothing breaks and then just run:
 ``` bash
+$ git add .
 $ git rebase --continue
 ```
 

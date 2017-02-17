@@ -8,7 +8,7 @@
 <script type="text/javascript">
     window.data = @php echo json_encode([
             'errors' => $errors,
-            'guest' => !Auth::check(),
+            'guest' => !Auth::check()
         ]);
         @endphp;
 </script>
