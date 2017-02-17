@@ -25,7 +25,7 @@
                         <a href="password/reset" class="is-pulled-right">Forgot Your Password?</a>
                     </p>
                     <p class="control">
-                        <button type="submit" class="button is-primary is-fullwidth">Login</button>
+                        <button type="submit" class="button is-accent is-fullwidth">Login</button>
                     </p>
                 </div>
             </div>

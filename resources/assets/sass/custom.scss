@@ -4,6 +4,7 @@ body {
 
 nav, .nav {
     margin-bottom: 20px;
+    background-color: $base-color;
     a {
         font-weight: 700;
         font-size: $size-5;
@@ -12,4 +13,40 @@ nav, .nav {
 
 .card {
     box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1);
+}
+
+.is-base {
+    background-color: $base-color;
+    color: $white;
+}
+
+.is-base-darker {
+    background-color: $base-color-darker;
+}
+
+.is-base-lighter {
+    background-color: $base-color-lighter;
+}
+
+.is-accent {
+    background-color: $accent-color;
+    color: $white;
+}
+
+.card {
+    box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1);
+}
+
+.dashboard .card-content {
+    min-height: 125px;
+    max-height: 125px;
+    overflow-y: hidden;
+}
+
+.card .card-content-item {
+    @extend .card-content;
+}
+
+.card .card-content-item:not(:last-child) {
+    border-bottom: 1px solid #dbdbdb;
 }

@@ -10,9 +10,6 @@ import login from './auth/login.vue'
         },
         data: () => ({
             guest: data.guest
-        }),
-        mounted() {
-            console.log('Component mounted.')
-        }
+        })
     }
 </script>
