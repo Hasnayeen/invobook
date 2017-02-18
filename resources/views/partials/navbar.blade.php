@@ -2,7 +2,6 @@
     <div class="nav-left">
       <a class="nav-item is-base-darker" href="{{ url('/') }}">
       GOODWORK
-      <i class="fa fa-space-shuttle"></i>
       </a>
     </div>
     <span class="nav-toggle">

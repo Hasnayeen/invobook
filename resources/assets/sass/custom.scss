@@ -3,7 +3,7 @@ body {
 }
 
 nav, .nav {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     background-color: $base-color;
     a {
         font-weight: 700;
@@ -37,10 +37,10 @@ nav, .nav {
     box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1);
 }
 
-.dashboard .card-content {
+.justified .card-content {
     min-height: 125px;
     max-height: 125px;
-    overflow-y: hidden;
+    overflow-y: auto;
 }
 
 .card .card-content-item {
@@ -48,5 +48,5 @@ nav, .nav {
 }
 
 .card .card-content-item:not(:last-child) {
-    border-bottom: 1px solid #dbdbdb;
+    border-bottom: 1px solid #0dcee7;
 }
