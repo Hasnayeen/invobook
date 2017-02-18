@@ -9585,7 +9585,7 @@ module.exports = function bind(fn, thisArg) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(34);
-login = __webpack_require__(36);
+login = __webpack_require__(35);
 
 var app = new Vue({
     el: '#app',
@@ -10438,13 +10438,11 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 32 */,
-/* 33 */
+/* 32 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
 //
 //
 //
@@ -10495,6 +10493,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 };
 
 /***/ }),
+/* 33 */,
 /* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10520,13 +10519,12 @@ window.axios.defaults.headers.common = {
 // });
 
 /***/ }),
-/* 35 */,
-/* 36 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(3)(
   /* script */
-  __webpack_require__(33),
+  __webpack_require__(32),
   /* template */
   __webpack_require__(37),
   /* scopeId */
@@ -10555,14 +10553,13 @@ module.exports = Component.exports
 
 
 /***/ }),
+/* 36 */,
 /* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "columns"
-  }, [_c('div', {
-    staticClass: "column is-4 is-offset-4"
+    staticClass: "column is-6 is-offset-3"
   }, [_c('form', {
     attrs: {
       "role": "form",
@@ -10609,7 +10606,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "help is-danger"
   }, [_vm._v(_vm._s(_vm.errors.password))]) : _vm._e()]), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2)])]), _vm._v(" "), _c('footer', {
     staticClass: "card-footer"
-  })])])])])
+  })])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('header', {
     staticClass: "card-header"
