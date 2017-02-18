@@ -1,7 +1,6 @@
 <nav class="nav has-shadow">
-  <div class="container">
     <div class="nav-left">
-      <a class="nav-item" href="{{ url('/') }}">
+      <a class="nav-item is-base-darker" href="{{ url('/') }}">
       GOODWORK
       <i class="fa fa-space-shuttle"></i>
       </a>
@@ -20,5 +19,4 @@
             </form>
         @endif
     </div>
-  </div>
 </nav>
