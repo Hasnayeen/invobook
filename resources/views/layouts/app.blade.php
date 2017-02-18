@@ -25,7 +25,15 @@
     <div id="app">
         @include('partials.navbar')
 
-        {{ $slot }}
+        <div class="container">
+            <div class="tile is-ancestor">
+                <div class="tile is-2"></div>
+                <div class="tile">
+                        {{ $slot }}
+                </div>
+                <div class="tile is-2"></div>
+            </div>
+        </div>
     </div>
     <!-- Scripts -->
     {{ $script }}
