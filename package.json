@@ -9,9 +9,7 @@
   "devDependencies": {
     "axios": "^0.15.2",
     "bulma": "^0.3.0",
-    "jquery": "^3.1.0",
-    "laravel-mix": "^0.4.0",
-    "lodash": "^4.16.2",
+    "laravel-mix": "^0.8.0",
     "vue": "^2.0.1",
     "webpack": "^2.2.1"
   }
