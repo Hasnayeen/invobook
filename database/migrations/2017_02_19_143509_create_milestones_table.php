@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOfficeProjectTable extends Migration
+class CreateMilestonesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateOfficeProjectTable extends Migration
      */
     public function up()
     {
-        Schema::create('office_project', function (Blueprint $table) {
+        Schema::create('milestones', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('office_id')->unsigned();
-            $table->integer('project_id')->unsigned();
+            $table->string('name');
+            $table->string('slug');
+            $table->string('description')->nullable();
+            $table->dateTime('due_on');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateOfficeProjectTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('office_project');
+        Schema::dropIfExists('milestones');
     }
 }

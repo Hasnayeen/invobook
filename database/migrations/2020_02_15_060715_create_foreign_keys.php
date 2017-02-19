@@ -74,6 +74,10 @@ class CreateForeignKeys extends Migration
             $table->foreign('label_id')->references('id')->on('labels')->onDelete('cascade');
             $table->foreign('task_id')->references('id')->on('tasks')->onDelete('cascade');
         });
+        Schema::table('milestone_task', function ($table) {
+            $table->foreign('milestone_id')->references('id')->on('milestones')->onDelete('cascade');
+            $table->foreign('task_id')->references('id')->on('tasks')->onDelete('cascade');
+        });
     }
 
     /**
@@ -91,17 +95,17 @@ class CreateForeignKeys extends Migration
             $table->dropForeign('projects_team_id_foreign');
         });
         Schema::table('tasks', function ($table) {
-            $table->foreign('tasks_assigned_to_foreign');
+            $table->dropForeign('tasks_assigned_to_foreign');
         });
         Schema::table('messages', function ($table) {
-            $table->foreign('messages_user_id_foreign');
-            $table->foreign('messages_attachment_id_foreign');
+            $table->dropForeign('messages_user_id_foreign');
+            $table->dropForeign('messages_attachment_id_foreign');
         });
         Schema::table('discussions', function ($table) {
-            $table->foreign('discussions_posted_by_foreign');
+            $table->dropForeign('discussions_posted_by_foreign');
         });
         Schema::table('events', function ($table) {
-            $table->foreign('events_created_by_foreign');
+            $table->dropForeign('events_created_by_foreign');
         });
         Schema::table('user_settings', function ($table) {
             $table->dropForeign('user_settings_user_id_foreign');
@@ -138,8 +142,16 @@ class CreateForeignKeys extends Migration
             $table->dropForeign('project_user_user_id_foreign');
         });
         Schema::table('office_project', function ($table) {
-            $table->dropForeign('office_user_office_id_foreign');
-            $table->dropForeign('office_user_project_id_foreign');
+            $table->dropForeign('office_project_office_id_foreign');
+            $table->dropForeign('office_project_project_id_foreign');
+        });
+        Schema::table('label_task', function ($table) {
+            $table->dropForeign('label_task_label_id_foreign');
+            $table->dropForeign('label_task_task_id_foreign');
+        });
+        Schema::table('milestone_task', function ($table) {
+            $table->dropForeign('milestone_task_milestone_id_foreign');
+            $table->dropForeign('milestone_task_task_id_foreign');
         });
     }
 }
