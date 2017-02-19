@@ -3,6 +3,7 @@
 // -----------
 $base-color: #08b7ce;
 $base-color-darker: #099fb3;
+$base-color-darkest: #0099ad;
 $base-color-lighter: #0dcee7;
 $accent-color: #f97d48;
 $gray-darker:  hsl(0, 0%, 21%);
@@ -14,7 +15,7 @@ $gray-lighter: hsl(0, 0%, 97%);
 // -----------
 // Link colors
 // -----------
-$link: $base-color-lighter !default;
+$link: $base-color-darker !default;
 $link-invert: findColorInvert($base-color-lighter) !default;
 
 // -----------

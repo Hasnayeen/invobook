@@ -1,7 +1,7 @@
 <template>
     <div class="column is-fullwidth">
         <div class="card">
-          <header class="card-header is-base-darker">
+          <header class="card-header">
             <a class="card-header-title has-text-centered">
               Activity Timeline
             </a>

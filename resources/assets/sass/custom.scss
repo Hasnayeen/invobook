@@ -45,8 +45,11 @@ nav, .nav {
 
 .card .card-content-item {
     @extend .card-content;
+    .icon, .a {
+        margin-right: .5rem;
+    }
 }
 
 .card .card-content-item:not(:last-child) {
-    border-bottom: 1px solid #0dcee7;
+    border-bottom: 1px solid hsla(187, 93%, 56%, 0.2);
 }
