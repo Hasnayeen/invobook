@@ -1,5 +1,5 @@
 <template>
-<div class="column is-6 is-offset-3">
+<div class="column is-6 is-offset-3 login-form">
     <form role="form" method="POST" :action="url">
         <input type="hidden" name="_token" :value="token">
         <div class="card">
