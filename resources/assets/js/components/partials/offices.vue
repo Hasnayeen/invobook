@@ -1,7 +1,7 @@
 <template>
     <div class="column is-one-third">
         <div class="card justified">
-          <header class="card-header is-base-darker">
+          <header class="card-header">
             <a class="card-header-title">
               Offices
             </a>
