@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class CreateForeignKeys extends Migration
@@ -70,6 +69,10 @@ class CreateForeignKeys extends Migration
         Schema::table('office_project', function ($table) {
             $table->foreign('office_id')->references('id')->on('offices')->onDelete('cascade');
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
+        });
+        Schema::table('label_task', function ($table) {
+            $table->foreign('label_id')->references('id')->on('labels')->onDelete('cascade');
+            $table->foreign('task_id')->references('id')->on('tasks')->onDelete('cascade');
         });
     }
 
