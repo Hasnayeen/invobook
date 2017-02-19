@@ -9603,7 +9603,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("\n    GOODWORK\n    ")])]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('div', {
     staticClass: "nav-right nav-menu"
   }, [_c('a', {
-    staticClass: "nav-item is-tab avatar-link",
+    staticClass: "nav-item is-tab avatar-link  is-base-darker",
     attrs: {
       "href": "#"
     },
@@ -9614,7 +9614,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "src": _vm.avater
     }
-  }), _vm._v(_vm._s(_vm.user.name))]), _vm._v(" "), _c('ul', {
+  }), _vm._v(_vm._s(_vm.user.name) + " "), _c('i', {
+    staticClass: "fa fa-angle-down",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  })]), _vm._v(" "), _c('ul', {
     directives: [{
       name: "show",
       rawName: "v-show",
