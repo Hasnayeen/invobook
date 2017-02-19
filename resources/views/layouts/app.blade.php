@@ -21,10 +21,22 @@
             'csrfToken' => csrf_token(),
         ]) !!};
     </script>
+    @if (!Auth::guest())
+    <script>
+        window.data = {!! json_encode([
+            'user' => Auth::user(),
+            'navUrl' => ['site' => url('/'), 'logout' => url('/logout')]
+        ]) !!};
+    </script>
+    @endif
+
 </head>
 <body>
     <div id="app">
-        @include('partials.navbar')
+
+        @if (!Auth::guest())
+        <navbar></navbar>
+        @endif
 
         <div class="container">
             <div class="tile is-ancestor">
