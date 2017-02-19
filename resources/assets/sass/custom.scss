@@ -53,3 +53,48 @@ nav, .nav {
 .card .card-content-item:not(:last-child) {
     border-bottom: 1px solid hsla(187, 93%, 56%, 0.2);
 }
+
+//Login From
+.login-form{
+    padding-top: 100px;
+}
+
+//Nav Right Dropdown Menu
+ul.sub-nav-item {
+    position: absolute;
+    top: 100%;
+    width: 180px;
+    background-color: $base-color;
+    right: 0;
+    text-align: left;
+    padding: 0 14px 5px;
+    margin-top: 1px;
+}
+
+ul.sub-nav-item a{
+    color: $text-light;
+    display: inline-block;
+    font-size: 1.2rem;
+    padding: 5px 0;
+}
+
+ul.sub-nav-item a:hover{
+    color: $gray-darker;
+}
+
+.avatar-link img{
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 1px solid $base-color-darker;
+    width: 25px;
+    height: 25px;
+}
+
+a.avatar-link:hover {
+    border: 0 none;
+}
+
+.avatar-link i{
+    margin-left: 8px;
+    margin-top: 1px;
+}
