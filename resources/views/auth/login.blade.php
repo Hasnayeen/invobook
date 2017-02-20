@@ -4,10 +4,7 @@
 
 @section('style')
 <style type="text/css">
-    html, body {
-        height: 100%;
-    }
-    body {
+    html {
         background-color: #08b7ce;
     }
 </style>

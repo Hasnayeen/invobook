@@ -13,9 +13,11 @@
         <div class="nav-right nav-menu">
            
             <a class="nav-item is-tab avatar-link  is-base-darker" href="#" @click="showMenus"><img :src="avater">{{ user.name }} <i class="fa fa-angle-down" aria-hidden="true"></i></a>
-            <ul v-show="showSubMenu" class="sub-nav-item">
+            <ul class="sub-nav-item " v-bind:class="{ 'is-hidden-tablet': hideSubMenu }">
+                <li><a href="#">Your profile</a></li>
+                <li><a href="#">Help</a></li>
                 <li><a href="#">Settings</a></li>
-                <li><a :href="url.logout" @click="logoutUser">Logout</a></li>
+                <li class="separator-menu"><a :href="url.logout" @click="logoutUser">Logout</a></li>
             </ul>
             
             <form id="logout-form" :action="url.logout" method="POST" style="display: none;">
@@ -31,7 +33,7 @@
             user: data.user,
             token: Laravel.csrfToken,
             url: data.navUrl,
-            showSubMenu: false,
+            hideSubMenu: true,
             avater: ''
         }),
         methods: {
@@ -41,7 +43,8 @@
             },
             showMenus(event){
                 event.preventDefault();
-                this.showSubMenu = !this.showSubMenu;
+                event.stopPropagation();
+                this.hideSubMenu = !this.hideSubMenu;
             }
         },
         created(){
@@ -50,6 +53,14 @@
             }else{
                 this.avater = this.user.avater;
             }
+        },
+        mounted(){
+            var thisNav = this;
+            document.addEventListener("click", function(){
+                if( thisNav.hideSubMenu == false ){
+                    thisNav.hideSubMenu = true;
+                }
+            });
         }
     }
 </script>

@@ -10546,7 +10546,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "/Users/hasnayeen/www/goodwork/resources/assets/js/components/auth/register.vue"
+Component.options.__file = "E:\\Node Project\\goodwork\\resources\\assets\\js\\components\\auth\\register.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] register.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -10674,7 +10674,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "card-header"
   }, [_c('p', {
     staticClass: "card-header-title title has-text-centered"
-  }, [_vm._v("\n                Register\n                ")])])
+  }, [_vm._v("\r\n                Register\r\n                ")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('p', {
     staticClass: "control"
