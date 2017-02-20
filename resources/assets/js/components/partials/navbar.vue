@@ -14,8 +14,10 @@
            
             <a class="nav-item is-tab avatar-link  is-base-darker" href="#" @click="showMenus"><img :src="avater">{{ user.name }} <i class="fa fa-angle-down" aria-hidden="true"></i></a>
             <ul class="sub-nav-item " v-bind:class="{ 'is-hidden-tablet': hideSubMenu }">
+                <li><a href="#">Your profile</a></li>
+                <li><a href="#">Help</a></li>
                 <li><a href="#">Settings</a></li>
-                <li><a :href="url.logout" @click="logoutUser">Logout</a></li>
+                <li class="separator-menu"><a :href="url.logout" @click="logoutUser">Logout</a></li>
             </ul>
             
             <form id="logout-form" :action="url.logout" method="POST" style="display: none;">

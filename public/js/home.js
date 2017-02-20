@@ -9076,6 +9076,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 //avater.jpg
 /* harmony default export */ __webpack_exports__["default"] = {
     data: function (_data) {
@@ -9636,7 +9638,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     class: {
       'is-hidden-tablet': _vm.hideSubMenu
     }
-  }, [_vm._m(1), _vm._v(" "), _c('li', [_c('a', {
+  }, [_vm._m(1), _vm._v(" "), _vm._m(2), _vm._v(" "), _vm._m(3), _vm._v(" "), _c('li', {
+    staticClass: "separator-menu"
+  }, [_c('a', {
     attrs: {
       "href": _vm.url.logout
     },
@@ -9665,6 +9669,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('span', {
     staticClass: "nav-toggle"
   }, [_c('span'), _vm._v(" "), _c('span'), _vm._v(" "), _c('span')])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('li', [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_vm._v("Your profile")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('li', [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_vm._v("Help")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('li', [_c('a', {
     attrs: {
