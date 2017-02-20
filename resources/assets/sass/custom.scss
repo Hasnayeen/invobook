@@ -1,5 +1,5 @@
 body {
-    margin-bottom: 25px;
+    padding-bottom: 25px;
 }
 
 nav, .nav {
@@ -56,45 +56,48 @@ nav, .nav {
 
 //Login From
 .login-form{
-    padding-top: 40%;
+    padding-top: 25vh;
 }
 
 //Nav Right Dropdown Menu
 ul.sub-nav-item {
     position: absolute;
     top: 100%;
-    width: 180px;
+    width: 190px;
     background-color: $base-color;
     right: 0;
     text-align: left;
-    padding: 0 14px 5px;
-    margin-top: 1px;
+    box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1);
+    border-top: 1px solid $gray-lighter;
+    li.separator-menu{
+        border-top: 1px solid $gray-lighter;
+    }
+    a{
+        color: $text-light;
+        display: block;
+        font-size: 1.2rem;
+        padding: 5px 5px 6px 12px;
+        &:hover{
+            background-color: $base-color-darker;
+        }
+    }
 }
 
-ul.sub-nav-item a{
-    color: $text-light;
-    display: inline-block;
-    font-size: 1.2rem;
-    padding: 5px 0;
-}
+.avatar-link{
+    img{
+        border-radius: 50%;
+        margin-right: 10px;
+        border: 1px solid $base-color-darker;
+        width: 25px;
+        height: 25px;
+    }
 
-ul.sub-nav-item a:hover{
-    color: $gray-darker;
-}
-
-.avatar-link img{
-    border-radius: 50%;
-    margin-right: 10px;
-    border: 1px solid $base-color-darker;
-    width: 25px;
-    height: 25px;
-}
+    i{
+        margin-left: 8px;
+        margin-top: 1px;
+    }
+} 
 
 a.avatar-link:hover {
     border: 0 none;
-}
-
-.avatar-link i{
-    margin-left: 8px;
-    margin-top: 1px;
 }
