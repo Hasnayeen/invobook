@@ -9093,7 +9093,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             user: data.user,
             token: Laravel.csrfToken,
             url: data.navUrl,
-            showSubMenu: false,
+            hideSubMenu: true,
             avater: ''
         };
     }),
@@ -9104,7 +9104,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         showMenus: function showMenus(event) {
             event.preventDefault();
-            this.showSubMenu = !this.showSubMenu;
+            event.stopPropagation();
+            this.hideSubMenu = !this.hideSubMenu;
         }
     },
     created: function created() {
@@ -9113,6 +9114,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         } else {
             this.avater = this.user.avater;
         }
+    },
+    mounted: function mounted() {
+        var thisNav = this;
+        document.addEventListener("click", function () {
+            if (thisNav.hideSubMenu == false) {
+                thisNav.hideSubMenu = true;
+            }
+        });
     }
 };
 
@@ -9231,7 +9240,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "/Users/hasnayeen/www/goodwork/resources/assets/js/components/home.vue"
+Component.options.__file = "E:\\Node Project\\goodwork\\resources\\assets\\js\\components\\home.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] home.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -9265,7 +9274,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "/Users/hasnayeen/www/goodwork/resources/assets/js/components/partials/activity.vue"
+Component.options.__file = "E:\\Node Project\\goodwork\\resources\\assets\\js\\components\\partials\\activity.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] activity.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -9299,7 +9308,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "/Users/hasnayeen/www/goodwork/resources/assets/js/components/partials/navbar.vue"
+Component.options.__file = "E:\\Node Project\\goodwork\\resources\\assets\\js\\components\\partials\\navbar.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] navbar.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -9333,7 +9342,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "/Users/hasnayeen/www/goodwork/resources/assets/js/components/partials/offices.vue"
+Component.options.__file = "E:\\Node Project\\goodwork\\resources\\assets\\js\\components\\partials\\offices.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] offices.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -9367,7 +9376,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "/Users/hasnayeen/www/goodwork/resources/assets/js/components/partials/projects.vue"
+Component.options.__file = "E:\\Node Project\\goodwork\\resources\\assets\\js\\components\\partials\\projects.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] projects.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -9401,7 +9410,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "/Users/hasnayeen/www/goodwork/resources/assets/js/components/partials/teams.vue"
+Component.options.__file = "E:\\Node Project\\goodwork\\resources\\assets\\js\\components\\partials\\teams.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] teams.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -9623,13 +9632,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "aria-hidden": "true"
     }
   })]), _vm._v(" "), _c('ul', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.showSubMenu),
-      expression: "showSubMenu"
-    }],
-    staticClass: "sub-nav-item"
+    staticClass: "sub-nav-item ",
+    class: {
+      'is-hidden-tablet': _vm.hideSubMenu
+    }
   }, [_vm._m(1), _vm._v(" "), _c('li', [_c('a', {
     attrs: {
       "href": _vm.url.logout

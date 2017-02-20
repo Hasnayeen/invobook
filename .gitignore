@@ -9,3 +9,4 @@ Homestead.yaml
 .env.dusk.local
 .phpintel
 composer.lock
+npm-debug.log

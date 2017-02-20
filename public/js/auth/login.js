@@ -10539,7 +10539,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "/Users/hasnayeen/www/goodwork/resources/assets/js/components/auth/login.vue"
+Component.options.__file = "E:\\Node Project\\goodwork\\resources\\assets\\js\\components\\auth\\login.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] login.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -10627,7 +10627,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "card-header"
   }, [_c('p', {
     staticClass: "card-header-title title has-text-centered"
-  }, [_vm._v("\n                Login\n                ")])])
+  }, [_vm._v("\r\n                Login\r\n                ")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('p', {
     staticClass: "control"
@@ -10636,7 +10636,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "type": "checkbox",
       "name": "remember"
     }
-  }), _vm._v("\n                        Remember Me\n                        "), _c('a', {
+  }), _vm._v("\r\n                        Remember Me\r\n                        "), _c('a', {
     staticClass: "is-pulled-right",
     attrs: {
       "href": "password/reset"
