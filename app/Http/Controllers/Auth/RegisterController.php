@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use App\Models\Token;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -48,7 +50,8 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name'     => 'required|max:255',
+            'name'     => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users',
             'email'    => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
@@ -64,8 +67,42 @@ class RegisterController extends Controller
     {
         return User::create([
             'name'     => $data['name'],
+            'username' => $data['username'],
             'email'    => $data['email'],
+            'role'     => 2,
+            'active'   => 1,
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm($token)
+    {
+        if (Token::where('token', $token)->exists()) {
+            return view('auth.register', compact('token'));
+        }
+
+        abort(403);
+    }
+
+    /**
+     * @param Request $request
+     * @param $token
+     */
+    public function confirmNewRegistration(Request $request, $token)
+    {
+        $token = Token::where('token', $token)->first();
+        if ($token) {
+            $this->register($request, $token);
+            $token->delete();
+
+            return redirect('/');
+        }
+
+        abort(403);
     }
 }
