@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Models\Token;
 use App\Models\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Models\Token;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
@@ -49,15 +50,10 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'token'       => 'required|string|max:255',
-            'name'        => 'required|string|max:255',
-            'username'    => 'required|string|max:255|unique:users',
-            'bio'         => 'string|max:255',
-            'designation' => 'string|max:255',
-            'avatar'      => 'string|max:255',
-            'timezone'    => 'string|max:255',
-            'email'       => 'required|email|max:255|unique:users',
-            'password'    => 'required|min:6|confirmed',
+            'name'     => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users',
+            'email'    => 'required|email|max:255|unique:users',
+            'password' => 'required|min:6|confirmed',
         ]);
     }
 
@@ -70,14 +66,12 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name'        => $data['name'],
-            'username'    => $data['username'],
-            'bio'         => $data['bio'],
-            'designation' => $data['designation'],
-            'avatar'      => $data['avatar'],
-            'timezone'    => $data['timezone'],
-            'email'       => $data['email'],
-            'password'    => bcrypt($data['password']),
+            'name'     => $data['name'],
+            'username' => $data['username'],
+            'email'    => $data['email'],
+            'role'     => 2,
+            'active'   => 1,
+            'password' => bcrypt($data['password']),
         ]);
     }
 
@@ -89,18 +83,24 @@ class RegisterController extends Controller
     public function showRegistrationForm($token)
     {
         if (Token::where('token', $token)->exists()) {
-            return view('auth.register');
+            return view('auth.register', compact('token'));
         }
 
         abort(403);
     }
 
+    /**
+     * @param Request $request
+     * @param $token
+     */
     public function confirmNewRegistration(Request $request, $token)
     {
         $token = Token::where('token', $token)->first();
         if ($token) {
+            $this->register($request, $token);
             $token->delete();
-            $this->register($request);
+
+            return redirect('/');
         }
 
         abort(403);
