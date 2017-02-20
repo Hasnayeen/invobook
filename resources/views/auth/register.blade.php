@@ -2,11 +2,22 @@
 
 @slot('title') Register @endslot
 
+@section('style')
+<style type="text/css">
+    html, body {
+        height: 100%;
+    }
+    body {
+        background-color: #08b7ce;
+    }
+</style>
+@endsection
+
 <register></register>
 
 @slot('script')
 <script type="text/javascript">
-    window.url = "{{ url('/register') }}"
+    window.url = "{{ url('/register/' . $token) }}"
     window.errors = <?php echo json_encode($errors->toArray()); ?>
 </script>
 <script src="/js/auth/register.js"></script>
