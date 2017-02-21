@@ -20,6 +20,8 @@ Route::post('register/{token}', 'Auth\RegisterController@confirmNewRegistration'
 
 Route::group(['middleware' => 'auth'], function () {
 
+    Route::get('register/invite/{email}', 'UserController@sentInvitationToRegister');
+
     Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 
     Route::get('projects', 'ProjectController@index');
