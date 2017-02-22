@@ -14,6 +14,9 @@ Route::post('password/reset', 'Auth\ForgotPasswordController@reset');
 
 Route::get('password/reset/{token}', 'Auth\ForgotPasswordController@showResetForm');
 
+Route::post('register/invite', 'UserController@sentInvitationToRegister')
+    ->middleware('auth');
+
 Route::get('register/{token}', 'Auth\RegisterController@showRegistrationForm');
 
 Route::post('register/{token}', 'Auth\RegisterController@confirmNewRegistration');
