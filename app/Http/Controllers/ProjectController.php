@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\Eloquents\ProjectRepository as Project;
+use App\Services\ProjectService;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -15,7 +15,7 @@ class ProjectController extends Controller
     /**
      * @param Project $project
      */
-    public function __construct(Project $project )
+    public function __construct(ProjectService $project )
     {
 
         $this->project = $project;
@@ -26,7 +26,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = $this->project->all();
+        $projects = $this->project->projectList();
 
         return view('home',compact('projects'));
     }
