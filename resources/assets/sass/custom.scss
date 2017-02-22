@@ -33,6 +33,17 @@ nav, .nav {
     color: $white;
 }
 
+.button.is-base.is-outlined {
+    background-color: transparent;
+    border-color: $base-color;
+    color: $base-color;
+}
+
+.button.is-base.is-inverted {
+    background-color: #fff;
+    color: $base-color;
+}
+
 .card {
     box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1);
 }

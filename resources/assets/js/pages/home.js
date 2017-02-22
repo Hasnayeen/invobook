@@ -1,10 +1,11 @@
-import Vue from 'vue';
+require('./../bootstrap');
 import home from './../components/home.vue';
 import navbar from './../components/partials/navbar.vue';
+import inviteModal from './../components/partials/inviteModal.vue';
 
 const app = new Vue({
     el: '#app',
     components: {
-        home, navbar
+        home, navbar, inviteModal
     }
 });
