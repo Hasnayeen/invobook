@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\SendInvitationToRegister;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\SendInvitationToRegister;
 
 class UserController extends Controller
 {
@@ -13,14 +13,24 @@ class UserController extends Controller
         return view('home');
     }
 
-    public function sentInvitationToRegister(Request $request, $email)
+    /**
+     * @param Request $request
+     */
+    public function sentInvitationToRegister(Request $request)
     {
-        Mail::to($email)
-            ->send(new SendInvitationToRegister());
+        try {
+            Mail::to($request->email)
+                ->send(new SendInvitationToRegister());
 
-        return response()->json([
-                'status' => 'success',
-                'message' => 'Mail sent'
+            return response()->json([
+                'status'  => 'success',
+                'message' => 'Invitation sent successfully',
             ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'status'  => 'error',
+                'message' => $e->getMessage(),
+            ]);
+        }
     }
 }

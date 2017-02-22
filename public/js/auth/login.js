@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 58);
+/******/ 	return __webpack_require__(__webpack_require__.s = 61);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -10430,6 +10430,7 @@ window.Vue = __webpack_require__(9);
 window.axios = __webpack_require__(11);
 
 window.axios.defaults.headers.common = {
+  'X-CSRF-TOKEN': window.Laravel.csrfToken,
   'X-Requested-With': 'XMLHttpRequest'
 };
 
@@ -10451,7 +10452,7 @@ window.axios.defaults.headers.common = {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(29);
-login = __webpack_require__(42);
+login = __webpack_require__(43);
 
 var app = new Vue({
     el: '#app',
@@ -10526,20 +10527,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 39 */,
 /* 40 */,
 /* 41 */,
-/* 42 */
+/* 42 */,
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(34),
   /* template */
-  __webpack_require__(52),
+  __webpack_require__(54),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "E:\\Node Project\\goodwork\\resources\\assets\\js\\components\\auth\\login.vue"
+Component.options.__file = "/Users/hasnayeen/www/goodwork/resources/assets/js/components/auth/login.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] login.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -10560,7 +10562,6 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 43 */,
 /* 44 */,
 /* 45 */,
 /* 46 */,
@@ -10569,7 +10570,9 @@ module.exports = Component.exports
 /* 49 */,
 /* 50 */,
 /* 51 */,
-/* 52 */
+/* 52 */,
+/* 53 */,
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -10627,7 +10630,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "card-header"
   }, [_c('p', {
     staticClass: "card-header-title title has-text-centered"
-  }, [_vm._v("\r\n                Login\r\n                ")])])
+  }, [_vm._v("\n                Login\n                ")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('p', {
     staticClass: "control"
@@ -10636,7 +10639,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "type": "checkbox",
       "name": "remember"
     }
-  }), _vm._v("\r\n                        Remember Me\r\n                        "), _c('a', {
+  }), _vm._v("\n                        Remember Me\n                        "), _c('a', {
     staticClass: "is-pulled-right",
     attrs: {
       "href": "password/reset"
@@ -10661,12 +10664,13 @@ if (false) {
 }
 
 /***/ }),
-/* 53 */,
-/* 54 */,
 /* 55 */,
 /* 56 */,
 /* 57 */,
-/* 58 */
+/* 58 */,
+/* 59 */,
+/* 60 */,
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(30);
