@@ -37,6 +37,7 @@
 
         @if (!Auth::guest())
         <navbar></navbar>
+        <invite-modal></invite-modal>
         @endif
 
         <div class="container">
