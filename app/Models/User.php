@@ -27,6 +27,6 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    const ADMIN  = 1;
+    const ADMIN = 1;
     const MEMBER = 2;
 }
