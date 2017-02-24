@@ -15,6 +15,7 @@ services:
 before_script:
   - mysql -e 'CREATE DATABASE goodwork;'
   - php artisan migrate --seed
+  - php artisan serve --host=goodwork.local --port=80
 
 script:
   - vendor/bin/phpunit
