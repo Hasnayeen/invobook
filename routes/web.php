@@ -22,7 +22,6 @@ Route::get('register/{token}', 'Auth\RegisterController@showRegistrationForm');
 Route::post('register/{token}', 'Auth\RegisterController@confirmNewRegistration');
 
 Route::group(['middleware' => 'auth'], function () {
-
     Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 
     Route::get('projects', 'ProjectController@index');
@@ -64,5 +63,4 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('users/{user}/settings', 'UserController@index');
 
     Route::get('settings', 'UserController@index');
-
 });
