@@ -3,12 +3,11 @@
 namespace App\Mail;
 
 use App\Models\Token;
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Http\Request;
+use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Queue\SerializesModels;
 
 class SendInvitationToRegister extends Mailable
 {
@@ -21,7 +20,6 @@ class SendInvitationToRegister extends Mailable
      */
     public function __construct()
     {
-        //
     }
 
     /**
@@ -35,10 +33,10 @@ class SendInvitationToRegister extends Mailable
         Token::create(['token' => $token, 'email' => $request->email]);
 
         return $this->view('emails.invite')
-                    ->subject(Auth::user()->name . ' invited you to join Goodwork')
+                    ->subject(Auth::user()->name.' invited you to join Goodwork')
                     ->with([
                 'token' => $token,
-                'name' => $request->name
+                'name'  => $request->name,
             ]);
     }
 }
