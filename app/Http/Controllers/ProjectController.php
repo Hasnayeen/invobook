@@ -26,7 +26,6 @@ class ProjectController extends Controller
     {
         $projects = $this->projectService->getAllProjects();
 
-        return view('home',compact('projects'));
+        return view('home', compact('projects'));
     }
-
 }
