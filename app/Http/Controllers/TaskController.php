@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreTask;
 use App\Models\Task;
 use Illuminate\Http\Request;
 
@@ -25,20 +26,11 @@ class TaskController extends Controller
     /**
      * Store a newly created task in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param StoreTask|Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreTask $request)
     {
-        $this->validate($request, [
-           'title'         => 'required|unique:tasks|max:255',
-           'assigned_to'   => 'nullable|exists:users,id',
-           'notes'         => 'required',
-           'due_on'        => 'required|date',
-           'taskable_type' => 'required',
-           'taskable_id'   => 'required',
-        ]);
-
         Task::create([
             'title'         => $request->input('title'),
             'assigned_to'   => $request->input('assigned_to'),
