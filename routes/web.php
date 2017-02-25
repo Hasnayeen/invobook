@@ -36,9 +36,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('offices/{office}', 'OfficeController@index');
 
-    Route::get('tasks/create', 'TaskController@create')->name('tasks.create');
+    Route::get('tasks/create', ['as' => 'tasks.create', 'uses' => 'TaskController@create']);
 
-    Route::post('tasks', 'TaskController@store')->name("tasks.store");
+    Route::post('tasks', ['as' => 'tasks.store', 'uses' => 'TaskController@store']);
 
     Route::get('tasks', 'TaskController@index');
 
