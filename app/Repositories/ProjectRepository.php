@@ -20,12 +20,11 @@ class ProjectRepository
     }
 
     /**
-     * @param array $columns
+     * @param  array $columns
      * @return mixed
      */
-    public function getAllProjects($columns = array('*'))
+    public function getAllProjects($columns = ['*'])
     {
         return $this->model->get($columns);
     }
-    
 }
