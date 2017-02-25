@@ -6,6 +6,7 @@ use Carbon\Carbon;
 $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
     static $password;
     $now = Carbon::now();
+
     return [
         'name'           => $faker->name,
         'username'       => $faker->userName,

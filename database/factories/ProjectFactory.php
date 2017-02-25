@@ -5,6 +5,7 @@ use Carbon\Carbon;
 
 $factory->define(App\Models\Project::class, function (Faker\Generator $faker) {
     $now = Carbon::now();
+
     return [
         'name'        => $faker->name,
         'slug'        => $faker->slug,

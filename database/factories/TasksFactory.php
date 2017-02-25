@@ -5,9 +5,9 @@ use Carbon\Carbon;
 
 $factory->define(App\Models\Task::class, function (Faker\Generator $faker) {
     $now = Carbon::now();
-    $taskable_type = $faker->randomElement(['office','team','project']);
+    $taskable_type = $faker->randomElement(['office', 'team', 'project']);
     $taskable_id = null;
-    switch($taskable_type) {
+    switch ($taskable_type) {
         case 'office':
             $taskable_id = factory(App\Models\Office::class)->create()->id;
             break;
@@ -18,7 +18,7 @@ $factory->define(App\Models\Task::class, function (Faker\Generator $faker) {
             $taskable_id = factory(App\Models\Project::class)->create()->id;
             break;
         default:
-            throw new Exception("Wrong Taskable type");
+            throw new Exception('Wrong Taskable type');
     }
     return [
         'title'         => $faker->sentence(6, true),

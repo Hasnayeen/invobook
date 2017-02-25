@@ -16,10 +16,11 @@ class Task extends Model
     ];
 
     /**
-     * Return the user this task belongs to
+     * Return the user this task belongs to.
      * @return mixed
      */
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo('App\Models\User', 'assigned_to', 'id');
     }
 
@@ -27,8 +28,10 @@ class Task extends Model
      * Return corresponding record from type (office/team/project) for this task
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function taskable_type() {
-        $taskableModel = 'App\Models\\' . ucfirst($this->taskable_type);
+    public function taskable_type()
+    {
+        $taskableModel = 'App\Models\\'.ucfirst($this->taskable_type);
+
         return $this->belongsTo($taskableModel, 'taskable_id', 'id');
     }
 }

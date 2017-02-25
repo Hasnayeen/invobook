@@ -2,12 +2,10 @@
 
 namespace Tests\Unit;
 
-use App\Http\Controllers\TaskController;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Faker\Factory as Faker;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class TaskControllerTest extends TestCase
 {
@@ -16,14 +14,14 @@ class TaskControllerTest extends TestCase
 
     protected $faker;
 
-    function __construct($name = null, array $data = [], $dataName = '')
+    public function __construct($name = null, array $data = [], $dataName = '')
     {
         $this->faker = Faker::create();
         parent::__construct($name, $data, $dataName);
     }
 
     /**
-     * Test method store()
+     * Test method store().
      *
      * @return void
      */
@@ -45,7 +43,7 @@ class TaskControllerTest extends TestCase
     }
 
     /**
-     * Negative testcase for store() method
+     * Negative testcase for store() method.
      * @return void
      */
     public function test_store_method_throws_error_for_wrong_data()

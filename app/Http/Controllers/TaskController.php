@@ -42,5 +42,4 @@ class TaskController extends Controller
 
         redirect('home')->with('status', 'Task created!');
     }
-
 }
