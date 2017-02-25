@@ -112,3 +112,39 @@ ul.sub-nav-item {
 a.avatar-link:hover {
     border: 0 none;
 }
+
+//Task Board 
+.taskboard-media{
+    a{
+        align-items: center;
+        display: flex;
+        width: 100%;
+    }
+    img{
+        border-radius: 50%;
+    }
+    .media-left{
+        margin-right: 0.6rem;
+        max-width: 34px;
+    }
+    .media-content{
+        background-color: #f7f7f7;
+        padding: 3px 6px 5px;
+    }
+    p {
+        line-height: 1.1;
+        span{
+            font-size: 0.9rem;
+        }
+        strong{
+            font-size: 0.8rem;
+        }
+        small {
+            font-size: 0.7em;
+        }
+    }
+    .image i{
+        font-size: 1.7rem;
+        color: $gray-darker;
+    }
+}

@@ -3,7 +3,8 @@ let mix = require('laravel-mix').mix;
 mix.sass('resources/assets/sass/app.scss', 'public/css');
 mix.js('resources/assets/js/pages/home.js', 'public/js')
    .js('resources/assets/js/pages/auth/login.js', 'public/js/auth')
-   .js('resources/assets/js/pages/auth/register.js', 'public/js/auth');
+   .js('resources/assets/js/pages/auth/register.js', 'public/js/auth')
+   .js('resources/assets/js/pages/projects/single.js', 'public/js/projects');
 
 // Full API
 // mix.js(src, output);
