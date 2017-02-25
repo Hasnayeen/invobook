@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreTask;
 use App\Models\Task;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreTask;
 
 class TaskController extends Controller
 {
@@ -26,7 +26,7 @@ class TaskController extends Controller
     /**
      * Store a newly created task in storage.
      *
-     * @param StoreTask|Request $request
+     * @param  StoreTask|Request         $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreTask $request)

@@ -20,6 +20,7 @@ $factory->define(App\Models\Task::class, function (Faker\Generator $faker) {
         default:
             throw new Exception('Wrong Taskable type');
     }
+
     return [
         'title'         => $faker->sentence(6, true),
         'assigned_to'   => factory(App\Models\User::class)->create()->id,

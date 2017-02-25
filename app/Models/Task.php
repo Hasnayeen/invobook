@@ -25,7 +25,7 @@ class Task extends Model
     }
 
     /**
-     * Return corresponding record from type (office/team/project) for this task
+     * Return corresponding record from type (office/team/project) for this task.
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function taskable_type()
