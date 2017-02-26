@@ -2,11 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Models\User;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use App\Models\User;
 
 class ProjectTest extends TestCase
 {
@@ -17,9 +14,9 @@ class ProjectTest extends TestCase
      */
     public function testProjectList()
     {
-        $user       = new User();
-        $authUser   = $user->where(['email'=>'admin@example.com'])->first();
-        $response   = $this->actingAs($authUser)
+        $user = new User();
+        $authUser = $user->where(['email'=>'admin@example.com'])->first();
+        $response = $this->actingAs($authUser)
                            ->withSession(['foo' => 'bar'])
                            ->get('/projects');
 
