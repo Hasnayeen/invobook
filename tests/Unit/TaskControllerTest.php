@@ -12,14 +12,6 @@ class TaskControllerTest extends TestCase
     use DatabaseMigrations;
     use WithoutMiddleware;
 
-    protected $faker;
-
-    public function __construct($name = null, array $data = [], $dataName = '')
-    {
-        $this->faker = Faker::create();
-        parent::__construct($name, $data, $dataName);
-    }
-
     /**
      * Test method store().
      *
@@ -37,9 +29,7 @@ class TaskControllerTest extends TestCase
             'taskable_type' => $task->taskable_type,
             'taskable_id'   => $task->taskable_id,
         ]);
-        $this
-            ->assertSessionHas('Task created')
-            ->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(200, $response->getStatusCode());
     }
 
     /**
@@ -50,10 +40,8 @@ class TaskControllerTest extends TestCase
     {
         $response = $this->call('POST', route('tasks.store'), [
             '_token' => csrf_token(),
-            'due_on' => 'abcd',
+            'due_on' => 'invalid_date',
         ]);
-        $this
-            ->assertSessionHas('Task created')
-            ->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(302, $response->getStatusCode());
     }
 }
