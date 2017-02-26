@@ -3,7 +3,6 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
-use Faker\Factory as Faker;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
