@@ -148,3 +148,26 @@ a.avatar-link:hover {
         color: $gray-darker;
     }
 }
+
+//Projects Page
+.projects-list {
+    background-color: $text-light;
+    box-shadow: 0 0 1px $gray-light;
+    width: 100%;
+    h1{
+        padding: 15px 0;
+        font-size: 2rem;
+    }
+    li{
+        border-top: 1px solid $gray-light;
+        padding: 15px 20px;
+        span{
+            display: block;
+            color: $gray;
+            font-size: 0.9rem;
+        }
+        a{
+            font-size: 1.2rem;
+        }
+    }
+}

@@ -26,7 +26,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('projects', 'ProjectController@index');
 
-    Route::get('projects/{project}', 'ProjectController@index');
+    Route::get('projects/{project}', 'ProjectController@single');
 
     Route::get('teams', 'TeamController@index');
 
@@ -35,6 +35,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('offices', 'OfficeController@index');
 
     Route::get('offices/{office}', 'OfficeController@index');
+
+    Route::get('tasks/create', ['as' => 'tasks.create', 'uses' => 'TaskController@create']);
+
+    Route::post('tasks', ['as' => 'tasks.store', 'uses' => 'TaskController@store']);
 
     Route::get('tasks', 'TaskController@index');
 
