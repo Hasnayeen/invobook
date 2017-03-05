@@ -42,5 +42,7 @@ class HomePageTest extends DuskTestCase
                     ->assertSeeIn('.columns div:nth-of-type(3) .content div:nth-of-type(2) a', $offices[1]['name'])
                     ->assertSeeIn('.columns div:nth-of-type(3) .content div:nth-of-type(3) a', $offices[2]['name']);
         });
+
+        $this->tearDown();
     }
 }
