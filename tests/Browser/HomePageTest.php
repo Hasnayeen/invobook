@@ -2,12 +2,12 @@
 
 namespace Tests\Browser;
 
-use App\Models\Office;
-use App\Models\Project;
 use App\Models\Team;
 use App\Models\User;
-use Laravel\Dusk\Browser;
+use App\Models\Office;
+use App\Models\Project;
 use Tests\DuskTestCase;
+use Laravel\Dusk\Browser;
 
 class HomePageTest extends DuskTestCase
 {
