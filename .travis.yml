@@ -7,6 +7,7 @@ php:
 install:
   - composer install --no-interaction --prefer-dist --no-suggest
   - cp .env.example .env
+  - cp .env.example .env.dusk.local
   - php artisan key:generate
 
 services:

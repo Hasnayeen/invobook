@@ -11,3 +11,4 @@ Homestead.yaml
 composer.lock
 npm-debug.log
 .env.testing
+.phpcomplete_extended/
