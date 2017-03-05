@@ -16,10 +16,10 @@ class HomePageTest extends TestCase
     /** @test */
     public function show_latest_three_projects_teams_and_offices()
     {
-        $user     = factory(User::class)->create();
+        $user = factory(User::class)->create();
         $projects = factory(Project::class, 3)->create(['office_id' => null, 'team_id' => null]);
-        $teams    = factory(Team::class, 3)->create(['office_id' => null]);
-        $offices  = factory(Office::class, 3)->create();
+        $teams = factory(Team::class, 3)->create(['office_id' => null]);
+        $offices = factory(Office::class, 3)->create();
 
         $response = $this->actingAs($user)
                          ->get('/');

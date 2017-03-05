@@ -18,7 +18,7 @@ class TaskControllerTest extends TestCase
      */
     public function test_store_method_creates_new_task()
     {
-        $task     = factory(\App\Models\Task::class)->make();
+        $task = factory(\App\Models\Task::class)->make();
         $response = $this->call('POST', route('tasks.store'), [
             '_token'        => csrf_token(),
             'title'         => $task->title,
