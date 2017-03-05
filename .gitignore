@@ -10,3 +10,4 @@ Homestead.yaml
 .phpintel
 composer.lock
 npm-debug.log
+.env.testing

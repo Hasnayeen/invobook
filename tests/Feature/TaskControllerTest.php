@@ -4,11 +4,11 @@ namespace Tests\Unit;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class TaskControllerTest extends TestCase
 {
-    use DatabaseMigrations;
+    use DatabaseTransactions;
     use WithoutMiddleware;
 
     /**
@@ -18,7 +18,7 @@ class TaskControllerTest extends TestCase
      */
     public function test_store_method_creates_new_task()
     {
-        $task = factory(\App\Models\Task::class)->make();
+        $task     = factory(\App\Models\Task::class)->make();
         $response = $this->call('POST', route('tasks.store'), [
             '_token'        => csrf_token(),
             'title'         => $task->title,
