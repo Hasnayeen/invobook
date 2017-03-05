@@ -30,8 +30,8 @@ class HomeController extends Controller
     {
         $this->middleware('auth');
         $this->projectService = $projectService;
-        $this->teamService    = $teamService;
-        $this->officeService  = $officeService;
+        $this->teamService = $teamService;
+        $this->officeService = $officeService;
     }
 
     /**
@@ -42,8 +42,8 @@ class HomeController extends Controller
     public function index()
     {
         $projects = $this->projectService->getLatestThreeProject()->toArray();
-        $teams    = $this->teamService->getLatestThreeTeam()->toArray();
-        $offices  = $this->officeService->getLatestThreeOffice()->toArray();
+        $teams = $this->teamService->getLatestThreeTeam()->toArray();
+        $offices = $this->officeService->getLatestThreeOffice()->toArray();
 
         return view('home', compact('projects', 'teams', 'offices'));
     }
