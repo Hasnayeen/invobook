@@ -46,10 +46,11 @@ abstract class DuskTestCase extends BaseTestCase
     {
         $dbName = env('DB_DATABASE');
         // Get all tables list, except migrations table
-        $tables = DB::select('SHOW TABLES WHERE `Tables_in_' . $dbName . '` != ?', ['migrations']);
+        $tables = DB::select('SHOW TABLES WHERE `Tables_in_'.$dbName.'` != ?', ['migrations']);
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         foreach ($tables as $table) {
-            DB::table($table->{'Tables_in_' . $dbName})->truncate();
+            DB::table($table->{'Tables_in_'.$dbName})->truncate();
         }
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');    }
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+    }
 }
