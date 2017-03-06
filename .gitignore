@@ -11,3 +11,4 @@ composer.lock
 npm-debug.log
 .env.testing
 .phpcomplete_extended/
+/tests/Browser/console/*.log

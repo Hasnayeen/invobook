@@ -18,14 +18,11 @@ before_script:
   - phantomjs --webdriver=127.0.0.1:9515 &
   - php artisan serve &
   - sleep 5
+  - php artisan config:clear
 
 script:
   - vendor/bin/phpunit
   - php artisan dusk
-
-cache:
-  directories:
-    - vendor
 
 notifications:
   on_success: never
