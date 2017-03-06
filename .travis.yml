@@ -16,7 +16,7 @@ services:
 before_script:
   - mysql -e 'CREATE DATABASE goodwork;'
   - php artisan migrate
-  - php artisan serve --host=goodwork.local --port=80 &
+  - php artisan serve --host=goodwork.local --port=8080 &
   - phantomjs --webdriver=127.0.0.1:4444 &
   - sleep 3
 

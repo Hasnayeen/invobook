@@ -24,12 +24,12 @@ class HomePageTest extends DuskTestCase
     /** @test */
     public function seeLatestThreeProjectTeamAndOffice()
     {
-        $user = factory(User::class)->create();
+        $user     = factory(User::class)->create();
         $projects = factory(Project::class, 3)->create(['office_id' => null, 'team_id' => null]);
-        $teams = factory(Team::class, 3)->create(['office_id' => null]);
-        $offices = factory(Office::class, 3)->create();
+        $teams    = factory(Team::class, 3)->create(['office_id' => null]);
+        $offices  = factory(Office::class, 3)->create();
 
-        $this->browse(function ($browser) use ($user, $projects, $teams, $offices) {
+        $this->browse(function (Browser $browser) use ($user, $projects, $teams, $offices) {
             $browser->loginAs($user)
                     ->visit('/')
                     ->assertSeeIn('.columns div:nth-of-type(1) .content div:nth-of-type(1) a', $projects[0]['name'])
