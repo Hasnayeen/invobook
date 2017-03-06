@@ -17,6 +17,7 @@ before_script:
   - mysql -e 'CREATE DATABASE goodwork;'
   - php artisan migrate
   - php artisan serve --host=goodwork.local --port=80
+  - phantomjs --webdriver=4444
 
 script:
   - vendor/bin/phpunit
