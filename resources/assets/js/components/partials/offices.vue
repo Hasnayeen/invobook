@@ -12,14 +12,11 @@
             </a>
           </header>
           <div class="card-content">
-            <!-- <div class=""> -->
-            <!-- <aside class="menu"> -->
-                
                 <div class="content">
-                    <a class="is-block has-text-centered" href="">Headquarter</a>
+                    <div v-for="office in offices">
+                        <a class="is-block has-text-centered" :href="office.url">{{ office.name }}</a>
+                    </div>
                 </div>
-            <!-- </aside> -->
-            <!-- </div> -->
           </div>
           <footer class="card-footer">
             <a class="card-footer-item">Create a New Office</a>
@@ -29,5 +26,12 @@
 </template>
 
 <script>
-    
+    export default {
+        data: () => ({
+            offices: data.offices.map((office) => {
+                office.url = 'offices/' + office.slug;
+                return office;
+            })
+        })
+    }
 </script>

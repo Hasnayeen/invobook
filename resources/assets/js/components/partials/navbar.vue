@@ -12,7 +12,7 @@
         </span>
         <div class="nav-right nav-menu">
            
-            <a class="nav-item is-tab avatar-link  is-base-darker" href="#" @click="showMenus"><img :src="avater">{{ user.name }} <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+            <a class="nav-item is-tab avatar-link  is-base-darker" href="#" @click="showMenus"><img :src="avatar">{{ user.name }} <i class="fa fa-angle-down" aria-hidden="true"></i></a>
             <ul class="sub-nav-item " v-bind:class="{ 'is-hidden-tablet': hideSubMenu }">
                 <li><a href="#">Your profile</a></li>
                 <li><a href="#">Help</a></li>
@@ -30,11 +30,11 @@
 <script> //avater.jpg
     export default {
         data: () => ({
-            user: data.user,
+            user: navbar.user,
             token: Laravel.csrfToken,
-            url: data.navUrl,
+            url: navbar.navUrl,
             hideSubMenu: true,
-            avater: ''
+            avatar: ''
         }),
         methods: {
             logoutUser(event){
@@ -48,10 +48,10 @@
             }
         },
         created(){
-            if( this.user.avater == null ){
-                this.avater = '/image/avater.jpg';
+            if( this.user.avatar == null ){
+                this.avatar = '/image/avatar.jpg';
             }else{
-                this.avater = this.user.avater;
+                this.avatar = this.user.avatar;
             }
         },
         mounted(){

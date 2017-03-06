@@ -6,7 +6,8 @@
 Homestead.json
 Homestead.yaml
 .env
-.env.dusk.local
 .phpintel
 composer.lock
 npm-debug.log
+.env.testing
+.phpcomplete_extended/
