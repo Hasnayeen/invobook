@@ -13,11 +13,9 @@
           </header>
           <div class="card-content">
             <div class="content">
-                <a class="is-block has-text-centered" href="">Marketing</a>
-                <a class="is-block has-text-centered" href="">Sales</a>
-                <a class="is-block has-text-centered" href="">AHR</a>
-                <a class="is-block has-text-centered" href="">Developer</a>
-                <a class="is-block has-text-centered" href="">Designer</a>
+                    <div v-for="team in teams">
+                        <a class="is-block has-text-centered" :href="team.url">{{ team.name }}</a>
+                    </div>
             </div>
           </div>
           <footer class="card-footer">
@@ -28,5 +26,12 @@
 </template>
 
 <script>
-    
+    export default {
+        data: () => ({
+            teams: data.teams.map((team) => {
+                team.url = 'teams/' + team.slug;
+                return team;
+            })
+        })
+    }
 </script>
