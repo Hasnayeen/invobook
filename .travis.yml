@@ -8,7 +8,6 @@ install:
   - composer install --no-interaction --prefer-dist --no-suggest
   - cp .env.example .env
   - php artisan key:generate
-  - cp .env .env.dusk.local
 
 services:
   - mysql
@@ -16,9 +15,9 @@ services:
 before_script:
   - mysql -e 'CREATE DATABASE goodwork;'
   - php artisan migrate
-  - php artisan serve --host=goodwork.local --port=8080 &
-  - phantomjs --webdriver=127.0.0.1:4444 &
-  - sleep 3
+  - phantomjs --webdriver=127.0.0.1:9515 &
+  - php artisan serve &
+  - sleep 5
 
 script:
   - vendor/bin/phpunit
