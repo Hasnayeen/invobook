@@ -23,8 +23,8 @@ class ProjectService
      * @param  array $columns
      * @return mixed
      */
-    public function getAllProjects($columns = ['*'])
+    public function getAllProjects()
     {
-        return $this->projectRepository->getAllProjects($columns);
+        return $this->projectRepository->getAllProjects();
     }
 }

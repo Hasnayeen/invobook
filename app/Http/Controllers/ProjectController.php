@@ -24,9 +24,13 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = $this->projectService->getAllProjects();
+        try {
+            $projects = $this->projectService->getAllProjects()->toArray();
 
-        return view('projects.index', compact('projects'));
+            return view('projects.index', compact('projects'));
+        } catch (Exception $e) {
+            throw $e;
+        }
     }
 
     public function single()

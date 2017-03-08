@@ -7,9 +7,9 @@ use App\Models\Project;
 class ProjectRepository
 {
     /**
-     * @var Project
+     * @var mixed
      */
-    private $model;
+    protected $model;
 
     /**
      * @param Project $project
@@ -20,11 +20,10 @@ class ProjectRepository
     }
 
     /**
-     * @param  array $columns
      * @return mixed
      */
-    public function getAllProjects($columns = ['*'])
+    public function getAllProjects()
     {
-        return $this->model->get($columns);
+        return $this->model->get(['name', 'description']);
     }
 }
