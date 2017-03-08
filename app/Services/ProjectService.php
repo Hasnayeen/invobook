@@ -17,7 +17,7 @@ class ProjectService
     {
         $this->projectRepository = $projectRepository;
     }
-    
+
     /**
      * @param  array $columns
      * @return mixed
@@ -25,5 +25,13 @@ class ProjectService
     public function getAllProjects($columns = ['*'])
     {
         return $this->projectRepository->getAllProjects($columns);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLatestThreeProject()
+    {
+        return $this->projectRepository->getLatestThreeProject();
     }
 }

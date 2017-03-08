@@ -26,4 +26,12 @@ class ProjectRepository
     {
         return $this->model->get($columns);
     }
+
+    /**
+     * @return mixed
+     */
+    public function getLatestThreeProject()
+    {
+        return $this->model->orderBy('created_at', 'desc')->take(3)->get();
+    }
 }

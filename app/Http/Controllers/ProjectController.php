@@ -24,9 +24,13 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = $this->projectService->getAllProjects();
+
         return view('projects.index', compact('projects'));
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function single()
     {
         return view('projects.single');
