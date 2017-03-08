@@ -22,6 +22,14 @@ class ProjectRepository
     /**
      * @return mixed
      */
+    public function getAllProjects()
+    {
+        return $this->model->get(['name', 'description']);
+    }
+
+    /**
+     * @return mixed
+     */
     public function getLatestThreeProject()
     {
         return $this->model->orderBy('created_at', 'desc')->take(3)->get();

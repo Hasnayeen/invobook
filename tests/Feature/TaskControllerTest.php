@@ -8,8 +8,8 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class TaskControllerTest extends TestCase
 {
-    use DatabaseTransactions;
     use WithoutMiddleware;
+    use DatabaseTransactions;
 
     /**
      * Test method store().

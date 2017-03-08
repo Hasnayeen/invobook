@@ -2,15 +2,40 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\ProjectService;
+
 class ProjectController extends Controller
 {
-    //View for project list
-    public function index()
+    /**
+     * @var ProjectService
+     */
+    private $projectService;
+
+    /**
+     * @param ProjectService $projectService
+     */
+    public function __construct(ProjectService $projectService)
     {
-        return view('projects.index');
+        $this->projectService = $projectService;
     }
 
-    //View for single project
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function index()
+    {
+        try {
+            $projects = $this->projectService->getAllProjects()->toArray();
+
+            return view('projects.index', compact('projects'));
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function single()
     {
         return view('projects.single');

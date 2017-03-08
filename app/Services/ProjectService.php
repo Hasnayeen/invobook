@@ -7,16 +7,25 @@ use App\Repositories\ProjectRepository;
 class ProjectService
 {
     /**
-     * @var mixed
+     * @var ProjectRepository
      */
-    protected $projectRepository;
+    private $projectRepository;
 
     /**
-     * @param ProjectRepository $ProjectRepository
+     * @param ProjectRepository $project
      */
     public function __construct(ProjectRepository $projectRepository)
     {
         $this->projectRepository = $projectRepository;
+    }
+
+    /**
+     * @param  array $columns
+     * @return mixed
+     */
+    public function getAllProjects()
+    {
+        return $this->projectRepository->getAllProjects();
     }
 
     /**

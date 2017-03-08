@@ -27,7 +27,7 @@
     </nav>
 </template>
 
-<script> //avater.jpg
+<script> //avatar.jpg
     export default {
         data: () => ({
             user: navbar.user,
