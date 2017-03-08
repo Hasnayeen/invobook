@@ -24,7 +24,7 @@
     </script>
     @if (!Auth::guest())
     <script>
-        window.data = {!! json_encode([
+        window.navbar = {!! json_encode([
             'user' => Auth::user(),
             'navUrl' => ['site' => url('/'), 'logout' => url('/logout')]
         ]) !!};

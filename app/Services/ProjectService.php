@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Services;
 
 use App\Repositories\ProjectRepository;
@@ -18,7 +17,7 @@ class ProjectService
     {
         $this->projectRepository = $projectRepository;
     }
-
+    
     /**
      * @param  array $columns
      * @return mixed
