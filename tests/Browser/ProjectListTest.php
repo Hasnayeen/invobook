@@ -2,10 +2,10 @@
 
 namespace Tests\Browser;
 
-use App\Models\Project;
 use App\Models\User;
-use Laravel\Dusk\Browser;
+use App\Models\Project;
 use Tests\DuskTestCase;
+use Laravel\Dusk\Browser;
 
 class ProjectListTest extends DuskTestCase
 {
@@ -16,7 +16,7 @@ class ProjectListTest extends DuskTestCase
         $projects = factory(Project::class, 2)->create();
 
         $this->browse(function (Browser $browser) use ($user, $projects) {
-                $browser->loginAs($user)
+            $browser->loginAs($user)
                         ->visit('/projects')
                         ->assertSeeIn('.projects-list ul li:nth-of-type(1) a', $projects[0]['name'])
                         ->assertSeeIn('.projects-list ul li:nth-of-type(1) span', $projects[0]['description'])

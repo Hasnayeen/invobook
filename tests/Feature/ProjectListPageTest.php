@@ -2,10 +2,10 @@
 
 namespace Tests\Feature;
 
-use App\Models\Project;
-use App\Models\User;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
+use App\Models\User;
+use App\Models\Project;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ProjectListPageTest extends TestCase
 {
@@ -22,11 +22,11 @@ class ProjectListPageTest extends TestCase
 
         $response->assertStatus(200)
                  ->assertViewHas('projects', $projects->transform(function ($item) {
-                    return [
-                        'name' => $item->name,
-                        'description' => $item->description
+                     return [
+                        'name'        => $item->name,
+                        'description' => $item->description,
                     ];
-                })->toArray()
+                 })->toArray()
         );
     }
 }
