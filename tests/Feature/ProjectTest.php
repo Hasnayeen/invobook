@@ -24,6 +24,6 @@ class ProjectTest extends TestCase
                            ->get('/projects');
 
         $response->assertStatus(200)
-                 ->assertViewHas('projects', $projects->toArray());
+                 ->assertViewHas('projects');
     }
 }
