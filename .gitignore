@@ -9,5 +9,6 @@ Homestead.yaml
 .phpintel
 composer.lock
 npm-debug.log
+/.phpcomplete_extended
 .env.testing
-.phpcomplete_extended/
+.env.dusk.local
