@@ -13,7 +13,9 @@
           </header>
           <div class="card-content">
             <div class="content">
-                <p class="is-block has-text-centered">You have no project yet</p>
+                    <div v-for="project in projects">
+                        <a class="is-block has-text-centered" :href="project.url">{{ project.name }}</a>
+                    </div>
             </div>
           </div>
           <footer class="card-footer">
@@ -24,5 +26,12 @@
 </template>
 
 <script>
-    
+    export default {
+        data: () => ({
+            projects: data.projects.map((project) => {
+                project.url = 'projects/' + project.slug;
+                return project;
+            })
+        })
+    }
 </script>

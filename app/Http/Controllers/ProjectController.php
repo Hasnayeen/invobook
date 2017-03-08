@@ -33,6 +33,9 @@ class ProjectController extends Controller
         }
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function single()
     {
         return view('projects.single');

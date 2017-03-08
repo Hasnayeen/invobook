@@ -27,4 +27,12 @@ class ProjectService
     {
         return $this->projectRepository->getAllProjects();
     }
+
+    /**
+     * @return mixed
+     */
+    public function getLatestThreeProject()
+    {
+        return $this->projectRepository->getLatestThreeProject();
+    }
 }
