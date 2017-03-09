@@ -40,4 +40,10 @@ class ProjectController extends Controller
     {
         return view('projects.single');
     }
+
+    //View for task borard
+    public function tasks()
+    {
+        return view('projects.tasks');
+    }
 }
