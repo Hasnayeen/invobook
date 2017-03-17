@@ -10605,7 +10605,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "E:\\Node Project\\goodwork\\resources\\assets\\js\\components\\partials\\inviteModal.vue"
+Component.options.__file = "/var/www/goodwork/resources/assets/js/components/partials/inviteModal.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] inviteModal.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -10639,7 +10639,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "E:\\Node Project\\goodwork\\resources\\assets\\js\\components\\partials\\navbar.vue"
+Component.options.__file = "/var/www/goodwork/resources/assets/js/components/partials/navbar.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] navbar.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -10911,6 +10911,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = {
     data: function (_data) {
@@ -10958,7 +10960,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "E:\\Node Project\\goodwork\\resources\\assets\\js\\components\\projects\\list.vue"
+Component.options.__file = "/var/www/goodwork/resources/assets/js/components/projects/list.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] list.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -10986,17 +10988,25 @@ module.exports = Component.exports
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "projects-list is-fullwidth"
-  }, [_c('h1', {
-    staticClass: "has-text-centered"
-  }, [_vm._v("All Projects")]), _vm._v(" "), _c('ul', _vm._l((_vm.projects), function(project) {
-    return _c('li', [_c('a', {
+    staticClass: "column is-fullwidth"
+  }, [_c('div', {
+    staticClass: "card"
+  }, [_vm._m(0), _vm._v(" "), _vm._l((_vm.projects), function(project) {
+    return _c('div', {
+      staticClass: "card-content-item"
+    }, [_c('a', {
       attrs: {
         "href": "#"
       }
-    }, [_vm._v(_vm._s(project.name))]), _vm._v(" "), _c('span', [_vm._v(_vm._s(project.description))])])
-  }))])
-},staticRenderFns: []}
+    }, [_vm._v(_vm._s(project.name))]), _vm._v(" "), _c('p', [_vm._v(_vm._s(project.description))])])
+  })], 2)])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('header', {
+    staticClass: "card-header"
+  }, [_c('a', {
+    staticClass: "card-header-title has-text-centered"
+  }, [_vm._v("All Projects")])])
+}]}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()

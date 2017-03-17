@@ -10605,7 +10605,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "E:\\Node Project\\goodwork\\resources\\assets\\js\\components\\partials\\inviteModal.vue"
+Component.options.__file = "/var/www/goodwork/resources/assets/js/components/partials/inviteModal.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] inviteModal.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -10639,7 +10639,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "E:\\Node Project\\goodwork\\resources\\assets\\js\\components\\partials\\navbar.vue"
+Component.options.__file = "/var/www/goodwork/resources/assets/js/components/partials/navbar.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] navbar.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -10924,7 +10924,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "E:\\Node Project\\goodwork\\resources\\assets\\js\\components\\projects\\tasks.vue"
+Component.options.__file = "/var/www/goodwork/resources/assets/js/components/projects/tasks.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] tasks.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -10965,10 +10965,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _vm._m(0)
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "projects-list is-fullwidth tasks-list"
-  }, [_c('h1', {
-    staticClass: "has-text-centered"
-  }, [_vm._v("All Tasks")]), _vm._v(" "), _c('ul', [_c('li', [_c('div', {
+    staticClass: "column is-fullwidth tasks-list"
+  }, [_c('div', {
+    staticClass: "card"
+  }, [_c('header', {
+    staticClass: "card-header"
+  }, [_c('a', {
+    staticClass: "card-header-title has-text-centered"
+  }, [_vm._v("All Tasks")])]), _vm._v(" "), _c('div', [_c('div', {
+    staticClass: "card-content-item"
+  }, [_c('div', {
     staticClass: "control is-grouped"
   }, [_c('p', {
     staticClass: "control is-expanded"
@@ -10983,9 +10989,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "type": "checkbox"
     }
-  }), _vm._v("\n                        Lorem ipsum dolor sit amet\n                    ")])]), _vm._v(" "), _c('p', {
+  }), _vm._v("\n                            Lorem ipsum dolor sit amet\n                        ")])]), _vm._v(" "), _c('p', {
     staticClass: "control"
-  }, [_vm._v("\n                    10:15\n                ")])])]), _vm._v(" "), _c('li', [_c('div', {
+  }, [_vm._v("\n                        10:15\n                    ")])])]), _vm._v(" "), _c('div', {
+    staticClass: "card-content-item"
+  }, [_c('div', {
     staticClass: "control is-grouped"
   }, [_c('p', {
     staticClass: "control is-expanded"
@@ -11000,26 +11008,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "type": "checkbox"
     }
-  }), _vm._v("\n                        Lorem ipsum dolor sit amet\n                    ")])]), _vm._v(" "), _c('p', {
+  }), _vm._v("\n                            Lorem ipsum dolor sit amet\n                        ")])]), _vm._v(" "), _c('p', {
     staticClass: "control"
-  }, [_vm._v("\n                    10:15\n                ")])])]), _vm._v(" "), _c('li', [_c('div', {
-    staticClass: "control is-grouped"
-  }, [_c('p', {
-    staticClass: "control is-expanded"
-  }, [_c('img', {
-    attrs: {
-      "src": "http://placehold.it/30x30",
-      "alt": "Avater"
-    }
-  }), _vm._v(" "), _c('label', {
-    staticClass: "checkbox"
-  }, [_c('input', {
-    attrs: {
-      "type": "checkbox"
-    }
-  }), _vm._v("\n                        Lorem ipsum dolor sit amet\n                    ")])]), _vm._v(" "), _c('p', {
-    staticClass: "control"
-  }, [_vm._v("\n                    10:15\n                ")])])])])])
+  }, [_vm._v("\n                        10:15\n                    ")])])])])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {

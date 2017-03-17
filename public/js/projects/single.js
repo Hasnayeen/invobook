@@ -10605,7 +10605,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "E:\\Node Project\\goodwork\\resources\\assets\\js\\components\\partials\\inviteModal.vue"
+Component.options.__file = "/var/www/goodwork/resources/assets/js/components/partials/inviteModal.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] inviteModal.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -10639,7 +10639,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "E:\\Node Project\\goodwork\\resources\\assets\\js\\components\\partials\\navbar.vue"
+Component.options.__file = "/var/www/goodwork/resources/assets/js/components/partials/navbar.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] navbar.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -11458,7 +11458,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "E:\\Node Project\\goodwork\\resources\\assets\\js\\components\\partials\\projects\\activity.vue"
+Component.options.__file = "/var/www/goodwork/resources/assets/js/components/partials/projects/activity.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] activity.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -11492,7 +11492,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "E:\\Node Project\\goodwork\\resources\\assets\\js\\components\\partials\\projects\\discussionBoard.vue"
+Component.options.__file = "/var/www/goodwork/resources/assets/js/components/partials/projects/discussionBoard.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] discussionBoard.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -11526,7 +11526,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "E:\\Node Project\\goodwork\\resources\\assets\\js\\components\\partials\\projects\\files.vue"
+Component.options.__file = "/var/www/goodwork/resources/assets/js/components/partials/projects/files.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] files.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -11560,7 +11560,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "E:\\Node Project\\goodwork\\resources\\assets\\js\\components\\partials\\projects\\messageBoard.vue"
+Component.options.__file = "/var/www/goodwork/resources/assets/js/components/partials/projects/messageBoard.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] messageBoard.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -11594,7 +11594,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "E:\\Node Project\\goodwork\\resources\\assets\\js\\components\\partials\\projects\\schedule.vue"
+Component.options.__file = "/var/www/goodwork/resources/assets/js/components/partials/projects/schedule.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] schedule.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -11628,7 +11628,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "E:\\Node Project\\goodwork\\resources\\assets\\js\\components\\partials\\projects\\taskBoard.vue"
+Component.options.__file = "/var/www/goodwork/resources/assets/js/components/partials/projects/taskBoard.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] taskBoard.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -11664,7 +11664,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "E:\\Node Project\\goodwork\\resources\\assets\\js\\components\\projects\\single.vue"
+Component.options.__file = "/var/www/goodwork/resources/assets/js/components/projects/single.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] single.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -11704,7 +11704,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "href": "#"
     }
-  }, [_vm._v("\r\n                Files\r\n            ")]), _vm._v(" "), _c('a', {
+  }, [_vm._v("\n                Files\n            ")]), _vm._v(" "), _c('a', {
     staticClass: "card-header-icon"
   }, [_c('span', {
     staticClass: "icon"
@@ -11801,7 +11801,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "href": "#"
     }
-  }, [_vm._v("\r\n                Message Board\r\n            ")]), _vm._v(" "), _c('a', {
+  }, [_vm._v("\n                Message Board\n            ")]), _vm._v(" "), _c('a', {
     staticClass: "card-header-icon"
   }, [_c('span', {
     staticClass: "icon"
@@ -11910,7 +11910,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "href": "#"
     }
-  }, [_vm._v("\r\n                Discussion Board\r\n            ")]), _vm._v(" "), _c('a', {
+  }, [_vm._v("\n                Discussion Board\n            ")]), _vm._v(" "), _c('a', {
     staticClass: "card-header-icon"
   }, [_c('span', {
     staticClass: "icon"
@@ -12004,7 +12004,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "href": "#"
     }
-  }, [_vm._v("\r\n                Task Board\r\n            ")]), _vm._v(" "), _c('a', {
+  }, [_vm._v("\n                Task Board\n            ")]), _vm._v(" "), _c('a', {
     staticClass: "card-header-icon"
   }, [_c('span', {
     staticClass: "icon"
@@ -12096,7 +12096,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "href": "#"
     }
-  }, [_vm._v("\r\n                Schedule\r\n            ")]), _vm._v(" "), _c('a', {
+  }, [_vm._v("\n                Schedule\n            ")]), _vm._v(" "), _c('a', {
     staticClass: "card-header-icon"
   }, [_c('span', {
     staticClass: "icon"
