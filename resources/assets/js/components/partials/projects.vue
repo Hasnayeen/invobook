@@ -2,7 +2,7 @@
     <div class="column is-one-third">
         <div class="card justified">
           <header class="card-header">
-            <a href="" class="card-header-title">
+            <a href="projects" class="card-header-title">
               Projects
             </a>
             <a class="card-header-icon">

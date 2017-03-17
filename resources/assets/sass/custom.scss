@@ -171,3 +171,18 @@ a.avatar-link:hover {
         }
     }
 }
+
+//Task Lists
+.tasks-list{
+    .control.is-grouped{
+        align-items: center;
+    }
+
+    label{
+        color: $base-color-darker;
+        padding: 5px 0 0 20px;
+        input{
+            margin-right: 20px;
+        }
+    }
+}

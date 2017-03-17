@@ -28,6 +28,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('projects/{project}', 'ProjectController@single');
 
+    Route::get('projects/{project}/tasks', 'ProjectController@tasks');
+
     Route::get('teams', 'TeamController@index');
 
     Route::get('teams/{team}', 'TeamController@index');
