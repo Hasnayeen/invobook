@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 93);
+/******/ 	return __webpack_require__(__webpack_require__.s = 95);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -10853,7 +10853,9 @@ if (false) {
 /* 36 */,
 /* 37 */,
 /* 38 */,
-/* 39 */
+/* 39 */,
+/* 40 */,
+/* 41 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -10862,8 +10864,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_partials_navbar_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_partials_navbar_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_partials_inviteModal_vue__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_partials_inviteModal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_partials_inviteModal_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_projects_list_vue__ = __webpack_require__(71);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_projects_list_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_projects_list_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_projects_tasks_vue__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_projects_tasks_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_projects_tasks_vue__);
 __webpack_require__(27);
 
 
@@ -10873,13 +10875,11 @@ __webpack_require__(27);
 var app = new Vue({
     el: '#app',
     components: {
-        inviteModal: __WEBPACK_IMPORTED_MODULE_1__components_partials_inviteModal_vue___default.a, navbar: __WEBPACK_IMPORTED_MODULE_0__components_partials_navbar_vue___default.a, list: __WEBPACK_IMPORTED_MODULE_2__components_projects_list_vue___default.a
+        inviteModal: __WEBPACK_IMPORTED_MODULE_1__components_partials_inviteModal_vue___default.a, navbar: __WEBPACK_IMPORTED_MODULE_0__components_partials_navbar_vue___default.a, tasks: __WEBPACK_IMPORTED_MODULE_2__components_projects_tasks_vue___default.a
     }
 });
 
 /***/ }),
-/* 40 */,
-/* 41 */,
 /* 42 */,
 /* 43 */,
 /* 44 */,
@@ -10894,45 +10894,7 @@ var app = new Vue({
 /* 53 */,
 /* 54 */,
 /* 55 */,
-/* 56 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = {
-    data: function (_data) {
-        function data() {
-            return _data.apply(this, arguments);
-        }
-
-        data.toString = function () {
-            return _data.toString();
-        };
-
-        return data;
-    }(function () {
-        return {
-            projects: data.projects
-        };
-    })
-};
-
-/***/ }),
+/* 56 */,
 /* 57 */,
 /* 58 */,
 /* 59 */,
@@ -10947,22 +10909,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 68 */,
 /* 69 */,
 /* 70 */,
-/* 71 */
+/* 71 */,
+/* 72 */,
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(56),
+  null,
   /* template */
-  __webpack_require__(74),
+  __webpack_require__(87),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "/var/www/goodwork/resources/assets/js/components/projects/list.vue"
+Component.options.__file = "/var/www/goodwork/resources/assets/js/components/projects/tasks.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] list.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] tasks.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -10971,9 +10935,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-12564281", Component.options)
+    hotAPI.createRecord("data-v-e047bb8a", Component.options)
   } else {
-    hotAPI.reload("data-v-12564281", Component.options)
+    hotAPI.reload("data-v-e047bb8a", Component.options)
   }
 })()}
 
@@ -10981,41 +10945,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 72 */,
-/* 73 */,
-/* 74 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "column is-fullwidth"
-  }, [_c('div', {
-    staticClass: "card"
-  }, [_vm._m(0), _vm._v(" "), _vm._l((_vm.projects), function(project) {
-    return _c('div', {
-      staticClass: "card-content-item"
-    }, [_c('a', {
-      attrs: {
-        "href": "#"
-      }
-    }, [_vm._v(_vm._s(project.name))]), _vm._v(" "), _c('p', [_vm._v(_vm._s(project.description))])])
-  })], 2)])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('header', {
-    staticClass: "card-header"
-  }, [_c('a', {
-    staticClass: "card-header-title has-text-centered"
-  }, [_vm._v("All Projects")])])
-}]}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-12564281", module.exports)
-  }
-}
-
-/***/ }),
+/* 74 */,
 /* 75 */,
 /* 76 */,
 /* 77 */,
@@ -11028,16 +10958,80 @@ if (false) {
 /* 84 */,
 /* 85 */,
 /* 86 */,
-/* 87 */,
+/* 87 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _vm._m(0)
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "column is-fullwidth tasks-list"
+  }, [_c('div', {
+    staticClass: "card"
+  }, [_c('header', {
+    staticClass: "card-header"
+  }, [_c('a', {
+    staticClass: "card-header-title has-text-centered"
+  }, [_vm._v("All Tasks")])]), _vm._v(" "), _c('div', [_c('div', {
+    staticClass: "card-content-item"
+  }, [_c('div', {
+    staticClass: "control is-grouped"
+  }, [_c('p', {
+    staticClass: "control is-expanded"
+  }, [_c('img', {
+    attrs: {
+      "src": "http://placehold.it/30x30",
+      "alt": "Avater"
+    }
+  }), _vm._v(" "), _c('label', {
+    staticClass: "checkbox"
+  }, [_c('input', {
+    attrs: {
+      "type": "checkbox"
+    }
+  }), _vm._v("\n                            Lorem ipsum dolor sit amet\n                        ")])]), _vm._v(" "), _c('p', {
+    staticClass: "control"
+  }, [_vm._v("\n                        10:15\n                    ")])])]), _vm._v(" "), _c('div', {
+    staticClass: "card-content-item"
+  }, [_c('div', {
+    staticClass: "control is-grouped"
+  }, [_c('p', {
+    staticClass: "control is-expanded"
+  }, [_c('img', {
+    attrs: {
+      "src": "http://placehold.it/30x30",
+      "alt": "Avater"
+    }
+  }), _vm._v(" "), _c('label', {
+    staticClass: "checkbox"
+  }, [_c('input', {
+    attrs: {
+      "type": "checkbox"
+    }
+  }), _vm._v("\n                            Lorem ipsum dolor sit amet\n                        ")])]), _vm._v(" "), _c('p', {
+    staticClass: "control"
+  }, [_vm._v("\n                        10:15\n                    ")])])])])])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-e047bb8a", module.exports)
+  }
+}
+
+/***/ }),
 /* 88 */,
 /* 89 */,
 /* 90 */,
 /* 91 */,
 /* 92 */,
-/* 93 */
+/* 93 */,
+/* 94 */,
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(39);
+module.exports = __webpack_require__(41);
 
 
 /***/ })

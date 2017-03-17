@@ -3,6 +3,7 @@
   "/js/home.js": "/js/home.js",
   "/css/app.css": "/css/app.css",
   "/js/projects/index.js": "/js/projects/index.js",
+  "/js/projects/tasks.js": "/js/projects/tasks.js",
   "/js/auth/register.js": "/js/auth/register.js",
   "/js/auth/login.js": "/js/auth/login.js"
 }
