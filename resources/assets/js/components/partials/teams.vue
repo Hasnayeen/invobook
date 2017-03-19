@@ -18,20 +18,22 @@
                     </div>
             </div>
           </div>
-          <footer class="card-footer">
-            <a class="card-footer-item">Create a New Team</a>
-          </footer>
+
+          <createTeamModal></createTeamModal>
+
         </div>
     </div>
 </template>
 
 <script>
+import createTeamModal from './teams/createTeamModal.vue'
     export default {
         data: () => ({
             teams: data.teams.map((team) => {
                 team.url = 'teams/' + team.slug;
                 return team;
             })
-        })
+        }),
+         components: {createTeamModal: createTeamModal}
     }
 </script>

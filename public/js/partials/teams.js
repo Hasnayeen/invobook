@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 100);
+/******/ 	return __webpack_require__(__webpack_require__.s = 97);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -11125,11 +11125,53 @@ module.exports = g;
 
 
 /***/ }),
-/* 30 */
+/* 30 */,
+/* 31 */,
+/* 32 */,
+/* 33 */,
+/* 34 */,
+/* 35 */,
+/* 36 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(38),
+  /* template */
+  __webpack_require__(40),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/var/www/html/OpenSourceProject/goodwork/resources/assets/js/components/partials/teams/createTeamModal.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] createTeamModal.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5dbac5c0", Component.options)
+  } else {
+    hotAPI.reload("data-v-5dbac5c0", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 37 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__teams_createTeamModal_vue__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__teams_createTeamModal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__teams_createTeamModal_vue__);
 //
 //
 //
@@ -11140,6 +11182,53 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = {
+    data: function (_data) {
+        function data() {
+            return _data.apply(this, arguments);
+        }
+
+        data.toString = function () {
+            return _data.toString();
+        };
+
+        return data;
+    }(function () {
+        return {
+            teams: data.teams.map(function (team) {
+                team.url = 'teams/' + team.slug;
+                return team;
+            })
+        };
+    }),
+    components: { createTeamModal: __WEBPACK_IMPORTED_MODULE_0__teams_createTeamModal_vue___default.a }
+};
+
+/***/ }),
+/* 38 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
@@ -11167,22 +11256,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             isActive: false,
             name: '',
-            email: ''
+            description: ''
         };
     },
     methods: {
-        openModal: function openModal() {
+        openCreateTeamModal: function openCreateTeamModal() {
             this.isActive = true;
         },
-        closeModal: function closeModal() {
+        closeCreateTeamModal: function closeCreateTeamModal() {
             this.isActive = false;
         },
-        sendInvitation: function sendInvitation() {
+        createNewTeam: function createNewTeam() {
             var _this = this;
 
-            axios.post('register/invite', {
+            axios.post('/teams', {
                 name: this.name,
-                email: this.email
+                description: this.description
             }).then(function (response) {
                 if (response.data.status == 'success') {
                     _this.isActive = false;
@@ -11195,96 +11284,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 };
 
 /***/ }),
-/* 31 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//avatar.jpg
-/* harmony default export */ __webpack_exports__["default"] = {
-    data: function data() {
-        return {
-            user: navbar.user,
-            token: Laravel.csrfToken,
-            url: navbar.navUrl,
-            hideSubMenu: true,
-            avatar: ''
-        };
-    },
-    methods: {
-        logoutUser: function logoutUser(event) {
-            event.preventDefault();
-            document.getElementById('logout-form').submit();
-        },
-        showMenus: function showMenus(event) {
-            event.preventDefault();
-            event.stopPropagation();
-            this.hideSubMenu = !this.hideSubMenu;
-        }
-    },
-    created: function created() {
-        if (this.user.avatar == null) {
-            this.avatar = '/image/avatar.jpg';
-        } else {
-            this.avatar = this.user.avatar;
-        }
-    },
-    mounted: function mounted() {
-        var thisNav = this;
-        document.addEventListener("click", function () {
-            if (thisNav.hideSubMenu == false) {
-                thisNav.hideSubMenu = true;
-            }
-        });
-    }
-};
-
-/***/ }),
-/* 32 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(1)(
   /* script */
-  __webpack_require__(30),
+  __webpack_require__(37),
   /* template */
-  __webpack_require__(35),
+  __webpack_require__(41),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "/var/www/html/OpenSourceProject/goodwork/resources/assets/js/components/partials/inviteModal.vue"
+Component.options.__file = "/var/www/html/OpenSourceProject/goodwork/resources/assets/js/components/partials/teams.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] inviteModal.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] teams.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -11293,9 +11308,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-987f00ae", Component.options)
+    hotAPI.createRecord("data-v-9903660a", Component.options)
   } else {
-    hotAPI.reload("data-v-987f00ae", Component.options)
+    hotAPI.reload("data-v-9903660a", Component.options)
   }
 })()}
 
@@ -11303,150 +11318,18 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 33 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(31),
-  /* template */
-  __webpack_require__(34),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "/var/www/html/OpenSourceProject/goodwork/resources/assets/js/components/partials/navbar.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] navbar.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-54093eca", Component.options)
-  } else {
-    hotAPI.reload("data-v-54093eca", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 34 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('nav', {
-    staticClass: "nav has-shadow"
-  }, [_c('div', {
-    staticClass: "nav-left"
+  return _c('footer', {
+    staticClass: "card-footer"
   }, [_c('a', {
-    staticClass: "nav-item is-base-darker",
-    attrs: {
-      "href": _vm.url.site
-    }
-  }, [_vm._v("\n    GOODWORK\n    ")])]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('div', {
-    staticClass: "nav-right nav-menu"
-  }, [_c('a', {
-    staticClass: "nav-item is-tab avatar-link  is-base-darker",
-    attrs: {
-      "href": "#"
-    },
+    staticClass: "card-footer-item",
     on: {
-      "click": _vm.showMenus
+      "click": _vm.openCreateTeamModal
     }
-  }, [_c('img', {
-    attrs: {
-      "src": _vm.avatar
-    }
-  }), _vm._v(_vm._s(_vm.user.name) + " "), _c('i', {
-    staticClass: "fa fa-angle-down",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  })]), _vm._v(" "), _c('ul', {
-    staticClass: "sub-nav-item ",
-    class: {
-      'is-hidden-tablet': _vm.hideSubMenu
-    }
-  }, [_vm._m(1), _vm._v(" "), _vm._m(2), _vm._v(" "), _vm._m(3), _vm._v(" "), _c('li', {
-    staticClass: "separator-menu"
-  }, [_c('a', {
-    attrs: {
-      "href": _vm.url.logout
-    },
-    on: {
-      "click": _vm.logoutUser
-    }
-  }, [_vm._v("Logout")])])]), _vm._v(" "), _c('form', {
-    staticStyle: {
-      "display": "none"
-    },
-    attrs: {
-      "id": "logout-form",
-      "action": _vm.url.logout,
-      "method": "POST"
-    }
-  }, [_c('input', {
-    attrs: {
-      "type": "hidden",
-      "name": "_token"
-    },
-    domProps: {
-      "value": _vm.token
-    }
-  })])])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('span', {
-    staticClass: "nav-toggle"
-  }, [_c('span'), _vm._v(" "), _c('span'), _vm._v(" "), _c('span')])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('li', [_c('a', {
-    attrs: {
-      "href": "#"
-    }
-  }, [_vm._v("Your profile")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('li', [_c('a', {
-    attrs: {
-      "href": "#"
-    }
-  }, [_vm._v("Help")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('li', [_c('a', {
-    attrs: {
-      "href": "#"
-    }
-  }, [_vm._v("Settings")])])
-}]}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-54093eca", module.exports)
-  }
-}
-
-/***/ }),
-/* 35 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "columns"
-  }, [_c('div', {
-    staticClass: "column is-2 is-offset-5"
-  }, [_c('a', {
-    staticClass: "button is-base is-outlined is-fullwidth",
-    on: {
-      "click": _vm.openModal
-    }
-  }, [_vm._v("Invite New Member")])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Create a New Team")]), _vm._v(" "), _c('div', {
     staticClass: "modal",
     class: {
       'is-active': _vm.isActive
@@ -11484,21 +11367,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.email),
-      expression: "email"
+      value: (_vm.description),
+      expression: "description"
     }],
     staticClass: "input is-danger",
     attrs: {
       "type": "text",
-      "placeholder": "Email Address"
+      "placeholder": "Description"
     },
     domProps: {
-      "value": (_vm.email)
+      "value": (_vm.description)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.email = $event.target.value
+        _vm.description = $event.target.value
       }
     }
   })]), _vm._v(" "), _c('p', {
@@ -11509,12 +11392,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "type": "submit"
     },
     on: {
-      "click": _vm.sendInvitation
+      "click": _vm.createNewTeam
     }
-  }, [_vm._v("Send Invitation")])])]), _vm._v(" "), _c('button', {
+  }, [_vm._v("Add New Team")])])]), _vm._v(" "), _c('button', {
     staticClass: "modal-close",
     on: {
-      "click": _vm.closeModal
+      "click": _vm.closeCreateTeamModal
     }
   })])])
 },staticRenderFns: []}
@@ -11522,36 +11405,69 @@ module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-987f00ae", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-5dbac5c0", module.exports)
   }
 }
 
 /***/ }),
-/* 36 */,
-/* 37 */,
-/* 38 */,
-/* 39 */,
-/* 40 */,
-/* 41 */,
+/* 41 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "column is-one-third"
+  }, [_c('div', {
+    staticClass: "card justified"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "card-content"
+  }, [_c('div', {
+    staticClass: "content"
+  }, _vm._l((_vm.teams), function(team) {
+    return _c('div', [_c('a', {
+      staticClass: "is-block has-text-centered",
+      attrs: {
+        "href": team.url
+      }
+    }, [_vm._v(_vm._s(team.name))])])
+  }))]), _vm._v(" "), _c('createTeamModal')], 1)])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('header', {
+    staticClass: "card-header"
+  }, [_c('a', {
+    staticClass: "card-header-title",
+    attrs: {
+      "href": "teams"
+    }
+  }, [_vm._v("\n          Teams\n        ")]), _vm._v(" "), _c('a', {
+    staticClass: "card-header-icon"
+  }, [_c('span', {
+    staticClass: "icon"
+  }, [_c('i', {
+    staticClass: "fa fa-angle-down"
+  })])])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-9903660a", module.exports)
+  }
+}
+
+/***/ }),
 /* 42 */,
 /* 43 */,
 /* 44 */,
-/* 45 */,
-/* 46 */,
-/* 47 */,
-/* 48 */
+/* 45 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_partials_navbar_vue__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_partials_navbar_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_partials_navbar_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_partials_inviteModal_vue__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_partials_inviteModal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_partials_inviteModal_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_projects_tasks_vue__ = __webpack_require__(78);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_projects_tasks_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_projects_tasks_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_partials_teams_vue__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_partials_teams_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_partials_teams_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_partials_teams_createTeamModal_vue__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_partials_teams_createTeamModal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_partials_teams_createTeamModal_vue__);
 __webpack_require__(27);
-
 
 
 
@@ -11559,11 +11475,14 @@ __webpack_require__(27);
 var app = new Vue({
     el: '#app',
     components: {
-        inviteModal: __WEBPACK_IMPORTED_MODULE_1__components_partials_inviteModal_vue___default.a, navbar: __WEBPACK_IMPORTED_MODULE_0__components_partials_navbar_vue___default.a, tasks: __WEBPACK_IMPORTED_MODULE_2__components_projects_tasks_vue___default.a
+        createTeamModal: __WEBPACK_IMPORTED_MODULE_1__components_partials_teams_createTeamModal_vue___default.a, teams: __WEBPACK_IMPORTED_MODULE_0__components_partials_teams_vue___default.a
     }
 });
 
 /***/ }),
+/* 46 */,
+/* 47 */,
+/* 48 */,
 /* 49 */,
 /* 50 */,
 /* 51 */,
@@ -11593,40 +11512,7 @@ var app = new Vue({
 /* 75 */,
 /* 76 */,
 /* 77 */,
-/* 78 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(1)(
-  /* script */
-  null,
-  /* template */
-  __webpack_require__(91),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "/var/www/html/OpenSourceProject/goodwork/resources/assets/js/components/projects/tasks.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] tasks.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-e047bb8a", Component.options)
-  } else {
-    hotAPI.reload("data-v-e047bb8a", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
+/* 78 */,
 /* 79 */,
 /* 80 */,
 /* 81 */,
@@ -11639,81 +11525,16 @@ module.exports = Component.exports
 /* 88 */,
 /* 89 */,
 /* 90 */,
-/* 91 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _vm._m(0)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "column is-fullwidth tasks-list"
-  }, [_c('div', {
-    staticClass: "card"
-  }, [_c('header', {
-    staticClass: "card-header"
-  }, [_c('a', {
-    staticClass: "card-header-title has-text-centered"
-  }, [_vm._v("All Tasks")])]), _vm._v(" "), _c('div', [_c('div', {
-    staticClass: "card-content-item"
-  }, [_c('div', {
-    staticClass: "control is-grouped"
-  }, [_c('p', {
-    staticClass: "control is-expanded"
-  }, [_c('img', {
-    attrs: {
-      "src": "http://placehold.it/30x30",
-      "alt": "Avater"
-    }
-  }), _vm._v(" "), _c('label', {
-    staticClass: "checkbox"
-  }, [_c('input', {
-    attrs: {
-      "type": "checkbox"
-    }
-  }), _vm._v("\n                            Lorem ipsum dolor sit amet\n                        ")])]), _vm._v(" "), _c('p', {
-    staticClass: "control"
-  }, [_vm._v("\n                        10:15\n                    ")])])]), _vm._v(" "), _c('div', {
-    staticClass: "card-content-item"
-  }, [_c('div', {
-    staticClass: "control is-grouped"
-  }, [_c('p', {
-    staticClass: "control is-expanded"
-  }, [_c('img', {
-    attrs: {
-      "src": "http://placehold.it/30x30",
-      "alt": "Avater"
-    }
-  }), _vm._v(" "), _c('label', {
-    staticClass: "checkbox"
-  }, [_c('input', {
-    attrs: {
-      "type": "checkbox"
-    }
-  }), _vm._v("\n                            Lorem ipsum dolor sit amet\n                        ")])]), _vm._v(" "), _c('p', {
-    staticClass: "control"
-  }, [_vm._v("\n                        10:15\n                    ")])])])])])])
-}]}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-e047bb8a", module.exports)
-  }
-}
-
-/***/ }),
+/* 91 */,
 /* 92 */,
 /* 93 */,
 /* 94 */,
 /* 95 */,
 /* 96 */,
-/* 97 */,
-/* 98 */,
-/* 99 */,
-/* 100 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(48);
+module.exports = __webpack_require__(45);
 
 
 /***/ })
