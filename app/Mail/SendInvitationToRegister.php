@@ -2,12 +2,13 @@
 
 namespace App\Mail;
 
+use App\Models\Setting;
 use App\Models\Token;
-use Illuminate\Http\Request;
 use Illuminate\Bus\Queueable;
+use Illuminate\Http\Request;
 use Illuminate\Mail\Mailable;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Auth;
 
 class SendInvitationToRegister extends Mailable
 {
@@ -31,12 +32,14 @@ class SendInvitationToRegister extends Mailable
     {
         $token = hash_hmac('sha256', str_random('40'), env('APP_KEY'));
         Token::create(['token' => $token, 'email' => $request->email]);
+        $setting = Setting::first();
 
         return $this->view('emails.invite')
                     ->subject(Auth::user()->name.' invited you to join Goodwork')
                     ->with([
                 'token' => $token,
                 'name'  => $request->name,
+                'company' => ($setting) ? $setting->company_name : null,
             ]);
     }
 }
