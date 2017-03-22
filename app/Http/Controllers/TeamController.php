@@ -8,4 +8,9 @@ class TeamController extends Controller
     {
         return view('teams.single');
     }
+
+    public function getAllMessages()
+    {
+        return view('teams.messages');
+    }
 }

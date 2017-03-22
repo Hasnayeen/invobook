@@ -30,13 +30,19 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('projects/{project}/tasks', 'ProjectController@tasks');
 
+    Route::get('projects/{project}/messages', 'ProjectController@getAllMessages');
+
     Route::get('teams', 'TeamController@index');
 
     Route::get('teams/{team}', 'TeamController@index');
 
+    Route::get('teams/{team}/messages', 'TeamController@getAllMessages');
+
     Route::get('offices', 'OfficeController@index');
 
     Route::get('offices/{office}', 'OfficeController@index');
+
+    Route::get('offices/{office}/messages', 'OfficeController@getAllMessages');
 
     Route::get('tasks/create', ['as' => 'tasks.create', 'uses' => 'TaskController@create']);
 

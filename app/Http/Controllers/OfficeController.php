@@ -8,4 +8,9 @@ class OfficeController extends Controller
     {
         return view('offices.single');
     }
+
+    public function getAllMessages()
+    {
+        return view('offices.messages');
+    }
 }

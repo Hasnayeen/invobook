@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 113);
+/******/ 	return __webpack_require__(__webpack_require__.s = 111);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -10850,8 +10850,156 @@ if (false) {
 }
 
 /***/ }),
-/* 36 */,
-/* 37 */,
+/* 36 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  null,
+  /* template */
+  __webpack_require__(37),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/var/www/goodwork/resources/assets/js/components/partials/messageBoard.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] messageBoard.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-80c6e42c", Component.options)
+  } else {
+    hotAPI.reload("data-v-80c6e42c", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 37 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _vm._m(0)
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "column is-fullwidth tasks-list"
+  }, [_c('div', {
+    staticClass: "card"
+  }, [_c('header', {
+    staticClass: "card-header"
+  }, [_c('a', {
+    staticClass: "card-header-title has-text-centered"
+  }, [_vm._v("Message Board")])]), _vm._v(" "), _c('div', {
+    staticClass: "message-box"
+  }, [_c('div', {
+    staticClass: "card-content-item"
+  }, [_c('article', {
+    staticClass: "media"
+  }, [_c('figure', {
+    staticClass: "media-left"
+  }, [_c('p', {
+    staticClass: "image is-32x32"
+  }, [_c('img', {
+    attrs: {
+      "src": "http://bulma.io/images/placeholders/128x128.png"
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "media-content"
+  }, [_c('div', {
+    staticClass: "content"
+  }, [_c('p', [_c('strong', [_vm._v("John Smith")]), _vm._v(" "), _c('small', [_vm._v("@johnsmith")]), _vm._v(" "), _c('small', [_vm._v("31m")]), _vm._v(" "), _c('br'), _vm._v("\n                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.\n                            ")])])]), _vm._v(" "), _c('div', {
+    staticClass: "media-right"
+  }, [_c('button', {
+    staticClass: "delete"
+  })])])]), _vm._v(" "), _c('div', {
+    staticClass: "card-content-item"
+  }, [_c('article', {
+    staticClass: "media"
+  }, [_c('figure', {
+    staticClass: "media-left"
+  }, [_c('p', {
+    staticClass: "image is-32x32"
+  }, [_c('img', {
+    attrs: {
+      "src": "http://bulma.io/images/placeholders/128x128.png"
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "media-content"
+  }, [_c('div', {
+    staticClass: "content"
+  }, [_c('p', [_c('strong', [_vm._v("John Smith")]), _vm._v(" "), _c('small', [_vm._v("@johnsmith")]), _vm._v(" "), _c('small', [_vm._v("31m")]), _vm._v(" "), _c('br'), _vm._v("\n                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.\n                            ")])])]), _vm._v(" "), _c('div', {
+    staticClass: "media-right"
+  }, [_c('button', {
+    staticClass: "delete"
+  })])])]), _vm._v(" "), _c('div', {
+    staticClass: "card-content-item"
+  }, [_c('article', {
+    staticClass: "media"
+  }, [_c('figure', {
+    staticClass: "media-left"
+  }, [_c('p', {
+    staticClass: "image is-32x32"
+  }, [_c('img', {
+    attrs: {
+      "src": "http://bulma.io/images/placeholders/128x128.png"
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "media-content"
+  }, [_c('div', {
+    staticClass: "content"
+  }, [_c('p', [_c('strong', [_vm._v("John Smith")]), _vm._v(" "), _c('small', [_vm._v("@johnsmith")]), _vm._v(" "), _c('small', [_vm._v("31m")]), _vm._v(" "), _c('br'), _vm._v("\n                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.\n                            ")])])]), _vm._v(" "), _c('div', {
+    staticClass: "media-right"
+  }, [_c('button', {
+    staticClass: "delete"
+  })])])]), _vm._v(" "), _c('div', {
+    staticClass: "card-content-item"
+  }, [_c('article', {
+    staticClass: "media"
+  }, [_c('figure', {
+    staticClass: "media-left"
+  }, [_c('p', {
+    staticClass: "image is-32x32"
+  }, [_c('img', {
+    attrs: {
+      "src": "http://bulma.io/images/placeholders/128x128.png"
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "media-content"
+  }, [_c('div', {
+    staticClass: "content"
+  }, [_c('p', [_c('strong', [_vm._v("John Smith")]), _vm._v(" "), _c('small', [_vm._v("@johnsmith")]), _vm._v(" "), _c('small', [_vm._v("31m")]), _vm._v(" "), _c('br'), _vm._v("\n                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.\n                            ")])])]), _vm._v(" "), _c('div', {
+    staticClass: "media-right"
+  }, [_c('button', {
+    staticClass: "delete"
+  })])])])]), _vm._v(" "), _c('footer', {
+    staticClass: "card-footer"
+  }, [_c('p', {
+    staticClass: "control card-footer-item send-message-box"
+  }, [_c('textarea', {
+    staticClass: "textarea",
+    attrs: {
+      "placeholder": "write your message here"
+    }
+  })])])])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-80c6e42c", module.exports)
+  }
+}
+
+/***/ }),
 /* 38 */,
 /* 39 */,
 /* 40 */,
@@ -10861,9 +11009,7 @@ if (false) {
 /* 44 */,
 /* 45 */,
 /* 46 */,
-/* 47 */,
-/* 48 */,
-/* 49 */
+/* 47 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -10872,8 +11018,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_partials_navbar_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_partials_navbar_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_partials_inviteModal_vue__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_partials_inviteModal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_partials_inviteModal_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_projects_list_vue__ = __webpack_require__(85);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_projects_list_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_projects_list_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_offices_messages_vue__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_offices_messages_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_offices_messages_vue__);
 __webpack_require__(27);
 
 
@@ -10883,11 +11029,13 @@ __webpack_require__(27);
 var app = new Vue({
     el: '#app',
     components: {
-        inviteModal: __WEBPACK_IMPORTED_MODULE_1__components_partials_inviteModal_vue___default.a, navbar: __WEBPACK_IMPORTED_MODULE_0__components_partials_navbar_vue___default.a, list: __WEBPACK_IMPORTED_MODULE_2__components_projects_list_vue___default.a
+        inviteModal: __WEBPACK_IMPORTED_MODULE_1__components_partials_inviteModal_vue___default.a, navbar: __WEBPACK_IMPORTED_MODULE_0__components_partials_navbar_vue___default.a, messages: __WEBPACK_IMPORTED_MODULE_2__components_offices_messages_vue___default.a
     }
 });
 
 /***/ }),
+/* 48 */,
+/* 49 */,
 /* 50 */,
 /* 51 */,
 /* 52 */,
@@ -10896,7 +11044,26 @@ var app = new Vue({
 /* 55 */,
 /* 56 */,
 /* 57 */,
-/* 58 */,
+/* 58 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__partials_messageBoard__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__partials_messageBoard___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__partials_messageBoard__);
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = {
+    components: {
+        messageBoard: __WEBPACK_IMPORTED_MODULE_0__partials_messageBoard___default.a
+    }
+};
+
+/***/ }),
 /* 59 */,
 /* 60 */,
 /* 61 */,
@@ -10906,52 +11073,47 @@ var app = new Vue({
 /* 65 */,
 /* 66 */,
 /* 67 */,
-/* 68 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = {
-    data: function (_data) {
-        function data() {
-            return _data.apply(this, arguments);
-        }
-
-        data.toString = function () {
-            return _data.toString();
-        };
-
-        return data;
-    }(function () {
-        return {
-            projects: data.projects
-        };
-    })
-};
-
-/***/ }),
+/* 68 */,
 /* 69 */,
 /* 70 */,
 /* 71 */,
 /* 72 */,
 /* 73 */,
 /* 74 */,
-/* 75 */,
+/* 75 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(58),
+  /* template */
+  __webpack_require__(92),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/var/www/goodwork/resources/assets/js/components/offices/messages.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] messages.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1c9e23a6", Component.options)
+  } else {
+    hotAPI.reload("data-v-1c9e23a6", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
 /* 76 */,
 /* 77 */,
 /* 78 */,
@@ -10961,79 +11123,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 82 */,
 /* 83 */,
 /* 84 */,
-/* 85 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(68),
-  /* template */
-  __webpack_require__(90),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "/var/www/goodwork/resources/assets/js/components/projects/list.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] list.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-12564281", Component.options)
-  } else {
-    hotAPI.reload("data-v-12564281", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
+/* 85 */,
 /* 86 */,
 /* 87 */,
 /* 88 */,
 /* 89 */,
-/* 90 */
+/* 90 */,
+/* 91 */,
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "column is-fullwidth"
-  }, [_c('div', {
-    staticClass: "card"
-  }, [_vm._m(0), _vm._v(" "), _vm._l((_vm.projects), function(project) {
-    return _c('div', {
-      staticClass: "card-content-item"
-    }, [_c('a', {
-      attrs: {
-        "href": "#"
-      }
-    }, [_vm._v(_vm._s(project.name))]), _vm._v(" "), _c('p', [_vm._v(_vm._s(project.description))])])
-  })], 2)])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('header', {
-    staticClass: "card-header"
-  }, [_c('a', {
-    staticClass: "card-header-title has-text-centered"
-  }, [_vm._v("All Projects")])])
-}]}
+  return _c('messageBoard')
+},staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-12564281", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-1c9e23a6", module.exports)
   }
 }
 
 /***/ }),
-/* 91 */,
-/* 92 */,
 /* 93 */,
 /* 94 */,
 /* 95 */,
@@ -11052,12 +11163,10 @@ if (false) {
 /* 108 */,
 /* 109 */,
 /* 110 */,
-/* 111 */,
-/* 112 */,
-/* 113 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(49);
+module.exports = __webpack_require__(47);
 
 
 /***/ })

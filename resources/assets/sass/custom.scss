@@ -186,3 +186,16 @@ a.avatar-link:hover {
         }
     }
 }
+
+.message-box {
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+.send-message-box textarea {
+    resize: none;
+    min-height: 3rem;
+    max-height: 10rem;
+    overflow: auto;
+    overflow-y: hidden;
+}
