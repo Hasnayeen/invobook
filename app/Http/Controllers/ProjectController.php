@@ -46,4 +46,9 @@ class ProjectController extends Controller
     {
         return view('projects.tasks');
     }
+
+    public function getAllMessages()
+    {
+        return view('projects.messages');
+    }
 }
