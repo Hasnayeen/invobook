@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Models\Message;
 
-
 class MessageRepository
 {
     /**
@@ -22,14 +21,15 @@ class MessageRepository
 
     /**
      * @return mixed
+     * @param  mixed $data
      */
     public function saveMessage($data)
     {
         return $this->model->create([
-            'body' => $data['message'],
-            'user_id' => $data['user_id'],
+            'body'             => $data['message'],
+            'user_id'          => $data['user_id'],
             'messageable_type' => $data['messageable_type'],
-            'messageable_id' => $data['messageable_id'],
+            'messageable_id'   => $data['messageable_id'],
         ]);
     }
 
