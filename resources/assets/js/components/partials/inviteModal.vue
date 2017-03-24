@@ -8,17 +8,9 @@
         <div class="modal-content">
             <p class="control has-icon has-icon-right">
                 <input class="input is-danger" type="text" placeholder="Name" v-model="name">
-<!--                     <span class="icon is-small">
-                    <i class="fa fa-warning"></i>
-                </span>
-                <span class="help is-danger">This email is invalid</span> -->
             </p>
             <p class="control has-icon has-icon-right">
                 <input class="input is-danger" type="text" placeholder="Email Address" v-model="email">
-<!--                     <span class="icon is-small">
-                    <i class="fa fa-warning"></i>
-                </span>
-                <span class="help is-danger">This email is invalid</span> -->
             </p>
             <p class="control">
                 <button type="submit" class="button is-primary is-fullwidth" @click="sendInvitation">Send Invitation</button>
@@ -44,7 +36,7 @@
                 this.isActive = false;
             },
             sendInvitation () {
-                axios.post('register/invite', {
+                axios.post('/register/invite', {
                     name: this.name,
                     email: this.email
                 })

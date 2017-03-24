@@ -34,4 +34,9 @@ class ProjectRepository
     {
         return $this->model->orderBy('created_at', 'desc')->take(3)->get();
     }
+
+    public function getIdFromSlug($slug)
+    {
+        return $this->model->where('slug', $slug)->first()->id;
+    }
 }
