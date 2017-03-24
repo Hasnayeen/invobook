@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreMessageRequest;
 use App\Services\MessageService;
+use App\Http\Requests\StoreMessageRequest;
 
 class OfficeController extends Controller
 {
@@ -39,7 +39,7 @@ class OfficeController extends Controller
             return response()->json([
                 'status'  => 'error',
                 'message' => $e->getMessage(),
-            ]);            
+            ]);
         }
     }
 }

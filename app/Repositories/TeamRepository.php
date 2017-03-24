@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Models\Team;
-use App\Repositories\RepositoryHelperTrait;
 
 class TeamRepository
 {
