@@ -22,9 +22,9 @@ class MessageService
     }
 
     /**
-     * @return mixed
      * @param  mixed $data
      * @param  mixed $slug
+     * @return mixed
      */
     public function saveMessage($data, $slug)
     {

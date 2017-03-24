@@ -20,8 +20,8 @@ class MessageRepository
     }
 
     /**
-     * @return mixed
      * @param  mixed $data
+     * @return mixed
      */
     public function saveMessage($data)
     {
