@@ -5,86 +5,23 @@
                 <a class="card-header-title has-text-centered">Message Board</a>
             </header>
             <div class="message-box">
-                <div class="card-content-item">
+                <div class="card-content-item" v-for="message in messages" :class="{ 'is-primary': message.user_id == user.id }">
                     <article class="media">
                         <figure class="media-left">
-                            <p class="image is-32x32">
-                                <img src="http://bulma.io/images/placeholders/128x128.png">
+                            <p class="image is-48x48">
+                                <img src="/image/avatar.jpg">
                             </p>
                         </figure>
                         <div class="media-content">
                             <div class="content">
                                 <p>
-                                    <strong>John Smith</strong> <small>@johnsmith</small> <small>31m</small>
+                                    <strong>{{ message.user.name }}</strong> <small>@{{ message.user.username }} </small> <small>{{ message.created_at }}</small>
                                     <br>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
+                                    {{ message.body }}
                                 </p>
                             </div>
                         </div>
-                        <div class="media-right">
-                            <button class="delete"></button>
-                        </div>
-                    </article>
-                </div>
-                <div class="card-content-item">
-                    <article class="media">
-                        <figure class="media-left">
-                            <p class="image is-32x32">
-                                <img src="http://bulma.io/images/placeholders/128x128.png">
-                            </p>
-                        </figure>
-                        <div class="media-content">
-                            <div class="content">
-                                <p>
-                                    <strong>John Smith</strong> <small>@johnsmith</small> <small>31m</small>
-                                    <br>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="media-right">
-                            <button class="delete"></button>
-                        </div>
-                    </article>
-                </div>
-                <div class="card-content-item">
-                    <article class="media">
-                        <figure class="media-left">
-                            <p class="image is-32x32">
-                                <img src="http://bulma.io/images/placeholders/128x128.png">
-                            </p>
-                        </figure>
-                        <div class="media-content">
-                            <div class="content">
-                                <p>
-                                    <strong>John Smith</strong> <small>@johnsmith</small> <small>31m</small>
-                                    <br>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="media-right">
-                            <button class="delete"></button>
-                        </div>
-                    </article>
-                </div>
-                <div class="card-content-item">
-                    <article class="media">
-                        <figure class="media-left">
-                            <p class="image is-32x32">
-                                <img src="http://bulma.io/images/placeholders/128x128.png">
-                            </p>
-                        </figure>
-                        <div class="media-content">
-                            <div class="content">
-                                <p>
-                                    <strong>John Smith</strong> <small>@johnsmith</small> <small>31m</small>
-                                    <br>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="media-right">
+                        <div class="media-right" v-if="message.user_id == user.id">
                             <button class="delete"></button>
                         </div>
                     </article>
@@ -92,9 +29,53 @@
             </div>
             <footer class="card-footer">
                 <p class="control card-footer-item send-message-box">
-                    <textarea class="textarea" placeholder="write your message here"></textarea>
+                    <textarea class="textarea" placeholder="write your message here" v-model="message" @keydown.enter.prevent="sendMessage($event)"></textarea>
                 </p>
             </footer>
         </div>
     </div>
 </template>
+
+<script>
+    export default {
+        props: ['type', 'id', 'project'],
+        data: () => ({
+            messages: data.messages.reverse(),
+            message: '',
+            user: navbar.user
+        }),
+        mounted () {
+            this.listen();
+        },
+        methods: {
+            sendMessage (e) {
+                if (e.shiftKey) {
+                    this.message = this.message + "\n";
+                } else {
+                    var msg = this.message;
+                    this.message = '';
+                    axios.post('messages', {
+                        message: msg,
+                        type: this.type
+                    })
+                    .then((response) => {
+                        if (response.data.status == 'success') {
+                            response.data.message.user = navbar.user;
+                            this.messages.push(response.data.message);
+                        }
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+                }
+            },
+            listen () {
+                Echo.channel(this.type + '.' + this.id)
+                    .listen('MessageCreated', event => {
+                        event.message.user = event.user;
+                        this.messages.push(event.message);
+                    });
+            }
+        }
+    }
+</script>

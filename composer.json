@@ -9,7 +9,8 @@
         "guzzlehttp/guzzle": "^6.2",
         "laravel/dusk": "^1.0",
         "laravel/framework": "5.4.*",
-        "laravel/tinker": "~1.0"
+        "laravel/tinker": "~1.0",
+        "predis/predis": "^1.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

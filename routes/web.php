@@ -32,17 +32,23 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('projects/{project}/messages', 'ProjectController@getAllMessages');
 
+    Route::post('projects/{project}/messages', 'ProjectController@storeMessage');
+
     Route::get('teams', 'TeamController@index');
 
     Route::get('teams/{team}', 'TeamController@index');
 
     Route::get('teams/{team}/messages', 'TeamController@getAllMessages');
 
+    Route::post('teams/{team}/messages', 'TeamController@storeMessage');
+
     Route::get('offices', 'OfficeController@index');
 
     Route::get('offices/{office}', 'OfficeController@index');
 
     Route::get('offices/{office}/messages', 'OfficeController@getAllMessages');
+
+    Route::post('offices/{office}/messages', 'OfficeController@storeMessage');
 
     Route::get('tasks/create', ['as' => 'tasks.create', 'uses' => 'TaskController@create']);
 
