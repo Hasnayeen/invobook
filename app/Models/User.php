@@ -29,4 +29,5 @@ class User extends Authenticatable
 
     const ADMIN = 1;
     const MEMBER = 2;
+    const GUEST = 3;
 }

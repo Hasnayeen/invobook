@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\MessageService;
 use App\Services\ProjectService;
+use App\Http\Requests\StoreMessageRequest;
 
 class ProjectController extends Controller
 {
@@ -10,13 +12,15 @@ class ProjectController extends Controller
      * @var ProjectService
      */
     private $projectService;
+    private $messageService;
 
     /**
      * @param ProjectService $projectService
      */
-    public function __construct(ProjectService $projectService)
+    public function __construct(ProjectService $projectService, MessageService $messageService)
     {
         $this->projectService = $projectService;
+        $this->messageService = $messageService;
     }
 
     /**
@@ -47,8 +51,27 @@ class ProjectController extends Controller
         return view('projects.tasks');
     }
 
-    public function getAllMessages()
+    public function getAllMessages($project)
     {
-        return view('projects.messages');
+        list($messages, $id) = $this->messageService->getAllMessages('project', $project);
+
+        return view('projects.messages', compact('project', 'id', 'messages'));
+    }
+
+    public function storeMessage(StoreMessageRequest $request, $project)
+    {
+        try {
+            $message = $this->messageService->saveMessage($request->all(), $project);
+
+            return response()->json([
+                'status'  => 'success',
+                'message' => $message,
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'status'  => 'error',
+                'message' => $e->getMessage(),
+            ]);
+        }
     }
 }
