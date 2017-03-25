@@ -4,7 +4,7 @@
             <header class="card-header">
                 <a class="card-header-title has-text-centered">Message Board</a>
             </header>
-            <div class="message-box">
+            <div class="message-box" id="message-box">
                 <div class="card-content-item" v-for="message in messages" :class="{ 'is-primary': message.user_id == user.id }">
                     <article class="media">
                         <figure class="media-left">
@@ -49,6 +49,10 @@
         mounted () {
             this.title = document.title;
             this.listen();
+            document.getElementById("message-box").scrollTop = document.getElementById("message-box").scrollHeight;
+        },
+        updated () {
+            document.getElementById("message-box").scrollTop = document.getElementById("message-box").scrollHeight;
         },
         methods: {
             sendMessage (e) {
