@@ -21648,7 +21648,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "E:\\Node Project\\goodwork\\resources\\assets\\js\\components\\partials\\inviteModal.vue"
+Component.options.__file = "/var/www/goodwork/resources/assets/js/components/partials/inviteModal.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] inviteModal.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -21682,7 +21682,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "E:\\Node Project\\goodwork\\resources\\assets\\js\\components\\partials\\navbar.vue"
+Component.options.__file = "/var/www/goodwork/resources/assets/js/components/partials/navbar.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] navbar.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -21971,10 +21971,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             messages: data.messages.reverse(),
             message: '',
-            user: navbar.user
+            user: navbar.user,
+            unreadMessage: 0,
+            title: ''
         };
     }),
     mounted: function mounted() {
+        this.title = document.title;
         this.listen();
     },
 
@@ -22006,7 +22009,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             Echo.channel(this.type + '.' + this.id).listen('MessageCreated', function (event) {
                 event.message.user = event.user;
                 _this2.messages.push(event.message);
+                if (document.activeElement != document.getElementById("send-message")) {
+                    _this2.unreadMessage += 1;
+                    document.title = '(' + _this2.unreadMessage + ') ' + _this2.title;
+                }
             });
+        },
+        clearTitleNotification: function clearTitleNotification() {
+            document.title = this.title;
+            this.unreadMessage = 0;
         }
     }
 };
@@ -22025,7 +22036,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "E:\\Node Project\\goodwork\\resources\\assets\\js\\components\\partials\\messageBoard.vue"
+Component.options.__file = "/var/www/goodwork/resources/assets/js/components/partials/messageBoard.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] messageBoard.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -22086,6 +22097,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }],
     staticClass: "textarea",
     attrs: {
+      "id": "send-message",
       "placeholder": "write your message here"
     },
     domProps: {
@@ -22096,6 +22108,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         if (_vm._k($event.keyCode, "enter", 13)) { return; }
         $event.preventDefault();
         _vm.sendMessage($event)
+      },
+      "focus": function($event) {
+        _vm.clearTitleNotification()
       },
       "input": function($event) {
         if ($event.target.composing) { return; }
@@ -22234,7 +22249,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "E:\\Node Project\\goodwork\\resources\\assets\\js\\components\\projects\\messages.vue"
+Component.options.__file = "/var/www/goodwork/resources/assets/js/components/projects/messages.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] messages.vue: functional components are not supported with templates, they should use render functions.")}
 
