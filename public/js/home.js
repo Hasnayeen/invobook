@@ -21516,6 +21516,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = {
     data: function data() {
@@ -21637,7 +21648,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "/var/www/goodwork/resources/assets/js/components/partials/inviteModal.vue"
+Component.options.__file = "E:\\Node Project\\goodwork\\resources\\assets\\js\\components\\partials\\inviteModal.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] inviteModal.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -21671,7 +21682,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "/var/www/goodwork/resources/assets/js/components/partials/navbar.vue"
+Component.options.__file = "E:\\Node Project\\goodwork\\resources\\assets\\js\\components\\partials\\navbar.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] navbar.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -21810,6 +21821,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "modal-background"
   }), _vm._v(" "), _c('div', {
     staticClass: "modal-content"
+  }, [_c('div', {
+    staticClass: "modal-card"
+  }, [_c('header', {
+    staticClass: "modal-card-head"
+  }, [_c('p', {
+    staticClass: "modal-card-title"
+  }, [_vm._v("Invite New Member")]), _vm._v(" "), _c('button', {
+    staticClass: "delete",
+    on: {
+      "click": _vm.closeModal
+    }
+  })]), _vm._v(" "), _c('section', {
+    staticClass: "modal-card-body"
   }, [_c('p', {
     staticClass: "control has-icon has-icon-right"
   }, [_c('input', {
@@ -21819,7 +21843,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       value: (_vm.name),
       expression: "name"
     }],
-    staticClass: "input is-danger",
+    staticClass: "input",
     attrs: {
       "type": "text",
       "placeholder": "Name"
@@ -21842,7 +21866,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       value: (_vm.email),
       expression: "email"
     }],
-    staticClass: "input is-danger",
+    staticClass: "input",
     attrs: {
       "type": "text",
       "placeholder": "Email Address"
@@ -21856,17 +21880,22 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.email = $event.target.value
       }
     }
-  })]), _vm._v(" "), _c('p', {
-    staticClass: "control"
+  })])]), _vm._v(" "), _c('footer', {
+    staticClass: "modal-card-foot"
   }, [_c('button', {
-    staticClass: "button is-primary is-fullwidth",
+    staticClass: "button is-primary",
     attrs: {
       "type": "submit"
     },
     on: {
       "click": _vm.sendInvitation
     }
-  }, [_vm._v("Send Invitation")])])]), _vm._v(" "), _c('button', {
+  }, [_vm._v("Send Invitation")]), _vm._v(" "), _c('a', {
+    staticClass: "button",
+    on: {
+      "click": _vm.closeModal
+    }
+  }, [_vm._v("Cancel")])])])]), _vm._v(" "), _c('button', {
     staticClass: "modal-close",
     on: {
       "click": _vm.closeModal
@@ -21898,7 +21927,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "/var/www/goodwork/resources/assets/js/components/partials/teams/createTeamModal.vue"
+Component.options.__file = "E:\\Node Project\\goodwork\\resources\\assets\\js\\components\\partials\\teams\\createTeamModal.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] createTeamModal.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -22004,6 +22033,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = {
     data: function data() {
@@ -22051,7 +22089,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "/var/www/goodwork/resources/assets/js/components/partials/teams.vue"
+Component.options.__file = "E:\\Node Project\\goodwork\\resources\\assets\\js\\components\\partials\\teams.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] teams.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -22092,6 +22130,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "modal-background"
   }), _vm._v(" "), _c('div', {
     staticClass: "modal-content"
+  }, [_c('div', {
+    staticClass: "modal-card"
+  }, [_c('header', {
+    staticClass: "modal-card-head"
+  }, [_c('p', {
+    staticClass: "modal-card-title"
+  }, [_vm._v("Create New Team")]), _vm._v(" "), _c('button', {
+    staticClass: "delete",
+    on: {
+      "click": _vm.closeCreateTeamModal
+    }
+  })]), _vm._v(" "), _c('section', {
+    staticClass: "modal-card-body"
   }, [_c('p', {
     staticClass: "control has-icon has-icon-right"
   }, [_c('input', {
@@ -22101,7 +22152,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       value: (_vm.name),
       expression: "name"
     }],
-    staticClass: "input is-danger",
+    staticClass: "input",
     attrs: {
       "type": "text",
       "placeholder": "Name"
@@ -22124,7 +22175,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       value: (_vm.description),
       expression: "description"
     }],
-    staticClass: "input is-danger",
+    staticClass: "input",
     attrs: {
       "type": "text",
       "placeholder": "Description"
@@ -22138,17 +22189,22 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.description = $event.target.value
       }
     }
-  })]), _vm._v(" "), _c('p', {
-    staticClass: "control"
+  })])]), _vm._v(" "), _c('footer', {
+    staticClass: "modal-card-foot"
   }, [_c('button', {
-    staticClass: "button is-primary is-fullwidth",
+    staticClass: "button is-primary",
     attrs: {
       "type": "submit"
     },
     on: {
       "click": _vm.createNewTeam
     }
-  }, [_vm._v("Add New Team")])])]), _vm._v(" "), _c('button', {
+  }, [_vm._v("Add New Team")]), _vm._v(" "), _c('a', {
+    staticClass: "button",
+    on: {
+      "click": _vm.closeCreateTeamModal
+    }
+  }, [_vm._v("Cancel")])])])]), _vm._v(" "), _c('button', {
     staticClass: "modal-close",
     on: {
       "click": _vm.closeCreateTeamModal
@@ -22414,6 +22470,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = {
     data: function (_data) {
@@ -22431,9 +22513,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             projects: data.projects.map(function (project) {
                 project.url = 'projects/' + project.slug;
                 return project;
-            })
+            }),
+            isCreateProjectActive: false
         };
-    })
+    }),
+    methods: {
+        openCreateProjectModal: function openCreateProjectModal() {
+            this.isCreateProjectActive = true;
+        },
+        closeCreateProjectModal: function closeCreateProjectModal() {
+            this.isCreateProjectActive = false;
+        }
+    }
 };
 
 /***/ }),
@@ -22462,7 +22553,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "/var/www/goodwork/resources/assets/js/components/home.vue"
+Component.options.__file = "E:\\Node Project\\goodwork\\resources\\assets\\js\\components\\home.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] home.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -22497,7 +22588,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "/var/www/goodwork/resources/assets/js/components/partials/activity.vue"
+Component.options.__file = "E:\\Node Project\\goodwork\\resources\\assets\\js\\components\\partials\\activity.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] activity.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -22531,7 +22622,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "/var/www/goodwork/resources/assets/js/components/partials/offices.vue"
+Component.options.__file = "E:\\Node Project\\goodwork\\resources\\assets\\js\\components\\partials\\offices.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] offices.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -22565,7 +22656,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "/var/www/goodwork/resources/assets/js/components/partials/projects.vue"
+Component.options.__file = "E:\\Node Project\\goodwork\\resources\\assets\\js\\components\\partials\\projects.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] projects.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -22619,7 +22710,51 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "href": project.url
       }
     }, [_vm._v(_vm._s(project.name))])])
-  }))]), _vm._v(" "), _vm._m(1)])])
+  }))]), _vm._v(" "), _c('footer', {
+    staticClass: "card-footer"
+  }, [_c('a', {
+    staticClass: "card-footer-item",
+    on: {
+      "click": _vm.openCreateProjectModal
+    }
+  }, [_vm._v("Create a New Project")]), _vm._v(" "), _c('div', {
+    staticClass: "modal",
+    class: {
+      'is-active': _vm.isCreateProjectActive
+    }
+  }, [_c('div', {
+    staticClass: "modal-background"
+  }), _vm._v(" "), _c('div', {
+    staticClass: "modal-content"
+  }, [_c('div', {
+    staticClass: "modal-card"
+  }, [_c('header', {
+    staticClass: "modal-card-head"
+  }, [_c('p', {
+    staticClass: "modal-card-title"
+  }, [_vm._v("Create New Project")]), _vm._v(" "), _c('button', {
+    staticClass: "delete",
+    on: {
+      "click": _vm.closeCreateProjectModal
+    }
+  })]), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('footer', {
+    staticClass: "modal-card-foot"
+  }, [_c('button', {
+    staticClass: "button is-primary",
+    attrs: {
+      "type": "button"
+    }
+  }, [_vm._v("Create Project")]), _vm._v(" "), _c('a', {
+    staticClass: "button",
+    on: {
+      "click": _vm.closeCreateProjectModal
+    }
+  }, [_vm._v("Cancel")])])])]), _vm._v(" "), _c('button', {
+    staticClass: "modal-close",
+    on: {
+      "click": _vm.closeCreateProjectModal
+    }
+  })])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('header', {
     staticClass: "card-header"
@@ -22636,11 +22771,24 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "fa fa-angle-down"
   })])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('footer', {
-    staticClass: "card-footer"
-  }, [_c('a', {
-    staticClass: "card-footer-item"
-  }, [_vm._v("Create a New Project")])])
+  return _c('section', {
+    staticClass: "modal-card-body"
+  }, [_c('p', {
+    staticClass: "control"
+  }, [_c('input', {
+    staticClass: "input",
+    attrs: {
+      "type": "text",
+      "placeholder": "Name"
+    }
+  })]), _vm._v(" "), _c('p', {
+    staticClass: "control"
+  }, [_c('textarea', {
+    staticClass: "textarea",
+    attrs: {
+      "placeholder": "Description"
+    }
+  })])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
