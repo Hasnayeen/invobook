@@ -21979,6 +21979,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     mounted: function mounted() {
         this.title = document.title;
         this.listen();
+        document.getElementById("message-box").scrollTop = document.getElementById("message-box").scrollHeight;
+    },
+    updated: function updated() {
+        document.getElementById("message-box").scrollTop = document.getElementById("message-box").scrollHeight;
     },
 
     methods: {
@@ -22066,7 +22070,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "card"
   }, [_vm._m(0), _vm._v(" "), _c('div', {
-    staticClass: "message-box"
+    staticClass: "message-box",
+    attrs: {
+      "id": "message-box"
+    }
   }, _vm._l((_vm.messages), function(message) {
     return _c('div', {
       staticClass: "card-content-item",
