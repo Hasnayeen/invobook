@@ -6,18 +6,29 @@
     <div class="modal" :class="{'is-active': isActive}">
         <div class="modal-background"></div>
         <div class="modal-content">
-            <p class="control has-icon has-icon-right">
-                <input class="input is-danger" type="text" placeholder="Name" v-model="name">
-            </p>
-            <p class="control has-icon has-icon-right">
-                <input class="input is-danger" type="text" placeholder="Email Address" v-model="email">
-            </p>
-            <p class="control">
-                <button type="submit" class="button is-primary is-fullwidth" @click="sendInvitation">Send Invitation</button>
-            </p>
+            <div class="modal-card">
+                <header class="modal-card-head">
+                    <p class="modal-card-title">Invite New Member</p>
+                    <button class="delete" @click="closeModal"></button>
+                </header>
+                <section class="modal-card-body">
+                    <p class="control has-icon has-icon-right">
+                        <input class="input" type="text" placeholder="Name" v-model="name">
+                    </p>
+                    <p class="control has-icon has-icon-right">
+                        <input class="input" type="text" placeholder="Email Address" v-model="email">
+                    </p>
+                </section>
+                <footer class="modal-card-foot">
+                    <button type="submit" class="button is-primary" @click="sendInvitation">Send Invitation</button>
+                    <a class="button" @click="closeModal">Cancel</a>
+                </footer>
+            </div> <!-- ./modal-card -->
         </div>
         <button class="modal-close" @click="closeModal"></button>
     </div>
+    <!-- ./modal -->
+
 </div>
 </template>
 
