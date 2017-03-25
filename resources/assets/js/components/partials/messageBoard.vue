@@ -29,7 +29,7 @@
             </div>
             <footer class="card-footer">
                 <p class="control card-footer-item send-message-box">
-                    <textarea class="textarea" placeholder="write your message here" v-model="message" @keydown.enter.prevent="sendMessage($event)"></textarea>
+                    <textarea class="textarea" id="send-message" placeholder="write your message here" v-model="message" @keydown.enter.prevent="sendMessage($event)" @focus="clearTitleNotification()"></textarea>
                 </p>
             </footer>
         </div>
@@ -42,9 +42,12 @@
         data: () => ({
             messages: data.messages.reverse(),
             message: '',
-            user: navbar.user
+            user: navbar.user,
+            unreadMessage: 0,
+            title: ''
         }),
         mounted () {
+            this.title = document.title;
             this.listen();
         },
         methods: {
@@ -74,7 +77,15 @@
                     .listen('MessageCreated', event => {
                         event.message.user = event.user;
                         this.messages.push(event.message);
+                        if (document.activeElement != document.getElementById("send-message")) {
+                            this.unreadMessage += 1;
+                            document.title = '(' + this.unreadMessage + ') ' + this.title;
+                        }
                     });
+            },
+            clearTitleNotification () {
+                document.title = this.title;
+                this.unreadMessage = 0;
             }
         }
     }
