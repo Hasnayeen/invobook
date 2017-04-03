@@ -21595,6 +21595,59 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //avatar.jpg
 /* harmony default export */ __webpack_exports__["default"] = {
     data: function data() {
@@ -21603,7 +21656,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             token: Laravel.csrfToken,
             url: navbar.navUrl,
             hideSubMenu: true,
-            avatar: ''
+            avatar: '',
+            hideNotificationList: true
         };
     },
     methods: {
@@ -21614,12 +21668,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         showMenus: function showMenus(event) {
             event.preventDefault();
             event.stopPropagation();
+            this.hideNotificationList = true; //Hide Notification on click
             this.hideSubMenu = !this.hideSubMenu;
+        },
+        showNotification: function showNotification(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            this.hideSubMenu = true; //Hide profile sub menu on click
+            this.hideNotificationList = !this.hideNotificationList;
         }
     },
     created: function created() {
-        if (this.user.avatar == null) {
-            this.avatar = '/image/avatar.jpg';
+        if (this.user.avatar == null || this.user.avatar == '') {
+            this.avatar = '/image/avatar.jpg'; //default avatar
         } else {
             this.avatar = this.user.avatar;
         }
@@ -21627,9 +21688,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     mounted: function mounted() {
         var thisNav = this;
         document.addEventListener("click", function () {
-            if (thisNav.hideSubMenu == false) {
-                thisNav.hideSubMenu = true;
-            }
+            //Hide sub menus on body click
+            thisNav.hideSubMenu = true;
+            thisNav.hideNotificationList = true;
         });
     }
 };
@@ -21648,7 +21709,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "/var/www/goodwork/resources/assets/js/components/partials/inviteModal.vue"
+Component.options.__file = "E:\\Node Project\\goodwork\\resources\\assets\\js\\components\\partials\\inviteModal.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] inviteModal.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -21682,7 +21743,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "/var/www/goodwork/resources/assets/js/components/partials/navbar.vue"
+Component.options.__file = "E:\\Node Project\\goodwork\\resources\\assets\\js\\components\\partials\\navbar.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] navbar.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -21716,10 +21777,40 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "href": _vm.url.site
     }
-  }, [_vm._v("\n    GOODWORK\n    ")])]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('div', {
+  }, [_vm._v("\n            GOODWORK\n        ")])]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('div', {
     staticClass: "nav-right nav-menu"
+  }, [_c('div', {
+    staticClass: "nav-menu-item"
   }, [_c('a', {
-    staticClass: "nav-item is-tab avatar-link  is-base-darker",
+    staticClass: "nav-item is-tab notification-link",
+    class: [_vm.hideNotificationList == false ? 'active' : ''],
+    attrs: {
+      "href": "#"
+    },
+    on: {
+      "click": _vm.showNotification
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-bell-o",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v("\n                Notification\n                "), _c('span', {
+    staticClass: "has-notification"
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "notification-box",
+    class: {
+      'is-hidden-tablet': _vm.hideNotificationList
+    }
+  }, [_vm._m(1), _vm._v(" "), _c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_vm._v("View All")])])]), _vm._v(" "), _c('div', {
+    staticClass: "nav-menu-item"
+  }, [_c('a', {
+    staticClass: "nav-item is-tab avatar-link is-base-darker",
+    class: [_vm.hideSubMenu == false ? 'active' : ''],
     attrs: {
       "href": "#"
     },
@@ -21740,7 +21831,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     class: {
       'is-hidden-tablet': _vm.hideSubMenu
     }
-  }, [_vm._m(1), _vm._v(" "), _vm._m(2), _vm._v(" "), _vm._m(3), _vm._v(" "), _c('li', {
+  }, [_vm._m(2), _vm._v(" "), _vm._m(3), _vm._v(" "), _vm._m(4), _vm._v(" "), _c('li', {
     staticClass: "separator-menu"
   }, [_c('a', {
     attrs: {
@@ -21766,11 +21857,51 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "value": _vm.token
     }
-  })])])])
+  })])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('span', {
     staticClass: "nav-toggle"
   }, [_c('span'), _vm._v(" "), _c('span'), _vm._v(" "), _c('span')])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "card"
+  }, [_c('div', {
+    staticClass: "card-content-item"
+  }, [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_c('div', {
+    staticClass: "icon"
+  }, [_c('i', {
+    staticClass: "fa fa-user-circle-o"
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "notify-content"
+  }, [_c('strong', [_vm._v("John Doe")]), _vm._v(" created a new task "), _c('br'), _vm._v(" "), _c('span', [_vm._v("15 minutes ago")])])])]), _vm._v(" "), _c('div', {
+    staticClass: "card-content-item"
+  }, [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_c('div', {
+    staticClass: "icon"
+  }, [_c('i', {
+    staticClass: "fa fa-user-circle-o"
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "notify-content"
+  }, [_c('strong', [_vm._v("John Doe")]), _vm._v(" created a new task "), _c('br'), _vm._v(" "), _c('span', [_vm._v("15 minutes ago")])])])]), _vm._v(" "), _c('div', {
+    staticClass: "card-content-item"
+  }, [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_c('div', {
+    staticClass: "icon"
+  }, [_c('i', {
+    staticClass: "fa fa-user-circle-o"
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "notify-content"
+  }, [_c('strong', [_vm._v("John Doe")]), _vm._v(" created a new task "), _c('br'), _vm._v(" "), _c('span', [_vm._v("15 minutes ago")])])])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('li', [_c('a', {
     attrs: {
@@ -22001,7 +22132,7 @@ var Component = __webpack_require__(1)(
   /* cssModules */
   null
 )
-Component.options.__file = "/var/www/goodwork/resources/assets/js/components/projects/tasks.vue"
+Component.options.__file = "E:\\Node Project\\goodwork\\resources\\assets\\js\\components\\projects\\tasks.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] tasks.vue: functional components are not supported with templates, they should use render functions.")}
 
