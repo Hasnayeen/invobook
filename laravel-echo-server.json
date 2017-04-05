@@ -1,5 +1,5 @@
 {
-	"authHost": "http://goodwork.local",
+	"authHost": "http://nginx",
 	"authEndpoint": "/broadcasting/auth",
 	"clients": [
 		{
@@ -11,7 +11,7 @@
 	"databaseConfig": {
 		"redis": {
 			"port": "6379",
-			"host": "localhost"
+			"host": "redis"
 		},
 		"sqlite": {
 			"databasePath": "/database/laravel-echo-server.sqlite"

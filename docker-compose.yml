@@ -1,0 +1,64 @@
+version: '3'
+
+services:
+  nginx:
+    image: nginx
+    ports:
+      - "${APP_PORT}:80"
+    volumes:
+      - ./site.conf:/etc/nginx/conf.d/default.conf
+      - .:/var/www
+    links:
+      - php
+
+  php:
+    build: .
+    volumes:
+      - .:/var/www
+    links:
+      - db
+      - redis
+    depends_on:
+      - db
+
+  db:
+    image: mariadb
+    hostname: db
+    environment:
+      - MYSQL_ROOT_PASSWORD="${DB_ROOT_PASSWORD}"
+      - MYSQL_DATABASE="${DB_DATABASE}"
+      - MYSQL_USER="${DB_USERNAME}"
+      - MYSQL_PASSWORD="${DB_PASSWORD}"
+    volumes:
+      - data-volume:/var/lib/mysql
+
+  redis:
+    image: redis
+    hostname: redis
+
+  worker:
+    image: php:7.1-cli
+    volumes:
+      - .:/var/www
+    links:
+      - db
+    working_dir: /var/www
+    command: bash -c "apt-get update && docker-php-ext-install pdo_mysql && php artisan queue:work redis --sleep=1 --tries=1"
+    depends_on:
+      - php
+
+  laravel_echo_server:
+    image: node:boron
+    hostname: laravel-echo-server
+    ports:
+      - "6001:6001"
+    volumes:
+      - ./laravel-echo-server.json:/usr/src/app/laravel-echo-server.json
+    working_dir: /usr/src/app
+    command: bash -c "npm install -g laravel-echo-server && /usr/local/lib/node_modules/laravel-echo-server/bin/server.js start"
+    depends_on:
+      - redis
+
+volumes:
+  data-volume:
+    driver: local

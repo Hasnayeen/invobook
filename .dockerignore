@@ -5,7 +5,6 @@
 /.idea
 Homestead.json
 Homestead.yaml
-.env
 .phpintel
 composer.lock
 npm-debug.log
@@ -13,3 +12,4 @@ npm-debug.log
 .env.testing
 .env.dusk.local
 docker.env
+!Dockerfile
