@@ -10,6 +10,7 @@
         "laravel/dusk": "^1.0",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
+        "pda/pheanstalk": "^3.1",
         "predis/predis": "^1.1"
     },
     "require-dev": {
