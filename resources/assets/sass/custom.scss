@@ -11,8 +11,8 @@ nav, .nav {
     }
 }
 
-.card {
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2) !important;
+div.card {
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
 }
 
 .is-base {
@@ -42,10 +42,6 @@ nav, .nav {
 .button.is-base.is-inverted {
     background-color: #fff;
     color: $base-color;
-}
-
-.card {
-    box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1);
 }
 
 .justified .card-content {
@@ -112,6 +108,108 @@ ul.sub-nav-item {
 a.avatar-link:hover {
     border: 0 none;
 }
+
+//Notification menu
+.nav-menu-item{
+    position: relative;
+
+    a.nav-item{
+        height: 100%;
+        position: relative;
+
+        &.active {
+            color: $gray-dark;
+        }
+
+        .has-notification{
+            position: absolute;
+            display: block;
+            height: 12px;
+            width: 12px;
+            background-color: $accent-color;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            left: 25px;
+            top: 12px;
+        }
+    }
+
+    &:not(:last-child) {
+        border-right: 1px solid hsla(187, 93%, 56%, 0.2);
+    }
+}
+
+.notification-link{
+    &.is-tab{
+        font-weight: 400;
+    }
+
+    i{
+        margin-right: 10px;
+    }
+
+    &:hover {
+        background-color: #099fb3;
+    }
+}
+
+.notification-box{
+    position: absolute;
+    // display: none;
+    width: 180%;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+    top: 110%;
+    left: -20%;
+
+    &:before {
+        content: "";
+        width: 0px;
+        height: 0px;
+        border-left: 1rem solid transparent;
+        border-right: 1rem solid transparent;
+        border-bottom: 1rem solid #fff;
+        position: absolute;
+        left: 45%;
+        top: -6%;
+    }
+
+    & > a {
+        display: block;
+        background-color: $base-color;
+        font-weight: 400;
+        font-size: 1rem;
+        color: #fff;
+        padding: 5px 0 3px;
+        text-transform: uppercase;
+    }
+
+    .card {
+        box-shadow: 0 0 0 0 rgba(0,0,0,0);
+
+        .card-content-item{
+            padding: 10px;
+
+            a {
+                font-size: 1rem;
+                font-weight: 400;
+                display: flex;
+                text-align: left;
+
+                strong {
+                    color: $base-color-darker;
+                }
+
+                &:hover strong{
+                    color: $gray-dark;
+                }
+
+                i {
+                    color: $gray-darker;
+                }
+            }
+        }
+    }
+} //End of .notification-box
 
 //Task Board 
 .taskboard-media{
