@@ -133,6 +133,10 @@ a.avatar-link:hover {
             top: 12px;
         }
     }
+
+    &:not(:last-child) {
+        border-right: 1px solid hsla(187, 93%, 56%, 0.2);
+    }
 }
 
 .notification-link{
@@ -143,26 +147,30 @@ a.avatar-link:hover {
     i{
         margin-right: 10px;
     }
+
+    &:hover {
+        background-color: #099fb3;
+    }
 }
 
 .notification-box{
     position: absolute;
     // display: none;
-    width: 300px;
+    width: 180%;
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
-    top: 51px;
-    left: 0;
+    top: 110%;
+    left: -20%;
 
     &:before {
         content: "";
-        width: 0;
-        height: 0;
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        border-bottom: 10px solid #fff;
+        width: 0px;
+        height: 0px;
+        border-left: 1rem solid transparent;
+        border-right: 1rem solid transparent;
+        border-bottom: 1rem solid #fff;
         position: absolute;
-        left: 79px;
-        top: -10px;
+        left: 45%;
+        top: -6%;
     }
 
     & > a {

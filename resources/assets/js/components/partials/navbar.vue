@@ -15,7 +15,7 @@
         <div class="nav-right nav-menu">
             <div class="nav-menu-item">
                 <a class="nav-item is-tab notification-link" href="#" @click="showNotification" v-bind:class="[hideNotificationList == false ? 'active' : '']">
-                    <i class="fa fa-bell-o" aria-hidden="true"></i>
+                    <i class="fa fa-bell" aria-hidden="true"></i>
                     Notification
                     <span class="has-notification"></span>
                 </a>
