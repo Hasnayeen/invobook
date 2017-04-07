@@ -3,8 +3,8 @@
 namespace App\Http\Requests;
 
 use App\Models\User;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Http\FormRequest;
 
 class StoreProjectRequest extends FormRequest
 {
@@ -26,10 +26,10 @@ class StoreProjectRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string',
+            'name'        => 'required|string',
             'description' => 'required|string',
-            'office_id' => 'integer',
-            'team_id' => 'integer',
+            'office_id'   => 'integer',
+            'team_id'     => 'integer',
         ];
     }
 }

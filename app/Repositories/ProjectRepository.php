@@ -43,11 +43,11 @@ class ProjectRepository
     public function storeProject($data)
     {
         return $this->model->create([
-            'name' => $data['name'],
-            'slug' => str_slug($data['name']),
+            'name'        => $data['name'],
+            'slug'        => str_slug($data['name']),
             'description' => $data['description'],
-            'office_id' => $data['office_id'] ?? null,
-            'team_id' => $data['team_id'] ?? null,
+            'office_id'   => $data['office_id'] ?? null,
+            'team_id'     => $data['team_id'] ?? null,
         ]);
     }
 }

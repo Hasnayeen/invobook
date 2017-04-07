@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreMessageRequest;
-use App\Http\Requests\StoreProjectRequest;
 use App\Services\MessageService;
 use App\Services\ProjectService;
+use App\Http\Requests\StoreMessageRequest;
+use App\Http\Requests\StoreProjectRequest;
 
 class ProjectController extends Controller
 {
@@ -82,7 +82,7 @@ class ProjectController extends Controller
             $project = $this->projectService->storeProject($request->all());
 
             return response()->json([
-                'status' => 'success',
+                'status'  => 'success',
                 'project' => $project,
                 ]);
         } catch (Exception $e) {
