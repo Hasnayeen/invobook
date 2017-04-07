@@ -45,9 +45,17 @@ div.card {
 }
 
 .justified .card-content {
-    min-height: 125px;
-    max-height: 125px;
+    min-height: 200px;
+    max-height: 200px;
     overflow-y: auto;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.justified .homepage {
+    min-height: 160px;
+    max-height: 160px;
 }
 
 .card .card-content-item {
@@ -226,7 +234,6 @@ a.avatar-link:hover {
         max-width: 34px;
     }
     .media-content{
-        background-color: #f7f7f7;
         padding: 3px 6px 5px;
     }
     p {
@@ -296,4 +303,18 @@ a.avatar-link:hover {
     max-height: 10rem;
     overflow: auto;
     overflow-y: hidden;
+}
+
+.homepage {
+    padding: 0.8rem 1.5rem;
+    .menu-list {
+        padding: 0.4rem 0;
+        &:not(:last-child) {
+            border-bottom: 1px solid rgba(38, 223, 247, 0.2);
+        }
+        a {
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+    }
 }

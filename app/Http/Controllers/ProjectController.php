@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\MessageService;
 use App\Services\ProjectService;
 use App\Http\Requests\StoreMessageRequest;
+use App\Http\Requests\StoreProjectRequest;
 
 class ProjectController extends Controller
 {
@@ -67,6 +68,23 @@ class ProjectController extends Controller
                 'status'  => 'success',
                 'message' => $message,
             ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'status'  => 'error',
+                'message' => $e->getMessage(),
+            ]);
+        }
+    }
+
+    public function storeProject(StoreProjectRequest $request)
+    {
+        try {
+            $project = $this->projectService->storeProject($request->all());
+
+            return response()->json([
+                'status'  => 'success',
+                'project' => $project,
+                ]);
         } catch (Exception $e) {
             return response()->json([
                 'status'  => 'error',
