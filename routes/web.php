@@ -26,6 +26,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('projects', 'ProjectController@index');
 
+    Route::post('projects', 'ProjectController@storeProject');
+
     Route::get('projects/{project}', 'ProjectController@single');
 
     Route::get('projects/{project}/tasks', 'ProjectController@tasks');

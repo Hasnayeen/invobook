@@ -30,14 +30,14 @@
                             </header>
                             <section class="modal-card-body">
                                 <p class="control">
-                                    <input class="input" type="text" placeholder="Name">
+                                    <input class="input" type="text" placeholder="Name" v-model="name">
                                 </p>
                                 <p class="control">
-                                    <textarea class="textarea" placeholder="Description"></textarea>
+                                    <input class="input" type="text" placeholder="Description" v-model="description">
                                 </p>
                             </section>
                             <footer class="modal-card-foot">
-                                <button type="button" class="button is-primary">Create Project</button>
+                                <button type="button" class="button is-primary" @click="createProject">Create Project</button>
                                 <a class="button" @click="closeCreateProjectModal">Cancel</a>
                             </footer>
                         </div> <!-- ./modal-card -->
@@ -58,7 +58,9 @@
                 project.url = 'projects/' + project.slug;
                 return project;
             }),
-            isCreateProjectActive: false
+            isCreateProjectActive: false,
+            name: '',
+            description: ''
         }),
         methods: {
             openCreateProjectModal () {
@@ -66,6 +68,22 @@
             },
             closeCreateProjectModal () {
                 this.isCreateProjectActive = false;
+            },
+            createProject () {
+                axios.post('/projects', {
+                    name: this.name,
+                    description: this.description
+                })
+                .then((response) => {
+                    if (response.data.status == 'success') {
+                        response.data.project.url = 'projects/' + response.data.project.slug;
+                        this.projects.push(response.data.project);
+                        this.closeCreateProjectModal();
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
             }
         }
     }

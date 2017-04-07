@@ -35,4 +35,9 @@ class ProjectService
     {
         return $this->projectRepository->getLatestThreeProject();
     }
+
+    public function storeProject($data)
+    {
+        return $this->projectRepository->storeProject($data);
+    }
 }
