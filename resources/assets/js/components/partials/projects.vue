@@ -11,15 +11,17 @@
               </span>
             </a>
           </header>
-          <div class="card-content">
+          <div class="card-content homepage">
             <div class="content">
-                <div v-for="project in projects">
-                    <a class="is-block has-text-centered" :href="project.url">{{ project.name }}</a>
+                <div class="menu-list" v-for="project in projects">
+                    <a class="has-text-centered" :href="project.url">{{ project.name }}</a>
                 </div>
             </div>
           </div>
             <footer class="card-footer">
                 <a class="card-footer-item" @click="openCreateProjectModal">Create a New Project</a>
+            </footer>
+                <!-- modal for project create form -->
                 <div class="modal" :class="{'is-active': isCreateProjectActive}">
                     <div class="modal-background"></div>
                     <div class="modal-content">
@@ -45,8 +47,6 @@
                     <button class="modal-close" @click="closeCreateProjectModal"></button>
                 </div>
                 <!-- ./modal -->
-
-            </footer>
         </div>
     </div>
 </template>
