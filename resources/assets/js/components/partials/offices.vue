@@ -11,12 +11,12 @@
               </span>
             </a>
           </header>
-          <div class="card-content">
-                <div class="content">
-                    <div v-for="office in offices">
-                        <a class="is-block has-text-centered" :href="office.url">{{ office.name }}</a>
-                    </div>
+          <div class="card-content homepage">
+            <div class="content">
+                <div class="menu-list" v-for="office in offices">
+                    <a class="has-text-centered" :href="office.url">{{ office.name }}</a>
                 </div>
+            </div>
           </div>
           <footer class="card-footer">
             <a class="card-footer-item">Create a New Office</a>
