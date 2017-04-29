@@ -33,4 +33,12 @@ class UserController extends Controller
             ]);
         }
     }
+
+     /**
+      * User Profile Page.
+      */
+     public function profile()
+     {
+         return view('users.profile');
+     }
 }
