@@ -78,7 +78,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('users', 'UserController@index');
 
-    Route::get('users/{user}', 'UserController@index');
+    Route::get('users/{user}', 'UserController@profile');
 
     Route::get('users/{user}/settings', 'UserController@index');
 
