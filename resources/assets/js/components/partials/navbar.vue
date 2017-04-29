@@ -67,7 +67,7 @@
                     <img :src="avatar">{{ user.name }} <i class="fa fa-angle-down" aria-hidden="true"></i>
                 </a>
                 <ul class="sub-nav-item " v-bind:class="{ 'is-hidden-tablet': hideSubMenu }">
-                    <li><a href="#">Your profile</a></li>
+                    <li><a :href="profileUrl">Your profile</a></li>
                     <li><a href="#">Help</a></li>
                     <li><a href="#">Settings</a></li>
                     <li class="separator-menu"><a :href="url.logout" @click="logoutUser">Logout</a></li>
@@ -88,7 +88,8 @@
             url: navbar.navUrl,
             hideSubMenu: true,
             avatar: '',
-            hideNotificationList: true
+            hideNotificationList: true,
+            profileUrl: navbar.navUrl.site + '/users/' + navbar.user.id
         }),
         methods: {
             logoutUser(event){
