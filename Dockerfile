@@ -17,9 +17,4 @@ WORKDIR /var/www
 
 # Install all the dependencies for the app
 RUN composer install --prefer-dist --no-interaction && \
-    cp .env.example .env && \
-    php artisan key:generate \
-    mysql -h db -u goodwork -psecret -e 'create database goodwork' \
-    php artisan migrate --seed \
-    php artisan cache:clear \
-    php artisan config:clear
+    cp .env.example .env
