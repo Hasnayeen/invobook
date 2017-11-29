@@ -20,7 +20,7 @@ if [ $# -gt 0 ];then
         $COMPOSE run --rm -w /var/www node yarn "$@"
     elif [[ "$1" == "mysql" ]]; then
         shift 1
-        $COMPOSE run --rm -w /var/www db mysql "$@"
+        $COMPOSE run --rm -w / db mysql "$@"
     else
         $COMPOSE "$@"
     fi
