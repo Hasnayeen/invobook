@@ -1,12 +1,9 @@
-/node_modules
 /public/storage
 /storage/*.key
-/vendor
 /.idea
 Homestead.json
 Homestead.yaml
 .phpintel
-composer.lock
 npm-debug.log
 /.phpcomplete_extended
 .env.testing
