@@ -13,7 +13,6 @@ services:
 
   php:
     build: .
-    image: hasnayeen/goodwork
     volumes:
       - .:/var/www
     links:
