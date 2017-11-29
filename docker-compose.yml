@@ -10,9 +10,11 @@ services:
       - .:/var/www
     links:
       - php
+    depends_on:
+      - php
 
   php:
-    build: .
+    image: goodwork_php
     volumes:
       - .:/var/www
     links:
