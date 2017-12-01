@@ -14,10 +14,10 @@ if [ $# -gt 0 ];then
         $COMPOSE run --rm -w /var/www php ./vendor/bin/phpunit "$@"
     elif [[ "$1" == "npm" ]]; then
         shift 1
-        $COMPOSE run --rm -w /var/www node npm "$@"
+        $COMPOSE run --rm -w /var/www laravel_echo_server npm "$@"
     elif [[ "$1" == "yarn" ]]; then
         shift 1
-        $COMPOSE run --rm -w /var/www node yarn "$@"
+        $COMPOSE run --rm -w /var/www laravel_echo_server yarn "$@"
     elif [[ "$1" == "mysql" ]]; then
         shift 1
         $COMPOSE run --rm -w / db mysql "$@"
