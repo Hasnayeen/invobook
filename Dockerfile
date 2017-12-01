@@ -14,7 +14,3 @@ COPY . /var/www
 
 # Set the WORKDIR to /var/www/goodwork so all following commands run in /var/www/goodwork
 WORKDIR /var/www
-
-# Install all the dependencies for the app
-RUN composer install --prefer-dist --no-interaction && \
-    cp .env.example .env

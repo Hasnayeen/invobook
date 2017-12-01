@@ -14,8 +14,9 @@ services:
       - php
 
   php:
-    build: .
-    image: goodwork_php
+    build:
+      context: .
+      dockerfile: Dockerfile
     volumes:
       - .:/var/www
     links:
@@ -57,6 +58,7 @@ services:
       - "6001:6001"
     volumes:
       - ./laravel-echo-server.json:/usr/src/app/laravel-echo-server.json
+      - .:/var/www
     working_dir: /usr/src/app
     command: bash -c "npm install -g laravel-echo-server && /usr/local/lib/node_modules/laravel-echo-server/bin/server.js start"
     depends_on:

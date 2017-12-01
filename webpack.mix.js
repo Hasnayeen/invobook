@@ -1,6 +1,9 @@
 let mix = require('laravel-mix').mix;
+var tailwindcss = require('tailwindcss');
 
-mix.sass('resources/assets/sass/app.scss', 'public/css');
+mix.postCss('resources/assets/css/main.css', 'public/css', [
+        tailwindcss('tailwind.js'),
+    ]);
 mix.js('resources/assets/js/pages/home.js', 'public/js')
    .js('resources/assets/js/pages/auth/login.js', 'public/js/auth')
    .js('resources/assets/js/pages/auth/register.js', 'public/js/auth');
