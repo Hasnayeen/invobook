@@ -1,12 +1,18 @@
 <template>
-<div class="columns is-multiline">
-    <taskBoard></taskBoard>
-    <discussionBoard></discussionBoard>
-    <messageBoard></messageBoard>
-    <schedule></schedule>
-    <files></files>
-    <activity></activity>
-</div>
+    <div class="container mx-auto w-3/5 mt-8">
+        <div class="text-center text-grey-dark font-semibold text-3xl mb-4">
+            Goodwork API
+            <p class="text-base">December 5, 2017 - December 13, 2017</p>
+        </div>
+        <div class="flex flex-row flex-wrap justify-center">
+            <taskBoard></taskBoard>
+            <discussionBoard></discussionBoard>
+            <messageBoard></messageBoard>
+            <schedule></schedule>
+            <files></files>
+            <activity></activity>
+        </div>
+    </div>
 </template>
 
 <script>

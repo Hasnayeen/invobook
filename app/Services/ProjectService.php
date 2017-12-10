@@ -31,9 +31,9 @@ class ProjectService
     /**
      * @return mixed
      */
-    public function getLatestThreeProject()
+    public function getLatestProject($total = 10)
     {
-        return $this->projectRepository->getLatestThreeProject();
+        return $this->projectRepository->getLatestProject($total);
     }
 
     public function storeProject($data)

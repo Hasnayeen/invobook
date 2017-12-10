@@ -1,5 +1,5 @@
 <template>
-<div class="columns">
+<div class="columns hidden">
     <div class="column is-2 is-offset-5">
         <a class="button is-base is-outlined is-fullwidth" @click="openModal">Invite New Member</a>
     </div>

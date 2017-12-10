@@ -1,81 +1,49 @@
 <template>
-<div class="column is-one-third">
-    <div class="card justified">
-        <header class="card-header">
-            <a href="#" class="card-header-title">
+    <div class="bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center rounded m-4">
+        <header class="w-full relative border-b h-12 pt-4 text-center">
+            <a href="#" class="text-grey-darker font-medium no-underline">
                 Files
             </a>
-            <a class="card-header-icon">
-                <span class="icon">
-                    <i class="fa fa-angle-down"></i>
-                </span>
-            </a>
+            <span class="text-grey-darker absolute pin-r mr-2">
+                <i class="fa fa-ellipsis-h"></i>
+            </span>
         </header>
-        <div class="card-content">
-            <div class="content">
-
-                <article class="media taskboard-media">
-                    <a href="#">
-                    <figure class="media-left">
-                        <p class="image">
-                            <i class="fa fa-file-text-o" aria-hidden="true"></i>
-                        </p>
-                    </figure>
-                    <div class="media-content">
-                        <div class="content">
-                            <p>
-                                <strong>File Name</strong>
-                                <br>
-                                <span>Short Information</span>
-                            </p>
-                        </div>
-                    </div>
-                    </a>
-                </article>
-
-                <article class="media taskboard-media">
-                    <a href="#">
-                    <figure class="media-left">
-                        <p class="image">
-                            <i class="fa fa-file-text-o" aria-hidden="true"></i>
-                        </p>
-                    </figure>
-                    <div class="media-content">
-                        <div class="content">
-                            <p>
-                                <strong>File Name</strong>
-                                <br>
-                                <span>Short Information</span>
-                            </p>
-                        </div>
-                    </div>
-                    </a>
-                </article>
-
-                <article class="media taskboard-media">
-                    <a href="#">
-                    <figure class="media-left">
-                        <p class="image">
-                            <i class="fa fa-file-text-o" aria-hidden="true"></i>
-                        </p>
-                    </figure>
-                    <div class="media-content">
-                        <div class="content">
-                            <p>
-                                <strong>File Name</strong>
-                                <br>
-                                <span>Short Information</span>
-                            </p>
-                        </div>
-                    </div>
-                    </a>
-                </article>
-
-                <!--<p class="is-block has-text-centered">You have no project yet</p>-->
-            </div>
+        <div class="w-full h-48 self-start text-left">
+            <a href="#" class="flex flex-row items-center p-4 no-underline text-grey-darker">
+                <span class="pr-4">
+                    <i class="text-xl fa fa-file-image-o"></i>
+                </span>
+                <div class="text-xs">
+                    <p class="text-base">landing-page-v.1.png</p>
+                    <p>
+                        <span class="text-pink">John</span><span> uploaded 15 min ago</span>
+                    </p>
+                </div>
+            </a>
+            <a href="#" class="flex flex-row items-center p-4 no-underline text-grey-darker">
+                <span class="pr-4">
+                    <i class="text-xl fa fa-file-pdf-o"></i>
+                </span>
+                <div class="text-xs">
+                    <p class="text-base">api-doc-v.1.pdf</p>
+                    <p>
+                        <span class="text-pink">John</span><span>  uploaded 15 min ago</span>
+                    </p>
+                </div>
+            </a>
+            <a href="#" class="flex flex-row items-center p-4 no-underline text-grey-darker">
+                <span class="pr-4">
+                    <i class="text-xl fa fa-file-text-o"></i>
+                </span>
+                <div class="text-xs">
+                    <p class="text-base">features list.txt</p>
+                    <p>
+                        <span class="text-pink">James</span><span>  uploaded 15 min ago</span>
+                    </p>
+                </div>
+            </a>
         </div>
     </div>
-</div>
 </template>
 
 <script>

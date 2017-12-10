@@ -13803,45 +13803,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//avatar.jpg
+
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             user: navbar.user,
             token: Laravel.csrfToken,
             url: navbar.navUrl,
-            hideSubMenu: true,
             avatar: '',
             hideNotificationList: true,
             profileUrl: navbar.navUrl.site + '/users/' + navbar.user.id
@@ -13853,10 +13821,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             document.getElementById('logout-form').submit();
         },
         showMenus: function showMenus(event) {
-            event.preventDefault();
-            event.stopPropagation();
-            this.hideNotificationList = true; //Hide Notification on click
-            this.hideSubMenu = !this.hideSubMenu;
+            document.getElementById('profile-menu').classList.remove('hidden');
         },
         showNotification: function showNotification(event) {
             event.preventDefault();
@@ -13890,133 +13855,157 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("nav", { staticClass: "nav has-shadow" }, [
-    _c("div", { staticClass: "nav-left" }, [
+  return _c(
+    "nav",
+    { staticClass: "bg-white flex flex-row justify-between h-12 px-4 shadow" },
+    [
       _c(
         "a",
         {
-          staticClass: "nav-item is-base-darker",
+          staticClass: "text-teal text-2xl no-underline self-center",
           attrs: { href: _vm.url.site }
         },
-        [_vm._v("\n            GOODWORK\n        ")]
-      )
-    ]),
-    _vm._v(" "),
-    _vm._m(0, false, false),
-    _vm._v(" "),
-    _c("div", { staticClass: "nav-right nav-menu" }, [
-      _c("div", { staticClass: "nav-menu-item" }, [
-        _c(
-          "a",
-          {
-            staticClass: "nav-item is-tab notification-link",
-            class: [_vm.hideNotificationList == false ? "active" : ""],
-            attrs: { href: "#" },
-            on: { click: _vm.showNotification }
-          },
-          [
-            _c("i", {
-              staticClass: "fa fa-bell",
-              attrs: { "aria-hidden": "true" }
-            }),
-            _vm._v("\n                Notification\n                "),
-            _c("span", { staticClass: "has-notification" })
-          ]
-        ),
+        [_vm._v("\n        GOODWORK\n    ")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex flex-row border-l" }, [
+        _c("div", { staticClass: "px-4 self-center" }, [
+          _c(
+            "a",
+            {
+              staticClass: "text-teal-light text-base no-underline",
+              class: [_vm.hideNotificationList == false ? "active" : ""],
+              attrs: { href: "#" },
+              on: { click: _vm.showNotification }
+            },
+            [
+              _c("i", {
+                staticClass: "fa fa-bell-o font-bold",
+                attrs: { "aria-hidden": "true" }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "hidden absolute",
+              class: { "is-hidden-tablet": _vm.hideNotificationList }
+            },
+            [
+              _vm._m(0, false, false),
+              _vm._v(" "),
+              _c("a", { attrs: { href: "#" } }, [_vm._v("View All")])
+            ]
+          )
+        ]),
         _vm._v(" "),
         _c(
           "div",
           {
-            staticClass: "notification-box",
-            class: { "is-hidden-tablet": _vm.hideNotificationList }
-          },
-          [
-            _vm._m(1, false, false),
-            _vm._v(" "),
-            _c("a", { attrs: { href: "#" } }, [_vm._v("View All")])
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "nav-menu-item" }, [
-        _c(
-          "a",
-          {
-            staticClass: "nav-item is-tab avatar-link is-base-darker",
-            class: [_vm.hideSubMenu == false ? "active" : ""],
-            attrs: { href: "#" },
+            staticClass: "px-4 border-l flex items-center cursor-pointer",
             on: { click: _vm.showMenus }
           },
           [
-            _c("img", { attrs: { src: _vm.avatar } }),
-            _vm._v(_vm._s(_vm.user.name) + " "),
-            _c("i", {
-              staticClass: "fa fa-angle-down",
-              attrs: { "aria-hidden": "true" }
-            })
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "ul",
-          {
-            staticClass: "sub-nav-item ",
-            class: { "is-hidden-tablet": _vm.hideSubMenu }
-          },
-          [
-            _c("li", [
-              _c("a", { attrs: { href: _vm.profileUrl } }, [
-                _vm._v("Your profile")
-              ])
-            ]),
+            _c("img", {
+              staticClass: "w-8 rounded-full mr-2",
+              attrs: { src: _vm.avatar }
+            }),
             _vm._v(" "),
-            _vm._m(2, false, false),
+            _c(
+              "span",
+              { staticClass: "text-grey-darker text-base no-underline" },
+              [
+                _vm._v(
+                  "\n                " +
+                    _vm._s(_vm.user.name) +
+                    "\n                "
+                ),
+                _c("i", {
+                  staticClass: "fa fa-angle-down",
+                  attrs: { "aria-hidden": "true" }
+                })
+              ]
+            ),
             _vm._v(" "),
-            _vm._m(3, false, false),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "hidden absolute bg-white w-32 pin-r mr-2 py-2 shadow-lg rounded",
+                staticStyle: { top: "3.5rem" },
+                attrs: { id: "profile-menu" }
+              },
+              [
+                _c(
+                  "a",
+                  {
+                    staticClass:
+                      "list-reset px-4 py-2 text-grey-dark no-underline block",
+                    attrs: { href: _vm.profileUrl }
+                  },
+                  [_vm._v("Your profile")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass:
+                      "list-reset px-4 py-2 text-grey-dark no-underline block",
+                    attrs: { href: "#" }
+                  },
+                  [_vm._v("Help")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass:
+                      "list-reset px-4 py-2 text-grey-dark no-underline block",
+                    attrs: { href: "#" }
+                  },
+                  [_vm._v("Settings")]
+                ),
+                _vm._v(" "),
+                _c("span", { staticClass: "block border-t" }),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass:
+                      "list-reset px-4 py-2 text-grey-dark no-underline block",
+                    attrs: { href: _vm.url.logout },
+                    on: { click: _vm.logoutUser }
+                  },
+                  [_vm._v("Logout")]
+                )
+              ]
+            ),
             _vm._v(" "),
-            _c("li", { staticClass: "separator-menu" }, [
-              _c(
-                "a",
-                {
-                  attrs: { href: _vm.url.logout },
-                  on: { click: _vm.logoutUser }
-                },
-                [_vm._v("Logout")]
-              )
-            ])
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "form",
-          {
-            staticStyle: { display: "none" },
-            attrs: { id: "logout-form", action: _vm.url.logout, method: "POST" }
-          },
-          [
-            _c("input", {
-              attrs: { type: "hidden", name: "_token" },
-              domProps: { value: _vm.token }
-            })
+            _c(
+              "form",
+              {
+                staticStyle: { display: "none" },
+                attrs: {
+                  id: "logout-form",
+                  action: _vm.url.logout,
+                  method: "POST"
+                }
+              },
+              [
+                _c("input", {
+                  attrs: { type: "hidden", name: "_token" },
+                  domProps: { value: _vm.token }
+                })
+              ]
+            )
           ]
         )
       ])
-    ])
-  ])
+    ]
+  )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "nav-toggle" }, [
-      _c("span"),
-      _vm._v(" "),
-      _c("span"),
-      _vm._v(" "),
-      _c("span")
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -14036,52 +14025,8 @@ var staticRenderFns = [
             _c("span", [_vm._v("15 minutes ago")])
           ])
         ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-content-item" }, [
-        _c("a", { attrs: { href: "#" } }, [
-          _c("div", { staticClass: "icon" }, [
-            _c("i", { staticClass: "fa fa-user-circle-o" })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "notify-content" }, [
-            _c("strong", [_vm._v("John Doe")]),
-            _vm._v(" created a new task "),
-            _c("br"),
-            _vm._v(" "),
-            _c("span", [_vm._v("15 minutes ago")])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-content-item" }, [
-        _c("a", { attrs: { href: "#" } }, [
-          _c("div", { staticClass: "icon" }, [
-            _c("i", { staticClass: "fa fa-user-circle-o" })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "notify-content" }, [
-            _c("strong", [_vm._v("John Doe")]),
-            _vm._v(" created a new task "),
-            _c("br"),
-            _vm._v(" "),
-            _c("span", [_vm._v("15 minutes ago")])
-          ])
-        ])
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Help")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Settings")])])
   }
 ]
 render._withStripped = true
@@ -14222,7 +14167,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "columns" }, [
+  return _c("div", { staticClass: "columns hidden" }, [
     _c("div", { staticClass: "column is-2 is-offset-5" }, [
       _c(
         "a",
@@ -14474,6 +14419,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -14582,44 +14533,6 @@ module.exports = Component.exports
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /***/ }),
 /* 76 */
@@ -14636,97 +14549,118 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "column is-one-third" }, [
-      _c("div", { staticClass: "card justified " }, [
-        _c("header", { staticClass: "card-header" }, [
-          _c("a", { staticClass: "card-header-title", attrs: { href: "#" } }, [
-            _vm._v("\n                Task Board\n            ")
-          ]),
+    return _c(
+      "div",
+      {
+        staticClass:
+          "bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center text-center rounded m-4"
+      },
+      [
+        _c("header", { staticClass: "w-full relative border-b h-12 pt-4" }, [
+          _c(
+            "a",
+            {
+              staticClass: "text-grey-darker font-medium no-underline",
+              attrs: { href: "#" }
+            },
+            [_vm._v("\n            Tasks\n        ")]
+          ),
           _vm._v(" "),
-          _c("a", { staticClass: "card-header-icon" }, [
-            _c("span", { staticClass: "icon" }, [
-              _c("i", { staticClass: "fa fa-angle-down" })
-            ])
+          _c("span", { staticClass: "text-grey-darker absolute pin-r mr-2" }, [
+            _c("i", { staticClass: "fa fa-ellipsis-h" })
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "card-content" }, [
-          _c("div", { staticClass: "content" }, [
-            _c("article", { staticClass: "media taskboard-media" }, [
-              _c("a", { attrs: { href: "#" } }, [
-                _c("figure", { staticClass: "media-left" }, [
-                  _c("p", { staticClass: "image" }, [
-                    _c("img", { attrs: { src: "http://placehold.it/34x34" } })
+        _c("div", { staticClass: "w-full h-48 self-start" }, [
+          _c(
+            "a",
+            {
+              staticClass: "flex flex-row p-4 no-underline items-center",
+              attrs: { href: "#" }
+            },
+            [
+              _c("input", {
+                staticClass:
+                  "bg-white rounded appearance-none border border-grey w-4 h-4",
+                attrs: { type: "checkbox", name: "", id: "" }
+              }),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "w-4/5 text-grey-dark text-left pl-2" },
+                [
+                  _c("p", { staticClass: "text-base" }, [
+                    _vm._v("Lorem ipsum dolor st..")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "text-sm" }, [
+                    _vm._v("\n                    John Smith\n                ")
                   ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "media-content" }, [
-                  _c("div", { staticClass: "content" }, [
-                    _c("p", [
-                      _c("strong", [_vm._v("John Smith")]),
-                      _vm._v(" "),
-                      _c("small", [_vm._v("11:03am")]),
-                      _vm._v(" "),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c("span", [_vm._v("Lorem ipsum dolor st..")])
-                    ])
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "flex flex-row p-4 no-underline items-center",
+              attrs: { href: "#" }
+            },
+            [
+              _c("input", {
+                staticClass:
+                  "bg-white rounded appearance-none border border-grey w-4 h-4",
+                attrs: { type: "checkbox", name: "", id: "" }
+              }),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "w-4/5 text-grey-dark text-left pl-2" },
+                [
+                  _c("p", { staticClass: "text-base" }, [
+                    _vm._v("Lorem ipsum dolor st..")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "text-sm" }, [
+                    _vm._v("\n                    John Smith\n                ")
                   ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("article", { staticClass: "media taskboard-media" }, [
-              _c("a", { attrs: { href: "#" } }, [
-                _c("figure", { staticClass: "media-left" }, [
-                  _c("p", { staticClass: "image" }, [
-                    _c("img", { attrs: { src: "http://placehold.it/34x34" } })
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "flex flex-row p-4 no-underline items-center",
+              attrs: { href: "#" }
+            },
+            [
+              _c("input", {
+                staticClass:
+                  "bg-white rounded appearance-none border border-grey w-4 h-4",
+                attrs: { type: "checkbox", name: "", id: "" }
+              }),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "w-4/5 text-grey-dark text-left pl-2" },
+                [
+                  _c("p", { staticClass: "text-base" }, [
+                    _vm._v("Lorem ipsum dolor st..")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "text-sm" }, [
+                    _vm._v("\n                    John Smith\n                ")
                   ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "media-content" }, [
-                  _c("div", { staticClass: "content" }, [
-                    _c("p", [
-                      _c("strong", [_vm._v("John Smith")]),
-                      _vm._v(" "),
-                      _c("small", [_vm._v("11:03am")]),
-                      _vm._v(" "),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c("span", [_vm._v("Lorem ipsum dolor st..")])
-                    ])
-                  ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("article", { staticClass: "media taskboard-media" }, [
-              _c("a", { attrs: { href: "#" } }, [
-                _c("figure", { staticClass: "media-left" }, [
-                  _c("p", { staticClass: "image" }, [
-                    _c("img", { attrs: { src: "http://placehold.it/34x34" } })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "media-content" }, [
-                  _c("div", { staticClass: "content" }, [
-                    _c("p", [
-                      _c("strong", [_vm._v("John Smith")]),
-                      _vm._v(" "),
-                      _c("small", [_vm._v("11:03am")]),
-                      _vm._v(" "),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c("span", [_vm._v("Lorem ipsum dolor st..")])
-                    ])
-                  ])
-                ])
-              ])
-            ])
-          ])
+                ]
+              )
+            ]
+          )
         ])
-      ])
-    ])
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -14832,44 +14766,6 @@ module.exports = Component.exports
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /***/ }),
 /* 79 */
@@ -14886,97 +14782,121 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "column is-one-third" }, [
-      _c("div", { staticClass: "card justified" }, [
-        _c("header", { staticClass: "card-header" }, [
-          _c("a", { staticClass: "card-header-title", attrs: { href: "#" } }, [
-            _vm._v("\n                Discussion Board\n            ")
-          ]),
+    return _c(
+      "div",
+      {
+        staticClass:
+          "bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center text-center rounded m-4"
+      },
+      [
+        _c("header", { staticClass: "w-full relative border-b h-12 pt-4" }, [
+          _c(
+            "a",
+            {
+              staticClass: "text-grey-darker font-medium no-underline",
+              attrs: { href: "#" }
+            },
+            [_vm._v("\n            Discussions\n        ")]
+          ),
           _vm._v(" "),
-          _c("a", { staticClass: "card-header-icon" }, [
-            _c("span", { staticClass: "icon" }, [
-              _c("i", { staticClass: "fa fa-angle-down" })
-            ])
+          _c("span", { staticClass: "text-grey-darker absolute pin-r mr-2" }, [
+            _c("i", { staticClass: "fa fa-ellipsis-h" })
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "card-content" }, [
-          _c("div", { staticClass: "content" }, [
-            _c("article", { staticClass: "media taskboard-media" }, [
-              _c("a", { attrs: { href: "#" } }, [
-                _c("figure", { staticClass: "media-left" }, [
-                  _c("p", { staticClass: "image" }, [
-                    _c("img", { attrs: { src: "http://placehold.it/34x34" } })
+        _c("div", { staticClass: "w-full h-48 self-start" }, [
+          _c(
+            "a",
+            {
+              staticClass: "flex flex-row p-4 no-underline",
+              attrs: { href: "#" }
+            },
+            [
+              _c("img", {
+                staticClass: "rounded-full",
+                attrs: { src: "http://placehold.it/34x34" }
+              }),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "w-4/5 text-grey-dark text-left pl-2" },
+                [
+                  _c("p", {}, [
+                    _c("strong", [_vm._v("John Smith")]),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "text-xs" }, [_vm._v("11:03am")])
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "text-sm" }, [
+                    _vm._v("Lorem ipsum dolor st..")
                   ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "media-content" }, [
-                  _c("div", { staticClass: "content" }, [
-                    _c("p", [
-                      _c("strong", [_vm._v("John Smith")]),
-                      _vm._v(" "),
-                      _c("small", [_vm._v("11:03am")]),
-                      _vm._v(" "),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c("span", [_vm._v("Lorem ipsum dolor st..")])
-                    ])
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "flex flex-row p-4 no-underline",
+              attrs: { href: "#" }
+            },
+            [
+              _c("img", {
+                staticClass: "rounded-full",
+                attrs: { src: "http://placehold.it/34x34" }
+              }),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "w-4/5 text-grey-dark text-left pl-2" },
+                [
+                  _c("p", {}, [
+                    _c("strong", [_vm._v("John Smith")]),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "text-xs" }, [_vm._v("11:03am")])
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "text-sm" }, [
+                    _vm._v("Lorem ipsum dolor st..")
                   ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("article", { staticClass: "media taskboard-media" }, [
-              _c("a", { attrs: { href: "#" } }, [
-                _c("figure", { staticClass: "media-left" }, [
-                  _c("p", { staticClass: "image" }, [
-                    _c("img", { attrs: { src: "http://placehold.it/34x34" } })
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "flex flex-row p-4 no-underline",
+              attrs: { href: "#" }
+            },
+            [
+              _c("img", {
+                staticClass: "rounded-full",
+                attrs: { src: "http://placehold.it/34x34" }
+              }),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "w-4/5 text-grey-dark text-left pl-2" },
+                [
+                  _c("p", {}, [
+                    _c("strong", [_vm._v("John Smith")]),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "text-xs" }, [_vm._v("11:03am")])
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "text-sm" }, [
+                    _vm._v("Lorem ipsum dolor st..")
                   ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "media-content" }, [
-                  _c("div", { staticClass: "content" }, [
-                    _c("p", [
-                      _c("strong", [_vm._v("John Smith")]),
-                      _vm._v(" "),
-                      _c("small", [_vm._v("11:03am")]),
-                      _vm._v(" "),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c("span", [_vm._v("Lorem ipsum dolor st..")])
-                    ])
-                  ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("article", { staticClass: "media taskboard-media" }, [
-              _c("a", { attrs: { href: "#" } }, [
-                _c("figure", { staticClass: "media-left" }, [
-                  _c("p", { staticClass: "image" }, [
-                    _c("img", { attrs: { src: "http://placehold.it/34x34" } })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "media-content" }, [
-                  _c("div", { staticClass: "content" }, [
-                    _c("p", [
-                      _c("strong", [_vm._v("John Smith")]),
-                      _vm._v(" "),
-                      _c("small", [_vm._v("11:03am")]),
-                      _vm._v(" "),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c("span", [_vm._v("Lorem ipsum dolor st..")])
-                    ])
-                  ])
-                ])
-              ])
-            ])
-          ])
+                ]
+              )
+            ]
+          )
         ])
-      ])
-    ])
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -15082,44 +15002,6 @@ module.exports = Component.exports
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /***/ }),
 /* 82 */
@@ -15136,97 +15018,121 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "column is-one-third" }, [
-      _c("div", { staticClass: "card justified" }, [
-        _c("header", { staticClass: "card-header" }, [
-          _c("a", { staticClass: "card-header-title", attrs: { href: "#" } }, [
-            _vm._v("\n                Message Board\n            ")
-          ]),
+    return _c(
+      "div",
+      {
+        staticClass:
+          "bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center text-center rounded m-4"
+      },
+      [
+        _c("header", { staticClass: "w-full relative border-b h-12 pt-4" }, [
+          _c(
+            "a",
+            {
+              staticClass: "text-grey-darker font-medium no-underline",
+              attrs: { href: "#" }
+            },
+            [_vm._v("\n            Messages\n        ")]
+          ),
           _vm._v(" "),
-          _c("a", { staticClass: "card-header-icon" }, [
-            _c("span", { staticClass: "icon" }, [
-              _c("i", { staticClass: "fa fa-angle-down" })
-            ])
+          _c("span", { staticClass: "text-grey-darker absolute pin-r mr-2" }, [
+            _c("i", { staticClass: "fa fa-ellipsis-h" })
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "card-content" }, [
-          _c("div", { staticClass: "content" }, [
-            _c("article", { staticClass: "media taskboard-media" }, [
-              _c("a", { attrs: { href: "#" } }, [
-                _c("figure", { staticClass: "media-left" }, [
-                  _c("p", { staticClass: "image" }, [
-                    _c("img", { attrs: { src: "http://placehold.it/34x34" } })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "media-content" }, [
-                  _c("div", { staticClass: "content" }, [
-                    _c("p", [
-                      _c("strong", [_vm._v("John Smith")]),
-                      _vm._v(" "),
-                      _c("small", [_vm._v("11:03am")]),
-                      _vm._v(" "),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c("span", [_vm._v("Lorem ipsum dolor st..")])
+        _c("div", { staticClass: "w-full h-48 self-start" }, [
+          _c(
+            "a",
+            {
+              staticClass: "flex flex-row items-center p-4 no-underline",
+              attrs: { href: "#" }
+            },
+            [
+              _c("img", {
+                staticClass: "rounded-full mr-2",
+                attrs: { src: "http://placehold.it/34x34" }
+              }),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "w-4/5 text-grey-dark text-left pl-2" },
+                [
+                  _c("p", {}, [
+                    _c("span", { staticClass: "text-xs" }, [
+                      _vm._v("5 min ago")
                     ])
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "text-sm" }, [
+                    _vm._v("Lorem ipsum dolor st..")
                   ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("article", { staticClass: "media taskboard-media" }, [
-              _c("a", { attrs: { href: "#" } }, [
-                _c("figure", { staticClass: "media-left" }, [
-                  _c("p", { staticClass: "image" }, [
-                    _c("img", { attrs: { src: "http://placehold.it/34x34" } })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "media-content" }, [
-                  _c("div", { staticClass: "content" }, [
-                    _c("p", [
-                      _c("strong", [_vm._v("John Smith")]),
-                      _vm._v(" "),
-                      _c("small", [_vm._v("11:03am")]),
-                      _vm._v(" "),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c("span", [_vm._v("Lorem ipsum dolor st..")])
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "flex flex-row items-center p-4 no-underline",
+              attrs: { href: "#" }
+            },
+            [
+              _c("img", {
+                staticClass: "rounded-full mr-2",
+                attrs: { src: "http://placehold.it/34x34" }
+              }),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "w-4/5 text-grey-dark text-left pl-2" },
+                [
+                  _c("p", {}, [
+                    _c("span", { staticClass: "text-xs" }, [
+                      _vm._v("5 min ago")
                     ])
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "text-sm" }, [
+                    _vm._v("Lorem ipsum dolor st..")
                   ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("article", { staticClass: "media taskboard-media" }, [
-              _c("a", { attrs: { href: "#" } }, [
-                _c("figure", { staticClass: "media-left" }, [
-                  _c("p", { staticClass: "image" }, [
-                    _c("img", { attrs: { src: "http://placehold.it/34x34" } })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "media-content" }, [
-                  _c("div", { staticClass: "content" }, [
-                    _c("p", [
-                      _c("strong", [_vm._v("John Smith")]),
-                      _vm._v(" "),
-                      _c("small", [_vm._v("11:03am")]),
-                      _vm._v(" "),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c("span", [_vm._v("Lorem ipsum dolor st..")])
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "flex flex-row items-center p-4 no-underline",
+              attrs: { href: "#" }
+            },
+            [
+              _c("img", {
+                staticClass: "rounded-full mr-2",
+                attrs: { src: "http://placehold.it/34x34" }
+              }),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "w-4/5 text-grey-dark text-left pl-2" },
+                [
+                  _c("p", {}, [
+                    _c("span", { staticClass: "text-xs" }, [
+                      _vm._v("5 min ago")
                     ])
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "text-sm" }, [
+                    _vm._v("Lorem ipsum dolor st..")
                   ])
-                ])
-              ])
-            ])
-          ])
+                ]
+              )
+            ]
+          )
         ])
-      ])
-    ])
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -15327,47 +15233,6 @@ module.exports = Component.exports
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /***/ }),
 /* 85 */
@@ -15384,100 +15249,73 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "column is-one-third" }, [
-      _c("div", { staticClass: "card justified" }, [
-        _c("header", { staticClass: "card-header" }, [
-          _c("a", { staticClass: "card-header-title", attrs: { href: "#" } }, [
-            _vm._v("\n                Schedule\n            ")
-          ]),
+    return _c(
+      "div",
+      {
+        staticClass:
+          "bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center text-center rounded m-4"
+      },
+      [
+        _c("header", { staticClass: "w-full relative border-b h-12 pt-4" }, [
+          _c(
+            "a",
+            {
+              staticClass: "text-grey-darker font-medium no-underline",
+              attrs: { href: "#" }
+            },
+            [_vm._v("\n            Schedules\n        ")]
+          ),
           _vm._v(" "),
-          _c("a", { staticClass: "card-header-icon" }, [
-            _c("span", { staticClass: "icon" }, [
-              _c("i", { staticClass: "fa fa-angle-down" })
-            ])
+          _c("span", { staticClass: "text-grey-darker absolute pin-r mr-2" }, [
+            _c("i", { staticClass: "fa fa-ellipsis-h" })
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "card-content" }, [
-          _c("div", { staticClass: "content" }, [
-            _c("article", { staticClass: "media taskboard-media" }, [
-              _c("a", { attrs: { href: "#" } }, [
-                _c("figure", { staticClass: "media-left" }, [
-                  _c("p", { staticClass: "image" }, [
-                    _c("i", {
-                      staticClass: "fa fa-calendar",
-                      attrs: { "aria-hidden": "true" }
-                    })
-                  ])
+        _c("div", { staticClass: "w-full h-48 self-start" }, [
+          _c("div", { staticClass: "px-2 py-4" }, [
+            _c(
+              "a",
+              {
+                staticClass: "no-underline text-grey-dark text-lg",
+                attrs: { href: "#" }
+              },
+              [
+                _c("span", [
+                  _c("i", {
+                    staticClass: "fa fa-calendar",
+                    attrs: { "aria-hidden": "true" }
+                  }),
+                  _vm._v("\n                    25 Feb, 2017\n                ")
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "media-content" }, [
-                  _c("div", { staticClass: "content" }, [
-                    _c("p", [
-                      _c("span", [_vm._v("John Smith Schedule")]),
-                      _vm._v(" "),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c("strong", [_vm._v("25 Feb, 2017")])
-                    ])
-                  ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("article", { staticClass: "media taskboard-media" }, [
-              _c("a", { attrs: { href: "#" } }, [
-                _c("figure", { staticClass: "media-left" }, [
-                  _c("p", { staticClass: "image" }, [
-                    _c("i", {
-                      staticClass: "fa fa-calendar",
-                      attrs: { "aria-hidden": "true" }
-                    })
-                  ])
+                _c("p", [_c("span", [_vm._v("Review Meeting")])])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "px-2 py-4" }, [
+            _c(
+              "a",
+              {
+                staticClass: "no-underline text-grey-dark text-lg",
+                attrs: { href: "#" }
+              },
+              [
+                _c("span", [
+                  _c("i", {
+                    staticClass: "fa fa-calendar",
+                    attrs: { "aria-hidden": "true" }
+                  }),
+                  _vm._v("\n                    26 Feb, 2017\n                ")
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "media-content" }, [
-                  _c("div", { staticClass: "content" }, [
-                    _c("p", [
-                      _c("span", [_vm._v("John Smith Schedule")]),
-                      _vm._v(" "),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c("strong", [_vm._v("25 Feb, 2017")])
-                    ])
-                  ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("article", { staticClass: "media taskboard-media" }, [
-              _c("a", { attrs: { href: "#" } }, [
-                _c("figure", { staticClass: "media-left" }, [
-                  _c("p", { staticClass: "image" }, [
-                    _c("i", {
-                      staticClass: "fa fa-calendar",
-                      attrs: { "aria-hidden": "true" }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "media-content" }, [
-                  _c("div", { staticClass: "content" }, [
-                    _c("p", [
-                      _c("span", [_vm._v("John Smith Schedule")]),
-                      _vm._v(" "),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c("strong", [_vm._v("25 Feb, 2017")])
-                    ])
-                  ])
-                ])
-              ])
-            ])
+                _c("p", [_c("span", [_vm._v("Landing Page Release")])])
+              ]
+            )
           ])
         ])
-      ])
-    ])
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -15589,38 +15427,6 @@ module.exports = Component.exports
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /***/ }),
 /* 88 */
@@ -15637,100 +15443,112 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "column is-one-third" }, [
-      _c("div", { staticClass: "card justified" }, [
-        _c("header", { staticClass: "card-header" }, [
-          _c("a", { staticClass: "card-header-title", attrs: { href: "#" } }, [
-            _vm._v("\n                Files\n            ")
-          ]),
-          _vm._v(" "),
-          _c("a", { staticClass: "card-header-icon" }, [
-            _c("span", { staticClass: "icon" }, [
-              _c("i", { staticClass: "fa fa-angle-down" })
-            ])
-          ])
-        ]),
+    return _c(
+      "div",
+      {
+        staticClass:
+          "bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center rounded m-4"
+      },
+      [
+        _c(
+          "header",
+          { staticClass: "w-full relative border-b h-12 pt-4 text-center" },
+          [
+            _c(
+              "a",
+              {
+                staticClass: "text-grey-darker font-medium no-underline",
+                attrs: { href: "#" }
+              },
+              [_vm._v("\n            Files\n        ")]
+            ),
+            _vm._v(" "),
+            _c(
+              "span",
+              { staticClass: "text-grey-darker absolute pin-r mr-2" },
+              [_c("i", { staticClass: "fa fa-ellipsis-h" })]
+            )
+          ]
+        ),
         _vm._v(" "),
-        _c("div", { staticClass: "card-content" }, [
-          _c("div", { staticClass: "content" }, [
-            _c("article", { staticClass: "media taskboard-media" }, [
-              _c("a", { attrs: { href: "#" } }, [
-                _c("figure", { staticClass: "media-left" }, [
-                  _c("p", { staticClass: "image" }, [
-                    _c("i", {
-                      staticClass: "fa fa-file-text-o",
-                      attrs: { "aria-hidden": "true" }
-                    })
-                  ])
+        _c("div", { staticClass: "w-full h-48 self-start text-left" }, [
+          _c(
+            "a",
+            {
+              staticClass:
+                "flex flex-row items-center p-4 no-underline text-grey-darker",
+              attrs: { href: "#" }
+            },
+            [
+              _c("span", { staticClass: "pr-4" }, [
+                _c("i", { staticClass: "text-xl fa fa-file-image-o" })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "text-xs" }, [
+                _c("p", { staticClass: "text-base" }, [
+                  _vm._v("landing-page-v.1.png")
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "media-content" }, [
-                  _c("div", { staticClass: "content" }, [
-                    _c("p", [
-                      _c("strong", [_vm._v("File Name")]),
-                      _vm._v(" "),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c("span", [_vm._v("Short Information")])
-                    ])
-                  ])
+                _c("p", [
+                  _c("span", { staticClass: "text-pink" }, [_vm._v("John")]),
+                  _c("span", [_vm._v(" uploaded 15 min ago")])
                 ])
               ])
-            ]),
-            _vm._v(" "),
-            _c("article", { staticClass: "media taskboard-media" }, [
-              _c("a", { attrs: { href: "#" } }, [
-                _c("figure", { staticClass: "media-left" }, [
-                  _c("p", { staticClass: "image" }, [
-                    _c("i", {
-                      staticClass: "fa fa-file-text-o",
-                      attrs: { "aria-hidden": "true" }
-                    })
-                  ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass:
+                "flex flex-row items-center p-4 no-underline text-grey-darker",
+              attrs: { href: "#" }
+            },
+            [
+              _c("span", { staticClass: "pr-4" }, [
+                _c("i", { staticClass: "text-xl fa fa-file-pdf-o" })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "text-xs" }, [
+                _c("p", { staticClass: "text-base" }, [
+                  _vm._v("api-doc-v.1.pdf")
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "media-content" }, [
-                  _c("div", { staticClass: "content" }, [
-                    _c("p", [
-                      _c("strong", [_vm._v("File Name")]),
-                      _vm._v(" "),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c("span", [_vm._v("Short Information")])
-                    ])
-                  ])
+                _c("p", [
+                  _c("span", { staticClass: "text-pink" }, [_vm._v("John")]),
+                  _c("span", [_vm._v("  uploaded 15 min ago")])
                 ])
               ])
-            ]),
-            _vm._v(" "),
-            _c("article", { staticClass: "media taskboard-media" }, [
-              _c("a", { attrs: { href: "#" } }, [
-                _c("figure", { staticClass: "media-left" }, [
-                  _c("p", { staticClass: "image" }, [
-                    _c("i", {
-                      staticClass: "fa fa-file-text-o",
-                      attrs: { "aria-hidden": "true" }
-                    })
-                  ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass:
+                "flex flex-row items-center p-4 no-underline text-grey-darker",
+              attrs: { href: "#" }
+            },
+            [
+              _c("span", { staticClass: "pr-4" }, [
+                _c("i", { staticClass: "text-xl fa fa-file-text-o" })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "text-xs" }, [
+                _c("p", { staticClass: "text-base" }, [
+                  _vm._v("features list.txt")
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "media-content" }, [
-                  _c("div", { staticClass: "content" }, [
-                    _c("p", [
-                      _c("strong", [_vm._v("File Name")]),
-                      _vm._v(" "),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c("span", [_vm._v("Short Information")])
-                    ])
-                  ])
+                _c("p", [
+                  _c("span", { staticClass: "text-pink" }, [_vm._v("James")]),
+                  _c("span", [_vm._v("  uploaded 15 min ago")])
                 ])
               ])
-            ])
-          ])
+            ]
+          )
         ])
-      ])
-    ])
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -15836,44 +15654,6 @@ module.exports = Component.exports
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /***/ }),
 /* 91 */
@@ -15890,100 +15670,103 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "column is-one-third" }, [
-      _c("div", { staticClass: "card justified" }, [
-        _c("header", { staticClass: "card-header" }, [
-          _c("a", { staticClass: "card-header-title has-text-centered" }, [
-            _vm._v("\n                Activity\n            ")
-          ]),
+    return _c(
+      "div",
+      {
+        staticClass:
+          "bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center text-center rounded m-4"
+      },
+      [
+        _c("header", { staticClass: "w-full relative border-b h-12 pt-4" }, [
+          _c(
+            "a",
+            {
+              staticClass: "text-grey-darker font-medium no-underline",
+              attrs: { href: "#" }
+            },
+            [_vm._v("\n            Activities\n        ")]
+          ),
           _vm._v(" "),
-          _c("a", { staticClass: "card-header-icon" }, [
-            _c("span", { staticClass: "icon" }, [
-              _c("i", { staticClass: "fa fa-angle-down" })
-            ])
+          _c("span", { staticClass: "text-grey-darker absolute pin-r mr-2" }, [
+            _c("i", { staticClass: "fa fa-ellipsis-h" })
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "card-content" }, [
-          _c("div", { staticClass: "content" }, [
-            _c("article", { staticClass: "media taskboard-media" }, [
-              _c("a", { attrs: { href: "#" } }, [
-                _c("figure", { staticClass: "media-left" }, [
-                  _c("p", { staticClass: "image" }, [
-                    _c("i", {
-                      staticClass: "fa fa-user-circle-o",
-                      attrs: { "aria-hidden": "true" }
-                    })
+        _c("div", { staticClass: "w-full h-48 self-start text-left" }, [
+          _c(
+            "a",
+            {
+              staticClass: "flex flex-row p-4 no-underline text-grey-darker",
+              attrs: { href: "#" }
+            },
+            [
+              _c("img", {
+                staticClass: "rounded-full w-8 h-8 mr-2",
+                attrs: { src: "http://placehold.it/34x34" }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "text-sm" }, [
+                _c("p", [
+                  _c("span", { staticClass: "text-pink" }, [_vm._v("John")]),
+                  _c("span", [_vm._v(" added a new task")])
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "text-xs" }, [_vm._v("15 min ago")])
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "flex flex-row p-4 no-underline text-grey-darker",
+              attrs: { href: "#" }
+            },
+            [
+              _c("img", {
+                staticClass: "rounded-full w-8 h-8 mr-2",
+                attrs: { src: "http://placehold.it/34x34" }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "text-sm" }, [
+                _c("p", [
+                  _c("span", { staticClass: "text-pink" }, [_vm._v("John")]),
+                  _c("span", [_vm._v(" commented in ")]),
+                  _c("span", { staticClass: "text-pink" }, [
+                    _vm._v("Review Meeting")
                   ])
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "media-content" }, [
-                  _c("div", { staticClass: "content" }, [
-                    _c("p", [
-                      _c("span", [_vm._v("John created a new task")]),
-                      _vm._v(" "),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c("strong", [_vm._v("15 minutes ago")])
-                    ])
-                  ])
-                ])
+                _c("p", { staticClass: "text-xs" }, [_vm._v("20 min ago")])
               ])
-            ]),
-            _vm._v(" "),
-            _c("article", { staticClass: "media taskboard-media" }, [
-              _c("a", { attrs: { href: "#" } }, [
-                _c("figure", { staticClass: "media-left" }, [
-                  _c("p", { staticClass: "image" }, [
-                    _c("i", {
-                      staticClass: "fa fa-envelope",
-                      attrs: { "aria-hidden": "true" }
-                    })
-                  ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "flex flex-row p-4 no-underline text-grey-darker",
+              attrs: { href: "#" }
+            },
+            [
+              _c("img", {
+                staticClass: "rounded-full w-8 h-8 mr-2",
+                attrs: { src: "http://placehold.it/34x34" }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "text-sm" }, [
+                _c("p", [
+                  _c("span", { staticClass: "text-pink" }, [_vm._v("James")]),
+                  _c("span", [_vm._v(" archived a discussion")])
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "media-content" }, [
-                  _c("div", { staticClass: "content" }, [
-                    _c("p", [
-                      _c("span", [_vm._v("You have a message")]),
-                      _vm._v(" "),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c("strong", [_vm._v("10 minutes ago")])
-                    ])
-                  ])
-                ])
+                _c("p", { staticClass: "text-xs" }, [_vm._v("1 hr ago")])
               ])
-            ]),
-            _vm._v(" "),
-            _c("article", { staticClass: "media taskboard-media" }, [
-              _c("a", { attrs: { href: "#" } }, [
-                _c("figure", { staticClass: "media-left" }, [
-                  _c("p", { staticClass: "image" }, [
-                    _c("i", {
-                      staticClass: "fa fa-user-circle-o",
-                      attrs: { "aria-hidden": "true" }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "media-content" }, [
-                  _c("div", { staticClass: "content" }, [
-                    _c("p", [
-                      _c("span", [_vm._v("Smith created a new task")]),
-                      _vm._v(" "),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c("strong", [_vm._v("45 minutes ago")])
-                    ])
-                  ])
-                ])
-              ])
-            ])
-          ])
+            ]
+          )
         ])
-      ])
-    ])
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -16003,26 +15786,46 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "columns is-multiline" },
-    [
-      _c("taskBoard"),
-      _vm._v(" "),
-      _c("discussionBoard"),
-      _vm._v(" "),
-      _c("messageBoard"),
-      _vm._v(" "),
-      _c("schedule"),
-      _vm._v(" "),
-      _c("files"),
-      _vm._v(" "),
-      _c("activity")
-    ],
-    1
-  )
+  return _c("div", { staticClass: "container mx-auto w-3/5 mt-8" }, [
+    _vm._m(0, false, false),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "flex flex-row flex-wrap justify-center" },
+      [
+        _c("taskBoard"),
+        _vm._v(" "),
+        _c("discussionBoard"),
+        _vm._v(" "),
+        _c("messageBoard"),
+        _vm._v(" "),
+        _c("schedule"),
+        _vm._v(" "),
+        _c("files"),
+        _vm._v(" "),
+        _c("activity")
+      ],
+      1
+    )
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "text-center text-grey-dark font-semibold text-3xl mb-4" },
+      [
+        _vm._v("\n        Goodwork API\n        "),
+        _c("p", { staticClass: "text-base" }, [
+          _vm._v("December 5, 2017 - December 13, 2017")
+        ])
+      ]
+    )
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

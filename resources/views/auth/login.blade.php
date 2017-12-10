@@ -2,14 +2,6 @@
 
 @slot('title') Login @endslot
 
-@section('style')
-<style type="text/css">
-    html {
-        background-color: #08b7ce;
-    }
-</style>
-@endsection
-
 <login></login>
 
 @slot('script')

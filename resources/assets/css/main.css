@@ -23,6 +23,14 @@
  * @import "components/forms";
  */
 
+.btn {
+    @apply bg-teal text-white text-xl font-medium py-2 px-4 rounded;
+}
+
+.btn:hover {
+    @apply bg-teal-dark;
+}
+
 /**
  * This injects all of Tailwind's utility classes, generated based on your
  * config file.

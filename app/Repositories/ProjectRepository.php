@@ -30,9 +30,9 @@ class ProjectRepository
     /**
      * @return mixed
      */
-    public function getLatestThreeProject()
+    public function getLatestProject($total)
     {
-        return $this->model->orderBy('created_at', 'desc')->take(3)->get();
+        return $this->model->orderBy('created_at', 'desc')->take($total)->get();
     }
 
     public function getIdFromSlug($slug)

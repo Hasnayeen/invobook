@@ -1,50 +1,16 @@
 <template>
-    <nav class="nav has-shadow">
-        <div class="nav-left">
-            <a class="nav-item is-base-darker" :href="url.site">
-                GOODWORK
-            </a>
-        </div>
+    <nav class="bg-white flex flex-row justify-between h-12 px-4 shadow">
+        <a class="text-teal text-2xl no-underline self-center" :href="url.site">
+            GOODWORK
+        </a>
 
-        <span class="nav-toggle">
-            <span></span>
-            <span></span>
-            <span></span>
-        </span>
-
-        <div class="nav-right nav-menu">
-            <div class="nav-menu-item">
-                <a class="nav-item is-tab notification-link" href="#" @click="showNotification" v-bind:class="[hideNotificationList == false ? 'active' : '']">
-                    <i class="fa fa-bell" aria-hidden="true"></i>
-                    Notification
-                    <span class="has-notification"></span>
+        <div class="flex flex-row border-l">
+            <div class="px-4 self-center">
+                <a class="text-teal-light text-base no-underline" href="#" @click="showNotification" v-bind:class="[hideNotificationList == false ? 'active' : '']">
+                    <i class="fa fa-bell-o font-bold" aria-hidden="true"></i>
                 </a>
-                <div class="notification-box" v-bind:class="{ 'is-hidden-tablet': hideNotificationList }">
+                <div class="hidden absolute" v-bind:class="{ 'is-hidden-tablet': hideNotificationList }">
                     <div class="card">
-                        <div class="card-content-item">
-                            <a href="#">
-                                <div class="icon">
-                                    <i class="fa fa-user-circle-o"></i>
-                                </div>
-                                <div class="notify-content">
-                                    <strong>John Doe</strong> created a new task <br>
-                                    <span>15 minutes ago</span>
-                                </div>
-                            </a>
-                        </div> <!-- ./card-content-item -->
-                        
-                        <div class="card-content-item">
-                            <a href="#">
-                                <div class="icon">
-                                    <i class="fa fa-user-circle-o"></i>
-                                </div>
-                                <div class="notify-content">
-                                    <strong>John Doe</strong> created a new task <br>
-                                    <span>15 minutes ago</span>
-                                </div>
-                            </a>
-                        </div> <!-- ./card-content-item -->
-                        
                         <div class="card-content-item">
                             <a href="#">
                                 <div class="icon">
@@ -60,33 +26,35 @@
                     </div> <!-- ./card -->
                     <a href="#">View All</a>
                 </div>
-            </div> <!-- ./nav-menu-item -->
+            </div>
 
-            <div class="nav-menu-item">
-                <a class="nav-item is-tab avatar-link is-base-darker" href="#" @click="showMenus" v-bind:class="[hideSubMenu == false ? 'active' : '']">
-                    <img :src="avatar">{{ user.name }} <i class="fa fa-angle-down" aria-hidden="true"></i>
-                </a>
-                <ul class="sub-nav-item " v-bind:class="{ 'is-hidden-tablet': hideSubMenu }">
-                    <li><a :href="profileUrl">Your profile</a></li>
-                    <li><a href="#">Help</a></li>
-                    <li><a href="#">Settings</a></li>
-                    <li class="separator-menu"><a :href="url.logout" @click="logoutUser">Logout</a></li>
-                </ul>            
+            <div class="px-4 border-l flex items-center cursor-pointer" @click="showMenus">
+                <img class="w-8 rounded-full mr-2" :src="avatar">
+                <span class="text-grey-darker text-base no-underline">
+                    {{ user.name }}
+                    <i class="fa fa-angle-down" aria-hidden="true"></i>
+                </span>
+                <div id="profile-menu" class="hidden absolute bg-white w-32 pin-r mr-2 py-2 shadow-lg rounded" style="top:3.5rem;">
+                    <a class="list-reset px-4 py-2 text-grey-dark no-underline block" :href="profileUrl">Your profile</a>
+                    <a class="list-reset px-4 py-2 text-grey-dark no-underline block" href="#">Help</a>
+                    <a class="list-reset px-4 py-2 text-grey-dark no-underline block" href="#">Settings</a>
+                    <span class="block border-t"></span>
+                    <a class="list-reset px-4 py-2 text-grey-dark no-underline block" :href="url.logout" @click="logoutUser">Logout</a>
+                </div>            
                 <form id="logout-form" :action="url.logout" method="POST" style="display: none;">
                     <input type="hidden" name="_token" :value="token">
                 </form>
-            </div> <!-- ./nav-menu-item -->
+            </div>
         </div> <!-- ./nav-right -->
     </nav>
 </template>
 
-<script> //avatar.jpg
+<script>
     export default {
         data: () => ({
             user: navbar.user,
             token: Laravel.csrfToken,
             url: navbar.navUrl,
-            hideSubMenu: true,
             avatar: '',
             hideNotificationList: true,
             profileUrl: navbar.navUrl.site + '/users/' + navbar.user.id
@@ -97,10 +65,7 @@
                 document.getElementById('logout-form').submit();
             },
             showMenus(event){
-                event.preventDefault();
-                event.stopPropagation();
-                this.hideNotificationList = true; //Hide Notification on click
-                this.hideSubMenu = !this.hideSubMenu;
+                document.getElementById('profile-menu').classList.remove('hidden');
             },
             showNotification(event){
                 event.preventDefault();
