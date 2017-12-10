@@ -28,6 +28,7 @@ class ProjectRepository
     }
 
     /**
+     * @param  mixed $total
      * @return mixed
      */
     public function getLatestProject($total)
