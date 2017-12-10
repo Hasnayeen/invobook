@@ -1,79 +1,41 @@
 <template>
-    <div class="column is-one-third">
-        <div class="card justified">
-            <header class="card-header">
-                <a class="card-header-title has-text-centered">
-                    Activity
-                </a>
-                <a class="card-header-icon">
-                    <span class="icon">
-                        <i class="fa fa-angle-down"></i>
-                    </span>
-                </a>
-            </header>
-            <div class="card-content">
-                <div class="content">
-                    
-                    <article class="media taskboard-media">
-                        <a href="#">
-                        <figure class="media-left">
-                            <p class="image">
-                                <i class="fa fa-user-circle-o" aria-hidden="true"></i>
-                            </p>
-                        </figure>
-                        <div class="media-content">
-                            <div class="content">
-                                <p>
-                                    <span>John created a new task</span>
-                                    <br>
-                                    <strong>15 minutes ago</strong>
-                                </p>
-                            </div>
-                        </div>
-                        </a>
-                    </article>
-                    
-                    <article class="media taskboard-media">
-                        <a href="#">
-                        <figure class="media-left">
-                            <p class="image">
-                                <i class="fa fa-envelope" aria-hidden="true"></i>
-                            </p>
-                        </figure>
-                        <div class="media-content">
-                            <div class="content">
-                                <p>
-                                    <span>You have a message</span>
-                                    <br>
-                                    <strong>10 minutes ago</strong>
-                                </p>
-                            </div>
-                        </div>
-                        </a>
-                    </article>
-                    
-                    <article class="media taskboard-media">
-                        <a href="#">
-                        <figure class="media-left">
-                            <p class="image">
-                                <i class="fa fa-user-circle-o" aria-hidden="true"></i>
-                            </p>
-                        </figure>
-                        <div class="media-content">
-                            <div class="content">
-                                <p>
-                                    <span>Smith created a new task</span>
-                                    <br>
-                                    <strong>45 minutes ago</strong>
-                                </p>
-                            </div>
-                        </div>
-                        </a>
-                    </article>
-
+    <div class="bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center text-center rounded m-4">
+        <header class="w-full relative border-b h-12 pt-4">
+            <a href="#" class="text-grey-darker font-medium no-underline">
+                Activities
+            </a>
+            <span class="text-grey-darker absolute pin-r mr-2">
+                <i class="fa fa-ellipsis-h"></i>
+            </span>
+        </header>
+        <div class="w-full h-48 self-start text-left">
+            <a href="#" class="flex flex-row p-4 no-underline text-grey-darker">
+                <img src="http://placehold.it/34x34" class="rounded-full w-8 h-8 mr-2">
+                <div class="text-sm">
+                    <p>
+                        <span class="text-pink">John</span><span> added a new task</span>
+                    </p>
+                    <p class="text-xs">15 min ago</p>
                 </div>
-            </div>
-
+            </a>
+            <a href="#" class="flex flex-row p-4 no-underline text-grey-darker">
+                <img src="http://placehold.it/34x34" class="rounded-full w-8 h-8 mr-2">
+                <div class="text-sm">
+                    <p>
+                        <span class="text-pink">John</span><span> commented in </span><span class="text-pink">Review Meeting</span>
+                    </p>
+                    <p class="text-xs">20 min ago</p>
+                </div>
+            </a>
+            <a href="#" class="flex flex-row p-4 no-underline text-grey-darker">
+                <img src="http://placehold.it/34x34" class="rounded-full w-8 h-8 mr-2">
+                <div class="text-sm">
+                    <p>
+                        <span class="text-pink">James</span><span> archived a discussion</span>
+                    </p>
+                    <p class="text-xs">1 hr ago</p>
+                </div>
+            </a>
         </div>
     </div>
 </template>

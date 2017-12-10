@@ -1,5 +1,5 @@
 <template>
-    <div class="column is-one-third">
+    <div class="hidden">
         <div class="card justified">
           <header class="card-header">
             <a href="teams" class="card-header-title">

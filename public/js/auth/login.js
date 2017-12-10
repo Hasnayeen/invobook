@@ -13831,13 +13831,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -13857,21 +13850,31 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "column is-6 is-offset-3 login-form" }, [
-    _c("form", { attrs: { role: "form", method: "POST", action: _vm.url } }, [
-      _c("input", {
-        attrs: { type: "hidden", name: "_token" },
-        domProps: { value: _vm.token }
-      }),
+  return _c(
+    "div",
+    {
+      staticClass:
+        "bg-white container mx-auto shadow-lg mt-32 flex flex-row w-2/5 justify-between"
+    },
+    [
+      _vm._m(0, false, false),
       _vm._v(" "),
-      _c("div", { staticClass: "card" }, [
-        _vm._m(0, false, false),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-content" }, [
-          _c("div", { staticClass: "content" }, [
-            _c("p", { staticClass: "control" }, [
+      _c("div", {}),
+      _vm._v(" "),
+      _c("div", { staticClass: "w-1/2 p-8" }, [
+        _c(
+          "form",
+          { attrs: { role: "form", method: "POST", action: _vm.url } },
+          [
+            _c("input", {
+              attrs: { type: "hidden", name: "_token" },
+              domProps: { value: _vm.token }
+            }),
+            _vm._v(" "),
+            _c("p", { staticClass: "py-4" }, [
               _c("input", {
-                staticClass: "input",
+                staticClass:
+                  "shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker",
                 attrs: {
                   id: "email",
                   type: "text",
@@ -13881,15 +13884,14 @@ var render = function() {
               }),
               _vm._v(" "),
               _vm.errors
-                ? _c("span", { staticClass: "help is-danger" }, [
-                    _vm._v(_vm._s(_vm.errors.email))
-                  ])
+                ? _c("span", {}, [_vm._v(_vm._s(_vm.errors.email))])
                 : _vm._e()
             ]),
             _vm._v(" "),
-            _c("p", { staticClass: "control" }, [
+            _c("p", { staticClass: "py-4" }, [
               _c("input", {
-                staticClass: "input",
+                staticClass:
+                  "shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker",
                 attrs: {
                   id: "password",
                   type: "password",
@@ -13899,31 +13901,40 @@ var render = function() {
               }),
               _vm._v(" "),
               _vm.errors
-                ? _c("span", { staticClass: "help is-danger" }, [
-                    _vm._v(_vm._s(_vm.errors.password))
-                  ])
+                ? _c("span", {}, [_vm._v(_vm._s(_vm.errors.password))])
                 : _vm._e()
             ]),
             _vm._v(" "),
             _vm._m(1, false, false),
             _vm._v(" "),
-            _vm._m(2, false, false)
-          ])
-        ]),
-        _vm._v(" "),
-        _c("footer", { staticClass: "card-footer" })
+            _vm._m(2, false, false),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "no-underline text-teal text-sm",
+                attrs: { href: "password/reset" }
+              },
+              [_vm._v("Forgot Your Password?")]
+            )
+          ]
+        )
       ])
-    ])
-  ])
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("header", { staticClass: "card-header" }, [
-      _c("p", { staticClass: "card-header-title title has-text-centered" }, [
-        _vm._v("\n                Login\n                ")
+    return _c("div", { staticClass: "w-1/2 text-center bg-teal-light p-4" }, [
+      _c("p", { staticClass: "text-white font-bold text-4xl pt-8 mt-8" }, [
+        _vm._v("GOODWORK")
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "text-white text-xl pt-4" }, [
+        _vm._v("Sane way to manage work")
       ])
     ])
   },
@@ -13931,29 +13942,19 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("p", { staticClass: "control" }, [
+    return _c("p", { staticClass: "py-4 text-grey" }, [
       _c("input", { attrs: { type: "checkbox", name: "remember" } }),
-      _vm._v("\n                        Remember Me\n                        "),
-      _c(
-        "a",
-        { staticClass: "is-pulled-right", attrs: { href: "password/reset" } },
-        [_vm._v("Forgot Your Password?")]
-      )
+      _vm._v("\n                Remember Me\n            ")
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("p", { staticClass: "control" }, [
-      _c(
-        "button",
-        {
-          staticClass: "button is-primary is-fullwidth",
-          attrs: { type: "submit" }
-        },
-        [_vm._v("Login")]
-      )
+    return _c("p", { staticClass: "py-4" }, [
+      _c("button", { staticClass: "btn", attrs: { type: "submit" } }, [
+        _vm._v("LOGIN")
+      ])
     ])
   }
 ]

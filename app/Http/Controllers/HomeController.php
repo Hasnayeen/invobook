@@ -41,7 +41,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $projects = $this->projectService->getLatestThreeProject()->toArray();
+        $projects = $this->projectService->getLatestProject(5)->toArray();
         $teams = $this->teamService->getLatestThreeTeam()->toArray();
         $offices = $this->officeService->getLatestThreeOffice()->toArray();
 

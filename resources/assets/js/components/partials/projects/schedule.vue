@@ -1,79 +1,38 @@
 <template>
-<div class="column is-one-third">
-    <div class="card justified">
-        <header class="card-header">
-            <a href="#" class="card-header-title">
-                Schedule
+    <div class="bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center text-center rounded m-4">
+        <header class="w-full relative border-b h-12 pt-4">
+            <a href="#" class="text-grey-darker font-medium no-underline">
+                Schedules
             </a>
-            <a class="card-header-icon">
-                <span class="icon">
-                    <i class="fa fa-angle-down"></i>
-                </span>
-            </a>
+            <span class="text-grey-darker absolute pin-r mr-2">
+                <i class="fa fa-ellipsis-h"></i>
+            </span>
         </header>
-        <div class="card-content">
-            <div class="content">
-
-                <article class="media taskboard-media">
-                    <a href="#">
-                    <figure class="media-left">
-                        <p class="image">
-                            <i class="fa fa-calendar" aria-hidden="true"></i>
-                        </p>
-                    </figure>
-                    <div class="media-content">
-                        <div class="content">
-                            <p>
-                                <span>John Smith Schedule</span>
-                                <br>
-                                <strong>25 Feb, 2017</strong>
-                            </p>
-                        </div>
-                    </div>
-                    </a>
-                </article>
-                <article class="media taskboard-media">
-                    <a href="#">
-                    <figure class="media-left">
-                        <p class="image">
-                            <i class="fa fa-calendar" aria-hidden="true"></i>
-                        </p>
-                    </figure>
-                    <div class="media-content">
-                        <div class="content">
-                            <p>
-                                <span>John Smith Schedule</span>
-                                <br>
-                                <strong>25 Feb, 2017</strong>
-                            </p>
-                        </div>
-                    </div>
-                    </a>
-                </article>
-                <article class="media taskboard-media">
-                    <a href="#">
-                    <figure class="media-left">
-                        <p class="image">
-                            <i class="fa fa-calendar" aria-hidden="true"></i>
-                        </p>
-                    </figure>
-                    <div class="media-content">
-                        <div class="content">
-                            <p>
-                                <span>John Smith Schedule</span>
-                                <br>
-                                <strong>25 Feb, 2017</strong>
-                            </p>
-                        </div>
-                    </div>
-                    </a>
-                </article>
-
-                <!--<p class="is-block has-text-centered">You have no project yet</p>-->
+        <div class="w-full h-48 self-start">
+            <div class="px-2 py-4">
+                <a href="#" class="no-underline text-grey-dark text-lg">
+                    <span>
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                        25 Feb, 2017
+                    </span>
+                    <p>
+                        <span>Review Meeting</span>
+                    </p>
+                </a>
+            </div>
+            <div class="px-2 py-4">
+                <a href="#" class="no-underline text-grey-dark text-lg">
+                    <span>
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                        26 Feb, 2017
+                    </span>
+                    <p>
+                        <span>Landing Page Release</span>
+                    </p>
+                </a>
             </div>
         </div>
     </div>
-</div>
 </template>
 
 <script>

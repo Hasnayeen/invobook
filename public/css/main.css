@@ -517,6 +517,22 @@ button,
  * @import "components/forms";
  */
 
+.btn {
+  background-color: #4dc0b5;
+  color: #ffffff;
+  font-size: 1.25rem;
+  font-weight: 500;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-radius: .25rem;
+}
+
+.btn:hover {
+  background-color: #38a89d;
+}
+
 /**
  * This injects all of Tailwind's utility classes, generated based on your
  * config file.
@@ -2485,6 +2501,10 @@ button,
   width: 83.33333%;
 }
 
+.w-3\/10 {
+  width: 30%;
+}
+
 .w-full {
   width: 100%;
 }
@@ -2897,6 +2917,10 @@ button,
   margin: 2rem;
 }
 
+.m-32 {
+  margin: 8rem;
+}
+
 .m-auto {
   margin: auto;
 }
@@ -2973,6 +2997,16 @@ button,
 .mx-8 {
   margin-left: 2rem;
   margin-right: 2rem;
+}
+
+.my-32 {
+  margin-top: 8rem;
+  margin-bottom: 8rem;
+}
+
+.mx-32 {
+  margin-left: 8rem;
+  margin-right: 8rem;
 }
 
 .my-auto {
@@ -3105,6 +3139,22 @@ button,
 
 .ml-8 {
   margin-left: 2rem;
+}
+
+.mt-32 {
+  margin-top: 8rem;
+}
+
+.mr-32 {
+  margin-right: 8rem;
+}
+
+.mb-32 {
+  margin-bottom: 8rem;
+}
+
+.ml-32 {
+  margin-left: 8rem;
 }
 
 .mt-auto {
@@ -5690,6 +5740,10 @@ button,
     width: 83.33333%;
   }
 
+  .sm\:w-3\/10 {
+    width: 30%;
+  }
+
   .sm\:w-full {
     width: 100%;
   }
@@ -6102,6 +6156,10 @@ button,
     margin: 2rem;
   }
 
+  .sm\:m-32 {
+    margin: 8rem;
+  }
+
   .sm\:m-auto {
     margin: auto;
   }
@@ -6178,6 +6236,16 @@ button,
   .sm\:mx-8 {
     margin-left: 2rem;
     margin-right: 2rem;
+  }
+
+  .sm\:my-32 {
+    margin-top: 8rem;
+    margin-bottom: 8rem;
+  }
+
+  .sm\:mx-32 {
+    margin-left: 8rem;
+    margin-right: 8rem;
   }
 
   .sm\:my-auto {
@@ -6310,6 +6378,22 @@ button,
 
   .sm\:ml-8 {
     margin-left: 2rem;
+  }
+
+  .sm\:mt-32 {
+    margin-top: 8rem;
+  }
+
+  .sm\:mr-32 {
+    margin-right: 8rem;
+  }
+
+  .sm\:mb-32 {
+    margin-bottom: 8rem;
+  }
+
+  .sm\:ml-32 {
+    margin-left: 8rem;
   }
 
   .sm\:mt-auto {
@@ -8881,6 +8965,10 @@ button,
     width: 83.33333%;
   }
 
+  .md\:w-3\/10 {
+    width: 30%;
+  }
+
   .md\:w-full {
     width: 100%;
   }
@@ -9293,6 +9381,10 @@ button,
     margin: 2rem;
   }
 
+  .md\:m-32 {
+    margin: 8rem;
+  }
+
   .md\:m-auto {
     margin: auto;
   }
@@ -9369,6 +9461,16 @@ button,
   .md\:mx-8 {
     margin-left: 2rem;
     margin-right: 2rem;
+  }
+
+  .md\:my-32 {
+    margin-top: 8rem;
+    margin-bottom: 8rem;
+  }
+
+  .md\:mx-32 {
+    margin-left: 8rem;
+    margin-right: 8rem;
   }
 
   .md\:my-auto {
@@ -9501,6 +9603,22 @@ button,
 
   .md\:ml-8 {
     margin-left: 2rem;
+  }
+
+  .md\:mt-32 {
+    margin-top: 8rem;
+  }
+
+  .md\:mr-32 {
+    margin-right: 8rem;
+  }
+
+  .md\:mb-32 {
+    margin-bottom: 8rem;
+  }
+
+  .md\:ml-32 {
+    margin-left: 8rem;
   }
 
   .md\:mt-auto {
@@ -12072,6 +12190,10 @@ button,
     width: 83.33333%;
   }
 
+  .lg\:w-3\/10 {
+    width: 30%;
+  }
+
   .lg\:w-full {
     width: 100%;
   }
@@ -12484,6 +12606,10 @@ button,
     margin: 2rem;
   }
 
+  .lg\:m-32 {
+    margin: 8rem;
+  }
+
   .lg\:m-auto {
     margin: auto;
   }
@@ -12560,6 +12686,16 @@ button,
   .lg\:mx-8 {
     margin-left: 2rem;
     margin-right: 2rem;
+  }
+
+  .lg\:my-32 {
+    margin-top: 8rem;
+    margin-bottom: 8rem;
+  }
+
+  .lg\:mx-32 {
+    margin-left: 8rem;
+    margin-right: 8rem;
   }
 
   .lg\:my-auto {
@@ -12692,6 +12828,22 @@ button,
 
   .lg\:ml-8 {
     margin-left: 2rem;
+  }
+
+  .lg\:mt-32 {
+    margin-top: 8rem;
+  }
+
+  .lg\:mr-32 {
+    margin-right: 8rem;
+  }
+
+  .lg\:mb-32 {
+    margin-bottom: 8rem;
+  }
+
+  .lg\:ml-32 {
+    margin-left: 8rem;
   }
 
   .lg\:mt-auto {
@@ -15263,6 +15415,10 @@ button,
     width: 83.33333%;
   }
 
+  .xl\:w-3\/10 {
+    width: 30%;
+  }
+
   .xl\:w-full {
     width: 100%;
   }
@@ -15675,6 +15831,10 @@ button,
     margin: 2rem;
   }
 
+  .xl\:m-32 {
+    margin: 8rem;
+  }
+
   .xl\:m-auto {
     margin: auto;
   }
@@ -15751,6 +15911,16 @@ button,
   .xl\:mx-8 {
     margin-left: 2rem;
     margin-right: 2rem;
+  }
+
+  .xl\:my-32 {
+    margin-top: 8rem;
+    margin-bottom: 8rem;
+  }
+
+  .xl\:mx-32 {
+    margin-left: 8rem;
+    margin-right: 8rem;
   }
 
   .xl\:my-auto {
@@ -15883,6 +16053,22 @@ button,
 
   .xl\:ml-8 {
     margin-left: 2rem;
+  }
+
+  .xl\:mt-32 {
+    margin-top: 8rem;
+  }
+
+  .xl\:mr-32 {
+    margin-right: 8rem;
+  }
+
+  .xl\:mb-32 {
+    margin-bottom: 8rem;
+  }
+
+  .xl\:ml-32 {
+    margin-left: 8rem;
   }
 
   .xl\:mt-auto {

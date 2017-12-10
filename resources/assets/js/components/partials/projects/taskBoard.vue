@@ -1,81 +1,43 @@
 <template>
-<div class="column is-one-third">
-    <div class="card justified ">
-        <header class="card-header">
-            <a href="#" class="card-header-title">
-                Task Board
+    <div class="bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center text-center rounded m-4">
+        <header class="w-full relative border-b h-12 pt-4">
+            <a href="#" class="text-grey-darker font-medium no-underline">
+                Tasks
             </a>
-            <a class="card-header-icon">
-                <span class="icon">
-                    <i class="fa fa-angle-down"></i>
-                </span>
-            </a>
+            <span class="text-grey-darker absolute pin-r mr-2">
+                <i class="fa fa-ellipsis-h"></i>
+            </span>
         </header>
-        <div class="card-content">
-            <div class="content">
-
-                <article class="media taskboard-media">
-                    <a href="#">
-                    <figure class="media-left">
-                        <p class="image">
-                            <img src="http://placehold.it/34x34">
-                        </p>
-                    </figure>
-                    <div class="media-content">
-                        <div class="content">
-                            <p>
-                                <strong>John Smith</strong> <small>11:03am</small>
-                                <br>
-                                <span>Lorem ipsum dolor st..</span>
-                            </p>
-                        </div>
-                    </div>
-                    </a>
-                </article>
-                
-                <article class="media taskboard-media">
-                    <a href="#">
-                    <figure class="media-left">
-                        <p class="image">
-                            <img src="http://placehold.it/34x34">
-                        </p>
-                    </figure>
-                    <div class="media-content">
-                        <div class="content">
-                            <p>
-                                <strong>John Smith</strong> <small>11:03am</small>
-                                <br>
-                                <span>Lorem ipsum dolor st..</span>
-                            </p>
-                        </div>
-                    </div>
-                    </a>
-                </article>
-                
-                <article class="media taskboard-media">
-                    <a href="#">
-                    <figure class="media-left">
-                        <p class="image">
-                            <img src="http://placehold.it/34x34">
-                        </p>
-                    </figure>
-                    <div class="media-content">
-                        <div class="content">
-                            <p>
-                                <strong>John Smith</strong> <small>11:03am</small>
-                                <br>
-                                <span>Lorem ipsum dolor st..</span>
-                            </p>
-                        </div>
-                    </div>
-                    </a>
-                </article>
-                
-                <!--<p class="is-block has-text-centered">You have no project yet</p>-->
-            </div>
+        <div class="w-full h-48 self-start">
+            <a href="#" class="flex flex-row p-4 no-underline items-center">
+                <input type="checkbox" name="" id="" class="bg-white rounded appearance-none border border-grey w-4 h-4">
+                <div class="w-4/5 text-grey-dark text-left pl-2">
+                    <p class="text-base">Lorem ipsum dolor st..</p>
+                    <p class="text-sm">
+                        John Smith
+                    </p>
+                </div>
+            </a>                                
+            <a href="#" class="flex flex-row p-4 no-underline items-center">
+                <input type="checkbox" name="" id="" class="bg-white rounded appearance-none border border-grey w-4 h-4">
+                <div class="w-4/5 text-grey-dark text-left pl-2">
+                    <p class="text-base">Lorem ipsum dolor st..</p>
+                    <p class="text-sm">
+                        John Smith
+                    </p>
+                </div>
+            </a>                                
+            <a href="#" class="flex flex-row p-4 no-underline items-center">
+                <input type="checkbox" name="" id="" class="bg-white rounded appearance-none border border-grey w-4 h-4">
+                <div class="w-4/5 text-grey-dark text-left pl-2">
+                    <p class="text-base">Lorem ipsum dolor st..</p>
+                    <p class="text-sm">
+                        John Smith
+                    </p>
+                </div>
+            </a>                                
         </div>
     </div>
-</div>
 </template>
 
 <script>

@@ -32,23 +32,15 @@
     @endif
 
 </head>
-<body>
+<body class="bg-grey-lighter">
     <div id="app">
-
+        <div class="h-1" style="background: linear-gradient(to right, #4DC0B5, #3490DC);"></div>
         @if (!Auth::guest())
         <navbar></navbar>
         <invite-modal></invite-modal>
         @endif
 
-        <div class="container">
-            <div class="tile is-ancestor">
-                <div class="tile is-2"></div>
-                <div class="tile">
-                        {{ $slot }}
-                </div>
-                <div class="tile is-2"></div>
-            </div>
-        </div>
+        {{ $slot }}
     </div>
     <!-- Scripts -->
     {{ $script }}

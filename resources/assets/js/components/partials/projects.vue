@@ -1,28 +1,32 @@
 <template>
-    <div class="column is-one-third">
-        <div class="card justified">
-          <header class="card-header">
-            <a href="projects" class="card-header-title">
-              Projects
-            </a>
-            <a class="card-header-icon">
-              <span class="icon">
-                <i class="fa fa-angle-down"></i>
-              </span>
-            </a>
-          </header>
-          <div class="card-content homepage">
-            <div class="content">
-                <div class="menu-list" v-for="project in projects">
-                    <a class="has-text-centered" :href="project.url">{{ project.name }}</a>
+    <div class="">
+        <div class="flex flex-row flex-wrap justify-center">
+            <div class="bg-white shadow-md w-64 h-64 flex flex-col justify-center items-center text-center rounded m-4">
+                <i class="fa fa-plus text-grey-dark text-4xl"></i>
+                <span class="text-grey-darker pt-4">Add a new project</span>
+            </div>
+            <div class="bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center items-center text-center rounded m-4" v-for="project in projects">
+                <span class="w-full h-16">
+                    <i class="fa fa-ellipsis-h float-right pr-4 pt-2 text-grey-darker cursor-pointer"></i>
+                </span>
+                <a class="text-pink text-xl no-underline w-full pt-8 h-16 self-end" :href="project.url">{{ project.name }}</a>
+                <span class="text-grey text-sm w-full h-16 self-start">{{ project.description }}</span>
+                <div class="border-t w-full h-16 flex flex-row justify-start items-center px-2">
+                    <img src="/image/avatar.jpg" class="rounded-full w-8 h-8 mr-2">
+                    <img src="/image/avatar.jpg" class="rounded-full w-8 h-8 mr-2">
+                    <img src="/image/avatar.jpg" class="rounded-full w-8 h-8 mr-2">
+                    <img src="/image/avatar.jpg" class="rounded-full w-8 h-8 mr-2">
+                    <img src="/image/avatar.jpg" class="rounded-full w-8 h-8 mr-2">
+                    <span class="bg-grey-light p-2 rounded-full">5+</span>
                 </div>
             </div>
-          </div>
+        </div>
+        <div class="card justified hidden">
             <footer class="card-footer">
                 <a class="card-footer-item" @click="openCreateProjectModal">Create a New Project</a>
             </footer>
                 <!-- modal for project create form -->
-                <div class="modal" :class="{'is-active': isCreateProjectActive}">
+                <div class="modal hidden" :class="{'is-active': isCreateProjectActive}">
                     <div class="modal-background"></div>
                     <div class="modal-content">
                         <div class="modal-card">
