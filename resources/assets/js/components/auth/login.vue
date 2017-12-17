@@ -23,7 +23,7 @@
                 <p class="py-4">
                     <button type="submit" class="btn">LOGIN</button>
                 </p>
-                    <a href="password/reset" class="no-underline text-teal text-sm">Forgot Your Password?</a>
+                <a href="password/reset" class="no-underline text-teal text-sm">Forgot Your Password?</a>
             </form>
         </div>
     </div>
