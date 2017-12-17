@@ -29,6 +29,7 @@ class ProjectService
     }
 
     /**
+     * @param  mixed $total
      * @return mixed
      */
     public function getLatestProject($total = 10)
