@@ -14511,18 +14511,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function (_data) {
@@ -14541,17 +14529,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 project.url = 'projects/' + project.slug;
                 return project;
             }),
-            isCreateProjectActive: false,
+            showCreateProjectForm: false,
             name: '',
             description: ''
         };
     }),
     methods: {
         openCreateProjectModal: function openCreateProjectModal() {
-            this.isCreateProjectActive = true;
+            this.showCreateProjectForm = true;
         },
         closeCreateProjectModal: function closeCreateProjectModal() {
-            this.isCreateProjectActive = false;
+            this.showCreateProjectForm = false;
         },
         createProject: function createProject() {
             var _this = this;
@@ -14581,11 +14569,115 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", {}, [
+    _c("div", { class: { hidden: !_vm.showCreateProjectForm } }, [
+      _c("div", { staticClass: "absolute pin opacity-75 bg-grey" }),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass:
+            "fixed pin-x w-1/3 z-10 bg-grey-lighter mx-auto p-8 rounded",
+          attrs: { id: "create-project-form" }
+        },
+        [
+          _c("p", { staticClass: "py-2" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.name,
+                  expression: "name"
+                }
+              ],
+              staticClass:
+                "shadow appearance-none border rounded py-2 px-3 text-grey-darker",
+              attrs: { type: "text", placeholder: "Name" },
+              domProps: { value: _vm.name },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.name = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("span", { staticClass: "hidden" })
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "py-2" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.description,
+                  expression: "description"
+                }
+              ],
+              staticClass:
+                "shadow appearance-none border rounded py-2 px-3 text-grey-darker",
+              attrs: { type: "text", placeholder: "Description" },
+              domProps: { value: _vm.description },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.description = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("span", { staticClass: "hidden" })
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "py-2" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn mr-4",
+                attrs: { type: "submit" },
+                on: { click: _vm.createProject }
+              },
+              [_vm._v("Create")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn bg-red-lighter hover:bg-red-light",
+                attrs: { type: "submit" },
+                on: { click: _vm.closeCreateProjectModal }
+              },
+              [_vm._v("Cancel")]
+            )
+          ])
+        ]
+      )
+    ]),
+    _vm._v(" "),
     _c(
       "div",
       { staticClass: "flex flex-row flex-wrap justify-center" },
       [
-        _vm._m(0, false, false),
+        _c(
+          "div",
+          {
+            staticClass:
+              "bg-white shadow-md w-64 h-64 flex flex-col justify-center items-center text-center rounded m-4 cursor-pointer",
+            on: { click: _vm.openCreateProjectModal }
+          },
+          [
+            _c("i", { staticClass: "fa fa-plus text-grey-dark text-4xl" }),
+            _vm._v(" "),
+            _c("span", { staticClass: "text-grey-darker pt-4" }, [
+              _vm._v("Add a new project")
+            ])
+          ]
+        ),
         _vm._v(" "),
         _vm._l(_vm.projects, function(project) {
           return _c(
@@ -14595,7 +14687,7 @@ var render = function() {
                 "bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center items-center text-center rounded m-4"
             },
             [
-              _vm._m(1, true, false),
+              _vm._m(0, true, false),
               _vm._v(" "),
               _c(
                 "a",
@@ -14613,150 +14705,16 @@ var render = function() {
                 [_vm._v(_vm._s(project.description))]
               ),
               _vm._v(" "),
-              _vm._m(2, true, false)
+              _vm._m(1, true, false)
             ]
           )
         })
       ],
       2
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "card justified hidden" }, [
-      _c("footer", { staticClass: "card-footer" }, [
-        _c(
-          "a",
-          {
-            staticClass: "card-footer-item",
-            on: { click: _vm.openCreateProjectModal }
-          },
-          [_vm._v("Create a New Project")]
-        )
-      ]),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "modal hidden",
-          class: { "is-active": _vm.isCreateProjectActive }
-        },
-        [
-          _c("div", { staticClass: "modal-background" }),
-          _vm._v(" "),
-          _c("div", { staticClass: "modal-content" }, [
-            _c("div", { staticClass: "modal-card" }, [
-              _c("header", { staticClass: "modal-card-head" }, [
-                _c("p", { staticClass: "modal-card-title" }, [
-                  _vm._v("Create New Project")
-                ]),
-                _vm._v(" "),
-                _c("button", {
-                  staticClass: "delete",
-                  on: { click: _vm.closeCreateProjectModal }
-                })
-              ]),
-              _vm._v(" "),
-              _c("section", { staticClass: "modal-card-body" }, [
-                _c("p", { staticClass: "control" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.name,
-                        expression: "name"
-                      }
-                    ],
-                    staticClass: "input",
-                    attrs: { type: "text", placeholder: "Name" },
-                    domProps: { value: _vm.name },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.name = $event.target.value
-                      }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("p", { staticClass: "control" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.description,
-                        expression: "description"
-                      }
-                    ],
-                    staticClass: "input",
-                    attrs: { type: "text", placeholder: "Description" },
-                    domProps: { value: _vm.description },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.description = $event.target.value
-                      }
-                    }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("footer", { staticClass: "modal-card-foot" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "button is-primary",
-                    attrs: { type: "button" },
-                    on: { click: _vm.createProject }
-                  },
-                  [_vm._v("Create Project")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "button",
-                    on: { click: _vm.closeCreateProjectModal }
-                  },
-                  [_vm._v("Cancel")]
-                )
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("button", {
-            staticClass: "modal-close",
-            on: { click: _vm.closeCreateProjectModal }
-          })
-        ]
-      )
-    ])
+    )
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "bg-white shadow-md w-64 h-64 flex flex-col justify-center items-center text-center rounded m-4"
-      },
-      [
-        _c("i", { staticClass: "fa fa-plus text-grey-dark text-4xl" }),
-        _vm._v(" "),
-        _c("span", { staticClass: "text-grey-darker pt-4" }, [
-          _vm._v("Add a new project")
-        ])
-      ]
-    )
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

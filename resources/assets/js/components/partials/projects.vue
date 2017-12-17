@@ -1,7 +1,26 @@
 <template>
     <div class="">
+        <!-- Create Project Form -->
+        <div :class="{'hidden': !showCreateProjectForm}">
+            <div class="absolute pin opacity-75 bg-grey"></div>
+            <div id="create-project-form" class="fixed pin-x w-1/3 z-10 bg-grey-lighter mx-auto p-8 rounded">
+                <p class="py-2">
+                    <input class="shadow appearance-none border rounded py-2 px-3 text-grey-darker" type="text" placeholder="Name" v-model="name">
+                    <span class="hidden"></span>
+                </p>
+                <p class="py-2">
+                    <input class="shadow appearance-none border rounded py-2 px-3 text-grey-darker" type="text" placeholder="Description" v-model="description">
+                    <span class="hidden"></span>
+                </p>
+                <p class="py-2">
+                    <button type="submit" class="btn mr-4" @click="createProject">Create</button>
+                    <button type="submit" class="btn bg-red-lighter hover:bg-red-light" @click="closeCreateProjectModal">Cancel</button>
+                </p>
+            </div>
+        </div>
+
         <div class="flex flex-row flex-wrap justify-center">
-            <div class="bg-white shadow-md w-64 h-64 flex flex-col justify-center items-center text-center rounded m-4">
+            <div class="bg-white shadow-md w-64 h-64 flex flex-col justify-center items-center text-center rounded m-4 cursor-pointer" @click="openCreateProjectModal">
                 <i class="fa fa-plus text-grey-dark text-4xl"></i>
                 <span class="text-grey-darker pt-4">Add a new project</span>
             </div>
@@ -21,37 +40,6 @@
                 </div>
             </div>
         </div>
-        <div class="card justified hidden">
-            <footer class="card-footer">
-                <a class="card-footer-item" @click="openCreateProjectModal">Create a New Project</a>
-            </footer>
-                <!-- modal for project create form -->
-                <div class="modal hidden" :class="{'is-active': isCreateProjectActive}">
-                    <div class="modal-background"></div>
-                    <div class="modal-content">
-                        <div class="modal-card">
-                            <header class="modal-card-head">
-                                <p class="modal-card-title">Create New Project</p>
-                                <button class="delete" @click="closeCreateProjectModal"></button>
-                            </header>
-                            <section class="modal-card-body">
-                                <p class="control">
-                                    <input class="input" type="text" placeholder="Name" v-model="name">
-                                </p>
-                                <p class="control">
-                                    <input class="input" type="text" placeholder="Description" v-model="description">
-                                </p>
-                            </section>
-                            <footer class="modal-card-foot">
-                                <button type="button" class="button is-primary" @click="createProject">Create Project</button>
-                                <a class="button" @click="closeCreateProjectModal">Cancel</a>
-                            </footer>
-                        </div> <!-- ./modal-card -->
-                    </div>
-                    <button class="modal-close" @click="closeCreateProjectModal"></button>
-                </div>
-                <!-- ./modal -->
-        </div>
     </div>
 </template>
 
@@ -62,16 +50,16 @@
                 project.url = 'projects/' + project.slug;
                 return project;
             }),
-            isCreateProjectActive: false,
+            showCreateProjectForm: false,
             name: '',
             description: ''
         }),
         methods: {
             openCreateProjectModal () {
-                this.isCreateProjectActive = true;
+                this.showCreateProjectForm = true;
             },
             closeCreateProjectModal () {
-                this.isCreateProjectActive = false;
+                this.showCreateProjectForm = false;
             },
             createProject () {
                 axios.post('/projects', {
