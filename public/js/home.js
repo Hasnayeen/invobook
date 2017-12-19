@@ -1098,7 +1098,7 @@ if (typeof io !== 'undefined') {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global, setImmediate) {/*!
- * Vue.js v2.5.9
+ * Vue.js v2.5.11
  * (c) 2014-2017 Evan You
  * Released under the MIT License.
  */
@@ -1441,6 +1441,7 @@ var config = ({
   /**
    * Option merge strategies (used in core/util/options)
    */
+  // $flow-disable-line
   optionMergeStrategies: Object.create(null),
 
   /**
@@ -1481,6 +1482,7 @@ var config = ({
   /**
    * Custom user key aliases for v-on
    */
+  // $flow-disable-line
   keyCodes: Object.create(null),
 
   /**
@@ -1915,8 +1917,7 @@ var arrayMethods = Object.create(arrayProto);[
   'splice',
   'sort',
   'reverse'
-]
-.forEach(function (method) {
+].forEach(function (method) {
   // cache original method
   var original = arrayProto[method];
   def(arrayMethods, method, function mutator () {
@@ -2248,18 +2249,18 @@ function mergeDataOrFn (
     // it has to be a function to pass previous merges.
     return function mergedDataFn () {
       return mergeData(
-        typeof childVal === 'function' ? childVal.call(this) : childVal,
-        typeof parentVal === 'function' ? parentVal.call(this) : parentVal
+        typeof childVal === 'function' ? childVal.call(this, this) : childVal,
+        typeof parentVal === 'function' ? parentVal.call(this, this) : parentVal
       )
     }
   } else {
     return function mergedInstanceDataFn () {
       // instance merge
       var instanceData = typeof childVal === 'function'
-        ? childVal.call(vm)
+        ? childVal.call(vm, vm)
         : childVal;
       var defaultData = typeof parentVal === 'function'
-        ? parentVal.call(vm)
+        ? parentVal.call(vm, vm)
         : parentVal;
       if (instanceData) {
         return mergeData(instanceData, defaultData)
@@ -2411,13 +2412,23 @@ var defaultStrat = function (parentVal, childVal) {
  */
 function checkComponents (options) {
   for (var key in options.components) {
-    var lower = key.toLowerCase();
-    if (isBuiltInTag(lower) || config.isReservedTag(lower)) {
-      warn(
-        'Do not use built-in or reserved HTML elements as component ' +
-        'id: ' + key
-      );
-    }
+    validateComponentName(key);
+  }
+}
+
+function validateComponentName (name) {
+  if (!/^[a-zA-Z][\w-]*$/.test(name)) {
+    warn(
+      'Invalid component name: "' + name + '". Component names ' +
+      'can only contain alphanumeric characters and the hyphen, ' +
+      'and must start with a letter.'
+    );
+  }
+  if (isBuiltInTag(name) || config.isReservedTag(name)) {
+    warn(
+      'Do not use built-in or reserved HTML elements as component ' +
+      'id: ' + name
+    );
   }
 }
 
@@ -2445,6 +2456,9 @@ function normalizeProps (options, vm) {
     for (var key in props) {
       val = props[key];
       name = camelize(key);
+      if ("development" !== 'production' && isPlainObject(val)) {
+        validatePropObject(name, val, vm);
+      }
       res[name] = isPlainObject(val)
         ? val
         : { type: val };
@@ -2457,6 +2471,26 @@ function normalizeProps (options, vm) {
     );
   }
   options.props = res;
+}
+
+/**
+ * Validate whether a prop object keys are valid.
+ */
+var propOptionsRE = /^(type|default|required|validator)$/;
+
+function validatePropObject (
+  propName,
+  prop,
+  vm
+) {
+  for (var key in prop) {
+    if (!propOptionsRE.test(key)) {
+      warn(
+        ("Invalid key \"" + key + "\" in validation rules object for prop \"" + propName + "\"."),
+        vm
+      );
+    }
+  }
 }
 
 /**
@@ -3606,6 +3640,8 @@ function eventsMixin (Vue) {
 
 /*  */
 
+
+
 /**
  * Runtime helper for resolving raw children VNodes into a slot object.
  */
@@ -3629,10 +3665,10 @@ function resolveSlots (
     if ((child.context === context || child.fnContext === context) &&
       data && data.slot != null
     ) {
-      var name = child.data.slot;
+      var name = data.slot;
       var slot = (slots[name] || (slots[name] = []));
       if (child.tag === 'template') {
-        slot.push.apply(slot, child.children);
+        slot.push.apply(slot, child.children || []);
       } else {
         slot.push(child);
       }
@@ -4473,6 +4509,7 @@ function getData (data, vm) {
 var computedWatcherOptions = { lazy: true };
 
 function initComputed (vm, computed) {
+  // $flow-disable-line
   var watchers = vm._computedWatchers = Object.create(null);
   // computed properties are just getters during SSR
   var isSSR = isServerRendering();
@@ -4703,11 +4740,11 @@ function resolveInject (inject, vm) {
     // inject is :any because flow is not smart enough to figure out cached
     var result = Object.create(null);
     var keys = hasSymbol
-        ? Reflect.ownKeys(inject).filter(function (key) {
-          /* istanbul ignore next */
-          return Object.getOwnPropertyDescriptor(inject, key).enumerable
-        })
-        : Object.keys(inject);
+      ? Reflect.ownKeys(inject).filter(function (key) {
+        /* istanbul ignore next */
+        return Object.getOwnPropertyDescriptor(inject, key).enumerable
+      })
+      : Object.keys(inject);
 
     for (var i = 0; i < keys.length; i++) {
       var key = keys[i];
@@ -4913,19 +4950,9 @@ function bindObjectProps (
  */
 function renderStatic (
   index,
-  isInFor,
-  isOnce
+  isInFor
 ) {
-  // render fns generated by compiler < 2.5.4 does not provide v-once
-  // information to runtime so be conservative
-  var isOldVersion = arguments.length < 3;
-  // if a static tree is generated by v-once, it is cached on the instance;
-  // otherwise it is purely static and can be cached on the shared options
-  // across all instances.
-  var renderFns = this.$options.staticRenderFns;
-  var cached = isOldVersion || isOnce
-    ? (this._staticTrees || (this._staticTrees = []))
-    : (renderFns.cached || (renderFns.cached = []));
+  var cached = this._staticTrees || (this._staticTrees = []);
   var tree = cached[index];
   // if has already-rendered static tree and not inside v-for,
   // we can reuse the same tree by doing a shallow clone.
@@ -4935,7 +4962,11 @@ function renderStatic (
       : cloneVNode(tree)
   }
   // otherwise, render a fresh tree.
-  tree = cached[index] = renderFns[index].call(this._renderProxy, null, this);
+  tree = cached[index] = this.$options.staticRenderFns[index].call(
+    this._renderProxy,
+    null,
+    this // for render fns generated for functional component templates
+  );
   markStatic(tree, ("__static__" + index), false);
   return tree
 }
@@ -5287,15 +5318,10 @@ function createComponentInstanceForVnode (
   parentElm,
   refElm
 ) {
-  var vnodeComponentOptions = vnode.componentOptions;
   var options = {
     _isComponent: true,
     parent: parent,
-    propsData: vnodeComponentOptions.propsData,
-    _componentTag: vnodeComponentOptions.tag,
     _parentVnode: vnode,
-    _parentListeners: vnodeComponentOptions.listeners,
-    _renderChildren: vnodeComponentOptions.children,
     _parentElm: parentElm || null,
     _refElm: refElm || null
   };
@@ -5305,7 +5331,7 @@ function createComponentInstanceForVnode (
     options.render = inlineTemplate.render;
     options.staticRenderFns = inlineTemplate.staticRenderFns;
   }
-  return new vnodeComponentOptions.Ctor(options)
+  return new vnode.componentOptions.Ctor(options)
 }
 
 function mergeHooks (data) {
@@ -5639,14 +5665,18 @@ function initMixin (Vue) {
 function initInternalComponent (vm, options) {
   var opts = vm.$options = Object.create(vm.constructor.options);
   // doing this because it's faster than dynamic enumeration.
+  var parentVnode = options._parentVnode;
   opts.parent = options.parent;
-  opts.propsData = options.propsData;
-  opts._parentVnode = options._parentVnode;
-  opts._parentListeners = options._parentListeners;
-  opts._renderChildren = options._renderChildren;
-  opts._componentTag = options._componentTag;
+  opts._parentVnode = parentVnode;
   opts._parentElm = options._parentElm;
   opts._refElm = options._refElm;
+
+  var vnodeComponentOptions = parentVnode.componentOptions;
+  opts.propsData = vnodeComponentOptions.propsData;
+  opts._parentListeners = vnodeComponentOptions.listeners;
+  opts._renderChildren = vnodeComponentOptions.children;
+  opts._componentTag = vnodeComponentOptions.tag;
+
   if (options.render) {
     opts.render = options.render;
     opts.staticRenderFns = options.staticRenderFns;
@@ -5780,14 +5810,8 @@ function initExtend (Vue) {
     }
 
     var name = extendOptions.name || Super.options.name;
-    if (true) {
-      if (!/^[a-zA-Z][\w-]*$/.test(name)) {
-        warn(
-          'Invalid component name: "' + name + '". Component names ' +
-          'can only contain alphanumeric characters and the hyphen, ' +
-          'and must start with a letter.'
-        );
-      }
+    if ("development" !== 'production' && name) {
+      validateComponentName(name);
     }
 
     var Sub = function VueComponent (options) {
@@ -5869,13 +5893,8 @@ function initAssetRegisters (Vue) {
         return this.options[type + 's'][id]
       } else {
         /* istanbul ignore if */
-        if (true) {
-          if (type === 'component' && config.isReservedTag(id)) {
-            warn(
-              'Do not use built-in or reserved HTML elements as component ' +
-              'id: ' + id
-            );
-          }
+        if ("development" !== 'production' && type === 'component') {
+          validateComponentName(id);
         }
         if (type === 'component' && isPlainObject(definition)) {
           definition.name = definition.name || id;
@@ -6082,7 +6101,7 @@ Object.defineProperty(Vue$3.prototype, '$ssrContext', {
   }
 });
 
-Vue$3.version = '2.5.9';
+Vue$3.version = '2.5.11';
 
 /*  */
 
@@ -6134,12 +6153,12 @@ function genClassForVnode (vnode) {
   var childNode = vnode;
   while (isDef(childNode.componentInstance)) {
     childNode = childNode.componentInstance._vnode;
-    if (childNode.data) {
+    if (childNode && childNode.data) {
       data = mergeClassData(childNode.data, data);
     }
   }
   while (isDef(parentNode = parentNode.parent)) {
-    if (parentNode.data) {
+    if (parentNode && parentNode.data) {
       data = mergeClassData(data, parentNode.data);
     }
   }
@@ -6650,6 +6669,9 @@ function createPatchFunction (backend) {
 
   function createChildren (vnode, children, insertedVnodeQueue) {
     if (Array.isArray(children)) {
+      if (true) {
+        checkDuplicateKeys(children);
+      }
       for (var i = 0; i < children.length; ++i) {
         createElm(children[i], insertedVnodeQueue, vnode.elm, null, true);
       }
@@ -6781,6 +6803,10 @@ function createPatchFunction (backend) {
     // during leaving transitions
     var canMove = !removeOnly;
 
+    if (true) {
+      checkDuplicateKeys(newCh);
+    }
+
     while (oldStartIdx <= oldEndIdx && newStartIdx <= newEndIdx) {
       if (isUndef(oldStartVnode)) {
         oldStartVnode = oldCh[++oldStartIdx]; // Vnode has been moved left
@@ -6813,13 +6839,6 @@ function createPatchFunction (backend) {
           createElm(newStartVnode, insertedVnodeQueue, parentElm, oldStartVnode.elm);
         } else {
           vnodeToMove = oldCh[idxInOld];
-          /* istanbul ignore if */
-          if ("development" !== 'production' && !vnodeToMove) {
-            warn(
-              'It seems there are duplicate keys that is causing an update error. ' +
-              'Make sure each v-for item has a unique key.'
-            );
-          }
           if (sameVnode(vnodeToMove, newStartVnode)) {
             patchVnode(vnodeToMove, newStartVnode, insertedVnodeQueue);
             oldCh[idxInOld] = undefined;
@@ -6837,6 +6856,24 @@ function createPatchFunction (backend) {
       addVnodes(parentElm, refElm, newCh, newStartIdx, newEndIdx, insertedVnodeQueue);
     } else if (newStartIdx > newEndIdx) {
       removeVnodes(parentElm, oldCh, oldStartIdx, oldEndIdx);
+    }
+  }
+
+  function checkDuplicateKeys (children) {
+    var seenKeys = {};
+    for (var i = 0; i < children.length; i++) {
+      var vnode = children[i];
+      var key = vnode.key;
+      if (isDef(key)) {
+        if (seenKeys[key]) {
+          warn(
+            ("Duplicate keys detected: '" + key + "'. This may cause an update error."),
+            vnode.context
+          );
+        } else {
+          seenKeys[key] = true;
+        }
+      }
     }
   }
 
@@ -7222,17 +7259,20 @@ function normalizeDirectives$1 (
 ) {
   var res = Object.create(null);
   if (!dirs) {
+    // $flow-disable-line
     return res
   }
   var i, dir;
   for (i = 0; i < dirs.length; i++) {
     dir = dirs[i];
     if (!dir.modifiers) {
+      // $flow-disable-line
       dir.modifiers = emptyModifiers;
     }
     res[getRawDirName(dir)] = dir;
     dir.def = resolveAsset(vm.$options, 'directives', dir.name, true);
   }
+  // $flow-disable-line
   return res
 }
 
@@ -7858,11 +7898,11 @@ function genCheckboxModel (
   var falseValueBinding = getBindingAttr(el, 'false-value') || 'false';
   addProp(el, 'checked',
     "Array.isArray(" + value + ")" +
-      "?_i(" + value + "," + valueBinding + ")>-1" + (
-        trueValueBinding === 'true'
-          ? (":(" + value + ")")
-          : (":_q(" + value + "," + trueValueBinding + ")")
-      )
+    "?_i(" + value + "," + valueBinding + ")>-1" + (
+      trueValueBinding === 'true'
+        ? (":(" + value + ")")
+        : (":_q(" + value + "," + trueValueBinding + ")")
+    )
   );
   addHandler(el, 'change',
     "var $$a=" + value + "," +
@@ -7879,9 +7919,9 @@ function genCheckboxModel (
 }
 
 function genRadioModel (
-    el,
-    value,
-    modifiers
+  el,
+  value,
+  modifiers
 ) {
   var number = modifiers && modifiers.number;
   var valueBinding = getBindingAttr(el, 'value') || 'null';
@@ -7891,9 +7931,9 @@ function genRadioModel (
 }
 
 function genSelect (
-    el,
-    value,
-    modifiers
+  el,
+  value,
+  modifiers
 ) {
   var number = modifiers && modifiers.number;
   var selectedVal = "Array.prototype.filter" +
@@ -8096,12 +8136,12 @@ function updateDOMProps (oldVnode, vnode) {
 function shouldUpdateValue (elm, checkVal) {
   return (!elm.composing && (
     elm.tagName === 'OPTION' ||
-    isDirty(elm, checkVal) ||
-    isInputChanged(elm, checkVal)
+    isNotInFocusAndDirty(elm, checkVal) ||
+    isDirtyWithModifiers(elm, checkVal)
   ))
 }
 
-function isDirty (elm, checkVal) {
+function isNotInFocusAndDirty (elm, checkVal) {
   // return true when textbox (.number and .trim) loses focus and its value is
   // not equal to the updated value
   var notInFocus = true;
@@ -8111,14 +8151,20 @@ function isDirty (elm, checkVal) {
   return notInFocus && elm.value !== checkVal
 }
 
-function isInputChanged (elm, newVal) {
+function isDirtyWithModifiers (elm, newVal) {
   var value = elm.value;
   var modifiers = elm._vModifiers; // injected by v-model runtime
-  if (isDef(modifiers) && modifiers.number) {
-    return toNumber(value) !== toNumber(newVal)
-  }
-  if (isDef(modifiers) && modifiers.trim) {
-    return value.trim() !== newVal.trim()
+  if (isDef(modifiers)) {
+    if (modifiers.lazy) {
+      // inputs with lazy should only be updated when not in focus
+      return false
+    }
+    if (modifiers.number) {
+      return toNumber(value) !== toNumber(newVal)
+    }
+    if (modifiers.trim) {
+      return value.trim() !== newVal.trim()
+    }
   }
   return value !== newVal
 }
@@ -8176,7 +8222,10 @@ function getStyle (vnode, checkChild) {
     var childNode = vnode;
     while (childNode.componentInstance) {
       childNode = childNode.componentInstance._vnode;
-      if (childNode.data && (styleData = normalizeStyleData(childNode.data))) {
+      if (
+        childNode && childNode.data &&
+        (styleData = normalizeStyleData(childNode.data))
+      ) {
         extend(res, styleData);
       }
     }
@@ -9332,7 +9381,7 @@ var TransitionGroup = {
       this._vnode,
       this.kept,
       false, // hydrating
-      true // removeOnly (!important, avoids unnecessary moves)
+      true // removeOnly (!important avoids unnecessary moves)
     );
     this._vnode = this.kept;
   },
@@ -9956,7 +10005,7 @@ function parseHTML (html, options) {
 var onRE = /^@|^v-on:/;
 var dirRE = /^v-|^@|^:/;
 var forAliasRE = /(.*?)\s+(?:in|of)\s+(.*)/;
-var forIteratorRE = /\((\{[^}]*\}|[^,{]*),([^,]*)(?:,([^,]*))?\)/;
+var forIteratorRE = /,([^,\}\]]*)(?:,([^,\}\]]*))?$/;
 var stripParensRE = /^\(|\)$/g;
 
 var argRE = /:(.*)$/;
@@ -10289,16 +10338,16 @@ function processFor (el) {
       return
     }
     el.for = inMatch[2].trim();
-    var alias = inMatch[1].trim();
+    var alias = inMatch[1].trim().replace(stripParensRE, '');
     var iteratorMatch = alias.match(forIteratorRE);
     if (iteratorMatch) {
-      el.alias = iteratorMatch[1].trim();
-      el.iterator1 = iteratorMatch[2].trim();
-      if (iteratorMatch[3]) {
-        el.iterator2 = iteratorMatch[3].trim();
+      el.alias = alias.replace(forIteratorRE, '');
+      el.iterator1 = iteratorMatch[1].trim();
+      if (iteratorMatch[2]) {
+        el.iterator2 = iteratorMatch[2].trim();
       }
     } else {
-      el.alias = alias.replace(stripParensRE, '');
+      el.alias = alias;
     }
   }
 }
@@ -11047,10 +11096,10 @@ function genElement (el, state) {
 }
 
 // hoist static sub-trees out
-function genStatic (el, state, once$$1) {
+function genStatic (el, state) {
   el.staticProcessed = true;
   state.staticRenderFns.push(("with(this){return " + (genElement(el, state)) + "}"));
-  return ("_m(" + (state.staticRenderFns.length - 1) + "," + (el.staticInFor ? 'true' : 'false') + "," + (once$$1 ? 'true' : 'false') + ")")
+  return ("_m(" + (state.staticRenderFns.length - 1) + (el.staticInFor ? ',true' : '') + ")")
 }
 
 // v-once
@@ -11076,7 +11125,7 @@ function genOnce (el, state) {
     }
     return ("_o(" + (genElement(el, state)) + "," + (state.onceId++) + "," + key + ")")
   } else {
-    return genStatic(el, state, true)
+    return genStatic(el, state)
   }
 }
 
@@ -11656,7 +11705,7 @@ function createCompilerCreator (baseCompile) {
         // merge custom directives
         if (options.directives) {
           finalOptions.directives = extend(
-            Object.create(baseOptions.directives),
+            Object.create(baseOptions.directives || null),
             options.directives
           );
         }
@@ -13725,7 +13774,6 @@ var Component = normalizeComponent(
   __vue_module_identifier__
 )
 Component.options.__file = "resources/assets/js/components/partials/navbar.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -13737,7 +13785,7 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-46c8fb34", Component.options)
   } else {
     hotAPI.reload("data-v-46c8fb34", Component.options)
-' + '  }
+  }
   module.hot.dispose(function (data) {
     disposed = true
   })
@@ -13893,7 +13941,7 @@ var render = function() {
               class: { "is-hidden-tablet": _vm.hideNotificationList }
             },
             [
-              _vm._m(0, false, false),
+              _vm._m(0),
               _vm._v(" "),
               _c("a", { attrs: { href: "#" } }, [_vm._v("View All")])
             ]
@@ -14065,7 +14113,6 @@ var Component = normalizeComponent(
   __vue_module_identifier__
 )
 Component.options.__file = "resources/assets/js/components/partials/inviteModal.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -14077,7 +14124,7 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-7b74c4be", Component.options)
   } else {
     hotAPI.reload("data-v-7b74c4be", Component.options)
-' + '  }
+  }
   module.hot.dispose(function (data) {
     disposed = true
   })
@@ -14342,7 +14389,6 @@ var Component = normalizeComponent(
   __vue_module_identifier__
 )
 Component.options.__file = "resources/assets/js/components/home.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -14354,7 +14400,7 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-6ebcac14", Component.options)
   } else {
     hotAPI.reload("data-v-6ebcac14", Component.options)
-' + '  }
+  }
   module.hot.dispose(function (data) {
     disposed = true
   })
@@ -14396,6 +14442,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+
 
 
 
@@ -14409,6 +14459,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             active: "projects"
         };
+    },
+    methods: {
+        activeThisTab: function activeThisTab(tab) {
+            if (tab != this.active) {
+                this.active = tab;
+            }
+        }
     }
 });
 
@@ -14439,7 +14496,6 @@ var Component = normalizeComponent(
   __vue_module_identifier__
 )
 Component.options.__file = "resources/assets/js/components/partials/projects.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -14451,7 +14507,7 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-07a94250", Component.options)
   } else {
     hotAPI.reload("data-v-07a94250", Component.options)
-' + '  }
+  }
   module.hot.dispose(function (data) {
     disposed = true
   })
@@ -14534,6 +14590,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             description: ''
         };
     }),
+    props: {
+        activeTab: {
+            required: true,
+            type: String
+        }
+    },
     methods: {
         openCreateProjectModal: function openCreateProjectModal() {
             this.showCreateProjectForm = true;
@@ -14568,7 +14630,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", {}, [
+  return _c("div", { class: { hidden: _vm.activeTab != "projects" } }, [
     _c("div", { class: { hidden: !_vm.showCreateProjectForm } }, [
       _c("div", { staticClass: "absolute pin opacity-75 bg-grey" }),
       _vm._v(" "),
@@ -14591,7 +14653,7 @@ var render = function() {
                 }
               ],
               staticClass:
-                "shadow appearance-none border rounded py-2 px-3 text-grey-darker",
+                "w-full shadow appearance-none border rounded py-2 px-3 text-grey-darker",
               attrs: { type: "text", placeholder: "Name" },
               domProps: { value: _vm.name },
               on: {
@@ -14618,7 +14680,7 @@ var render = function() {
                 }
               ],
               staticClass:
-                "shadow appearance-none border rounded py-2 px-3 text-grey-darker",
+                "w-full shadow appearance-none border rounded py-2 px-3 text-grey-darker",
               attrs: { type: "text", placeholder: "Description" },
               domProps: { value: _vm.description },
               on: {
@@ -14639,7 +14701,7 @@ var render = function() {
               "button",
               {
                 staticClass: "btn mr-4",
-                attrs: { type: "submit" },
+                attrs: { type: "w-full submit" },
                 on: { click: _vm.createProject }
               },
               [_vm._v("Create")]
@@ -14687,7 +14749,7 @@ var render = function() {
                 "bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center items-center text-center rounded m-4"
             },
             [
-              _vm._m(0, true, false),
+              _vm._m(0, true),
               _vm._v(" "),
               _c(
                 "a",
@@ -14705,7 +14767,7 @@ var render = function() {
                 [_vm._v(_vm._s(project.description))]
               ),
               _vm._v(" "),
-              _vm._m(1, true, false)
+              _vm._m(1, true)
             ]
           )
         })
@@ -14805,7 +14867,6 @@ var Component = normalizeComponent(
   __vue_module_identifier__
 )
 Component.options.__file = "resources/assets/js/components/partials/teams.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -14817,7 +14878,7 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-56857460", Component.options)
   } else {
     hotAPI.reload("data-v-56857460", Component.options)
-' + '  }
+  }
   module.hot.dispose(function (data) {
     disposed = true
   })
@@ -14832,6 +14893,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -14903,17 +14965,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 team.url = 'teams/' + team.slug;
                 return team;
             }),
-            isActive: false,
+            showCreateTeamForm: false,
             name: '',
             description: ''
         };
     }),
+    props: {
+        activeTab: {
+            required: true,
+            type: String
+        }
+    },
     methods: {
         openCreateTeamModal: function openCreateTeamModal() {
-            this.isActive = true;
+            this.showCreateTeamForm = true;
         },
         closeCreateTeamModal: function closeCreateTeamModal() {
-            this.isActive = false;
+            this.showCreateTeamForm = false;
         },
         createNewTeam: function createNewTeam() {
             var _this = this;
@@ -14923,7 +14991,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 description: this.description
             }).then(function (response) {
                 if (response.data.status == 'success') {
-                    _this.isActive = false;
+                    _this.showCreateTeamForm = false;
                 }
             }).catch(function (error) {
                 console.log(error);
@@ -14940,136 +15008,150 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "hidden" }, [
-    _c("div", { staticClass: "card justified" }, [
-      _vm._m(0, false, false),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-content homepage" }, [
-        _c(
-          "div",
-          { staticClass: "content" },
-          _vm._l(_vm.teams, function(team) {
-            return _c("div", { staticClass: "menu-list" }, [
-              _c(
-                "a",
-                { staticClass: "has-text-centered", attrs: { href: team.url } },
-                [_vm._v(_vm._s(team.name))]
-              )
-            ])
-          })
-        )
-      ]),
-      _vm._v(" "),
-      _c("footer", { staticClass: "card-footer" }, [
-        _c(
-          "a",
-          {
-            staticClass: "card-footer-item",
-            on: { click: _vm.openCreateTeamModal }
-          },
-          [_vm._v("Create a New Team")]
-        )
-      ]),
+  return _c("div", { class: { hidden: _vm.activeTab != "teams" } }, [
+    _c("div", { class: { hidden: !_vm.showCreateTeamForm } }, [
+      _c("div", { staticClass: "absolute pin opacity-75 bg-grey" }),
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "modal", class: { "is-active": _vm.isActive } },
+        {
+          staticClass:
+            "fixed pin-x w-1/3 z-10 bg-grey-lighter mx-auto p-8 rounded",
+          attrs: { id: "create-project-form" }
+        },
         [
-          _c("div", { staticClass: "modal-background" }),
-          _vm._v(" "),
-          _c("div", { staticClass: "modal-content" }, [
-            _c("div", { staticClass: "modal-card" }, [
-              _c("header", { staticClass: "modal-card-head" }, [
-                _c("p", { staticClass: "modal-card-title" }, [
-                  _vm._v("Create New Team")
-                ]),
-                _vm._v(" "),
-                _c("button", {
-                  staticClass: "delete",
-                  on: { click: _vm.closeCreateTeamModal }
-                })
-              ]),
-              _vm._v(" "),
-              _c("section", { staticClass: "modal-card-body" }, [
-                _c("p", { staticClass: "control has-icon has-icon-right" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.name,
-                        expression: "name"
-                      }
-                    ],
-                    staticClass: "input",
-                    attrs: { type: "text", placeholder: "Name" },
-                    domProps: { value: _vm.name },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.name = $event.target.value
-                      }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("p", { staticClass: "control has-icon has-icon-right" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.description,
-                        expression: "description"
-                      }
-                    ],
-                    staticClass: "input",
-                    attrs: { type: "text", placeholder: "Description" },
-                    domProps: { value: _vm.description },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.description = $event.target.value
-                      }
-                    }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("footer", { staticClass: "modal-card-foot" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "button is-primary",
-                    attrs: { type: "submit" },
-                    on: { click: _vm.createNewTeam }
-                  },
-                  [_vm._v("Add New Team")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "button",
-                    on: { click: _vm.closeCreateTeamModal }
-                  },
-                  [_vm._v("Cancel")]
-                )
-              ])
-            ])
+          _c("p", { staticClass: "py-2" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.name,
+                  expression: "name"
+                }
+              ],
+              staticClass:
+                "w-full shadow appearance-none border rounded py-2 px-3 text-grey-darker",
+              attrs: { type: "text", placeholder: "Name" },
+              domProps: { value: _vm.name },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.name = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("span", { staticClass: "hidden" })
           ]),
           _vm._v(" "),
-          _c("button", {
-            staticClass: "modal-close",
-            on: { click: _vm.closeCreateTeamModal }
-          })
+          _c("p", { staticClass: "py-2" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.description,
+                  expression: "description"
+                }
+              ],
+              staticClass:
+                "w-full shadow appearance-none border rounded py-2 px-3 text-grey-darker",
+              attrs: { type: "text", placeholder: "Description" },
+              domProps: { value: _vm.description },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.description = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("span", { staticClass: "hidden" })
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "py-2" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn mr-4",
+                attrs: { type: "w-full submit" },
+                on: { click: _vm.createNewTeam }
+              },
+              [_vm._v("Create")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn bg-red-lighter hover:bg-red-light",
+                attrs: { type: "submit" },
+                on: { click: _vm.closeCreateTeamModal }
+              },
+              [_vm._v("Cancel")]
+            )
+          ])
         ]
       )
-    ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "flex flex-row flex-wrap justify-center" },
+      [
+        _c(
+          "div",
+          {
+            staticClass:
+              "bg-white shadow-md w-64 h-64 flex flex-col justify-center items-center text-center rounded m-4 cursor-pointer",
+            on: { click: _vm.openCreateTeamModal }
+          },
+          [
+            _c("i", { staticClass: "fa fa-plus text-grey-dark text-4xl" }),
+            _vm._v(" "),
+            _c("span", { staticClass: "text-grey-darker pt-4" }, [
+              _vm._v("Add a new team")
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _vm._l(_vm.teams, function(team) {
+          return _c(
+            "div",
+            {
+              staticClass:
+                "bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center items-center text-center rounded m-4"
+            },
+            [
+              _vm._m(0, true),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass:
+                    "text-pink text-xl no-underline w-full pt-8 h-16 self-end",
+                  attrs: { href: team.url }
+                },
+                [_vm._v(_vm._s(team.name))]
+              ),
+              _vm._v(" "),
+              _c(
+                "span",
+                { staticClass: "text-grey text-sm w-full h-16 self-start" },
+                [_vm._v(_vm._s(team.description))]
+              ),
+              _vm._v(" "),
+              _vm._m(1, true)
+            ]
+          )
+        })
+      ],
+      2
+    )
   ])
 }
 var staticRenderFns = [
@@ -15077,17 +15159,54 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("header", { staticClass: "card-header" }, [
-      _c("a", { staticClass: "card-header-title", attrs: { href: "teams" } }, [
-        _vm._v("\n          Teams\n        ")
-      ]),
-      _vm._v(" "),
-      _c("a", { staticClass: "card-header-icon" }, [
-        _c("span", { staticClass: "icon" }, [
-          _c("i", { staticClass: "fa fa-angle-down" })
-        ])
-      ])
+    return _c("span", { staticClass: "w-full h-16" }, [
+      _c("i", {
+        staticClass:
+          "fa fa-ellipsis-h float-right pr-4 pt-2 text-grey-darker cursor-pointer"
+      })
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "border-t w-full h-16 flex flex-row justify-start items-center px-2"
+      },
+      [
+        _c("img", {
+          staticClass: "rounded-full w-8 h-8 mr-2",
+          attrs: { src: "/image/avatar.jpg" }
+        }),
+        _vm._v(" "),
+        _c("img", {
+          staticClass: "rounded-full w-8 h-8 mr-2",
+          attrs: { src: "/image/avatar.jpg" }
+        }),
+        _vm._v(" "),
+        _c("img", {
+          staticClass: "rounded-full w-8 h-8 mr-2",
+          attrs: { src: "/image/avatar.jpg" }
+        }),
+        _vm._v(" "),
+        _c("img", {
+          staticClass: "rounded-full w-8 h-8 mr-2",
+          attrs: { src: "/image/avatar.jpg" }
+        }),
+        _vm._v(" "),
+        _c("img", {
+          staticClass: "rounded-full w-8 h-8 mr-2",
+          attrs: { src: "/image/avatar.jpg" }
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "bg-grey-light p-2 rounded-full" }, [
+          _vm._v("5+")
+        ])
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -15126,7 +15245,6 @@ var Component = normalizeComponent(
   __vue_module_identifier__
 )
 Component.options.__file = "resources/assets/js/components/partials/offices.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -15138,7 +15256,7 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-0959d75e", Component.options)
   } else {
     hotAPI.reload("data-v-0959d75e", Component.options)
-' + '  }
+  }
   module.hot.dispose(function (data) {
     disposed = true
   })
@@ -15153,6 +15271,33 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -15197,9 +15342,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             offices: data.offices.map(function (office) {
                 office.url = 'offices/' + office.slug;
                 return office;
-            })
+            }),
+            showCreateOfficeForm: false,
+            name: '',
+            description: ''
         };
-    })
+    }),
+    props: {
+        activeTab: {
+            required: true,
+            type: String
+        }
+    },
+    methods: {
+        createNewOffice: function createNewOffice() {},
+        closeCreateOfficeModal: function closeCreateOfficeModal() {
+            this.showCreateOfficeForm = false;
+        },
+        openCreateOfficeModal: function openCreateOfficeModal() {
+            this.showCreateOfficeForm = true;
+        }
+    }
 });
 
 /***/ }),
@@ -15210,31 +15373,150 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "hidden" }, [
-    _c("div", { staticClass: "card justified" }, [
-      _vm._m(0, false, false),
+  return _c("div", { class: { hidden: _vm.activeTab != "offices" } }, [
+    _c("div", { class: { hidden: !_vm.showCreateOfficeForm } }, [
+      _c("div", { staticClass: "absolute pin opacity-75 bg-grey" }),
       _vm._v(" "),
-      _c("div", { staticClass: "card-content homepage" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "fixed pin-x w-1/3 z-10 bg-grey-lighter mx-auto p-8 rounded",
+          attrs: { id: "create-project-form" }
+        },
+        [
+          _c("p", { staticClass: "py-2" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.name,
+                  expression: "name"
+                }
+              ],
+              staticClass:
+                "w-full shadow appearance-none border rounded py-2 px-3 text-grey-darker",
+              attrs: { type: "text", placeholder: "Name" },
+              domProps: { value: _vm.name },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.name = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("span", { staticClass: "hidden" })
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "py-2" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.description,
+                  expression: "description"
+                }
+              ],
+              staticClass:
+                "w-full shadow appearance-none border rounded py-2 px-3 text-grey-darker",
+              attrs: { type: "text", placeholder: "Description" },
+              domProps: { value: _vm.description },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.description = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("span", { staticClass: "hidden" })
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "py-2" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn mr-4",
+                attrs: { type: "w-full submit" },
+                on: { click: _vm.createNewOffice }
+              },
+              [_vm._v("Create")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn bg-red-lighter hover:bg-red-light",
+                attrs: { type: "submit" },
+                on: { click: _vm.closeCreateOfficeModal }
+              },
+              [_vm._v("Cancel")]
+            )
+          ])
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "flex flex-row flex-wrap justify-center" },
+      [
         _c(
           "div",
-          { staticClass: "content" },
-          _vm._l(_vm.offices, function(office) {
-            return _c("div", { staticClass: "menu-list" }, [
+          {
+            staticClass:
+              "bg-white shadow-md w-64 h-64 flex flex-col justify-center items-center text-center rounded m-4 cursor-pointer",
+            on: { click: _vm.openCreateOfficeModal }
+          },
+          [
+            _c("i", { staticClass: "fa fa-plus text-grey-dark text-4xl" }),
+            _vm._v(" "),
+            _c("span", { staticClass: "text-grey-darker pt-4" }, [
+              _vm._v("Add a new office")
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _vm._l(_vm.offices, function(office) {
+          return _c(
+            "div",
+            {
+              staticClass:
+                "bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center items-center text-center rounded m-4"
+            },
+            [
+              _vm._m(0, true),
+              _vm._v(" "),
               _c(
                 "a",
                 {
-                  staticClass: "has-text-centered",
+                  staticClass:
+                    "text-pink text-xl no-underline w-full pt-8 h-16 self-end",
                   attrs: { href: office.url }
                 },
                 [_vm._v(_vm._s(office.name))]
-              )
-            ])
-          })
-        )
-      ]),
-      _vm._v(" "),
-      _vm._m(1, false, false)
-    ])
+              ),
+              _vm._v(" "),
+              _c(
+                "span",
+                { staticClass: "text-grey text-sm w-full h-16 self-start" },
+                [_vm._v(_vm._s(office.description))]
+              ),
+              _vm._v(" "),
+              _vm._m(1, true)
+            ]
+          )
+        })
+      ],
+      2
+    )
   ])
 }
 var staticRenderFns = [
@@ -15242,29 +15524,54 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("header", { staticClass: "card-header" }, [
-      _c(
-        "a",
-        { staticClass: "card-header-title", attrs: { href: "offices" } },
-        [_vm._v("\n          Offices\n        ")]
-      ),
-      _vm._v(" "),
-      _c("a", { staticClass: "card-header-icon" }, [
-        _c("span", { staticClass: "icon" }, [
-          _c("i", { staticClass: "fa fa-angle-down" })
-        ])
-      ])
+    return _c("span", { staticClass: "w-full h-16" }, [
+      _c("i", {
+        staticClass:
+          "fa fa-ellipsis-h float-right pr-4 pt-2 text-grey-darker cursor-pointer"
+      })
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("footer", { staticClass: "card-footer" }, [
-      _c("a", { staticClass: "card-footer-item" }, [
-        _vm._v("Create a New Office")
-      ])
-    ])
+    return _c(
+      "div",
+      {
+        staticClass:
+          "border-t w-full h-16 flex flex-row justify-start items-center px-2"
+      },
+      [
+        _c("img", {
+          staticClass: "rounded-full w-8 h-8 mr-2",
+          attrs: { src: "/image/avatar.jpg" }
+        }),
+        _vm._v(" "),
+        _c("img", {
+          staticClass: "rounded-full w-8 h-8 mr-2",
+          attrs: { src: "/image/avatar.jpg" }
+        }),
+        _vm._v(" "),
+        _c("img", {
+          staticClass: "rounded-full w-8 h-8 mr-2",
+          attrs: { src: "/image/avatar.jpg" }
+        }),
+        _vm._v(" "),
+        _c("img", {
+          staticClass: "rounded-full w-8 h-8 mr-2",
+          attrs: { src: "/image/avatar.jpg" }
+        }),
+        _vm._v(" "),
+        _c("img", {
+          staticClass: "rounded-full w-8 h-8 mr-2",
+          attrs: { src: "/image/avatar.jpg" }
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "bg-grey-light p-2 rounded-full" }, [
+          _vm._v("5+")
+        ])
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -15303,7 +15610,6 @@ var Component = normalizeComponent(
   __vue_module_identifier__
 )
 Component.options.__file = "resources/assets/js/components/partials/activity.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -15315,7 +15621,7 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-2fb2ca65", Component.options)
   } else {
     hotAPI.reload("data-v-2fb2ca65", Component.options)
-' + '  }
+  }
   module.hot.dispose(function (data) {
     disposed = true
   })
@@ -15374,7 +15680,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0, false, false)
+  return _vm._m(0)
 }
 var staticRenderFns = [
   function() {
@@ -15485,23 +15791,59 @@ var render = function() {
             {
               class: {
                 "text-grey-darkest font-semibold border-teal border-b-4 pb-3 -mb-4":
-                  _vm.active === "projects"
+                  _vm.active === "projects",
+                "cursor-pointer": _vm.active != "projects"
+              },
+              on: {
+                click: function($event) {
+                  _vm.activeThisTab("projects")
+                }
               }
             },
             [_vm._v("\n            Projects\n        ")]
           ),
           _vm._v(" "),
-          _c("span", [_vm._v("\n            Teams\n        ")]),
+          _c(
+            "span",
+            {
+              class: {
+                "text-grey-darkest font-semibold border-teal border-b-4 pb-3 -mb-4":
+                  _vm.active === "teams",
+                "cursor-pointer": _vm.active != "teams"
+              },
+              on: {
+                click: function($event) {
+                  _vm.activeThisTab("teams")
+                }
+              }
+            },
+            [_vm._v("\n            Teams\n        ")]
+          ),
           _vm._v(" "),
-          _c("span", [_vm._v("\n            Offices\n        ")])
+          _c(
+            "span",
+            {
+              class: {
+                "text-grey-darkest font-semibold border-teal border-b-4 pb-3 -mb-4":
+                  _vm.active === "offices",
+                "cursor-pointer": _vm.active != "offices"
+              },
+              on: {
+                click: function($event) {
+                  _vm.activeThisTab("offices")
+                }
+              }
+            },
+            [_vm._v("\n            Offices\n        ")]
+          )
         ]
       ),
       _vm._v(" "),
-      _c("projects"),
+      _c("projects", { attrs: { "active-tab": _vm.active } }),
       _vm._v(" "),
-      _c("teams"),
+      _c("teams", { attrs: { "active-tab": _vm.active } }),
       _vm._v(" "),
-      _c("offices")
+      _c("offices", { attrs: { "active-tab": _vm.active } })
     ],
     1
   )

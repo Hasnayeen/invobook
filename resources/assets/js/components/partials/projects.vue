@@ -1,19 +1,19 @@
 <template>
-    <div class="">
+    <div :class="{'hidden': (activeTab != 'projects')}">
         <!-- Create Project Form -->
         <div :class="{'hidden': !showCreateProjectForm}">
             <div class="absolute pin opacity-75 bg-grey"></div>
             <div id="create-project-form" class="fixed pin-x w-1/3 z-10 bg-grey-lighter mx-auto p-8 rounded">
                 <p class="py-2">
-                    <input class="shadow appearance-none border rounded py-2 px-3 text-grey-darker" type="text" placeholder="Name" v-model="name">
+                    <input class="w-full shadow appearance-none border rounded py-2 px-3 text-grey-darker" type="text" placeholder="Name" v-model="name">
                     <span class="hidden"></span>
                 </p>
                 <p class="py-2">
-                    <input class="shadow appearance-none border rounded py-2 px-3 text-grey-darker" type="text" placeholder="Description" v-model="description">
+                    <input class="w-full shadow appearance-none border rounded py-2 px-3 text-grey-darker" type="text" placeholder="Description" v-model="description">
                     <span class="hidden"></span>
                 </p>
                 <p class="py-2">
-                    <button type="submit" class="btn mr-4" @click="createProject">Create</button>
+                    <button type="w-full submit" class="btn mr-4" @click="createProject">Create</button>
                     <button type="submit" class="btn bg-red-lighter hover:bg-red-light" @click="closeCreateProjectModal">Cancel</button>
                 </p>
             </div>
@@ -54,6 +54,12 @@
             name: '',
             description: ''
         }),
+        props: {
+            activeTab: {
+                required: true,
+                type: String
+            }
+        },
         methods: {
             openCreateProjectModal () {
                 this.showCreateProjectForm = true;
