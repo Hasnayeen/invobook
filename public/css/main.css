@@ -3803,6 +3803,10 @@ button,
  * @import "utilities/skew-transforms";
  */
 
+.resize-none {
+  resize: none;
+}
+
 @media (min-width: 576px) {
   .sm\:list-reset {
     list-style: none;

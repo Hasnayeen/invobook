@@ -19,12 +19,14 @@
             </div>
         </div>
 
+        <!-- Projects -->
         <div class="flex flex-row flex-wrap justify-center">
             <div class="bg-white shadow-md w-64 h-64 flex flex-col justify-center items-center text-center rounded m-4 cursor-pointer" @click="openCreateProjectModal">
                 <i class="fa fa-plus text-grey-dark text-4xl"></i>
                 <span class="text-grey-darker pt-4">Add a new project</span>
             </div>
-            <div class="bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center items-center text-center rounded m-4" v-for="project in projects">
+            <!-- Projects list -->
+            <div v-for="project in projects" class="bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center items-center text-center rounded m-4">
                 <span class="w-full h-16">
                     <i class="fa fa-ellipsis-h float-right pr-4 pt-2 text-grey-darker cursor-pointer"></i>
                 </span>

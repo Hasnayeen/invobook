@@ -1,92 +1,82 @@
 <template>
-    <div class="user-profile">
-        <div class="avatar-section">
-            <div class="main-avatar">
-                <img src="/image/avatar-profile.png" alt="Default avatar">
+    <div class="flex flex-col bg-white mx-auto my-8 p-8 max-w-md shadow rounded">
+        <div class="flex flex-col items-center">
+            <img src="/image/avatar-profile.png" :alt="'Default avatar of ' + user.name" class="w-32 h-32 rounded-full">
+            <div class="text-grey-darker text-2xl font-semibold py-4">
+                {{user.name}}
             </div>
-            <div class="change-avatar">
-                <input type="file" name="file" id="change-avatar-file" class="inputfile" />
-                <label for="change-avatar-file">Change your avatar</label>
+            <div class="">
+                <input type="file" name="file" id="select-file" class="hidden" />
+                <button class="bg-transparent text-grey-darker hover:text-teal py-2 px-4 border border-grey-light hover:border-teal rounded">Change Your Avatar</button>
             </div>
         </div>
-        <div class="inputs-section">
-
-            <div class="field">
-                <label class="label">Name <span class="required">required</span></label>
-                <p class="control">
-                    <input class="input" type="text" placeholder="">
-                </p>
+        <form class="px-8 pt-6">
+            <div class="mb-4">
+                <label class="block text-grey-darker text-sm font-bold mb-2" for="username">
+                    Name
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="username" type="text" placeholder="Nehal Hasnayeen">
             </div>
-
-            <div class="field">
-                <label class="label">Title at Goodwork</label>
-                <p class="control">
-                    <input class="input" type="text" placeholder="">
-                </p>
+            <div class="mb-4">
+                <label class="block text-grey-darker text-sm font-bold mb-2" for="title">
+                    Title at Goodwork
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="title" type="text" placeholder="Developer">
             </div>
-
-            <div class="field">
-                <label class="label">Short bio</label>
-                <p class="control">
-                    <input class="input" type="text" placeholder="">
-                </p>
+            <div class="mb-4">
+                <label class="block text-grey-darker text-sm font-bold mb-2" for="title">
+                    Short Bio
+                </label>
+                <textarea class="shadow appearance-none resize-none border rounded w-full py-2 px-3 text-grey-darker" id="bio" type="text" rows="3" placeholder="About Yourself"></textarea>
             </div>
-
-            <div class="field">
-                <label class="label">Email <span class="required">required</span></label>
-                <p class="control">
-                    <input class="input" type="email" placeholder="">
-                </p>
+            <div class="mb-4">
+                <label class="block text-grey-darker text-sm font-bold mb-2" for="timezone">
+                    Time Zone
+                </label>
+                <div class="relative">
+                    <select class="shadow appearance-none border rounded w-full px-3 py-2 text-grey-darker bg-grey-lighter text-grey-darker" id="grid-state">
+                        <option>Asia/Dhaka (+6)</option>
+                        <option>Missouri</option>
+                        <option>Texas</option>
+                    </select>
+                    <div class="pointer-events-none absolute pin-y pin-r flex items-center px-2 text-grey-darker">
+                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                    </div>
+                </div>
             </div>
-
-            <div class="field">
-                <label class="label">Time zone</label>
-                <p class="help">Goodwork uses your time zone setings for email notification, event reminders and your schedule.</p>
-                <p class="control">
-                    <span class="select is-fullwidth">
-                        <select>
-                            <option>Australia UTC +10:30</option>
-                            <option>Australia UTC +9:30</option>
-                            <option>South America UTC -5</option>
-                            <option>Australia UTC +9:30 / +10:30</option>
-                            <option>Australia UTC +8:45</option>
-                            <option>Asia UTC +3</option>
-                        </select>
-                    </span>
-                </p>
+            <div class="mb-4">
+                <label class="block text-grey-darker text-sm font-bold mb-2" for="weekstart">
+                    First Day of the Week
+                </label>
+                <div class="relative">
+                    <select class="shadow appearance-none border rounded w-full px-3 py-2 text-grey-darker bg-grey-lighter text-grey-darker" id="weekstart">
+                        <option>Saturday</option>
+                        <option>Sunday</option>
+                        <option>Monday</option>
+                    </select>
+                    <div class="pointer-events-none absolute pin-y pin-r flex items-center px-2 text-grey-darker">
+                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                    </div>
+                </div>
             </div>
-
-            <div class="field">
-                <label class="label">First day of the week</label>
-                <p class="help">Goodwork uses this when presenting calendars.</p>
-                <p class="control">
-                    <span class="select is-fullwidth">
-                        <select>
-                            <option>Monday</option>
-                            <option>Tuesday</option>
-                            <option>Wednesday</option>
-                            <option>Thursday</option>
-                            <option>Friday</option>
-                            <option>Saturday</option>
-                            <option>Sunday</option>
-                        </select>
-                    </span>
-                </p>
+            <div class="mt-8">
+                <button class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded" type="button">
+                    Save
+                </button>
             </div>
-
-            <div class="field">
-                <p class="control">
-                    <button class="button is-primary">Save Changes</button>
-                </p>
+            <div class="mt-4">
+                <a class="font-bold text-sm text-red-lighter hover:text-red no-underline" href="#">
+                    Delete account
+                </a>
             </div>
-
-            <div class="field user-remove-me">
-                <label class="label">Want to leave?</label>
-                <p class="control">
-                    <a href="#">Remove me from this account.</a>
-                </p>
-            </div>
-
-        </div>
+        </form>
     </div>
 </template>
+
+<script>
+export default {
+    data: () => ({
+        user: navbar.user
+    }),
+}
+</script>
