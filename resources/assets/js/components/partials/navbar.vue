@@ -6,46 +6,72 @@
 
         <div class="flex flex-row border-l">
             <div class="px-4 self-center">
-                <a class="text-teal-light text-base no-underline" href="#" @click="showNotification" v-bind:class="[hideNotificationList == false ? 'active' : '']">
-                    <i class="fa fa-bell-o font-bold" aria-hidden="true"></i>
-                </a>
-                <div class="hidden absolute" v-bind:class="{ 'is-hidden-tablet': hideNotificationList }">
-                    <div class="card">
-                        <div class="card-content-item">
-                            <a href="#">
-                                <div class="icon">
-                                    <i class="fa fa-user-circle-o"></i>
-                                </div>
-                                <div class="notify-content">
-                                    <strong>John Doe</strong> created a new task <br>
-                                    <span>15 minutes ago</span>
-                                </div>
-                            </a>
-                        </div> <!-- ./card-content-item -->
-                        
-                    </div> <!-- ./card -->
-                    <a href="#">View All</a>
+                <div id="notification" class="text-teal-light text-base no-underline cursor-pointer" @click="toggleNotification">
+                    <i class="fa fa-bell-o font-bold text-xl" aria-hidden="true"></i>
+                    <i v-if="unreadNotification" class="fa fa-circle text-red-light text-sm absolute pin-t mt-3 ml-3" aria-hidden="true"></i>
+                </div>
+                <div v-if="notificationShown" class="absolute bg-white w-64 mt-6 mr-8 py-4 shadow-lg rounded" style="right: 5%;">
+                    <a class="flex flex-row items-center list-reset px-4 py-2 text-grey-dark no-underline block" href="#">
+                        <img class="w-10 h-10 rounded-full mr-2" :src="avatar">
+                        <div>
+                            <div class="py-1 text-sm">
+                                commented on your post
+                            </div>
+                            <div class="py-1 text-xs">
+                                2 min ago
+                            </div>
+                        </div>
+                    </a>
+                    <a class="flex flex-row items-center list-reset px-4 py-2 text-grey-dark no-underline block" href="#">
+                        <img class="w-10 h-10 rounded-full mr-2" :src="avatar">
+                        <div>
+                            <div class="py-1 text-sm">
+                                commented on your post
+                            </div>
+                            <div class="py-1 text-xs">
+                                2 min ago
+                            </div>
+                        </div>
+                    </a>
+                    <span class="block border-t"></span>
+                    <a class="list-reset px-4 pt-2 text-blue-light text-center no-underline block" href="/notifications">
+                        View All
+                    </a>
                 </div>
             </div>
 
-            <div class="px-4 border-l flex items-center cursor-pointer" @click="showMenus">
-                <img class="w-8 rounded-full mr-2" :src="avatar">
-                <span class="text-grey-darker text-base no-underline">
-                    {{ user.name }}
-                    <i class="fa fa-angle-down" aria-hidden="true"></i>
-                </span>
-                <div id="profile-menu" class="hidden absolute bg-white w-32 pin-r mr-2 py-2 shadow-lg rounded" style="top:3.5rem;">
-                    <a class="list-reset px-4 py-2 text-grey-dark no-underline block" :href="profileUrl">Your profile</a>
-                    <a class="list-reset px-4 py-2 text-grey-dark no-underline block" href="#">Help</a>
-                    <a class="list-reset px-4 py-2 text-grey-dark no-underline block" href="#">Settings</a>
+            <div class="px-4 border-l flex items-center cursor-pointer">
+                <div id="profile-dropdown" class="flex flex-row items-center" @click="toggleProfileDropdown">
+                    <img class="w-10 h-10 rounded-full mr-2" :src="avatar">
+                    <span class="text-grey-darker text-base no-underline">
+                        {{ user.name }}
+                        <i class="fa fa-angle-down" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div v-if="profileDropdownShown" id="profile-menu" class="absolute bg-white w-48 pin-r mr-2 py-2 shadow-lg rounded" style="top:3.5rem;">
+                    <a class="list-reset px-4 py-2 text-teal-light font-semibold no-underline block" :href="profileUrl">
+                        <i class="text-teal-light w-6 fa fa-user"></i>
+                        Your profile
+                    </a>
+                    <a class="list-reset px-4 py-2 text-teal-light font-semibold no-underline block" href="#">
+                        <i class="text-teal-light w-6 fa fa-question"></i>
+                        Help
+                    </a>
+                    <a class="list-reset px-4 py-2 text-teal-light font-semibold no-underline block" href="#">
+                        <i class="text-teal-light w-6 fa fa-cog"></i>
+                        Settings
+                    </a>
                     <span class="block border-t"></span>
-                    <a class="list-reset px-4 py-2 text-grey-dark no-underline block" :href="url.logout" @click="logoutUser">Logout</a>
+                    <a class="list-reset px-4 py-2 text-teal-light font-semibold no-underline block" :href="url.logout" @click="logoutUser">
+                        <i class="text-teal-light w-6 fa fa-sign-out"></i>
+                        Logout
+                    </a>
                 </div>            
                 <form id="logout-form" :action="url.logout" method="POST" style="display: none;">
                     <input type="hidden" name="_token" :value="token">
                 </form>
             </div>
-        </div> <!-- ./nav-right -->
+        </div>
     </nav>
 </template>
 
@@ -56,23 +82,58 @@
             token: Laravel.csrfToken,
             url: navbar.navUrl,
             avatar: '',
-            hideNotificationList: true,
-            profileUrl: navbar.navUrl.site + '/users/' + navbar.user.id
+            profileUrl: navbar.navUrl.site + '/users/' + navbar.user.id,
+            notificationShown: false,
+            unreadNotification: false,
+            profileDropdownShown: false,
         }),
         methods: {
             logoutUser(event){
                 event.preventDefault();
                 document.getElementById('logout-form').submit();
             },
-            showMenus(event){
-                document.getElementById('profile-menu').classList.remove('hidden');
+            toggleProfileDropdown (event) {
+                if (this.profileDropdownShown) {
+                    this.hideProfileDropdown(event);
+                    document.body.removeEventListener('keyup', this.hideProfileDropdown);
+                } else {
+                    this.showProfileDropdown();
+                    document.body.addEventListener('keyup', this.hideProfileDropdown);
+                }
             },
-            showNotification(event){
-                event.preventDefault();
-                event.stopPropagation();
-                this.hideSubMenu = true; //Hide profile sub menu on click
-                this.hideNotificationList = !this.hideNotificationList;
-            }
+            showProfileDropdown (event) {
+                if (this.notificationShown) {
+                    this.notificationShown = false;
+                }
+                this.profileDropdownShown = true;
+            },
+            hideProfileDropdown (event) {
+                if (event.type === 'keyup' && event.key !== 'Escape') {
+                    return false;
+                }
+                this.profileDropdownShown = false;
+            },
+            toggleNotification (event) {
+                if (this.notificationShown) {
+                    document.body.removeEventListener('keyup', this.hideNotification);
+                    this.hideNotification(event);
+                } else {
+                    document.body.addEventListener('keyup', this.hideNotification);
+                    this.showNotification();
+                }
+            },
+            showNotification (event) {
+                if (this.profileDropdownShown) {
+                    this.profileDropdownShown = false;
+                }
+                this.notificationShown = true;
+            },
+            hideNotification (event) {
+                if (event.type === 'keyup' && event.key !== 'Escape') {
+                    return false;
+                }
+                this.notificationShown = false;
+            },
         },
         created(){
             if( this.user.avatar == null || this.user.avatar == '' ){
