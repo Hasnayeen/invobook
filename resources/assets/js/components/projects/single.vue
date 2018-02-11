@@ -5,12 +5,12 @@
             <p class="text-base">December 5, 2017 - December 13, 2017</p>
         </div>
         <div class="flex flex-row flex-wrap justify-center">
-            <taskBoard></taskBoard>
-            <discussionBoard></discussionBoard>
-            <messageBoard></messageBoard>
-            <schedule></schedule>
-            <files></files>
-            <activity></activity>
+            <taskBoard :project="project"></taskBoard>
+            <discussionBoard :project="project"></discussionBoard>
+            <messageBoard :project="project"></messageBoard>
+            <schedule :project="project"></schedule>
+            <files :project="project"></files>
+            <activity :project="project"></activity>
         </div>
     </div>
 </template>
@@ -26,6 +26,7 @@ import activity from './../partials/projects/activity.vue'
     export default {
         components: {
             taskBoard, discussionBoard, messageBoard, schedule, files, activity
-        }
+        },
+        props: ['project'],
     }
 </script>
