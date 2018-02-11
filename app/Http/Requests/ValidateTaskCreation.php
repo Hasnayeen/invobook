@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreTask extends FormRequest
+class ValidateTaskCreation extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,8 +26,9 @@ class StoreTask extends FormRequest
         return [
             'title'         => 'required|unique:tasks|max:255',
             'assigned_to'   => 'nullable|exists:users,id',
-            'notes'         => 'required',
-            'due_on'        => 'required|date',
+            'notes'         => 'string',
+            'due_on'        => 'required|date_format:Y-m-d',
+            'related_to'    => 'nullable|string',
             'taskable_type' => 'required',
             'taskable_id'   => 'required',
         ];

@@ -48,9 +48,9 @@ class ProjectController extends Controller
     }
 
     //View for task borard
-    public function tasks()
+    public function tasks(Project $project)
     {
-        return view('projects.tasks');
+        return view('projects.tasks', ['project' => $project]);
     }
 
     public function getAllMessages($project)

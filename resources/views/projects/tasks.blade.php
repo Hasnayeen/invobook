@@ -2,7 +2,7 @@
 
 @slot('title') All task of this projects @endslot
 
-<tasks></tasks>
+<tasks :project="{{ $project }}"></tasks>
 
 @slot('script')
 <script src="/js/projects/tasks.js"></script>
