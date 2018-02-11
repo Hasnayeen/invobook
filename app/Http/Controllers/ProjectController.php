@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
 use App\Services\MessageService;
 use App\Services\ProjectService;
 use App\Http\Requests\StoreMessageRequest;
@@ -41,9 +42,9 @@ class ProjectController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function single()
+    public function single(Project $project)
     {
-        return view('projects.single');
+        return view('projects.single', ['project' => $project]);
     }
 
     //View for task borard

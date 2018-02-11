@@ -14710,7 +14710,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     components: {
         taskBoard: __WEBPACK_IMPORTED_MODULE_0__partials_projects_taskBoard_vue___default.a, discussionBoard: __WEBPACK_IMPORTED_MODULE_1__partials_projects_discussionBoard_vue___default.a, messageBoard: __WEBPACK_IMPORTED_MODULE_2__partials_projects_messageBoard_vue___default.a, schedule: __WEBPACK_IMPORTED_MODULE_3__partials_projects_schedule_vue___default.a, files: __WEBPACK_IMPORTED_MODULE_4__partials_projects_files_vue___default.a, activity: __WEBPACK_IMPORTED_MODULE_5__partials_projects_activity_vue___default.a
-    }
+    },
+    props: ['project']
 });
 
 /***/ }),
@@ -14762,8 +14763,10 @@ module.exports = Component.exports
 
 /***/ }),
 /* 75 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
@@ -14806,6 +14809,10 @@ module.exports = Component.exports
 //
 //
 //
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['project']
+});
 
 /***/ }),
 /* 76 */
@@ -14815,125 +14822,119 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    {
+      staticClass:
+        "bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center text-center rounded m-4"
+    },
+    [
+      _c("header", { staticClass: "w-full relative border-b h-12 pt-4" }, [
+        _c(
+          "a",
+          {
+            staticClass: "text-grey-darker font-medium no-underline",
+            attrs: { href: "/projects/" + _vm.project.slug + "/tasks" }
+          },
+          [_vm._v("\n            Tasks\n        ")]
+        ),
+        _vm._v(" "),
+        _vm._m(0)
+      ]),
+      _vm._v(" "),
+      _vm._m(1)
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center text-center rounded m-4"
-      },
-      [
-        _c("header", { staticClass: "w-full relative border-b h-12 pt-4" }, [
-          _c(
-            "a",
-            {
-              staticClass: "text-grey-darker font-medium no-underline",
-              attrs: { href: "#" }
-            },
-            [_vm._v("\n            Tasks\n        ")]
-          ),
+    return _c("span", { staticClass: "text-grey-darker absolute pin-r mr-2" }, [
+      _c("i", { staticClass: "fa fa-ellipsis-h" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "w-full h-48 self-start" }, [
+      _c(
+        "a",
+        {
+          staticClass: "flex flex-row p-4 no-underline items-center",
+          attrs: { href: "#" }
+        },
+        [
+          _c("input", {
+            staticClass:
+              "bg-white rounded appearance-none border border-grey w-4 h-4",
+            attrs: { type: "checkbox", name: "", id: "" }
+          }),
           _vm._v(" "),
-          _c("span", { staticClass: "text-grey-darker absolute pin-r mr-2" }, [
-            _c("i", { staticClass: "fa fa-ellipsis-h" })
+          _c("div", { staticClass: "w-4/5 text-grey-dark text-left pl-2" }, [
+            _c("p", { staticClass: "text-base" }, [
+              _vm._v("Lorem ipsum dolor st..")
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "text-sm" }, [
+              _vm._v("\n                    John Smith\n                ")
+            ])
           ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "w-full h-48 self-start" }, [
-          _c(
-            "a",
-            {
-              staticClass: "flex flex-row p-4 no-underline items-center",
-              attrs: { href: "#" }
-            },
-            [
-              _c("input", {
-                staticClass:
-                  "bg-white rounded appearance-none border border-grey w-4 h-4",
-                attrs: { type: "checkbox", name: "", id: "" }
-              }),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "w-4/5 text-grey-dark text-left pl-2" },
-                [
-                  _c("p", { staticClass: "text-base" }, [
-                    _vm._v("Lorem ipsum dolor st..")
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "text-sm" }, [
-                    _vm._v("\n                    John Smith\n                ")
-                  ])
-                ]
-              )
-            ]
-          ),
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "flex flex-row p-4 no-underline items-center",
+          attrs: { href: "#" }
+        },
+        [
+          _c("input", {
+            staticClass:
+              "bg-white rounded appearance-none border border-grey w-4 h-4",
+            attrs: { type: "checkbox", name: "", id: "" }
+          }),
           _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "flex flex-row p-4 no-underline items-center",
-              attrs: { href: "#" }
-            },
-            [
-              _c("input", {
-                staticClass:
-                  "bg-white rounded appearance-none border border-grey w-4 h-4",
-                attrs: { type: "checkbox", name: "", id: "" }
-              }),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "w-4/5 text-grey-dark text-left pl-2" },
-                [
-                  _c("p", { staticClass: "text-base" }, [
-                    _vm._v("Lorem ipsum dolor st..")
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "text-sm" }, [
-                    _vm._v("\n                    John Smith\n                ")
-                  ])
-                ]
-              )
-            ]
-          ),
+          _c("div", { staticClass: "w-4/5 text-grey-dark text-left pl-2" }, [
+            _c("p", { staticClass: "text-base" }, [
+              _vm._v("Lorem ipsum dolor st..")
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "text-sm" }, [
+              _vm._v("\n                    John Smith\n                ")
+            ])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "flex flex-row p-4 no-underline items-center",
+          attrs: { href: "#" }
+        },
+        [
+          _c("input", {
+            staticClass:
+              "bg-white rounded appearance-none border border-grey w-4 h-4",
+            attrs: { type: "checkbox", name: "", id: "" }
+          }),
           _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "flex flex-row p-4 no-underline items-center",
-              attrs: { href: "#" }
-            },
-            [
-              _c("input", {
-                staticClass:
-                  "bg-white rounded appearance-none border border-grey w-4 h-4",
-                attrs: { type: "checkbox", name: "", id: "" }
-              }),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "w-4/5 text-grey-dark text-left pl-2" },
-                [
-                  _c("p", { staticClass: "text-base" }, [
-                    _vm._v("Lorem ipsum dolor st..")
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "text-sm" }, [
-                    _vm._v("\n                    John Smith\n                ")
-                  ])
-                ]
-              )
-            ]
-          )
-        ])
-      ]
-    )
+          _c("div", { staticClass: "w-4/5 text-grey-dark text-left pl-2" }, [
+            _c("p", { staticClass: "text-base" }, [
+              _vm._v("Lorem ipsum dolor st..")
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "text-sm" }, [
+              _vm._v("\n                    John Smith\n                ")
+            ])
+          ])
+        ]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -14994,8 +14995,10 @@ module.exports = Component.exports
 
 /***/ }),
 /* 78 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
@@ -15038,6 +15041,10 @@ module.exports = Component.exports
 //
 //
 //
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['project']
+});
 
 /***/ }),
 /* 79 */
@@ -15047,128 +15054,113 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    {
+      staticClass:
+        "bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center text-center rounded m-4"
+    },
+    [
+      _c("header", { staticClass: "w-full relative border-b h-12 pt-4" }, [
+        _c(
+          "a",
+          {
+            staticClass: "text-grey-darker font-medium no-underline",
+            attrs: { href: "/projects/" + _vm.project.slug + "/discussions" }
+          },
+          [_vm._v("\n            Discussions\n        ")]
+        ),
+        _vm._v(" "),
+        _vm._m(0)
+      ]),
+      _vm._v(" "),
+      _vm._m(1)
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center text-center rounded m-4"
-      },
-      [
-        _c("header", { staticClass: "w-full relative border-b h-12 pt-4" }, [
-          _c(
-            "a",
-            {
-              staticClass: "text-grey-darker font-medium no-underline",
-              attrs: { href: "#" }
-            },
-            [_vm._v("\n            Discussions\n        ")]
-          ),
+    return _c("span", { staticClass: "text-grey-darker absolute pin-r mr-2" }, [
+      _c("i", { staticClass: "fa fa-ellipsis-h" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "w-full h-48 self-start" }, [
+      _c(
+        "a",
+        { staticClass: "flex flex-row p-4 no-underline", attrs: { href: "#" } },
+        [
+          _c("img", {
+            staticClass: "rounded-full",
+            attrs: { src: "http://placehold.it/34x34" }
+          }),
           _vm._v(" "),
-          _c("span", { staticClass: "text-grey-darker absolute pin-r mr-2" }, [
-            _c("i", { staticClass: "fa fa-ellipsis-h" })
+          _c("div", { staticClass: "w-4/5 text-grey-dark text-left pl-2" }, [
+            _c("p", {}, [
+              _c("strong", [_vm._v("John Smith")]),
+              _vm._v(" "),
+              _c("span", { staticClass: "text-xs" }, [_vm._v("11:03am")])
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "text-sm" }, [
+              _vm._v("Lorem ipsum dolor st..")
+            ])
           ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "w-full h-48 self-start" }, [
-          _c(
-            "a",
-            {
-              staticClass: "flex flex-row p-4 no-underline",
-              attrs: { href: "#" }
-            },
-            [
-              _c("img", {
-                staticClass: "rounded-full",
-                attrs: { src: "http://placehold.it/34x34" }
-              }),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "w-4/5 text-grey-dark text-left pl-2" },
-                [
-                  _c("p", {}, [
-                    _c("strong", [_vm._v("John Smith")]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "text-xs" }, [_vm._v("11:03am")])
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "text-sm" }, [
-                    _vm._v("Lorem ipsum dolor st..")
-                  ])
-                ]
-              )
-            ]
-          ),
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        { staticClass: "flex flex-row p-4 no-underline", attrs: { href: "#" } },
+        [
+          _c("img", {
+            staticClass: "rounded-full",
+            attrs: { src: "http://placehold.it/34x34" }
+          }),
           _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "flex flex-row p-4 no-underline",
-              attrs: { href: "#" }
-            },
-            [
-              _c("img", {
-                staticClass: "rounded-full",
-                attrs: { src: "http://placehold.it/34x34" }
-              }),
+          _c("div", { staticClass: "w-4/5 text-grey-dark text-left pl-2" }, [
+            _c("p", {}, [
+              _c("strong", [_vm._v("John Smith")]),
               _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "w-4/5 text-grey-dark text-left pl-2" },
-                [
-                  _c("p", {}, [
-                    _c("strong", [_vm._v("John Smith")]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "text-xs" }, [_vm._v("11:03am")])
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "text-sm" }, [
-                    _vm._v("Lorem ipsum dolor st..")
-                  ])
-                ]
-              )
-            ]
-          ),
+              _c("span", { staticClass: "text-xs" }, [_vm._v("11:03am")])
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "text-sm" }, [
+              _vm._v("Lorem ipsum dolor st..")
+            ])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        { staticClass: "flex flex-row p-4 no-underline", attrs: { href: "#" } },
+        [
+          _c("img", {
+            staticClass: "rounded-full",
+            attrs: { src: "http://placehold.it/34x34" }
+          }),
           _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "flex flex-row p-4 no-underline",
-              attrs: { href: "#" }
-            },
-            [
-              _c("img", {
-                staticClass: "rounded-full",
-                attrs: { src: "http://placehold.it/34x34" }
-              }),
+          _c("div", { staticClass: "w-4/5 text-grey-dark text-left pl-2" }, [
+            _c("p", {}, [
+              _c("strong", [_vm._v("John Smith")]),
               _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "w-4/5 text-grey-dark text-left pl-2" },
-                [
-                  _c("p", {}, [
-                    _c("strong", [_vm._v("John Smith")]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "text-xs" }, [_vm._v("11:03am")])
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "text-sm" }, [
-                    _vm._v("Lorem ipsum dolor st..")
-                  ])
-                ]
-              )
-            ]
-          )
-        ])
-      ]
-    )
+              _c("span", { staticClass: "text-xs" }, [_vm._v("11:03am")])
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "text-sm" }, [
+              _vm._v("Lorem ipsum dolor st..")
+            ])
+          ])
+        ]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -15229,8 +15221,10 @@ module.exports = Component.exports
 
 /***/ }),
 /* 81 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
@@ -15273,6 +15267,10 @@ module.exports = Component.exports
 //
 //
 //
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['project']
+});
 
 /***/ }),
 /* 82 */
@@ -15282,128 +15280,116 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    {
+      staticClass:
+        "bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center text-center rounded m-4"
+    },
+    [
+      _c("header", { staticClass: "w-full relative border-b h-12 pt-4" }, [
+        _c(
+          "a",
+          {
+            staticClass: "text-grey-darker font-medium no-underline",
+            attrs: { href: "/projects/" + _vm.project.slug + "/messages" }
+          },
+          [_vm._v("\n            Messages\n        ")]
+        ),
+        _vm._v(" "),
+        _vm._m(0)
+      ]),
+      _vm._v(" "),
+      _vm._m(1)
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center text-center rounded m-4"
-      },
-      [
-        _c("header", { staticClass: "w-full relative border-b h-12 pt-4" }, [
-          _c(
-            "a",
-            {
-              staticClass: "text-grey-darker font-medium no-underline",
-              attrs: { href: "#" }
-            },
-            [_vm._v("\n            Messages\n        ")]
-          ),
+    return _c("span", { staticClass: "text-grey-darker absolute pin-r mr-2" }, [
+      _c("i", { staticClass: "fa fa-ellipsis-h" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "w-full h-48 self-start" }, [
+      _c(
+        "a",
+        {
+          staticClass: "flex flex-row items-center p-4 no-underline",
+          attrs: { href: "#" }
+        },
+        [
+          _c("img", {
+            staticClass: "rounded-full mr-2",
+            attrs: { src: "http://placehold.it/34x34" }
+          }),
           _vm._v(" "),
-          _c("span", { staticClass: "text-grey-darker absolute pin-r mr-2" }, [
-            _c("i", { staticClass: "fa fa-ellipsis-h" })
+          _c("div", { staticClass: "w-4/5 text-grey-dark text-left pl-2" }, [
+            _c("p", {}, [
+              _c("span", { staticClass: "text-xs" }, [_vm._v("5 min ago")])
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "text-sm" }, [
+              _vm._v("Lorem ipsum dolor st..")
+            ])
           ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "w-full h-48 self-start" }, [
-          _c(
-            "a",
-            {
-              staticClass: "flex flex-row items-center p-4 no-underline",
-              attrs: { href: "#" }
-            },
-            [
-              _c("img", {
-                staticClass: "rounded-full mr-2",
-                attrs: { src: "http://placehold.it/34x34" }
-              }),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "w-4/5 text-grey-dark text-left pl-2" },
-                [
-                  _c("p", {}, [
-                    _c("span", { staticClass: "text-xs" }, [
-                      _vm._v("5 min ago")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "text-sm" }, [
-                    _vm._v("Lorem ipsum dolor st..")
-                  ])
-                ]
-              )
-            ]
-          ),
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "flex flex-row items-center p-4 no-underline",
+          attrs: { href: "#" }
+        },
+        [
+          _c("img", {
+            staticClass: "rounded-full mr-2",
+            attrs: { src: "http://placehold.it/34x34" }
+          }),
           _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "flex flex-row items-center p-4 no-underline",
-              attrs: { href: "#" }
-            },
-            [
-              _c("img", {
-                staticClass: "rounded-full mr-2",
-                attrs: { src: "http://placehold.it/34x34" }
-              }),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "w-4/5 text-grey-dark text-left pl-2" },
-                [
-                  _c("p", {}, [
-                    _c("span", { staticClass: "text-xs" }, [
-                      _vm._v("5 min ago")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "text-sm" }, [
-                    _vm._v("Lorem ipsum dolor st..")
-                  ])
-                ]
-              )
-            ]
-          ),
+          _c("div", { staticClass: "w-4/5 text-grey-dark text-left pl-2" }, [
+            _c("p", {}, [
+              _c("span", { staticClass: "text-xs" }, [_vm._v("5 min ago")])
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "text-sm" }, [
+              _vm._v("Lorem ipsum dolor st..")
+            ])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "flex flex-row items-center p-4 no-underline",
+          attrs: { href: "#" }
+        },
+        [
+          _c("img", {
+            staticClass: "rounded-full mr-2",
+            attrs: { src: "http://placehold.it/34x34" }
+          }),
           _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "flex flex-row items-center p-4 no-underline",
-              attrs: { href: "#" }
-            },
-            [
-              _c("img", {
-                staticClass: "rounded-full mr-2",
-                attrs: { src: "http://placehold.it/34x34" }
-              }),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "w-4/5 text-grey-dark text-left pl-2" },
-                [
-                  _c("p", {}, [
-                    _c("span", { staticClass: "text-xs" }, [
-                      _vm._v("5 min ago")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "text-sm" }, [
-                    _vm._v("Lorem ipsum dolor st..")
-                  ])
-                ]
-              )
-            ]
-          )
-        ])
-      ]
-    )
+          _c("div", { staticClass: "w-4/5 text-grey-dark text-left pl-2" }, [
+            _c("p", {}, [
+              _c("span", { staticClass: "text-xs" }, [_vm._v("5 min ago")])
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "text-sm" }, [
+              _vm._v("Lorem ipsum dolor st..")
+            ])
+          ])
+        ]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -15464,8 +15450,10 @@ module.exports = Component.exports
 
 /***/ }),
 /* 84 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
@@ -15503,6 +15491,10 @@ module.exports = Component.exports
 //
 //
 //
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['project']
+});
 
 /***/ }),
 /* 85 */
@@ -15512,80 +15504,86 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    {
+      staticClass:
+        "bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center text-center rounded m-4"
+    },
+    [
+      _c("header", { staticClass: "w-full relative border-b h-12 pt-4" }, [
+        _c(
+          "a",
+          {
+            staticClass: "text-grey-darker font-medium no-underline",
+            attrs: { href: "/projects/" + _vm.project.slug + "/schedules" }
+          },
+          [_vm._v("\n            Schedules\n        ")]
+        ),
+        _vm._v(" "),
+        _vm._m(0)
+      ]),
+      _vm._v(" "),
+      _vm._m(1)
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center text-center rounded m-4"
-      },
-      [
-        _c("header", { staticClass: "w-full relative border-b h-12 pt-4" }, [
-          _c(
-            "a",
-            {
-              staticClass: "text-grey-darker font-medium no-underline",
-              attrs: { href: "#" }
-            },
-            [_vm._v("\n            Schedules\n        ")]
-          ),
-          _vm._v(" "),
-          _c("span", { staticClass: "text-grey-darker absolute pin-r mr-2" }, [
-            _c("i", { staticClass: "fa fa-ellipsis-h" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "w-full h-48 self-start" }, [
-          _c("div", { staticClass: "px-2 py-4" }, [
-            _c(
-              "a",
-              {
-                staticClass: "no-underline text-grey-dark text-lg",
-                attrs: { href: "#" }
-              },
-              [
-                _c("span", [
-                  _c("i", {
-                    staticClass: "fa fa-calendar",
-                    attrs: { "aria-hidden": "true" }
-                  }),
-                  _vm._v("\n                    25 Feb, 2017\n                ")
-                ]),
-                _vm._v(" "),
-                _c("p", [_c("span", [_vm._v("Review Meeting")])])
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "px-2 py-4" }, [
-            _c(
-              "a",
-              {
-                staticClass: "no-underline text-grey-dark text-lg",
-                attrs: { href: "#" }
-              },
-              [
-                _c("span", [
-                  _c("i", {
-                    staticClass: "fa fa-calendar",
-                    attrs: { "aria-hidden": "true" }
-                  }),
-                  _vm._v("\n                    26 Feb, 2017\n                ")
-                ]),
-                _vm._v(" "),
-                _c("p", [_c("span", [_vm._v("Landing Page Release")])])
-              ]
-            )
-          ])
-        ])
-      ]
-    )
+    return _c("span", { staticClass: "text-grey-darker absolute pin-r mr-2" }, [
+      _c("i", { staticClass: "fa fa-ellipsis-h" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "w-full h-48 self-start" }, [
+      _c("div", { staticClass: "px-2 py-4" }, [
+        _c(
+          "a",
+          {
+            staticClass: "no-underline text-grey-dark text-lg",
+            attrs: { href: "#" }
+          },
+          [
+            _c("span", [
+              _c("i", {
+                staticClass: "fa fa-calendar",
+                attrs: { "aria-hidden": "true" }
+              }),
+              _vm._v("\n                    25 Feb, 2017\n                ")
+            ]),
+            _vm._v(" "),
+            _c("p", [_c("span", [_vm._v("Review Meeting")])])
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "px-2 py-4" }, [
+        _c(
+          "a",
+          {
+            staticClass: "no-underline text-grey-dark text-lg",
+            attrs: { href: "#" }
+          },
+          [
+            _c("span", [
+              _c("i", {
+                staticClass: "fa fa-calendar",
+                attrs: { "aria-hidden": "true" }
+              }),
+              _vm._v("\n                    26 Feb, 2017\n                ")
+            ]),
+            _vm._v(" "),
+            _c("p", [_c("span", [_vm._v("Landing Page Release")])])
+          ]
+        )
+      ])
+    ])
   }
 ]
 render._withStripped = true
@@ -15646,8 +15644,10 @@ module.exports = Component.exports
 
 /***/ }),
 /* 87 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
@@ -15696,6 +15696,10 @@ module.exports = Component.exports
 //
 //
 //
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['project']
+});
 
 /***/ }),
 /* 88 */
@@ -15705,119 +15709,121 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    {
+      staticClass:
+        "bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center rounded m-4"
+    },
+    [
+      _c(
+        "header",
+        { staticClass: "w-full relative border-b h-12 pt-4 text-center" },
+        [
+          _c(
+            "a",
+            {
+              staticClass: "text-grey-darker font-medium no-underline",
+              attrs: { href: "/projects/" + _vm.project.slug + "/files" }
+            },
+            [_vm._v("\n            Files\n        ")]
+          ),
+          _vm._v(" "),
+          _vm._m(0)
+        ]
+      ),
+      _vm._v(" "),
+      _vm._m(1)
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center rounded m-4"
-      },
-      [
-        _c(
-          "header",
-          { staticClass: "w-full relative border-b h-12 pt-4 text-center" },
-          [
-            _c(
-              "a",
-              {
-                staticClass: "text-grey-darker font-medium no-underline",
-                attrs: { href: "#" }
-              },
-              [_vm._v("\n            Files\n        ")]
-            ),
+    return _c("span", { staticClass: "text-grey-darker absolute pin-r mr-2" }, [
+      _c("i", { staticClass: "fa fa-ellipsis-h" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "w-full h-48 self-start text-left" }, [
+      _c(
+        "a",
+        {
+          staticClass:
+            "flex flex-row items-center p-4 no-underline text-grey-darker",
+          attrs: { href: "#" }
+        },
+        [
+          _c("span", { staticClass: "pr-4" }, [
+            _c("i", { staticClass: "text-xl fa fa-file-image-o" })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "text-xs" }, [
+            _c("p", { staticClass: "text-base" }, [
+              _vm._v("landing-page-v.1.png")
+            ]),
             _vm._v(" "),
-            _c(
-              "span",
-              { staticClass: "text-grey-darker absolute pin-r mr-2" },
-              [_c("i", { staticClass: "fa fa-ellipsis-h" })]
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "w-full h-48 self-start text-left" }, [
-          _c(
-            "a",
-            {
-              staticClass:
-                "flex flex-row items-center p-4 no-underline text-grey-darker",
-              attrs: { href: "#" }
-            },
-            [
-              _c("span", { staticClass: "pr-4" }, [
-                _c("i", { staticClass: "text-xl fa fa-file-image-o" })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "text-xs" }, [
-                _c("p", { staticClass: "text-base" }, [
-                  _vm._v("landing-page-v.1.png")
-                ]),
-                _vm._v(" "),
-                _c("p", [
-                  _c("span", { staticClass: "text-pink" }, [_vm._v("John")]),
-                  _c("span", [_vm._v(" uploaded 15 min ago")])
-                ])
-              ])
-            ]
-          ),
+            _c("p", [
+              _c("span", { staticClass: "text-pink" }, [_vm._v("John")]),
+              _c("span", [_vm._v(" uploaded 15 min ago")])
+            ])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass:
+            "flex flex-row items-center p-4 no-underline text-grey-darker",
+          attrs: { href: "#" }
+        },
+        [
+          _c("span", { staticClass: "pr-4" }, [
+            _c("i", { staticClass: "text-xl fa fa-file-pdf-o" })
+          ]),
           _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass:
-                "flex flex-row items-center p-4 no-underline text-grey-darker",
-              attrs: { href: "#" }
-            },
-            [
-              _c("span", { staticClass: "pr-4" }, [
-                _c("i", { staticClass: "text-xl fa fa-file-pdf-o" })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "text-xs" }, [
-                _c("p", { staticClass: "text-base" }, [
-                  _vm._v("api-doc-v.1.pdf")
-                ]),
-                _vm._v(" "),
-                _c("p", [
-                  _c("span", { staticClass: "text-pink" }, [_vm._v("John")]),
-                  _c("span", [_vm._v("  uploaded 15 min ago")])
-                ])
-              ])
-            ]
-          ),
+          _c("div", { staticClass: "text-xs" }, [
+            _c("p", { staticClass: "text-base" }, [_vm._v("api-doc-v.1.pdf")]),
+            _vm._v(" "),
+            _c("p", [
+              _c("span", { staticClass: "text-pink" }, [_vm._v("John")]),
+              _c("span", [_vm._v("  uploaded 15 min ago")])
+            ])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass:
+            "flex flex-row items-center p-4 no-underline text-grey-darker",
+          attrs: { href: "#" }
+        },
+        [
+          _c("span", { staticClass: "pr-4" }, [
+            _c("i", { staticClass: "text-xl fa fa-file-text-o" })
+          ]),
           _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass:
-                "flex flex-row items-center p-4 no-underline text-grey-darker",
-              attrs: { href: "#" }
-            },
-            [
-              _c("span", { staticClass: "pr-4" }, [
-                _c("i", { staticClass: "text-xl fa fa-file-text-o" })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "text-xs" }, [
-                _c("p", { staticClass: "text-base" }, [
-                  _vm._v("features list.txt")
-                ]),
-                _vm._v(" "),
-                _c("p", [
-                  _c("span", { staticClass: "text-pink" }, [_vm._v("James")]),
-                  _c("span", [_vm._v("  uploaded 15 min ago")])
-                ])
-              ])
-            ]
-          )
-        ])
-      ]
-    )
+          _c("div", { staticClass: "text-xs" }, [
+            _c("p", { staticClass: "text-base" }, [
+              _vm._v("features list.txt")
+            ]),
+            _vm._v(" "),
+            _c("p", [
+              _c("span", { staticClass: "text-pink" }, [_vm._v("James")]),
+              _c("span", [_vm._v("  uploaded 15 min ago")])
+            ])
+          ])
+        ]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -15878,8 +15884,10 @@ module.exports = Component.exports
 
 /***/ }),
 /* 90 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
@@ -15922,6 +15930,10 @@ module.exports = Component.exports
 //
 //
 //
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['project']
+});
 
 /***/ }),
 /* 91 */
@@ -15931,110 +15943,116 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    {
+      staticClass:
+        "bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center text-center rounded m-4"
+    },
+    [
+      _c("header", { staticClass: "w-full relative border-b h-12 pt-4" }, [
+        _c(
+          "a",
+          {
+            staticClass: "text-grey-darker font-medium no-underline",
+            attrs: { href: "/projects/" + _vm.project.slug + "/activities" }
+          },
+          [_vm._v("\n            Activities\n        ")]
+        ),
+        _vm._v(" "),
+        _vm._m(0)
+      ]),
+      _vm._v(" "),
+      _vm._m(1)
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center text-center rounded m-4"
-      },
-      [
-        _c("header", { staticClass: "w-full relative border-b h-12 pt-4" }, [
-          _c(
-            "a",
-            {
-              staticClass: "text-grey-darker font-medium no-underline",
-              attrs: { href: "#" }
-            },
-            [_vm._v("\n            Activities\n        ")]
-          ),
+    return _c("span", { staticClass: "text-grey-darker absolute pin-r mr-2" }, [
+      _c("i", { staticClass: "fa fa-ellipsis-h" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "w-full h-48 self-start text-left" }, [
+      _c(
+        "a",
+        {
+          staticClass: "flex flex-row p-4 no-underline text-grey-darker",
+          attrs: { href: "#" }
+        },
+        [
+          _c("img", {
+            staticClass: "rounded-full w-8 h-8 mr-2",
+            attrs: { src: "http://placehold.it/34x34" }
+          }),
           _vm._v(" "),
-          _c("span", { staticClass: "text-grey-darker absolute pin-r mr-2" }, [
-            _c("i", { staticClass: "fa fa-ellipsis-h" })
+          _c("div", { staticClass: "text-sm" }, [
+            _c("p", [
+              _c("span", { staticClass: "text-pink" }, [_vm._v("John")]),
+              _c("span", [_vm._v(" added a new task")])
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "text-xs" }, [_vm._v("15 min ago")])
           ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "w-full h-48 self-start text-left" }, [
-          _c(
-            "a",
-            {
-              staticClass: "flex flex-row p-4 no-underline text-grey-darker",
-              attrs: { href: "#" }
-            },
-            [
-              _c("img", {
-                staticClass: "rounded-full w-8 h-8 mr-2",
-                attrs: { src: "http://placehold.it/34x34" }
-              }),
-              _vm._v(" "),
-              _c("div", { staticClass: "text-sm" }, [
-                _c("p", [
-                  _c("span", { staticClass: "text-pink" }, [_vm._v("John")]),
-                  _c("span", [_vm._v(" added a new task")])
-                ]),
-                _vm._v(" "),
-                _c("p", { staticClass: "text-xs" }, [_vm._v("15 min ago")])
-              ])
-            ]
-          ),
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "flex flex-row p-4 no-underline text-grey-darker",
+          attrs: { href: "#" }
+        },
+        [
+          _c("img", {
+            staticClass: "rounded-full w-8 h-8 mr-2",
+            attrs: { src: "http://placehold.it/34x34" }
+          }),
           _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "flex flex-row p-4 no-underline text-grey-darker",
-              attrs: { href: "#" }
-            },
-            [
-              _c("img", {
-                staticClass: "rounded-full w-8 h-8 mr-2",
-                attrs: { src: "http://placehold.it/34x34" }
-              }),
-              _vm._v(" "),
-              _c("div", { staticClass: "text-sm" }, [
-                _c("p", [
-                  _c("span", { staticClass: "text-pink" }, [_vm._v("John")]),
-                  _c("span", [_vm._v(" commented in ")]),
-                  _c("span", { staticClass: "text-pink" }, [
-                    _vm._v("Review Meeting")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("p", { staticClass: "text-xs" }, [_vm._v("20 min ago")])
+          _c("div", { staticClass: "text-sm" }, [
+            _c("p", [
+              _c("span", { staticClass: "text-pink" }, [_vm._v("John")]),
+              _c("span", [_vm._v(" commented in ")]),
+              _c("span", { staticClass: "text-pink" }, [
+                _vm._v("Review Meeting")
               ])
-            ]
-          ),
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "text-xs" }, [_vm._v("20 min ago")])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "flex flex-row p-4 no-underline text-grey-darker",
+          attrs: { href: "#" }
+        },
+        [
+          _c("img", {
+            staticClass: "rounded-full w-8 h-8 mr-2",
+            attrs: { src: "http://placehold.it/34x34" }
+          }),
           _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "flex flex-row p-4 no-underline text-grey-darker",
-              attrs: { href: "#" }
-            },
-            [
-              _c("img", {
-                staticClass: "rounded-full w-8 h-8 mr-2",
-                attrs: { src: "http://placehold.it/34x34" }
-              }),
-              _vm._v(" "),
-              _c("div", { staticClass: "text-sm" }, [
-                _c("p", [
-                  _c("span", { staticClass: "text-pink" }, [_vm._v("James")]),
-                  _c("span", [_vm._v(" archived a discussion")])
-                ]),
-                _vm._v(" "),
-                _c("p", { staticClass: "text-xs" }, [_vm._v("1 hr ago")])
-              ])
-            ]
-          )
-        ])
-      ]
-    )
+          _c("div", { staticClass: "text-sm" }, [
+            _c("p", [
+              _c("span", { staticClass: "text-pink" }, [_vm._v("James")]),
+              _c("span", [_vm._v(" archived a discussion")])
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "text-xs" }, [_vm._v("1 hr ago")])
+          ])
+        ]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -16061,17 +16079,17 @@ var render = function() {
       "div",
       { staticClass: "flex flex-row flex-wrap justify-center" },
       [
-        _c("taskBoard"),
+        _c("taskBoard", { attrs: { project: _vm.project } }),
         _vm._v(" "),
-        _c("discussionBoard"),
+        _c("discussionBoard", { attrs: { project: _vm.project } }),
         _vm._v(" "),
-        _c("messageBoard"),
+        _c("messageBoard", { attrs: { project: _vm.project } }),
         _vm._v(" "),
-        _c("schedule"),
+        _c("schedule", { attrs: { project: _vm.project } }),
         _vm._v(" "),
-        _c("files"),
+        _c("files", { attrs: { project: _vm.project } }),
         _vm._v(" "),
-        _c("activity")
+        _c("activity", { attrs: { project: _vm.project } })
       ],
       1
     )
