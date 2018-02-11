@@ -1,5 +1,6 @@
 <template>
-    <div class="column is-fullwidth tasks-list">
+    <div class="">
+        <notification-popup :message="message" @close="closeNotification" :show-notification="showNotification"></notification-popup>
         <div :class="{'hidden': !createTaskFormShown}" class="absolute container mx-auto w-1/3 bg-white rounded shadow-lg z-10" style="top: 10vh;left: 0;right: 0;">
             <div class="p-4">
                 <div class="p-4">
@@ -34,7 +35,7 @@
                 </div>
             </div>
             <div class="flex flex-row justify-between py-4 px-8 bg-grey-lighter rounded">
-                <button class="text-red-lighter hover:font-bold hover:text-red-light">Cancel</button>
+                <button @click="closeCreateTaskForm" class="text-red-lighter hover:font-bold hover:text-red-light">Cancel</button>
                 <button @click="createTask" class="bg-teal-light text-white font-medium hover:bg-teal-dark py-4 px-8 rounded">Create</button>
             </div>
         </div>
@@ -44,7 +45,7 @@
                 <a class="card-header-title has-text-centered">All Tasks</a>
             </header>
             <div>
-                <a @click.prevent="openTaskForm" class="" href="#">Create Task</a>
+                <a @click.prevent="openCreateTaskForm" class="" href="#">Create Task</a>
                 <div class="card-content-item">
                     <div class="control is-grouped">
                         <p class="control is-expanded">
@@ -81,8 +82,9 @@
 
 <script>
 import Datepicker from "vuejs-datepicker";
+import NotificationPopup from "../partials/notificationPopup.vue";
 export default {
-    components: {Datepicker},
+    components: {Datepicker, NotificationPopup},
     props: ['project'],
     data: () => ({
         createTaskFormShown: false,
@@ -90,10 +92,15 @@ export default {
         notes: '',
         assigned_to: null,
         related_to: '',
+        message: '',
+        showNotification: false,
     }),
     methods: {
-        openTaskForm () {
+        openCreateTaskForm () {
             this.createTaskFormShown = true;
+        },
+        closeCreateTaskForm () {
+            this.createTaskFormShown = false;
         },
         createTask () {
             axios.post('/tasks', {
@@ -108,15 +115,23 @@ export default {
             .then((response) => {
                 if (response.data.status == 'success') {
                     this.createTaskFormShown = false;
-                    title = this.title;
-                    notes = this.notes;
-                    assigned_to = this.assigned_to;
-                    related_to = this.related_to;
+                    this.message = 'New Task Created';
+                    this.showNotification = true;
+                    this.title = '';
+                    this.notes = '';
+                    this.assigned_to = null;
+                    this.related_to = '';
+                    setTimeout(() => {
+                        this.showNotification = false;
+                    }, 2000);
                 }
             })
             .catch((error) => {
                 console.log(error);
             });
+        },
+        closeNotification () {
+            this.showNotification = false;
         }
     }
 }
