@@ -12,7 +12,7 @@ class Task extends Model
      * @var array
      */
     protected $fillable = [
-        'title', '	assigned_to', 'notes', 'due_on', 'taskable_type', 'taskable_id',
+        'title', 'assigned_to', 'notes', 'due_on', 'taskable_type', 'taskable_id',
     ];
 
     /**
@@ -30,7 +30,7 @@ class Task extends Model
      */
     public function taskable_type()
     {
-        $taskableModel = 'App\Models\\'.ucfirst($this->taskable_type);
+        $taskableModel = 'App\Models\\' . ucfirst($this->taskable_type);
 
         return $this->belongsTo($taskableModel, 'taskable_id', 'id');
     }

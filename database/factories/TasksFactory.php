@@ -1,6 +1,5 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
 use Carbon\Carbon;
 
 $factory->define(App\Models\Task::class, function (Faker\Generator $faker) {
@@ -26,6 +25,7 @@ $factory->define(App\Models\Task::class, function (Faker\Generator $faker) {
         'assigned_to'   => factory(App\Models\User::class)->create()->id,
         'notes'         => $faker->sentence(20, true),
         'due_on'        => $faker->dateTimeBetween('now', '+5 years')->format('Y-m-d'),
+        'related_to'    => null,
         'taskable_type' => $taskable_type,
         'taskable_id'   => $taskable_id,
         'created_at'    => $now,
