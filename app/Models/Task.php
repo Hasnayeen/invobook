@@ -30,7 +30,7 @@ class Task extends Model
      */
     public function taskable_type()
     {
-        $taskableModel = 'App\Models\\' . ucfirst($this->taskable_type);
+        $taskableModel = 'App\Models\\'.ucfirst($this->taskable_type);
 
         return $this->belongsTo($taskableModel, 'taskable_id', 'id');
     }
