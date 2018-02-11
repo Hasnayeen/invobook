@@ -2917,6 +2917,10 @@ button,
   margin: 2rem;
 }
 
+.m-16 {
+  margin: 4rem;
+}
+
 .m-32 {
   margin: 8rem;
 }
@@ -2997,6 +3001,16 @@ button,
 .mx-8 {
   margin-left: 2rem;
   margin-right: 2rem;
+}
+
+.my-16 {
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+}
+
+.mx-16 {
+  margin-left: 4rem;
+  margin-right: 4rem;
 }
 
 .my-32 {
@@ -3139,6 +3153,22 @@ button,
 
 .ml-8 {
   margin-left: 2rem;
+}
+
+.mt-16 {
+  margin-top: 4rem;
+}
+
+.mr-16 {
+  margin-right: 4rem;
+}
+
+.mb-16 {
+  margin-bottom: 4rem;
+}
+
+.ml-16 {
+  margin-left: 4rem;
 }
 
 .mt-32 {
@@ -6160,6 +6190,10 @@ button,
     margin: 2rem;
   }
 
+  .sm\:m-16 {
+    margin: 4rem;
+  }
+
   .sm\:m-32 {
     margin: 8rem;
   }
@@ -6240,6 +6274,16 @@ button,
   .sm\:mx-8 {
     margin-left: 2rem;
     margin-right: 2rem;
+  }
+
+  .sm\:my-16 {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+  }
+
+  .sm\:mx-16 {
+    margin-left: 4rem;
+    margin-right: 4rem;
   }
 
   .sm\:my-32 {
@@ -6382,6 +6426,22 @@ button,
 
   .sm\:ml-8 {
     margin-left: 2rem;
+  }
+
+  .sm\:mt-16 {
+    margin-top: 4rem;
+  }
+
+  .sm\:mr-16 {
+    margin-right: 4rem;
+  }
+
+  .sm\:mb-16 {
+    margin-bottom: 4rem;
+  }
+
+  .sm\:ml-16 {
+    margin-left: 4rem;
   }
 
   .sm\:mt-32 {
@@ -9385,6 +9445,10 @@ button,
     margin: 2rem;
   }
 
+  .md\:m-16 {
+    margin: 4rem;
+  }
+
   .md\:m-32 {
     margin: 8rem;
   }
@@ -9465,6 +9529,16 @@ button,
   .md\:mx-8 {
     margin-left: 2rem;
     margin-right: 2rem;
+  }
+
+  .md\:my-16 {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+  }
+
+  .md\:mx-16 {
+    margin-left: 4rem;
+    margin-right: 4rem;
   }
 
   .md\:my-32 {
@@ -9607,6 +9681,22 @@ button,
 
   .md\:ml-8 {
     margin-left: 2rem;
+  }
+
+  .md\:mt-16 {
+    margin-top: 4rem;
+  }
+
+  .md\:mr-16 {
+    margin-right: 4rem;
+  }
+
+  .md\:mb-16 {
+    margin-bottom: 4rem;
+  }
+
+  .md\:ml-16 {
+    margin-left: 4rem;
   }
 
   .md\:mt-32 {
@@ -12610,6 +12700,10 @@ button,
     margin: 2rem;
   }
 
+  .lg\:m-16 {
+    margin: 4rem;
+  }
+
   .lg\:m-32 {
     margin: 8rem;
   }
@@ -12690,6 +12784,16 @@ button,
   .lg\:mx-8 {
     margin-left: 2rem;
     margin-right: 2rem;
+  }
+
+  .lg\:my-16 {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+  }
+
+  .lg\:mx-16 {
+    margin-left: 4rem;
+    margin-right: 4rem;
   }
 
   .lg\:my-32 {
@@ -12832,6 +12936,22 @@ button,
 
   .lg\:ml-8 {
     margin-left: 2rem;
+  }
+
+  .lg\:mt-16 {
+    margin-top: 4rem;
+  }
+
+  .lg\:mr-16 {
+    margin-right: 4rem;
+  }
+
+  .lg\:mb-16 {
+    margin-bottom: 4rem;
+  }
+
+  .lg\:ml-16 {
+    margin-left: 4rem;
   }
 
   .lg\:mt-32 {
@@ -15835,6 +15955,10 @@ button,
     margin: 2rem;
   }
 
+  .xl\:m-16 {
+    margin: 4rem;
+  }
+
   .xl\:m-32 {
     margin: 8rem;
   }
@@ -15915,6 +16039,16 @@ button,
   .xl\:mx-8 {
     margin-left: 2rem;
     margin-right: 2rem;
+  }
+
+  .xl\:my-16 {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+  }
+
+  .xl\:mx-16 {
+    margin-left: 4rem;
+    margin-right: 4rem;
   }
 
   .xl\:my-32 {
@@ -16057,6 +16191,22 @@ button,
 
   .xl\:ml-8 {
     margin-left: 2rem;
+  }
+
+  .xl\:mt-16 {
+    margin-top: 4rem;
+  }
+
+  .xl\:mr-16 {
+    margin-right: 4rem;
+  }
+
+  .xl\:mb-16 {
+    margin-bottom: 4rem;
+  }
+
+  .xl\:ml-16 {
+    margin-left: 4rem;
   }
 
   .xl\:mt-32 {
