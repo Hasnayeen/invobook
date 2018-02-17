@@ -759,6 +759,11 @@ module.exports = {
     '100': '1',
   },
 
+  modules: {
+    cursor: ['responsive', 'hover'],
+    borderWidths: ['responsive', 'hover'],
+  },
+
 
   /*
   |-----------------------------------------------------------------------------

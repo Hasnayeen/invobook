@@ -30,7 +30,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('projects/{project}', 'ProjectController@single');
 
-    Route::get('projects/{project}/tasks', 'ProjectController@tasks');
+    Route::get('projects/{project}/tasks', 'ProjectTaskController@index');
 
     Route::get('projects/{project}/messages', 'ProjectController@getAllMessages');
 

@@ -1,6 +1,8 @@
 <template>
     <div class="">
         <notification-popup :message="message" @close="closeNotification" :show-notification="showNotification"></notification-popup>
+
+        <!-- Create Task Form -->
         <div :class="{'hidden': !createTaskFormShown}" class="absolute container mx-auto w-1/3 bg-white rounded shadow-lg z-10" style="top: 10vh;left: 0;right: 0;">
             <div class="p-4">
                 <div class="p-4">
@@ -40,38 +42,22 @@
             </div>
         </div>
         <div :class="{'hidden': !createTaskFormShown}" class="h-screen w-screen fixed pin bg-grey-darkest opacity-25"></div>
-        <div class="card">
-            <header class="card-header">
-                <a class="card-header-title has-text-centered">All Tasks</a>
+
+        <!-- Task list -->
+        <div class="flex flex-col bg-white shadow container mx-auto mt-8 max-w-md rounded">
+            <button @click.prevent="openCreateTaskForm" class="no-underline float-right border p-2 m-4 mb-0 text-base text-grey-darker rounded shadow self-end">Create Task</button>
+            <header class="text-grey-darker text-2xl font-semibold text-center py-4 border-b">
+                Tasks <span class="text-base font-normal">{{ taskCompleted }}/{{ tasks.length }}</span>
             </header>
-            <div>
-                <a @click.prevent="openCreateTaskForm" class="" href="#">Create Task</a>
-                <div class="card-content-item">
-                    <div class="control is-grouped">
-                        <p class="control is-expanded">
-                            <img src="http://placehold.it/30x30" alt="Avater">
-                            <label class="checkbox">
-                                <input type="checkbox">
-                                Lorem ipsum dolor sit amet
-                            </label>
-                        </p>
-                        <p class="control">
-                            10:15
-                        </p>
-                    </div>
-                </div>
-                <div class="card-content-item">
-                    <div class="control is-grouped">
-                        <p class="control is-expanded">
-                            <img src="http://placehold.it/30x30" alt="Avater">
-                            <label class="checkbox">
-                                <input type="checkbox">
-                                Lorem ipsum dolor sit amet
-                            </label>
-                        </p>
-                        <p class="control">
-                            10:15
-                        </p>
+            <div v-for="task in tasks" class="">
+                <div class="flex flex-row items-center justify-start py-4 hover:bg-grey-lighter border-l-4 hover:border-teal border-transparent px-6 hover:cursor-pointer">
+                    <i :class="[task.completed ? 'fa-check p-0 text-teal border-teal' : 'p-2 text-grey']" class="fa border-2 text-lg mr-6"></i>
+                    <img class="rounded-full w-10" src="http://placehold.it/30x30" alt="Avater">
+                    <div class="w-3/5 ml-6 text-grey-darkest">
+                        {{ task.title }}
+                        <div class="text-sm text-grey-darker pt-1">
+                            <span class="text-xs text-grey">Due on</span> {{ task.due_on }}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -85,7 +71,7 @@ import Datepicker from "vuejs-datepicker";
 import NotificationPopup from "../partials/notificationPopup.vue";
 export default {
     components: {Datepicker, NotificationPopup},
-    props: ['project'],
+    props: ['project', 'tasks'],
     data: () => ({
         createTaskFormShown: false,
         title: '',
@@ -132,6 +118,11 @@ export default {
         },
         closeNotification () {
             this.showNotification = false;
+        }
+    },
+    computed: {
+        taskCompleted () {
+            return this.tasks.filter(task => task.completed).length;
         }
     }
 }
