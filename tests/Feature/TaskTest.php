@@ -60,7 +60,7 @@ class TaskTest extends TestCase
         ]);
         // When we visit projects tasks page
         $response = $this->actingAs($this->user)
-                         ->get('/projects/' . $project->slug . '/tasks');
+                         ->get('/projects/'.$project->slug.'/tasks');
         // Then we should see all task of that project
         $response->assertSee($tasks[0]->title);
     }
