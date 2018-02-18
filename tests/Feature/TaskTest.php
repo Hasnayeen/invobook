@@ -47,7 +47,7 @@ class TaskTest extends TestCase
             'taskable_type' => 'project',
             'taskable_id'   => $project->id,
         ]);
-        $response = $this->actingAs($this->user)->get('/projects/' . $project->slug . '/tasks');
+        $response = $this->actingAs($this->user)->get('/projects/'.$project->slug.'/tasks');
         $response->assertSee($tasks[0]->title);
     }
 }
