@@ -6,7 +6,7 @@
         </div>
 
         <!-- Add Member Form -->
-        <addMemberForm v-if="addMemberFormShown" @close="closeAddMemberForm"></addMemberForm>
+        <addMemberForm v-if="addMemberFormShown" @close="closeAddMemberForm" :project="project"></addMemberForm>
 
         <div class="h-16 flex flex-row justify-around items-center px-2">
             <span @click="showAddMemberForm" class="bg-white shadow w-12 h-12 rounded-full text-teal hover:cursor-pointer text-center">
