@@ -4,13 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use App\Repositories\UserRepository;
 use App\Mail\SendInvitationToRegister;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(UserRepository $userRepository)
     {
-        return view('home');
+        $users = $userRepository->getAllUsers();
+
+        return response()->json([
+            'status' => 'success',
+            'data'   => $users,
+        ]);
     }
 
     /**

@@ -7,8 +7,9 @@
                     Add Member
                 </label>
                 <select v-model="newMember" class="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" id="user">
+                    <option selected disabled hidden>Select User to Add</option>
                     <template v-for="user in users">
-                        <option value="">{{ user.username }}</option>
+                        <option :value="user.id" class="my-2 text-lg">{{ user.username }}</option>
                     </template>
                 </select>
                 <i class="fa fa-chevron-down pointer-events-none absolute flex items-center pin-r pin-t pr-8 mr-2 mt-16 pt-4 text-grey-darker"></i>
@@ -25,6 +26,7 @@
 
 <script>
 export default {
+    props: ['project'],
     data: () => ({
         users: [],
         newMember: null,
