@@ -40,7 +40,9 @@ class HomePageTest extends TestCase
     {
         $project = factory(Project::class)->create(['office_id' => null, 'team_id' => null]);
         $users = factory(User::class, 5)->create();
-        $project->members()->attach($users->map(function ($user) {return $user->id;}));
+        $project->members()->attach($users->map(function ($user) {
+            return $user->id;
+        }));
         $response = $this->actingAs($this->user)->get('/');
         $response->assertSee($users[0]->name)
                  ->assertSee($users[1]->name)
