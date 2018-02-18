@@ -31,8 +31,7 @@ class HomePageTest extends TestCase
 
         $response->assertStatus(200)
                  ->assertSee($projects[0]->name)
-                 ->assertViewHas('offices', $offices->toArray())
-                 ->assertViewHas('teams', $teams->toArray());
+                 ->assertSee($teams[0]->name);
     }
 
     /** @test */
