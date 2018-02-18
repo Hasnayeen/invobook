@@ -14682,6 +14682,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__partials_projects_files_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__partials_projects_files_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__partials_projects_activity_vue__ = __webpack_require__(89);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__partials_projects_activity_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__partials_projects_activity_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__partials_addMemberForm_vue__ = __webpack_require__(131);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__partials_addMemberForm_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__partials_addMemberForm_vue__);
 //
 //
 //
@@ -14699,6 +14701,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -14709,9 +14726,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     components: {
-        taskBoard: __WEBPACK_IMPORTED_MODULE_0__partials_projects_taskBoard_vue___default.a, discussionBoard: __WEBPACK_IMPORTED_MODULE_1__partials_projects_discussionBoard_vue___default.a, messageBoard: __WEBPACK_IMPORTED_MODULE_2__partials_projects_messageBoard_vue___default.a, schedule: __WEBPACK_IMPORTED_MODULE_3__partials_projects_schedule_vue___default.a, files: __WEBPACK_IMPORTED_MODULE_4__partials_projects_files_vue___default.a, activity: __WEBPACK_IMPORTED_MODULE_5__partials_projects_activity_vue___default.a
+        taskBoard: __WEBPACK_IMPORTED_MODULE_0__partials_projects_taskBoard_vue___default.a, discussionBoard: __WEBPACK_IMPORTED_MODULE_1__partials_projects_discussionBoard_vue___default.a, messageBoard: __WEBPACK_IMPORTED_MODULE_2__partials_projects_messageBoard_vue___default.a, schedule: __WEBPACK_IMPORTED_MODULE_3__partials_projects_schedule_vue___default.a, files: __WEBPACK_IMPORTED_MODULE_4__partials_projects_files_vue___default.a, activity: __WEBPACK_IMPORTED_MODULE_5__partials_projects_activity_vue___default.a, addMemberForm: __WEBPACK_IMPORTED_MODULE_6__partials_addMemberForm_vue___default.a
     },
-    props: ['project']
+    props: ['project'],
+    data: function data() {
+        return {
+            addMemberFormShown: false
+        };
+    },
+    methods: {
+        showAddMemberForm: function showAddMemberForm() {
+            this.addMemberFormShown = true;
+        },
+        closeAddMemberForm: function closeAddMemberForm() {
+            this.addMemberFormShown = false;
+        }
+    }
 });
 
 /***/ }),
@@ -16072,28 +16102,76 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container mx-auto w-3/5 mt-8" }, [
-    _vm._m(0),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "flex flex-row flex-wrap justify-center" },
-      [
-        _c("taskBoard", { attrs: { project: _vm.project } }),
-        _vm._v(" "),
-        _c("discussionBoard", { attrs: { project: _vm.project } }),
-        _vm._v(" "),
-        _c("messageBoard", { attrs: { project: _vm.project } }),
-        _vm._v(" "),
-        _c("schedule", { attrs: { project: _vm.project } }),
-        _vm._v(" "),
-        _c("files", { attrs: { project: _vm.project } }),
-        _vm._v(" "),
-        _c("activity", { attrs: { project: _vm.project } })
-      ],
-      1
-    )
-  ])
+  return _c(
+    "div",
+    { staticClass: "container mx-auto w-3/5 mt-8" },
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      _vm.addMemberFormShown
+        ? _c("addMemberForm", { on: { close: _vm.closeAddMemberForm } })
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "h-16 flex flex-row justify-around items-center px-2" },
+        [
+          _c(
+            "span",
+            {
+              staticClass:
+                "bg-white shadow w-12 h-12 rounded-full text-teal hover:cursor-pointer text-center",
+              on: { click: _vm.showAddMemberForm }
+            },
+            [_c("i", { staticClass: "fa fa-plus p-4" })]
+          ),
+          _vm._v(" "),
+          _vm._l(_vm.project.members, function(member, index) {
+            return index < 5
+              ? _c("a", { attrs: { href: "/users/" + member.username } }, [
+                  _c("img", {
+                    staticClass: "rounded-full w-8 h-8 mr-1",
+                    attrs: { src: "/image/avatar.jpg" }
+                  })
+                ])
+              : _vm._e()
+          }),
+          _vm._v(" "),
+          _vm.project.members.length > 5
+            ? _c(
+                "span",
+                {
+                  staticClass:
+                    "bg-grey-lighter border-teal border p-2 rounded-full"
+                },
+                [_vm._v(_vm._s(_vm.project.members.length - 5) + "+")]
+              )
+            : _vm._e()
+        ],
+        2
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "flex flex-row flex-wrap justify-center" },
+        [
+          _c("taskBoard", { attrs: { project: _vm.project } }),
+          _vm._v(" "),
+          _c("discussionBoard", { attrs: { project: _vm.project } }),
+          _vm._v(" "),
+          _c("messageBoard", { attrs: { project: _vm.project } }),
+          _vm._v(" "),
+          _c("schedule", { attrs: { project: _vm.project } }),
+          _vm._v(" "),
+          _c("files", { attrs: { project: _vm.project } }),
+          _vm._v(" "),
+          _c("activity", { attrs: { project: _vm.project } })
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -16118,6 +16196,282 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-3c17ec36", module.exports)
+  }
+}
+
+/***/ }),
+/* 93 */,
+/* 94 */,
+/* 95 */,
+/* 96 */,
+/* 97 */,
+/* 98 */,
+/* 99 */,
+/* 100 */,
+/* 101 */,
+/* 102 */,
+/* 103 */,
+/* 104 */,
+/* 105 */,
+/* 106 */,
+/* 107 */,
+/* 108 */,
+/* 109 */,
+/* 110 */,
+/* 111 */,
+/* 112 */,
+/* 113 */,
+/* 114 */,
+/* 115 */,
+/* 116 */,
+/* 117 */,
+/* 118 */,
+/* 119 */,
+/* 120 */,
+/* 121 */,
+/* 122 */,
+/* 123 */,
+/* 124 */,
+/* 125 */,
+/* 126 */,
+/* 127 */,
+/* 128 */,
+/* 129 */,
+/* 130 */,
+/* 131 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(132)
+/* template */
+var __vue_template__ = __webpack_require__(133)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/partials/addMemberForm.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3f853b99", Component.options)
+  } else {
+    hotAPI.reload("data-v-3f853b99", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 132 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            users: [],
+            newMember: null
+        };
+    },
+    created: function created() {
+        var _this = this;
+
+        axios.get('/users').then(function (response) {
+            _this.users = response.data.data;
+        }).catch(function (error) {
+            console.log(error);
+        });
+    },
+
+    methods: {
+        addMember: function addMember() {
+            axios.post('/projects/' + this.project.slug + '/users', {
+                'user_id': this.newMember
+            }).then(function (response) {
+                if (response.data.status == 'success') {
+                    console.log(response.status);
+                }
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        closeAddMemberForm: function closeAddMemberForm() {
+            this.$emit('close');
+        }
+    }
+});
+
+/***/ }),
+/* 133 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "div",
+      {
+        staticClass:
+          "absolute container mx-auto w-1/3 bg-white rounded shadow-lg z-10",
+        staticStyle: { top: "10vh", left: "0", right: "0" }
+      },
+      [
+        _c("div", { staticClass: "p-4" }, [
+          _c("div", { staticClass: "p-4" }, [
+            _c(
+              "label",
+              {
+                staticClass:
+                  "block uppercase tracking-wide text-grey-darker text-xs font-bold text-center text-lg mb-4",
+                attrs: { for: "user" }
+              },
+              [_vm._v("\n                    Add Member\n                ")]
+            ),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.newMember,
+                    expression: "newMember"
+                  }
+                ],
+                staticClass:
+                  "block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded",
+                attrs: { id: "user" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.newMember = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _vm._l(_vm.users, function(user) {
+                  return [
+                    _c("option", { attrs: { value: "" } }, [
+                      _vm._v(_vm._s(user.username))
+                    ])
+                  ]
+                })
+              ],
+              2
+            ),
+            _vm._v(" "),
+            _c("i", {
+              staticClass:
+                "fa fa-chevron-down pointer-events-none absolute flex items-center pin-r pin-t pr-8 mr-2 mt-16 pt-4 text-grey-darker"
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass:
+              "flex flex-row justify-between py-4 px-8 bg-grey-lighter rounded"
+          },
+          [
+            _c(
+              "button",
+              {
+                staticClass:
+                  "text-red-lighter hover:font-bold hover:text-red-light",
+                on: { click: _vm.closeAddMemberForm }
+              },
+              [_vm._v("Cancel")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass:
+                  "bg-teal-light text-white font-medium hover:bg-teal-dark py-4 px-8 rounded",
+                on: { click: _vm.addMember }
+              },
+              [_vm._v("Add")]
+            )
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c("div", {
+      staticClass: "h-screen w-screen fixed pin bg-grey-darkest opacity-25"
+    })
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-3f853b99", module.exports)
   }
 }
 

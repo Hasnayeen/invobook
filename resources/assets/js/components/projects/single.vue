@@ -4,6 +4,20 @@
             Goodwork API
             <p class="text-base">December 5, 2017 - December 13, 2017</p>
         </div>
+
+        <!-- Add Member Form -->
+        <addMemberForm v-if="addMemberFormShown" @close="closeAddMemberForm"></addMemberForm>
+
+        <div class="h-16 flex flex-row justify-around items-center px-2">
+            <span @click="showAddMemberForm" class="bg-white shadow w-12 h-12 rounded-full text-teal hover:cursor-pointer text-center">
+                <i class="fa fa-plus p-4"></i>
+            </span>
+            <a v-for="(member, index) in project.members" v-if="index < 5" :href="'/users/' + member.username">
+                <img src="/image/avatar.jpg" class="rounded-full w-8 h-8 mr-1">
+            </a>
+            <span v-if="project.members.length > 5" class="bg-grey-lighter border-teal border p-2 rounded-full">{{ project.members.length - 5 }}+</span>
+        </div>
+
         <div class="flex flex-row flex-wrap justify-center">
             <taskBoard :project="project"></taskBoard>
             <discussionBoard :project="project"></discussionBoard>
@@ -22,11 +36,23 @@ import messageBoard from './../partials/projects/messageBoard.vue'
 import schedule from './../partials/projects/schedule.vue'
 import files from './../partials/projects/files.vue'
 import activity from './../partials/projects/activity.vue'
+import addMemberForm from "./../partials/addMemberForm.vue";
 
-    export default {
-        components: {
-            taskBoard, discussionBoard, messageBoard, schedule, files, activity
+export default {
+    components: {
+        taskBoard, discussionBoard, messageBoard, schedule, files, activity, addMemberForm
+    },
+    props: ['project'],
+    data: () => ({
+        addMemberFormShown: false,
+    }),
+    methods: {
+        showAddMemberForm () {
+            this.addMemberFormShown = true;
         },
-        props: ['project'],
+        closeAddMemberForm () {
+            this.addMemberFormShown = false;
+        },
     }
+}
 </script>
