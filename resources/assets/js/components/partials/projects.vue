@@ -32,13 +32,12 @@
                 </span>
                 <a class="text-pink text-xl no-underline w-full pt-8 h-16 self-end" :href="project.url">{{ project.name }}</a>
                 <span class="text-grey text-sm w-full h-16 self-start">{{ project.description }}</span>
-                <div class="border-t w-full h-16 flex flex-row justify-start items-center px-2">
-                    <img src="/image/avatar.jpg" class="rounded-full w-8 h-8 mr-2">
-                    <img src="/image/avatar.jpg" class="rounded-full w-8 h-8 mr-2">
-                    <img src="/image/avatar.jpg" class="rounded-full w-8 h-8 mr-2">
-                    <img src="/image/avatar.jpg" class="rounded-full w-8 h-8 mr-2">
-                    <img src="/image/avatar.jpg" class="rounded-full w-8 h-8 mr-2">
-                    <span class="bg-grey-light p-2 rounded-full">5+</span>
+                <div class="border-t w-full h-16 flex flex-row justify-around items-center px-2">
+                    <a v-for="(member, index) in project.members" v-if="index < 5" :href="'/users/' + member.username">
+                        <img src="/image/avatar.jpg" class="rounded-full w-8 h-8 mr-1">
+                    </a>
+                    <span v-if="project.members.length > 5" class="bg-grey-lighter border-teal border p-2 rounded-full">{{ project.members.length - 5 }}+</span>
+                    <span v-else class="text-grey-dark text-center">No members yet</span>
                 </div>
             </div>
         </div>

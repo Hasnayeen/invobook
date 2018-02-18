@@ -2,23 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\TeamService;
 use App\Services\OfficeService;
-use App\Services\ProjectService;
+use App\Repositories\TeamRepository;
+use App\Repositories\ProjectRepository;
 
 class HomeController extends Controller
 {
-    /**
-     * @var mixed
-     */
-    protected $projectService;
-    /**
-     * @var mixed
-     */
-    protected $teamService;
-    /**
-     * @var mixed
-     */
+    protected $projectRepository;
+    protected $teamRepository;
     protected $officeService;
 
     /**
@@ -26,11 +17,11 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct(ProjectService $projectService, TeamService $teamService, OfficeService $officeService)
+    public function __construct(ProjectRepository $projectRepository, TeamRepository $teamRepository, OfficeService $officeService)
     {
         $this->middleware('auth');
-        $this->projectService = $projectService;
-        $this->teamService = $teamService;
+        $this->projectRepository = $projectRepository;
+        $this->teamRepository = $teamRepository;
         $this->officeService = $officeService;
     }
 
@@ -41,9 +32,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $projects = $this->projectService->getLatestProject(5)->toArray();
-        $teams = $this->teamService->getLatestThreeTeam()->toArray();
+        $projects = $this->projectRepository->getLatestProjects(5);
+        $teams = $this->teamRepository->getLatestTeams(5);
         $offices = $this->officeService->getLatestThreeOffice()->toArray();
+        $projects->load('members');
+        $teams->load('members');
 
         return view('home', compact('projects', 'teams', 'offices'));
     }

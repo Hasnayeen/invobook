@@ -40,28 +40,14 @@ class TaskTest extends TestCase
     }
 
     /** @test */
-    public function store_method_throws_error_for_wrong_data()
-    {
-        $response = $this->call('POST', route('tasks.store'), [
-            '_token' => csrf_token(),
-            'due_on' => 'invalid_date',
-        ]);
-        $this->assertEquals(302, $response->getStatusCode());
-    }
-
-    /** @test */
     public function user_can_see_tasks()
     {
-        // Given there are tasks
         $project = factory('App\Models\Project')->create();
         $tasks = factory('App\Models\Task', 5)->create([
             'taskable_type' => 'project',
             'taskable_id'   => $project->id,
         ]);
-        // When we visit projects tasks page
-        $response = $this->actingAs($this->user)
-                         ->get('/projects/'.$project->slug.'/tasks');
-        // Then we should see all task of that project
+        $response = $this->actingAs($this->user)->get('/projects/' . $project->slug . '/tasks');
         $response->assertSee($tasks[0]->title);
     }
 }

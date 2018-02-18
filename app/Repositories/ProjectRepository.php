@@ -6,32 +6,19 @@ use App\Models\Project;
 
 class ProjectRepository
 {
-    /**
-     * @var mixed
-     */
     protected $model;
 
-    /**
-     * @param Project $project
-     */
     public function __construct(Project $project)
     {
         $this->model = $project;
     }
 
-    /**
-     * @return mixed
-     */
     public function getAllProjects()
     {
         return $this->model->get(['name', 'description']);
     }
 
-    /**
-     * @param  mixed $total
-     * @return mixed
-     */
-    public function getLatestProject($total)
+    public function getLatestProjects($total)
     {
         return $this->model->orderBy('created_at', 'desc')->take($total)->get();
     }

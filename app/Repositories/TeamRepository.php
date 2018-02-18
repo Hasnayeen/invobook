@@ -27,4 +27,9 @@ class TeamRepository
     {
         return $this->model->orderBy('created_at', 'desc')->take(3)->get();
     }
+
+    public function getLatestTeams($total)
+    {
+        return $this->model->orderBy('created_at', 'desc')->take($total)->get();
+    }
 }
