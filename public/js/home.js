@@ -14796,7 +14796,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function (_data) {
@@ -14997,7 +14996,45 @@ var render = function() {
                 [_vm._v(_vm._s(project.description))]
               ),
               _vm._v(" "),
-              _vm._m(1, true)
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "border-t w-full h-16 flex flex-row justify-around items-center px-2"
+                },
+                [
+                  _vm._l(project.members, function(member, index) {
+                    return index < 5
+                      ? _c(
+                          "a",
+                          { attrs: { href: "/users/" + member.username } },
+                          [
+                            _c("img", {
+                              staticClass: "rounded-full w-8 h-8 mr-1",
+                              attrs: { src: "/image/avatar.jpg" }
+                            })
+                          ]
+                        )
+                      : _vm._e()
+                  }),
+                  _vm._v(" "),
+                  project.members.length > 5
+                    ? _c(
+                        "span",
+                        {
+                          staticClass:
+                            "bg-grey-lighter border-teal border p-2 rounded-full"
+                        },
+                        [_vm._v(_vm._s(project.members.length - 5) + "+")]
+                      )
+                    : _c(
+                        "span",
+                        { staticClass: "text-grey-dark text-center" },
+                        [_vm._v("No members yet")]
+                      )
+                ],
+                2
+              )
             ]
           )
         })
@@ -15017,48 +15054,6 @@ var staticRenderFns = [
           "fa fa-ellipsis-h float-right pr-4 pt-2 text-grey-darker cursor-pointer"
       })
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "border-t w-full h-16 flex flex-row justify-start items-center px-2"
-      },
-      [
-        _c("img", {
-          staticClass: "rounded-full w-8 h-8 mr-2",
-          attrs: { src: "/image/avatar.jpg" }
-        }),
-        _vm._v(" "),
-        _c("img", {
-          staticClass: "rounded-full w-8 h-8 mr-2",
-          attrs: { src: "/image/avatar.jpg" }
-        }),
-        _vm._v(" "),
-        _c("img", {
-          staticClass: "rounded-full w-8 h-8 mr-2",
-          attrs: { src: "/image/avatar.jpg" }
-        }),
-        _vm._v(" "),
-        _c("img", {
-          staticClass: "rounded-full w-8 h-8 mr-2",
-          attrs: { src: "/image/avatar.jpg" }
-        }),
-        _vm._v(" "),
-        _c("img", {
-          staticClass: "rounded-full w-8 h-8 mr-2",
-          attrs: { src: "/image/avatar.jpg" }
-        }),
-        _vm._v(" "),
-        _c("span", { staticClass: "bg-grey-light p-2 rounded-full" }, [
-          _vm._v("5+")
-        ])
-      ]
-    )
   }
 ]
 render._withStripped = true
@@ -15123,7 +15118,6 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
 //
 //
 //
@@ -15375,7 +15369,45 @@ var render = function() {
                 [_vm._v(_vm._s(team.description))]
               ),
               _vm._v(" "),
-              _vm._m(1, true)
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "border-t w-full h-16 flex flex-row justify-around items-center px-2"
+                },
+                [
+                  _vm._l(team.members, function(member, index) {
+                    return index < 5
+                      ? _c(
+                          "a",
+                          { attrs: { href: "/users/" + member.username } },
+                          [
+                            _c("img", {
+                              staticClass: "rounded-full w-8 h-8 mr-1",
+                              attrs: { src: "/image/avatar.jpg" }
+                            })
+                          ]
+                        )
+                      : _vm._e()
+                  }),
+                  _vm._v(" "),
+                  team.members.length > 5
+                    ? _c(
+                        "span",
+                        {
+                          staticClass:
+                            "bg-grey-lighter border-teal border p-2 rounded-full"
+                        },
+                        [_vm._v(_vm._s(team.members.length - 5) + "+")]
+                      )
+                    : _c(
+                        "span",
+                        { staticClass: "text-grey-dark text-center" },
+                        [_vm._v("No members yet")]
+                      )
+                ],
+                2
+              )
             ]
           )
         })
@@ -15395,48 +15427,6 @@ var staticRenderFns = [
           "fa fa-ellipsis-h float-right pr-4 pt-2 text-grey-darker cursor-pointer"
       })
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "border-t w-full h-16 flex flex-row justify-start items-center px-2"
-      },
-      [
-        _c("img", {
-          staticClass: "rounded-full w-8 h-8 mr-2",
-          attrs: { src: "/image/avatar.jpg" }
-        }),
-        _vm._v(" "),
-        _c("img", {
-          staticClass: "rounded-full w-8 h-8 mr-2",
-          attrs: { src: "/image/avatar.jpg" }
-        }),
-        _vm._v(" "),
-        _c("img", {
-          staticClass: "rounded-full w-8 h-8 mr-2",
-          attrs: { src: "/image/avatar.jpg" }
-        }),
-        _vm._v(" "),
-        _c("img", {
-          staticClass: "rounded-full w-8 h-8 mr-2",
-          attrs: { src: "/image/avatar.jpg" }
-        }),
-        _vm._v(" "),
-        _c("img", {
-          staticClass: "rounded-full w-8 h-8 mr-2",
-          attrs: { src: "/image/avatar.jpg" }
-        }),
-        _vm._v(" "),
-        _c("span", { staticClass: "bg-grey-light p-2 rounded-full" }, [
-          _vm._v("5+")
-        ])
-      ]
-    )
   }
 ]
 render._withStripped = true

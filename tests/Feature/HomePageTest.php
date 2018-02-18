@@ -13,20 +13,37 @@ class HomePageTest extends TestCase
 {
     use DatabaseTransactions;
 
+    public function setUp()
+    {
+        parent::setUp();
+        $this->user = factory(User::class)->create();
+    }
+
     /** @test */
     public function show_latest_three_projects_teams_and_offices()
     {
-        $user = factory(User::class)->create();
         $projects = factory(Project::class, 3)->create(['office_id' => null, 'team_id' => null]);
         $teams = factory(Team::class, 3)->create(['office_id' => null]);
         $offices = factory(Office::class, 3)->create();
 
-        $response = $this->actingAs($user)
+        $response = $this->actingAs($this->user)
                          ->get('/');
 
         $response->assertStatus(200)
-                 ->assertViewHas('projects', $projects->toArray())
+                 ->assertSee($projects[0]->name)
                  ->assertViewHas('offices', $offices->toArray())
                  ->assertViewHas('teams', $teams->toArray());
+    }
+
+    /** @test */
+    public function user_can_see_members_of_projects_teams()
+    {
+        $project = factory(Project::class)->create(['office_id' => null, 'team_id' => null]);
+        $users = factory(User::class, 5)->create();
+        $project->members()->attach($users->map(function ($user) {return $user->id;}));
+        $response = $this->actingAs($this->user)->get('/');
+        $response->assertSee($users[0]->name)
+                 ->assertSee($users[1]->name)
+                 ->assertSee($users[2]->name);
     }
 }
