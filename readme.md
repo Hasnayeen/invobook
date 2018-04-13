@@ -1,40 +1,46 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+### Goodwork
+[![License](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://github.com/iluminar/goodwork/blob/dev/LICENSE)
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+Self hosted project management and collaboration tool inspired by basecamp
 
-## About Laravel
+## About Goodwork
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+Goodwork is a simple project management and collaboration tool for all kind of teams. It is open source and MIT (See License) licensed. Goodwork is a self-hosted software so no dependency on anyone and only you keep your data.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Goodwork brings you all the component required for your project to run smoothly in one place so that you have single source of truth. Instead of using a collection of tools or service which makes everything messy and hard to find important details from stuff scattered all over the place, Goodwork organizes everything in a central place where everyone in the company knows what to do, knows where things stand and find stuff without having to ask around all the time.
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb combination of simplicity, elegance, and innovation give you tools you need to build any application with which you are tasked.
+[Overview](https://github.com/iluminar/goodwork/wiki/Overview)
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough documentation and video tutorial library of any modern web application framework. The [Laravel documentation](https://laravel.com/docs) is thorough, complete, and makes it a breeze to get started learning the framework.
+## Installation
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 900 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
+[Install via docker](https://github.com/iluminar/goodwork/wiki/Installation#setup-using-docker)
+
+[Install manually](https://github.com/iluminar/goodwork/wiki/Installation#setup-usual-way-if-youre-not-using-docker)
+
+
+## Screenshots
+
+![Login](https://i.imgur.com/hcSwUA5.png)
+
+![Dashboard](https://i.imgur.com/R6UOAmu.png)
+
+![Create Task Form](https://i.imgur.com/QlkS0IJ.png)
+
+![Project Home Page](https://i.imgur.com/ksmmfAo.png)
+
+![Profile Page](https://i.imgur.com/jIN7FQL.png)
+
+![Notifications](https://i.imgur.com/XGdakw9.png)
 
 ## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+Thank you for considering contributing to the Goodwork! The contribution guide can be found in the [Contribution Guideline](https://github.com/iluminar/goodwork/wiki/Contribution-Guideline).
 
 ## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability within Goodwork, please send an e-mail to searching.nehal@gmail.com. All security vulnerabilities will be promptly addressed.
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+Goodwork is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
