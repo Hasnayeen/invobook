@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Mail;
@@ -43,8 +44,10 @@ class UserController extends Controller
     /**
      * User Profile Page.
      */
-    public function profile()
+    public function profile(User $user)
     {
-        return view('users.profile');
+        $user->load('projects', 'teams');
+
+        return view('users.profile', ['user' => $user]);
     }
 }

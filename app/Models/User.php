@@ -25,4 +25,14 @@ class User extends Authenticatable
     {
         return 'username';
     }
+
+    public function teams()
+    {
+        return $this->belongsToMany('App\Models\Team');
+    }
+
+    public function projects()
+    {
+        return $this->belongsToMany('App\Models\Project');
+    }
 }
