@@ -46,7 +46,6 @@ class ProjectController extends Controller
         return view('projects.single', ['project' => $project]);
     }
 
-    //View for task borard
     public function tasks(Project $project)
     {
         return view('projects.tasks', ['project' => $project]);

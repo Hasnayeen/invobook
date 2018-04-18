@@ -36,6 +36,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('projects/{project}/messages', 'ProjectController@storeMessage');
 
+    Route::post('projects/{project}/members', 'ProjectMemberController@store');
+
     Route::get('teams', 'TeamController@index');
 
     Route::get('teams/{team}', 'TeamController@index');

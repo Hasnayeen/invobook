@@ -37,7 +37,7 @@
                         <img src="/image/avatar.jpg" class="rounded-full w-8 h-8 mr-1">
                     </a>
                     <span v-if="project.members.length > 5" class="bg-grey-lighter border-teal border p-2 rounded-full">{{ project.members.length - 5 }}+</span>
-                    <span v-else class="text-grey-dark text-center">No members yet</span>
+                    <span v-if="project.members.length == 0" class="text-grey-dark text-center">No members yet</span>
                 </div>
             </div>
         </div>
