@@ -136,6 +136,7 @@
             },
         },
         created(){
+            console.log('s');
             if( this.user.avatar == null || this.user.avatar == '' ){
                 this.avatar = '/image/avatar.jpg'; //default avatar
             }else{
