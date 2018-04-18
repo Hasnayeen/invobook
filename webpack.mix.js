@@ -8,6 +8,9 @@ mix.js('resources/assets/js/pages/home.js', 'public/js')
    .js('resources/assets/js/pages/auth/login.js', 'public/js/auth')
    .js('resources/assets/js/pages/auth/register.js', 'public/js/auth');
 
+// Error page
+mix.js('resources/assets/js/pages/errors/404.js', 'public/js/errors');
+
 // Projects
 mix.js('resources/assets/js/pages/projects/single.js', 'public/js/projects')
    .js('resources/assets/js/pages/projects/tasks.js', 'public/js/projects')

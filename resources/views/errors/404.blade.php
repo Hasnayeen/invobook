@@ -1,0 +1,17 @@
+@component('layouts.app')
+
+@slot('title') 404 - Page Not Found @endslot
+
+<div class="text-4xl text-grey-darker container mx-auto mt-16 text-center font-bold">
+    <div class="text-teal" style="font-size: 16rem">
+        404
+    </div>
+    <div class="mb-8">WHOOPS! Page Not Found</div>
+    <a href="{{ route('home') }}" class="text-teal no-underline text-2xl">← Go To Home</a>
+</div>
+
+@slot('script')
+<script src="/js/errors/404.js"></script>
+@endslot
+
+@endcomponent
