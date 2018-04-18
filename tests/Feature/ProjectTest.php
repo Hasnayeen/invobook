@@ -22,7 +22,7 @@ class ProjectTest extends TestCase
     public function add_user_to_project()
     {
         $user = factory('App\Models\User')->create();
-        $response = $this->actingAs($this->user)->post('/projects/' . $this->project->slug . '/members', ['user_id' => $user->id]);
+        $response = $this->actingAs($this->user)->post('/projects/'.$this->project->slug.'/members', ['user_id' => $user->id]);
         $response->assertJson([
             'status'  => 'success',
             'message' => 'User added to the project',
