@@ -13,7 +13,7 @@ class UserRepository
         $this->model = $user;
     }
 
-    public function getAllUsers($columns = ['name', 'username', 'avatar'])
+    public function getAllUsers($columns = ['id', 'name', 'username', 'avatar'])
     {
         return $this->model->get($columns);
     }
