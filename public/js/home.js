@@ -20873,7 +20873,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     created: function created() {
-        console.log('s');
         if (this.user.avatar == null || this.user.avatar == '') {
             this.avatar = '/image/avatar.jpg'; //default avatar
         } else {
@@ -20923,7 +20922,7 @@ var render = function() {
             },
             [
               _c("i", {
-                staticClass: "fa fa-bell-o font-bold text-xl",
+                staticClass: "far fa-bell font-bold text-xl",
                 attrs: { "aria-hidden": "true" }
               }),
               _vm._v(" "),
@@ -21925,10 +21924,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "w-full h-16" }, [
+    return _c("span", { staticClass: "w-full h-16 pr-4 pt-2" }, [
       _c("i", {
         staticClass:
-          "fa fa-ellipsis-h float-right pr-4 pt-2 text-grey-darker cursor-pointer"
+          "fas fa-ellipsis-h float-right text-grey-darker cursor-pointer"
       })
     ])
   }
@@ -22298,10 +22297,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "w-full h-16" }, [
+    return _c("span", { staticClass: "w-full h-16 pr-4 pt-2" }, [
       _c("i", {
         staticClass:
-          "fa fa-ellipsis-h float-right pr-4 pt-2 text-grey-darker cursor-pointer"
+          "fa fa-ellipsis-h float-right text-grey-darker cursor-pointer"
       })
     ])
   }
@@ -22621,10 +22620,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "w-full h-16" }, [
+    return _c("span", { staticClass: "w-full h-16 pr-4 pt-2" }, [
       _c("i", {
         staticClass:
-          "fa fa-ellipsis-h float-right pr-4 pt-2 text-grey-darker cursor-pointer"
+          "fa fa-ellipsis-h float-right text-grey-darker cursor-pointer"
       })
     ])
   },

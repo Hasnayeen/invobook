@@ -20,7 +20,6 @@
     "luxon": "^1.0.0",
     "tailwindcss": "^0.4.1",
     "vue": "^2.5.13",
-    "vue2-dropzone": "^3.0.4",
     "vuejs-datepicker": "^0.9.25",
     "webpack": "^3.10.0"
   }

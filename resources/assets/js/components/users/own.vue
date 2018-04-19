@@ -1,13 +1,12 @@
 <template>
     <div class="my-8">
         <div class="flex flex-col items-center">
-            <img src="/image/avatar-profile.png" :alt="'Default avatar of ' + user.name" class="w-32 h-32 rounded-full">
+            <img :src="avatarUrl" :alt="'Default avatar of ' + user.name" class="w-32 h-32 rounded-full">
             <div class="text-grey-darker text-2xl font-semibold py-4">
                 {{user.name}}
             </div>
             <div class="">
-                <input type="file" name="file" id="select-file" class="hidden" />
-                <button class="bg-transparent text-grey-darker hover:text-teal py-2 px-4 border border-grey-light hover:border-teal rounded">Change Your Avatar</button>
+                <file-upload :user="user" @image-loaded="updateImage"></file-upload>
             </div>
         </div>
         <form class="px-8 pt-6">
@@ -74,8 +73,20 @@
 </template>
 
 <script>
+import FileUpload from './../partials/fileUpload'
 export default {
     name: 'Own',
+    components: {FileUpload},
     props: ['user'],
+    methods: {
+        updateImage (imageUrl) {
+            this.user.avatar = imageUrl;
+        }
+    },
+    computed: {
+        avatarUrl () {
+            return this.user.avatar !== null ? this.user.avatar : '/image/avatar-profile.png';
+        }
+    }
 }
 </script>

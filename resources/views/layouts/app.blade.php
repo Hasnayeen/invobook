@@ -10,7 +10,6 @@
     <title>{{ config('app.name', 'GOODWORK') }} | {{ $title }}</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300,400,600">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     @yield('style')
 
@@ -28,6 +27,7 @@
     </script>
     @endif
 
+    <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
 </head>
 <body class="bg-grey-lighter">
     <div id="app">

@@ -20873,7 +20873,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     created: function created() {
-        console.log('s');
         if (this.user.avatar == null || this.user.avatar == '') {
             this.avatar = '/image/avatar.jpg'; //default avatar
         } else {
@@ -20923,7 +20922,7 @@ var render = function() {
             },
             [
               _c("i", {
-                staticClass: "fa fa-bell-o font-bold text-xl",
+                staticClass: "far fa-bell font-bold text-xl",
                 attrs: { "aria-hidden": "true" }
               }),
               _vm._v(" "),
