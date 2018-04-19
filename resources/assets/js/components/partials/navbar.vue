@@ -7,7 +7,7 @@
         <div class="flex flex-row border-l">
             <div class="px-4 self-center">
                 <div id="notification" class="text-teal-light text-base no-underline cursor-pointer" @click="toggleNotification">
-                    <i class="fa fa-bell-o font-bold text-xl" aria-hidden="true"></i>
+                    <i class="far fa-bell font-bold text-xl" aria-hidden="true"></i>
                     <i v-if="unreadNotification" class="fa fa-circle text-red-light text-sm absolute pin-t mt-3 ml-3" aria-hidden="true"></i>
                 </div>
                 <div v-if="notificationShown" class="absolute bg-white w-64 mt-6 mr-8 py-4 shadow-lg rounded" style="right: 5%;">
@@ -136,7 +136,6 @@
             },
         },
         created(){
-            console.log('s');
             if( this.user.avatar == null || this.user.avatar == '' ){
                 this.avatar = '/image/avatar.jpg'; //default avatar
             }else{

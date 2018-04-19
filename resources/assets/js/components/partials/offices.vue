@@ -32,8 +32,8 @@
 
             <div class="bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center items-center text-center rounded m-4" 
                 v-for="office in offices">
-                <span class="w-full h-16">
-                    <i class="fa fa-ellipsis-h float-right pr-4 pt-2 text-grey-darker cursor-pointer"></i>
+                <span class="w-full h-16 pr-4 pt-2">
+                    <i class="fa fa-ellipsis-h float-right text-grey-darker cursor-pointer"></i>
                 </span>
                 <a class="text-pink text-xl no-underline w-full pt-8 h-16 self-end" 
                     :href="office.url">{{ office.name }}</a>
