@@ -3,6 +3,8 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class UserTest extends TestCase
@@ -25,5 +27,17 @@ class UserTest extends TestCase
             'username'   => $users[0]->username,
             'name'       => $users[0]->name,
         ]);
+    }
+
+    /** @test */
+    public function user_can_upload_avatar_image()
+    {
+        $this->actingAs($this->user);
+        Storage::fake('public');
+        $this->post('users/' . $this->user->username . '/avatar', [
+            'avatar' => UploadedFile::fake()->image('avatar.png'),
+        ]);
+        $this->assertEquals('avatars/' . $this->user->username . '.png', auth()->user()->avatar);
+        Storage::disk('public')->assertExists('avatars/' . $this->user->username . '.png');
     }
 }

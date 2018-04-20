@@ -26,6 +26,11 @@ class User extends Authenticatable
         return 'username';
     }
 
+    public function getAvatarAttribute($value)
+    {
+        return asset($value ? 'storage/' . $value : 'image/avatar.jpg');
+    }
+
     public function teams()
     {
         return $this->belongsToMany('App\Models\Team');

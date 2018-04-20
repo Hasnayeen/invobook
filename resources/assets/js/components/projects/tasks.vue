@@ -51,7 +51,7 @@
             </header>
             <div v-for="task in tasks" class="">
                 <div class="flex flex-row items-center justify-start py-4 hover:bg-grey-lighter border-l-4 hover:border-teal border-transparent px-6 hover:cursor-pointer">
-                    <i :class="[task.completed ? 'fa-check p-0 text-teal border-teal' : 'p-2 text-grey']" class="fa border-2 text-lg mr-6"></i>
+                    <i :class="[task.completed ? 'fas fa-check p-0 text-teal border-teal' : 'p-2 text-grey']" class="border-2 text-lg mr-6"></i>
                     <img class="rounded-full w-10" src="http://placehold.it/30x30" alt="Avater">
                     <div class="w-3/5 ml-6 text-grey-darkest">
                         {{ task.title }}

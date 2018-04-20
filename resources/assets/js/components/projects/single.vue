@@ -9,11 +9,11 @@
         <addMemberForm v-if="addMemberFormShown" @close="closeAddMemberForm" :project="project" @addMember="addMember"></addMemberForm>
 
         <div class="h-16 flex flex-row justify-center items-center px-2">
-            <span @click="showAddMemberForm" class="bg-white shadow w-8 h-8 rounded-full text-teal hover:cursor-pointer text-center">
-                <i class="fa fa-plus p-2"></i>
+            <span @click="showAddMemberForm" class="bg-white shadow w-8 h-8 rounded-full text-teal hover:cursor-pointer text-center p-2">
+                <i class="fas fa-plus"></i>
             </span>
             <a v-for="(member, index) in project.members" v-if="index < 5" :href="'/users/' + member.username" class="pl-2">
-                <img src="/image/avatar.jpg" class="rounded-full w-8 h-8 mr-1">
+                <img :src="member.avatar" class="rounded-full w-8 h-8 mr-1">
             </a>
             <span v-if="project.members.length > 5" class="bg-grey-lighter border-teal border p-2 rounded-full">{{ project.members.length - 5 }}+</span>
         </div>
