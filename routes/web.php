@@ -24,6 +24,10 @@ Route::post('register/{token}', 'Auth\RegisterController@confirmNewRegistration'
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 
+    /**********************************
+        Project
+    **********************************/
+
     Route::get('projects', 'ProjectController@index');
 
     Route::post('projects', 'ProjectController@storeProject');
@@ -37,6 +41,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('projects/{project}/messages', 'ProjectController@storeMessage');
 
     Route::post('projects/{project}/members', 'ProjectMemberController@store');
+
+    /**********************************
+        Team
+    **********************************/
 
     Route::get('teams', 'TeamController@index');
 
@@ -78,9 +86,15 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('files/{file}', 'FileController@index');
 
+    /**********************************
+        User
+    **********************************/
+
     Route::get('users', 'UserController@index');
 
     Route::get('users/{user}', 'UserController@profile');
+
+    Route::post('users/{user}/avatar', 'UserAvatarController@store');
 
     Route::get('users/{user}/settings', 'UserController@index');
 

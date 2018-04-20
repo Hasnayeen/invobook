@@ -20818,7 +20818,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             token: Laravel.csrfToken,
             url: navbar.navUrl,
             avatar: '',
-            profileUrl: navbar.navUrl.site + '/users/' + navbar.user.id,
+            profileUrl: navbar.navUrl.site + '/users/' + navbar.user.username,
             notificationShown: false,
             unreadNotification: false,
             profileDropdownShown: false
@@ -21035,7 +21035,7 @@ var render = function() {
                   "div",
                   {
                     staticClass:
-                      "absolute bg-white w-48 pin-r mr-2 py-2 shadow-lg rounded",
+                      "absolute bg-white w-48 pin-r mr-2 py-1 shadow-lg rounded",
                     staticStyle: { top: "3.5rem" },
                     attrs: { id: "profile-menu" }
                   },
@@ -21044,22 +21044,20 @@ var render = function() {
                       "a",
                       {
                         staticClass:
-                          "list-reset px-4 py-2 text-teal-light font-semibold no-underline block",
+                          "px-4 py-2 hover:bg-teal hover:text-white no-underline text-grey-dark block font-medium",
                         attrs: { href: _vm.profileUrl }
                       },
                       [
-                        _c("i", {
-                          staticClass: "text-teal-light w-6 fa fa-user"
-                        }),
+                        _vm._m(2),
                         _vm._v(
-                          "\n                    Your profile\n                "
+                          "\n                        Your profile\n                "
                         )
                       ]
                     ),
                     _vm._v(" "),
-                    _vm._m(2),
-                    _vm._v(" "),
                     _vm._m(3),
+                    _vm._v(" "),
+                    _vm._m(4),
                     _vm._v(" "),
                     _c("span", { staticClass: "block border-t" }),
                     _vm._v(" "),
@@ -21067,14 +21065,12 @@ var render = function() {
                       "a",
                       {
                         staticClass:
-                          "list-reset px-4 py-2 text-teal-light font-semibold no-underline block",
+                          "px-4 py-2 hover:bg-teal hover:text-white text-grey-dark font-medium no-underline block",
                         attrs: { href: _vm.url.logout },
                         on: { click: _vm.logoutUser }
                       },
                       [
-                        _c("i", {
-                          staticClass: "text-teal-light w-6 fa fa-sign-out"
-                        }),
+                        _vm._m(5),
                         _vm._v("\n                    Logout\n                ")
                       ]
                     )
@@ -21146,15 +21142,25 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "w-6 inline-block" }, [
+      _c("i", { staticClass: "pr-1 fa fa-user" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c(
       "a",
       {
         staticClass:
-          "list-reset px-4 py-2 text-teal-light font-semibold no-underline block",
+          "px-4 py-2 hover:bg-teal hover:text-white text-grey-dark font-medium no-underline block",
         attrs: { href: "#" }
       },
       [
-        _c("i", { staticClass: "text-teal-light w-6 fa fa-question" }),
+        _c("span", { staticClass: "w-6 inline-block" }, [
+          _c("i", { staticClass: "pr-1 fa fa-question font-regular" })
+        ]),
         _vm._v("\n                    Help\n                ")
       ]
     )
@@ -21167,14 +21173,24 @@ var staticRenderFns = [
       "a",
       {
         staticClass:
-          "list-reset px-4 py-2 text-teal-light font-semibold no-underline block",
+          "px-4 py-2 hover:bg-teal hover:text-white text-grey-dark font-medium no-underline block",
         attrs: { href: "#" }
       },
       [
-        _c("i", { staticClass: "text-teal-light w-6 fa fa-cog" }),
+        _c("span", { staticClass: "w-6 inline-block" }, [
+          _c("i", { staticClass: "pr-1 fa fa-cog font-regular" })
+        ]),
         _vm._v("\n                    Settings\n                ")
       ]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "w-6 inline-block" }, [
+      _c("i", { staticClass: "pr-1 fas fa-sign-out-alt font-regular" })
+    ])
   }
 ]
 render._withStripped = true

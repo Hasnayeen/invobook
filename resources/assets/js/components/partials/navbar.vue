@@ -48,22 +48,22 @@
                         <i class="fa fa-angle-down" aria-hidden="true"></i>
                     </span>
                 </div>
-                <div v-if="profileDropdownShown" id="profile-menu" class="absolute bg-white w-48 pin-r mr-2 py-2 shadow-lg rounded" style="top:3.5rem;">
-                    <a class="list-reset px-4 py-2 text-teal-light font-semibold no-underline block" :href="profileUrl">
-                        <i class="text-teal-light w-6 fa fa-user"></i>
-                        Your profile
+                <div v-if="profileDropdownShown" id="profile-menu" class="absolute bg-white w-48 pin-r mr-2 py-1 shadow-lg rounded" style="top:3.5rem;">
+                    <a class="px-4 py-2 hover:bg-teal hover:text-white no-underline text-grey-dark block font-medium" :href="profileUrl">
+                        <span class="w-6 inline-block"><i class="pr-1 fa fa-user"></i></span>
+                            Your profile
                     </a>
-                    <a class="list-reset px-4 py-2 text-teal-light font-semibold no-underline block" href="#">
-                        <i class="text-teal-light w-6 fa fa-question"></i>
+                    <a class="px-4 py-2 hover:bg-teal hover:text-white text-grey-dark font-medium no-underline block" href="#">
+                        <span class="w-6 inline-block"><i class="pr-1 fa fa-question font-regular"></i></span>
                         Help
                     </a>
-                    <a class="list-reset px-4 py-2 text-teal-light font-semibold no-underline block" href="#">
-                        <i class="text-teal-light w-6 fa fa-cog"></i>
+                    <a class="px-4 py-2 hover:bg-teal hover:text-white text-grey-dark font-medium no-underline block" href="#">
+                        <span class="w-6 inline-block"><i class="pr-1 fa fa-cog font-regular"></i></span>
                         Settings
                     </a>
                     <span class="block border-t"></span>
-                    <a class="list-reset px-4 py-2 text-teal-light font-semibold no-underline block" :href="url.logout" @click="logoutUser">
-                        <i class="text-teal-light w-6 fa fa-sign-out"></i>
+                    <a class="px-4 py-2 hover:bg-teal hover:text-white text-grey-dark font-medium no-underline block" :href="url.logout" @click="logoutUser">
+                        <span class="w-6 inline-block"><i class="pr-1 fas fa-sign-out-alt font-regular"></i></span>
                         Logout
                     </a>
                 </div>            
@@ -82,7 +82,7 @@
             token: Laravel.csrfToken,
             url: navbar.navUrl,
             avatar: '',
-            profileUrl: navbar.navUrl.site + '/users/' + navbar.user.id,
+            profileUrl: navbar.navUrl.site + '/users/' + navbar.user.username,
             notificationShown: false,
             unreadNotification: false,
             profileDropdownShown: false,

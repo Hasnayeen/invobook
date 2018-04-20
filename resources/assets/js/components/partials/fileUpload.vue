@@ -26,13 +26,13 @@ export default {
         uploadImage (file) {
             let data = new FormData();
             data.append('avatar', file);
-            // axios.get('/')
-            //      .then(res => {
+            axios.post('/users/' + this.user.username + '/avatar', data)
+                 .then(res => {
+                     console.log(res);
+                 })
+                 .catch(err => {
 
-            //      })
-            //      .catch(err => {
-
-            //      });
+                 });
         }
     }
 }
