@@ -21444,302 +21444,9 @@ if (false) {
 }
 
 /***/ }),
-/* 40 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(41)
-/* template */
-var __vue_template__ = __webpack_require__(42)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/partials/messageBoard.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-231e2916", Component.options)
-  } else {
-    hotAPI.reload("data-v-231e2916", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 41 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['type', 'id', 'project'],
-    data: function (_data) {
-        function data() {
-            return _data.apply(this, arguments);
-        }
-
-        data.toString = function () {
-            return _data.toString();
-        };
-
-        return data;
-    }(function () {
-        return {
-            messages: data.messages.reverse(),
-            message: '',
-            user: navbar.user,
-            unreadMessage: 0,
-            title: ''
-        };
-    }),
-    mounted: function mounted() {
-        this.title = document.title;
-        this.listen();
-        document.getElementById("message-box").scrollTop = document.getElementById("message-box").scrollHeight;
-    },
-    updated: function updated() {
-        document.getElementById("message-box").scrollTop = document.getElementById("message-box").scrollHeight;
-    },
-
-    methods: {
-        sendMessage: function sendMessage(e) {
-            var _this = this;
-
-            if (e.shiftKey) {
-                this.message = this.message + "\n";
-            } else {
-                var msg = this.message;
-                this.message = '';
-                axios.post('messages', {
-                    message: msg,
-                    type: this.type
-                }).then(function (response) {
-                    if (response.data.status == 'success') {
-                        response.data.message.user = navbar.user;
-                        _this.messages.push(response.data.message);
-                    }
-                }).catch(function (error) {
-                    console.log(error);
-                });
-            }
-        },
-        listen: function listen() {
-            var _this2 = this;
-
-            Echo.channel(this.type + '.' + this.id).listen('MessageCreated', function (event) {
-                event.message.user = event.user;
-                _this2.messages.push(event.message);
-                if (document.activeElement != document.getElementById("send-message")) {
-                    _this2.unreadMessage += 1;
-                    document.title = '(' + _this2.unreadMessage + ') ' + _this2.title;
-                }
-            });
-        },
-        clearTitleNotification: function clearTitleNotification() {
-            document.title = this.title;
-            this.unreadMessage = 0;
-        }
-    }
-});
-
-/***/ }),
-/* 42 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "column is-fullwidth tasks-list" }, [
-    _c("div", { staticClass: "card" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "message-box", attrs: { id: "message-box" } },
-        _vm._l(_vm.messages, function(message) {
-          return _c(
-            "div",
-            {
-              staticClass: "card-content-item",
-              class: { "is-primary": message.user_id == _vm.user.id }
-            },
-            [
-              _c("article", { staticClass: "media" }, [
-                _vm._m(1, true),
-                _vm._v(" "),
-                _c("div", { staticClass: "media-content" }, [
-                  _c("div", { staticClass: "content" }, [
-                    _c("p", [
-                      _c("strong", [_vm._v(_vm._s(message.user.name))]),
-                      _vm._v(" "),
-                      _c("small", [
-                        _vm._v("@" + _vm._s(message.user.username) + " ")
-                      ]),
-                      _vm._v(" "),
-                      _c("small", [_vm._v(_vm._s(message.created_at))]),
-                      _vm._v(" "),
-                      _c("br"),
-                      _vm._v(
-                        "\n                                " +
-                          _vm._s(message.body) +
-                          "\n                            "
-                      )
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                message.user_id == _vm.user.id
-                  ? _c("div", { staticClass: "media-right" }, [
-                      _c("button", { staticClass: "delete" })
-                    ])
-                  : _vm._e()
-              ])
-            ]
-          )
-        })
-      ),
-      _vm._v(" "),
-      _c("footer", { staticClass: "card-footer" }, [
-        _c("p", { staticClass: "control card-footer-item send-message-box" }, [
-          _c("textarea", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.message,
-                expression: "message"
-              }
-            ],
-            staticClass: "textarea",
-            attrs: {
-              id: "send-message",
-              placeholder: "write your message here"
-            },
-            domProps: { value: _vm.message },
-            on: {
-              keydown: function($event) {
-                if (
-                  !("button" in $event) &&
-                  _vm._k($event.keyCode, "enter", 13, $event.key)
-                ) {
-                  return null
-                }
-                $event.preventDefault()
-                _vm.sendMessage($event)
-              },
-              focus: function($event) {
-                _vm.clearTitleNotification()
-              },
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.message = $event.target.value
-              }
-            }
-          })
-        ])
-      ])
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("header", { staticClass: "card-header" }, [
-      _c("a", { staticClass: "card-header-title has-text-centered" }, [
-        _vm._v("Message Board")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("figure", { staticClass: "media-left" }, [
-      _c("p", { staticClass: "image is-48x48" }, [
-        _c("img", { attrs: { src: "/image/avatar.jpg" } })
-      ])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-231e2916", module.exports)
-  }
-}
-
-/***/ }),
+/* 40 */,
+/* 41 */,
+/* 42 */,
 /* 43 */,
 /* 44 */,
 /* 45 */,
@@ -21899,8 +21606,8 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__partials_messageBoard__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__partials_messageBoard___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__partials_messageBoard__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__partials_messages__ = __webpack_require__(163);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__partials_messages___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__partials_messages__);
 //
 //
 //
@@ -21910,7 +21617,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['id', 'team'],
     components: {
-        messageBoard: __WEBPACK_IMPORTED_MODULE_0__partials_messageBoard___default.a
+        messages: __WEBPACK_IMPORTED_MODULE_0__partials_messages___default.a
     }
 });
 
@@ -21922,9 +21629,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("messageBoard", {
-    attrs: { type: "team", id: _vm.id, team: _vm.team }
-  })
+  return _c("messages", { attrs: { type: "team", id: _vm.id, team: _vm.team } })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -21933,6 +21638,342 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-8c92b648", module.exports)
+  }
+}
+
+/***/ }),
+/* 123 */,
+/* 124 */,
+/* 125 */,
+/* 126 */,
+/* 127 */,
+/* 128 */,
+/* 129 */,
+/* 130 */,
+/* 131 */,
+/* 132 */,
+/* 133 */,
+/* 134 */,
+/* 135 */,
+/* 136 */,
+/* 137 */,
+/* 138 */,
+/* 139 */,
+/* 140 */,
+/* 141 */,
+/* 142 */,
+/* 143 */,
+/* 144 */,
+/* 145 */,
+/* 146 */,
+/* 147 */,
+/* 148 */,
+/* 149 */,
+/* 150 */,
+/* 151 */,
+/* 152 */,
+/* 153 */,
+/* 154 */,
+/* 155 */,
+/* 156 */,
+/* 157 */,
+/* 158 */,
+/* 159 */,
+/* 160 */,
+/* 161 */,
+/* 162 */,
+/* 163 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(164)
+/* template */
+var __vue_template__ = __webpack_require__(165)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/partials/messages.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-f9ff1bbc", Component.options)
+  } else {
+    hotAPI.reload("data-v-f9ff1bbc", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 164 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['type', 'id', 'project'],
+    data: function (_data) {
+        function data() {
+            return _data.apply(this, arguments);
+        }
+
+        data.toString = function () {
+            return _data.toString();
+        };
+
+        return data;
+    }(function () {
+        return {
+            messages: data.messages.reverse(),
+            message: '',
+            user: navbar.user,
+            unreadMessage: 0,
+            title: ''
+        };
+    }),
+    mounted: function mounted() {
+        this.title = document.title;
+        this.listen();
+        document.getElementById("message-box").scrollTop = document.getElementById("message-box").scrollHeight;
+    },
+    updated: function updated() {
+        document.getElementById("message-box").scrollTop = document.getElementById("message-box").scrollHeight;
+    },
+
+    methods: {
+        sendMessage: function sendMessage(e) {
+            var _this = this;
+
+            if (e.shiftKey) {
+                this.message = this.message + "\n";
+            } else {
+                var msg = this.message;
+                this.message = '';
+                axios.post('messages', {
+                    message: msg,
+                    type: this.type
+                }).then(function (response) {
+                    if (response.data.status == 'success') {
+                        response.data.message.user = navbar.user;
+                        _this.messages.push(response.data.message);
+                    }
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            }
+        },
+        listen: function listen() {
+            var _this2 = this;
+
+            Echo.channel(this.type + '.' + this.id).listen('MessageCreated', function (event) {
+                event.message.user = event.user;
+                _this2.messages.push(event.message);
+                if (document.activeElement != document.getElementById("send-message")) {
+                    _this2.unreadMessage += 1;
+                    document.title = '(' + _this2.unreadMessage + ') ' + _this2.title;
+                }
+            });
+        },
+        clearTitleNotification: function clearTitleNotification() {
+            document.title = this.title;
+            this.unreadMessage = 0;
+        }
+    }
+});
+
+/***/ }),
+/* 165 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "column is-fullwidth tasks-list" }, [
+    _c("div", { staticClass: "card" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "message-box", attrs: { id: "message-box" } },
+        _vm._l(_vm.messages, function(message) {
+          return _c(
+            "div",
+            {
+              staticClass: "card-content-item",
+              class: { "is-primary": message.user_id == _vm.user.id }
+            },
+            [
+              _c("article", { staticClass: "media" }, [
+                _vm._m(1, true),
+                _vm._v(" "),
+                _c("div", { staticClass: "media-content" }, [
+                  _c("div", { staticClass: "content" }, [
+                    _c("p", [
+                      _c("strong", [_vm._v(_vm._s(message.user.name))]),
+                      _vm._v(" "),
+                      _c("small", [
+                        _vm._v("@" + _vm._s(message.user.username) + " ")
+                      ]),
+                      _vm._v(" "),
+                      _c("small", [_vm._v(_vm._s(message.created_at))]),
+                      _vm._v(" "),
+                      _c("br"),
+                      _vm._v(
+                        "\n                                " +
+                          _vm._s(message.body) +
+                          "\n                            "
+                      )
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                message.user_id == _vm.user.id
+                  ? _c("div", { staticClass: "media-right" }, [
+                      _c("button", { staticClass: "delete" })
+                    ])
+                  : _vm._e()
+              ])
+            ]
+          )
+        })
+      ),
+      _vm._v(" "),
+      _c("footer", { staticClass: "card-footer" }, [
+        _c("p", { staticClass: "control card-footer-item send-message-box" }, [
+          _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.message,
+                expression: "message"
+              }
+            ],
+            staticClass: "textarea",
+            attrs: {
+              id: "send-message",
+              placeholder: "write your message here"
+            },
+            domProps: { value: _vm.message },
+            on: {
+              keydown: function($event) {
+                if (
+                  !("button" in $event) &&
+                  _vm._k($event.keyCode, "enter", 13, $event.key)
+                ) {
+                  return null
+                }
+                $event.preventDefault()
+                _vm.sendMessage($event)
+              },
+              focus: function($event) {
+                _vm.clearTitleNotification()
+              },
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.message = $event.target.value
+              }
+            }
+          })
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("header", { staticClass: "card-header" }, [
+      _c("a", { staticClass: "card-header-title has-text-centered" }, [
+        _vm._v("Message Board")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("figure", { staticClass: "media-left" }, [
+      _c("p", { staticClass: "image is-48x48" }, [
+        _c("img", { attrs: { src: "/image/avatar.jpg" } })
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-f9ff1bbc", module.exports)
   }
 }
 

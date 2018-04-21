@@ -6,21 +6,48 @@
     "watch": "node node_modules/cross-env/dist/bin/cross-env.js NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "observe": "node node_modules/cross-env/bin/cross-env.js NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "hot": "node node_modules/cross-env/bin/cross-env.js NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "production": "node node_modules/cross-env/bin/cross-env.js NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+    "production": "node node_modules/cross-env/bin/cross-env.js NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "test": "jest"
   },
   "dependencies": {
     "laravel-echo-server": "^1.3.6"
   },
   "devDependencies": {
     "axios": "^0.15.2",
+    "babel-jest": "^22.4.3",
     "cross-env": "^3.2.4",
+    "jest": "^22.4.3",
     "jquery": "^3.3.1",
+    "jsdom": "^11.8.0",
+    "jsdom-global": "^3.0.2",
     "laravel-echo": "^1.3.5",
     "laravel-mix": "^2.0.0",
     "luxon": "^1.0.0",
     "tailwindcss": "^0.4.1",
     "vue": "^2.5.13",
+    "vue-jest": "^2.5.0",
+    "vue-test-utils": "^1.0.0-beta.11",
     "vuejs-datepicker": "^0.9.25",
     "webpack": "^3.10.0"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "vue"
+    ],
+    "moduleNameMapper": {
+      "^vue$": "vue/dist/vue.common.js"
+    },
+    "moduleDirectories": ["node_modules", "<rootDir>/resources/assets/js/"],
+    "setupTestFrameworkScriptFile": "<rootDir>/tests/JS/setup.js",
+    "transform": {
+      ".*\\.(vue)$": "<rootDir>/node_modules/vue-jest",
+      "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
+    },
+    "roots": [
+      "<rootDir>/resources/assets/js/",
+      "<rootDir>/tests/JS/"
+    ]
   }
 }

@@ -1,13 +1,13 @@
 <template>
-    <messageBoard type="office" :id="id" :office="office"></messageBoard>
+    <messages type="office" :id="id" :office="office"></messages>
 </template>
 
 <script>
-import messageBoard from './../partials/messageBoard'
+import messages from './../partials/messages'
     export default {
         props: ['id', 'office'],
         components: {
-            messageBoard
+            messages
         }
     }
 </script>
