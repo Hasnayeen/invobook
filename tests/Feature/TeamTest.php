@@ -19,7 +19,7 @@ class TeamTest extends TestCase
     /** @test */
     public function user_can_see_team_page()
     {
-        $response = $this->actingAs($this->user)->get('teams/' . $this->team->slug);
+        $response = $this->actingAs($this->user)->get('teams/'.$this->team->slug);
         $response->assertSee($this->team->name);
     }
 
