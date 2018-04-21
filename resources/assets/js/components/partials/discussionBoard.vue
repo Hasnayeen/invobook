@@ -1,7 +1,7 @@
 <template>
     <div class="bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center text-center rounded m-4">
         <header class="w-full relative border-b h-12 pt-4">
-            <a :href="'/projects/' + resource.slug + '/discussions'" class="text-grey-darker font-medium no-underline">
+            <a :href="'/' + resourceType + '/' + resource.slug + '/discussions'" class="text-grey-darker font-medium no-underline">
                 Discussions
             </a>
             <span class="text-grey-darker absolute pin-r mr-2">
@@ -42,6 +42,6 @@
 
 <script>
 export default {
-    props: ['resource'],
+    props: ['resource', 'resourceType'],
 }
 </script>

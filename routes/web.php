@@ -48,6 +48,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('teams', 'TeamController@index');
 
+    Route::post('teams', 'TeamController@store');
+
     Route::get('teams/{team}', 'TeamController@show');
 
     Route::get('teams/{team}/messages', 'TeamController@getAllMessages');

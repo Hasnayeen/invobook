@@ -17,8 +17,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    const ADMIN = 1;
-    const MEMBER = 2;
+    const MEMBER = 1;
+    const ADMIN = 2;
     const GUEST = 3;
 
     public function getRouteKeyName()
@@ -28,7 +28,7 @@ class User extends Authenticatable
 
     public function getAvatarAttribute($value)
     {
-        return asset($value ? 'storage/'.$value : 'image/avatar.jpg');
+        return asset($value ? 'storage/' . $value : 'image/avatar.jpg');
     }
 
     public function teams()
