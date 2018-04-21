@@ -34,10 +34,10 @@ class UserTest extends TestCase
     {
         $this->actingAs($this->user);
         Storage::fake('public');
-        $this->post('users/' . $this->user->username . '/avatar', [
+        $this->post('users/'.$this->user->username.'/avatar', [
             'avatar' => UploadedFile::fake()->image('avatar.png'),
         ]);
-        $this->assertEquals(env('APP_URL') . '/storage/avatars/' . $this->user->username . '.png', auth()->user()->avatar);
-        Storage::disk('public')->assertExists('avatars/' . $this->user->username . '.png');
+        $this->assertEquals(env('APP_URL').'/storage/avatars/'.$this->user->username.'.png', auth()->user()->avatar);
+        Storage::disk('public')->assertExists('avatars/'.$this->user->username.'.png');
     }
 }
