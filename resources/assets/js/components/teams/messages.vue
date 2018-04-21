@@ -1,13 +1,13 @@
 <template>
-    <messageBoard type="team" :id="id" :team="team"></messageBoard>
+    <messages type="team" :id="id" :team="team"></messages>
 </template>
 
 <script>
-import messageBoard from './../partials/messageBoard'
+import messages from './../partials/messages'
     export default {
         props: ['id', 'team'],
         components: {
-            messageBoard
+            messages
         }
     }
 </script>

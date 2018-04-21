@@ -18,7 +18,8 @@ mix.js('resources/assets/js/pages/projects/single.js', 'public/js/projects')
    .js('resources/assets/js/pages/projects/index.js', 'public/js/projects');
 
 // Teams
-mix.js('resources/assets/js/pages/teams/messages.js', 'public/js/teams');
+mix.js('resources/assets/js/pages/teams/messages.js', 'public/js/teams')
+    .js('resources/assets/js/pages/teams/single.js', 'public/js/teams');
 
 // Offices
 mix.js('resources/assets/js/pages/offices/messages.js', 'public/js/offices');

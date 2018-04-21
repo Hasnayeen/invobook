@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Team;
 use App\Services\MessageService;
 use App\Http\Requests\StoreMessageRequest;
 
@@ -39,5 +40,12 @@ class TeamController extends Controller
                 'message' => $e->getMessage(),
             ]);
         }
+    }
+
+    public function show(Team $team)
+    {
+        $team->load('members');
+
+        return view('teams.single', ['team' => $team]);
     }
 }
