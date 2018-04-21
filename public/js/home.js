@@ -21444,9 +21444,238 @@ if (false) {
 }
 
 /***/ }),
-/* 40 */,
-/* 41 */,
-/* 42 */,
+/* 40 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(41)
+/* template */
+var __vue_template__ = __webpack_require__(42)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/partials/activity.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2fb2ca65", Component.options)
+  } else {
+    hotAPI.reload("data-v-2fb2ca65", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 41 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['resource', 'resourceType']
+});
+
+/***/ }),
+/* 42 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass:
+        "bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center text-center rounded m-4"
+    },
+    [
+      _c("header", { staticClass: "w-full relative border-b h-12 pt-4" }, [
+        _c(
+          "a",
+          {
+            staticClass: "text-grey-darker font-medium no-underline",
+            attrs: {
+              href:
+                "/" + _vm.resourceType + "/" + _vm.resource.slug + "/activities"
+            }
+          },
+          [_vm._v("\n            Activities\n        ")]
+        ),
+        _vm._v(" "),
+        _vm._m(0)
+      ]),
+      _vm._v(" "),
+      _vm._m(1)
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "text-grey-darker absolute pin-r mr-2" }, [
+      _c("i", { staticClass: "fa fa-ellipsis-h" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "w-full h-48 self-start text-left" }, [
+      _c(
+        "a",
+        {
+          staticClass: "flex flex-row p-4 no-underline text-grey-darker",
+          attrs: { href: "#" }
+        },
+        [
+          _c("img", {
+            staticClass: "rounded-full w-8 h-8 mr-2",
+            attrs: { src: "http://placehold.it/34x34" }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "text-sm" }, [
+            _c("p", [
+              _c("span", { staticClass: "text-pink" }, [_vm._v("John")]),
+              _c("span", [_vm._v(" added a new task")])
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "text-xs" }, [_vm._v("15 min ago")])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "flex flex-row p-4 no-underline text-grey-darker",
+          attrs: { href: "#" }
+        },
+        [
+          _c("img", {
+            staticClass: "rounded-full w-8 h-8 mr-2",
+            attrs: { src: "http://placehold.it/34x34" }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "text-sm" }, [
+            _c("p", [
+              _c("span", { staticClass: "text-pink" }, [_vm._v("John")]),
+              _c("span", [_vm._v(" commented in ")]),
+              _c("span", { staticClass: "text-pink" }, [
+                _vm._v("Review Meeting")
+              ])
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "text-xs" }, [_vm._v("20 min ago")])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "flex flex-row p-4 no-underline text-grey-darker",
+          attrs: { href: "#" }
+        },
+        [
+          _c("img", {
+            staticClass: "rounded-full w-8 h-8 mr-2",
+            attrs: { src: "http://placehold.it/34x34" }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "text-sm" }, [
+            _c("p", [
+              _c("span", { staticClass: "text-pink" }, [_vm._v("James")]),
+              _c("span", [_vm._v(" archived a discussion")])
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "text-xs" }, [_vm._v("1 hr ago")])
+          ])
+        ]
+      )
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-2fb2ca65", module.exports)
+  }
+}
+
+/***/ }),
 /* 43 */,
 /* 44 */,
 /* 45 */,
@@ -21472,7 +21701,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(65);
-module.exports = __webpack_require__(81);
+module.exports = __webpack_require__(78);
 
 
 /***/ }),
@@ -21508,7 +21737,7 @@ var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(67)
 /* template */
-var __vue_template__ = __webpack_require__(80)
+var __vue_template__ = __webpack_require__(77)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -21558,7 +21787,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__partials_teams_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__partials_teams_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__partials_offices_vue__ = __webpack_require__(74);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__partials_offices_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__partials_offices_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__partials_activity_vue__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__partials_activity_vue__ = __webpack_require__(40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__partials_activity_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__partials_activity_vue__);
 //
 //
@@ -22129,6 +22358,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).then(function (response) {
                 if (response.data.status == 'success') {
                     _this.showCreateTeamForm = false;
+                    _this.teams.push(response.data.team);
                 }
             }).catch(function (error) {
                 console.log(error);
@@ -22313,11 +22543,15 @@ var render = function() {
                         },
                         [_vm._v(_vm._s(team.members.length - 5) + "+")]
                       )
-                    : _c(
+                    : _vm._e(),
+                  _vm._v(" "),
+                  team.members.length < 1
+                    ? _c(
                         "span",
                         { staticClass: "text-grey-dark text-center" },
                         [_vm._v("No members yet")]
                       )
+                    : _vm._e()
                 ],
                 2
               )
@@ -22720,235 +22954,6 @@ if (false) {
 /* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(78)
-/* template */
-var __vue_template__ = __webpack_require__(79)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/partials/activity.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-2fb2ca65", Component.options)
-  } else {
-    hotAPI.reload("data-v-2fb2ca65", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 78 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['resource']
-});
-
-/***/ }),
-/* 79 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      staticClass:
-        "bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center text-center rounded m-4"
-    },
-    [
-      _c("header", { staticClass: "w-full relative border-b h-12 pt-4" }, [
-        _c(
-          "a",
-          {
-            staticClass: "text-grey-darker font-medium no-underline",
-            attrs: { href: "/projects/" + _vm.resource.slug + "/activities" }
-          },
-          [_vm._v("\n            Activities\n        ")]
-        ),
-        _vm._v(" "),
-        _vm._m(0)
-      ]),
-      _vm._v(" "),
-      _vm._m(1)
-    ]
-  )
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "text-grey-darker absolute pin-r mr-2" }, [
-      _c("i", { staticClass: "fa fa-ellipsis-h" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "w-full h-48 self-start text-left" }, [
-      _c(
-        "a",
-        {
-          staticClass: "flex flex-row p-4 no-underline text-grey-darker",
-          attrs: { href: "#" }
-        },
-        [
-          _c("img", {
-            staticClass: "rounded-full w-8 h-8 mr-2",
-            attrs: { src: "http://placehold.it/34x34" }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "text-sm" }, [
-            _c("p", [
-              _c("span", { staticClass: "text-pink" }, [_vm._v("John")]),
-              _c("span", [_vm._v(" added a new task")])
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "text-xs" }, [_vm._v("15 min ago")])
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "a",
-        {
-          staticClass: "flex flex-row p-4 no-underline text-grey-darker",
-          attrs: { href: "#" }
-        },
-        [
-          _c("img", {
-            staticClass: "rounded-full w-8 h-8 mr-2",
-            attrs: { src: "http://placehold.it/34x34" }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "text-sm" }, [
-            _c("p", [
-              _c("span", { staticClass: "text-pink" }, [_vm._v("John")]),
-              _c("span", [_vm._v(" commented in ")]),
-              _c("span", { staticClass: "text-pink" }, [
-                _vm._v("Review Meeting")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "text-xs" }, [_vm._v("20 min ago")])
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "a",
-        {
-          staticClass: "flex flex-row p-4 no-underline text-grey-darker",
-          attrs: { href: "#" }
-        },
-        [
-          _c("img", {
-            staticClass: "rounded-full w-8 h-8 mr-2",
-            attrs: { src: "http://placehold.it/34x34" }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "text-sm" }, [
-            _c("p", [
-              _c("span", { staticClass: "text-pink" }, [_vm._v("James")]),
-              _c("span", [_vm._v(" archived a discussion")])
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "text-xs" }, [_vm._v("1 hr ago")])
-          ])
-        ]
-      )
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-2fb2ca65", module.exports)
-  }
-}
-
-/***/ }),
-/* 80 */
-/***/ (function(module, exports, __webpack_require__) {
-
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -23037,7 +23042,7 @@ if (false) {
 }
 
 /***/ }),
-/* 81 */
+/* 78 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

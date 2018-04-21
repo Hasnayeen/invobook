@@ -43,7 +43,7 @@
                         <img :src="member.avatar" class="rounded-full w-8 h-8 mr-1">
                     </a>
                     <span v-if="team.members.length > 5" class="bg-grey-lighter border-teal border p-2 rounded-full">{{ team.members.length - 5 }}+</span>
-                    <span v-else class="text-grey-dark text-center">No members yet</span>
+                    <span v-if="team.members.length < 1" class="text-grey-dark text-center">No members yet</span>
                 </div>
             </div>
     	</div>
@@ -82,6 +82,7 @@
                 }).then((response) => {
                     if (response.data.status == 'success') {
                         this.showCreateTeamForm = false;
+                        this.teams.push(response.data.team);
                     }
                 }).catch((error) => {
                     console.log(error);

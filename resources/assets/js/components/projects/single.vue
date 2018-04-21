@@ -1,7 +1,7 @@
 <template>
     <div class="container mx-auto w-3/5 mt-8">
         <div class="text-center text-grey-dark font-semibold text-3xl mb-4">
-            Goodwork API
+            {{project.name}}
             <p class="text-base">December 5, 2017 - December 13, 2017</p>
         </div>
 
@@ -19,31 +19,32 @@
         </div>
 
         <div class="flex flex-row flex-wrap justify-center">
-            <taskBoard :project="project"></taskBoard>
-            <discussionBoard :project="project"></discussionBoard>
-            <messageBoard :project="project"></messageBoard>
-            <schedule :project="project"></schedule>
-            <files :project="project"></files>
-            <activity :project="project"></activity>
+            <taskBoard :resourceType="resourceType" :resource="project"></taskBoard>
+            <discussionBoard :resourceType="resourceType" :resource="project"></discussionBoard>
+            <messagesBoard :resourceType="resourceType" :resource="project"></messagesBoard>
+            <schedule :resourceType="resourceType" :resource="project"></schedule>
+            <files :resourceType="resourceType" :resource="project"></files>
+            <activity :resourceType="resourceType" :resource="project"></activity>
         </div>
     </div>
 </template>
 
 <script>
-import taskBoard from './../partials/projects/taskBoard.vue'
-import discussionBoard from './../partials/projects/discussionBoard.vue'
-import messageBoard from './../partials/projects/messageBoard.vue'
-import schedule from './../partials/projects/schedule.vue'
-import files from './../partials/projects/files.vue'
-import activity from './../partials/projects/activity.vue'
+import taskBoard from './../partials/taskBoard.vue'
+import discussionBoard from './../partials/discussionBoard.vue'
+import messagesBoard from './../partials/messagesBoard.vue'
+import schedule from './../partials/schedule.vue'
+import files from './../partials/files.vue'
+import activity from './../partials/activity.vue'
 import addMemberForm from "./../partials/addMemberForm.vue";
 
 export default {
     components: {
-        taskBoard, discussionBoard, messageBoard, schedule, files, activity, addMemberForm
+        taskBoard, discussionBoard, messagesBoard, schedule, files, activity, addMemberForm
     },
     props: ['project'],
     data: () => ({
+        resourceType: 'projects',
         addMemberFormShown: false,
     }),
     methods: {

@@ -22,4 +22,20 @@ class TeamTest extends TestCase
         $response = $this->actingAs($this->user)->get('teams/' . $this->team->slug);
         $response->assertSee($this->team->name);
     }
+
+    /** @test */
+    public function admin_can_create_team()
+    {
+        $admin = factory('App\Models\User')->create(['role' => 2]);
+        $response = $this->actingAs($admin)->post('/teams', [
+            'name'        => 'New Team',
+            'description' => 'Team of all new members',
+        ]);
+        $response->assertJsonFragment([
+            'status'      => 'success',
+            'name'        => 'New Team',
+            'description' => 'Team of all new members',
+        ]);
+        $this->assertDatabaseHas('teams', ['name' => 'New Team', 'description' => 'Team of all new members']);
+    }
 }
