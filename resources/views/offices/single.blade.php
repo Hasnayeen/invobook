@@ -2,10 +2,10 @@
 
 @slot('title') Single Resource View @endslot
 
-<single></single>
+<single :office="{{ $office }}"></single>
 
 @slot('script')
-<script src="/js/projects/single.js"></script>
+<script src="/js/offices/single.js"></script>
 @endslot
 
 @endcomponent

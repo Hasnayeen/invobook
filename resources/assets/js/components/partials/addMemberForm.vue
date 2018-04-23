@@ -6,13 +6,15 @@
                 <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold text-center text-lg mb-4" for="user">
                     Add Member
                 </label>
-                <select v-model="newMember" class="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" id="user">
-                    <option selected disabled hidden>Select User to Add</option>
-                    <template v-for="user in users">
-                        <option :value="user.id" class="my-2 text-lg">{{ user.name }}</option>
-                    </template>
-                </select>
-                <i class="fa fa-chevron-down pointer-events-none absolute flex items-center pin-r pin-t pr-8 mr-2 mt-16 pt-4 text-grey-darker"></i>
+                <div class="flex flex-row items-center">
+                    <select v-model="newMember" class="w-5/6 block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" id="user">
+                        <option selected disabled hidden>Select User to Add</option>
+                        <template v-for="user in users">
+                            <option :value="user.id" class="my-2 text-lg">{{ user.name }}</option>
+                        </template>
+                    </select>
+                    <i class="w-1/6 fa fa-chevron-down pointer-events-none flex items-center text-grey-darker -ml-8"></i>
+                </div>
             </div>
         </div>
         <div class="flex flex-row justify-between py-4 px-8 bg-grey-lighter rounded">

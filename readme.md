@@ -33,7 +33,7 @@ Goodwork brings you all the component required for your project to run smoothly 
 
 ![Notifications](https://i.imgur.com/XGdakw9.png)
 
-![Messages](https://imgur.com/a/Gck1Wod)
+![Messages](https://i.imgur.com/e6oTWtw.png)
 
 ## Contributing
 

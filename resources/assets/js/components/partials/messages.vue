@@ -30,7 +30,7 @@
                             <img :src="message.user.avatar" :alt="message.user.name" class="w-10 h-10 rounded-full border-2"
                                 :class="[(message.user_id == user.id) ? 'order-1 border-teal' : 'border-pink']">
                             <div class="rounded-2xl p-4 mx-2 w-64 leading-normal mt-6 text-white"
-                                :class="[(message.user_id == user.id) ? 'bg-teal-light rounded-tr-none' : 'bg-grey rounded-tl-none']">
+                                :class="[(message.user_id == user.id) ? 'bg-teal rounded-tr-none' : 'bg-grey rounded-tl-none']">
                                 <div>{{ message.body }}</div>
                                 <div class="text-grey-lighter text-xs pt-2 float-right">{{ getTime(message.created_at) }}</div>
                             </div>

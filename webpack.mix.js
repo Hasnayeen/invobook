@@ -14,15 +14,15 @@ mix.js('resources/assets/js/pages/errors/404.js', 'public/js/errors');
 // Projects
 mix.js('resources/assets/js/pages/projects/single.js', 'public/js/projects')
    .js('resources/assets/js/pages/projects/tasks.js', 'public/js/projects')
-   .js('resources/assets/js/pages/projects/messages.js', 'public/js/projects')
-   .js('resources/assets/js/pages/projects/index.js', 'public/js/projects');
+   .js('resources/assets/js/pages/projects/messages.js', 'public/js/projects');
 
 // Teams
 mix.js('resources/assets/js/pages/teams/messages.js', 'public/js/teams')
     .js('resources/assets/js/pages/teams/single.js', 'public/js/teams');
 
 // Offices
-mix.js('resources/assets/js/pages/offices/messages.js', 'public/js/offices');
+mix.js('resources/assets/js/pages/offices/messages.js', 'public/js/offices')
+    .js('resources/assets/js/pages/offices/single.js', 'public/js/offices');
 
 // Users
 mix.js('resources/assets/js/pages/users/profile.js', 'public/js/users');
@@ -40,3 +40,4 @@ mix.sourceMaps(); // Enable sourcemaps
 // mix.disableNotifications();
 // mix.setPublicPath('path/to/public'); <-- Useful for Node apps.
 // mix.webpackConfig({}); <-- Override webpack.config.js, without editing the file directly.
+mix.webpackConfig({ devtool: "inline-source-map" });

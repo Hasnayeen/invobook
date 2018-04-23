@@ -15,11 +15,6 @@ class TeamController extends Controller
         $this->messageService = $messageService;
     }
 
-    public function index()
-    {
-        return view('teams.single');
-    }
-
     public function getAllMessages($team)
     {
         list($messages, $id) = $this->messageService->getAllMessages('team', $team);
