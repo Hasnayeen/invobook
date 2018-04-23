@@ -25,20 +25,6 @@ class ProjectController extends Controller
         $this->messageService = $messageService;
     }
 
-    /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function index()
-    {
-        try {
-            $projects = $this->projectService->getAllProjects()->toArray();
-
-            return view('projects.index', compact('projects'));
-        } catch (Exception $e) {
-            throw $e;
-        }
-    }
-
     public function single(Project $project)
     {
         $project->load('members');

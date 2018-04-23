@@ -11,7 +11,7 @@
         <div class="w-full h-48 self-start text-left">
             <a href="#" class="flex flex-row items-center p-4 no-underline text-grey-darker">
                 <span class="pr-4">
-                    <i class="text-xl fa fa-file-image-o"></i>
+                    <i class="text-xl fas fa-file-image-o"></i>
                 </span>
                 <div class="text-xs">
                     <p class="text-base">landing-page-v.1.png</p>
@@ -22,7 +22,7 @@
             </a>
             <a href="#" class="flex flex-row items-center p-4 no-underline text-grey-darker">
                 <span class="pr-4">
-                    <i class="text-xl fa fa-file-pdf-o"></i>
+                    <i class="text-xl fas fa-file-pdf-o"></i>
                 </span>
                 <div class="text-xs">
                     <p class="text-base">api-doc-v.1.pdf</p>
@@ -33,7 +33,7 @@
             </a>
             <a href="#" class="flex flex-row items-center p-4 no-underline text-grey-darker">
                 <span class="pr-4">
-                    <i class="text-xl fa fa-file-text-o"></i>
+                    <i class="text-xl fas fa-file-text-o"></i>
                 </span>
                 <div class="text-xs">
                     <p class="text-base">features list.txt</p>

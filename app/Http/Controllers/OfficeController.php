@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Office;
 use App\Services\MessageService;
 use App\Http\Requests\StoreMessageRequest;
 
@@ -14,9 +15,11 @@ class OfficeController extends Controller
         $this->messageService = $messageService;
     }
 
-    public function index()
+    public function show(Office $office)
     {
-        return view('offices.single');
+        $office->load('members');
+
+        return view('offices.single', ['office' => $office]);
     }
 
     public function getAllMessages($office)
