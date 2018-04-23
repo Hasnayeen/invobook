@@ -14,3 +14,4 @@ npm-debug.log
 .env.dusk.local
 docker.env
 /storage/framework/testing
+.vscode

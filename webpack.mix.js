@@ -35,7 +35,7 @@ mix.js('resources/assets/js/pages/users/profile.js', 'public/js/users');
 // mix.combine(files, destination);
 // mix.copy(from, to);
 // mix.minify(file);
-// mix.sourceMaps(); // Enable sourcemaps
+mix.sourceMaps(); // Enable sourcemaps
 // mix.version(); // Enable versioning.
 // mix.disableNotifications();
 // mix.setPublicPath('path/to/public'); <-- Useful for Node apps.

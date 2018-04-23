@@ -48,8 +48,8 @@ class MessageService
 
     private function getIdFromSlug($type, $slug)
     {
-        $model = 'App\Models\\'.ucwords($type);
-        $repository = 'App\Repositories\\'.ucwords($type).'Repository';
+        $model = 'App\Models\\' . ucwords($type);
+        $repository = 'App\Repositories\\' . ucwords($type) . 'Repository';
         $repository = new $repository(new $model);
 
         return $repository->getIdFromSlug($slug);

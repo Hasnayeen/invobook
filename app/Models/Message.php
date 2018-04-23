@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Message extends Model
@@ -12,10 +11,5 @@ class Message extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function getCreatedAtAttribute($value)
-    {
-        return Carbon::createFromFormat('Y-m-d H:i:s', $value)->diffForHumans();
     }
 }
