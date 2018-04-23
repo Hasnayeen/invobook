@@ -37,7 +37,7 @@ class MessageRepository
     {
         return $this->model->where(['messageable_type' => $type, 'messageable_id' => $id])
                            ->with('user')
-                           ->orderBy('created_at', 'desc')
+                           ->orderBy('id', 'desc')
                            ->take(15)
                            ->get();
     }

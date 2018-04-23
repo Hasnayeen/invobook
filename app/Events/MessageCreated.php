@@ -36,6 +36,6 @@ class MessageCreated implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return [$this->message->messageable_type.'.'.$this->message->messageable_id];
+        return [$this->message->messageable_type . '.' . $this->message->messageable_id];
     }
 }

@@ -59,3 +59,11 @@
  .resize-none {
      resize: none;
  }
+
+ .order-1 {
+     order: 1;
+ }
+
+ .h-60-vh {
+     height: 60vh;
+ }

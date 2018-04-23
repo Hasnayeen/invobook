@@ -51,9 +51,9 @@ class ProjectController extends Controller
         return view('projects.tasks', ['project' => $project]);
     }
 
-    public function getAllMessages($project)
+    public function getAllMessages(Project $project)
     {
-        list($messages, $id) = $this->messageService->getAllMessages('project', $project);
+        list($messages, $id) = $this->messageService->getAllMessages('project', $project->slug);
 
         return view('projects.messages', compact('project', 'id', 'messages'));
     }
@@ -62,6 +62,7 @@ class ProjectController extends Controller
     {
         try {
             $message = $this->messageService->saveMessage($request->all(), $project);
+            $message->load('user');
 
             return response()->json([
                 'status'  => 'success',

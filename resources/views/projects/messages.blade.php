@@ -2,7 +2,7 @@
 
 @slot('title') Messages @endslot
 
-<messages id="{{ $id }}" project="{{ $project }}"></messages>
+<messages :id="{{ $id }}" :project="{{ $project }}"></messages>
 
 @slot('script')
 <script type="text/javascript">
