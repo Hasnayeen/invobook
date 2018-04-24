@@ -19,12 +19,12 @@
         </div>
 
         <div class="flex flex-row flex-wrap justify-center">
-            <taskBoard :resourceType="resourceType" :resource="project"></taskBoard>
-            <discussionBoard :resourceType="resourceType" :resource="project"></discussionBoard>
-            <messagesBoard :resourceType="resourceType" :resource="project"></messagesBoard>
-            <schedule :resourceType="resourceType" :resource="project"></schedule>
-            <files :resourceType="resourceType" :resource="project"></files>
-            <activity :resourceType="resourceType" :resource="project"></activity>
+            <taskBoard resourceType="projects" :resource="project"></taskBoard>
+            <discussionBoard resourceType="projects" :resource="project"></discussionBoard>
+            <messagesBoard resourceType="projects" :resource="project"></messagesBoard>
+            <schedule resourceType="projects" :resource="project"></schedule>
+            <files resourceType="projects" :resource="project"></files>
+            <activity resourceType="projects" :resource="project"></activity>
         </div>
     </div>
 </template>
@@ -44,7 +44,6 @@ export default {
     },
     props: ['project'],
     data: () => ({
-        resourceType: 'projects',
         addMemberFormShown: false,
     }),
     methods: {

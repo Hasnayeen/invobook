@@ -19,12 +19,12 @@
         </div>
 
         <div class="flex flex-row flex-wrap justify-center">
-            <taskBoard :resource="team"></taskBoard>
-            <discussionBoard :resource="team"></discussionBoard>
-            <messagesBoard :resource="team"></messagesBoard>
-            <schedule :resource="team"></schedule>
-            <files :resource="team"></files>
-            <activity :resource="team"></activity>
+            <taskBoard resourceType="teams" :resource="team"></taskBoard>
+            <discussionBoard resourceType="teams" :resource="team"></discussionBoard>
+            <messagesBoard resourceType="teams" :resource="team"></messagesBoard>
+            <schedule resourceType="teams" :resource="team"></schedule>
+            <files resourceType="teams" :resource="team"></files>
+            <activity resourceType="teams" :resource="team"></activity>
         </div>
     </div>
 </template>
