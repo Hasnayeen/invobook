@@ -5,7 +5,7 @@ Self hosted project management and collaboration tool inspired by basecamp
 
 ## About Goodwork
 
-Goodwork is a simple project management and collaboration tool for all kind of teams. It is open source and MIT (See License) licensed. Goodwork is a self-hosted software so no dependency on anyone and only you keep your data.
+Goodwork is a simple project management and collaboration tool for all kind of teams. It is open source and MIT [See License](https://github.com/iluminar/goodwork/blob/dev/LICENSE) licensed. Goodwork is a self-hosted software so no dependency on anyone and only you keep your data.
 
 Goodwork brings you all the component required for your project to run smoothly in one place so that you have single source of truth. Instead of using a collection of tools or service which makes everything messy and hard to find important details from stuff scattered all over the place, Goodwork organizes everything in a central place where everyone in the company knows what to do, knows where things stand and find stuff without having to ask around all the time.
 
@@ -33,7 +33,7 @@ Goodwork brings you all the component required for your project to run smoothly 
 
 ![Notifications](https://i.imgur.com/XGdakw9.png)
 
-![Messages](https://i.imgur.com/e6oTWtw.png)
+![Messages](https://i.imgur.com/Qb9hkc6.png)
 
 ## Contributing
 

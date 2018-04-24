@@ -1,5 +1,5 @@
 <template>
-    <div class="container mx-auto w-3/5 mt-8">
+    <div class="container mx-auto w-3/4 2xl:w-3/5 mt-8">
         <div class="flex flex-row justify-around mb-8 pb-3 border-b-2 text-grey">
             <span @click="activeThisTab('projects')"
                 :class="{'text-grey-darker font-semibold border-teal border-b-4 pb-3 -mb-4':(active === 'projects'), 'cursor-pointer': (active != 'projects')}">

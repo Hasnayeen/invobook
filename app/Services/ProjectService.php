@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\Auth;
 use App\Repositories\ProjectRepository;
 
 class ProjectService
@@ -39,6 +40,10 @@ class ProjectService
 
     public function storeProject($data)
     {
-        return $this->projectRepository->storeProject($data);
+        $project = $this->projectRepository->storeProject($data);
+        $project->members()->save(Auth::user());
+        $project->load('members');
+
+        return $project;
     }
 }

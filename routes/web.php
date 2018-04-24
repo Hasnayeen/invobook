@@ -32,7 +32,7 @@ Route::group(['middleware' => 'auth'], function () {
         return abort(404);
     });
 
-    Route::post('projects', 'ProjectController@storeProject');
+    Route::post('projects', 'ProjectController@store');
 
     Route::get('projects/{project}', 'ProjectController@single');
 
