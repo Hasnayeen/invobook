@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Team;
 use Illuminate\Http\Request;
+use App\Services\TeamService;
 use App\Services\MessageService;
-use App\Repositories\TeamRepository;
 use App\Http\Requests\StoreMessageRequest;
 
 class TeamController extends Controller
@@ -46,10 +46,10 @@ class TeamController extends Controller
         return view('teams.single', ['team' => $team]);
     }
 
-    public function store(Request $request, TeamRepository $repository)
+    public function store(Request $request, TeamService $service)
     {
         try {
-            $team = $repository->createNewTeam($request->all());
+            $team = $service->createNewTeam($request->all());
 
             return response()->json([
                 'status' => 'success',

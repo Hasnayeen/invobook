@@ -15,11 +15,10 @@
                         type="text" placeholder="Description" v-model="description">
                     <span class="hidden"></span>
                 </p>
-                <p class="py-2">
-                    <button type="w-full submit" class="btn mr-4" @click="createNewOffice">Create</button>
-                    <button type="submit" class="btn bg-red-lighter hover:bg-red-light" 
-                        @click="closeCreateOfficeModal">Cancel</button>
-                </p>
+                <div class="flex flex-row justify-between pt-8 bg-grey-lighter rounded">
+                    <button @click="closeCreateOfficeModal" class="text-red-lighter hover:font-bold hover:text-red-light">Cancel</button>
+                    <button @click="createNewOffice" class="bg-teal-light text-white font-medium hover:bg-teal-dark py-3 px-4 rounded">Create</button>
+                </div>
             </div>
         </div>
 
@@ -32,12 +31,13 @@
 
             <div class="bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center items-center text-center rounded m-4" 
                 v-for="office in offices">
-                <span class="w-full h-16 pr-4 pt-2">
+                <span class="w-full h-8 pr-4 pt-2">
                     <i class="fa fa-ellipsis-h float-right text-grey-darker cursor-pointer"></i>
                 </span>
-                <a class="text-pink text-xl no-underline w-full pt-8 h-16 self-end" 
-                    :href="office.url">{{ office.name }}</a>
-                <span class="text-grey text-sm w-full h-16 self-start">{{ office.description }}</span>
+                <div class="w-full p-2 h-24 flex flex-col justify-end">
+                    <a class="text-pink text-xl no-underline" :href="office.url">{{ office.name }}</a>
+                </div>
+                <span class="text-grey text-sm w-full px-2 h-16 self-start">{{ office.description }}</span>
                 <div class="border-t w-full h-16 flex flex-row justify-start items-center px-2">
                     <img src="/image/avatar.jpg" class="rounded-full w-8 h-8 mr-2">
                     <img src="/image/avatar.jpg" class="rounded-full w-8 h-8 mr-2">

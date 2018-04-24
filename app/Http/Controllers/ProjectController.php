@@ -62,7 +62,7 @@ class ProjectController extends Controller
         }
     }
 
-    public function storeProject(StoreProjectRequest $request)
+    public function store(StoreProjectRequest $request)
     {
         try {
             $project = $this->projectService->storeProject($request->all());
