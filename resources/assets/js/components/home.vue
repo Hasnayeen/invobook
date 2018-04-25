@@ -27,18 +27,18 @@
     import activity from './partials/activity.vue'
 
     export default {
-        components: {
-            projects, teams, offices, activity
-        },
-        data: () => ({
-            active: "projects",
-        }),
-        methods: {
-            activeThisTab(tab){
-                if(tab != this.active){
-                    this.active = tab;
-                }
-            }
+      components: {
+        projects, teams, offices, activity
+      },
+      data: () => ({
+        active: 'projects'
+      }),
+      methods: {
+        activeThisTab (tab) {
+          if (tab != this.active) {
+            this.active = tab
+          }
         }
+      }
     }
 </script>

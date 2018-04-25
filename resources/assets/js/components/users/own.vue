@@ -75,18 +75,18 @@
 <script>
 import FileUpload from './../partials/fileUpload'
 export default {
-    name: 'Own',
-    components: {FileUpload},
-    props: ['user'],
-    methods: {
-        updateImage (imageUrl) {
-            this.user.avatar = imageUrl;
-        }
-    },
-    computed: {
-        avatarUrl () {
-            return this.user.avatar !== null ? this.user.avatar : '/image/avatar-profile.png';
-        }
+  name: 'Own',
+  components: {FileUpload},
+  props: ['user'],
+  methods: {
+    updateImage (imageUrl) {
+      this.user.avatar = imageUrl
     }
+  },
+  computed: {
+    avatarUrl () {
+      return this.user.avatar !== null ? this.user.avatar : '/image/avatar-profile.png'
+    }
+  }
 }
 </script>

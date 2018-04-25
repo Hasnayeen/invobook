@@ -27,13 +27,13 @@
 
 <script>
     export default {
-        data: () => ({
-            token: Laravel.csrfToken,
-            errors: errors,
-            status: false
-        }),
-        mounted() {
-            this.status = (status != 'null') ? status : false;
-        }
+      data: () => ({
+        token: Laravel.csrfToken,
+        errors: errors,
+        status: false
+      }),
+      mounted () {
+        this.status = (status != 'null') ? status : false
+    }
     }
 </script>

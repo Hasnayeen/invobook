@@ -36,14 +36,14 @@
 
 <script>
     export default {
-        data: () => ({
-            csrfToken: Laravel.csrfToken,
-            token: token,
-            errors: errors,
-            status: false
-        }),
-        mounted() {
-            this.status = (status != 'null') ? status : false;
-        }
+      data: () => ({
+        csrfToken: Laravel.csrfToken,
+        token: token,
+        errors: errors,
+        status: false
+      }),
+      mounted () {
+        this.status = (status != 'null') ? status : false
+    }
     }
 </script>

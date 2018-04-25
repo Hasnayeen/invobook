@@ -54,31 +54,31 @@
 
 <script>
     export default {
-        data: () => ({
-            offices: data.offices.map((office) => {
-                office.url = 'offices/' + office.slug;
-                return office;
-            }),
-            showCreateOfficeForm: false,
-            name: '',
-            description: ''
+      data: () => ({
+        offices: data.offices.map((office) => {
+          office.url = 'offices/' + office.slug
+          return office
         }),
-        props: {
-            activeTab: {
-                required: true,
-                type: String
-            }
-        },
-        methods: {
-            createNewOffice(){
-
-            },
-            closeCreateOfficeModal(){
-                this.showCreateOfficeForm = false;
-            },
-            openCreateOfficeModal(){
-                this.showCreateOfficeForm = true;
-            }
+        showCreateOfficeForm: false,
+        name: '',
+        description: ''
+      }),
+      props: {
+        activeTab: {
+          required: true,
+          type: String
         }
+      },
+      methods: {
+        createNewOffice () {
+
+        },
+        closeCreateOfficeModal () {
+          this.showCreateOfficeForm = false
+        },
+        openCreateOfficeModal () {
+          this.showCreateOfficeForm = true
+        }
+      }
     }
 </script>

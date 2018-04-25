@@ -56,75 +56,75 @@
 </template>
 
 <script>
-let day = null;
-    export default {
-        props: ['type', 'id', 'project'],
-        data: () => ({
-            messages: data.messages.reverse(),
-            message: '',
-            user: navbar.user,
-            unreadMessage: 0,
-            title: '',
-        }),
-        mounted () {
-            this.title = document.title;
-            this.listen();
-            document.getElementById("message-box").scrollTop = document.getElementById("message-box").scrollHeight;
-        },
-        updated () {
-            document.getElementById("message-box").scrollTop = document.getElementById("message-box").scrollHeight;
-        },
-        methods: {
-            sendMessage (e) {
-                if (e.shiftKey) {
-                    this.message = this.message + "\n";
-                } else {
-                    var msg = this.message;
-                    this.message = '';
-                    axios.post('messages', {
-                        message: msg,
-                        type: this.type
-                    })
-                    .then((response) => {
-                        if (response.data.status == 'success') {
-                            response.data.message.user = navbar.user;
-                            this.messages.push(response.data.message);
-                        }
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    });
-                }
-            },
-            listen () {
-                Echo.channel(this.type + '.' + this.id)
-                    .listen('MessageCreated', event => {
-                        event.message.user = event.user;
-                        this.messages.push(event.message);
-                        if (document.activeElement != document.getElementById("send-message")) {
-                            this.unreadMessage += 1;
-                            document.title = '(' + this.unreadMessage + ') ' + this.title;
-                        }
-                    });
-            },
-            clearTitleNotification () {
-                document.title = this.title;
-                this.unreadMessage = 0;
-            },
-            showDate (created_at) {
-                let createdDay = window.luxon.DateTime.fromSQL(created_at).toLocaleString(window.luxon.DateTime.DATE_MED);
-                if (day === null || day != createdDay) {
-                    day = createdDay;
-                    return true;
-                }
-                return false;
-            },
-            getDate (created_at) {
-                return window.luxon.DateTime.fromSQL(created_at).toLocaleString(window.luxon.DateTime.DATE_MED);
-            },
-            getTime (created_at) {
-                return window.luxon.DateTime.fromSQL(created_at).toLocaleString(window.luxon.DateTime.TIME_SIMPLE);
+let day = null
+export default {
+  props: ['type', 'id', 'project'],
+  data: () => ({
+    messages: data.messages.reverse(),
+    message: '',
+    user: navbar.user,
+    unreadMessage: 0,
+    title: ''
+  }),
+  mounted () {
+    this.title = document.title
+    this.listen()
+    document.getElementById('message-box').scrollTop = document.getElementById('message-box').scrollHeight
+  },
+  updated () {
+    document.getElementById('message-box').scrollTop = document.getElementById('message-box').scrollHeight
+  },
+  methods: {
+    sendMessage (e) {
+      if (e.shiftKey) {
+        this.message = this.message + '\n'
+      } else {
+        var msg = this.message
+        this.message = ''
+        axios.post('messages', {
+          message: msg,
+          type: this.type
+        })
+          .then((response) => {
+            if (response.data.status == 'success') {
+              response.data.message.user = navbar.user
+              this.messages.push(response.data.message)
             }
-        }
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+      }
+    },
+    listen () {
+      Echo.channel(this.type + '.' + this.id)
+        .listen('MessageCreated', event => {
+          event.message.user = event.user
+          this.messages.push(event.message)
+          if (document.activeElement != document.getElementById('send-message')) {
+            this.unreadMessage += 1
+            document.title = '(' + this.unreadMessage + ') ' + this.title
+          }
+        })
+    },
+    clearTitleNotification () {
+      document.title = this.title
+      this.unreadMessage = 0
+    },
+    showDate (created_at) {
+      let createdDay = window.luxon.DateTime.fromSQL(created_at).toLocaleString(window.luxon.DateTime.DATE_MED)
+      if (day === null || day != createdDay) {
+        day = createdDay
+        return true
+      }
+      return false
+    },
+    getDate (created_at) {
+      return window.luxon.DateTime.fromSQL(created_at).toLocaleString(window.luxon.DateTime.DATE_MED)
+    },
+    getTime (created_at) {
+      return window.luxon.DateTime.fromSQL(created_at).toLocaleString(window.luxon.DateTime.TIME_SIMPLE)
     }
+  }
+}
 </script>

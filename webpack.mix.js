@@ -37,7 +37,7 @@ mix.js('resources/assets/js/pages/users/profile.js', 'public/js/users');
 // mix.minify(file);
 mix.sourceMaps(); // Enable sourcemaps
 // mix.version(); // Enable versioning.
-// mix.disableNotifications();
+mix.disableNotifications();
 // mix.setPublicPath('path/to/public'); <-- Useful for Node apps.
 // mix.webpackConfig({}); <-- Override webpack.config.js, without editing the file directly.
 mix.webpackConfig({ devtool: "inline-source-map" });

@@ -67,63 +67,63 @@
 </template>
 
 <script>
-import Datepicker from "vuejs-datepicker";
-import NotificationPopup from "../partials/notificationPopup.vue";
+import Datepicker from 'vuejs-datepicker'
+import NotificationPopup from '../partials/notificationPopup.vue'
 export default {
-    components: {Datepicker, NotificationPopup},
-    props: ['project', 'tasks'],
-    data: () => ({
-        createTaskFormShown: false,
-        title: '',
-        notes: '',
-        assigned_to: null,
-        related_to: '',
-        message: '',
-        showNotification: false,
-    }),
-    methods: {
-        openCreateTaskForm () {
-            this.createTaskFormShown = true;
-        },
-        closeCreateTaskForm () {
-            this.createTaskFormShown = false;
-        },
-        createTask () {
-            axios.post('/tasks', {
-                title: this.title,
-                notes: this.notes,
-                assigned_to: this.assigned_to,
-                related_to: this.related_to,
-                due_on: this.$refs.dueOnDate.formattedValue,
-                taskable_id: this.project.id,
-                taskable_type: 'project',
-            })
-            .then((response) => {
-                if (response.data.status == 'success') {
-                    this.createTaskFormShown = false;
-                    this.message = 'New Task Created';
-                    this.showNotification = true;
-                    this.title = '';
-                    this.notes = '';
-                    this.assigned_to = null;
-                    this.related_to = '';
-                    setTimeout(() => {
-                        this.showNotification = false;
-                    }, 2000);
-                }
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-        },
-        closeNotification () {
-            this.showNotification = false;
-        }
+  components: {Datepicker, NotificationPopup},
+  props: ['project', 'tasks'],
+  data: () => ({
+    createTaskFormShown: false,
+    title: '',
+    notes: '',
+    assigned_to: null,
+    related_to: '',
+    message: '',
+    showNotification: false
+  }),
+  methods: {
+    openCreateTaskForm () {
+      this.createTaskFormShown = true
     },
-    computed: {
-        taskCompleted () {
-            return this.tasks.filter(task => task.completed).length;
-        }
+    closeCreateTaskForm () {
+      this.createTaskFormShown = false
+    },
+    createTask () {
+      axios.post('/tasks', {
+        title: this.title,
+        notes: this.notes,
+        assigned_to: this.assigned_to,
+        related_to: this.related_to,
+        due_on: this.$refs.dueOnDate.formattedValue,
+        taskable_id: this.project.id,
+        taskable_type: 'project'
+      })
+        .then((response) => {
+          if (response.data.status == 'success') {
+            this.createTaskFormShown = false
+            this.message = 'New Task Created'
+            this.showNotification = true
+            this.title = ''
+            this.notes = ''
+            this.assigned_to = null
+            this.related_to = ''
+            setTimeout(() => {
+              this.showNotification = false
+            }, 2000)
+          }
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
+    closeNotification () {
+      this.showNotification = false
     }
+  },
+  computed: {
+    taskCompleted () {
+      return this.tasks.filter(task => task.completed).length
+    }
+  }
 }
 </script>

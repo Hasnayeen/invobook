@@ -77,77 +77,77 @@
 
 <script>
     export default {
-        data: () => ({
-            user: navbar.user,
-            token: Laravel.csrfToken,
-            url: navbar.navUrl,
-            avatar: '',
-            profileUrl: navbar.navUrl.site + '/users/' + navbar.user.username,
-            notificationShown: false,
-            unreadNotification: false,
-            profileDropdownShown: false,
-        }),
-        methods: {
-            logoutUser(event){
-                event.preventDefault();
-                document.getElementById('logout-form').submit();
-            },
-            toggleProfileDropdown (event) {
-                if (this.profileDropdownShown) {
-                    this.hideProfileDropdown(event);
-                    document.body.removeEventListener('keyup', this.hideProfileDropdown);
-                } else {
-                    this.showProfileDropdown();
-                    document.body.addEventListener('keyup', this.hideProfileDropdown);
-                }
-            },
-            showProfileDropdown (event) {
-                if (this.notificationShown) {
-                    this.notificationShown = false;
-                }
-                this.profileDropdownShown = true;
-            },
-            hideProfileDropdown (event) {
-                if (event.type === 'keyup' && event.key !== 'Escape') {
-                    return false;
-                }
-                this.profileDropdownShown = false;
-            },
-            toggleNotification (event) {
-                if (this.notificationShown) {
-                    document.body.removeEventListener('keyup', this.hideNotification);
-                    this.hideNotification(event);
-                } else {
-                    document.body.addEventListener('keyup', this.hideNotification);
-                    this.showNotification();
-                }
-            },
-            showNotification (event) {
-                if (this.profileDropdownShown) {
-                    this.profileDropdownShown = false;
-                }
-                this.notificationShown = true;
-            },
-            hideNotification (event) {
-                if (event.type === 'keyup' && event.key !== 'Escape') {
-                    return false;
-                }
-                this.notificationShown = false;
-            },
+      data: () => ({
+        user: navbar.user,
+        token: Laravel.csrfToken,
+        url: navbar.navUrl,
+        avatar: '',
+        profileUrl: navbar.navUrl.site + '/users/' + navbar.user.username,
+        notificationShown: false,
+        unreadNotification: false,
+        profileDropdownShown: false
+      }),
+      methods: {
+        logoutUser (event) {
+          event.preventDefault()
+          document.getElementById('logout-form').submit()
         },
-        created(){
-            if( this.user.avatar == null || this.user.avatar == '' ){
-                this.avatar = '/image/avatar.jpg'; //default avatar
-            }else{
-                this.avatar = this.user.avatar;
-            }
+        toggleProfileDropdown (event) {
+          if (this.profileDropdownShown) {
+            this.hideProfileDropdown(event)
+            document.body.removeEventListener('keyup', this.hideProfileDropdown)
+          } else {
+            this.showProfileDropdown()
+            document.body.addEventListener('keyup', this.hideProfileDropdown)
+          }
         },
-        mounted(){
-            var thisNav = this;
-            document.addEventListener("click", function(){ //Hide sub menus on body click
-                thisNav.hideSubMenu = true;
-                thisNav.hideNotificationList = true;
-            });
+        showProfileDropdown (event) {
+          if (this.notificationShown) {
+            this.notificationShown = false
+          }
+          this.profileDropdownShown = true
+        },
+        hideProfileDropdown (event) {
+          if (event.type === 'keyup' && event.key !== 'Escape') {
+            return false
+          }
+          this.profileDropdownShown = false
+        },
+        toggleNotification (event) {
+          if (this.notificationShown) {
+            document.body.removeEventListener('keyup', this.hideNotification)
+            this.hideNotification(event)
+          } else {
+            document.body.addEventListener('keyup', this.hideNotification)
+            this.showNotification()
+          }
+        },
+        showNotification (event) {
+          if (this.profileDropdownShown) {
+            this.profileDropdownShown = false
+          }
+          this.notificationShown = true
+        },
+        hideNotification (event) {
+          if (event.type === 'keyup' && event.key !== 'Escape') {
+            return false
+          }
+          this.notificationShown = false
         }
+      },
+      created () {
+        if (this.user.avatar == null || this.user.avatar == '') {
+          this.avatar = '/image/avatar.jpg' // default avatar
+        } else {
+          this.avatar = this.user.avatar
+        }
+      },
+      mounted () {
+        var thisNav = this
+        document.addEventListener('click', function () { // Hide sub menus on body click
+          thisNav.hideSubMenu = true
+          thisNav.hideNotificationList = true
+        })
+  }
     }
 </script>

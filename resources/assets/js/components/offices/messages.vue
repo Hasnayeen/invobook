@@ -4,10 +4,10 @@
 
 <script>
 import messages from './../partials/messages'
-    export default {
-        props: ['id', 'office'],
-        components: {
-            messages
-        }
-    }
+export default {
+  props: ['id', 'office'],
+  components: {
+    messages
+  }
+}
 </script>

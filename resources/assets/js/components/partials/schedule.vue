@@ -37,6 +37,6 @@
 
 <script>
 export default {
-    props: ['resource'],
+  props: ['resource']
 }
 </script>

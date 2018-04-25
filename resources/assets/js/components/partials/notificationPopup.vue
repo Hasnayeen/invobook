@@ -6,11 +6,11 @@
 
 <script>
 export default {
-    props: ['message', 'showNotification'],
-    methods: {
-        closeNotification () {
-            this.$emit('close');
-        }
+  props: ['message', 'showNotification'],
+  methods: {
+    closeNotification () {
+      this.$emit('close')
     }
+  }
 }
 </script>
