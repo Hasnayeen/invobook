@@ -53,41 +53,41 @@
 
 <script>
     export default {
-        data: () => ({
-            teams: data.teams.map((team) => {
-                team.url = 'teams/' + team.slug;
-                return team;
-            }),
-            showCreateTeamForm: false,
-            name: '',
-            description: ''
+      data: () => ({
+        teams: data.teams.map((team) => {
+          team.url = 'teams/' + team.slug
+          return team
         }),
-        props: {
-            activeTab: {
-                required: true,
-                type: String
-            }
-        },
-        methods: {
-            openCreateTeamModal(){
-                this.showCreateTeamForm = true;
-            },
-            closeCreateTeamModal(){
-                this.showCreateTeamForm = false;
-            },
-            createNewTeam(){
-                axios.post('/teams', {
-                    name: this.name,
-                    description: this.description
-                }).then((response) => {
-                    if (response.data.status == 'success') {
-                        this.showCreateTeamForm = false;
-                        this.teams.push(response.data.team);
-                    }
-                }).catch((error) => {
-                    console.log(error);
-                });
-            }
+        showCreateTeamForm: false,
+        name: '',
+        description: ''
+      }),
+      props: {
+        activeTab: {
+          required: true,
+          type: String
         }
+      },
+      methods: {
+        openCreateTeamModal () {
+          this.showCreateTeamForm = true
+        },
+        closeCreateTeamModal () {
+          this.showCreateTeamForm = false
+        },
+        createNewTeam () {
+          axios.post('/teams', {
+            name: this.name,
+            description: this.description
+          }).then((response) => {
+            if (response.data.status == 'success') {
+              this.showCreateTeamForm = false
+              this.teams.push(response.data.team)
+            }
+          }).catch((error) => {
+            console.log(error)
+          })
+    }
+      }
     }
 </script>

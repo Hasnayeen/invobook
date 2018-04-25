@@ -34,32 +34,32 @@
 
 <script>
     export default {
-        data: () => ({
-            isActive: false,
-            name: '',
-            email: ''
-        }),
-        methods: {
-            openModal () {
-                this.isActive = true;
-            },
-            closeModal () {
-                this.isActive = false;
-            },
-            sendInvitation () {
-                axios.post('/register/invite', {
-                    name: this.name,
-                    email: this.email
-                })
-                .then((response) => {
-                    if (response.data.status == 'success') {
-                        this.isActive = false;
-                    }
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-            }
-        }
+      data: () => ({
+        isActive: false,
+        name: '',
+        email: ''
+      }),
+      methods: {
+        openModal () {
+          this.isActive = true
+        },
+        closeModal () {
+          this.isActive = false
+        },
+        sendInvitation () {
+          axios.post('/register/invite', {
+            name: this.name,
+            email: this.email
+          })
+            .then((response) => {
+              if (response.data.status == 'success') {
+                this.isActive = false
+              }
+            })
+            .catch((error) => {
+              console.log(error)
+            })
+    }
+      }
     }
 </script>

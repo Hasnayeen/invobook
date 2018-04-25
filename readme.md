@@ -1,6 +1,8 @@
 ### Goodwork
 [![License](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://github.com/iluminar/goodwork/blob/dev/LICENSE)
 
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+
 Self hosted project management and collaboration tool inspired by basecamp
 
 ## About Goodwork

@@ -53,5 +53,14 @@
       "<rootDir>/resources/assets/js/",
       "<rootDir>/tests/JS/"
     ]
+  },
+  "standard": {
+    "globals": [
+      "Vue",
+      "axios",
+      "luxon",
+      "Laravel",
+      "Echo"
+    ]
   }
 }

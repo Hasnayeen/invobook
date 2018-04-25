@@ -31,14 +31,14 @@
 </template>
 
 <script>
-import { DateTime } from "luxon";
+import { DateTime } from 'luxon'
 export default {
-    name: 'other',
-    props: ['user'],
-    computed: {
-        userLocalTime () {
-            return DateTime.local().setZone(this.user.timezone).toLocaleString(DateTime.TIME_SIMPLE);
-        }
+  name: 'other',
+  props: ['user'],
+  computed: {
+    userLocalTime () {
+      return DateTime.local().setZone(this.user.timezone).toLocaleString(DateTime.TIME_SIMPLE)
     }
+  }
 }
 </script>

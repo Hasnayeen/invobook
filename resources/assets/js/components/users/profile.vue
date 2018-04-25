@@ -6,13 +6,13 @@
 </template>
 
 <script>
-import Own from './own';
-import Other from './other';
+import Own from './own'
+import Other from './other'
 export default {
-    components: {Own, Other},
-    props: ['user'],
-    data: () => ({
-        authUser: navbar.user
-    }),
+  components: {Own, Other},
+  props: ['user'],
+  data: () => ({
+    authUser: navbar.user
+  })
 }
 </script>

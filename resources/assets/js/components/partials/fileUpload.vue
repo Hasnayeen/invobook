@@ -9,31 +9,31 @@
 
 <script>
 export default {
-    props: ['user'],
-    methods: {
-        selectFile (e) {
-            if (! e.target.files.length) return;
-            let file = e.target.files[0];
-            let reader = new FileReader();
-            reader.readAsDataURL(file);
+  props: ['user'],
+  methods: {
+    selectFile (e) {
+      if (!e.target.files.length) return
+      let file = e.target.files[0]
+      let reader = new FileReader()
+      reader.readAsDataURL(file)
 
-            reader.onload = e => {
-                this.$emit('image-loaded', e.target.result);
-            }
+      reader.onload = e => {
+        this.$emit('image-loaded', e.target.result)
+      }
 
-            this.uploadImage(file);
-        },
-        uploadImage (file) {
-            let data = new FormData();
-            data.append('avatar', file);
-            axios.post('/users/' + this.user.username + '/avatar', data)
-                 .then(res => {
-                     console.log(res);
-                 })
-                 .catch(err => {
+      this.uploadImage(file)
+    },
+    uploadImage (file) {
+      let data = new FormData()
+      data.append('avatar', file)
+      axios.post('/users/' + this.user.username + '/avatar', data)
+        .then(res => {
+          console.log(res)
+        })
+        .catch(err => {
 
-                 });
-        }
+        })
     }
+  }
 }
 </script>

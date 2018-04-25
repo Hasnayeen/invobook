@@ -28,37 +28,37 @@
 
 <script>
 export default {
-    props: ['project'],
-    data: () => ({
-        users: [],
-        newMember: null,
-    }),
-    created () {
-        axios.get('/users')
-             .then((response) => {
-                 this.users = response.data.data;
-             })
-            .catch((error) => {
-                console.log(error);
-            });
+  props: ['project'],
+  data: () => ({
+    users: [],
+    newMember: null
+  }),
+  created () {
+    axios.get('/users')
+      .then((response) => {
+        this.users = response.data.data
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  },
+  methods: {
+    addMember () {
+      axios.post('/projects/' + this.project.slug + '/members', {
+        user_id: this.newMember
+      })
+        .then((response) => {
+          if (response.data.status == 'success') {
+            this.$emit('addMember', response.data.user)
+          }
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     },
-    methods: {
-        addMember () {
-            axios.post('/projects/' + this.project.slug + '/members', {
-                user_id : this.newMember,
-            })
-                .then((response) => {
-                    if (response.data.status == 'success') {
-                        this.$emit('addMember', response.data.user);
-                    }
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        },
-        closeAddMemberForm () {
-            this.$emit('close');
-        }
+    closeAddMemberForm () {
+      this.$emit('close')
     }
+  }
 }
 </script>

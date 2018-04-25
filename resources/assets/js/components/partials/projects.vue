@@ -48,44 +48,44 @@
 
 <script>
     export default {
-        data: () => ({
-            projects: data.projects.map((project) => {
-                project.url = 'projects/' + project.slug;
-                return project;
-            }),
-            showCreateProjectForm: false,
-            name: '',
-            description: ''
+      data: () => ({
+        projects: data.projects.map((project) => {
+          project.url = 'projects/' + project.slug
+          return project
         }),
-        props: {
-            activeTab: {
-                required: true,
-                type: String
-            }
-        },
-        methods: {
-            openCreateProjectModal () {
-                this.showCreateProjectForm = true;
-            },
-            closeCreateProjectModal () {
-                this.showCreateProjectForm = false;
-            },
-            createProject () {
-                axios.post('/projects', {
-                    name: this.name,
-                    description: this.description
-                })
-                .then((response) => {
-                    if (response.data.status == 'success') {
-                        response.data.project.url = 'projects/' + response.data.project.slug;
-                        this.projects.push(response.data.project);
-                        this.closeCreateProjectModal();
-                    }
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-            }
+        showCreateProjectForm: false,
+        name: '',
+        description: ''
+      }),
+      props: {
+        activeTab: {
+          required: true,
+          type: String
         }
+      },
+      methods: {
+        openCreateProjectModal () {
+          this.showCreateProjectForm = true
+        },
+        closeCreateProjectModal () {
+          this.showCreateProjectForm = false
+        },
+        createProject () {
+          axios.post('/projects', {
+            name: this.name,
+            description: this.description
+          })
+            .then((response) => {
+              if (response.data.status == 'success') {
+                response.data.project.url = 'projects/' + response.data.project.slug
+                this.projects.push(response.data.project)
+                this.closeCreateProjectModal()
+              }
+            })
+            .catch((error) => {
+              console.log(error)
+            })
+    }
+      }
     }
 </script>
