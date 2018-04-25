@@ -1,6 +1,7 @@
 ### Goodwork
-[![License](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://github.com/iluminar/goodwork/blob/dev/LICENSE)
-
+[![License](http://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/iluminar/goodwork/blob/dev/LICENSE)
+[![Build Status](https://travis-ci.org/iluminar/goodwork.svg?branch=dev)](https://travis-ci.org/iluminar/goodwork)
+[![StyleCI](https://styleci.io/repos/81873619/shield?branch=dev)](https://styleci.io/repos/81873619)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 Self hosted project management and collaboration tool inspired by basecamp
@@ -25,7 +26,7 @@ Goodwork brings you all the component required for your project to run smoothly 
 
 ![Login](https://i.imgur.com/hcSwUA5.png)
 
-![Dashboard](https://i.imgur.com/R6UOAmu.png)
+![Dashboard](https://i.imgur.com/oPlF1bi.png)
 
 ![Create Task Form](https://i.imgur.com/QlkS0IJ.png)
 
