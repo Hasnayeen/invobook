@@ -1,5 +1,6 @@
 <template>
   <div class="container mx-auto w-3/5 mt-6">
+    <notification-popup :message="message" @close="closeNotification" :show-notification="showNotification"></notification-popup>
     <div class="text-center text-grey-dark font-semibold text-xl mb-4">
       {{project.name}}
       <p class="text-sm">December 5, 2017 - December 13, 2017</p>
@@ -64,15 +65,18 @@ import schedule from './../partials/schedule.vue'
 import files from './../partials/files.vue'
 import activity from './../partials/activity.vue'
 import addMemberForm from './../partials/addMemberForm.vue'
+import notificationPopup from '../partials/notificationPopup.vue'
 
 export default {
   components: {
-    taskBoard, discussionBoard, messagesBoard, schedule, files, activity, addMemberForm
+    taskBoard, discussionBoard, messagesBoard, schedule, files, activity, addMemberForm, notificationPopup
   },
   props: ['project'],
   data: () => ({
     addMemberFormShown: false,
-    active: 'tasks'
+    active: 'tasks',
+    showNotification: false,
+    message: ''
   }),
   methods: {
     showAddMemberForm () {
@@ -81,14 +85,26 @@ export default {
     closeAddMemberForm () {
       this.addMemberFormShown = false
     },
-    addMember (newMember) {
-      this.project.members.push(newMember)
+    addMember (data) {
+      if (data.user) {
+        this.message = data.message
+        this.project.members.push(data.user)
+      } else {
+        this.message = data.message
+      }
+      this.showNotification = true
       this.addMemberFormShown = false
+      setTimeout(() => {
+        this.showNotification = false
+      }, 2000)
     },
     activateThisTab (tab) {
       if (tab != this.active) {
         this.active = tab
       }
+    },
+    closeNotification () {
+      this.showNotification = false
     }
   }
 }

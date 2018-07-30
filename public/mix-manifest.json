@@ -1,9 +1,9 @@
 {
+    "/js/teams/single.js": "/js/teams/single.js",
+    "/js/projects/single.js": "/js/projects/single.js",
     "/js/offices/single.js": "/js/offices/single.js",
     "/js/home.js": "/js/home.js",
     "/css/main.css": "/css/main.css",
-    "/js/teams/single.js": "/js/teams/single.js",
-    "/js/projects/single.js": "/js/projects/single.js",
     "/js/users/profile.js": "/js/users/profile.js",
     "/js/projects/tasks.js": "/js/projects/tasks.js",
     "/js/teams/messages.js": "/js/teams/messages.js",
