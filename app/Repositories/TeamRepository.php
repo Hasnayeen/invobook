@@ -35,6 +35,6 @@ class TeamRepository
 
     public function createNewTeam($data)
     {
-        return $this->model->create(array_add($data, 'slug', str_slug($data['name'])));
+        return $this->model->create($data);
     }
 }

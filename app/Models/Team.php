@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Team extends Model
 {
-    protected $fillable = ['name', 'slug', 'description', 'office_id'];
+    protected $fillable = ['name', 'slug', 'description', 'office_id', 'owner_id'];
 
     public function getRouteKeyName()
     {

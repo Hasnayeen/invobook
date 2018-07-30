@@ -21,7 +21,13 @@ class TeamService
 
     public function createNewTeam($data)
     {
-        $team = $this->teamRepository->createNewTeam($data);
+        $team = $this->teamRepository->createNewTeam(array_merge(
+            $data,
+            [
+                'owner_id' => Auth::user()->id,
+                'slug'     => str_slug($data['name']),
+            ]
+        ));
         $team->members()->save(Auth::user());
         $team->load('members');
 
