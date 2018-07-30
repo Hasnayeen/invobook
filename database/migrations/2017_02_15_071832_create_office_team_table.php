@@ -17,6 +17,8 @@ class CreateOfficeTeamTable extends Migration
             $table->increments('id');
             $table->integer('office_id')->unsigned();
             $table->integer('team_id')->unsigned();
+            $table->foreign('office_id')->references('id')->on('offices')->onDelete('cascade');
+            $table->foreign('team_id')->references('id')->on('teams')->onDelete('cascade');
             $table->timestamps();
         });
     }

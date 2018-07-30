@@ -20,6 +20,8 @@ class CreateMessagesTable extends Migration
             $table->integer('attachment_id')->unsigned()->nullable()->comment('id of files table');
             $table->string('messageable_type')->comment('office, team or projects');
             $table->integer('messageable_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('attachment_id')->references('id')->on('attachments')->onDelete('cascade');
             $table->timestamps();
         });
     }

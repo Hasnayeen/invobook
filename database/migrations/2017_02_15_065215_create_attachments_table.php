@@ -18,6 +18,7 @@ class CreateAttachmentsTable extends Migration
             $table->string('url');
             $table->string('name');
             $table->integer('uploaded_by')->unsigned();
+            $table->foreign('uploaded_by')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
