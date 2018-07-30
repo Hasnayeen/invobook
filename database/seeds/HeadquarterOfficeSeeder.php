@@ -18,6 +18,7 @@ class HeadquarterOfficeSeeder extends Seeder
             'description' => 'Central office',
             'created_at'  => Carbon::now(),
             'updated_at'  => Carbon::now(),
+            'owner_id'    => 1,
         ]);
     }
 }
