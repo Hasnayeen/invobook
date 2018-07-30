@@ -18,6 +18,8 @@ class CreateOfficesTable extends Migration
             $table->string('name');
             $table->string('slug');
             $table->string('description');
+            $table->integer('owner_id')->unsigned()->comment('user id of the owner of the project');
+            $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
