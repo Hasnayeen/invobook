@@ -17,6 +17,8 @@ class CreateOfficeProjectTable extends Migration
             $table->increments('id');
             $table->integer('office_id')->unsigned();
             $table->integer('project_id')->unsigned();
+            $table->foreign('office_id')->references('id')->on('offices')->onDelete('cascade');
+            $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
             $table->timestamps();
         });
     }

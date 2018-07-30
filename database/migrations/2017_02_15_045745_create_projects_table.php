@@ -20,6 +20,8 @@ class CreateProjectsTable extends Migration
             $table->string('description');
             $table->integer('office_id')->unsigned()->nullable()->comment('id of office, if any, under which this project operates');
             $table->integer('team_id')->unsigned()->nullable()->comment('id of team, if any, under which this project operates');
+            $table->foreign('office_id')->references('id')->on('offices')->onDelete('cascade');
+            $table->foreign('team_id')->references('id')->on('teams')->onDelete('cascade');
             $table->timestamps();
         });
     }

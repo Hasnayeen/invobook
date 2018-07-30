@@ -17,6 +17,8 @@ class CreateMilestoneTaskTable extends Migration
             $table->increments('id');
             $table->integer('milestone_id')->unsigned();
             $table->integer('task_id')->unsigned();
+            $table->foreign('milestone_id')->references('id')->on('milestones')->onDelete('cascade');
+            $table->foreign('task_id')->references('id')->on('tasks')->onDelete('cascade');
             $table->timestamps();
         });
     }

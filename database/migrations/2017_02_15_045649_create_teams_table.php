@@ -19,6 +19,7 @@ class CreateTeamsTable extends Migration
             $table->string('slug');
             $table->string('description');
             $table->integer('office_id')->unsigned()->nullable()->comment('id of office, if any, under which this team operates');
+            $table->foreign('office_id')->references('id')->on('offices')->onDelete('cascade');
             $table->timestamps();
         });
     }
