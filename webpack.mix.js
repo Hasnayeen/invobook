@@ -13,7 +13,6 @@ mix.js('resources/assets/js/pages/errors/404.js', 'public/js/errors');
 
 // Projects
 mix.js('resources/assets/js/pages/projects/single.js', 'public/js/projects')
-   .js('resources/assets/js/pages/projects/tasks.js', 'public/js/projects')
    .js('resources/assets/js/pages/projects/messages.js', 'public/js/projects');
 
 // Teams
