@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto w-3/5 mt-6">
+  <div class="container mx-auto px-4 my-6 w-full md:w-md lg:w-lg xl:w-xl xxl:w-2xl">
     <notification-popup :message="message" @close="closeNotification" :show-notification="showNotification"></notification-popup>
     <div class="text-center text-grey-dark font-semibold text-xl mb-4">
       {{project.name}}
@@ -46,10 +46,10 @@
       </div>
     </div>
 
-    <div class="flex flex-row flex-wrap justify-center">
+    <div class="flex flex-row flex-wrap justify-start">
+      <taskBoard resourceType="projects" :project="project"  :activeTab="active"></taskBoard>
       <discussionBoard resourceType="projects" :resource="project" :activeTab="active"></discussionBoard>
-      <!-- <taskBoard resourceType="projects" :resource="project"></taskBoard>
-      <messagesBoard resourceType="projects" :resource="project"></messagesBoard>
+      <!-- <messagesBoard resourceType="projects" :resource="project"></messagesBoard>
       <schedule resourceType="projects" :resource="project"></schedule>
       <files resourceType="projects" :resource="project"></files>
       <activity resourceType="projects" :resource="project"></activity> -->

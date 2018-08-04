@@ -56,6 +56,38 @@
  * @import "utilities/skew-transforms";
  */
 
+@responsive {
+    .mx-1\/40 {
+        margin-left: 2.5%;
+        margin-right: 2.5%;
+    }
+
+    .-mx-1\/40 {
+        margin-left: -2.5%;
+        margin-right: -2.5%;
+    }
+
+    .mx-1\/60 {
+        margin-left: 1.66%;
+        margin-right: 1.66%;
+    }
+
+    .-mx-1\/60 {
+        margin-left: -1.66%;
+        margin-right: -1.66%;
+    }
+
+    .mx-1\/20 {
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+
+    .-mx-1\/20 {
+        margin-left: -5%;
+        margin-right: -5%;
+    }
+}
+
  .resize-none {
      resize: none;
  }

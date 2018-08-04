@@ -18,6 +18,7 @@ class TaskController extends Controller
             'taskable_type'     => $request->input('taskable_type'),
             'taskable_id'       => $request->input('taskable_id'),
         ]);
+        $task->load('user:id,avatar');
 
         return response()->json([
             'status' => 'success',

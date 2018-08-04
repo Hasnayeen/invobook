@@ -9,8 +9,11 @@ class ProjectTaskController extends Controller
 {
     public function index(Project $project, TaskRepository $taskRepository)
     {
-        $tasks = $taskRepository->all('project', $project->id);
+        $tasks = $taskRepository->getAllTaskWithAssignee('project', $project->id);
 
-        return view('projects.tasks', ['project' => $project, 'tasks' => $tasks]);
+        return response()->json([
+            'status'  => 'success',
+            'tasks'   => $tasks,
+        ]);
     }
 }
