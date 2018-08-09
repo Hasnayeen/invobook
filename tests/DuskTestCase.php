@@ -33,12 +33,14 @@ abstract class DuskTestCase extends BaseTestCase
     {
         if (env('TRAVIS') == true) {
             return RemoteWebDriver::create(
-                'http://localhost:9515', DesiredCapabilities::phantomjs()
+                'http://localhost:9515',
+                DesiredCapabilities::phantomjs()
             );
         }
 
         return RemoteWebDriver::create(
-            'http://localhost:9515', DesiredCapabilities::chrome()
+            'http://localhost:9515',
+            DesiredCapabilities::chrome()
         );
     }
 

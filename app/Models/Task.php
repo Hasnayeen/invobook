@@ -21,7 +21,7 @@ class Task extends Model
      */
     public function user()
     {
-        return $this->belongsTo('App\Models\User', 'assigned_to', 'id');
+        return $this->belongsTo(\App\Models\User::class, 'assigned_to', 'id');
     }
 
     /**

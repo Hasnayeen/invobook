@@ -12,7 +12,7 @@ class TaskTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->user = factory('App\Models\User')->create();
+        $this->user = factory(\App\Models\User::class)->create();
     }
 
     /** @test */
@@ -42,8 +42,8 @@ class TaskTest extends TestCase
     /** @test */
     public function user_can_see_tasks()
     {
-        $project = factory('App\Models\Project')->create();
-        $tasks = factory('App\Models\Task', 5)->create([
+        $project = factory(\App\Models\Project::class)->create();
+        $tasks = factory(\App\Models\Task::class, 5)->create([
             'taskable_type' => 'project',
             'taskable_id'   => $project->id,
         ]);

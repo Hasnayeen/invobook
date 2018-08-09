@@ -33,11 +33,11 @@ class User extends Authenticatable
 
     public function teams()
     {
-        return $this->belongsToMany('App\Models\Team');
+        return $this->belongsToMany(\App\Models\Team::class);
     }
 
     public function projects()
     {
-        return $this->belongsToMany('App\Models\Project');
+        return $this->belongsToMany(\App\Models\Project::class);
     }
 }

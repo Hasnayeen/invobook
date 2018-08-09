@@ -40,6 +40,6 @@ class SendInvitationToRegister extends Mailable
                 'token'   => $token,
                 'name'    => $request->name,
                 'company' => ($setting) ? $setting->company_name : null,
-            ]);
+                    ]);
     }
 }

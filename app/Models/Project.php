@@ -15,6 +15,6 @@ class Project extends Model
 
     public function members()
     {
-        return $this->belongsToMany('App\Models\User', 'project_user', 'project_id', 'user_id');
+        return $this->belongsToMany(\App\Models\User::class, 'project_user', 'project_id', 'user_id');
     }
 }

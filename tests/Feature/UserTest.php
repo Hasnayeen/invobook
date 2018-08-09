@@ -14,13 +14,13 @@ class UserTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->user = factory('App\Models\User')->create();
+        $this->user = factory(\App\Models\User::class)->create();
     }
 
     /** @test */
     public function get_all_users()
     {
-        $users = factory('App\Models\User', 5)->create();
+        $users = factory(\App\Models\User::class, 5)->create();
         $response = $this->actingAs($this->user)->get('users');
         $response->assertJsonFragment([
             'status'     => 'success',
