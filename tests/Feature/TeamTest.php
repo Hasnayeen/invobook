@@ -12,8 +12,8 @@ class TeamTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->user = factory('App\Models\User')->create();
-        $this->team = factory('App\Models\Team')->create();
+        $this->user = factory(\App\Models\User::class)->create();
+        $this->team = factory(\App\Models\Team::class)->create();
     }
 
     /** @test */
@@ -26,7 +26,7 @@ class TeamTest extends TestCase
     /** @test */
     public function admin_can_create_team()
     {
-        $admin = factory('App\Models\User')->create(['role' => 2]);
+        $admin = factory(\App\Models\User::class)->create(['role' => 2]);
         $response = $this->actingAs($admin)->post('/teams', [
             'name'        => 'New Team',
             'description' => 'Team of all new members',

@@ -14,14 +14,14 @@ class ProjectTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->user = factory('App\Models\User')->create();
-        $this->project = factory('App\Models\Project')->create();
+        $this->user = factory(\App\Models\User::class)->create();
+        $this->project = factory(\App\Models\Project::class)->create();
     }
 
     /** @test */
     public function add_user_to_project()
     {
-        $user = factory('App\Models\User')->create();
+        $user = factory(\App\Models\User::class)->create();
         $response = $this->actingAs($this->user)->post('/projects/'.$this->project->slug.'/members', ['user_id' => $user->id]);
         $response->assertJson([
             'status'  => 'success',
