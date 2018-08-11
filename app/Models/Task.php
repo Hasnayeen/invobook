@@ -15,6 +15,10 @@ class Task extends Model
         'title', 'assigned_to', 'notes', 'due_on', 'taskable_type', 'taskable_id',
     ];
 
+    protected $casts = [
+        'assigned_to' => 'integer',
+    ];
+
     /**
      * Return the user this task belongs to.
      * @return mixed
@@ -30,7 +34,7 @@ class Task extends Model
      */
     public function taskable_type()
     {
-        $taskableModel = 'App\Models\\'.ucfirst($this->taskable_type);
+        $taskableModel = 'App\Models\\' . ucfirst($this->taskable_type);
 
         return $this->belongsTo($taskableModel, 'taskable_id', 'id');
     }

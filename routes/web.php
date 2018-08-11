@@ -74,14 +74,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('offices/{office}/messages', 'OfficeController@storeMessage');
 
-    Route::get('tasks/create', ['as' => 'tasks.create', 'uses' => 'TaskController@create']);
-
-    Route::post('tasks', ['as' => 'tasks.store', 'uses' => 'TaskController@store']);
-
-    Route::get('tasks', 'TaskController@index');
-
-    Route::get('tasks/{task}', 'TaskController@index');
-
     Route::get('discussions', 'DiscussionController@index');
 
     Route::get('discussions/{discussion}', 'DiscussionController@index');
@@ -97,6 +89,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('files', 'FileController@index');
 
     Route::get('files/{file}', 'FileController@index');
+
+    /**********************************
+        Team
+    **********************************/
+
+    Route::post('tasks', ['as' => 'tasks.store', 'uses' => 'TaskController@store']);
+
+    Route::get('tasks/{task}', 'TaskController@show');
 
     /**********************************
         User
