@@ -3,7 +3,7 @@
         <notification-popup :message="message" @close="closeNotification" :show-notification="showNotification"></notification-popup>
 
         <!-- Create Task Form -->
-        <div :class="{'hidden': !formShown}" class="absolute container mx-auto w-1/3 bg-white rounded shadow-lg z-10" style="top: 10vh;left: 0;right: 0;">
+        <div :class="{'hidden': !formShown}" class="absolute container mx-auto w-1/3 bg-white rounded shadow-lg z-10" style="top: 12vh;left: 0;right: 0;">
             <div class="p-4">
                 <div class="p-4">
                     <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name">

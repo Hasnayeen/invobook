@@ -13,6 +13,7 @@ class TaskTest extends TestCase
     {
         parent::setUp();
         $this->user = factory('App\Models\User')->create();
+        $this->task = factory(\App\Models\Task::class)->create();
     }
 
     /** @test */
@@ -47,7 +48,22 @@ class TaskTest extends TestCase
             'taskable_type' => 'project',
             'taskable_id'   => $project->id,
         ]);
-        $response = $this->actingAs($this->user)->get('/projects/'.$project->slug.'/tasks');
+        $response = $this->actingAs($this->user)->get('/projects/' . $project->slug . '/tasks');
         $response->assertSee($tasks[0]->title);
+    }
+
+    /** @test */
+    public function user_can_see_details_of_a_task()
+    {
+        $response = $this->actingAs($this->user)->get('/tasks/' . $this->task->id);
+        $response->assertJsonFragment([
+            'status'         => 'success',
+            'title'          => $this->task->title,
+            'notes'          => $this->task->notes,
+            'assigned_to'    => $this->task->assigned_to,
+            'related_to'     => $this->task->related_to,
+            'due_on'         => $this->task->due_on,
+            'avatar'         => $this->task->user->avatar,
+        ]);
     }
 }

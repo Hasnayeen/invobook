@@ -25,4 +25,14 @@ class TaskController extends Controller
             'task'   => $task,
         ], 201);
     }
+
+    public function show(Task $task)
+    {
+        $task->load('user');
+
+        return response()->json([
+            'status' => 'success',
+            'task'   => $task,
+        ]);
+    }
 }
