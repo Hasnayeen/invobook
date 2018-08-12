@@ -33,7 +33,7 @@
 
 <script>
 export default {
-  props: ['project'],
+  props: ['resource', 'resourceType'],
   data: () => ({
     users: [],
     newMember: null,
@@ -51,8 +51,10 @@ export default {
   methods: {
     addMember () {
       this.loading = true
-      axios.post('/projects/' + this.project.slug + '/members', {
-        user_id: this.newMember
+      axios.post( '/members', {
+        user_id: this.newMember,
+        resource_type: this.resourceType,
+        resource_id: this.resource.id
       })
         .then((response) => {
           if (response.data.status == 'success') {
