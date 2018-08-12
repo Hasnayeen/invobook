@@ -37,10 +37,8 @@ class MemberController extends Controller
         switch (request('resource_type')) {
             case 'team':
                 return Team::find(request('resource_id'));
-
             case 'office':
                 return Office::find(request('resource_id'));
-
             default:
                 return Project::find(request('resource_id'));
         }
