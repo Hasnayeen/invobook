@@ -42,8 +42,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('projects/{project}/messages', 'ProjectController@storeMessage');
 
-    Route::post('projects/{project}/members', 'ProjectMemberController@store');
-
     /**********************************
         Team
     **********************************/
@@ -55,6 +53,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('teams', 'TeamController@store');
 
     Route::get('teams/{team}', 'TeamController@show');
+
+    Route::get('teams/{team}/tasks', 'TeamTaskController@index');
 
     Route::get('teams/{team}/messages', 'TeamController@getAllMessages');
 
@@ -74,6 +74,12 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('offices/{office}/messages', 'OfficeController@storeMessage');
 
+    /**********************************
+     Member
+     **********************************/
+
+    Route::post('/members', 'MemberController@store');
+
     Route::get('discussions', 'DiscussionController@index');
 
     Route::get('discussions/{discussion}', 'DiscussionController@index');
@@ -91,7 +97,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('files/{file}', 'FileController@index');
 
     /**********************************
-        Team
+        Task
     **********************************/
 
     Route::post('tasks', ['as' => 'tasks.store', 'uses' => 'TaskController@store']);

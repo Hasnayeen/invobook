@@ -22,7 +22,11 @@ class ProjectTest extends TestCase
     public function add_user_to_project()
     {
         $user = factory('App\Models\User')->create();
-        $response = $this->actingAs($this->user)->post('/projects/'.$this->project->slug.'/members', ['user_id' => $user->id]);
+        $response = $this->actingAs($this->user)->post('/members', [
+            'user_id'       => $user->id,
+            'resource_type' => 'project',
+            'resource_id'   => $this->project->id,
+        ]);
         $response->assertJson([
             'status'  => 'success',
             'message' => 'User added to the project',
@@ -33,5 +37,17 @@ class ProjectTest extends TestCase
                 'avatar'   => $user->avatar,
             ],
         ]);
+    }
+
+    /** @test */
+    public function user_can_see_tasks()
+    {
+        $project = factory('App\Models\Project')->create();
+        $tasks = factory('App\Models\Task', 5)->create([
+            'taskable_type' => 'project',
+            'taskable_id'   => $project->id,
+        ]);
+        $response = $this->actingAs($this->user)->get('/projects/' . $project->slug . '/tasks');
+        $response->assertSee($tasks[0]->title);
     }
 }

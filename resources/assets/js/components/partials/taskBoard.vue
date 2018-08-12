@@ -1,6 +1,6 @@
 <template>
 <div :class="{'hidden': (activeTab != 'tasks')}" class="w-full">
-  <create-task-form :project="project" :form-shown="createTaskFormShown" @close="closeCreateTaskForm"></create-task-form>
+  <create-task-form :resource="resource" :resourceType="resourceType" :form-shown="createTaskFormShown" @close="closeCreateTaskForm"></create-task-form>
 
   <task-details v-if="task" :task="task" :task-details-shown="taskDetailsShown" @close="closeTaskDetails"></task-details>
 
@@ -13,7 +13,7 @@
       <img v-if="task.assigned_to" :src="task.user.avatar" class="rounded-full w-8 h-8 mx-2 self-start">
       <i v-else class="fas fa-question-circle fa-2x mx-2 self-start text-grey-darker"></i>
       <div class="w-4/5 text-grey-darker text-left pl-2 flex flex-col justify-between h-full">
-        <p class="text-base pb-2">{{task.title}}</p>
+        <p class="text-base mb-2 overflow-hidden">{{task.title}}</p>
         <p class="text-sm text-grey-dark">
           Due by {{task.due_on}}
         </p>
@@ -29,9 +29,13 @@ import taskDetails from './../partials/taskDetails.vue'
 export default {
   components: {createTaskForm, taskDetails},
   props: {
-    project: {
+    resource: {
       required: true,
       type: Object
+    },
+    resourceType: {
+      required: true,
+      type: String
     },
     activeTab: {
       required: true,
@@ -45,7 +49,7 @@ export default {
     task: null
   }),
   created: function () {
-    axios.get('/projects/' + this.project.slug + '/tasks')
+    axios.get('/' + this.resourceType + 's/' + this.resource.slug + '/tasks')
       .then((response) => {
         this.tasks = response.data.tasks
       })
