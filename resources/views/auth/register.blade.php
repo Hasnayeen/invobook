@@ -20,6 +20,6 @@
     window.url = "{{ url('/register/' . $token) }}"
     window.errors = <?php echo json_encode($errors->toArray()); ?>
 </script>
-<script src="/js/auth/register.js"></script>
+<script src="{{ asset('/js/auth/register.js') }}"></script>
 @endslot
 @endcomponent

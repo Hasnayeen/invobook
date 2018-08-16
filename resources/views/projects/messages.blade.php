@@ -11,7 +11,7 @@
 ]); ?>;
 </script>
 <script src="//{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>
-<script src="/js/projects/messages.js"></script>
+<script src="{{ asset('/js/projects/messages.js') }}"></script>
 @endslot
 
 @endcomponent

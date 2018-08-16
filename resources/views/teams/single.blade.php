@@ -5,7 +5,7 @@
 <single :team="{{ $team }}"></single>
 
 @slot('script')
-<script src="/js/teams/single.js"></script>
+<script src="{{ asset('/js/teams/single.js') }}"></script>
 @endslot
 
 @endcomponent

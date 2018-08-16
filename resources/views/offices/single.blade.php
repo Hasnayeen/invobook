@@ -5,7 +5,7 @@
 <single :office="{{ $office }}"></single>
 
 @slot('script')
-<script src="/js/offices/single.js"></script>
+<script src="{{ asset('/js/offices/single.js') }}"></script>
 @endslot
 
 @endcomponent

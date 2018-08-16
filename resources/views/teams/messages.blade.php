@@ -10,8 +10,8 @@
     'messages' => $messages
 ]); ?>;
 </script>
-<script src="//{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>
-<script src="/js/teams/messages.js"></script>
+<script src="{{ asset(Request::getHost() . ':6001/socket.io/socket.io.js') }}"></script>
+<script src="{{ asset('/js/teams/messages.js') }}"></script>
 @endslot
 
 @endcomponent
