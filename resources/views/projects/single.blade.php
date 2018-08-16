@@ -5,7 +5,7 @@
 <single :project="{{ $project }}"></single>
 
 @slot('script')
-<script src="/js/projects/single.js"></script>
+<script src="{{ asset('/js/projects/single.js') }}"></script>
 @endslot
 
 @endcomponent

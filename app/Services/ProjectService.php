@@ -40,6 +40,7 @@ class ProjectService
 
     public function storeProject($data)
     {
+        $data['owner_id'] = Auth::user()->id;
         $project = $this->projectRepository->storeProject($data);
         $project->members()->save(Auth::user());
         $project->load('members');

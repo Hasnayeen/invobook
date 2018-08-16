@@ -16,7 +16,7 @@ class AdminUserSeeder extends Seeder
             'name'       => 'Admin',
             'username'   => 'admin',
             'email'      => 'admin@example.com',
-            'role'       => 1,
+            'role'       => 2,
             'active'     => 1,
             'password'   => bcrypt('secret'),
             'created_at' => Carbon::now(),
