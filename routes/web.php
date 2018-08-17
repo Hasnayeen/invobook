@@ -1,5 +1,9 @@
 <?php
 
+if (env('INSTALL')) {
+    Route::any('/{any}', 'InstallController@index')->where('any', '.*');
+}
+
 Route::get('login', 'Auth\LoginController@showLoginForm');
 
 Route::post('login', 'Auth\LoginController@login');
