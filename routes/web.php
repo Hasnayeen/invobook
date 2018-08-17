@@ -78,6 +78,8 @@ Route::group(['middleware' => 'auth'], function () {
      Member
      **********************************/
 
+    Route::get('/members', 'MemberController@index');
+
     Route::post('/members', 'MemberController@store');
 
     Route::get('discussions', 'DiscussionController@index');
