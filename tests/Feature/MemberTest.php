@@ -16,7 +16,7 @@ class MemberTest extends TestCase
     }
 
     /**
-     * Get all members of project/team/office
+     * Get all members of project/team/office.
      * @test
      * */
     public function get_all_members_of_a_group()
