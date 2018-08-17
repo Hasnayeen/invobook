@@ -40,7 +40,18 @@ class MemberController extends Controller
             case 'office':
                 return Office::find(request('resource_id'));
             default:
-                return Project::find(request('resource_id'));
+                return Project::find(1);
         }
+    }
+
+    public function index()
+    {
+        $entity = $this->getEntityModel();
+
+        return response()->json([
+            'status'  => 'success',
+            'items'   => count($entity->members),
+            'members' => $entity->members,
+        ]);
     }
 }
