@@ -17,4 +17,9 @@ class Team extends Model
     {
         return $this->belongsToMany('App\Models\User', 'team_user', 'team_id', 'user_id');
     }
+
+    public function messages()
+    {
+        return $this->morphMany('App\Models\Message', 'messageable');
+    }
 }

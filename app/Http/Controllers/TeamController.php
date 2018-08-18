@@ -15,13 +15,6 @@ class TeamController extends Controller
         $this->messageService = $messageService;
     }
 
-    public function getAllMessages($team)
-    {
-        list($messages, $id) = $this->messageService->getAllMessages('team', $team);
-
-        return view('teams.messages', compact('team', 'id', 'messages'));
-    }
-
     public function storeMessage(StoreMessageRequest $request, $team)
     {
         try {

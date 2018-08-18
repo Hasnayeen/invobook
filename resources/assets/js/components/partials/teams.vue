@@ -29,6 +29,7 @@
                 <span class="text-grey-darker pt-4">Add a new team</span>
             </div>
 
+            <!-- Teams list -->
 			<div class="bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center items-center text-center rounded m-4" 
 				v-for="team in teams">
                 <span class="w-full h-8 pr-4 pt-2">

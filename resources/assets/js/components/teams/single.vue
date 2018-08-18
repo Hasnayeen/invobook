@@ -49,8 +49,8 @@
     <div class="flex flex-row flex-wrap justify-center">
       <taskBoard resourceType="team" :resource="team"  :activeTab="active"></taskBoard>
       <discussionBoard resourceType="team" :resource="team" :activeTab="active"></discussionBoard>
-      <!-- <messagesBoard resourceType="projects" :resource="project"></messagesBoard>
-      <schedule resourceType="projects" :resource="project"></schedule>
+      <messagesBoard resourceType="team" :resource="team" :activeTab="active"></messagesBoard>
+      <!-- <schedule resourceType="projects" :resource="project"></schedule>
       <files resourceType="projects" :resource="project"></files>
       <activity resourceType="projects" :resource="project"></activity> -->
     </div>
