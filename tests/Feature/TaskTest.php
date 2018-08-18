@@ -54,4 +54,53 @@ class TaskTest extends TestCase
             'avatar'         => $this->task->user->avatar,
         ]);
     }
+
+    /** @test */
+    public function user_can_see_tasks_of_a_group()
+    {
+        $project = factory('App\Models\Project')->create();
+        $tasks = factory('App\Models\Task', 3)->create([
+            'taskable_type' => 'project',
+            'taskable_id'   => $project->id,
+        ]);
+        $response = $this->actingAs($this->user)->call('GET', '/tasks', [
+            'resource_type' => 'project',
+            'resource_id'   => $project->id,
+        ]);
+        $response->assertJsonFragment([
+            'status'           => 'success',
+            'total'            => 3,
+            'title'            => $tasks[2]['title'],
+        ]);
+
+        $team = factory('App\Models\Team')->create();
+        $tasks = factory('App\Models\Task', 3)->create([
+            'taskable_type' => 'team',
+            'taskable_id'   => $team->id,
+        ]);
+        $response = $this->actingAs($this->user)->call('GET', '/tasks', [
+            'resource_type' => 'team',
+            'resource_id'   => $team->id,
+        ]);
+        $response->assertJsonFragment([
+            'status'           => 'success',
+            'total'            => 3,
+            'title'            => $tasks[2]['title'],
+        ]);
+
+        $office = factory('App\Models\Office')->create();
+        $tasks = factory('App\Models\Task', 3)->create([
+            'taskable_type' => 'office',
+            'taskable_id'   => $office->id,
+        ]);
+        $response = $this->actingAs($this->user)->call('GET', '/tasks', [
+            'resource_type' => 'office',
+            'resource_id'   => $office->id,
+        ]);
+        $response->assertJsonFragment([
+            'status'           => 'success',
+            'total'            => 3,
+            'title'            => $tasks[2]['title'],
+        ]);
+    }
 }

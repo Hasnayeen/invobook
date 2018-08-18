@@ -48,6 +48,7 @@
     <div class="flex flex-row flex-wrap justify-start">
       <taskBoard resourceType="project" :resource="project"  :activeTab="active"></taskBoard>
       <discussionBoard resourceType="project" :resource="project" :activeTab="active"></discussionBoard>
+      <messagesBoard resourceType="project" :resource="project" :activeTab="active"></messagesBoard>
       <!-- <messagesBoard resourceType="projects" :resource="project"></messagesBoard>
       <schedule resourceType="projects" :resource="project"></schedule>
       <files resourceType="projects" :resource="project"></files>

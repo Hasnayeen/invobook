@@ -15,4 +15,9 @@ class Office extends Model
     {
         return $this->belongsToMany('App\Models\User', 'office_user', 'office_id', 'user_id');
     }
+
+    public function messages()
+    {
+        return $this->morphMany('App\Models\Message', 'messageable');
+    }
 }

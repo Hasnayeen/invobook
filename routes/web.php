@@ -34,11 +34,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('projects', 'ProjectController@store');
 
-    Route::get('projects/{project}', 'ProjectController@single');
-
-    Route::get('projects/{project}/tasks', 'ProjectTaskController@index');
-
-    Route::get('projects/{project}/messages', 'ProjectController@getAllMessages');
+    Route::get('projects/{project}', 'ProjectController@show');
 
     Route::post('projects/{project}/messages', 'ProjectController@storeMessage');
 
@@ -54,10 +50,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('teams/{team}', 'TeamController@show');
 
-    Route::get('teams/{team}/tasks', 'TeamTaskController@index');
-
-    Route::get('teams/{team}/messages', 'TeamController@getAllMessages');
-
     Route::post('teams/{team}/messages', 'TeamController@storeMessage');
 
     /**********************************
@@ -70,7 +62,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('offices/{office}', 'OfficeController@show');
 
-    Route::get('offices/{office}/messages', 'OfficeController@getAllMessages');
+    Route::get('offices/{office}/tasks', 'TaskController@index');
 
     Route::post('offices/{office}/messages', 'OfficeController@storeMessage');
 
@@ -101,6 +93,8 @@ Route::group(['middleware' => 'auth'], function () {
     /**********************************
         Task
     **********************************/
+
+    Route::get('tasks', 'TaskController@index');
 
     Route::post('tasks', ['as' => 'tasks.store', 'uses' => 'TaskController@store']);
 

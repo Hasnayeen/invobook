@@ -6,10 +6,13 @@ use App\Models\Team;
 use App\Models\User;
 use App\Models\Office;
 use App\Models\Project;
+use App\Utilities\EntityTrait;
 use App\Exceptions\UserIsAlreadyMember;
 
 class MemberController extends Controller
 {
+    use EntityTrait;
+
     public function store()
     {
         // Get model of team/project/office depending on request
@@ -30,18 +33,6 @@ class MemberController extends Controller
     private function userIsAlreadyMember($entity, $userId)
     {
         return $entity->members()->where('user_id', $userId)->exists();
-    }
-
-    private function getEntityModel()
-    {
-        switch (request('resource_type')) {
-            case 'team':
-                return Team::find(request('resource_id'));
-            case 'office':
-                return Office::find(request('resource_id'));
-            default:
-                return Project::find(1);
-        }
     }
 
     public function index()

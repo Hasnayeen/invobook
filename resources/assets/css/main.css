@@ -67,8 +67,8 @@
         margin-right: -2.5%;
     }
 
-    .mx-1\/60 {
-        margin-left: 1.66%;
+    .mx-1\/5 {
+        margin-5eft: 1.66%;
         margin-right: 1.66%;
     }
 
@@ -96,6 +96,6 @@
      order: 1;
  }
 
- .h-60-vh {
-     height: 60vh;
+ .h-50-vh {
+     height: 50vh;
  }
