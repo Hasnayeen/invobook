@@ -6,7 +6,7 @@ class InstallController extends Controller
 {
     public function __construct()
     {
-        if (!env('INSTALL')) {
+        if (! env('INSTALL')) {
             abort(404);
         }
     }
