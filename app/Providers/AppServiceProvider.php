@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 
 class AppServiceProvider extends ServiceProvider
 {
+
     /**
      * Bootstrap any application services.
      *
@@ -19,6 +20,7 @@ class AppServiceProvider extends ServiceProvider
             'team'     => 'App\Models\Team',
             'office'   => 'App\Models\Office',
         ]);
+
     }
 
     /**

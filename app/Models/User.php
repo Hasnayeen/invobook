@@ -40,4 +40,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Models\Project');
     }
+
+    public function admin()
+    {
+        return $this->role === User::ADMIN;
+    }
 }
