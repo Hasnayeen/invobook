@@ -1,48 +1,17 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Be right back.</title>
+@component('layouts.app')
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+@slot('title') 403 - Unauthorized access @endslot
 
-        <style>
-            html, body {
-                height: 100%;
-            }
+<div class="text-4xl text-grey-darker container mx-auto mt-16 text-center font-bold">
+    <div class="text-teal" style="font-size: 16rem">
+        403
+    </div>
+    <div class="mb-8">WHOOPS! Access Denied</div>
+    <a href="{{ route('home') }}" class="text-teal no-underline text-2xl">← Go To Home</a>
+</div>
 
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                color: #fff;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato', sans-serif;
-                background-color: #08b7ce;
-            }
+@slot('script')
+<script src="{{ asset('/js/errors/404.js') }}"></script>
+@endslot
 
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
-
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
-
-            .title {
-                font-size: 72px;
-                margin-bottom: 40px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="content">
-                <div class="title">Be right back.</div>
-            </div>
-        </div>
-    </body>
-</html>
+@endcomponent
