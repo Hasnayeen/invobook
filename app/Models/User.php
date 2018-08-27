@@ -43,6 +43,6 @@ class User extends Authenticatable
 
     public function admin()
     {
-        return $this->role === User::ADMIN;
+        return $this->role === self::ADMIN;
     }
 }
