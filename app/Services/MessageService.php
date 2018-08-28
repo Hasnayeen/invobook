@@ -24,6 +24,7 @@ class MessageService
     /**
      * @param  mixed $data
      * @param  mixed $slug
+     * @param  mixed $id
      * @return mixed
      */
     public function saveMessage($data, $id)
