@@ -41,7 +41,7 @@
                 <span class="text-grey text-sm w-full px-2 h-16 self-start">{{ team.description }}</span>
                 <div class="border-t w-full h-16 flex flex-row justify-around items-center px-2">
                     <a v-for="(member, index) in team.members" v-if="index < 5" :href="'/users/' + member.username">
-                        <img :src="member.avatar" class="rounded-full w-8 h-8 mr-1">
+                        <img :src="generateUrl(member.avatar)" class="rounded-full w-8 h-8 mr-1">
                     </a>
                     <span v-if="team.members.length > 5" class="bg-grey-lighter border-teal border p-2 rounded-full">{{ team.members.length - 5 }}+</span>
                     <span v-if="team.members.length < 1" class="text-grey-dark text-center">No members yet</span>

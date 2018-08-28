@@ -14,7 +14,7 @@
         <i class="fas fa-plus"></i>
       </span>
       <a v-for="(member, index) in team.members" v-if="index < 5" :href="'/users/' + member.username" class="pl-2">
-        <img :src="member.avatar" class="rounded-full w-8 h-8 mr-1">
+        <img :src="generateUrl(member.avatar)" class="rounded-full w-8 h-8 mr-1">
       </a>
       <span v-if="team.members.length > 5" class="bg-grey-lighter border-teal border p-2 rounded-full">{{ team.members.length - 5 }}+</span>
     </div>

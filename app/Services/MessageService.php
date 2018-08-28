@@ -26,9 +26,8 @@ class MessageService
      * @param  mixed $slug
      * @return mixed
      */
-    public function saveMessage($data, $slug)
+    public function saveMessage($data, $id)
     {
-        $id = $this->getIdFromSlug($data['type'], $slug);
         $data['user_id'] = Auth::user()->id;
         $data['username'] = Auth::user()->username;
         $data['messageable_type'] = $data['type'];

@@ -14,7 +14,7 @@
         </div>
         <div class="px-8 py-2">
           <a :href="'/users/' + task.user.username">
-            <img v-if="task.assigned_to" :src="task.user.avatar" class="rounded-full w-8 h-8 mx-2 self-start">
+            <img v-if="task.assigned_to" :src="generateUrl(task.user.avatar)" class="rounded-full w-8 h-8 mx-2 self-start">
           </a>
         </div>
       </div>
@@ -82,7 +82,7 @@
     </div>
     <div class="px-8 pt-8">
       <div class="flex flex-row items-center text-grey-dark">
-        <img :src="task.user.avatar" class="rounded-full w-8 h-8 mx-2 self-start">
+        <img :src="generateUrl(task.user.avatar)" class="rounded-full w-8 h-8 mx-2 self-start">
         <div class="px-4">
           Nehal Hasnayeen
         </div>

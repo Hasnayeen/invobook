@@ -14,8 +14,7 @@ Route::post('password/reset', 'Auth\ForgotPasswordController@reset');
 
 Route::get('password/reset/{token}', 'Auth\ForgotPasswordController@showResetForm');
 
-Route::post('register/invite', 'UserController@sentInvitationToRegister')
-    ->middleware('auth');
+Route::post('register/invite', 'UserController@sentInvitationToRegister')->middleware('auth');
 
 Route::get('register/{token}', 'Auth\RegisterController@showRegistrationForm');
 
@@ -67,20 +66,24 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('offices/{office}/messages', 'OfficeController@storeMessage');
 
     /**********************************
-     Member
+        Member
      **********************************/
 
-    Route::get('/members', 'MemberController@index');
+    Route::get('members', 'MemberController@index');
 
-    Route::post('/members', 'MemberController@store');
+    Route::post('members', 'MemberController@store');
 
     Route::get('discussions', 'DiscussionController@index');
 
     Route::get('discussions/{discussion}', 'DiscussionController@index');
 
+    /**********************************
+        Messages
+     **********************************/
+
     Route::get('messages', 'MessageController@index');
 
-    Route::get('messages/{message}', 'MessageController@index');
+    Route::post('messages', 'MessageController@store');
 
     Route::get('events', 'EventController@index');
 
