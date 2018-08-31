@@ -28,7 +28,6 @@ export default {
       data.append('avatar', file)
       axios.post('/users/' + this.user.username + '/avatar', data)
         .then(res => {
-          console.log(res)
         })
         .catch(err => {
 
