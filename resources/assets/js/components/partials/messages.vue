@@ -27,7 +27,7 @@
                         </div>
                         <div class="flex flex-row text-grey-darker py-3"
                             :class="[(message.user_id == user.id) ? 'self-end' : '']">
-                            <img :src="message.user.avatar" :alt="message.user.name" class="w-10 h-10 rounded-full border-2"
+                            <img :src="generateUrl(message.user.avatar)" :alt="message.user.name" class="w-10 h-10 rounded-full border-2"
                                 :class="[(message.user_id == user.id) ? 'order-1 border-teal' : 'border-pink']">
                             <div class="rounded-2xl p-4 mx-2 w-64 leading-normal mt-6 text-grey-darkest"
                                 :class="[(message.user_id == user.id) ? 'bg-teal-lightest rounded-tr-none' : 'bg-pink-lightest rounded-tl-none']">

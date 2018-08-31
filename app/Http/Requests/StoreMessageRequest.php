@@ -24,7 +24,8 @@ class StoreMessageRequest extends FormRequest
     public function rules()
     {
         return [
-            'type' => 'string|required',
+            'resource_type' => 'string|required',
+            'resource_id'   => 'integer|required',
         ];
     }
 }

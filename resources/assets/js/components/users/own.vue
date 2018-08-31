@@ -1,7 +1,7 @@
 <template>
     <div class="my-8">
         <div class="flex flex-col items-center">
-            <img :src="avatarUrl" :alt="'Default avatar of ' + user.name" class="w-32 h-32 rounded-full">
+            <img :src="avatar" :alt="'Default avatar of ' + user.name" class="w-32 h-32 rounded-full">
             <div class="text-grey-darker text-2xl font-semibold py-4">
                 {{user.name}}
             </div>
@@ -78,15 +78,16 @@ export default {
   name: 'Own',
   components: {FileUpload},
   props: ['user'],
+  data: () => ({
+    avatar: null
+  }),
   methods: {
     updateImage (imageUrl) {
-      this.user.avatar = imageUrl
+      this.avatar = imageUrl
     }
   },
-  computed: {
-    avatarUrl () {
-      return this.user.avatar !== null ? this.user.avatar : '/image/avatar-profile.png'
-    }
+  mounted () {
+    this.avatar = this.generateUrl(this.user.avatar)
   }
 }
 </script>

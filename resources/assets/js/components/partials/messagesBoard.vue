@@ -1,16 +1,17 @@
 <template>
 <div :class="{'hidden': (activeTab != 'messages')}" class="w-full">
-    <div id="message-box" class="flex flex-col bg-white mx-auto my-8 max-w-md shadow rounded">
+    <div class="flex flex-col bg-white mx-auto my-8 max-w-md shadow rounded">
 
         <div class="text-grey-dark bg-white shadow p-4 text-xl flex flex-row items-center">
             <div>
                 Currently in room:
             </div>
-            <img src="/image/avatar.jpg" alt="" class="w-8 h-8 rounded-full mr-2 ml-4">
-            <img src="/image/avatar.jpg" alt="" class="w-8 h-8 rounded-full mx-2">
+            <template v-for="user in users">
+              <img :src="generateUrl(user.avatar)" alt="" class="w-8 h-8 rounded-full mr-2 ml-4">
+            </template>
         </div>
 
-        <div class="h-50-vh overflow-y-auto">
+        <div id="message-box" class="h-50-vh overflow-y-auto">
             <div class="">
                 <div v-for="message in messages" class="flex flex-col p-4">
                     <div v-if="showDate(message.created_at)" class="w-full flex flex-row py-4">
@@ -22,7 +23,7 @@
                     </div>
                     <div class="flex flex-row text-grey-darker py-3"
                         :class="[(message.user_id == user.id) ? 'self-end' : '']">
-                        <img :src="message.user.avatar" :alt="message.user.name" class="w-10 h-10 rounded-full border-2"
+                        <img :src="generateUrl(message.user.avatar)" :alt="message.user.name" class="w-10 h-10 rounded-full border-2"
                             :class="[(message.user_id == user.id) ? 'order-1 border-teal' : 'border-pink']">
                         <div class="rounded-2xl p-4 mx-2 w-64 leading-normal mt-6 text-grey-darkest"
                             :class="[(message.user_id == user.id) ? 'bg-teal-lightest rounded-tr-none' : 'bg-pink-lightest rounded-tl-none']">
@@ -58,7 +59,8 @@ export default {
     message: '',
     user: navbar.user,
     unreadMessage: 0,
-    title: ''
+    title: '',
+    users: []
   }),
   mounted () {
     axios.get('/messages', {
@@ -68,7 +70,7 @@ export default {
       }
     })
       .then((response) => {
-        this.messages = response.data.messages
+        this.messages = response.data.messages.reverse()
       })
       .catch((error) => {
         console.log(error)
@@ -87,9 +89,10 @@ export default {
       } else {
         var msg = this.message
         this.message = ''
-        axios.post('messages', {
+        axios.post('/messages', {
           message: msg,
-          type: this.type
+          resource_type: this.resourceType,
+          resource_id: this.resource.id
         })
           .then((response) => {
             if (response.data.status == 'success') {
@@ -103,15 +106,24 @@ export default {
       }
     },
     listen () {
-      Echo.channel(this.resourceType + '.' + this.resource.id)
-        .listen('MessageCreated', event => {
-          event.message.user = event.user
-          this.messages.push(event.message)
-          if (document.activeElement != document.getElementById('send-message')) {
-            this.unreadMessage += 1
-            document.title = '(' + this.unreadMessage + ') ' + this.title
-          }
-        })
+      Echo.join(this.resourceType + '.' + this.resource.id)
+          .here(users => {
+            this.users = users
+          })
+          .joining(user => {
+            this.users.push(user)
+          })
+          .leaving(user => {
+            this.users = this.users.filter(u => u.username !== user.username)
+          })
+          .listen('MessageCreated', event => {
+            event.message.user = event.user
+            this.messages.push(event.message)
+            if ((document.activeElement != document.getElementById('send-message')) || (!document.hasFocus())) {
+              this.unreadMessage += 1
+              document.title = '(' + this.unreadMessage + ') ' + this.title
+            }
+          })
     },
     clearTitleNotification () {
       document.title = this.title
