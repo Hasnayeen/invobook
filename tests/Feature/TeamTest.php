@@ -41,18 +41,6 @@ class TeamTest extends TestCase
     }
 
     /** @test */
-    public function user_can_see_tasks_of_a_team()
-    {
-        $team = factory('App\Models\Team')->create();
-        $tasks = factory('App\Models\Task', 5)->create([
-            'taskable_type' => 'team',
-            'taskable_id'   => $team->id,
-        ]);
-        $response = $this->actingAs($this->user)->get('/teams/' . $team->slug . '/tasks');
-        $response->assertSee($tasks[0]->title);
-    }
-
-    /** @test */
     public function add_user_to_team()
     {
         $user = factory('App\Models\User')->create();
