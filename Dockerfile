@@ -12,8 +12,5 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ 
 # Copy application file to /var/www/goodwork
 COPY . /var/www
 
-# Set permission to storage folder
-RUN chown -R www-data:www-data /var/www
-
 # Set the WORKDIR to /var/www/goodwork so all following commands run in /var/www/goodwork
 WORKDIR /var/www
