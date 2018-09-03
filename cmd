@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-COMPOSE="docker-compose"
+COMPOSE="sudo docker-compose"
 
 if [ $# -gt 0 ];then
     if [[ "$1" == "art" ]]; then

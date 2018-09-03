@@ -19,7 +19,6 @@ class HomeController extends Controller
      */
     public function __construct(ProjectRepository $projectRepository, TeamRepository $teamRepository, OfficeService $officeService)
     {
-        $this->middleware('auth');
         $this->projectRepository = $projectRepository;
         $this->teamRepository = $teamRepository;
         $this->officeService = $officeService;
