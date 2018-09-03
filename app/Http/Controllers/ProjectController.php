@@ -25,23 +25,12 @@ class ProjectController extends Controller
         $this->messageService = $messageService;
     }
 
-    public function single(Project $project)
+    public function show(Project $project)
     {
+        $this->authorize('view', $project);
         $project->load('members');
 
         return view('projects.single', ['project' => $project]);
-    }
-
-    public function tasks(Project $project)
-    {
-        return view('projects.tasks', ['project' => $project]);
-    }
-
-    public function getAllMessages(Project $project)
-    {
-        list($messages, $id) = $this->messageService->getAllMessages('project', $project->slug);
-
-        return view('projects.messages', compact('project', 'id', 'messages'));
     }
 
     public function storeMessage(StoreMessageRequest $request, $project)

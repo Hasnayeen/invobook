@@ -28,7 +28,7 @@ class User extends Authenticatable
 
     public function getAvatarAttribute($value)
     {
-        return asset($value ? 'storage/' . $value : 'image/avatar.jpg');
+        return $value ? 'storage/' . $value : 'image/avatar.jpg';
     }
 
     public function teams()
@@ -39,5 +39,10 @@ class User extends Authenticatable
     public function projects()
     {
         return $this->belongsToMany('App\Models\Project');
+    }
+
+    public function admin()
+    {
+        return $this->role === self::ADMIN;
     }
 }

@@ -14,7 +14,7 @@
         <i class="fas fa-plus"></i>
       </span>
       <a v-for="(member, index) in office.members" v-if="index < 5" :href="'/users/' + member.username" class="pl-2">
-        <img :src="member.avatar" class="rounded-full w-8 h-8 mr-1">
+        <img :src="generateUrl(member.avatar)" class="rounded-full w-8 h-8 mr-1">
       </a>
       <span v-if="office.members.length > 5" class="bg-grey-lighter border-teal border p-2 rounded-full">{{ office.members.length - 5 }}+</span>
     </div>
@@ -49,6 +49,7 @@
     <div class="flex flex-row flex-wrap justify-center">
       <taskBoard resourceType="office" :resource="office"  :activeTab="active"></taskBoard>
       <discussionBoard resourceType="office" :resource="office" :activeTab="active"></discussionBoard>
+      <messagesBoard resourceType="office" :resource="office" :activeTab="active"></messagesBoard>
       <!-- <taskBoard resourceType="projects" :resource="project"></taskBoard>
       <messagesBoard resourceType="projects" :resource="project"></messagesBoard>
       <schedule resourceType="projects" :resource="project"></schedule>

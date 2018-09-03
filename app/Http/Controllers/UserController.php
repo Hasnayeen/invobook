@@ -41,9 +41,6 @@ class UserController extends Controller
         }
     }
 
-    /**
-     * User Profile Page.
-     */
     public function profile(User $user)
     {
         $user->load('projects', 'teams');

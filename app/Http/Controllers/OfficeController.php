@@ -22,13 +22,6 @@ class OfficeController extends Controller
         return view('offices.single', ['office' => $office]);
     }
 
-    public function getAllMessages($office)
-    {
-        list($messages, $id) = $this->messageService->getAllMessages('office', $office);
-
-        return view('offices.messages', compact('office', 'id', 'messages'));
-    }
-
     public function storeMessage(StoreMessageRequest $request, $office)
     {
         try {

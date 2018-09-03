@@ -13,7 +13,7 @@
                     </div>
                     <div v-if="notificationShown" class="absolute bg-white w-64 mt-6 mr-8 py-4 shadow-lg rounded" style="right: 5%;">
                         <a class="flex flex-row items-center list-reset px-4 py-2 text-grey-dark no-underline block" href="#">
-                            <img class="w-10 h-10 rounded-full mr-2" :src="avatar">
+                            <img class="w-10 h-10 rounded-full mr-2" :src="generateUrl(user.avatar)">
                             <div>
                                 <div class="py-1 text-sm">
                                     commented on your post
@@ -24,7 +24,7 @@
                             </div>
                         </a>
                         <a class="flex flex-row items-center list-reset px-4 py-2 text-grey-dark no-underline block" href="#">
-                            <img class="w-10 h-10 rounded-full mr-2" :src="avatar">
+                            <img class="w-10 h-10 rounded-full mr-2" :src="generateUrl(user.avatar)">
                             <div>
                                 <div class="py-1 text-sm">
                                     commented on your post
@@ -43,7 +43,7 @@
 
                 <div class="px-4 border-l flex items-center cursor-pointer">
                     <div id="profile-dropdown" class="flex flex-row items-center" @click="toggleProfileDropdown">
-                        <img class="w-10 h-10 rounded-full mr-2" :src="avatar">
+                        <img class="w-10 h-10 rounded-full mr-2" :src="generateUrl(user.avatar)">
                         <span class="text-grey-darker text-base no-underline">
                             {{ user.name }}
                             <i class="fa fa-angle-down" aria-hidden="true"></i>
@@ -135,13 +135,6 @@
             return false
           }
           this.notificationShown = false
-        }
-      },
-      created () {
-        if (this.user.avatar == null || this.user.avatar == '') {
-          this.avatar = '/image/avatar.jpg' // default avatar
-        } else {
-          this.avatar = this.user.avatar
         }
       },
       mounted () {

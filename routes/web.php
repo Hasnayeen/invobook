@@ -14,8 +14,7 @@ Route::post('password/reset', 'Auth\ForgotPasswordController@reset');
 
 Route::get('password/reset/{token}', 'Auth\ForgotPasswordController@showResetForm');
 
-Route::post('register/invite', 'UserController@sentInvitationToRegister')
-    ->middleware('auth');
+Route::post('register/invite', 'UserController@sentInvitationToRegister')->middleware('auth');
 
 Route::get('register/{token}', 'Auth\RegisterController@showRegistrationForm');
 
@@ -34,11 +33,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('projects', 'ProjectController@store');
 
-    Route::get('projects/{project}', 'ProjectController@single');
-
-    Route::get('projects/{project}/tasks', 'ProjectTaskController@index');
-
-    Route::get('projects/{project}/messages', 'ProjectController@getAllMessages');
+    Route::get('projects/{project}', 'ProjectController@show');
 
     Route::post('projects/{project}/messages', 'ProjectController@storeMessage');
 
@@ -54,10 +49,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('teams/{team}', 'TeamController@show');
 
-    Route::get('teams/{team}/tasks', 'TeamTaskController@index');
-
-    Route::get('teams/{team}/messages', 'TeamController@getAllMessages');
-
     Route::post('teams/{team}/messages', 'TeamController@storeMessage');
 
     /**********************************
@@ -70,23 +61,29 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('offices/{office}', 'OfficeController@show');
 
-    Route::get('offices/{office}/messages', 'OfficeController@getAllMessages');
+    Route::get('offices/{office}/tasks', 'TaskController@index');
 
     Route::post('offices/{office}/messages', 'OfficeController@storeMessage');
 
     /**********************************
-     Member
+        Member
      **********************************/
 
-    Route::post('/members', 'MemberController@store');
+    Route::get('members', 'MemberController@index');
+
+    Route::post('members', 'MemberController@store');
 
     Route::get('discussions', 'DiscussionController@index');
 
     Route::get('discussions/{discussion}', 'DiscussionController@index');
 
+    /**********************************
+        Messages
+     **********************************/
+
     Route::get('messages', 'MessageController@index');
 
-    Route::get('messages/{message}', 'MessageController@index');
+    Route::post('messages', 'MessageController@store');
 
     Route::get('events', 'EventController@index');
 
@@ -99,6 +96,8 @@ Route::group(['middleware' => 'auth'], function () {
     /**********************************
         Task
     **********************************/
+
+    Route::get('tasks', 'TaskController@index');
 
     Route::post('tasks', ['as' => 'tasks.store', 'uses' => 'TaskController@store']);
 

@@ -38,16 +38,4 @@ class ProjectTest extends TestCase
             ],
         ]);
     }
-
-    /** @test */
-    public function user_can_see_tasks()
-    {
-        $project = factory('App\Models\Project')->create();
-        $tasks = factory('App\Models\Task', 5)->create([
-            'taskable_type' => 'project',
-            'taskable_id'   => $project->id,
-        ]);
-        $response = $this->actingAs($this->user)->get('/projects/' . $project->slug . '/tasks');
-        $response->assertSee($tasks[0]->title);
-    }
 }

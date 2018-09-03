@@ -6,10 +6,13 @@ use App\Models\Team;
 use App\Models\User;
 use App\Models\Office;
 use App\Models\Project;
+use App\Utilities\EntityTrait;
 use App\Exceptions\UserIsAlreadyMember;
 
 class MemberController extends Controller
 {
+    use EntityTrait;
+
     public function store()
     {
         // Get model of team/project/office depending on request
@@ -32,15 +35,14 @@ class MemberController extends Controller
         return $entity->members()->where('user_id', $userId)->exists();
     }
 
-    private function getEntityModel()
+    public function index()
     {
-        switch (request('resource_type')) {
-            case 'team':
-                return Team::find(request('resource_id'));
-            case 'office':
-                return Office::find(request('resource_id'));
-            default:
-                return Project::find(request('resource_id'));
-        }
+        $entity = $this->getEntityModel();
+
+        return response()->json([
+            'status'  => 'success',
+            'items'   => count($entity->members),
+            'members' => $entity->members,
+        ]);
     }
 }

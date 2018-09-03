@@ -12,4 +12,9 @@ class Message extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function messageable()
+    {
+        return $this->morphTo();
+    }
 }

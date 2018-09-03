@@ -14,7 +14,7 @@
         <i class="fas fa-plus"></i>
       </span>
       <a v-for="(member, index) in project.members" :href="'/users/' + member.username" class="pl-2">
-        <img :src="member.avatar" class="rounded-full w-8 h-8 mr-1">
+        <img :src="generateUrl(member.avatar)" class="rounded-full w-8 h-8 mr-1">
       </a>
     </div>
 
@@ -48,6 +48,7 @@
     <div class="flex flex-row flex-wrap justify-start">
       <taskBoard resourceType="project" :resource="project"  :activeTab="active"></taskBoard>
       <discussionBoard resourceType="project" :resource="project" :activeTab="active"></discussionBoard>
+      <messagesBoard resourceType="project" :resource="project" :activeTab="active"></messagesBoard>
       <!-- <messagesBoard resourceType="projects" :resource="project"></messagesBoard>
       <schedule resourceType="projects" :resource="project"></schedule>
       <files resourceType="projects" :resource="project"></files>

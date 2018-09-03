@@ -3,7 +3,7 @@
         <notification-popup :messageType="messageType" :message="message" @close="closeNotification" :show-notification="showNotification"></notification-popup>
 
         <!-- Create Task Form -->
-        <div :class="{'hidden': !formShown}" class="absolute container mx-auto w-1/3 bg-white rounded shadow-lg z-10" style="top: 12vh;left: 0;right: 0;">
+        <div :class="{'hidden': !formShown}" class="absolute container mx-auto w-5/6 md:w-3/5 lg:w-2/5 bg-white rounded shadow-lg z-10" style="top: 12vh;left: 0;right: 0;">
             <div class="p-4">
                 <div class="p-4">
                     <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name">
@@ -21,7 +21,15 @@
                     <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name">
                         Assigned To <span class="text-grey capitalize">(required)</span>
                     </label>
-                    <input v-model="assigned_to" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-last-name" type="text" placeholder="Assigned to" required>
+                    <div class="flex flex-row items-center">
+                      <select v-model="assigned_to" class="w-5/6 block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" id="user">
+                          <option selected disabled hidden>Select User to Add</option>
+                          <template v-for="member in resource.members">
+                              <option :value="member.id" class="my-2 text-lg">{{ member.name }}</option>
+                          </template>
+                      </select>
+                      <i class="w-1/6 fa fa-chevron-down pointer-events-none flex items-center text-grey-darker -ml-8"></i>
+                    </div>
                 </div>
                 <div class="p-4">
                     <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name">
@@ -96,6 +104,9 @@ export default {
     },
     closeNotification () {
       this.showNotification = false
+    },
+    suggestMember (e) {
+
     }
   },
   computed: {
