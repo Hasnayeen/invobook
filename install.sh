@@ -5,8 +5,6 @@ green=`tput setaf 2`
 blue=`tput setaf 4`
 reset=`tput sgr0`
 
-port=$1
-
 # Check for docker installation
 which docker && docker --version | grep "Docker version"
 
@@ -37,31 +35,6 @@ else
   exit 1
 fi
 
-# Check for port 80
-ss -lntu | grep ':80'
-
-if [[ $# -eq 0 && $? -eq 1 ]]
-then
-  echo ""
-  echo "${green}Port 80 is available${reset}"
-  echo ""
-else
-  echo ""
-  echo "${red}Error: Please open port 80 or provide another port as argument when running installer${reset}"
-  echo ""
-  exit 1
-fi
-
-# Copy env file from env.example
-cp .env.example .env
-
-# Replace port in .env if supplied
-if [ $# -gt 0 ]
-then
-  sed -i "s/APP_PORT=80/APP_PORT=${port}/g" .env
-  sed -i "s/localhost:80/localhost:${port}/g" .env
-fi
-
 COMPOSE="sudo docker-compose"
 
 $COMPOSE build php
@@ -85,7 +58,7 @@ echo "${green}Installation complete.${reset}"
 echo ""
 
 echo ""
-echo "${blue}Visit http://localhost:${port}${reset}"
+awk 'BEGIN{FS="=";RS="\n"}{if($1 == "APP_URL") print $2}' .env  
 echo ""
 
 # Exit from the script with success (0)
