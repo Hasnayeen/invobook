@@ -34,8 +34,6 @@ Goodwork brings you all the component required for your project to run smoothly 
 
 ![Task Details](https://i.imgur.com/J6wKeNL.png)
 
-![Project Home Page](https://i.imgur.com/ksmmfAo.png)
-
 ![Profile Page](https://i.imgur.com/jIN7FQL.png)
 
 ![Notifications](https://i.imgur.com/XGdakw9.png)

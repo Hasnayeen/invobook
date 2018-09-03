@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col bg-white mx-auto my-8 max-w-md shadow rounded">
+    <div class="flex flex-col bg-white mx-4 md:mx-auto my-8 max-w-md shadow rounded">
         <own v-if="user.id === authUser.id" :user="authUser"></own>
         <other v-else :user="user"></other>
     </div>
