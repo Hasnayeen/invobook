@@ -117,3 +117,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('settings', 'UserController@index');
 });
+
+Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function () {
+    Route::get('/', 'AdminController@index');
+});
