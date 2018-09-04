@@ -35,6 +35,12 @@ else
   exit 1
 fi
 
+# Get domain name for ssl cert file
+domain=$(awk 'BEGIN{FS="=";RS="\n"}{if($1 == "SSL_CERT_DOMAIN") print $2}' .env)
+
+# Replace the domain in site.conf file
+sed -i -e "s/example.com/$domain/g" site.conf
+
 COMPOSE="sudo docker-compose"
 
 $COMPOSE build php
