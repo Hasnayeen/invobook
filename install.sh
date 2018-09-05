@@ -53,18 +53,22 @@ $COMPOSE run --rm -w /var/www php php artisan key:generate
 
 $COMPOSE run --rm -w /var/www php chmod -R 777 /var/www/storage
 
-$COMPOSE run --rm -w /var/www php php artisan migrate --seed
-
 $COMPOSE run --rm -w /var/www laravel_echo_server npm install
 
 $COMPOSE run --rm -w /var/www laravel_echo_server npm run production
+
+$COMPOSE run --rm -w /var/www php php artisan migrate --seed
+
+git checkout site.conf
 
 echo ""
 echo "${green}Installation complete.${reset}"
 echo ""
 
 echo ""
+echo "${blue}Your application is running at :"
 awk 'BEGIN{FS="=";RS="\n"}{if($1 == "APP_URL") print $2}' .env  
+echo "${reset}"
 echo ""
 
 # Exit from the script with success (0)

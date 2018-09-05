@@ -13,6 +13,7 @@ services:
       - php
     depends_on:
       - php
+    restart: always
 
   php:
     build:
@@ -36,6 +37,7 @@ services:
       - "MYSQL_PASSWORD=${DB_PASSWORD}"
     volumes:
       - data-volume:/var/lib/mysql
+    restart: always
 
   redis:
     image: redis
@@ -51,6 +53,7 @@ services:
     command: bash -c "apt-get update && docker-php-ext-install pdo_mysql && php artisan queue:work redis --sleep=1 --tries=1"
     depends_on:
       - php
+    restart: always
 
   laravel_echo_server:
     image: node:boron
@@ -64,6 +67,7 @@ services:
     command: bash -c "npm install -g laravel-echo-server && /usr/local/lib/node_modules/laravel-echo-server/bin/server.js start"
     depends_on:
       - redis
+    restart: always
 
 volumes:
   data-volume:
