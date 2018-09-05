@@ -4,6 +4,7 @@ red=`tput setaf 1`
 green=`tput setaf 2`
 blue=`tput setaf 4`
 reset=`tput sgr0`
+local=$2
 
 # Check for docker installation
 which docker && docker --version | grep "Docker version"
@@ -41,7 +42,12 @@ domain=$(awk 'BEGIN{FS="=";RS="\n"}{if($1 == "SSL_CERT_DOMAIN") print $2}' .env)
 # Replace the domain in site.conf file
 sed -i -e "s/example.com/$domain/g" site.conf
 
-COMPOSE="sudo docker-compose"
+if [[ $# -gt 0 && local -eq "local" ]]
+then
+  COMPOSE="sudo docker-compose -f docker-compose.dev.yml"
+else
+  COMPOSE="sudo docker-compose"
+fi
 
 $COMPOSE build php
 
