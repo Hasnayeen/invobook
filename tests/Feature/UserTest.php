@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use App\Models\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -18,15 +19,15 @@ class UserTest extends TestCase
     }
 
     /** @test */
-    public function get_all_users()
+    public function admin_can_see_all_users()
     {
-        $users = factory('App\Models\User', 5)->create();
-        $response = $this->actingAs($this->user)->get('users');
-        $response->assertJsonFragment([
-            'status'     => 'success',
-            'username'   => $users[0]->username,
-            'name'       => $users[0]->name,
+        factory('App\Models\User', 5)->create();
+        $admin = factory('App\Models\User')->create([
+            'role' => 2,
         ]);
+        $users = User::all(['name', 'username', 'email', 'role', 'timezone', 'avatar']);
+        $response = $this->actingAs($admin)->get('admin');
+        $response->assertSeeInOrder($users->pluck('name', 'username', 'email', 'role', 'timezone', 'avatar')->toArray());
     }
 
     /** @test */

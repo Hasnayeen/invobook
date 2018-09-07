@@ -11,6 +11,9 @@
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300,400,600">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+
+    <script defer src="{{ asset('js/fontawesome-all.min.js') }}" integrity="sha384-kW+oWsYx3YpxvjtZjFXqazFpA7UP/MbiY4jvs+RWZo2+N94PFZ36T6TFkc9O3qoB" crossorigin="anonymous"></script>
+
     @yield('style')
 
     <script>
@@ -26,15 +29,12 @@
         ]) !!};
     </script>
     @endif
-
-    <script defer src="{{ asset('js/fontawesome-all.min.js') }}" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
 </head>
 <body class="bg-grey-lighter">
     <div id="app">
         <div class="h-1" style="background: linear-gradient(to right, #4DC0B5, #3490DC);"></div>
         @if (!Auth::guest())
         <navbar></navbar>
-        <invite-modal></invite-modal>
         @endif
 
         {{ $slot }}

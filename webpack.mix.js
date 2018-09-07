@@ -26,6 +26,9 @@ mix.js('resources/assets/js/pages/offices/messages.js', 'public/js/offices')
 // Users
 mix.js('resources/assets/js/pages/users/profile.js', 'public/js/users');
 
+// Admin
+mix.js('resources/assets/js/pages/admin/index.js', 'public/js/admin');
+
 // Full API
 // mix.js(src, output);
 // mix.extract(vendorLibs);

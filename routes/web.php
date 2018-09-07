@@ -107,13 +107,11 @@ Route::group(['middleware' => 'auth'], function () {
         User
     **********************************/
 
-    Route::get('users', 'UserController@index');
-
     Route::get('users/{user}', 'UserController@profile');
 
     Route::post('users/{user}/avatar', 'UserAvatarController@store');
+});
 
-    Route::get('users/{user}/settings', 'UserController@index');
-
-    Route::get('settings', 'UserController@index');
+Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function () {
+    Route::get('/', 'AdminController@index');
 });
