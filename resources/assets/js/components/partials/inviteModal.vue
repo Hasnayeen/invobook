@@ -1,65 +1,54 @@
 <template>
-<div class="columns hidden">
-    <div class="column is-2 is-offset-5">
-        <a class="button is-base is-outlined is-fullwidth" @click="openModal">Invite New Member</a>
-    </div>
-    <div class="modal" :class="{'is-active': isActive}">
-        <div class="modal-background"></div>
-        <div class="modal-content">
-            <div class="modal-card">
-                <header class="modal-card-head">
-                    <p class="modal-card-title">Invite New Member</p>
-                    <button class="delete" @click="closeModal"></button>
-                </header>
-                <section class="modal-card-body">
-                    <p class="control has-icon has-icon-right">
-                        <input class="input" type="text" placeholder="Name" v-model="name">
-                    </p>
-                    <p class="control has-icon has-icon-right">
-                        <input class="input" type="text" placeholder="Email Address" v-model="email">
-                    </p>
-                </section>
-                <footer class="modal-card-foot">
-                    <button type="submit" class="button is-primary" @click="sendInvitation">Send Invitation</button>
-                    <a class="button" @click="closeModal">Cancel</a>
-                </footer>
-            </div> <!-- ./modal-card -->
-        </div>
-        <button class="modal-close" @click="closeModal"></button>
-    </div>
-    <!-- ./modal -->
-
+<div class="mb-4 text-center">
+  <button @click="openModal" class="no-underline p-2 my-4 mb-0 bg-white text-base text-teal rounded shadow">Invite New Member</button>
+  <div :class="{'hidden': !showInviteMemberForm}">
+      <div @click="closeModal" class="absolute pin opacity-75 bg-grey"></div>
+      <div class="fixed pin-x md:w-1/3 z-10 bg-grey-lighter mx-2 md:mx-auto p-8 rounded">
+          <p class="py-2">
+              <input class="w-full shadow appearance-none border rounded py-2 px-3 text-grey-darker" type="text" placeholder="John Doe" v-model="name">
+          </p>
+          <p class="py-2">
+              <input class="w-full shadow appearance-none border rounded py-2 px-3 text-grey-darker" type="text" placeholder="john@example.com" v-model="email">
+          </p>
+          <div class="flex flex-row justify-between pt-8 bg-grey-lighter rounded">
+              <button @click="closeModal" class="text-red-light hover:font-bold">Cancel</button>
+              <button @click="sendInvitation" class="bg-teal-light text-white font-medium hover:bg-teal-dark py-3 px-4 rounded">Send Invitation</button>
+          </div>
+      </div>
+  </div>
 </div>
 </template>
 
 <script>
     export default {
       data: () => ({
-        isActive: false,
+        showInviteMemberForm: false,
         name: '',
         email: ''
       }),
       methods: {
         openModal () {
-          this.isActive = true
+          this.showInviteMemberForm = true
         },
         closeModal () {
-          this.isActive = false
+          this.showInviteMemberForm = false
         },
         sendInvitation () {
           axios.post('/register/invite', {
             name: this.name,
             email: this.email
           })
-            .then((response) => {
-              if (response.data.status == 'success') {
-                this.isActive = false
-              }
-            })
-            .catch((error) => {
-              console.log(error)
-            })
-    }
+          .then((response) => {
+            if (response.data.status == 'success') {
+              this.name = ''
+              this.email = ''
+              this.showInviteMemberForm = false
+            }
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+        }
       }
     }
 </script>

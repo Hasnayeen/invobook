@@ -38,13 +38,12 @@
                     <a class="text-pink text-xl no-underline" :href="office.url">{{ office.name }}</a>
                 </div>
                 <span class="text-grey text-sm w-full px-2 h-16 self-start">{{ office.description }}</span>
-                <div class="border-t w-full h-16 flex flex-row justify-start items-center px-2">
-                    <img src="/image/avatar.jpg" class="rounded-full w-8 h-8 mr-2">
-                    <img src="/image/avatar.jpg" class="rounded-full w-8 h-8 mr-2">
-                    <img src="/image/avatar.jpg" class="rounded-full w-8 h-8 mr-2">
-                    <img src="/image/avatar.jpg" class="rounded-full w-8 h-8 mr-2">
-                    <img src="/image/avatar.jpg" class="rounded-full w-8 h-8 mr-2">
-                    <span class="bg-grey-light p-2 rounded-full">5+</span>
+                <div class="border-t w-full h-16 flex flex-row justify-around items-center px-2">
+                    <a v-for="(member, index) in office.members" v-if="index < 5" :href="'/users/' + member.username">
+                        <img :src="generateUrl(member.avatar)" class="rounded-full w-8 h-8 mr-1">
+                    </a>
+                    <span v-if="office.members.length > 5" class="bg-grey-lighter border-teal border p-2 rounded-full">{{ office.members.length - 5 }}+</span>
+                    <span v-if="office.members.length == 0" class="text-grey-dark text-center">No members yet</span>
                 </div>
             </div>
         </div>

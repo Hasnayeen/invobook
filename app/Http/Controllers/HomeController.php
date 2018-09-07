@@ -33,9 +33,10 @@ class HomeController extends Controller
     {
         $projects = $this->projectRepository->getLatestProjects(5);
         $teams = $this->teamRepository->getLatestTeams(5);
-        $offices = $this->officeService->getLatestThreeOffice()->toArray();
+        $offices = $this->officeService->getLatestThreeOffice();
         $projects->load('members');
         $teams->load('members');
+        $offices->load('members');
 
         return view('home', compact('projects', 'teams', 'offices'));
     }

@@ -1,5 +1,5 @@
 <template>
-<nav class="bg-white flex flex-row justify-between h-12 px-4 shadow">
+<nav class="bg-white flex flex-row justify-between h-12 pl-4 md:px-4 shadow">
   <a class="text-teal text-2xl no-underline self-center" :href="url.site">
     GOODWORK
   </a>
