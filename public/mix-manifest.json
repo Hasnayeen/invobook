@@ -5,6 +5,7 @@
     "/js/home.js": "/js/home.js",
     "/css/main.css": "/css/main.css",
     "/js/users/profile.js": "/js/users/profile.js",
+    "/js/admin/index.js": "/js/admin/index.js",
     "/js/teams/messages.js": "/js/teams/messages.js",
     "/js/projects/messages.js": "/js/projects/messages.js",
     "/js/offices/messages.js": "/js/offices/messages.js",
