@@ -6,8 +6,8 @@
       <i class="fas fa-users text-xl md:text-2xl"></i>
       <span class="block text-xs font-regular pt-2">Users</span>
     </div>
-    <div @click="activateThisTab('activities')"
-      :class="[(active === 'activities') ? 'text-teal-dark font-semibold border-teal border-b-2 pb-4 -mb-2 md:-mb-4' : 'cursor-pointer', 'text-center w-1/2']">
+    <div @click="activateThisTab('about')"
+      :class="[(active === 'about') ? 'text-teal-dark font-semibold border-teal border-b-2 pb-4 -mb-2 md:-mb-4' : 'cursor-pointer', 'text-center w-1/2']">
       <i class="fas fa-info-circle text-xl md:text-2xl"></i>
       <span class="block text-xs font-regular pt-2">About</span>
     </div>
@@ -15,14 +15,16 @@
 
     <div class="flex flex-row flex-wrap justify-start mt-4">
       <usersBoard :users="users" :activeTab="active"></usersBoard>
+      <aboutBoard :activeTab="active"></aboutBoard>
     </div>
 </div>
 </template>
 
 <script>
 import usersBoard from './usersBoard.vue'
+import aboutBoard from './aboutBoard.vue'
 export default {
-  components: {usersBoard},
+  components: {usersBoard, aboutBoard},
   props: {
     users: {
       required: true,
