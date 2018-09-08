@@ -116,4 +116,6 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function 
     Route::get('/', 'AdminController@index');
 
     Route::get('check-for-update', 'AboutController@checkForUpdate');
+
+    Route::get('update-software', 'AboutController@updateSoftware');
 });

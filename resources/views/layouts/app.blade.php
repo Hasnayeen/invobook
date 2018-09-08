@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="app-version" content="{{ config('about.version') }}">
+    <meta name="app-version" content="{{ config('about.current_version') }}">
     <meta name="last-updated" content="{{ config('about.last_updated') }}">
 
     <title>{{ config('app.name', 'GOODWORK') }} | {{ $title }}</title>
