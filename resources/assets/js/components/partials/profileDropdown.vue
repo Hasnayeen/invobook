@@ -12,9 +12,9 @@
       <span class="w-6 inline-block"><i class="pr-1 fa fa-user"></i></span>
           Your profile
     </a>
-    <a class="px-4 py-2 hover:bg-teal hover:text-white text-grey-dark font-medium no-underline block" href="#">
-      <span class="w-6 inline-block"><i class="pr-1 fa fa-question font-regular"></i></span>
-      Help
+    <a class="px-4 py-2 hover:bg-teal hover:text-white text-grey-dark font-medium no-underline block" href="/admin">
+      <span class="w-6 inline-block"><i class="pr-1 fas fa-shield-alt font-regular"></i></span>
+      Admin
     </a>
     <a class="px-4 py-2 hover:bg-teal hover:text-white text-grey-dark font-medium no-underline block" href="#">
       <span class="w-6 inline-block"><i class="pr-1 fa fa-cog font-regular"></i></span>
