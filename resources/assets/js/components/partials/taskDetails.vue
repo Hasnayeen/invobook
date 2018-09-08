@@ -66,7 +66,7 @@
     </div>
     <div class="px-8 pt-8">
       <div class="flex flex-row items-center text-grey-dark">
-        <img src="http://goodwork.local/storage/avatars/brady25.png" class="rounded-full w-8 h-8 mx-2 self-start">
+        <img src="/image/avatar.jpg" class="rounded-full w-8 h-8 mx-2 self-start">
         <div class="px-4">
           Olen Ulrich
         </div>

@@ -26,9 +26,9 @@ if (typeof io !== 'undefined') {
 window.Vue.mixin({
   methods: {
     generateUrl: function (value) {
-	  if (!value) return 'http://' + window.location.host + "/image/avatar.jpg"
-	  value = value.toString()
-	  return 'http://' + window.location.host + "/" + value
-    },
+      if (!value) return 'http://' + window.location.host + '/image/avatar.jpg'
+      value = value.toString()
+      return window.location.protocol + '//' + window.location.host + '/' + value
+    }
   }
 })
