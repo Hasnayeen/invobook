@@ -22,19 +22,19 @@ class AboutController extends Controller
                     'message'          => 'New version ' . $latestVersion . ' is available.',
                     'update_available' => $result,
                 ]);
-            } else {
-                return response()->json([
+            }
+
+            return response()->json([
                     'status'           => 'success',
                     'message'          => 'Version ' . config('about.version') . ' is the latest version.',
                     'update_available' => $result,
                 ]);
-            }
-        } else {
-            return response()->json([
+        }
+
+        return response()->json([
                 'status'  => 'error',
                 'message' => "Couldn't check for updates at this moment.",
             ]);
-        }
     }
 
     private function getLatestVersion($response)
