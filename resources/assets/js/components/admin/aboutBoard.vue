@@ -7,8 +7,13 @@
             {{ message }}
           </p>
           <div class="flex flex-row justify-between pt-8 bg-grey-lighter rounded">
-              <button @click="closeUpdateModal" class="text-red-lighter hover:font-bold hover:text-red-light hover:border-red-light border-red-lighter border px-4 py-3 rounded">Cancel</button>
-              <button v-if="update_available" @click="updateProject" class="bg-teal-light text-white font-medium hover:bg-teal-dark py-3 px-4 rounded">Update</button>
+              <button @click="closeUpdateModal" class="text-red-lighter hover:font-bold hover:text-red-light hover:border-red-light border-red-lighter border px-4 py-3 rounded">{{ update_available ? 'Cancel' : 'Ok' }}</button>
+              <button v-if="update_available" @click="updateSoftware" class="bg-teal-light text-white font-medium hover:bg-teal-dark py-3 px-4 rounded">
+                Update
+                <div v-if="loading" class="inline">
+                  <i class="fas fa-spinner fa-spin"></i>
+                </div>
+              </button>
           </div>
       </div>
   </div>
@@ -74,7 +79,7 @@ export default {
            })
            .catch((error) => {
              this.loading = false
-             this.message = response.data.message
+             this.message = error.response.data.message
              this.update_available = false
              this.showUpdateModal = true
            })
@@ -82,11 +87,21 @@ export default {
     closeUpdateModal () {
       this.loading = false
       this.showUpdateModal = false
-      this.$nextTick(function () {
-        this.loading = false
-      })
     },
-    updateProject () {}
+    updateSoftware () {
+      this.loading = true
+      axios.get('/admin/update-software')
+           .then((response) => {
+             this.loading = false
+             this.message = response.data.message
+             this.showUpdateModal = false
+           })
+           .catch((error) => {
+             this.loading = false
+             this.message = error.response.data.message
+             this.showUpdateModal = false
+           })
+    }
   }
 }
 </script>
