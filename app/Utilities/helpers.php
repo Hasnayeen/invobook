@@ -10,7 +10,7 @@ if (!function_exists('about')) {
      */
     function about($key, $value = null)
     {
-        $string = file_get_contents(storage_path() . '/app/config/about.json');
+        $string = file_get_contents(storage_path() . '/config/about.json');
         $config = json_decode($string, true);
 
         if (is_null($value)) {
@@ -18,7 +18,7 @@ if (!function_exists('about')) {
         }
         
         $config[$key] = $value;
-        file_put_contents(storage_path() . '/app/config/about.json', json_encode($config));
+        file_put_contents(storage_path() . '/config/about.json', json_encode($config));
 
         return $config;
     }
