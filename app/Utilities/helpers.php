@@ -1,8 +1,8 @@
 <?php
 
-if (!function_exists('about')) {
+if (! function_exists('about')) {
     /**
-     * Get or set software related values
+     * Get or set software related values.
      *
      * @param  string $key
      * @param  string $value
@@ -16,7 +16,7 @@ if (!function_exists('about')) {
         if (is_null($value)) {
             return $config[$key];
         }
-        
+
         $config[$key] = $value;
         file_put_contents(storage_path() . '/app/config/about.json', json_encode($config));
 
