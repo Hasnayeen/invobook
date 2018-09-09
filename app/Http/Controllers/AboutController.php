@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use GuzzleHttp\Client;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Config;
 
 class AboutController extends Controller
 {
