@@ -16,9 +16,9 @@ class AboutController extends Controller
 
         if ($response->getStatusCode() === 200) {
             $latestVersion = $this->getLatestVersion($response);
-            $result = $latestVersion > config('about.version');
+            $result = $latestVersion > about('current_version');
             if ($result) {
-                $this->setConfig(['latest_version' => $latestVersion]);
+                about('latest_version', $latestVersion);
 
                 return response()->json([
                     'status'           => 'success',
@@ -29,7 +29,7 @@ class AboutController extends Controller
 
             return response()->json([
                     'status'           => 'success',
-                    'message'          => 'Version ' . config('about.version') . ' is the latest version.',
+                    'message'          => 'Version ' . about('current_version') . ' is the latest version.',
                     'update_available' => $result,
                 ]);
         }
@@ -49,15 +49,13 @@ class AboutController extends Controller
 
     public function updateSoftware()
     {
-        $latestVersion = config('about.latest_version');
-        if (config('about.current_version') !== $latestVersion) {
+        $latestVersion = about('latest_version');
+        if (about('current_version') !== $latestVersion) {
             $output = shell_exec('git fetch --tags origin master:master');
             if (strpos($output, '[new tag]')) {
                 shell_exec('git checkout v.' . $latestVersion);
-                $this->setConfig([
-                    'current_version' => $latestVersion,
-                    'last_updated'    => Carbon::today()->toFormattedDateString(),
-                ]);
+                about('current_version', $latestVersion);
+                about('last_updated', Carbon::today()->toFormattedDateString());
 
                 return response()->json([
                     'status'  => 'success',
@@ -70,16 +68,5 @@ class AboutController extends Controller
             'status'  => 'error',
             'message' => 'Nothing to update',
         ]);
-    }
-
-    private function setConfig($data)
-    {
-        $config = config('about');
-        foreach ($data as $key => $value) {
-            $config[$key] = $value;
-        }
-        $data = var_export($config, 1);
-
-        return File::put(base_path() . '/config/about.php', "<?php\n return $data ;");
     }
 }
