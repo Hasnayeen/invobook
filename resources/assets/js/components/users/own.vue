@@ -1,5 +1,5 @@
 <template>
-    <div class="my-8">
+    <div class="bg-white rounded shadow py-8 mt-8">
         <div class="flex flex-col items-center">
             <img :src="avatar" :alt="'Default avatar of ' + user.name" class="w-32 h-32 rounded-full">
             <div class="text-grey-darker text-2xl font-semibold py-4">
@@ -10,25 +10,25 @@
             </div>
         </div>
         <form class="px-8 pt-6">
-            <div class="mb-4">
+            <div class="mb-6">
                 <label class="block text-grey-darker text-sm font-bold mb-2" for="username">
                     Name
                 </label>
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="username" type="text" placeholder="Nehal Hasnayeen">
             </div>
-            <div class="mb-4">
+            <div class="mb-6">
                 <label class="block text-grey-darker text-sm font-bold mb-2" for="title">
                     Title at Goodwork
                 </label>
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="title" type="text" placeholder="Developer">
             </div>
-            <div class="mb-4">
+            <div class="mb-6">
                 <label class="block text-grey-darker text-sm font-bold mb-2" for="title">
                     Short Bio
                 </label>
                 <textarea class="shadow appearance-none resize-none border rounded w-full py-2 px-3 text-grey-darker" id="bio" type="text" rows="3" placeholder="About Yourself"></textarea>
             </div>
-            <div class="mb-4">
+            <div class="mb-6">
                 <label class="block text-grey-darker text-sm font-bold mb-2" for="timezone">
                     Time Zone
                 </label>
@@ -43,7 +43,7 @@
                     </div>
                 </div>
             </div>
-            <div class="mb-4">
+            <div class="mb-6">
                 <label class="block text-grey-darker text-sm font-bold mb-2" for="weekstart">
                     First Day of the Week
                 </label>
@@ -59,14 +59,10 @@
                 </div>
             </div>
             <div class="mt-8">
-                <button class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded" type="button">
-                    Save
+                <button class="bg-teal hover:bg-teal-dark text-white font-bold p-4 rounded shadow hover:shadow-lg" type="button">
+                    Update
                 </button>
-            </div>
-            <div class="mt-4">
-                <a class="font-bold text-sm text-red-lighter hover:text-red no-underline" href="#">
-                    Delete account
-                </a>
+                <div></div>
             </div>
         </form>
     </div>
