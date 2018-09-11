@@ -109,6 +109,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('users/{user}', 'UserController@profile');
 
+    Route::put('users/{user}/account', 'UserAccountController@update');
+
     Route::post('users/{user}/avatar', 'UserAvatarController@store');
 });
 

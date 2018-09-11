@@ -41,4 +41,21 @@ class UserTest extends TestCase
         $this->assertEquals('storage/avatars/' . $this->user->username . '.png', auth()->user()->avatar);
         Storage::disk('public')->assertExists('avatars/' . $this->user->username . '.png');
     }
+
+    /** @test */
+    public function user_can_change_email_and_passwords()
+    {
+        $response = $this->actingAs($this->user)->put('users/' . $this->user->username . '/account', [
+            'email'                         => 'new@email.com',
+            'new_password'                  => 'new_password',
+            'new_password_confirmation'     => 'new_password',
+        ]);
+
+        $response->assertJson([
+            'status'  => 'success',
+            'message' => 'Account details are updated',
+        ]);
+        $this->assertDatabaseHas('users', ['email' => 'new@email.com']);
+        password_verify('new_password', $this->user->password);
+    }
 }

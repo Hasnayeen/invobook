@@ -1,7 +1,9 @@
 ### Goodwork
 [![License](http://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/iluminar/goodwork/blob/dev/LICENSE)
 [![Build Status](https://travis-ci.org/iluminar/goodwork.svg?branch=dev)](https://travis-ci.org/iluminar/goodwork)
-[![StyleCI](https://styleci.io/repos/81873619/shield?branch=dev)](https://styleci.io/repos/81873619)
+[![Stable Version](https://poser.pugx.org/iluminar/goodwork/v/stable)](https://github.com/iluminar/goodwork)
+[![Laravel Version](https://img.shields.io/badge/Laravel-5.6-brightgreen.svg?style=flat)](https://github.com/laravel/laravel)
+[![StyleCI](https://styleci.io/repos/81873619/shield?branch=dev&style=flat)](https://styleci.io/repos/81873619)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 Self hosted project management and collaboration tool inspired by basecamp
@@ -47,6 +49,12 @@ Thank you for considering contributing to the Goodwork! The contribution guide c
 ## Security Vulnerabilities
 
 If you discover a security vulnerability within Goodwork, please send an e-mail to searching.nehal@gmail.com. All security vulnerabilities will be promptly addressed.
+
+## Credits
+
+* Author: [Nehal Hasnayeen](https://github.com/Hasnayeen)
+
+* [Other Contributors](https://github.com/iluminar/goodwork/graphs/contributors)
 
 ## License
 
