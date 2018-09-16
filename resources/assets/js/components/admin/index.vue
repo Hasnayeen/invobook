@@ -6,6 +6,11 @@
       <i class="fas fa-users text-xl md:text-2xl"></i>
       <span class="block text-xs font-regular pt-2">Users</span>
     </div>
+    <div @click="activateThisTab('auth')"
+      :class="[(active === 'auth') ? 'text-teal-dark font-semibold border-teal border-b-2 pb-2 md:pb-4 -mb-2 md:-mb-4' : 'cursor-pointer', 'text-center w-1/2']">
+      <i class="fas fa-lock-open text-xl md:text-2xl"></i>
+      <span class="block text-xs font-regular pt-2">Roles & Permissions</span>
+    </div>
     <div @click="activateThisTab('about')"
       :class="[(active === 'about') ? 'text-teal-dark font-semibold border-teal border-b-2 pb-4 -mb-2 md:-mb-4' : 'cursor-pointer', 'text-center w-1/2']">
       <i class="fas fa-info-circle text-xl md:text-2xl"></i>
@@ -13,18 +18,20 @@
     </div>
   </div>
 
-    <div class="flex flex-row flex-wrap justify-start mt-4">
-      <usersBoard :users="users" :activeTab="active"></usersBoard>
-      <aboutBoard :activeTab="active"></aboutBoard>
-    </div>
+  <div class="flex flex-row flex-wrap justify-start mt-4">
+    <usersBoard :users="users" :activeTab="active"></usersBoard>
+    <authBoard :users="users" :activeTab="active"></authBoard>
+    <aboutBoard :activeTab="active"></aboutBoard>
+  </div>
 </div>
 </template>
 
 <script>
-import usersBoard from './usersBoard.vue'
 import aboutBoard from './aboutBoard.vue'
+import authBoard from './authBoard.vue'
+import usersBoard from './usersBoard.vue'
 export default {
-  components: {usersBoard, aboutBoard},
+  components: {aboutBoard, authBoard, usersBoard},
   props: {
     users: {
       required: true,

@@ -2,7 +2,6 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 use Carbon\Carbon;
-use App\Models\User;
 
 $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
     static $password;
@@ -16,7 +15,6 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
         'designation'    => '',
         'avatar'         => '',
         'timezone'       => $faker->timezone,
-        'role'           => User::MEMBER,
         'active'         => 1,
         'password'       => $password ?: $password = bcrypt('secret'),
         'created_at'     => $now,

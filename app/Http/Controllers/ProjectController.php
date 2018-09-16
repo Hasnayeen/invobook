@@ -55,6 +55,7 @@ class ProjectController extends Controller
     {
         try {
             $project = $this->projectService->storeProject($request->all());
+            create_permissions($project);
 
             return response()->json([
                 'status'  => 'success',

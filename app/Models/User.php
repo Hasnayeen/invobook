@@ -2,24 +2,21 @@
 
 namespace App\Models;
 
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasRoles;
 
     protected $fillable = [
-        'name', 'username', 'bio', 'designation', 'avatar', 'role', 'active', 'timezone', 'email', 'password',
+        'name', 'username', 'bio', 'designation', 'avatar', 'active', 'timezone', 'email', 'password',
     ];
 
     protected $hidden = [
         'password', 'remember_token',
     ];
-
-    const MEMBER = 1;
-    const ADMIN = 2;
-    const GUEST = 3;
 
     public function getRouteKeyName()
     {
@@ -39,10 +36,5 @@ class User extends Authenticatable
     public function projects()
     {
         return $this->belongsToMany('App\Models\Project');
-    }
-
-    public function admin()
-    {
-        return $this->role === self::ADMIN;
     }
 }
