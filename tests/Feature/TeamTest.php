@@ -26,7 +26,7 @@ class TeamTest extends TestCase
     /** @test */
     public function admin_can_create_team()
     {
-        $admin = factory('App\Models\User')->create(['role' => 2]);
+        $admin = factory('App\Models\User')->create();
         $response = $this->actingAs($admin)->post('/teams', [
             'name'        => 'New Team',
             'description' => 'Team of all new members',

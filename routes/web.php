@@ -119,7 +119,7 @@ Route::group(['middleware' => ['auth', 'permission:view admin page'], 'prefix' =
 
     Route::get('roles', 'RoleController@index');
 
-    Route::post('roles', 'RoleController@store');
+    Route::post('roles', 'RoleController@store')->middleware('permission:create role');
 
     Route::delete('roles/{role}', 'RoleController@delete')->middleware('permission:delete role');
 
