@@ -24,7 +24,7 @@ class RoleController extends Controller
             'name' => 'required|unique:roles|max:255',
         ]);
 
-        $role = Role::create(['name' => strtolower(request('name'))]);
+        $role = Role::create(['name' => strtolower($validatedData['name'])]);
         $role->load('permissions');
 
         return response()->json([

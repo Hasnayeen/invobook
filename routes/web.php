@@ -129,8 +129,6 @@ Route::group(['middleware' => ['auth', 'permission:view admin page'], 'prefix' =
 
     Route::get('permissions', 'PermissionController@index')->middleware('permission:view permissions');
 
-    Route::post('permissions', 'PermissionController@store')->middleware('permission:create permission');
-
     Route::get('check-for-update', 'AboutController@checkForUpdate');
 
     Route::get('update-software', 'AboutController@updateSoftware');

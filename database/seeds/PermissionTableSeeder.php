@@ -29,6 +29,6 @@ class PermissionTableSeeder extends Seeder
         Permission::create(['name' => 'view permissions']);
         Permission::create(['name' => 'assign permission']);
         Permission::create(['name' => 'revoke permission']);
-        Permission::create(['name' => 'view admin']);
+        Permission::create(['name' => 'view admin page']);
     }
 }

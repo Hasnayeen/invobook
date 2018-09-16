@@ -12,7 +12,7 @@ class OwnerPermissionCantBeRevoked extends Exception
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function render($request)
+    public function render()
     {
         return response()->json([
             'status'   => 'error',
