@@ -2,7 +2,7 @@
 
 use Spatie\Permission\Models\Permission;
 
-if (!function_exists('about')) {
+if (! function_exists('about')) {
     /**
      * Get or set software related values.
      *
@@ -26,9 +26,9 @@ if (!function_exists('about')) {
     }
 }
 
-if (!function_exists('create_permissions')) {
+if (! function_exists('create_permissions')) {
     /**
-     * Create permissions for a single resource
+     * Create permissions for a single resource.
      *
      * @param  \Illuminate\Database\Eloquent\Model $resource
      * @return array
