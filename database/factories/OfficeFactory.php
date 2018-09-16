@@ -8,7 +8,7 @@ $factory->define(App\Models\Office::class, function (Faker\Generator $faker) {
 
     return [
         'name'        => $faker->word,
-        'slug'        => $faker->slug(1, false),
+        'slug'        => $faker->slug,
         'description' => $faker->sentence,
         'created_at'  => $now,
         'updated_at'  => $now,
