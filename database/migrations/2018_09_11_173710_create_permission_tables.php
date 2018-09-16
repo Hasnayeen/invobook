@@ -36,7 +36,7 @@ class CreatePermissionTables extends Migration
 
             $table->string('model_type');
             $table->unsignedBigInteger($columnNames['model_morph_key']);
-            $table->index([$columnNames['model_morph_key'], 'model_type', ]);
+            $table->index([$columnNames['model_morph_key'], 'model_type']);
 
             $table->foreign('permission_id')
                 ->references('id')
@@ -54,7 +54,7 @@ class CreatePermissionTables extends Migration
 
             $table->string('model_type');
             $table->unsignedBigInteger($columnNames['model_morph_key']);
-            $table->index([$columnNames['model_morph_key'], 'model_type', ]);
+            $table->index([$columnNames['model_morph_key'], 'model_type']);
 
             $table->foreign('role_id')
                 ->references('id')
