@@ -6,6 +6,7 @@ use Tests\TestCase;
 use App\Models\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Spatie\Permission\Models\Permission;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class UserTest extends TestCase
@@ -19,15 +20,19 @@ class UserTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_see_all_users()
+    public function owner_can_see_all_users()
     {
+        $permission = Permission::create(['name' => 'view admin page']);
+        $this->user->givePermissionTo($permission);
         factory('App\Models\User', 5)->create();
-        $admin = factory('App\Models\User')->create([
-            'role' => 2,
-        ]);
-        $users = User::all(['name', 'username', 'email', 'role', 'timezone', 'avatar']);
-        $response = $this->actingAs($admin)->get('admin');
-        $response->assertSeeInOrder($users->pluck('name', 'username', 'email', 'role', 'timezone', 'avatar')->toArray());
+        $users = User::all(['name', 'username', 'email', 'timezone', 'avatar']);
+        $response = $this->actingAs($this->user)->get('admin');
+        $response->assertSee($users[0]['name']);
+        $response->assertSee($users[0]['username']);
+        $response->assertSee($users[0]['email']);
+        $response->assertSee($users[5]['name']);
+        $response->assertSee($users[5]['username']);
+        $response->assertSee($users[5]['email']);
     }
 
     /** @test */

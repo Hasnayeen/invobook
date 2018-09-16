@@ -21,7 +21,6 @@ class CreateUsersTable extends Migration
             $table->string('designation')->nullable();
             $table->string('avatar')->nullable();
             $table->string('email')->unique();
-            $table->tinyInteger('role')->unsigned()->default(1)->comment('role of the user');
             $table->boolean('active')->comment('is user active or deactivated');
             $table->string('password');
             $table->string('timezone')->nullable();

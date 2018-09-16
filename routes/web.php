@@ -33,7 +33,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('projects', 'ProjectController@store');
 
-    Route::get('projects/{project}', 'ProjectController@show');
+    Route::get('projects/{project}', 'ProjectController@show')->middleware('granular.permission:view project');
 
     Route::post('projects/{project}/messages', 'ProjectController@storeMessage');
 
@@ -114,8 +114,20 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('users/{user}/avatar', 'UserAvatarController@store');
 });
 
-Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function () {
+Route::group(['middleware' => ['auth', 'permission:view admin page'], 'prefix' => 'admin'], function () {
     Route::get('/', 'AdminController@index');
+
+    Route::get('roles', 'RoleController@index');
+
+    Route::post('roles', 'RoleController@store')->middleware('permission:create role');
+
+    Route::delete('roles/{role}', 'RoleController@delete')->middleware('permission:delete role');
+
+    Route::post('roles/{role}/permissions', 'RolePermissionController@store')->middleware('permission:assign permission');
+
+    Route::delete('roles/{role}/permissions', 'RolePermissionController@delete')->middleware('permission:revoke permission');
+
+    Route::get('permissions', 'PermissionController@index')->middleware('permission:view permissions');
 
     Route::get('check-for-update', 'AboutController@checkForUpdate');
 
