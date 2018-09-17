@@ -39,6 +39,8 @@
         <navbar></navbar>
         @endif
 
+        <notification-popup></notification-popup>
+
         {{ $slot }}
     </div>
 

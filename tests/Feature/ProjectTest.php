@@ -5,6 +5,8 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Project;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ProjectTest extends TestCase
@@ -16,6 +18,30 @@ class ProjectTest extends TestCase
         parent::setUp();
         $this->user = factory('App\Models\User')->create();
         $this->project = factory('App\Models\Project')->create();
+        $this->ownerRole = Role::create(['name' => 'owner']);
+    }
+
+    /** @test */
+    public function owner_can_create_project()
+    {
+        $permission = Permission::create(['name' => 'create project']);
+        $this->ownerRole->givePermissionTo($permission);
+        $this->user->assignRole($this->ownerRole);
+
+        $response = $this->actingAs($this->user)->post('projects', [
+            'name'        => 'New Project',
+            'description' => 'Description for new project',
+            'owner_id'    => $this->user->id,
+        ]);
+        $response->assertJsonFragment([
+            'status' => 'success',
+            'name'   => 'New Project',
+            'slug'   => str_slug('New Project'),
+        ]);
+        $this->assertDatabaseHas('projects', ['name' => 'New Project', 'description' => 'Description for new project', 'owner_id' => $this->user->id]);
+        $this->assertTrue($this->user->hasPermissionTo('view project->new-project'));
+        $this->assertTrue($this->user->hasPermissionTo('edit project->new-project'));
+        $this->assertTrue($this->user->hasPermissionTo('delete project->new-project'));
     }
 
     /** @test */

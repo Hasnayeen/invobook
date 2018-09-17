@@ -1,5 +1,11 @@
 # Release Notes
 
+## v0.6 (Yet to release)
+
+### Added
+- Added Global EventBus for front end notification ([issue-143](https://github.com/iluminar/goodwork/issues/143))
+- Added new permissions ('create team', 'create project', 'create office') ([issue-143](https://github.com/iluminar/goodwork/issues/143))
+
 ## v0.5 (2018-09-16)
 
 ### Added
@@ -14,6 +20,7 @@
 
 ### Removed
 - Removed `RedirectIfNotAdmin` middleware
+
 ### Fixed
 
 ### Security

@@ -1,6 +1,5 @@
 <template>
   <div class="container mx-auto px-4 my-6 w-full md:w-md lg:w-lg xl:w-xl xxl:w-2xl">
-    <notification-popup :messageType="messageType" :message="message" @close="closeNotification" :show-notification="showNotification"></notification-popup>
     <div class="text-center text-grey-dark font-semibold text-xl mb-4">
       {{project.name}}
       <p class="text-sm">December 5, 2017 - December 13, 2017</p>
@@ -65,19 +64,15 @@ import schedule from './../partials/schedule.vue'
 import files from './../partials/files.vue'
 import activity from './../partials/activity.vue'
 import addMemberForm from './../partials/addMemberForm.vue'
-import notificationPopup from '../partials/notificationPopup.vue'
 
 export default {
   components: {
-    taskBoard, discussionBoard, messagesBoard, schedule, files, activity, addMemberForm, notificationPopup
+    taskBoard, discussionBoard, messagesBoard, schedule, files, activity, addMemberForm
   },
   props: ['project'],
   data: () => ({
     addMemberFormShown: false,
     active: 'tasks',
-    showNotification: false,
-    message: '',
-    messageType: '',
   }),
   methods: {
     showAddMemberForm () {
@@ -88,26 +83,18 @@ export default {
     },
     addMember (data) {
       if (data.user) {
-        this.message = data.message
-        this.messageType = 'success'
+        var messageType = 'success'
         this.project.members.push(data.user)
       } else {
-        this.messageType = 'error'
-        this.message = data.message
+        var messageType = 'error'
       }
-      this.showNotification = true
+      this.$emit('notification', data.message, messageType)
       this.addMemberFormShown = false
-      setTimeout(() => {
-        this.showNotification = false
-      }, 3000)
     },
     activateThisTab (tab) {
       if (tab != this.active) {
         this.active = tab
       }
-    },
-    closeNotification () {
-      this.showNotification = false
     }
   }
 }

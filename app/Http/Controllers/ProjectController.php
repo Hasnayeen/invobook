@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Services\MessageService;
 use App\Services\ProjectService;
-use App\Http\Requests\StoreMessageRequest;
 use App\Http\Requests\StoreProjectRequest;
 
 class ProjectController extends Controller
@@ -33,24 +32,6 @@ class ProjectController extends Controller
         return view('projects.single', ['project' => $project]);
     }
 
-    public function storeMessage(StoreMessageRequest $request, $project)
-    {
-        try {
-            $message = $this->messageService->saveMessage($request->all(), $project);
-            $message->load('user');
-
-            return response()->json([
-                'status'  => 'success',
-                'message' => $message,
-            ]);
-        } catch (Exception $e) {
-            return response()->json([
-                'status'  => 'error',
-                'message' => $e->getMessage(),
-            ]);
-        }
-    }
-
     public function store(StoreProjectRequest $request)
     {
         try {
@@ -60,6 +41,7 @@ class ProjectController extends Controller
             return response()->json([
                 'status'  => 'success',
                 'project' => $project,
+                'message' => 'New project has been created',
                 ]);
         } catch (Exception $e) {
             return response()->json([

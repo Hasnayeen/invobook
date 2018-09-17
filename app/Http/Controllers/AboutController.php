@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
 use GuzzleHttp\Client;
 
 class AboutController extends Controller
@@ -14,21 +13,18 @@ class AboutController extends Controller
 
         if ($response->getStatusCode() === 200) {
             $latestVersion = $this->getLatestVersion($response);
-            $result = $latestVersion > about('current_version');
-            if ($result) {
+            if ($latestVersion > about('current_version')) {
                 about('latest_version', $latestVersion);
 
                 return response()->json([
                     'status'           => 'success',
-                    'message'          => 'New version ' . $latestVersion . ' is available.',
-                    'update_available' => $result,
+                    'message'          => 'New version ' . $latestVersion . ' is available. Please update.',
                 ]);
             }
 
             return response()->json([
                     'status'           => 'success',
                     'message'          => 'Version ' . about('current_version') . ' is the latest version.',
-                    'update_available' => $result,
                 ]);
         }
 
@@ -43,28 +39,5 @@ class AboutController extends Controller
         return collect(json_decode($response->getBody()->getContents(), 1)['packages']['iluminar/goodwork'])->keys()->transform(function ($item) {
             return (float) preg_replace('/v(\d.\d.?\d?)/', '${1}', $item);
         })->max();
-    }
-
-    public function updateSoftware()
-    {
-        $latestVersion = about('latest_version');
-        if (about('current_version') !== $latestVersion) {
-            $output = shell_exec('git fetch --tags origin master:master');
-            if (strpos($output, '[new tag]')) {
-                shell_exec('git checkout v.' . $latestVersion);
-                about('current_version', $latestVersion);
-                about('last_updated', Carbon::today()->toFormattedDateString());
-
-                return response()->json([
-                    'status'  => 'success',
-                    'message' => 'Software updated to latest version',
-                ]);
-            }
-        }
-
-        return response()->json([
-            'status'  => 'error',
-            'message' => 'Nothing to update',
-        ]);
     }
 }
