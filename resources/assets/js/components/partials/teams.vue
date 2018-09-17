@@ -82,7 +82,7 @@ export default {
         description: this.description
       }).then((response) => {
         if (response.data.status == 'success') {
-          this.$emit('notification', response.data.message, response.data.status)
+          EventBus.$emit('notification', response.data.message, response.data.status)
           response.data.project.url = 'projects/' + response.data.project.slug
           this.teams.push(response.data.team)
           this.showCreateTeamForm = false

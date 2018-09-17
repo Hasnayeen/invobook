@@ -14,18 +14,18 @@ class PermissionTableSeeder extends Seeder
     {
         app()['cache']->forget('spatie.permission.cache');
 
-        Permission::create(['name' => 'create projects']);
+        Permission::create(['name' => 'create project']);
         Permission::create(['name' => 'view projects']);
         Permission::create(['name' => 'edit projects']);
-        Permission::create(['name' => 'delete projects']);
-        Permission::create(['name' => 'create teams']);
+        Permission::create(['name' => 'delete project']);
+        Permission::create(['name' => 'create team']);
         Permission::create(['name' => 'view teams']);
-        Permission::create(['name' => 'edit teams']);
-        Permission::create(['name' => 'delete teams']);
-        Permission::create(['name' => 'create offices']);
+        Permission::create(['name' => 'edit team']);
+        Permission::create(['name' => 'delete team']);
+        Permission::create(['name' => 'create office']);
         Permission::create(['name' => 'view offices']);
-        Permission::create(['name' => 'edit offices']);
-        Permission::create(['name' => 'delete offices']);
+        Permission::create(['name' => 'edit office']);
+        Permission::create(['name' => 'delete office']);
         Permission::create(['name' => 'invite users']);
         Permission::create(['name' => 'create role']);
         Permission::create(['name' => 'delete role']);

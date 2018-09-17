@@ -59,12 +59,14 @@ export default {
         .then((response) => {
           if (response.data.status == 'success') {
             this.loading = false
+            EventBus.$emit('notification', response.data.message, response.data.status)
             this.$emit('addMember', response.data)
             this.$emit('close')
           }
         })
         .catch((error) => {
           this.loading = false
+          EventBus.$emit('notification', error.response.data.message, error.response.data.status)
           this.$emit('addMember', error.response.data)
           this.$emit('close')
         })
