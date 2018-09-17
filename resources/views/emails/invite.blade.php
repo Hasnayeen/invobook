@@ -4,7 +4,11 @@
         <meta charset="utf-8">
     </head>
     <body>
-        <h2>{{ Auth::user()->name }} invited you to join Goodwork ({{ $company }})</h2>
+        @if ($company)
+            <h2>{{ Auth::user()->name }} invited you to join Goodwork ({{ $company }})</h2>
+        @else
+            <h2>{{ Auth::user()->name }} invited you to join Goodwork</h2>
+        @endif
 
         <div>
             Hi {{ $name }},

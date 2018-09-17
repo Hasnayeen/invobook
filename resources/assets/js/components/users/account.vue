@@ -1,6 +1,5 @@
 <template>
   <div class="bg-white rounded shadow py-8 mt-8">
-    <notification-popup :message="message" :messageType="messageType" :showNotification="showNotification" ></notification-popup>
     <div class="flex flex-col py-4">
       <div class="mb-4 px-8">
         <label class="block text-grey-darker text-sm font-bold mb-2" for="username">
@@ -57,9 +56,7 @@
 </template>
 
 <script>
-import notificationPopup from "./../partials/notificationPopup";
 export default {
-  components: {notificationPopup},
   props: {
     user: {
       required: true,
@@ -71,9 +68,6 @@ export default {
     currentPassword: '',
     newPassword: '',
     newPasswordConfirmation: '',
-    message: '',
-    messageType: '',
-    showNotification: false,
     errorMessage: {
       email: '',
       current_password: '',
@@ -94,17 +88,11 @@ export default {
       }
       axios.put('/users/' + this.user.username + '/account' , params)
       .then((response) => {
-        this.message = response.data.message
-        this.messageType = 'success'
-        this.showNotification = true
+        EventBus.$emit('notification', response.data.message, response.data.status)
         this.email = '',
         this.currentPassword = '',
         this.newPassword = '',
         this.newPasswordConfirmation = ''
-        setTimeout(() => {
-          this.showNotification = false
-          this.message = ''
-        }, 2000)
       })
       .catch((error) => {
         for (const prop in error.response.data.errors) {

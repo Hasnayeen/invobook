@@ -12,13 +12,20 @@ class UserController extends Controller
     public function sentInvitationToRegister(Request $request)
     {
         try {
-            Mail::to($request->email)
-                ->send(new SendInvitationToRegister());
+            if (! User::exists('email', $request->email)) {
+                Mail::to($request->email)
+                    ->send(new SendInvitationToRegister());
+
+                return response()->json([
+                    'status'  => 'success',
+                    'message' => 'Invitation sent successfully',
+                ]);
+            }
 
             return response()->json([
-                'status'  => 'success',
-                'message' => 'Invitation sent successfully',
-            ]);
+                'status'  => 'error',
+                'message' => 'Email already exist',
+            ], 409);
         } catch (Exception $e) {
             return response()->json([
                 'status'  => 'error',

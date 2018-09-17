@@ -35,8 +35,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('projects/{project}', 'ProjectController@show')->middleware('granular.permission:view project->');
 
-    Route::post('projects/{project}/messages', 'ProjectController@storeMessage');
-
     /**********************************
         Team
     **********************************/
@@ -49,8 +47,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('teams/{team}', 'TeamController@show')->middleware('granular.permission:view team->');
 
-    Route::post('teams/{team}/messages', 'TeamController@storeMessage');
-
     /**********************************
      Office
      **********************************/
@@ -62,8 +58,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('offices/{office}', 'OfficeController@show');
 
     Route::get('offices/{office}/tasks', 'TaskController@index');
-
-    Route::post('offices/{office}/messages', 'OfficeController@storeMessage');
 
     /**********************************
         Member

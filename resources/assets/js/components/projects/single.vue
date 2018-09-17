@@ -88,7 +88,7 @@ export default {
       } else {
         var messageType = 'error'
       }
-      this.$emit('notification', data.message, messageType)
+      EventBus.$emit('notification', data.message, messageType)
       this.addMemberFormShown = false
     },
     activateThisTab (tab) {
