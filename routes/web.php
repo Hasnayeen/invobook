@@ -31,9 +31,9 @@ Route::group(['middleware' => 'auth'], function () {
         return abort(404);
     });
 
-    Route::post('projects', 'ProjectController@store');
+    Route::post('projects', 'ProjectController@store')->middleware('permission:create project');
 
-    Route::get('projects/{project}', 'ProjectController@show')->middleware('granular.permission:view project');
+    Route::get('projects/{project}', 'ProjectController@show')->middleware('granular.permission:view project->');
 
     Route::post('projects/{project}/messages', 'ProjectController@storeMessage');
 
@@ -47,7 +47,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('teams', 'TeamController@store');
 
-    Route::get('teams/{team}', 'TeamController@show');
+    Route::get('teams/{team}', 'TeamController@show')->middleware('granular.permission:view team->');
 
     Route::post('teams/{team}/messages', 'TeamController@storeMessage');
 

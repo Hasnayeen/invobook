@@ -7,7 +7,6 @@ Homestead.json
 Homestead.yaml
 .env
 .phpintel
-composer.lock
 npm-debug.log
 /.phpcomplete_extended
 .env.testing

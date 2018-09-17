@@ -18,8 +18,8 @@ class GranularPermissionMiddleware
             : explode('|', $permission);
 
         foreach ($permissions as $permission) {
-            $permission = (strpos($permission, ':') !== false)
-                ? $permission . ':' . $request->segment(2)
+            $permission = (strpos($permission, '->') !== false)
+                ? $permission . $request->segment(2)
                 : $permission;
             if (app('auth')->user()->can($permission)) {
                 return $next($request);

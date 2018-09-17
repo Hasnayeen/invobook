@@ -14,12 +14,15 @@ class PermissionTableSeeder extends Seeder
     {
         app()['cache']->forget('spatie.permission.cache');
 
+        Permission::create(['name' => 'create projects']);
         Permission::create(['name' => 'view projects']);
         Permission::create(['name' => 'edit projects']);
         Permission::create(['name' => 'delete projects']);
+        Permission::create(['name' => 'create teams']);
         Permission::create(['name' => 'view teams']);
         Permission::create(['name' => 'edit teams']);
         Permission::create(['name' => 'delete teams']);
+        Permission::create(['name' => 'create offices']);
         Permission::create(['name' => 'view offices']);
         Permission::create(['name' => 'edit offices']);
         Permission::create(['name' => 'delete offices']);
