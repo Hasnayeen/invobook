@@ -12,7 +12,7 @@ class UserController extends Controller
     public function sentInvitationToRegister(Request $request)
     {
         try {
-            if (!User::exists('email', $request->email)) {
+            if (! User::exists('email', $request->email)) {
                 Mail::to($request->email)
                     ->send(new SendInvitationToRegister());
 
