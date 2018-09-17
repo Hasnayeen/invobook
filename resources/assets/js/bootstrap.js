@@ -32,3 +32,5 @@ window.Vue.mixin({
     }
   }
 })
+
+window.EventBus = new Vue()
