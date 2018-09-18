@@ -64,22 +64,6 @@ var colors = {
   'red-lighter': '#f9acaa',
   'red-lightest': '#fcebea',
 
-  'orange-darkest': '#542605',
-  'orange-darker': '#7f4012',
-  'orange-dark': '#de751f',
-  'orange': '#f6993f',
-  'orange-light': '#faad63',
-  'orange-lighter': '#fcd9b6',
-  'orange-lightest': '#fff5eb',
-
-  'yellow-darkest': '#453411',
-  'yellow-darker': '#684f1d',
-  'yellow-dark': '#f2d024',
-  'yellow': '#ffed4a',
-  'yellow-light': '#fff382',
-  'yellow-lighter': '#fff9c2',
-  'yellow-lightest': '#fcfbeb',
-
   'green-darkest': '#032d19',
   'green-darker': '#0b4228',
   'green-dark': '#1f9d55',
@@ -111,14 +95,6 @@ var colors = {
   'indigo-light': '#7886d7',
   'indigo-lighter': '#b2b7ff',
   'indigo-lightest': '#e6e8ff',
-
-  'purple-darkest': '#1f133f',
-  'purple-darker': '#352465',
-  'purple-dark': '#794acf',
-  'purple': '#9561e2',
-  'purple-light': '#a779e9',
-  'purple-lighter': '#d6bbfc',
-  'purple-lightest': '#f3ebff',
 
   'pink-darkest': '#45051e',
   'pink-darker': '#72173a',

@@ -5,7 +5,7 @@
 <profile :user="{{ $user }}"></profile>
 
 @slot('script')
-<script src="{{ asset('/js/users/profile.js') }}"></script>
+<script src="{{ mix('/js/users/profile.js') }}"></script>
 @endslot
 
 @endcomponent

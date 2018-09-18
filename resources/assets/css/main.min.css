@@ -1,0 +1,101 @@
+/**
+ * This injects Tailwind's base styles, which is a combination of
+ * Normalize.css and some additional base styles.
+ *
+ * You can see the styles here:
+ * https://github.com/tailwindcss/tailwindcss/blob/master/css/preflight.css
+ */
+@tailwind preflight;
+
+/**
+ * Here you would add any of your custom component classes; stuff that you'd
+ * want loaded *before* the utilities so that the utilities could still
+ * override them.
+ *
+ * Example:
+ *
+ * .btn { ... }
+ * .form-input { ... }
+ *
+ * Or if using a preprocessor:
+ *
+ * @import "components/buttons";
+ * @import "components/forms";
+ */
+
+.btn {
+    @apply bg-teal text-white text-xl font-medium py-2 px-4 rounded;
+}
+
+.btn:hover {
+    @apply bg-teal-dark;
+}
+
+.checkbox {
+    @apply border-grey border p-2 rounded;
+}
+
+/**
+ * This injects all of Tailwind's utility classes, generated based on your
+ * config file.
+ */
+@tailwind utilities;
+
+/**
+ * Here you would add any custom utilities you need that don't come out of the
+ * box with Tailwind.
+ *
+ * Example :
+ *
+ * .bg-pattern-graph-paper { ... }
+ * .skew-45 { ... }
+ *
+ * Or if using a preprocessor..
+ *
+ * @import "utilities/background-patterns";
+ * @import "utilities/skew-transforms";
+ */
+
+@responsive {
+    .mx-1\/40 {
+        margin-left: 2.5%;
+        margin-right: 2.5%;
+    }
+
+    .-mx-1\/40 {
+        margin-left: -2.5%;
+        margin-right: -2.5%;
+    }
+
+    .mx-1\/5 {
+        margin-5eft: 1.66%;
+        margin-right: 1.66%;
+    }
+
+    .-mx-1\/60 {
+        margin-left: -1.66%;
+        margin-right: -1.66%;
+    }
+
+    .mx-1\/20 {
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+
+    .-mx-1\/20 {
+        margin-left: -5%;
+        margin-right: -5%;
+    }
+}
+
+ .resize-none {
+     resize: none;
+ }
+
+ .order-1 {
+     order: 1;
+ }
+
+ .h-50-vh {
+     height: 50vh;
+ }

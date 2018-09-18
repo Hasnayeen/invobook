@@ -13,7 +13,7 @@
 ]); ?>;
     window.errors = <?php echo json_encode($errors->toArray()); ?>
 </script>
-<script src="{{ asset('/js/home.js') }}"></script>
+<script src="{{ mix('/js/home.min.js') }}"></script>
 @endslot
 
 @endcomponent

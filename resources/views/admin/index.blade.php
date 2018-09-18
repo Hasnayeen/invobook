@@ -5,7 +5,7 @@
 <index :users="{{ $users }}"></index>
 
 @slot('script')
-<script src="{{ asset('/js/admin/index.js') }}"></script>
+<script src="{{ mix('/js/admin/index.min.js') }}"></script>
 @endslot
 
 @endcomponent
