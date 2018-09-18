@@ -43,6 +43,8 @@ Goodwork brings you all the component required for your project to run smoothly 
 
 ![Messages](https://i.imgur.com/Qb9hkc6.png)
 
+![Roles Board](https://i.imgur.com/87gbE0v.png)
+
 ## Contributing
 
 Thank you for considering contributing to the Goodwork! The contribution guide can be found in the [Contribution Guideline](https://github.com/iluminar/goodwork/wiki/Contribution-Guideline).
