@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
 use App\Models\Token;
+use App\Models\Office;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -105,5 +106,18 @@ class RegisterController extends Controller
         }
 
         abort(403);
+    }
+
+    /**
+     * The user has been registered.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  mixed                    $user
+     * @return void
+     */
+    protected function registered(Request $request, $user)
+    {
+        $office = Office::where('slug', 'headquarter')->first();
+        $user->offices()->attach($office->id);
     }
 }

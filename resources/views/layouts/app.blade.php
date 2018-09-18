@@ -37,9 +37,9 @@
         <div class="h-1" style="background: linear-gradient(to right, #4DC0B5, #3490DC);"></div>
         @if (!Auth::guest())
         <navbar></navbar>
+        <notification-popup></notification-popup>
         @endif
 
-        <notification-popup></notification-popup>
 
         {{ $slot }}
     </div>
