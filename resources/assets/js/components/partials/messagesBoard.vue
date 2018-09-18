@@ -51,6 +51,7 @@
 </template>
 
 <script>
+import luxon from 'luxon'
 let day = null
 export default {
   props: ['resource', 'resourceType', 'activeTab'],
@@ -130,7 +131,7 @@ export default {
       this.unreadMessage = 0
     },
     showDate (created_at) {
-      let createdDay = window.luxon.DateTime.fromSQL(created_at).toLocaleString(window.luxon.DateTime.DATE_MED)
+      let createdDay = luxon.DateTime.fromSQL(created_at).toLocaleString(luxon.DateTime.DATE_MED)
       if (day === null || day != createdDay) {
         day = createdDay
         return true
@@ -138,10 +139,10 @@ export default {
       return false
     },
     getDate (created_at) {
-      return window.luxon.DateTime.fromSQL(created_at).toLocaleString(window.luxon.DateTime.DATE_MED)
+      return luxon.DateTime.fromSQL(created_at).toLocaleString(luxon.DateTime.DATE_MED)
     },
     getTime (created_at) {
-      return window.luxon.DateTime.fromSQL(created_at).toLocaleString(window.luxon.DateTime.TIME_SIMPLE)
+      return luxon.DateTime.fromSQL(created_at).toLocaleString(luxon.DateTime.TIME_SIMPLE)
     }
   }
 }
