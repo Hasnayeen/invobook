@@ -20,5 +20,8 @@ class HeadquarterOfficeSeeder extends Seeder
             'updated_at'  => Carbon::now(),
             'owner_id'    => 1,
         ]);
+        $office = Office::where('slug', 'headquarter')->first();
+        $user = User::find(1);
+        $user->offices()->attach($office->id);
     }
 }
