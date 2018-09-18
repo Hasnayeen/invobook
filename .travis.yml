@@ -24,7 +24,10 @@ before_script:
   - php artisan config:clear
 
 script:
-  - vendor/bin/phpunit
+  - vendor/bin/phpunit --coverage-clover=coverage.xml
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
 
 notifications:
   on_success: never
