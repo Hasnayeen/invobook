@@ -2,6 +2,7 @@
 
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Office;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -29,5 +30,7 @@ class AdminUserSeeder extends Seeder
         $permissions = Permission::all();
         $permissions = $permissions->pluck('id')->toArray();
         $role->givePermissionTo($permissions);
+        $office = Office::where('slug', 'headquarter')->first();
+        $user->offices()->attach($office->id);
     }
 }
