@@ -1,33 +1,29 @@
-let mix = require('laravel-mix').mix;
-var tailwindcss = require('tailwindcss');
+let mix = require('laravel-mix').mix
+var tailwindcss = require('tailwindcss')
+let glob = require('glob-all')
+let PurgecssPlugin = require('purgecss-webpack-plugin')
+
+class TailwindExtractor {
+  static extract (content) {
+    return content.match(/[A-Za-z0-9-_:\/]+/g) || []
+  }
+}
 
 mix.postCss('resources/assets/css/main.css', 'public/css', [
-        tailwindcss('tailwind.js'),
-    ]);
-mix.js('resources/assets/js/pages/home.js', 'public/js')
-   .js('resources/assets/js/pages/auth/login.js', 'public/js/auth')
-   .js('resources/assets/js/pages/auth/register.js', 'public/js/auth');
+  tailwindcss('tailwind.js')
+]).minify('public/css/main.css')
 
-// Error page
-mix.js('resources/assets/js/pages/errors/404.js', 'public/js/errors');
-
-// Projects
-mix.js('resources/assets/js/pages/projects/single.js', 'public/js/projects')
-   .js('resources/assets/js/pages/projects/messages.js', 'public/js/projects');
-
-// Teams
-mix.js('resources/assets/js/pages/teams/messages.js', 'public/js/teams')
-    .js('resources/assets/js/pages/teams/single.js', 'public/js/teams');
-
-// Offices
-mix.js('resources/assets/js/pages/offices/messages.js', 'public/js/offices')
-    .js('resources/assets/js/pages/offices/single.js', 'public/js/offices');
-
-// Users
-mix.js('resources/assets/js/pages/users/profile.js', 'public/js/users');
-
-// Admin
-mix.js('resources/assets/js/pages/admin/index.js', 'public/js/admin');
+mix.js('resources/assets/js/pages/auth/login.js', 'public/js/auth').minify('public/js/auth/login.js')
+  .js('resources/assets/js/pages/auth/register.js', 'public/js/auth').minify('public/js/auth/register.js')
+  .js('resources/assets/js/pages/errors/404.js', 'public/js/errors').minify('public/js/errors/404.js')
+  .js('resources/assets/js/pages/projects/single.js', 'public/js/projects').minify('public/js/projects/single.js')
+  .js('resources/assets/js/pages/teams/single.js', 'public/js/teams').minify('public/js/teams/single.js')
+  .js('resources/assets/js/pages/offices/single.js', 'public/js/offices').minify('public/js/offices/single.js')
+  .js('resources/assets/js/pages/users/profile.js', 'public/js/users').minify('public/js/users/profile.js')
+  .js('resources/assets/js/pages/admin/index.js', 'public/js/admin').minify('public/js/admin/index.js')
+  .js('resources/assets/js/pages/home.js', 'public/js').minify('public/js/home.js')
+  .extract(['vue', 'axios'])
+  .version()
 
 // Full API
 // mix.js(src, output);
@@ -37,9 +33,44 @@ mix.js('resources/assets/js/pages/admin/index.js', 'public/js/admin');
 // mix.combine(files, destination);
 // mix.copy(from, to);
 // mix.minify(file);
-mix.sourceMaps(); // Enable sourcemaps
+mix.sourceMaps() // Enable sourcemaps
 // mix.version(); // Enable versioning.
-mix.disableNotifications();
+mix.disableNotifications()
 // mix.setPublicPath('path/to/public'); <-- Useful for Node apps.
 // mix.webpackConfig({}); <-- Override webpack.config.js, without editing the file directly.
-mix.webpackConfig({ devtool: "inline-source-map" });
+mix.webpackConfig(
+  {
+    devtool: 'inline-source-map'
+  },
+  {
+    resolve: {
+      alias: {
+        'vue$': mix.inProduction() ? 'vue/dist/vue.min.js' : 'vue/dist/vue.js'
+      }
+    }
+  }
+)
+
+if (mix.inProduction()) {
+  mix.webpackConfig({
+    plugins: [
+      new PurgecssPlugin({
+
+        // Specify the locations of any files you want to scan for class names.
+        paths: glob.sync([
+          path.join(__dirname, 'resources/views/**/*.blade.php'),
+          path.join(__dirname, 'resources/assets/js/**/*.vue')
+        ]),
+        extractors: [
+          {
+            extractor: TailwindExtractor,
+
+            // Specify the file extensions to include when scanning for
+            // class names.
+            extensions: ['html', 'js', 'php', 'vue']
+          }
+        ]
+      })
+    ]
+  })
+}
