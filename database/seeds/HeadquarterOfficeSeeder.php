@@ -1,6 +1,8 @@
 <?php
 
 use Carbon\Carbon;
+use App\Models\User;
+use App\Models\Office;
 use Illuminate\Database\Seeder;
 
 class HeadquarterOfficeSeeder extends Seeder
