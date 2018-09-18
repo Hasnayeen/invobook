@@ -9,6 +9,6 @@
     window.url = "{{ url('/login') }}"
     window.errors = <?php echo json_encode($errors->toArray()); ?>
 </script>
-<script src="{{ asset('/js/auth/login.js') }}"></script>
+<script src="{{ mix('/js/auth/login.js') }}"></script>
 @endslot
 @endcomponent
