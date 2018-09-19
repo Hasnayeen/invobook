@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Auth;
 use App\Models\User;
 use App\Models\Token;
 use App\Models\Office;
+use App\Mail\UserRegistered;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -119,5 +121,7 @@ class RegisterController extends Controller
     {
         $office = Office::where('slug', 'headquarter')->first();
         $user->offices()->attach($office->id);
+        Mail::to($user->email)
+            ->send(new UserRegistered($user));
     }
 }
