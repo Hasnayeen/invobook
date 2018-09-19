@@ -5,6 +5,8 @@
 ### Added
 - Added Global EventBus for front end notification ([issue-143](https://github.com/iluminar/goodwork/issues/143))
 - Added new permissions ('create team', 'create project', 'create office') ([issue-143](https://github.com/iluminar/goodwork/issues/143))
+- Added new welcome email to new registered user ([issue-26](https://github.com/iluminar/goodwork/issues/26))
+- Added new config variable `company_name` in `config/app.php` ([issue-26](https://github.com/iluminar/goodwork/issues/26))
 
 ### Changed
 - Use `mix` helper instead of `asset`
