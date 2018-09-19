@@ -34,8 +34,8 @@ class SendInvitationToRegister extends Mailable
         Token::create(['token' => $token, 'email' => $request->email]);
         $setting = Setting::first();
 
-        return $this->view('emails.invite')
-                    ->subject(Auth::user()->name.' invited you to join Goodwork')
+        return $this->markdown('emails.invite')
+                    ->subject(Auth::user()->name . ' invited you to join Goodwork')
                     ->with([
                 'token'   => $token,
                 'name'    => $request->name,
