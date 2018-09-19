@@ -15,6 +15,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Company Name
+    |--------------------------------------------------------------------------
+    |
+    | This value is the name of your organization. This value is used when the
+    | application needs to place the company's name in a notification or
+    | any other location as required by the application or its packages.
+    */
+
+    'company_name' => env('COMPANY_NAME'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Environment
     |--------------------------------------------------------------------------
     |
