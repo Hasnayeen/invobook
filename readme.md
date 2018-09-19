@@ -9,6 +9,27 @@
 
 Self hosted project management and collaboration tool inspired by basecamp
 
+<hr>
+<p align="center">
+<b><a href="#overview">Overview</a></b>
+|
+<b><a href="#demo">Demo</a></b>
+|
+<b><a href="#installation">Installation</a></b>
+|
+<b><a href="#screenshots">Screens</a></b>
+|
+<b><a href="#contributing">Contributing</a></b>
+|
+<b><a href="#security-vulnerabilities">Security Vulnerabilities</a></b>
+|
+<b><a href="#credits">Credits</a></b>
+|
+<b><a href="#license">License</a></b>
+</p>
+
+<hr>
+
 ## About Goodwork
 
 Goodwork is a simple project management and collaboration tool for all kind of teams. It is open source and MIT [See License](https://github.com/iluminar/goodwork/blob/dev/LICENSE) licensed. Goodwork is a self-hosted software so no dependency on anyone and only you keep your data.
@@ -17,6 +38,13 @@ Goodwork brings you all the component required for your project to run smoothly 
 
 [Overview](https://github.com/iluminar/goodwork/wiki/Overview)
 
+## Demo
+
+You can check out a instance of the application that we use as a guest user using below described email & password. This user has limited permission so you'll only see a handfull of the feature. Visit this link: https://goodworkfor.life
+
+`email`: guest@example.com
+
+`password`: guestpass
 
 ## Installation
 
@@ -37,7 +65,9 @@ Goodwork brings you all the component required for your project to run smoothly 
 
 ![Task Details](https://i.imgur.com/J6wKeNL.png)
 
-![Profile Page](https://i.imgur.com/jIN7FQL.png)
+![Profile Page](https://i.imgur.com/MOS2k8l.png)
+
+![Account Page](https://i.imgur.com/TelYaCs.png)
 
 ![Notifications](https://i.imgur.com/XGdakw9.png)
 
