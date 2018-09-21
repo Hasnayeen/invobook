@@ -15,7 +15,7 @@ class AuthorizationTest extends TestCase
     {
         parent::setUp();
         $this->user = factory('App\Models\User')->create();
-        $this->ownerRole = Role::create(['name' => 'owner']);
+        $this->ownerRole = Role::create(['name' => 'owner', 'deletable' => false]);
         $permission = Permission::create(['name' => 'view admin page']);
         $this->ownerRole->givePermissionTo($permission);
         $this->user->assignRole($this->ownerRole);
@@ -27,8 +27,8 @@ class AuthorizationTest extends TestCase
     {
         $permission = Permission::create(['name' => 'create role']);
         $this->ownerRole->givePermissionTo($permission);
-        $response = $this->actingAs($this->user)->post('admin/roles', ['name' => 'staff']);
-        $response->assertJsonFragment([
+        $this->actingAs($this->user)->post('admin/roles', ['name' => 'staff'])
+        ->assertJsonFragment([
             'status'  => 'success',
             'message' => 'New role has been created',
             'name'    => 'staff',
@@ -41,8 +41,8 @@ class AuthorizationTest extends TestCase
         $permission = Permission::create(['name' => 'delete role']);
         $this->ownerRole->givePermissionTo($permission);
         $role2 = Role::create(['name' => 'delete']);
-        $response = $this->actingAs($this->user)->delete('admin/roles/' . $this->ownerRole->id);
-        $response->assertJsonFragment([
+        $this->actingAs($this->user)->delete('admin/roles/' . $role2->id)
+        ->assertJsonFragment([
             'status'  => 'success',
             'message' => 'Role has been deleted',
         ]);
@@ -56,8 +56,8 @@ class AuthorizationTest extends TestCase
         $role2 = Role::create(['name' => 'guest']);
         $permission2 = Permission::create(['name' => 'view project']);
         $role2->givePermissionTo($permission2);
-        $response = $this->actingAs($this->user)->delete('admin/roles/' . $role2->id . '/permissions', ['permission_id' => $permission2->id]);
-        $response->assertJsonFragment([
+        $this->actingAs($this->user)->delete('admin/roles/' . $role2->id . '/permissions', ['permission_id' => $permission2->id])
+        ->assertJsonFragment([
             'status'  => 'success',
             'message' => 'Permission has been revoked from the role',
         ]);
@@ -70,8 +70,8 @@ class AuthorizationTest extends TestCase
         $this->ownerRole->givePermissionTo($permission);
         $role1 = Role::create(['name' => 'staff']);
         $permission1 = Permission::create(['name' => 'view projects']);
-        $response = $this->actingAs($this->user)->post('admin/roles/' . $role1->id . '/permissions', ['permission_id' => $permission1->id]);
-        $response->assertJsonFragment([
+        $this->actingAs($this->user)->post('admin/roles/' . $role1->id . '/permissions', ['permission_id' => $permission1->id])
+        ->assertJsonFragment([
             'status'  => 'success',
             'message' => 'Permission has been assigned to the role',
             'name'    => 'view projects',
@@ -89,13 +89,26 @@ class AuthorizationTest extends TestCase
         Permission::create(['name' => 'edit projects']);
         Permission::create(['name' => 'delete projects']);
 
-        $response = $this->actingAs($this->user)->get('admin/permissions');
-        $response->assertJsonFragment([
+        $this->actingAs($this->user)->get('admin/permissions')
+        ->assertJsonFragment([
             'status' => 'success',
             'name'   => 'view projects',
             'name'   => 'edit projects',
             'name'   => 'delete projects',
             'name'   => 'view permissions',
         ]);
+    }
+
+    /**
+     * @test
+     * @expectedException App\Exceptions\RoleCantBeDeleted
+     * */
+    public function owner_role_cannot_be_deleted()
+    {
+        $permission = Permission::create(['name' => 'delete role']);
+        $this->ownerRole->givePermissionTo($permission);
+
+        $this->actingAs($this->user)->delete('admin/roles/' . $this->ownerRole->id)
+            ->assertForbidden();
     }
 }

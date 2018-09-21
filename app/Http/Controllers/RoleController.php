@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use App\Exceptions\RoleCantBeDeleted;
 
 class RoleController extends Controller
 {
@@ -36,11 +37,15 @@ class RoleController extends Controller
 
     public function delete(Role $role)
     {
-        $role->delete();
+        if ($role->deletable) {
+            $role->delete();
 
-        return response()->json([
-            'status'  => 'success',
-            'message' => 'Role has been deleted',
-        ]);
+            return response()->json([
+                'status'  => 'success',
+                'message' => 'Role has been deleted',
+            ]);
+        }
+
+        throw new RoleCantBeDeleted;
     }
 }

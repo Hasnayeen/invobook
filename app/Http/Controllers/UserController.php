@@ -4,15 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendInvitationToRegister;
 
 class UserController extends Controller
 {
+    public function index(UserRepository $userRepository)
+    {
+        $users = $userRepository->getAllUsers();
+
+        return response()->json([
+            'status' => 'success',
+            'data'   => $users,
+        ]);
+    }
+
     public function sentInvitationToRegister(Request $request)
     {
         try {
-            if (! User::where('email', $request->email)->first()) {
+            if (!User::where('email', $request->email)->first()) {
                 Mail::to($request->email)
                     ->send(new SendInvitationToRegister());
 

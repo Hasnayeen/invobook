@@ -21,8 +21,6 @@ Self hosted project management and collaboration tool inspired by basecamp
 |
 <b><a href="#contributing">Contributing</a></b>
 |
-<b><a href="#security-vulnerabilities">Security Vulnerabilities</a></b>
-|
 <b><a href="#credits">Credits</a></b>
 |
 <b><a href="#license">License</a></b>
@@ -42,9 +40,9 @@ Goodwork brings you all the component required for your project to run smoothly 
 
 You can check out a instance of the application that we use as a guest user using below described email & password. This user has limited permission so you'll only see a handfull of the feature. Visit this link: https://goodworkfor.life
 
-`email`: guest@example.com
+`email: guest@example.com`
 
-`password`: guestpass
+`password: guestpass`
 
 ## Installation
 
