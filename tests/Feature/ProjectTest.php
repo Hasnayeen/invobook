@@ -28,12 +28,11 @@ class ProjectTest extends TestCase
         $this->ownerRole->givePermissionTo($permission);
         $this->user->assignRole($this->ownerRole);
 
-        $response = $this->actingAs($this->user)->post('projects', [
+        $this->actingAs($this->user)->post('projects', [
             'name'        => 'New Project',
             'description' => 'Description for new project',
             'owner_id'    => $this->user->id,
-        ]);
-        $response->assertJsonFragment([
+        ])->assertJsonFragment([
             'status' => 'success',
             'name'   => 'New Project',
             'slug'   => str_slug('New Project'),
@@ -48,12 +47,11 @@ class ProjectTest extends TestCase
     public function add_user_to_project()
     {
         $user = factory('App\Models\User')->create();
-        $response = $this->actingAs($this->user)->post('/members', [
+        $this->actingAs($this->user)->post('/members', [
             'user_id'       => $user->id,
             'resource_type' => 'project',
             'resource_id'   => $this->project->id,
-        ]);
-        $response->assertJson([
+        ])->assertJson([
             'status'  => 'success',
             'message' => 'User added to the project',
             'user'    => [

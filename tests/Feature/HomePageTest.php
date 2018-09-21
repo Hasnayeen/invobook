@@ -26,12 +26,11 @@ class HomePageTest extends TestCase
         $teams = factory(Team::class, 3)->create(['office_id' => null]);
         $offices = factory(Office::class, 3)->create();
 
-        $response = $this->actingAs($this->user)
-                         ->get('/');
-
-        $response->assertStatus(200)
-                 ->assertSee($projects[0]->name)
-                 ->assertSee($teams[0]->name);
+        $this->actingAs($this->user)
+            ->get('/')
+            ->assertStatus(200)
+            ->assertSee($projects[0]->name)
+            ->assertSee($teams[0]->name);
     }
 
     /** @test */
@@ -42,9 +41,10 @@ class HomePageTest extends TestCase
         $project->members()->attach($users->map(function ($user) {
             return $user->id;
         }));
-        $response = $this->actingAs($this->user)->get('/');
-        $response->assertSee($users[0]->name)
-                 ->assertSee($users[1]->name)
-                 ->assertSee($users[2]->name);
+        $this->actingAs($this->user)
+            ->get('/')
+            ->assertSee($users[0]->name)
+            ->assertSee($users[1]->name)
+            ->assertSee($users[2]->name);
     }
 }

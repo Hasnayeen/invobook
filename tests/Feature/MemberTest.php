@@ -36,11 +36,10 @@ class MemberTest extends TestCase
         ]);
         $office->members()->saveMany($users);
 
-        $response = $this->actingAs($users[0])->call('GET', 'members', [
+        $this->actingAs($users[0])->call('GET', 'members', [
             'resource_type' => 'project',
             'resource_id'   => $project->id,
-        ]);
-        $response->assertJsonFragment([
+        ])->assertJsonFragment([
             'status'   => 'success',
             'items'    => 3,
             'username' => $users['0']['username'],
@@ -48,11 +47,10 @@ class MemberTest extends TestCase
             'username' => $users['2']['username'],
         ]);
 
-        $response = $this->actingAs($users[0])->call('GET', 'members', [
+        $this->actingAs($users[0])->call('GET', 'members', [
             'resource_type' => 'team',
             'resource_id'   => $team->id,
-        ]);
-        $response->assertJsonFragment([
+        ])->assertJsonFragment([
             'status'   => 'success',
             'items'    => 3,
             'username' => $users['0']['username'],
@@ -60,11 +58,10 @@ class MemberTest extends TestCase
             'username' => $users['2']['username'],
         ]);
 
-        $response = $this->actingAs($users[0])->call('GET', 'members', [
+        $this->actingAs($users[0])->call('GET', 'members', [
             'resource_type' => 'office',
             'resource_id'   => $office->id,
-        ]);
-        $response->assertJsonFragment([
+        ])->assertJsonFragment([
             'status'   => 'success',
             'items'    => 3,
             'username' => $users['0']['username'],

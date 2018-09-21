@@ -101,6 +101,8 @@ Route::group(['middleware' => 'auth'], function () {
         User
     **********************************/
 
+    Route::get('users', 'UserController@index');
+
     Route::get('users/{user}', 'UserController@profile');
 
     Route::put('users/{user}/account', 'UserAccountController@update');

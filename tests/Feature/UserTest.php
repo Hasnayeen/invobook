@@ -26,13 +26,13 @@ class UserTest extends TestCase
         $this->user->givePermissionTo($permission);
         factory('App\Models\User', 5)->create();
         $users = User::all(['name', 'username', 'email', 'timezone', 'avatar']);
-        $response = $this->actingAs($this->user)->get('admin');
-        $response->assertSee($users[0]['name']);
-        $response->assertSee($users[0]['username']);
-        $response->assertSee($users[0]['email']);
-        $response->assertSee($users[5]['name']);
-        $response->assertSee($users[5]['username']);
-        $response->assertSee($users[5]['email']);
+        $this->actingAs($this->user)->get('admin')
+            ->assertSee($users[0]['name'])
+            ->assertSee($users[0]['username'])
+            ->assertSee($users[0]['email'])
+            ->assertSee($users[5]['name'])
+            ->assertSee($users[5]['username'])
+            ->assertSee($users[5]['email']);
     }
 
     /** @test */
@@ -50,13 +50,11 @@ class UserTest extends TestCase
     /** @test */
     public function user_can_change_email_and_passwords()
     {
-        $response = $this->actingAs($this->user)->put('users/' . $this->user->username . '/account', [
+        $this->actingAs($this->user)->put('users/' . $this->user->username . '/account', [
             'email'                         => 'new@email.com',
             'new_password'                  => 'new_password',
             'new_password_confirmation'     => 'new_password',
-        ]);
-
-        $response->assertJson([
+        ])->assertJson([
             'status'  => 'success',
             'message' => 'Account details are updated',
         ]);

@@ -34,11 +34,10 @@ class MessageTest extends TestCase
             'messageable_id'   => $project->id,
         ]);
 
-        $response = $this->actingAs($user1)->call('GET', '/messages', [
+        $this->actingAs($user1)->call('GET', '/messages', [
             'resource_type' => 'project',
             'resource_id'   => $project->id,
-        ]);
-        $response->assertJsonFragment([
+        ])->assertJsonFragment([
             'status'           => 'success',
             'total'            => 5,
             'user_id'          => (string) $user1['id'],
@@ -61,11 +60,10 @@ class MessageTest extends TestCase
             'messageable_id'   => $team->id,
         ]);
 
-        $response = $this->actingAs($user1)->call('GET', '/messages', [
+        $this->actingAs($user1)->call('GET', '/messages', [
             'resource_type' => 'team',
             'resource_id'   => $team->id,
-        ]);
-        $response->assertJsonFragment([
+        ])->assertJsonFragment([
             'status'           => 'success',
             'total'            => 5,
             'user_id'          => (string) $user1['id'],
@@ -88,11 +86,10 @@ class MessageTest extends TestCase
             'messageable_id'   => $office->id,
         ]);
 
-        $response = $this->actingAs($user1)->call('GET', '/messages', [
+        $this->actingAs($user1)->call('GET', '/messages', [
             'resource_type' => 'office',
             'resource_id'   => $office->id,
-        ]);
-        $response->assertJsonFragment([
+        ])->assertJsonFragment([
             'status'           => 'success',
             'total'            => 5,
             'user_id'          => (string) $user1['id'],

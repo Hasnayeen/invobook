@@ -25,8 +25,7 @@ class TeamTest extends TestCase
     {
         $this->admin_can_create_team();
 
-        $response = $this->actingAs($this->user)->get('teams/new-team');
-        $response->assertSee('New Team');
+        $this->actingAs($this->user)->get('teams/new-team')->assertSee('New Team');
     }
 
     /** @test */
@@ -35,11 +34,10 @@ class TeamTest extends TestCase
         $permission = Permission::create(['name' => 'create team']);
         $this->ownerRole->givePermissionTo($permission);
 
-        $response = $this->actingAs($this->user)->post('/teams', [
+        $this->actingAs($this->user)->post('/teams', [
             'name'        => 'New Team',
             'description' => 'Team of all new members',
-        ]);
-        $response->assertJsonFragment([
+        ])->assertJsonFragment([
             'status'      => 'success',
             'name'        => 'New Team',
             'description' => 'Team of all new members',
@@ -55,12 +53,11 @@ class TeamTest extends TestCase
     public function add_user_to_team()
     {
         $user = factory('App\Models\User')->create();
-        $response = $this->actingAs($this->user)->post('/members', [
+        $this->actingAs($this->user)->post('/members', [
             'user_id'       => $user->id,
             'resource_type' => 'team',
             'resource_id'   => $this->team->id,
-        ]);
-        $response->assertJson([
+        ])->assertJson([
             'status'  => 'success',
             'message' => 'User added to the team',
             'user'    => [

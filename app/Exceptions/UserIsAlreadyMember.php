@@ -6,7 +6,7 @@ use Exception;
 
 class UserIsAlreadyMember extends Exception
 {
-    public function render($request)
+    public function render()
     {
         return response()->json([
             'status'   => 'error',
