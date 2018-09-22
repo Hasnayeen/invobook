@@ -97,6 +97,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('tasks/{task}', 'TaskController@show');
 
+    Route::delete('tasks/{task}', 'TaskController@delete')->middleware('can:delete,task');
+
     /**********************************
         User
     **********************************/

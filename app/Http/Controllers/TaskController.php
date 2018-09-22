@@ -58,4 +58,14 @@ class TaskController extends Controller
             ]);
         }
     }
+
+    public function delete(Task $task)
+    {
+        $task->delete();
+
+        return response()->json([
+            'status'  => 'success',
+            'message' => 'The task has been deleted',
+        ]);
+    }
 }
