@@ -46,5 +46,11 @@ if (! function_exists('create_permissions')) {
         $role->givePermissionTo($permission);
         $permission = Permission::create(['name' => 'delete ' . $resourceType . '->' . $resource->$key, 'guard_name' => 'web']);
         $role->givePermissionTo($permission);
+        $permission = Permission::create(['name' => 'create task.' . $resourceType . '->' . $resource->$key, 'guard_name' => 'web']);
+        $role->givePermissionTo($permission);
+        $permission = Permission::create(['name' => 'edit task.' . $resourceType . '->' . $resource->$key, 'guard_name' => 'web']);
+        $role->givePermissionTo($permission);
+        $permission = Permission::create(['name' => 'delete task.' . $resourceType . '->' . $resource->$key, 'guard_name' => 'web']);
+        $role->givePermissionTo($permission);
     }
 }

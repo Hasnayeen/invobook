@@ -22,4 +22,9 @@ class Project extends Model
     {
         return $this->morphMany('App\Models\Message', 'messageable');
     }
+
+    public function tasks()
+    {
+        return $this->morphMany(\App\Models\Task::class, 'taskable');
+    }
 }

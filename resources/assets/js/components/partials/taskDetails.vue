@@ -1,13 +1,23 @@
 <template>
 <div>
-  <div :class="{'hidden': !taskDetailsShown}" class="absolute container mx-auto w-2/5 bg-white rounded shadow-lg z-10 pt-4 pb-8" style="top: 12vh;left: 0;right: 0;">
-    <div @click="closeTaskDetails" class="flex flex-row justify-end cursor-pointer px-8">
-      <i class="fas fa-times text-base text-grey-darker"></i>
+  <div :class="{'hidden': !taskDetailsShown}" class="absolute container mx-auto md:w-3/4 lg:2/3 xl:w-1/2 xxl:w-2/5 bg-white rounded shadow-lg z-10 pt-4 pb-8" style="top: 12vh;left: 0;right: 0;">
+    <div class="flex flex-row justify-between px-8 relative">
+      <div @click="closeTaskDetails" class="cursor-pointer">
+        <i class="fas fa-arrow-left text-base text-grey-dark"></i>
+      </div>
+      <div @click="toggleMenu" class="cursor-pointer">
+        <i class="fas fa-ellipsis-h text-base text-grey-dark"></i>
+      </div>
+      <div v-if="dropdownMenuShown" class="absolute rounded shadow-lg pin-r pin-t mt-4 mr-4 p-4 text-grey-darker">
+        <div @click="deleteTask" class="cursor-pointer">
+          Delete
+        </div>
+      </div>
     </div>
     <div class="text-2xl text-grey-darker text-center font-semibold px-8 py-4">
       {{ task.title }}
     </div>
-    <div class="flex flex-row justify-between pt-4">
+    <div class="flex flex-row flex-wrap justify-between pt-4">
       <div>
         <div class="text-sm text-grey-dark px-8">
           Assignee
@@ -97,7 +107,7 @@
       </div>
     </div>
   </div>
-  <div :class="{'hidden': !taskDetailsShown}" class="h-screen w-screen fixed pin bg-grey-darkest opacity-25"></div>
+  <div @click="closeTaskDetails" :class="{'hidden': !taskDetailsShown}" class="h-screen w-screen fixed pin bg-grey-darkest opacity-25"></div>
 </div>
 </template>
 
@@ -111,12 +121,37 @@ export default {
     task: {
       required: true,
       type: Object
+    },
+    index: {
+      required: true,
+      type: Number
     }
   },
+  data: () => ({
+    dropdownMenuShown: false
+  }),
   methods: {
     closeTaskDetails () {
+      this.dropdownMenuShown = false
       this.$emit('close')
     },
+    toggleMenu () {
+      this.dropdownMenuShown = !this.dropdownMenuShown
+    },
+    deleteTask () {
+      axios.delete('/tasks/' + this.task.id)
+        .then((response) => {
+          this.$emit('delete', this.index)
+          this.dropdownMenuShown = false
+          EventBus.$emit('notification', response.data.message, response.data.status)
+          this.$emit('close')
+        })
+          this.dropdownMenuShown = false
+        .catch((error) => {
+          EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+          this.$emit('close')
+        })
+    }
   }
 }
 </script>
