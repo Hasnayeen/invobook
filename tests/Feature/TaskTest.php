@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
+use Spatie\Permission\Models\Role;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class TaskTest extends TestCase
@@ -12,8 +13,11 @@ class TaskTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->user = factory('App\Models\User')->create();
+        $this->user = factory(\App\Models\User::class)->create();
         $this->task = factory(\App\Models\Task::class)->create();
+        $this->ownerRole = Role::create(['name' => 'owner']);
+        $this->user->assignRole($this->ownerRole);
+        create_permissions($this->task->taskable);
     }
 
     /** @test */
@@ -97,5 +101,29 @@ class TaskTest extends TestCase
             'total'            => 3,
             'title'            => $tasks[2]['title'],
         ]);
+    }
+
+    /** @test */
+    public function user_with_permission_can_delete_a_task()
+    {
+        $this->actingAs($this->user)->delete('/tasks/' . $this->task->id)
+             ->assertJsonFragment([
+                 'status'  => 'success',
+                 'message' => 'The task has been deleted',
+             ]);
+    }
+
+    /**
+     *  @test
+     * @expectedException Illuminate\Auth\Access\AuthorizationException
+     * */
+    public function user_without_permission_cant_delete_a_task()
+    {
+        $user = factory(\App\Models\User::class)->create();
+        $this->actingAs($user)->delete('/tasks/' . $this->task->id)
+             ->assertJsonFragment([
+                 'status'  => 'error',
+                 'message' => 'User does not have the right permissions',
+             ]);
     }
 }

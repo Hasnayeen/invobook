@@ -28,14 +28,8 @@ class Task extends Model
         return $this->belongsTo('App\Models\User', 'assigned_to', 'id');
     }
 
-    /**
-     * Return corresponding record from type (office/team/project) for this task.
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function taskable_type()
+    public function taskable()
     {
-        $taskableModel = 'App\Models\\' . ucfirst($this->taskable_type);
-
-        return $this->belongsTo($taskableModel, 'taskable_id', 'id');
+        return $this->morphTo();
     }
 }

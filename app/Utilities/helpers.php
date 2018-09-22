@@ -3,7 +3,7 @@
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
-if (! function_exists('about')) {
+if (!function_exists('about')) {
     /**
      * Get or set software related values.
      *
@@ -27,7 +27,7 @@ if (! function_exists('about')) {
     }
 }
 
-if (! function_exists('create_permissions')) {
+if (!function_exists('create_permissions')) {
     /**
      * Create permissions for a single resource.
      *
@@ -45,6 +45,12 @@ if (! function_exists('create_permissions')) {
         $permission = Permission::create(['name' => 'edit ' . $resourceType . '->' . $resource->$key, 'guard_name' => 'web']);
         $role->givePermissionTo($permission);
         $permission = Permission::create(['name' => 'delete ' . $resourceType . '->' . $resource->$key, 'guard_name' => 'web']);
+        $role->givePermissionTo($permission);
+        $permission = Permission::create(['name' => 'create task.' . $resourceType . '->' . $resource->$key, 'guard_name' => 'web']);
+        $role->givePermissionTo($permission);
+        $permission = Permission::create(['name' => 'edit task.' . $resourceType . '->' . $resource->$key, 'guard_name' => 'web']);
+        $role->givePermissionTo($permission);
+        $permission = Permission::create(['name' => 'delete task.' . $resourceType . '->' . $resource->$key, 'guard_name' => 'web']);
         $role->givePermissionTo($permission);
     }
 }
