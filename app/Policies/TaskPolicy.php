@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\User;
 use App\Models\Task;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class TaskPolicy
@@ -19,7 +19,6 @@ class TaskPolicy
      */
     public function view(User $user, Task $task)
     {
-        //
     }
 
     /**
@@ -30,7 +29,6 @@ class TaskPolicy
      */
     public function create(User $user)
     {
-        //
     }
 
     /**
@@ -42,7 +40,6 @@ class TaskPolicy
      */
     public function update(User $user, Task $task)
     {
-        //
     }
 
     /**
@@ -66,7 +63,6 @@ class TaskPolicy
      */
     public function restore(User $user, Task $task)
     {
-        //
     }
 
     /**
@@ -78,6 +74,5 @@ class TaskPolicy
      */
     public function forceDelete(User $user, Task $task)
     {
-        //
     }
 }
