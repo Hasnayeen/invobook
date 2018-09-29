@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Activitylog\Traits\CausesActivity;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable, HasRoles;
+    use Notifiable, HasRoles, CausesActivity;
 
     protected $fillable = [
         'name', 'username', 'bio', 'designation', 'avatar', 'active', 'timezone', 'email', 'password',

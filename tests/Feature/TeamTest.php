@@ -3,8 +3,6 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class TeamTest extends TestCase
@@ -14,10 +12,7 @@ class TeamTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->user = factory('App\Models\User')->create();
         $this->team = factory('App\Models\Team')->create();
-        $this->ownerRole = Role::create(['name' => 'owner']);
-        $this->user->assignRole($this->ownerRole);
     }
 
     /** @test */
@@ -31,9 +26,6 @@ class TeamTest extends TestCase
     /** @test */
     public function admin_can_create_team()
     {
-        $permission = Permission::create(['name' => 'create team']);
-        $this->ownerRole->givePermissionTo($permission);
-
         $this->actingAs($this->user)->post('/teams', [
             'name'        => 'New Team',
             'description' => 'Team of all new members',

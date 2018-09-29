@@ -14,19 +14,12 @@ class AuthorizationTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->user = factory('App\Models\User')->create();
-        $this->ownerRole = Role::create(['name' => 'owner', 'deletable' => false]);
-        $permission = Permission::create(['name' => 'view admin page']);
-        $this->ownerRole->givePermissionTo($permission);
-        $this->user->assignRole($this->ownerRole);
         Role::create(['name' => 'admin']);
     }
 
     /** @test */
     public function owner_can_create_new_role()
     {
-        $permission = Permission::create(['name' => 'create role']);
-        $this->ownerRole->givePermissionTo($permission);
         $this->actingAs($this->user)->post('admin/roles', ['name' => 'staff'])
         ->assertJsonFragment([
             'status'  => 'success',
@@ -38,8 +31,6 @@ class AuthorizationTest extends TestCase
     /** @test */
     public function owner_can_delete_role()
     {
-        $permission = Permission::create(['name' => 'delete role']);
-        $this->ownerRole->givePermissionTo($permission);
         $role2 = Role::create(['name' => 'delete']);
         $this->actingAs($this->user)->delete('admin/roles/' . $role2->id)
         ->assertJsonFragment([
@@ -51,8 +42,6 @@ class AuthorizationTest extends TestCase
     /** @test */
     public function owner_can_revoke_permission_from_role()
     {
-        $permission = Permission::create(['name' => 'revoke permission']);
-        $this->ownerRole->givePermissionTo($permission);
         $role2 = Role::create(['name' => 'guest']);
         $permission2 = Permission::create(['name' => 'view project']);
         $role2->givePermissionTo($permission2);
@@ -66,15 +55,13 @@ class AuthorizationTest extends TestCase
     /** @test */
     public function owner_can_assign_permission_to_role()
     {
-        $permission = Permission::create(['name' => 'assign permission']);
-        $this->ownerRole->givePermissionTo($permission);
         $role1 = Role::create(['name' => 'staff']);
-        $permission1 = Permission::create(['name' => 'view projects']);
+        $permission1 = Permission::create(['name' => 'new permission']);
         $this->actingAs($this->user)->post('admin/roles/' . $role1->id . '/permissions', ['permission_id' => $permission1->id])
         ->assertJsonFragment([
             'status'  => 'success',
             'message' => 'Permission has been assigned to the role',
-            'name'    => 'view projects',
+            'name'    => 'new permission',
         ]);
         $this->assertDatabaseHas('role_has_permissions', ['role_id' => $role1->id, 'permission_id' => $permission1->id]);
     }
@@ -82,13 +69,6 @@ class AuthorizationTest extends TestCase
     /** @test */
     public function owner_can_see_all_permissions()
     {
-        $permission = Permission::create(['name' => 'view permissions']);
-        $this->ownerRole->givePermissionTo($permission);
-
-        Permission::create(['name' => 'view projects']);
-        Permission::create(['name' => 'edit projects']);
-        Permission::create(['name' => 'delete projects']);
-
         $this->actingAs($this->user)->get('admin/permissions')
         ->assertJsonFragment([
             'status' => 'success',
@@ -105,9 +85,6 @@ class AuthorizationTest extends TestCase
      * */
     public function owner_role_cannot_be_deleted()
     {
-        $permission = Permission::create(['name' => 'delete role']);
-        $this->ownerRole->givePermissionTo($permission);
-
         $this->actingAs($this->user)->delete('admin/roles/' . $this->ownerRole->id)
             ->assertForbidden();
     }
