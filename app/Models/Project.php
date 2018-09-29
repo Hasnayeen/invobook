@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Project extends Model
 {
+    use LogsActivity;
+
     protected $fillable = ['name', 'slug', 'description', 'office_id', 'team_id', 'owner_id'];
 
     public function getRouteKeyName()
