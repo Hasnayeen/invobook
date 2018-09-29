@@ -6,7 +6,6 @@ use Tests\TestCase;
 use App\Models\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Spatie\Permission\Models\Permission;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class UserTest extends TestCase
@@ -16,14 +15,11 @@ class UserTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->user = factory('App\Models\User')->create();
     }
 
     /** @test */
     public function owner_can_see_all_users()
     {
-        $permission = Permission::create(['name' => 'view admin page']);
-        $this->user->givePermissionTo($permission);
         factory('App\Models\User', 5)->create();
         $users = User::all(['name', 'username', 'email', 'timezone', 'avatar']);
         $this->actingAs($this->user)->get('admin')

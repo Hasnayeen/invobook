@@ -3,7 +3,6 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
-use Spatie\Permission\Models\Role;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class TaskTest extends TestCase
@@ -13,10 +12,7 @@ class TaskTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->user = factory(\App\Models\User::class)->create();
         $this->task = factory(\App\Models\Task::class)->create();
-        $this->ownerRole = Role::create(['name' => 'owner']);
-        $this->user->assignRole($this->ownerRole);
         create_permissions($this->task->taskable);
     }
 

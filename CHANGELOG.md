@@ -9,6 +9,7 @@
 - Added new permissions ('create task', 'edit task', 'delete task') ([issue-130](https://github.com/iluminar/goodwork/issues/130))
 - Added new welcome email to new registered user ([issue-26](https://github.com/iluminar/goodwork/issues/26))
 - Added new config variable `company_name` in `config/app.php` ([issue-26](https://github.com/iluminar/goodwork/issues/26))
+- Added `spatie/laravel-activitylog` package ([issue-30](https://github.com/iluminar/goodwork/issues/30))
 
 ### Changed
 - Use `mix` helper instead of `asset`

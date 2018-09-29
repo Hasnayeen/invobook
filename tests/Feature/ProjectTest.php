@@ -5,8 +5,6 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Project;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ProjectTest extends TestCase
@@ -16,18 +14,12 @@ class ProjectTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->user = factory('App\Models\User')->create();
         $this->project = factory('App\Models\Project')->create();
-        $this->ownerRole = Role::create(['name' => 'owner']);
     }
 
     /** @test */
     public function owner_can_create_project()
     {
-        $permission = Permission::create(['name' => 'create project']);
-        $this->ownerRole->givePermissionTo($permission);
-        $this->user->assignRole($this->ownerRole);
-
         $this->actingAs($this->user)->post('projects', [
             'name'        => 'New Project',
             'description' => 'Description for new project',
