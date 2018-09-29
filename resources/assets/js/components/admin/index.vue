@@ -11,6 +11,11 @@
       <i class="fas fa-lock-open text-xl md:text-2xl"></i>
       <span class="block text-xs font-regular pt-2">Roles & Permissions</span>
     </div>
+    <div @click="activateThisTab('activity')"
+      :class="[(active === 'activity') ? 'text-teal-dark font-semibold border-teal border-b-2 pb-2 md:pb-4 -mb-2 md:-mb-4' : 'cursor-pointer', 'text-center w-1/2']">
+      <i class="fas fa-bolt text-xl md:text-2xl"></i>
+      <span class="block text-xs font-regular pt-2">Activities</span>
+    </div>
     <div @click="activateThisTab('about')"
       :class="[(active === 'about') ? 'text-teal-dark font-semibold border-teal border-b-2 pb-4 -mb-2 md:-mb-4' : 'cursor-pointer', 'text-center w-1/2']">
       <i class="fas fa-info-circle text-xl md:text-2xl"></i>
@@ -21,6 +26,7 @@
   <div class="flex flex-row flex-wrap justify-start mt-4">
     <usersBoard :users="users" :activeTab="active"></usersBoard>
     <authBoard :users="users" :activeTab="active"></authBoard>
+    <activityBoard :activeTab="active"></activityBoard>
     <aboutBoard :activeTab="active"></aboutBoard>
   </div>
 </div>
@@ -30,8 +36,9 @@
 import aboutBoard from './aboutBoard.vue'
 import authBoard from './authBoard.vue'
 import usersBoard from './usersBoard.vue'
+import activityBoard from './activityBoard.vue'
 export default {
-  components: {aboutBoard, authBoard, usersBoard},
+  components: {aboutBoard, authBoard, usersBoard, activityBoard},
   props: {
     users: {
       required: true,
