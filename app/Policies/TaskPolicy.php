@@ -51,7 +51,7 @@ class TaskPolicy
      */
     public function delete(User $user, Task $task)
     {
-        return $user->hasPermissionTo('delete task.' . $task->taskable_type . '->' . $task->taskable->slug);
+        return $user->hasPermissionTo('delete task.' . $task->taskable_type . '->' . $task->taskable->id);
     }
 
     /**

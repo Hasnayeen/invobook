@@ -56,7 +56,7 @@
 export default {
   data: () => ({
     teams: data.teams.map((team) => {
-      team.url = 'teams/' + team.slug
+      team.url = 'teams/' + team.id
       return team
     }),
     showCreateTeamForm: false,
@@ -83,12 +83,13 @@ export default {
       }).then((response) => {
         if (response.data.status == 'success') {
           EventBus.$emit('notification', response.data.message, response.data.status)
-          response.data.project.url = 'projects/' + response.data.project.slug
+          response.data.project.url = 'projects/' + response.data.project.id
           this.teams.push(response.data.team)
           this.showCreateTeamForm = false
         }
       }).catch((error) => {
         console.log(error)
+          this.showCreateTeamForm = false
       })
     }
   }

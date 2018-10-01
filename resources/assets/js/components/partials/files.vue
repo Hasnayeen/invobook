@@ -1,7 +1,7 @@
 <template>
     <div class="bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center rounded m-4">
         <header class="w-full relative border-b h-12 pt-4 text-center">
-            <a :href="'/' + resourceType + '/' + resource.slug + '/files'" class="text-grey-darker font-medium no-underline">
+            <a :href="'/' + resourceType + '/' + resource.id + '/files'" class="text-grey-darker font-medium no-underline">
                 Files
             </a>
             <span class="text-grey-darker absolute pin-r mr-2">

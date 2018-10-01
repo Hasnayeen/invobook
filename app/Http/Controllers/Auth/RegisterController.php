@@ -119,7 +119,7 @@ class RegisterController extends Controller
      */
     protected function registered(Request $request, $user)
     {
-        $office = Office::where('slug', 'headquarter')->first();
+        $office = Office::where('name', 'Headquarter')->first();
         $user->offices()->attach($office->id);
         Mail::to($user->email)
             ->send(new UserRegistered($user));

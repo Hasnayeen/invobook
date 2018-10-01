@@ -3,13 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Office extends Model
 {
-    public function getRouteKeyName()
-    {
-        return 'slug';
-    }
+    use LogsActivity;
 
     public function members()
     {

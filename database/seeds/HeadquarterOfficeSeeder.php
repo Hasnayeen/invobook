@@ -16,13 +16,12 @@ class HeadquarterOfficeSeeder extends Seeder
     {
         DB::table('offices')->insert([
             'name'        => 'Headquarter',
-            'slug'        => 'headquarter',
             'description' => 'Central office',
             'created_at'  => Carbon::now(),
             'updated_at'  => Carbon::now(),
             'owner_id'    => 1,
         ]);
-        $office = Office::where('slug', 'headquarter')->first();
+        $office = Office::where('name', 'Headquarter')->first();
         $user = User::find(1);
         $user->offices()->attach($office->id);
     }

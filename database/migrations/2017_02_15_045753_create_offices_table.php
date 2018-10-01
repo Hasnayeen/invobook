@@ -16,7 +16,6 @@ class CreateOfficesTable extends Migration
         Schema::create('offices', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('slug')->unique();
             $table->string('description');
             $table->integer('owner_id')->unsigned()->comment('user id of the owner of the project');
             $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade');

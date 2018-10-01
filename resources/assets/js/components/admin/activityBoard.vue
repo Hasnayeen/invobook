@@ -34,51 +34,27 @@
     </div>
 
     <div class="text-grey-darker">
-      <div class="bg-white border p-3 text-grey-dark inline-flex rounded mt-4">17 Aug, 2018</div>
-      <div class="h-16 border-l ml-2 md:ml-6 -my-4"></div>
-      <div class="flex flex-row items-center">
-        <div class="border-l flex flex-row items-center ml-2 md:ml-6 self-stretch">
-          <div class="rounded-full bg-grey-lighter border border-pink p-1 -ml-2 md:mr-4">
-            <div class="rounded-full bg-pink p-1"></div>
+      <template v-for="(value, key) in activities">
+        <div class="bg-white border p-3 text-grey-dark inline-flex rounded">{{ key }}</div>
+        <template v-for="activity in value">
+          <div class="h-16 border-l ml-2 md:ml-6 -my-4"></div>
+          <div class="flex flex-row items-center">
+            <div class="border-l flex flex-row items-center ml-2 md:ml-6 self-stretch">
+              <div class="rounded-full bg-grey-lighter border border-pink p-1 -ml-2 md:mr-4">
+                <div class="rounded-full bg-pink p-1"></div>
+              </div>
+            </div>
+            <div class="text-sm px-4 md:mr-4">{{ activity.time }}</div>
+            <div class="flex-grow bg-white border px-4 md:px-8 py-4 rounded">
+              <a :href="'/users/' + activity.causer.username" class="text-blue font-medium cursor-pointer no-underline">{{ activity.causer.name }}</a>
+              {{ activity.description }} {{ activity.subject_type }}
+              <a :href="activity.subject_type + 's/' + activity.subject.id" class="text-blue font-medium cursor-pointer no-underline">{{ activity.subject.name }}</a>
+            </div>
           </div>
-        </div>
-        <div class="text-sm px-4 md:mr-4">11:39 PM</div>
-        <div class="flex-grow bg-white border px-4 md:px-8 py-4 rounded">
-          <span class="text-blue font-medium cursor-pointer">John Doe</span>
-           started working on
-           <span class="text-blue font-medium cursor-pointer">Add a Timeline</span>
-        </div>
-      </div>
-      <div class="h-16 border-l ml-2 md:ml-6 -my-4"></div>
-      <div class="flex flex-row items-center">
-        <div class="border-l flex flex-row items-center ml-2 md:ml-6 self-stretch">
-          <div class="rounded-full bg-grey-lighter border border-pink p-1 -ml-2 md:mr-4">
-            <div class="rounded-full bg-pink p-1"></div>
-          </div>
-        </div>
-        <div class="text-sm px-4 md:mr-4">08:13 PM</div>
-        <div class="flex-grow bg-white border px-4 md:px-8 py-4 rounded">
-          <span class="text-blue font-medium cursor-pointer">Nehal Hasnayeen</span>
-           created a new task
-           <span class="text-blue font-medium cursor-pointer">Add a Timeline</span>
-        </div>
-      </div>
-      <div class="h-16 border-l ml-2 md:ml-6 -my-4"></div>
-      <div class="bg-white border p-3 text-grey-dark inline-flex rounded mt-4">16 Aug, 2018</div>
-      <div class="h-16 border-l ml-2 md:ml-6 -my-4"></div>
-      <div class="flex flex-row items-center">
-        <div class="border-l flex flex-row items-center ml-2 md:ml-6 self-stretch">
-          <div class="rounded-full bg-grey-lighter border border-pink p-1 -ml-2 md:mr-4">
-            <div class="rounded-full bg-pink p-1"></div>
-          </div>
-        </div>
-        <div class="text-sm px-4 md:mr-4">06:31 PM</div>
-        <div class="flex-grow bg-white border px-4 md:px-8 py-4 rounded">
-          <span class="text-blue font-medium cursor-pointer">Nehal Hasnayeen</span>
-           removed event
-           <span class="text-blue font-medium cursor-pointer">Project 1 August Release</span>
-        </div>
-      </div>
+        </template>
+        <div class="h-8 border-l ml-2 md:ml-6"></div>
+      </template>
+      <div class="h-16 border-l border-grey-lighter -mt-8 ml-2 md:ml-6"></div>
     </div>
 
     <div class="flex flex-row justify-center mt-16 mb-8">
@@ -101,7 +77,17 @@ export default {
     activity: 'activity',
     user: 'user',
     date: 'date',
-    loading: false
-  })
+    loading: false,
+    activities: []
+  }),
+  created () {
+    axios.get('admin/activities')
+      .then((response) => {
+        this.activities = response.data.activities
+      })
+      .catch((error) => {
+        console.log(error.response)
+      })
+  }
 }
 </script>

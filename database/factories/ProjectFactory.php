@@ -8,7 +8,6 @@ $factory->define(App\Models\Project::class, function (Faker\Generator $faker) {
 
     return [
         'name'        => $faker->name,
-        'slug'        => $faker->slug,
         'description' => $faker->sentence,
         'created_at'  => $now,
         'updated_at'  => $now,
@@ -21,7 +20,6 @@ $factory->defineAs(App\Models\Project::class, 'withOfficeAndTeam', function (Fak
 
     return [
         'name'        => $faker->name,
-        'slug'        => $faker->slug,
         'description' => $faker->sentence,
         'office_id'   => factory(App\Models\Office::class)->create()->id,
         'team_id'     => factory(App\Models\Team::class)->create()->id,

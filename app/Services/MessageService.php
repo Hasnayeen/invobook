@@ -23,7 +23,6 @@ class MessageService
 
     /**
      * @param  mixed $data
-     * @param  mixed $slug
      * @param  mixed $id
      * @return mixed
      */
@@ -39,19 +38,8 @@ class MessageService
         return $message;
     }
 
-    public function getAllMessages($type, $slug)
+    public function getAllMessages($type, $id)
     {
-        $id = $this->getIdFromSlug($type, $slug);
-
         return [$this->messageRepository->getAllMessages($type, $id), $id];
-    }
-
-    private function getIdFromSlug($type, $slug)
-    {
-        $model = 'App\Models\\' . ucwords($type);
-        $repository = 'App\Repositories\\' . ucwords($type) . 'Repository';
-        $repository = new $repository(new $model);
-
-        return $repository->getIdFromSlug($slug);
     }
 }
