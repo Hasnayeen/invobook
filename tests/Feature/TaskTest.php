@@ -21,7 +21,7 @@ class TaskTest extends TestCase
     {
         $task = factory(\App\Models\Task::class)->make();
         $this->actingAs($this->user)->post(route('tasks.store'), [
-            'title'         => $task->title,
+            'name'          => $task->name,
             'assigned_to'   => $task->assigned_to,
             'notes'         => $task->notes,
             'due_on'        => $task->due_on,
@@ -29,7 +29,7 @@ class TaskTest extends TestCase
             'taskable_id'   => $task->taskable_id,
         ])->assertJsonFragment([
             'status'        => 'success',
-            'title'         => $task->title,
+            'name'          => $task->name,
             'assigned_to'   => $task->assigned_to,
             'notes'         => $task->notes,
             'due_on'        => $task->due_on,
@@ -44,7 +44,7 @@ class TaskTest extends TestCase
         $this->actingAs($this->user)->get('/tasks/' . $this->task->id)
         ->assertJsonFragment([
             'status'         => 'success',
-            'title'          => $this->task->title,
+            'name'           => $this->task->name,
             'notes'          => $this->task->notes,
             'assigned_to'    => $this->task->assigned_to,
             'related_to'     => $this->task->related_to,
@@ -67,7 +67,7 @@ class TaskTest extends TestCase
         ])->assertJsonFragment([
             'status'           => 'success',
             'total'            => 3,
-            'title'            => $tasks[2]['title'],
+            'name'             => $tasks[2]['name'],
         ]);
 
         $team = factory('App\Models\Team')->create();
@@ -81,7 +81,7 @@ class TaskTest extends TestCase
         ])->assertJsonFragment([
             'status'           => 'success',
             'total'            => 3,
-            'title'            => $tasks[2]['title'],
+            'name'             => $tasks[2]['name'],
         ]);
 
         $office = factory('App\Models\Office')->create();
@@ -95,7 +95,7 @@ class TaskTest extends TestCase
         ])->assertJsonFragment([
             'status'           => 'success',
             'total'            => 3,
-            'title'            => $tasks[2]['title'],
+            'name'             => $tasks[2]['name'],
         ]);
     }
 

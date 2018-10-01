@@ -25,7 +25,6 @@ class TeamService
             $data,
             [
                 'owner_id' => Auth::user()->id,
-                'slug'     => str_slug($data['name']),
             ]
         ));
         $team->members()->save(Auth::user());

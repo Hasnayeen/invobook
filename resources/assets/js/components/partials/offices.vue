@@ -55,7 +55,7 @@
     export default {
       data: () => ({
         offices: data.offices.map((office) => {
-          office.url = 'offices/' + office.slug
+          office.url = 'offices/' + office.id
           return office
         }),
         showCreateOfficeForm: false,

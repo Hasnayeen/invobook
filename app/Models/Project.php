@@ -9,12 +9,7 @@ class Project extends Model
 {
     use LogsActivity;
 
-    protected $fillable = ['name', 'slug', 'description', 'office_id', 'team_id', 'owner_id'];
-
-    public function getRouteKeyName()
-    {
-        return 'slug';
-    }
+    protected $fillable = ['name', 'description', 'office_id', 'team_id', 'owner_id'];
 
     public function members()
     {

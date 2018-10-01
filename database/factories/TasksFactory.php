@@ -21,7 +21,7 @@ $factory->define(App\Models\Task::class, function (Faker\Generator $faker) {
     }
 
     return [
-        'title'         => $faker->sentence(6, true),
+        'name'          => $faker->sentence(6, true),
         'assigned_to'   => factory(App\Models\User::class)->create()->id,
         'notes'         => $faker->sentence(20, true),
         'due_on'        => $faker->dateTimeBetween('now', '+5 years')->format('Y-m-d'),

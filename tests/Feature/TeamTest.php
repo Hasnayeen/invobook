@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use App\Models\Team;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class TeamTest extends TestCase
@@ -19,8 +20,9 @@ class TeamTest extends TestCase
     public function user_can_see_team_page()
     {
         $this->admin_can_create_team();
+        $id = Team::where('name', 'New Team')->first()->id;
 
-        $this->actingAs($this->user)->get('teams/new-team')->assertSee('New Team');
+        $this->actingAs($this->user)->get('teams/' . $id)->assertSee('New Team');
     }
 
     /** @test */
@@ -36,9 +38,11 @@ class TeamTest extends TestCase
             'owner_id'    => $this->user->id,
         ]);
         $this->assertDatabaseHas('teams', ['name' => 'New Team', 'description' => 'Team of all new members', 'owner_id' => $this->user->id]);
-        $this->assertTrue($this->user->hasPermissionTo('view team->new-team'));
-        $this->assertTrue($this->user->hasPermissionTo('edit team->new-team'));
-        $this->assertTrue($this->user->hasPermissionTo('delete team->new-team'));
+
+        $id = Team::where('name', 'New Team')->first()->id;
+        $this->assertTrue($this->user->hasPermissionTo('view team->' . $id));
+        $this->assertTrue($this->user->hasPermissionTo('edit team->' . $id));
+        $this->assertTrue($this->user->hasPermissionTo('delete team->' . $id));
     }
 
     /** @test */

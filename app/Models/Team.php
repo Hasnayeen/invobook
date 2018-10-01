@@ -3,15 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Team extends Model
 {
-    protected $fillable = ['name', 'slug', 'description', 'office_id', 'owner_id'];
+    use LogsActivity;
 
-    public function getRouteKeyName()
-    {
-        return 'slug';
-    }
+    protected $fillable = ['name', 'description', 'office_id', 'owner_id'];
 
     public function members()
     {

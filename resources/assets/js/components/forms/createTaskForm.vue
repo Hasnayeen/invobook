@@ -9,7 +9,7 @@
                     <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name">
                         Title <span class="text-grey capitalize">(required)</span>
                     </label>
-                    <input v-model="title" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-last-name" type="text" placeholder="New Task" required>
+                    <input v-model="name" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-last-name" type="text" placeholder="New Task" required>
                 </div>
                 <div class="p-4">
                     <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name">
@@ -61,7 +61,7 @@ export default {
   components: {Datepicker, NotificationPopup},
   props: ['resource', 'resourceType', 'formShown'],
   data: () => ({
-    title: '',
+    name: '',
     notes: '',
     assigned_to: null,
     related_to: '',
@@ -72,7 +72,7 @@ export default {
   methods: {
     createTask () {
       axios.post('/tasks', {
-        title: this.title,
+        name: this.name,
         notes: this.notes,
         assigned_to: this.assigned_to,
         related_to: this.related_to,
@@ -85,7 +85,7 @@ export default {
             this.message = 'New Task Created'
             this.messageType = 'success'
             this.showNotification = true
-            this.title = ''
+            this.name = ''
             this.notes = ''
             this.assigned_to = null
             this.related_to = ''

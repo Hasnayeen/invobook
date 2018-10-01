@@ -18,10 +18,10 @@
             <div class="text-grey-darker pt-8 self-start px-8 bg-grey-lighter w-full pb-8">
                 <div>
                     Belongs to:
-                    <a :href="'/projects/' + project.slug" class="bg-pink-lighter hover:bg-pink rounded font-medium p-2 mx-2 no-underline text-white" v-for="project in user.projects">
+                    <a :href="'/projects/' + project.id" class="bg-pink-lighter hover:bg-pink rounded font-medium p-2 mx-2 no-underline text-white" v-for="project in user.projects">
                         {{project.name}}
                     </a>
-                    <a :href="'/teams/' + team.slug" class="bg-pink-lighter hover:bg-pink rounded font-medium p-2 mx-2 no-underline text-white" v-for="team in user.teams">
+                    <a :href="'/teams/' + team.id" class="bg-pink-lighter hover:bg-pink rounded font-medium p-2 mx-2 no-underline text-white" v-for="team in user.teams">
                         {{team.name}}
                     </a>
                 </div>

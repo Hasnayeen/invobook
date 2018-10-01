@@ -4,6 +4,7 @@
 
 ### Added
 - Added task delete feature on tak details modal ([issue-130](https://github.com/iluminar/goodwork/issues/130))
+- Added `Activities` section on Admin page ([issue-29](https://github.com/iluminar/goodwork/issues/29))
 - Added Global EventBus for front end notification ([issue-143](https://github.com/iluminar/goodwork/issues/143))
 - Added new permissions ('create team', 'create project', 'create office') ([issue-143](https://github.com/iluminar/goodwork/issues/143))
 - Added new permissions ('create task', 'edit task', 'delete task') ([issue-130](https://github.com/iluminar/goodwork/issues/130))

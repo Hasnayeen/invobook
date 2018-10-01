@@ -1,7 +1,14 @@
 {
     "name": "iluminar/goodwork",
     "description": "Self hosted project management and collaboration tool",
-    "keywords": ["application", "project management", "team", "project", "task", "messaging", "developer", "self hosted", "container"],
+    "authors": [
+        {
+            "name": "Nehal hasnayeen",
+            "email": "searching.nehal@gmail.com",
+            "homepage": "https://hasnayeen.github.io"
+        }
+    ],
+    "keywords": ["application", "project management", "team", "project", "task", "messaging", "developer", "self hosted", "container", "laravel", "vue", "tailwindcss"],
     "license": "MIT",
     "type": "application",
     "require": {
