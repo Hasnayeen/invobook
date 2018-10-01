@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="text-2xl text-grey-darker text-center font-semibold px-8 py-4">
-      {{ task.title }}
+      {{ task.name }}
     </div>
     <div class="flex flex-row flex-wrap justify-between pt-4">
       <div>
@@ -123,7 +123,7 @@ export default {
       type: Object
     },
     index: {
-      required: true,
+      required: false,
       type: Number
     }
   },

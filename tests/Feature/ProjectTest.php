@@ -27,12 +27,13 @@ class ProjectTest extends TestCase
         ])->assertJsonFragment([
             'status' => 'success',
             'name'   => 'New Project',
-            'slug'   => str_slug('New Project'),
         ]);
         $this->assertDatabaseHas('projects', ['name' => 'New Project', 'description' => 'Description for new project', 'owner_id' => $this->user->id]);
-        $this->assertTrue($this->user->hasPermissionTo('view project->new-project'));
-        $this->assertTrue($this->user->hasPermissionTo('edit project->new-project'));
-        $this->assertTrue($this->user->hasPermissionTo('delete project->new-project'));
+
+        $id = Project::where('name', 'New Project')->first()->id;
+        $this->assertTrue($this->user->hasPermissionTo('view project->' . $id));
+        $this->assertTrue($this->user->hasPermissionTo('edit project->' . $id));
+        $this->assertTrue($this->user->hasPermissionTo('delete project->' . $id));
     }
 
     /** @test */

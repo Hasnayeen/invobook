@@ -50,7 +50,7 @@
     export default {
       data: () => ({
         projects: data.projects.map((project) => {
-          project.url = 'projects/' + project.slug
+          project.url = 'projects/' + project.id
           return project
         }),
         showCreateProjectForm: false,
@@ -78,7 +78,7 @@
             .then((response) => {
               if (response.data.status == 'success') {
                 EventBus.$emit('notification', response.data.message, response.data.status)
-                response.data.project.url = 'projects/' + response.data.project.slug
+                response.data.project.url = 'projects/' + response.data.project.id
                 this.projects.push(response.data.project)
                 this.closeCreateProjectModal()
               }

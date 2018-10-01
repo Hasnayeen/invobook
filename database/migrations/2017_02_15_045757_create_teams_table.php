@@ -16,7 +16,6 @@ class CreateTeamsTable extends Migration
         Schema::create('teams', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('slug')->unique();
             $table->string('description');
             $table->integer('office_id')->unsigned()->nullable()->comment('id of office, if any, under which this team operates');
             $table->integer('owner_id')->unsigned()->comment('user id of the owner of the project');

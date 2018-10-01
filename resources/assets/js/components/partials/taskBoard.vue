@@ -10,7 +10,7 @@
       <img v-if="task.assigned_to" :src="generateUrl(task.user.avatar)" class="rounded-full w-8 h-8 mx-2 self-start">
       <i v-else class="fas fa-question-circle fa-2x mx-2 self-start text-grey-darker"></i>
       <div class="w-4/5 text-grey-darker text-left pl-2 flex flex-col justify-between h-full">
-        <p class="text-base mb-2 overflow-hidden">{{task.title}}</p>
+        <p class="text-base mb-2 overflow-hidden">{{task.name}}</p>
         <p class="text-sm text-grey-dark">
           Due by {{task.due_on}}
         </p>

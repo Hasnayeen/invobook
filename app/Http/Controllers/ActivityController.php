@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Spatie\Activitylog\Models\Activity;
+use App\Models\Activity;
 
 class ActivityController extends Controller
 {
     public function index()
     {
-        $query = Activity::query();
+        $query = Activity::with(['causer:id,name,username', 'subject:id,name']);
         $query = request('user') ? $query->where('causer_id', request('user')) : $query;
         $query = request('date') ? $query->whereDate('created_at', request('date')) : $query;
-        $activities = $query->get();
+        $activities = $query->get()->groupBy('date');
+        // dd($activities['2018-09-29'][0]);
 
         return response()->json([
             'status'     => 'success',

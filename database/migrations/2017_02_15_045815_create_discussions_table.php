@@ -15,6 +15,7 @@ class CreateDiscussionsTable extends Migration
     {
         Schema::create('discussions', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
             $table->text('content');
             $table->integer('posted_by')->unsigned();
             $table->boolean('archived')->default(false);

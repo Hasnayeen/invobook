@@ -14,7 +14,7 @@ class TaskController extends Controller
     public function store(ValidateTaskCreation $request)
     {
         $task = Task::create([
-            'title'             => $request->input('title'),
+            'name'              => $request->input('name'),
             'assigned_to'       => $request->input('assigned_to'),
             'notes'             => $request->input('notes'),
             'due_on'            => $request->input('due_on'),
