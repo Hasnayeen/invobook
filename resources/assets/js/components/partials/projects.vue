@@ -84,7 +84,7 @@
               }
             })
             .catch((error) => {
-              console.log(error)
+              EventBus.$emit('notification', error.response.data.message, error.response.data.status)
             })
     }
       }

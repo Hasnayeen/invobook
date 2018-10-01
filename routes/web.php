@@ -55,9 +55,9 @@ Route::group(['middleware' => 'auth'], function () {
         return abort(404);
     });
 
-    Route::get('offices/{office}', 'OfficeController@show');
+    Route::post('offices', 'OfficeController@store');
 
-    Route::get('offices/{office}/tasks', 'TaskController@index');
+    Route::get('offices/{office}', 'OfficeController@show');
 
     /**********************************
         Member
