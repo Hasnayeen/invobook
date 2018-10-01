@@ -9,6 +9,8 @@ class Office extends Model
 {
     use LogsActivity;
 
+    protected $fillable = ['name', 'description', 'owner_id'];
+
     public function members()
     {
         return $this->belongsToMany('App\Models\User', 'office_user', 'office_id', 'user_id');

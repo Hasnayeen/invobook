@@ -27,4 +27,13 @@ class OfficeRepository
     {
         return $this->model->orderBy('created_at', 'desc')->take(3)->get();
     }
+
+    public function store($data)
+    {
+        return $this->model->create([
+            'name'         => $data['name'],
+            'description'  => $data['description'],
+            'owner_id'     => auth()->user()->id,
+        ]);
+    }
 }

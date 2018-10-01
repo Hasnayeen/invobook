@@ -1,6 +1,5 @@
 <template>
     <div :class="{'hidden': (activeTab != 'offices')}">
-
         <!-- Create Office Form -->
         <div :class="{'hidden': !showCreateOfficeForm}">
             <div class="absolute pin opacity-75 bg-grey"></div>
@@ -70,7 +69,21 @@
       },
       methods: {
         createNewOffice () {
-
+          axios.post('/offices', {
+            name: this.name,
+            description: this.description
+          })
+            .then((response) => {
+              if (response.data.status == 'success') {
+                EventBus.$emit('notification', response.data.message, response.data.status)
+                response.data.office.url = 'offices/' + response.data.office.id
+                this.offices.push(response.data.office)
+                this.showCreateOfficeForm = false
+              }
+            })
+            .catch((error) => {
+              EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+            })
         },
         closeCreateOfficeModal () {
           this.showCreateOfficeForm = false

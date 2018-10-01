@@ -4,13 +4,13 @@
     "/js/projects/single.js": "/js/projects/single.js?id=5f74f47bf91fb32f75b2",
     "/js/offices/single.js": "/js/offices/single.js?id=7c2b9b0330b9ea18d44b",
     "/js/users/profile.js": "/js/users/profile.js?id=8689d61e1ec225e27c92",
-    "/js/home.js": "/js/home.js?id=adb7e36b88e07f5cf70a",
+    "/js/home.js": "/js/home.js?id=9642caad193f8dd04ac0",
     "/js/vendor.js": "/js/vendor.js?id=4e1a515ee324cb4905d9",
     "/js/errors/404.js": "/js/errors/404.js?id=4ecd3aece33aa8b48206",
     "/js/auth/login.js": "/js/auth/login.js?id=333058b0d5ad5cb0e124",
     "/css/main.css": "/css/main.css?id=9515938f4053d4878b50",
     "/js/auth/register.js": "/js/auth/register.js?id=e0091e74b876620f4855",
-    "/js/manifest.js": "/js/manifest.js?id=daa949678a7eb69b3e23",
+    "/js/manifest.js": "/js/manifest.js?id=ed6c30ed175fd7c71b5e",
     "/css/main.min.css": "/css/main.min.css?id=9515938f4053d4878b50",
     "/js/auth/login.min.js": "/js/auth/login.min.js?id=333058b0d5ad5cb0e124",
     "/js/auth/register.min.js": "/js/auth/register.min.js?id=e0091e74b876620f4855",
@@ -20,5 +20,5 @@
     "/js/offices/single.min.js": "/js/offices/single.min.js?id=7c2b9b0330b9ea18d44b",
     "/js/users/profile.min.js": "/js/users/profile.min.js?id=8689d61e1ec225e27c92",
     "/js/admin/index.min.js": "/js/admin/index.min.js?id=cd42ee298cae9ccd9c03",
-    "/js/home.min.js": "/js/home.min.js?id=adb7e36b88e07f5cf70a"
+    "/js/home.min.js": "/js/home.min.js?id=9642caad193f8dd04ac0"
 }
