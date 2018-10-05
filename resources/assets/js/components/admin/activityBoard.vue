@@ -48,7 +48,7 @@
             <div class="flex-grow bg-white border px-4 md:px-8 py-4 rounded">
               <a :href="'/users/' + activity.causer.username" class="text-blue font-medium cursor-pointer no-underline">{{ activity.causer.name }}</a>
               {{ activity.description }} {{ activity.subject_type }}
-              <a :href="activity.subject_type + 's/' + activity.subject.id" class="text-blue font-medium cursor-pointer no-underline">{{ activity.subject.name }}</a>
+              <a v-if="activity.subject" :href="activity.subject_type + 's/' + activity.subject_id" class="text-blue font-medium cursor-pointer no-underline">{{ activity.subject.name }}</a>
             </div>
           </div>
         </template>

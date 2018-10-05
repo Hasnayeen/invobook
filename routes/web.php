@@ -67,6 +67,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('members', 'MemberController@store');
 
+    /**********************************
+        Discussions
+     **********************************/
+
     Route::get('discussions', 'DiscussionController@index');
 
     Route::get('discussions/{discussion}', 'DiscussionController@index');
@@ -78,6 +82,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('messages', 'MessageController@index');
 
     Route::post('messages', 'MessageController@store');
+
+    /**********************************
+        Events
+     **********************************/
 
     Route::get('events', 'EventController@index');
 

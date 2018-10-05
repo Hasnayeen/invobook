@@ -12,7 +12,6 @@ class ActivityController extends Controller
         $query = request('user') ? $query->where('causer_id', request('user')) : $query;
         $query = request('date') ? $query->whereDate('created_at', request('date')) : $query;
         $activities = $query->get()->groupBy('date');
-        // dd($activities['2018-09-29'][0]);
 
         return response()->json([
             'status'     => 'success',
