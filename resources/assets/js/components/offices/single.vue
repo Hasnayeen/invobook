@@ -19,32 +19,7 @@
       <span v-if="office.members.length > 5" class="bg-grey-lighter border-teal border p-2 rounded-full">{{ office.members.length - 5 }}+</span>
     </div>
 
-    <div class="flex flex-row justify-around my-6 py-4 bg-white shadow rounded text-grey">
-      <div @click="activateThisTab('tasks')"
-        :class="[(active === 'tasks') ? 'text-teal-dark font-semibold border-teal border-b-2 pb-4 -mb-4' : 'cursor-pointer', 'text-center w-1/6']">
-        <i class="fas fa-tasks text-2xl"></i>
-      </div>
-      <div @click="activateThisTab('discussions')"
-        :class="[(active === 'discussions') ? 'text-teal-dark font-semibold border-teal border-b-2 pb-4 -mb-4' : 'cursor-pointer', 'text-center w-1/6']">
-        <i class="fas fa-clipboard-list text-2xl"></i>
-      </div>
-      <div @click="activateThisTab('messages')"
-        :class="[(active === 'messages') ? 'text-teal-dark font-semibold border-teal border-b-2 pb-4 -mb-4' : 'cursor-pointer', 'text-center w-1/6']">
-        <i class="fas fa-comments text-2xl"></i>
-      </div>
-      <div @click="activateThisTab('events')"
-        :class="[(active === 'events') ? 'text-teal-dark font-semibold border-teal border-b-2 pb-4 -mb-4' : 'cursor-pointer', 'text-center w-1/6']">
-        <i class="fas fa-calendar-alt text-2xl"></i>
-      </div>
-      <div @click="activateThisTab('files')"
-        :class="[(active === 'files') ? 'text-teal-dark font-semibold border-teal border-b-2 pb-4 -mb-4' : 'cursor-pointer', 'text-center w-1/6']">
-        <i class="fas fa-file-alt text-2xl"></i>
-      </div>
-      <div @click="activateThisTab('activities')"
-        :class="[(active === 'activities') ? 'text-teal-dark font-semibold border-teal border-b-2 pb-4 -mb-4' : 'cursor-pointer', 'text-center w-1/6']">
-        <i class="fas fa-bolt text-2xl"></i>
-      </div>
-    </div>
+    <tab-menu :active="active" @activate="activateTab"></tab-menu>
 
     <div class="flex flex-row flex-wrap justify-center">
       <taskBoard resourceType="office" :resource="office"  :activeTab="active"></taskBoard>
@@ -68,10 +43,11 @@ import files from './../partials/files.vue'
 import activity from './../partials/activity.vue'
 import addMemberForm from './../partials/addMemberForm.vue'
 import notificationPopup from '../partials/notificationPopup.vue'
+import tabMenu from './../partials/tabMenu.vue'
 
 export default {
   components: {
-    taskBoard, discussionBoard, messagesBoard, schedule, files, activity, addMemberForm, notificationPopup
+    taskBoard, discussionBoard, messagesBoard, schedule, files, activity, addMemberForm, notificationPopup, tabMenu
   },
   props: ['office'],
   data: () => ({
@@ -103,7 +79,7 @@ export default {
         this.showNotification = false
       }, 3000)
     },
-    activateThisTab (tab) {
+    activateTab (tab) {
       if (tab != this.active) {
         this.active = tab
       }

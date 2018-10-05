@@ -20,6 +20,37 @@ $ git remote add origin git@github.com:iluminar/goodwork.git
 ```
 
 3. Setup application
+
+#### Using docker
+
+> Docker & Docker Compose must be installed
+
+a) Copy `.env` from `.env.example`
+
+```
+cp .env.example .env
+```
+
+b) Define environment variable
+
+Set app port, db credentials and mail driver credentials in `.env` file. Also provide `SSL_CERT_DOMAIN`(your domain) and `SSL_CERT_DIR`(directory of your ssl certificates file) values for ssl setup.(Not needed for local development)
+
+c) Run the installer
+
+```bash
+sudo chmod +x install.sh
+./install.sh local
+```
+
+> To stop server: `./cmd stop` & to start server `./cmd start`
+
+
+Login Credentials for Admin User
+`email: admin@example.com`
+`password: secret`
+
+#### Install Manualy
+
 ``` bash
 $ git checkout dev
 $ git pull origin dev
@@ -29,19 +60,9 @@ $ php artisan key:generate
 $ npm install
 ```
 
-N.B: If you get this error
-```
-[Symfony\Component\Debug\Exception\FatalErrorException]
-Class 'Laravel\Dusk\DuskServiceProvider' not found"
-```
-
-run this command
-``` bash
-$ composer update
-```
 
 ### Regular workflow
-1. Create a branch for new issue (the branch name should be as “issue[number]”. E.g. – “issue7”):
+1. Create a branch for new issue from `dev` branch latest commit (the branch name should be as “issue[number]”. E.g. – “issue7”):
 ``` bash
 $ git checkout -b issue[number]
 ```
@@ -119,12 +140,12 @@ Or like this
 * Add issue number in final commit message when the task is complete
 
 ## Coding style
-Goodwork follows the [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) coding standard and the [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md) autoloading standard.
+Goodwork follows the [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) coding standard and the [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md) autoloading standard and StandardJS style for Javascript file [StandardJS](https://standardjs.com/rules.html).
 
 ## Project workflow
 * All the task will be created as a issue with appropriate label and milestone
 * All the task will also be available in project board of the repository
-* By default all task will be at `Backlog` column
+* By default all task will be at `Ideas` column
 * You can self-assign yourself to a task or task can be assigned to you
 * When a member start a task, the card should be moved to `In Progress` column
 * When someone test a task other than the original contributor after task is complete it should be placed in `In Review`
