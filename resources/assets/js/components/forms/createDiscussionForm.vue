@@ -9,6 +9,15 @@
     </div>
     <div class="p-4 bg-grey-lighter">
       <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name">
+        Category <span class="text-grey capitalize">(required)</span>
+      </label>
+      <select class="appearance-none block w-full bg-white text-grey-darker border border-grey-lighter rounded py-3 px-4" v-model="categoryId">
+        <option value="" disabled>Choose one</option>
+        <option :value="category.id" v-for="category in categories">{{ category.name }}</option>
+      </select>
+    </div>
+    <div class="p-4 bg-grey-lighter">
+      <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name">
         Body <span class="text-grey capitalize">(required)</span>
       </label>
       <div id="editor" class="h-80 bg-white">
@@ -45,6 +54,10 @@ export default {
       required: true,
       type: Boolean
     },
+    categories: {
+      required: true, 
+      type: Array
+    },
     resourceId: {
       required: true,
       type: Number
@@ -56,7 +69,8 @@ export default {
   },
   data: () => ({
     quill: null,
-    name: ''
+    name: '',
+    categoryId: '',
   }),
   mounted () {
     this.quill = new Quill('#editor', options)
@@ -65,6 +79,7 @@ export default {
     savePost (draft = true) {
       axios.post('/discussions', {
         name: this.name,
+        category_id: this.categoryId,
         content: this.quill.root.innerHTML,
         raw_content: JSON.stringify(this.quill.getContents()),
         draft: draft,
@@ -73,6 +88,7 @@ export default {
       })
       .then((response) => {
         this.name = ''
+        this.categoryId = ''
         this.quill.setContents([])
         EventBus.$emit('notification', response.data.message, response.data.status)
         this.$emit('close')
