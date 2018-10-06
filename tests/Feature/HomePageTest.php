@@ -7,18 +7,9 @@ use App\Models\Team;
 use App\Models\User;
 use App\Models\Office;
 use App\Models\Project;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class HomePageTest extends TestCase
 {
-    use DatabaseTransactions;
-
-    public function setUp()
-    {
-        parent::setUp();
-        $this->user = factory(User::class)->create();
-    }
-
     /** @test */
     public function show_latest_three_projects_teams_and_offices()
     {

@@ -13,6 +13,8 @@ mix.postCss('resources/assets/css/main.css', 'public/css', [
   tailwindcss('tailwind.js')
 ]).minify('public/css/main.css')
 
+mix.copy('resources/assets/css/editor.css', 'public/css/editor.css').minify('public/css/editor.css')
+
 mix.js('resources/assets/js/pages/auth/login.js', 'public/js/auth').minify('public/js/auth/login.js')
   .js('resources/assets/js/pages/auth/register.js', 'public/js/auth').minify('public/js/auth/register.js')
   .js('resources/assets/js/pages/errors/404.js', 'public/js/errors').minify('public/js/errors/404.js')

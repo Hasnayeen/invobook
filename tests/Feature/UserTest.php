@@ -6,17 +6,9 @@ use Tests\TestCase;
 use App\Models\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class UserTest extends TestCase
 {
-    use DatabaseTransactions;
-
-    public function setUp()
-    {
-        parent::setUp();
-    }
-
     /** @test */
     public function owner_can_see_all_users()
     {

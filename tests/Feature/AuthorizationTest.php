@@ -5,12 +5,9 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AuthorizationTest extends TestCase
 {
-    use DatabaseTransactions;
-
     public function setUp()
     {
         parent::setUp();

@@ -73,6 +73,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('discussions', 'DiscussionController@index');
 
+    Route::post('discussions', 'DiscussionController@store');
+
     Route::get('discussions/{discussion}', 'DiscussionController@index');
 
     /**********************************

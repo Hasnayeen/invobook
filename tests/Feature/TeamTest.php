@@ -4,12 +4,9 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Models\Team;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class TeamTest extends TestCase
 {
-    use DatabaseTransactions;
-
     public function setUp()
     {
         parent::setUp();

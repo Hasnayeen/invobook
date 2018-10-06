@@ -7,7 +7,7 @@
       <i class="fa fa-angle-down" aria-hidden="true"></i>
     </span>
   </div>
-  <div v-if="profileDropdownShown" id="profile-menu" class="absolute bg-white w-48 pin-r mr-2 py-1 shadow-lg rounded" style="top:3.5rem;">
+  <div v-if="profileDropdownShown" id="profile-menu" class="absolute bg-white w-48 pin-r mr-2 py-1 shadow-lg rounded z-50" style="top:3.5rem;">
     <a class="px-4 py-2 hover:bg-teal hover:text-white no-underline text-grey-dark block font-medium" :href="profileUrl">
       <span class="w-6 inline-block"><i class="pr-1 fa fa-user"></i></span>
           Your profile

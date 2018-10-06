@@ -3,17 +3,9 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class MemberTest extends TestCase
 {
-    use DatabaseTransactions;
-
-    public function setUp()
-    {
-        parent::setUp();
-    }
-
     /**
      * Get all members of project/team/office.
      * @test
