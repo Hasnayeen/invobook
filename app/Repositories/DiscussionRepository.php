@@ -18,6 +18,7 @@ class DiscussionRepository
         return $this->model->create([
             'name'                => $data['name'],
             'content'             => $data['content'],
+            'category_id'         => $data['category_id'],
             'raw_content'         => $data['raw_content'],
             'draft'               => $data['draft'],
             'posted_by'           => auth()->user()->id,

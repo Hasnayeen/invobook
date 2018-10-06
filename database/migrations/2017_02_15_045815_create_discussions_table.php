@@ -23,6 +23,7 @@ class CreateDiscussionsTable extends Migration
             $table->boolean('draft')->default(true);
             $table->string('discussionable_type')->comment('office, team or projects');
             $table->integer('discussionable_id')->unsigned();
+            $table->integer('category_id')->unsigned();
             $table->foreign('posted_by')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
