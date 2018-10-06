@@ -6,7 +6,6 @@ use App\Models\Team;
 
 class TeamRepository
 {
-    use RepositoryHelperTrait;
     /**
      * @var mixed
      */

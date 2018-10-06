@@ -1,5 +1,7 @@
 <template>
 <div :class="{'hidden': (activeTab != 'discussions')}" class="w-full">
+  <create-discussion-form :resourceId="resource.id" :resourceType="resourceType" @close="closeCreateDiscussionForm" :form-shown="createDiscussionFormShown"></create-discussion-form>
+  <button @click="showCreateDiscussionForm" class="no-underline p-3 my-4 bg-white text-base text-teal rounded shadow">Create New Post</button>
   <div class="w-full bg-white shadow-md flex flex-row flex-wrap rounded mt-8">
     <a href="#" class="flex flex-row items-center px-6 py-4 no-underline">
       <div class="w-12 h-12 flex-none">
@@ -61,7 +63,9 @@
 </template>
 
 <script>
+import createDiscussionForm from '../forms/createDiscussionForm.vue'
 export default {
+  components: {createDiscussionForm},
   props: {
     resource: {
       required: true,
@@ -74,6 +78,17 @@ export default {
     activeTab: {
       required: true,
       type: String
+    }
+  },
+  data: () => ({
+    createDiscussionFormShown: false
+  }),
+  methods: {
+    showCreateDiscussionForm () {
+      this.createDiscussionFormShown = true
+    },
+    closeCreateDiscussionForm () {
+      this.createDiscussionFormShown = false
     }
   }
 }

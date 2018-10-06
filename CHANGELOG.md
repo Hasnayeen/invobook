@@ -1,5 +1,10 @@
 # Release Notes
 
+## v0.7 (Yet to Release)
+
+### Added
+- Added `Quill` rich text editor on discussion section ([issue-165](https://github.com/iluminar/goodwork/issues/165))
+
 ## v0.6 (2018-10-04)
 
 ### Added

@@ -27,6 +27,7 @@
     "laravel-mix": "^2.0.0",
     "luxon": "^1.0.0",
     "purgecss-webpack-plugin": "^1.3.0",
+    "quill": "^1.3.6",
     "tailwindcss": "^0.6.5",
     "vue": "^2.5.13",
     "vue-jest": "^2.5.0",
