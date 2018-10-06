@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\Category;
 use App\Services\MessageService;
 use App\Services\ProjectService;
 use App\Http\Requests\StoreProjectRequest;
@@ -29,7 +30,9 @@ class ProjectController extends Controller
         $this->authorize('view', $project);
         $project->load('members');
 
-        return view('projects.single', ['project' => $project]);
+        $categories = Category::all();
+
+        return view('projects.single', ['project' => $project, 'categories' => $categories]);
     }
 
     public function store(StoreProjectRequest $request)
