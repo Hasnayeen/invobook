@@ -23,6 +23,5 @@ class CategorySeeder extends Seeder
         Category::create([
             'name'       => 'Other',
         ]);
-
     }
 }

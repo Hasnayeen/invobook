@@ -13,13 +13,13 @@ $factory->define(\App\Models\Discussion::class, function (Faker $faker) {
         'draft'                 => false,
         'discussionable_type'   => 'project',
         'discussionable_id'     => function () {
-                                        return factory(\App\Models\Project::class)->create()->id;
-                                    },
+            return factory(\App\Models\Project::class)->create()->id;
+        },
         'posted_by'             => function () {
-                                        return factory(\App\Models\User::class)->create()->id;
-                                    },
+            return factory(\App\Models\User::class)->create()->id;
+        },
         'category_id'           => function () {
-                                        return factory(\App\Models\Category::class)->create()->id;
-                                    },
+            return factory(\App\Models\Category::class)->create()->id;
+        },
     ];
 });
