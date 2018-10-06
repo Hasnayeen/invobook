@@ -5,15 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Team;
 use Illuminate\Http\Request;
 use App\Services\TeamService;
-use App\Services\MessageService;
 
 class TeamController extends Controller
 {
-    public function __construct(MessageService $messageService)
-    {
-        $this->messageService = $messageService;
-    }
-
     public function show(Team $team)
     {
         $team->load('members');

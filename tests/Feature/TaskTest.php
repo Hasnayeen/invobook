@@ -3,12 +3,9 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class TaskTest extends TestCase
 {
-    use DatabaseTransactions;
-
     public function setUp()
     {
         parent::setUp();
@@ -110,7 +107,7 @@ class TaskTest extends TestCase
     }
 
     /**
-     *  @test
+     * @test
      * @expectedException Illuminate\Auth\Access\AuthorizationException
      * */
     public function user_without_permission_cant_delete_a_task()

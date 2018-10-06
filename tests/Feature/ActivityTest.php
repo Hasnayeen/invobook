@@ -5,17 +5,9 @@ namespace Tests\Feature;
 use Carbon\Carbon;
 use Tests\TestCase;
 use Spatie\Activitylog\Models\Activity;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ActivityTest extends TestCase
 {
-    use DatabaseTransactions;
-
-    public function setUp()
-    {
-        parent::setUp();
-    }
-
     /** @test */
     public function owner_can_see_all_recent_activity()
     {

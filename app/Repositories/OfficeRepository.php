@@ -6,7 +6,6 @@ use App\Models\Office;
 
 class OfficeRepository
 {
-    use RepositoryHelperTrait;
     /**
      * @var mixed
      */

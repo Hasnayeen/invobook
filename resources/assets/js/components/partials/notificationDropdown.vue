@@ -4,7 +4,7 @@
         <i class="far fa-bell font-bold text-xl" aria-hidden="true"></i>
         <i v-if="unreadNotification" class="fa fa-circle text-red-light text-sm absolute pin-t mt-3 ml-3" aria-hidden="true"></i>
     </div>
-    <div v-if="notificationShown" class="absolute bg-white w-64 mt-6 mr-8 py-4 shadow-lg rounded" style="right: 5%;">
+    <div v-if="notificationShown" class="absolute bg-white w-64 mt-5 mr-8 py-4 shadow-lg rounded z-50" style="right: 5%;">
         <a class="flex flex-row items-center list-reset px-4 py-2 text-grey-dark no-underline block" href="#">
             <img class="w-10 h-10 rounded-full mr-2" :src="generateUrl(user.avatar)">
             <div>
