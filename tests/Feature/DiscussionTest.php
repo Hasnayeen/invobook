@@ -59,4 +59,24 @@ class DiscussionTest extends TestCase
             'status'              => 'error',
         ]);
     }
+
+    /** @test */
+    public function user_can_see_all_discussions()
+    {
+        $project = factory(\App\Models\Project::class)->create();
+        $discussions = factory(\App\Models\Discussion::class, 2)->create([
+            'discussionable_type' => 'project',
+            'discussionable_id'   => $project->id,
+        ]);
+
+        $this->actingAs($this->user)->call('GET', '/discussions', ['resource_type' => 'project', 'resource_id' => $project->id])
+             ->assertJsonFragment([
+                 'status'  => 'success',
+                 'total'   => 2,
+                 'name'    => $discussions[0]->name,
+                 'content' => $discussions[0]->content,
+                 'name'    => $discussions[1]->name,
+                 'content' => $discussions[1]->content,
+             ]);
+    }
 }
