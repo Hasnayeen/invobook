@@ -75,7 +75,7 @@ export default {
         this.name = ''
         this.quill.setContents([])
         EventBus.$emit('notification', response.data.message, response.data.status)
-        this.$emit('close')
+        this.$emit('close', response.data.discussion)
       })
       .catch((error) => {
         EventBus.$emit('notification', error.response.data.message, error.response.data.status)

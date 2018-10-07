@@ -1,63 +1,24 @@
 <template>
 <div :class="{'hidden': (activeTab != 'discussions')}" class="w-full">
   <create-discussion-form :resourceId="resource.id" :resourceType="resourceType" @close="closeCreateDiscussionForm" :form-shown="createDiscussionFormShown"></create-discussion-form>
-  <button @click="showCreateDiscussionForm" class="no-underline p-3 my-4 bg-white text-base text-teal rounded shadow">Create New Post</button>
-  <div class="w-full bg-white shadow-md flex flex-row flex-wrap rounded mt-8">
-    <a href="#" class="flex flex-row items-center px-6 py-4 no-underline">
-      <div class="w-12 h-12 flex-none">
-        <img src="http://placehold.it/34x34" class="rounded-full w-12 h-12">
-      </div>
-      <div class="text-grey-dark text-left pl-4">
-        <p class="font-semibold text-grey-dark">
-          John Smith
-          <span class="text-xs px-2">11:03am</span>
-          <span class="text-xs">
-            6
-            <i class="fas fa-comment-alt"></i>
-          </span>
-        </p>
-        <p class="text-regular pt-3 text-grey-darker leading-normal">Differences in how writing systems represent language raise important questions about the extent to which the
-        role of linguistic skills such as phonological awareness (PA) and morphological awareness (MA) in ...</p>
-      </div>
-    </a>
+  <div class="text-center">
+    <button @click="showCreateDiscussionForm" class="no-underline p-3 my-4 bg-white text-base text-teal rounded shadow">Create New Post</button>
   </div>
-  <div class="w-full bg-white shadow-md flex flex-row flex-wrap rounded mt-8">
-    <a href="#" class="flex flex-row items-center px-6 py-4 no-underline">
-      <div class="w-12 h-12 flex-none">
-        <img src="http://placehold.it/34x34" class="rounded-full w-12 h-12">
+  <div class="flex flex-row flex-wrap justify-center items-start">
+    <div v-for="discussion in discussions" class="w-80 my-6 md:m-6 bg-white shadow-md flex flex-col items-center rounded cursor-pointer">
+      <div class="bg-teal flex flex-col items-center w-full text-white rounded-t">
+        <div class="w-10 h-10 flex-none py-4">
+          <img :src="generateUrl(discussion.creator.avatar)" class="rounded-full w-10 h-10">
+        </div>
+        <div class="mt-6 text-xs">
+          by <a :href="'/users/' + discussion.creator.username" class="text-sm text-white font-bold cursor-pointer no-underline">{{ discussion.creator.name }}</a> on <span class="text-sm">{{ discussion.date }}</span>
+        </div>
+        <div class="text-white text-3xl text-center font-semibold p-4">{{ discussion.name }}</div>
       </div>
-      <div class="text-grey-dark text-left pl-4">
-        <p class="font-semibold text-grey-dark">
-          John Smith
-          <span class="text-xs px-2">11:03am</span>
-          <span class="text-xs">
-            6
-            <i class="fas fa-comment-alt"></i>
-          </span>
-        </p>
-        <p class="text-regular pt-3 text-grey-darker leading-normal">Differences in how writing systems represent language raise important questions about the extent to which the
-        role of linguistic skills such as phonological awareness (PA) and morphological awareness (MA) in ...</p>
+      <div class="text-regular m-4 text-grey-darker leading-normal overflow-hidden" style="max-height: 12rem;">
+        <div v-html="discussion.content"></div>
       </div>
-    </a>
-  </div>
-  <div class="w-full bg-white shadow-md flex flex-row flex-wrap rounded mt-8">
-    <a href="#" class="flex flex-row items-center px-6 py-4 no-underline">
-      <div class="w-12 h-12 flex-none">
-        <img src="http://placehold.it/34x34" class="rounded-full w-12 h-12">
-      </div>
-      <div class="text-grey-dark text-left pl-4">
-        <p class="font-semibold text-grey-dark">
-          John Smith
-          <span class="text-xs px-2">11:03am</span>
-          <span class="text-xs">
-            6
-            <i class="fas fa-comment-alt"></i>
-          </span>
-        </p>
-        <p class="text-regular pt-3 text-grey-darker leading-normal">Differences in how writing systems represent language raise important questions about the extent to which the
-        role of linguistic skills such as phonological awareness (PA) and morphological awareness (MA) in ...</p>
-      </div>
-    </a>
+    </div>
   </div>
 </div>
 </template>
@@ -81,15 +42,39 @@ export default {
     }
   },
   data: () => ({
-    createDiscussionFormShown: false
+    createDiscussionFormShown: false,
+    discussions: []
   }),
   methods: {
     showCreateDiscussionForm () {
       this.createDiscussionFormShown = true
     },
-    closeCreateDiscussionForm () {
+    closeCreateDiscussionForm (newDiscussion = null) {
+      (newDiscussion) ? this.discussions.push(newDiscussion) : null
       this.createDiscussionFormShown = false
+    },
+    getAllDiscussions () {
+      if (this.activeTab === 'discussions' && this.discussions.length < 1) {
+        axios.get('/discussions', {
+          params: {
+            resource_type: this.resourceType,
+            resource_id: this.resource.id
+          }
+        })
+        .then((response) => {
+          this.discussions = response.data.discussions
+        })
+        .catch((error) => {
+          console.log(error.response.data.message)
+        })
+      }
     }
+  },
+  mounted () {
+    console.log('just')
+  },
+  watch: {
+    activeTab: 'getAllDiscussions'
   }
 }
 </script>

@@ -25,4 +25,9 @@ class DiscussionRepository
             'discussionable_id'   => $data['discussionable_id'],
         ]);
     }
+
+    public function getAllDiscussionWithCreator($type, $id)
+    {
+        return $this->model->where(['discussionable_type' => $type, 'discussionable_id' => $id, 'draft' => false, 'archived' => false])->with('creator:id,avatar,name,username')->get(['id', 'name', 'content', 'posted_by', 'created_at']);
+    }
 }
