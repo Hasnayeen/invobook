@@ -9,7 +9,7 @@ class Discussion extends Model
 {
     use LogsActivity;
 
-    protected $fillable = ['name', 'content', 'raw_content', 'posted_by', 'archived', 'draft', 'discussionable_type', 'discussionable_id'];
+    protected $fillable = ['name', 'content', 'raw_content', 'posted_by', 'archived', 'draft', 'discussionable_type', 'discussionable_id', 'category_id'];
 
     protected $appends = ['date'];
 
@@ -21,5 +21,10 @@ class Discussion extends Model
     public function getDateAttribute()
     {
         return $this->created_at->format('M j');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(\App\Models\Category::class);
     }
 }

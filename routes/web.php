@@ -77,6 +77,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('discussions/{discussion}', 'DiscussionController@index');
 
+    Route::get('categories', 'CategoryController@index');
+
     /**********************************
         Messages
      **********************************/
@@ -121,6 +123,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('users/{user}/avatar', 'UserAvatarController@store');
 });
+
+    /**********************************
+        Admin
+    **********************************/
 
 Route::group(['middleware' => ['auth', 'permission:view admin page'], 'prefix' => 'admin'], function () {
     Route::get('/', 'AdminController@index');
