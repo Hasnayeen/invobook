@@ -30,6 +30,7 @@ class ValidateDiscussionCreation extends FormRequest
             'draft'               => 'required|boolean',
             'discussionable_type' => 'required|string|in:project,team,office',
             'discussionable_id'   => 'required|integer',
+            'category_id'         => 'required|integer|exists:categories,id',
         ];
     }
 }
