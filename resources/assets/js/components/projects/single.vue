@@ -19,7 +19,7 @@
 
     <tab-menu :active="active" @activate="activateTab"></tab-menu>
 
-    <div class="flex flex-row flex-wrap justify-start">
+    <div class="flex flex-row flex-wrap">
       <taskBoard resourceType="project" :resource="project"  :activeTab="active"></taskBoard>
       <discussionBoard resourceType="project" :resource="project" :activeTab="active"></discussionBoard>
       <messagesBoard resourceType="project" :resource="project" :activeTab="active"></messagesBoard>
