@@ -11,7 +11,7 @@
           <img :src="generateUrl(discussion.creator.avatar)" class="rounded-full w-10 h-10">
         </div>
         <div class="mt-6 text-xs">
-          by <a :href="'/users/' + discussion.creator.username" class="text-sm text-white font-bold cursor-pointer no-underline">{{ discussion.creator.name }}</a> on <span class="text-sm">{{ discussion.date }}</span>
+          by <a :href="'/users/' + discussion.creator.username" class="text-sm text-white font-bold cursor-pointer no-underline">{{ discussion.creator.name }}</a> on <span class="text-sm font-bold">{{ discussion.date }}</span> in <span class="text-sm font-bold">{{ discussion.category.name }}</span>
         </div>
         <div class="text-white text-3xl text-center font-semibold p-4">{{ discussion.name }}</div>
       </div>
