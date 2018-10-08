@@ -27,7 +27,7 @@ class ProjectTest extends TestCase
     /**
      * @expectedException Illuminate\Auth\Access\AuthorizationException
      * @test
-    */
+     */
     public function user_without_permission_cant_see_project_page()
     {
         $user = factory(\App\Models\User::class)->create();

@@ -25,7 +25,7 @@ class OfficeTest extends TestCase
     /**
      * @expectedException Illuminate\Auth\Access\AuthorizationException
      * @test
-    */
+     */
     public function user_without_permission_cant_see_office_page()
     {
         $user = factory(\App\Models\User::class)->create();
@@ -57,7 +57,7 @@ class OfficeTest extends TestCase
     /**
      * @expectedException Illuminate\Auth\Access\AuthorizationException
      * @test
-    */
+     */
     public function user_without_permission_cant_create_office()
     {
         $user = factory(\App\Models\User::class)->create();

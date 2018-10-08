@@ -26,7 +26,7 @@ class TeamTest extends TestCase
     /**
      * @expectedException Illuminate\Auth\Access\AuthorizationException
      * @test
-    */
+     */
     public function user_without_permission_cant_see_team_page()
     {
         $user = factory(\App\Models\User::class)->create();
@@ -59,7 +59,7 @@ class TeamTest extends TestCase
     /**
      * @expectedException Illuminate\Auth\Access\AuthorizationException
      * @test
-    */
+     */
     public function user_without_permission_cant_create_team()
     {
         $user = factory(\App\Models\User::class)->create();

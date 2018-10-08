@@ -19,7 +19,6 @@ class DiscussionPolicy
      */
     public function view(User $user, AppModelsDiscussion $appModelsDiscussion)
     {
-        //
     }
 
     /**
@@ -42,7 +41,6 @@ class DiscussionPolicy
      */
     public function update(User $user, AppModelsDiscussion $appModelsDiscussion)
     {
-        //
     }
 
     /**
@@ -54,7 +52,6 @@ class DiscussionPolicy
      */
     public function delete(User $user, AppModelsDiscussion $appModelsDiscussion)
     {
-        //
     }
 
     /**
@@ -66,7 +63,6 @@ class DiscussionPolicy
      */
     public function restore(User $user, AppModelsDiscussion $appModelsDiscussion)
     {
-        //
     }
 
     /**
@@ -78,6 +74,5 @@ class DiscussionPolicy
      */
     public function forceDelete(User $user, AppModelsDiscussion $appModelsDiscussion)
     {
-        //
     }
 }

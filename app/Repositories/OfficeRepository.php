@@ -20,6 +20,7 @@ class OfficeRepository
     }
 
     /**
+     * @param  mixed $total
      * @return mixed
      */
     public function getLatestOffices($total)
