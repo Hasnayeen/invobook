@@ -22,6 +22,7 @@ class MemberController extends Controller
         }
         $user = User::select(['id', 'name', 'username', 'avatar'])->find(request('user_id'));
         $entity->members()->save($user);
+        $this->givePermissionTo($user, $entity->id);
 
         return response()->json([
             'status'   => 'success',
@@ -44,5 +45,12 @@ class MemberController extends Controller
             'items'   => count($entity->members),
             'members' => $entity->members,
         ]);
+    }
+
+    private function givePermissionTo(User $user, $entityId)
+    {
+        $user->givePermissionTo(
+            'view ' . request('resource_type') . '->' . $entityId
+        );
     }
 }

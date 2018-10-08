@@ -3,25 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
-use App\Services\MessageService;
-use App\Services\ProjectService;
+use App\Repositories\ProjectRepository;
 use App\Http\Requests\StoreProjectRequest;
 
 class ProjectController extends Controller
 {
-    /**
-     * @var ProjectService
-     */
-    private $projectService;
-    private $messageService;
+    private $projectRepository;
 
     /**
-     * @param ProjectService $projectService
+     * @param \App\Repositories\ProjectRepository $projectRepository
      */
-    public function __construct(ProjectService $projectService, MessageService $messageService)
+    public function __construct(ProjectRepository $projectRepository)
     {
-        $this->projectService = $projectService;
-        $this->messageService = $messageService;
+        $this->projectRepository = $projectRepository;
     }
 
     public function show(Project $project)
@@ -35,7 +29,9 @@ class ProjectController extends Controller
     public function store(StoreProjectRequest $request)
     {
         try {
-            $project = $this->projectService->storeProject($request->all());
+            $project = $this->projectRepository->storeProject($request->all());
+            $project->members()->save(auth()->user());
+            $project->load('members');
             create_permissions($project);
 
             return response()->json([

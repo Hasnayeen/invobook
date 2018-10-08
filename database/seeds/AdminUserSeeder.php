@@ -29,5 +29,18 @@ class AdminUserSeeder extends Seeder
         $permissions = Permission::all();
         $permissions = $permissions->pluck('id')->toArray();
         $role->givePermissionTo($permissions);
+
+        // Guest User
+        $user = User::create([
+            'name'       => 'Guest',
+            'username'   => 'guest',
+            'email'      => 'guest@example.com',
+            'active'     => 1,
+            'password'   => bcrypt('guestpass'),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+        $role = Role::where('name', 'guest')->first();
+        $user->assignRole($role);
     }
 }

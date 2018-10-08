@@ -51,7 +51,6 @@
 </template>
 
 <script>
-import luxon from 'luxon'
 let day = null
 export default {
   props: ['resource', 'resourceType', 'activeTab'],

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Team;
 use Illuminate\Http\Request;
-use App\Services\TeamService;
+use App\Repositories\TeamRepository;
 
 class TeamController extends Controller
 {
@@ -15,10 +15,12 @@ class TeamController extends Controller
         return view('teams.single', ['team' => $team]);
     }
 
-    public function store(Request $request, TeamService $service)
+    public function store(Request $request, TeamRepository $repository)
     {
         try {
-            $team = $service->createNewTeam($request->all());
+            $team = $repository->createNewTeam($request->all());
+            $team->members()->save(auth()->user());
+            $team->load('members');
             create_permissions($team);
 
             return response()->json([
@@ -26,7 +28,10 @@ class TeamController extends Controller
                 'team'   => $team->load('members'),
             ], 201);
         } catch (Exception $e) {
-            throw $e;
+            return response()->json([
+                'status'  => 'error',
+                'message' => $e->getMessage(),
+            ]);
         }
     }
 }

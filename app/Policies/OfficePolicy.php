@@ -19,7 +19,7 @@ class OfficePolicy
      */
     public function view(User $user, Office $office)
     {
-        return $office->members()->where('user_id', $user->id)->exists();
+        return $user->hasPermissionTo('view office->' . $office->id);
     }
 
     /**
@@ -30,6 +30,7 @@ class OfficePolicy
      */
     public function create(User $user)
     {
+        return $user->hasPermissionTo('create office');
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
+use Spatie\Permission\Models\Permission;
 
 class TaskTest extends TestCase
 {
@@ -14,10 +15,13 @@ class TaskTest extends TestCase
     }
 
     /** @test */
-    public function user_can_create_new_task()
+    public function user_with_permission_can_create_new_task()
     {
         $task = factory(\App\Models\Task::class)->make();
-        $this->actingAs($this->user)->post(route('tasks.store'), [
+        $permission = Permission::create(['name' => 'create task.' . $task->taskable_type . '->' . $task->taskable_id]);
+        $this->user->givePermissionTo($permission);
+
+        $this->actingAs($this->user)->post('/tasks', [
             'name'          => $task->name,
             'assigned_to'   => $task->assigned_to,
             'notes'         => $task->notes,
@@ -26,6 +30,26 @@ class TaskTest extends TestCase
             'taskable_id'   => $task->taskable_id,
         ])->assertJsonFragment([
             'status'        => 'success',
+            'name'          => $task->name,
+            'assigned_to'   => $task->assigned_to,
+            'notes'         => $task->notes,
+            'due_on'        => $task->due_on,
+            'taskable_type' => $task->taskable_type,
+            'taskable_id'   => $task->taskable_id,
+        ]);
+    }
+
+    /**
+     * @test
+     * @expectedException Illuminate\Auth\Access\AuthorizationException
+     * */
+    public function user_without_permission_cant_create_new_task()
+    {
+        $task = factory(\App\Models\Task::class)->make();
+        $permission = Permission::create(['name' => 'create task.' . $task->taskable_type . '->' . $task->taskable_id]);
+        $user = factory(\App\Models\User::class)->create();
+
+        $this->actingAs($this->user)->post('/tasks', [
             'name'          => $task->name,
             'assigned_to'   => $task->assigned_to,
             'notes'         => $task->notes,
@@ -113,10 +137,6 @@ class TaskTest extends TestCase
     public function user_without_permission_cant_delete_a_task()
     {
         $user = factory(\App\Models\User::class)->create();
-        $this->actingAs($user)->delete('/tasks/' . $this->task->id)
-             ->assertJsonFragment([
-                 'status'  => 'error',
-                 'message' => 'User does not have the right permissions',
-             ]);
+        $this->actingAs($user)->delete('/tasks/' . $this->task->id);
     }
 }

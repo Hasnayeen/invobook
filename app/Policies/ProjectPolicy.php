@@ -19,7 +19,7 @@ class ProjectPolicy
      */
     public function view(User $user, Project $project)
     {
-        return $project->members()->where('user_id', $user->id)->exists();
+        return $user->hasPermissionTo('view project->' . $project->id);
     }
 
     /**
@@ -30,6 +30,7 @@ class ProjectPolicy
      */
     public function create(User $user)
     {
+        return $user->hasPermissionTo('create project');
     }
 
     /**

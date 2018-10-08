@@ -30,7 +30,7 @@ class ProjectRepository
             'description'  => $data['description'],
             'office_id'    => $data['office_id'] ?? null,
             'team_id'      => $data['team_id'] ?? null,
-            'owner_id'     => $data['owner_id'],
+            'owner_id'     => auth()->user()->id,
         ]);
     }
 }

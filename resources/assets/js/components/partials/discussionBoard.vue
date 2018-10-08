@@ -70,9 +70,6 @@ export default {
       }
     }
   },
-  mounted () {
-    console.log('just')
-  },
   watch: {
     activeTab: 'getAllDiscussions'
   }

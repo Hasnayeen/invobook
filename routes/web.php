@@ -31,9 +31,9 @@ Route::group(['middleware' => 'auth'], function () {
         return abort(404);
     });
 
-    Route::post('projects', 'ProjectController@store')->middleware('permission:create project');
+    Route::post('projects', 'ProjectController@store')->middleware('can:create,App\Models\Project');
 
-    Route::get('projects/{project}', 'ProjectController@show')->middleware('granular.permission:view project->');
+    Route::get('projects/{project}', 'ProjectController@show')->middleware('can:view,project');
 
     /**********************************
         Team
@@ -43,9 +43,9 @@ Route::group(['middleware' => 'auth'], function () {
         return abort(404);
     });
 
-    Route::post('teams', 'TeamController@store');
+    Route::post('teams', 'TeamController@store')->middleware('can:create,App\Models\Team');
 
-    Route::get('teams/{team}', 'TeamController@show')->middleware('granular.permission:view team->');
+    Route::get('teams/{team}', 'TeamController@show')->middleware('can:view,team');
 
     /**********************************
      Office
@@ -55,9 +55,9 @@ Route::group(['middleware' => 'auth'], function () {
         return abort(404);
     });
 
-    Route::post('offices', 'OfficeController@store');
+    Route::post('offices', 'OfficeController@store')->middleware('can:create,App\Models\Office');
 
-    Route::get('offices/{office}', 'OfficeController@show');
+    Route::get('offices/{office}', 'OfficeController@show')->middleware('can:view,office');
 
     /**********************************
         Member
@@ -73,7 +73,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('discussions', 'DiscussionController@index');
 
-    Route::post('discussions', 'DiscussionController@store');
+    Route::post('discussions', 'DiscussionController@store')->middleware('can:create,App\Models\Discussion');
 
     Route::get('discussions/{discussion}', 'DiscussionController@index');
 
@@ -105,7 +105,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('tasks', 'TaskController@index');
 
-    Route::post('tasks', ['as' => 'tasks.store', 'uses' => 'TaskController@store']);
+    Route::post('tasks', 'TaskController@store')->middleware('can:create,App\Models\Task');
 
     Route::get('tasks/{task}', 'TaskController@show');
 

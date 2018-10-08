@@ -29,6 +29,7 @@ class TaskPolicy
      */
     public function create(User $user)
     {
+        return $user->hasPermissionTo('create task.' . request()->input('taskable_type') . '->' . request()->input('taskable_id'));
     }
 
     /**

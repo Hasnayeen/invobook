@@ -22,9 +22,9 @@ class OfficeRepository
     /**
      * @return mixed
      */
-    public function getLatestThreeOffice()
+    public function getLatestOffices($total)
     {
-        return $this->model->orderBy('created_at', 'desc')->take(3)->get();
+        return $this->model->orderBy('created_at', 'desc')->take($total)->get();
     }
 
     public function store($data)
