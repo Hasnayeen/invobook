@@ -5,6 +5,7 @@
 [![Laravel Version](https://img.shields.io/badge/Laravel-5.6-brightgreen.svg?style=flat)](https://github.com/laravel/laravel)
 [![VueJS Version](https://img.shields.io/badge/vue-2.5.13-brightgreen.svg?style=flat)](https://github.com/vuejs/vue)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e52feb1563874cd19bc1ffbff32aa567)](https://www.codacy.com/app/Hasnayeen/goodwork)
+[![Scrutinizer](https://scrutinizer-ci.com/g/iluminar/goodwork/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/iluminar/goodwork)
 [![StyleCI](https://styleci.io/repos/81873619/shield?branch=dev&style=flat)](https://styleci.io/repos/81873619)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 

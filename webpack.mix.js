@@ -24,7 +24,7 @@ mix.js('resources/assets/js/pages/auth/login.js', 'public/js/auth').minify('publ
   .js('resources/assets/js/pages/users/profile.js', 'public/js/users').minify('public/js/users/profile.js')
   .js('resources/assets/js/pages/admin/index.js', 'public/js/admin').minify('public/js/admin/index.js')
   .js('resources/assets/js/pages/home.js', 'public/js').minify('public/js/home.js')
-  .extract(['vue', 'axios'])
+  .extract(['vue', 'axios', 'luxon'])
   .version()
 
 // Full API
@@ -35,7 +35,10 @@ mix.js('resources/assets/js/pages/auth/login.js', 'public/js/auth').minify('publ
 // mix.combine(files, destination);
 // mix.copy(from, to);
 // mix.minify(file);
-mix.sourceMaps() // Enable sourcemaps
+mix.minify('public/js/vendor.js')
+if (!mix.inProduction()) {
+  mix.sourceMaps() // Enable sourcemaps
+}
 // mix.version(); // Enable versioning.
 mix.disableNotifications()
 // mix.setPublicPath('path/to/public'); <-- Useful for Node apps.

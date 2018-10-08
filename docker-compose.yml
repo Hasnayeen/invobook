@@ -13,7 +13,7 @@ services:
       - php
     depends_on:
       - php
-    restart: always
+    restart: unless-stopped
 
   php:
     build:
@@ -63,6 +63,7 @@ services:
     volumes:
       - ./laravel-echo-server.json:/usr/src/app/laravel-echo-server.json
       - ./:/var/www
+      - "${SSL_CERT_DIR}:/etc/ssl/certs"
     working_dir: /usr/src/app
     command: bash -c "npm install -g laravel-echo-server && /usr/local/lib/node_modules/laravel-echo-server/bin/server.js start"
     depends_on:

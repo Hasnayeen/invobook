@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Project;
+use Spatie\Permission\Models\Permission;
 
 class ProjectTest extends TestCase
 {
@@ -15,12 +16,33 @@ class ProjectTest extends TestCase
     }
 
     /** @test */
-    public function owner_can_create_project()
+    public function user_with_permission_can_see_project_page()
+    {
+        $this->user_with_permission_can_create_project();
+        $id = Project::where('name', 'New Project')->first()->id;
+
+        $this->actingAs($this->user)->get('projects/' . $id)->assertSee('New Project');
+    }
+
+    /**
+     * @expectedException Illuminate\Auth\Access\AuthorizationException
+     * @test
+    */
+    public function user_without_permission_cant_see_project_page()
+    {
+        $user = factory(\App\Models\User::class)->create();
+        $this->user_with_permission_can_create_project();
+        $id = Project::where('name', 'New Project')->first()->id;
+
+        $this->actingAs($user)->get('projects/' . $id)->assertSee('New Project');
+    }
+
+    /** @test */
+    public function user_with_permission_can_create_project()
     {
         $this->actingAs($this->user)->post('projects', [
             'name'        => 'New Project',
             'description' => 'Description for new project',
-            'owner_id'    => $this->user->id,
         ])->assertJsonFragment([
             'status' => 'success',
             'name'   => 'New Project',
@@ -33,9 +55,25 @@ class ProjectTest extends TestCase
         $this->assertTrue($this->user->hasPermissionTo('delete project->' . $id));
     }
 
+    /**
+     * @test
+     * @expectedException Illuminate\Auth\Access\AuthorizationException
+     * */
+    public function user_without_permission_cant_create_project()
+    {
+        $user = factory('App\Models\User')->create();
+
+        $this->actingAs($user)->post('projects', [
+            'name'        => 'New Project',
+            'description' => 'Description for new project',
+        ]);
+    }
+
     /** @test */
     public function add_user_to_project()
     {
+        Permission::create(['name' => 'view project->' . $this->project->id]);
+
         $user = factory('App\Models\User')->create();
         $this->actingAs($this->user)->post('/members', [
             'user_id'       => $user->id,

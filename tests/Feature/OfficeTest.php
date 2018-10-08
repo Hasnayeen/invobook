@@ -14,7 +14,29 @@ class OfficeTest extends TestCase
     }
 
     /** @test */
-    public function owner_can_create_office()
+    public function user_with_permission_can_see_office_page()
+    {
+        $this->user_with_permission_can_create_office();
+        $id = Office::where('name', 'New Office')->first()->id;
+
+        $this->actingAs($this->user)->get('offices/' . $id)->assertSee('New Office');
+    }
+
+    /**
+     * @expectedException Illuminate\Auth\Access\AuthorizationException
+     * @test
+    */
+    public function user_without_permission_cant_see_office_page()
+    {
+        $user = factory(\App\Models\User::class)->create();
+        $this->user_with_permission_can_create_office();
+        $id = Office::where('name', 'New Office')->first()->id;
+
+        $this->actingAs($user)->get('offices/' . $id)->assertSee('New Office');
+    }
+
+    /** @test */
+    public function user_with_permission_can_create_office()
     {
         $this->actingAs($this->user)->post('offices', [
             'name'        => 'New Office',
@@ -30,5 +52,19 @@ class OfficeTest extends TestCase
         $this->assertTrue($this->user->hasPermissionTo('view office->' . $id));
         $this->assertTrue($this->user->hasPermissionTo('edit office->' . $id));
         $this->assertTrue($this->user->hasPermissionTo('delete office->' . $id));
+    }
+
+    /**
+     * @expectedException Illuminate\Auth\Access\AuthorizationException
+     * @test
+    */
+    public function user_without_permission_cant_create_office()
+    {
+        $user = factory(\App\Models\User::class)->create();
+
+        $this->actingAs($user)->post('/offices', [
+            'name'        => 'New Office',
+            'description' => 'Office of all new members',
+        ]);
     }
 }

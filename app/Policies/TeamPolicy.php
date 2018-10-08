@@ -19,7 +19,7 @@ class TeamPolicy
      */
     public function view(User $user, Team $team)
     {
-        return $team->members()->where('user_id', $user->id)->exists();
+        return $user->hasPermissionTo('view team->' . $team->id);
     }
 
     /**
@@ -30,6 +30,7 @@ class TeamPolicy
      */
     public function create(User $user)
     {
+        return $user->hasPermissionTo('create team');
     }
 
     /**

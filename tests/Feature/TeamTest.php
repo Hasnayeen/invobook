@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Models\Team;
+use Spatie\Permission\Models\Permission;
 
 class TeamTest extends TestCase
 {
@@ -14,16 +15,29 @@ class TeamTest extends TestCase
     }
 
     /** @test */
-    public function user_can_see_team_page()
+    public function user_with_permission_can_see_team_page()
     {
-        $this->admin_can_create_team();
+        $this->user_with_permission_can_create_team();
         $id = Team::where('name', 'New Team')->first()->id;
 
         $this->actingAs($this->user)->get('teams/' . $id)->assertSee('New Team');
     }
 
+    /**
+     * @expectedException Illuminate\Auth\Access\AuthorizationException
+     * @test
+    */
+    public function user_without_permission_cant_see_team_page()
+    {
+        $user = factory(\App\Models\User::class)->create();
+        $this->user_with_permission_can_create_team();
+        $id = Team::where('name', 'New Team')->first()->id;
+
+        $this->actingAs($user)->get('teams/' . $id)->assertSee('New Team');
+    }
+
     /** @test */
-    public function admin_can_create_team()
+    public function user_with_permission_can_create_team()
     {
         $this->actingAs($this->user)->post('/teams', [
             'name'        => 'New Team',
@@ -42,9 +56,25 @@ class TeamTest extends TestCase
         $this->assertTrue($this->user->hasPermissionTo('delete team->' . $id));
     }
 
+    /**
+     * @expectedException Illuminate\Auth\Access\AuthorizationException
+     * @test
+    */
+    public function user_without_permission_cant_create_team()
+    {
+        $user = factory(\App\Models\User::class)->create();
+
+        $this->actingAs($user)->post('/teams', [
+            'name'        => 'New Team',
+            'description' => 'Team of all new members',
+        ]);
+    }
+
     /** @test */
     public function add_user_to_team()
     {
+        Permission::create(['name' => 'view team->' . $this->team->id]);
+
         $user = factory('App\Models\User')->create();
         $this->actingAs($this->user)->post('/members', [
             'user_id'       => $user->id,

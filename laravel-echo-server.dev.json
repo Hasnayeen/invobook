@@ -17,11 +17,11 @@
 			"databasePath": "/database/laravel-echo-server.sqlite"
 		}
 	},
-	"devMode": false,
+	"devMode": true,
 	"host": "",
 	"port": "6001",
-	"protocol": "https",
+	"protocol": "http",
 	"socketio": {},
-	"sslCertPath": "/etc/ssl/certs/goodworkfor.life.crt",
-	"sslKeyPath": "/etc/ssl/certs/goodworkfor.life.key"
+	"sslCertPath": "",
+	"sslKeyPath": ""
 }

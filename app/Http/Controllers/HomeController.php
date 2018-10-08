@@ -2,26 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\OfficeService;
 use App\Repositories\TeamRepository;
+use App\Repositories\OfficeRepository;
 use App\Repositories\ProjectRepository;
 
 class HomeController extends Controller
 {
     protected $projectRepository;
     protected $teamRepository;
-    protected $officeService;
+    protected $officeRepository;
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct(ProjectRepository $projectRepository, TeamRepository $teamRepository, OfficeService $officeService)
+    public function __construct(ProjectRepository $projectRepository, TeamRepository $teamRepository, OfficeRepository $officeRepository)
     {
         $this->projectRepository = $projectRepository;
         $this->teamRepository = $teamRepository;
-        $this->officeService = $officeService;
+        $this->officeRepository = $officeRepository;
     }
 
     /**
@@ -31,9 +26,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $projects = $this->projectRepository->getLatestProjects(5);
-        $teams = $this->teamRepository->getLatestTeams(5);
-        $offices = $this->officeService->getLatestThreeOffice();
+        $projects = $this->projectRepository->getLatestProjects(10);
+        $teams = $this->teamRepository->getLatestTeams(10);
+        $offices = $this->officeRepository->getLatestOffices(10);
         $projects->load('members');
         $teams->load('members');
         $offices->load('members');

@@ -34,6 +34,11 @@ class TeamRepository
 
     public function createNewTeam($data)
     {
-        return $this->model->create($data);
+        return $this->model->create([
+            'name'         => $data['name'],
+            'description'  => $data['description'],
+            'office_id'    => $data['office_id'] ?? null,
+            'owner_id'     => auth()->user()->id,
+        ]);
     }
 }
