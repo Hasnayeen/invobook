@@ -20,7 +20,7 @@ class UserRegistrationTest extends TestCase
         event(new Registered($user));
 
         $this->assertDatabaseHas('activity_log', [
-            'causer_id' => $user->getKey(),
+            'causer_id'   => $user->getKey(),
             'causer_type' => get_class($user),
             'description' => 'User John Doe has registered',
         ]);
