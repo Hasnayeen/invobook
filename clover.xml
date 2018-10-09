@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1539104862">
-  <project timestamp="1539104862">
+<coverage generated="1539106036">
+  <project timestamp="1539106036">
     <package name="App\Console">
       <file name="/home/user/projects/php/sites/goodwork/app/Console/Kernel.php">
         <class name="App\Console\Kernel" namespace="App\Console">
           <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="6" coveredelements="6"/>
         </class>
-        <line num="24" type="method" name="schedule" visibility="protected" complexity="1" crap="1" count="41"/>
-        <line num="28" type="stmt" count="41"/>
-        <line num="35" type="method" name="commands" visibility="protected" complexity="1" crap="1" count="41"/>
-        <line num="37" type="stmt" count="41"/>
-        <line num="38" type="stmt" count="41"/>
-        <line num="39" type="stmt" count="41"/>
+        <line num="24" type="method" name="schedule" visibility="protected" complexity="1" crap="1" count="42"/>
+        <line num="28" type="stmt" count="42"/>
+        <line num="35" type="method" name="commands" visibility="protected" complexity="1" crap="1" count="42"/>
+        <line num="37" type="stmt" count="42"/>
+        <line num="38" type="stmt" count="42"/>
+        <line num="39" type="stmt" count="42"/>
         <metrics loc="40" ncloc="20" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="6" coveredelements="6"/>
       </file>
     </package>
@@ -658,6 +658,23 @@
         <metrics loc="36" ncloc="26" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="4" coveredelements="4"/>
       </file>
     </package>
+    <package name="App\Listeners">
+      <file name="/home/user/projects/php/sites/goodwork/app/Listeners/LogUserRegistration.php">
+        <class name="App\Listeners\LogUserRegistration" namespace="App\Listeners">
+          <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="9" coveredelements="9"/>
+        </class>
+        <line num="18" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="20" type="stmt" count="1"/>
+        <line num="21" type="stmt" count="1"/>
+        <line num="26" type="method" name="handle" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="28" type="stmt" count="1"/>
+        <line num="29" type="stmt" count="1"/>
+        <line num="30" type="stmt" count="1"/>
+        <line num="31" type="stmt" count="1"/>
+        <line num="32" type="stmt" count="1"/>
+        <metrics loc="33" ncloc="24" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="9" coveredelements="9"/>
+      </file>
+    </package>
     <package name="App\Mail">
       <file name="/home/user/projects/php/sites/goodwork/app/Mail/SendInvitationToRegister.php">
         <class name="App\Mail\SendInvitationToRegister" namespace="App\Mail">
@@ -967,64 +984,64 @@
         <class name="App\Providers\AppServiceProvider" namespace="App\Providers">
           <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="6" coveredelements="6"/>
         </class>
-        <line num="15" type="method" name="boot" visibility="public" complexity="1" crap="1" count="41"/>
-        <line num="17" type="stmt" count="41"/>
-        <line num="18" type="stmt" count="41"/>
-        <line num="25" type="stmt" count="41"/>
-        <line num="32" type="method" name="register" visibility="public" complexity="1" crap="1" count="41"/>
-        <line num="34" type="stmt" count="41"/>
+        <line num="15" type="method" name="boot" visibility="public" complexity="1" crap="1" count="42"/>
+        <line num="17" type="stmt" count="42"/>
+        <line num="18" type="stmt" count="42"/>
+        <line num="25" type="stmt" count="42"/>
+        <line num="32" type="method" name="register" visibility="public" complexity="1" crap="1" count="42"/>
+        <line num="34" type="stmt" count="42"/>
         <metrics loc="35" ncloc="25" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="6" coveredelements="6"/>
       </file>
       <file name="/home/user/projects/php/sites/goodwork/app/Providers/AuthServiceProvider.php">
         <class name="App\Providers\AuthServiceProvider" namespace="App\Providers">
           <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
         </class>
-        <line num="27" type="method" name="boot" visibility="public" complexity="1" crap="1" count="41"/>
-        <line num="29" type="stmt" count="41"/>
-        <line num="30" type="stmt" count="41"/>
+        <line num="27" type="method" name="boot" visibility="public" complexity="1" crap="1" count="42"/>
+        <line num="29" type="stmt" count="42"/>
+        <line num="30" type="stmt" count="42"/>
         <metrics loc="31" ncloc="21" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
       </file>
       <file name="/home/user/projects/php/sites/goodwork/app/Providers/BroadcastServiceProvider.php">
         <class name="App\Providers\BroadcastServiceProvider" namespace="App\Providers">
           <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
         </class>
-        <line num="15" type="method" name="boot" visibility="public" complexity="1" crap="1" count="41"/>
-        <line num="17" type="stmt" count="41"/>
-        <line num="19" type="stmt" count="41"/>
-        <line num="20" type="stmt" count="41"/>
+        <line num="15" type="method" name="boot" visibility="public" complexity="1" crap="1" count="42"/>
+        <line num="17" type="stmt" count="42"/>
+        <line num="19" type="stmt" count="42"/>
+        <line num="20" type="stmt" count="42"/>
         <metrics loc="21" ncloc="16" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
       </file>
       <file name="/home/user/projects/php/sites/goodwork/app/Providers/EventServiceProvider.php">
         <class name="App\Providers\EventServiceProvider" namespace="App\Providers">
           <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
         </class>
-        <line num="26" type="method" name="boot" visibility="public" complexity="1" crap="1" count="41"/>
-        <line num="28" type="stmt" count="41"/>
-        <line num="29" type="stmt" count="41"/>
-        <metrics loc="30" ncloc="20" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
+        <line num="27" type="method" name="boot" visibility="public" complexity="1" crap="1" count="42"/>
+        <line num="29" type="stmt" count="42"/>
+        <line num="30" type="stmt" count="42"/>
+        <metrics loc="31" ncloc="21" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
       </file>
       <file name="/home/user/projects/php/sites/goodwork/app/Providers/RouteServiceProvider.php">
         <class name="App\Providers\RouteServiceProvider" namespace="App\Providers">
           <metrics complexity="4" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="14" elements="18" coveredelements="18"/>
         </class>
-        <line num="24" type="method" name="boot" visibility="public" complexity="1" crap="1" count="41"/>
-        <line num="26" type="stmt" count="41"/>
-        <line num="27" type="stmt" count="41"/>
-        <line num="34" type="method" name="map" visibility="public" complexity="1" crap="1" count="41"/>
-        <line num="36" type="stmt" count="41"/>
-        <line num="38" type="stmt" count="41"/>
-        <line num="39" type="stmt" count="41"/>
-        <line num="48" type="method" name="mapWebRoutes" visibility="protected" complexity="1" crap="1" count="41"/>
-        <line num="50" type="stmt" count="41"/>
-        <line num="51" type="stmt" count="41"/>
-        <line num="52" type="stmt" count="41"/>
-        <line num="53" type="stmt" count="41"/>
-        <line num="62" type="method" name="mapApiRoutes" visibility="protected" complexity="1" crap="1" count="41"/>
-        <line num="64" type="stmt" count="41"/>
-        <line num="65" type="stmt" count="41"/>
-        <line num="66" type="stmt" count="41"/>
-        <line num="67" type="stmt" count="41"/>
-        <line num="68" type="stmt" count="41"/>
+        <line num="24" type="method" name="boot" visibility="public" complexity="1" crap="1" count="42"/>
+        <line num="26" type="stmt" count="42"/>
+        <line num="27" type="stmt" count="42"/>
+        <line num="34" type="method" name="map" visibility="public" complexity="1" crap="1" count="42"/>
+        <line num="36" type="stmt" count="42"/>
+        <line num="38" type="stmt" count="42"/>
+        <line num="39" type="stmt" count="42"/>
+        <line num="48" type="method" name="mapWebRoutes" visibility="protected" complexity="1" crap="1" count="42"/>
+        <line num="50" type="stmt" count="42"/>
+        <line num="51" type="stmt" count="42"/>
+        <line num="52" type="stmt" count="42"/>
+        <line num="53" type="stmt" count="42"/>
+        <line num="62" type="method" name="mapApiRoutes" visibility="protected" complexity="1" crap="1" count="42"/>
+        <line num="64" type="stmt" count="42"/>
+        <line num="65" type="stmt" count="42"/>
+        <line num="66" type="stmt" count="42"/>
+        <line num="67" type="stmt" count="42"/>
+        <line num="68" type="stmt" count="42"/>
         <metrics loc="69" ncloc="38" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="14" elements="18" coveredelements="18"/>
       </file>
     </package>
@@ -1198,6 +1215,6 @@
       <line num="61" type="stmt" count="19"/>
       <metrics loc="62" ncloc="49" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="29" coveredstatements="26" elements="29" coveredelements="26"/>
     </file>
-    <metrics files="86" loc="2898" ncloc="2255" classes="66" methods="160" coveredmethods="84" conditionals="0" coveredconditionals="0" statements="496" coveredstatements="303" elements="656" coveredelements="387"/>
+    <metrics files="87" loc="2932" ncloc="2280" classes="67" methods="162" coveredmethods="86" conditionals="0" coveredconditionals="0" statements="503" coveredstatements="310" elements="665" coveredelements="396"/>
   </project>
 </coverage>
