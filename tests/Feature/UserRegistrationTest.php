@@ -25,5 +25,4 @@ class UserRegistrationTest extends TestCase
             'description' => 'User John Doe has registered',
         ]);
     }
-
 }
