@@ -15,7 +15,7 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         Registered::class => [
-            LogUserRegistration::class
+            LogUserRegistration::class,
         ],
     ];
 
