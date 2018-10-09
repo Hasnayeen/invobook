@@ -4,6 +4,8 @@
 
 ### Added
 - Added `Quill` rich text editor on discussion section ([issue-165](https://github.com/iluminar/goodwork/issues/165))
+- Added Discussion create form
+- Added Discussion details modal on Discussion Board section ([issue-40](https://github.com/iluminar/goodwork/issues/40))
 
 ## v0.6 (2018-10-04)
 

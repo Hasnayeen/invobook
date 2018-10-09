@@ -64,7 +64,12 @@
       "axios",
       "luxon",
       "Laravel",
-      "Echo"
+      "Echo",
+      "describe",
+      "test",
+      "expect",
+      "jest",
+      "it"
     ]
   }
 }
