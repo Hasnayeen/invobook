@@ -30,5 +30,4 @@ class LogUserRegistration
             ->performedOn($event->user)
             ->log('User ' . $event->user->name . ' has registered');
     }
-
 }
