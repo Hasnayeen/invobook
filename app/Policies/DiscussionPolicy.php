@@ -3,7 +3,7 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\AppModelsDiscussion;
+use App\Models\Discussion;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class DiscussionPolicy
@@ -13,11 +13,11 @@ class DiscussionPolicy
     /**
      * Determine whether the user can view the app models discussion.
      *
-     * @param  \App\Models\User         $user
-     * @param  \App\AppModelsDiscussion $appModelsDiscussion
+     * @param  \App\Models\User       $user
+     * @param  \App\Models\Discussion $discussion
      * @return mixed
      */
-    public function view(User $user, AppModelsDiscussion $appModelsDiscussion)
+    public function view(User $user, Discussion $discussion)
     {
     }
 
@@ -35,44 +35,44 @@ class DiscussionPolicy
     /**
      * Determine whether the user can update the app models discussion.
      *
-     * @param  \App\Models\User         $user
-     * @param  \App\AppModelsDiscussion $appModelsDiscussion
+     * @param  \App\Models\User       $user
+     * @param  \App\Models\Discussion $discussion
      * @return mixed
      */
-    public function update(User $user, AppModelsDiscussion $appModelsDiscussion)
+    public function update(User $user, Discussion $discussion)
     {
     }
 
     /**
      * Determine whether the user can delete the app models discussion.
      *
-     * @param  \App\Models\User         $user
-     * @param  \App\AppModelsDiscussion $appModelsDiscussion
+     * @param  \App\Models\User       $user
+     * @param  \App\Models\Discussion $discussion
      * @return mixed
      */
-    public function delete(User $user, AppModelsDiscussion $appModelsDiscussion)
+    public function delete(User $user, Discussion $discussion)
     {
     }
 
     /**
      * Determine whether the user can restore the app models discussion.
      *
-     * @param  \App\Models\User         $user
-     * @param  \App\AppModelsDiscussion $appModelsDiscussion
+     * @param  \App\Models\User       $user
+     * @param  \App\Models\Discussion $discussion
      * @return mixed
      */
-    public function restore(User $user, AppModelsDiscussion $appModelsDiscussion)
+    public function restore(User $user, Discussion $discussion)
     {
     }
 
     /**
      * Determine whether the user can permanently delete the app models discussion.
      *
-     * @param  \App\Models\User         $user
-     * @param  \App\AppModelsDiscussion $appModelsDiscussion
+     * @param  \App\Models\User       $user
+     * @param  \App\Models\Discussion $discussion
      * @return mixed
      */
-    public function forceDelete(User $user, AppModelsDiscussion $appModelsDiscussion)
+    public function forceDelete(User $user, Discussion $discussion)
     {
     }
 }
