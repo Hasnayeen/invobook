@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CommentController;
+
 Route::get('login', 'Auth\LoginController@showLoginForm');
 
 Route::post('login', 'Auth\LoginController@login');
@@ -78,6 +80,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('discussions/{discussion}', 'DiscussionController@index');
 
     Route::get('categories', 'CategoryController@index');
+
+    Route::post('discussions/{discussion}/comments', 'CommentController@store');
 
     /**********************************
         Messages
