@@ -95,7 +95,7 @@ class MemberTest extends TestCase
                 'name'      => $this->user->name,
                 'username'  => $this->user->username,
                 'avatar'    => $this->user->avatar,
-            ]
+            ],
         ]);
 
         Notification::assertSentTo(
