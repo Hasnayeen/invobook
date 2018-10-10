@@ -645,7 +645,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],[\"env\",{\"modules\":false}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/partials/teams.vue":
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],[\"env\",{\"modules\":false}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/partials/team.vue":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -674,6 +674,54 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['details'],
+    data: function data() {
+        return {
+            team: this.details,
+            dropdownMenuShown: false
+        };
+    },
+
+    methods: {
+        toggleMenu: function toggleMenu() {
+            this.dropdownMenuShown = !this.dropdownMenuShown;
+        },
+        deleteTeam: function deleteTeam(team) {
+            var _this = this;
+
+            axios.delete('/teams/' + team.id).then(function (response) {
+                _this.$emit('deleted');
+
+                _this.dropdownMenuShown = false;
+
+                EventBus.$emit('notification', response.data.message, response.data.status);
+            }).catch(function (error) {
+                _this.dropdownMenuShown = false;
+
+                EventBus.$emit('notification', error.response.data.message, error.response.data.status);
+            });
+        }
+    }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],[\"env\",{\"modules\":false}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/partials/teams.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__team__ = __webpack_require__("./resources/assets/js/components/partials/team.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__team___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__team__);
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -705,7 +753,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: { team: __WEBPACK_IMPORTED_MODULE_0__team___default.a },
   data: function (_data) {
     function data() {
       return _data.apply(this, arguments);
@@ -724,7 +775,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }),
       showCreateTeamForm: false,
       name: '',
-      description: ''
+      description: '',
+      dropdownMenuShown: false
     };
   }),
   props: {
@@ -757,6 +809,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         console.log(error);
         _this.showCreateTeamForm = false;
       });
+    },
+    deleteTeam: function deleteTeam(index) {
+      this.teams.splice(index, 1);
     }
   }
 });
@@ -2343,6 +2398,128 @@ if (false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-0f0091b3\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/partials/team.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass:
+        "relative bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center items-center text-center rounded m-4"
+    },
+    [
+      _c(
+        "span",
+        { staticClass: "w-full h-8 pr-4 pt-2", on: { click: _vm.toggleMenu } },
+        [
+          _c("i", {
+            staticClass:
+              "fa fa-ellipsis-h float-right text-grey-darker cursor-pointer"
+          })
+        ]
+      ),
+      _vm._v(" "),
+      _vm.dropdownMenuShown
+        ? _c(
+            "div",
+            {
+              staticClass:
+                "absolute rounded shadow-lg pin-r pin-t mt-4 mr-2 p-4 text-grey-darker"
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "cursor-pointer",
+                  on: {
+                    click: function($event) {
+                      _vm.deleteTeam(_vm.team)
+                    }
+                  }
+                },
+                [_vm._v("\n            Delete\n        ")]
+              )
+            ]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _c("div", { staticClass: "w-full p-2 h-24 flex flex-col justify-end" }, [
+        _c(
+          "a",
+          {
+            staticClass: "text-pink text-xl no-underline",
+            attrs: { href: _vm.team.url }
+          },
+          [_vm._v(_vm._s(_vm.team.name))]
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "span",
+        { staticClass: "text-grey text-sm w-full px-2 h-16 self-start" },
+        [_vm._v(_vm._s(_vm.team.description))]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass:
+            "border-t w-full h-16 flex flex-row justify-around items-center px-2"
+        },
+        [
+          _vm._l(_vm.team.members, function(member, index) {
+            return index < 5
+              ? _c(
+                  "a",
+                  { key: index, attrs: { href: "/users/" + member.username } },
+                  [
+                    _c("img", {
+                      staticClass: "rounded-full w-8 h-8 mr-1",
+                      attrs: { src: _vm.generateUrl(member.avatar) }
+                    })
+                  ]
+                )
+              : _vm._e()
+          }),
+          _vm._v(" "),
+          _vm.team.members.length > 5
+            ? _c(
+                "span",
+                {
+                  staticClass:
+                    "bg-grey-lighter border-teal border p-2 rounded-full"
+                },
+                [_vm._v(_vm._s(_vm.team.members.length - 5) + "+")]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.team.members.length < 1
+            ? _c("span", { staticClass: "text-grey-dark text-center" }, [
+                _vm._v("No members yet")
+              ])
+            : _vm._e()
+        ],
+        2
+      )
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-0f0091b3", module.exports)
+  }
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-2fb2ca65\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/partials/activity.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2687,103 +2864,23 @@ var render = function() {
           ]
         ),
         _vm._v(" "),
-        _vm._l(_vm.teams, function(team) {
-          return _c(
-            "div",
-            {
-              staticClass:
-                "bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center items-center text-center rounded m-4"
-            },
-            [
-              _vm._m(0, true),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "w-full p-2 h-24 flex flex-col justify-end" },
-                [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "text-pink text-xl no-underline",
-                      attrs: { href: team.url }
-                    },
-                    [_vm._v(_vm._s(team.name))]
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "span",
-                {
-                  staticClass: "text-grey text-sm w-full px-2 h-16 self-start"
-                },
-                [_vm._v(_vm._s(team.description))]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "border-t w-full h-16 flex flex-row justify-around items-center px-2"
-                },
-                [
-                  _vm._l(team.members, function(member, index) {
-                    return index < 5
-                      ? _c(
-                          "a",
-                          { attrs: { href: "/users/" + member.username } },
-                          [
-                            _c("img", {
-                              staticClass: "rounded-full w-8 h-8 mr-1",
-                              attrs: { src: _vm.generateUrl(member.avatar) }
-                            })
-                          ]
-                        )
-                      : _vm._e()
-                  }),
-                  _vm._v(" "),
-                  team.members.length > 5
-                    ? _c(
-                        "span",
-                        {
-                          staticClass:
-                            "bg-grey-lighter border-teal border p-2 rounded-full"
-                        },
-                        [_vm._v(_vm._s(team.members.length - 5) + "+")]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  team.members.length < 1
-                    ? _c(
-                        "span",
-                        { staticClass: "text-grey-dark text-center" },
-                        [_vm._v("No members yet")]
-                      )
-                    : _vm._e()
-                ],
-                2
-              )
-            ]
-          )
+        _vm._l(_vm.teams, function(team, index) {
+          return _c("team", {
+            key: index,
+            attrs: { details: team },
+            on: {
+              deleted: function($event) {
+                _vm.deleteTeam(index)
+              }
+            }
+          })
         })
       ],
       2
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "w-full h-8 pr-4 pt-2" }, [
-      _c("i", {
-        staticClass:
-          "fa fa-ellipsis-h float-right text-grey-darker cursor-pointer"
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -3483,6 +3580,54 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-07a94250", Component.options)
   } else {
     hotAPI.reload("data-v-07a94250", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/partials/team.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],[\"env\",{\"modules\":false}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]],\"env\":{\"test\":{\"presets\":[[\"env\",{\"targets\":{\"node\":\"current\"}}]]}}}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/partials/team.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-0f0091b3\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/partials/team.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/partials/team.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0f0091b3", Component.options)
+  } else {
+    hotAPI.reload("data-v-0f0091b3", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true

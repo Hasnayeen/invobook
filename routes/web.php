@@ -51,6 +51,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('teams/{team}', 'TeamController@show')->middleware('can:view,team');
 
+    Route::delete('teams/{team}', 'TeamController@delete')->middleware('can:delete,team');
+
     /**********************************
      Office
      **********************************/
