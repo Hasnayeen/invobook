@@ -6,6 +6,7 @@ use Tests\TestCase;
 use App\Models\User;
 use App\Models\Project;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\Notification;
 
 class ProjectTest extends TestCase
 {
@@ -72,6 +73,7 @@ class ProjectTest extends TestCase
     /** @test */
     public function add_user_to_project()
     {
+        Notification::fake();
         Permission::create(['name' => 'view project->' . $this->project->id]);
 
         $user = factory('App\Models\User')->create();
