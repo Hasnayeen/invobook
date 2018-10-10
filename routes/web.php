@@ -37,8 +37,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('projects/{project}', 'ProjectController@show')->middleware('can:view,project');
 
-    Route::post('discussions/{discussion}/comments', [CommentController::class, 'create']);
-
     /**********************************
         Team
     **********************************/
@@ -82,6 +80,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('discussions/{discussion}', 'DiscussionController@index');
 
     Route::get('categories', 'CategoryController@index');
+
+    Route::post('discussions/{discussion}/comments', 'CommentController@store');
 
     /**********************************
         Messages
