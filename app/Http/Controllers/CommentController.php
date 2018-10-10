@@ -23,8 +23,8 @@ class CommentController extends Controller
     }
 
     /**
-     * @param  Discussion $discussion
-     * @param  Request    $request
+     * @param  Discussion   $discussion
+     * @param  Request      $request
      * @return JsonResponse
      */
     public function create(Discussion $discussion, Request $request): JsonResponse

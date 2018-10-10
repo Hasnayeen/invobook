@@ -28,7 +28,7 @@ class CommentRepositoryTest extends TestCase
         $data = [
             'discussion_id' => 10,
             'user_id'       => 20,
-            'body'          => 'Testing Comment'
+            'body'          => 'Testing Comment',
         ];
 
         /** @var Comment $comment */

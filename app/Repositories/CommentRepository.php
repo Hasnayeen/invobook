@@ -21,7 +21,7 @@ class CommentRepository
     }
 
     /**
-     * @param  array $data
+     * @param  array         $data
      * @return Comment|Model
      */
     public function create(array $data): Comment

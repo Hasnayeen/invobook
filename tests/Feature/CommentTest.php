@@ -39,7 +39,7 @@ class CommentTest extends TestCase
             'status'  => 'success',
             'comment' => [
                 'discussion_id' => 1,
-                'body'          => 'Comment body'
+                'body'          => 'Comment body',
             ]
         ]);
 
