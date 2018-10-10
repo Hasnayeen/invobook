@@ -1,8 +1,5 @@
 <template>
 <div class="">
-  <notification-popup :messageType="messageType" :message="message" @close="closeNotification" :show-notification="showNotification"></notification-popup>
-
-  <!-- Create Task Form -->
   <div :class="{'hidden': !formShown}" class="absolute container mx-auto w-5/6 md:w-3/5 lg:w-2/5 bg-white rounded shadow-lg z-10" style="top: 12vh;left: 0;right: 0;">
       <div class="p-4">
         <div class="p-4">
@@ -56,18 +53,14 @@
 
 <script>
 import Datepicker from 'vuejs-datepicker'
-import NotificationPopup from '../partials/notificationPopup.vue'
 export default {
-  components: {Datepicker, NotificationPopup},
+  components: {Datepicker},
   props: ['resource', 'resourceType', 'formShown'],
   data: () => ({
     name: '',
     notes: '',
     assigned_to: null,
     related_to: '',
-    message: '',
-    messageType: '',
-    showNotification: false
   }),
   methods: {
     createTask () {
@@ -82,21 +75,17 @@ export default {
       })
         .then((response) => {
           if (response.data.status == 'success') {
-            this.message = 'New Task Created'
-            this.messageType = 'success'
-            this.showNotification = true
             this.name = ''
             this.notes = ''
             this.assigned_to = null
             this.related_to = ''
-            setTimeout(() => {
-              this.showNotification = false
-            }, 2000)
+            EventBus.$emit('notification', response.data.message, response.data.status)
             this.$emit('close', response.data.task)
           }
         })
         .catch((error) => {
-          console.log(error)
+          EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+          this.$emit('close')
         })
     },
     closeCreateTaskForm () {

@@ -30,6 +30,7 @@ class TaskTest extends TestCase
             'taskable_id'   => $task->taskable_id,
         ])->assertJsonFragment([
             'status'        => 'success',
+            'message'       => 'New task has been created',
             'name'          => $task->name,
             'assigned_to'   => $task->assigned_to,
             'notes'         => $task->notes,

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1539177224">
-  <project timestamp="1539177224">
+<coverage generated="1539183838">
+  <project timestamp="1539183838">
     <package name="App\Console">
       <file name="/home/user/projects/php/sites/goodwork/app/Console/Kernel.php">
         <class name="App\Console\Kernel" namespace="App\Console">
@@ -387,7 +387,7 @@
       </file>
       <file name="/home/user/projects/php/sites/goodwork/app/Http/Controllers/TaskController.php">
         <class name="App\Http\Controllers\TaskController" namespace="App\Http\Controllers">
-          <metrics complexity="5" methods="4" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="28" coveredstatements="25" elements="32" coveredelements="28"/>
+          <metrics complexity="5" methods="4" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="29" coveredstatements="26" elements="33" coveredelements="29"/>
         </class>
         <line num="14" type="method" name="store" visibility="public" complexity="1" crap="1" count="1"/>
         <line num="16" type="stmt" count="1"/>
@@ -403,25 +403,26 @@
         <line num="28" type="stmt" count="1"/>
         <line num="29" type="stmt" count="1"/>
         <line num="30" type="stmt" count="1"/>
-        <line num="33" type="method" name="show" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="35" type="stmt" count="1"/>
-        <line num="37" type="stmt" count="1"/>
+        <line num="31" type="stmt" count="1"/>
+        <line num="34" type="method" name="show" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="36" type="stmt" count="1"/>
         <line num="38" type="stmt" count="1"/>
         <line num="39" type="stmt" count="1"/>
-        <line num="43" type="method" name="index" visibility="public" complexity="2" crap="2.21" count="1"/>
-        <line num="46" type="stmt" count="1"/>
-        <line num="48" type="stmt" count="1"/>
+        <line num="40" type="stmt" count="1"/>
+        <line num="44" type="method" name="index" visibility="public" complexity="2" crap="2.21" count="1"/>
+        <line num="47" type="stmt" count="1"/>
         <line num="49" type="stmt" count="1"/>
         <line num="50" type="stmt" count="1"/>
         <line num="51" type="stmt" count="1"/>
-        <line num="53" type="stmt" count="0"/>
+        <line num="52" type="stmt" count="1"/>
         <line num="54" type="stmt" count="0"/>
         <line num="55" type="stmt" count="0"/>
-        <line num="61" type="method" name="delete" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="63" type="stmt" count="1"/>
-        <line num="65" type="stmt" count="1"/>
+        <line num="56" type="stmt" count="0"/>
+        <line num="62" type="method" name="delete" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="64" type="stmt" count="1"/>
         <line num="66" type="stmt" count="1"/>
-        <metrics loc="70" ncloc="70" classes="1" methods="4" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="28" coveredstatements="25" elements="32" coveredelements="28"/>
+        <line num="67" type="stmt" count="1"/>
+        <metrics loc="71" ncloc="71" classes="1" methods="4" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="29" coveredstatements="26" elements="33" coveredelements="29"/>
       </file>
       <file name="/home/user/projects/php/sites/goodwork/app/Http/Controllers/TeamController.php">
         <class name="App\Http\Controllers\TeamController" namespace="App\Http\Controllers">
@@ -1262,6 +1263,6 @@
       <line num="61" type="stmt" count="19"/>
       <metrics loc="62" ncloc="49" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="29" coveredstatements="26" elements="29" coveredelements="26"/>
     </file>
-    <metrics files="90" loc="3067" ncloc="2376" classes="70" methods="170" coveredmethods="91" conditionals="0" coveredconditionals="0" statements="524" coveredstatements="337" elements="694" coveredelements="428"/>
+    <metrics files="90" loc="3068" ncloc="2377" classes="70" methods="170" coveredmethods="91" conditionals="0" coveredconditionals="0" statements="525" coveredstatements="338" elements="695" coveredelements="429"/>
   </project>
 </coverage>
