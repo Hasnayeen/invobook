@@ -25,8 +25,9 @@ class TaskController extends Controller
         $task->load('user:id,avatar');
 
         return response()->json([
-            'status' => 'success',
-            'task'   => $task,
+            'status'  => 'success',
+            'message' => 'New task has been created',
+            'task'    => $task,
         ], 201);
     }
 
