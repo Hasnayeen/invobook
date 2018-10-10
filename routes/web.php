@@ -23,7 +23,7 @@ Route::get('register/{token}', 'Auth\RegisterController@showRegistrationForm');
 Route::post('register/{token}', 'Auth\RegisterController@confirmNewRegistration');
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
+    Route::get('/', 'HomeController@index');
 
     /**********************************
         Project
@@ -121,7 +121,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('users', 'UserController@index');
 
-    Route::get('users/{user}', 'UserController@profile');
+    Route::get('users/{user}', 'UserController@show');
 
     Route::put('users/{user}/account', 'UserAccountController@update');
 

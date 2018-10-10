@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DateTimeZone;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Repositories\UserRepository;
@@ -23,7 +24,7 @@ class UserController extends Controller
     public function sentInvitationToRegister(Request $request)
     {
         try {
-            if (! User::where('email', $request->email)->first()) {
+            if (!User::where('email', $request->email)->first()) {
                 Mail::to($request->email)
                     ->send(new SendInvitationToRegister());
 
@@ -45,10 +46,10 @@ class UserController extends Controller
         }
     }
 
-    public function profile(User $user)
+    public function show(User $user)
     {
         $user->load('projects', 'teams');
 
-        return view('users.profile', ['user' => $user]);
+        return view('users.profile', ['user' => $user, 'timezones' => DateTimeZone::listIdentifiers()]);
     }
 }
