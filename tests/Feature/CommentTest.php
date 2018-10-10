@@ -40,7 +40,7 @@ class CommentTest extends TestCase
             'comment' => [
                 'discussion_id' => 1,
                 'body'          => 'Comment body',
-            ]
+            ],
         ]);
 
         $this->assertDatabaseHas('comments', ['discussion_id' => 1, 'body' => 'Comment body']);
