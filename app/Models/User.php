@@ -43,4 +43,12 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Models\Office');
     }
+
+    /**
+     * @return HasMany
+     */
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class, 'discussion_id');
+    }
 }

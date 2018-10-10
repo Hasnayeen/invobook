@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CommentController;
+
 Route::get('login', 'Auth\LoginController@showLoginForm');
 
 Route::post('login', 'Auth\LoginController@login');
@@ -34,6 +36,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('projects', 'ProjectController@store')->middleware('can:create,App\Models\Project');
 
     Route::get('projects/{project}', 'ProjectController@show')->middleware('can:view,project');
+
+    Route::post('discussions/{discussion}/comments', [CommentController::class, 'create']);
+
 
     /**********************************
         Team
