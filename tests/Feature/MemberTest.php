@@ -3,6 +3,10 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use App\Models\Project;
+use App\Notifications\BecameNewMember;
+use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\Notification;
 
 class MemberTest extends TestCase
 {
@@ -60,5 +64,45 @@ class MemberTest extends TestCase
             'username' => $users['1']['username'],
             'username' => $users['2']['username'],
         ]);
+    }
+
+    /**
+     * @test
+     */
+    public function adding_member_to_a_group_sends_him_notification()
+    {
+        Notification::fake();
+
+        $this->actingAs($this->user);
+
+        $project = factory(Project::class)->create();
+        factory(Permission::class)->create(['name' => 'view project->' . $project->id]);
+
+        $payload = [
+            'user_id'       => $this->user->id,
+            'resource_type' => 'project',
+            'resource_id'   => $project->getKey(),
+        ];
+
+        $response = $this->post('members', $payload);
+
+        $response->assertStatus(200);
+        $response->assertJson([
+            'status'   => 'success',
+            'message'  => 'User added to the project',
+            'user'     => [
+                'id'        => $this->user->id,
+                'name'      => $this->user->name,
+                'username'  => $this->user->username,
+                'avatar'    => $this->user->avatar,
+            ],
+        ]);
+
+        $this->assertDatabaseHas('project_user', ['project_id' => $project->id, 'user_id' => $this->user->id]);
+
+        Notification::assertSentTo(
+            $this->user,
+            BecameNewMember::class
+        );
     }
 }

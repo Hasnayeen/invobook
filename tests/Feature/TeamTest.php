@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use App\Models\Team;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\Notification;
 
 class TeamTest extends TestCase
 {
@@ -73,6 +74,7 @@ class TeamTest extends TestCase
     /** @test */
     public function add_user_to_team()
     {
+        Notification::fake();
         Permission::create(['name' => 'view team->' . $this->team->id]);
 
         $user = factory('App\Models\User')->create();
