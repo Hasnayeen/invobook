@@ -65,6 +65,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('offices/{office}', 'OfficeController@show')->middleware('can:view,office');
 
+    Route::delete('offices/{office}', 'OfficeController@delete')->middleware('can:delete,office');
+
     /**********************************
         Member
      **********************************/

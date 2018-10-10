@@ -67,4 +67,33 @@ class OfficeTest extends TestCase
             'description' => 'Office of all new members',
         ]);
     }
+
+    /** @test */
+    public function user_with_permission_can_delete_a_office()
+    {
+        $this->user_with_permission_can_create_office();
+
+        $id = Office::where('name', 'New Office')->first()->id;
+
+        $this->actingAs($this->user)->delete('/offices/' . $id)
+             ->assertJsonFragment([
+                 'status'  => 'success',
+                 'message' => 'The office has been deleted',
+             ]);
+    }
+
+    /**
+     * @expectedException Illuminate\Auth\Access\AuthorizationException
+     * @test
+     */
+    public function user_without_permission_cant_delete_a_office()
+    {
+        $user = factory(\App\Models\User::class)->create();
+
+        $this->user_with_permission_can_create_office();
+
+        $id = Office::where('name', 'New Office')->first()->id;
+
+        $this->actingAs($user)->delete('offices/' . $id);
+    }
 }
