@@ -98,6 +98,8 @@ class MemberTest extends TestCase
             ],
         ]);
 
+        $this->assertDatabaseHas('project_user', ['project_id' => $project->id, 'user_id' => $this->user->id]);
+
         Notification::assertSentTo(
             $this->user,
             BecameNewMember::class
