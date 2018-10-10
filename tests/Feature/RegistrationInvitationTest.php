@@ -70,7 +70,6 @@ class RegistrationInvitationTest extends TestCase
     public function email_needs_to_be_supplied_in_request()
     {
         $this->expectException(ErrorException::class);
-        $this->expectExceptionMessage('Trying to get property \'email\' of non-object');
 
         $this->actingAs($this->user);
         $this->post(self::$endpoint, []);
