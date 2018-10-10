@@ -10,7 +10,7 @@
         </div>
       </div>
       <account v-if="activeTab === 'account'" :user="authUser"></account>
-      <own v-if="activeTab === 'profile'" :user="authUser"></own>
+      <own v-if="activeTab === 'profile'" :user="authUser" :timezones="timezones"></own>
     </template>
     <other v-else :user="user"></other>
   </div>
@@ -22,7 +22,7 @@ import Own from './own'
 import Other from './other'
 export default {
   components: {Account, Own, Other},
-  props: ['user'],
+  props: ['user', 'timezones'],
   data: () => ({
     activeTab: 'profile',
     authUser: navbar.user
