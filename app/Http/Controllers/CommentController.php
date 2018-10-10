@@ -27,7 +27,7 @@ class CommentController extends Controller
      * @param  Request      $request
      * @return JsonResponse
      */
-    public function create(Discussion $discussion, Request $request): JsonResponse
+    public function store(Discussion $discussion, Request $request): JsonResponse
     {
         $data = $request->validate([
             'body' => 'required',
