@@ -2,10 +2,10 @@
 
 namespace Tests\Feature;
 
-use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 use App\Models\User;
 use Illuminate\Http\UploadedFile;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Storage;
 
 class UserTest extends TestCase
