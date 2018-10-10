@@ -8,7 +8,7 @@
 
 Hi {{ $name }},
 
-**Goodwork** is a simple project management and collaboration tool to help everyone in {{ $company or 'a company'}} to stay organized and get work done.
+**Goodwork** is a simple project management and collaboration tool to help everyone in {{ $company ?? 'a company'}} to stay organized and get work done.
 It's simple and easy! To join click the link below:
 
 @component('mail::button', ['url' => url('register/' . $token)])
