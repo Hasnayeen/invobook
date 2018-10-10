@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\User;
 use App\Models\Project;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Spatie\Permission\Models\Permission;
 
 class ProjectPolicy
 {
@@ -53,6 +54,7 @@ class ProjectPolicy
      */
     public function delete(User $user, Project $project)
     {
+        return $user->hasPermissionTo('delete project->' . $project->id);
     }
 
     /**

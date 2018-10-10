@@ -37,6 +37,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('projects/{project}', 'ProjectController@show')->middleware('can:view,project');
 
+    Route::delete('projects/{project}', 'ProjectController@delete')->middleware('can:delete,project');
+
     /**********************************
         Team
     **********************************/
