@@ -27,7 +27,7 @@ class CommentTest extends TestCase
      */
     public function user_can_create_comment()
     {
-        $this->actingAs(factory(User::class)->create());
+        $this->actingAs($this->user);
 
         $response = $this->post(
             self::$endpoint,
@@ -64,7 +64,7 @@ class CommentTest extends TestCase
      */
     public function user_can_not_create_comment_for_not_existing_discussion()
     {
-        $this->actingAs(factory(User::class)->create());
+        $this->actingAs($this->user);
 
         $this->expectException(ModelNotFoundException::class);
         $response = $this->post(
@@ -80,7 +80,7 @@ class CommentTest extends TestCase
      */
     public function body_attribute_is_required()
     {
-        $this->actingAs(factory(User::class)->create());
+        $this->actingAs($this->user);
 
         $this->expectException(ValidationException::class);
 
