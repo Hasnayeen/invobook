@@ -5,7 +5,7 @@
         <label class="block text-grey-darker text-sm font-bold mb-2" for="username">
           Email
         </label>
-        <input v-model="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="email" type="email" placeholder="john@example.com">
+        <input v-model="user.email" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="email" type="email" placeholder="john@example.com">
         <div v-if="errorMessage.email" class="text-red text-base pt-2">
           {{ errorMessage.email }}
         </div>
