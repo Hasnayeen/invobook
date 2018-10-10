@@ -2,9 +2,9 @@
 
 namespace Tests\Unit\Repositories;
 
+use Tests\TestCase;
 use App\Models\Comment;
 use App\Repositories\CommentRepository;
-use Tests\TestCase;
 
 class CommentRepositoryTest extends TestCase
 {
@@ -27,8 +27,8 @@ class CommentRepositoryTest extends TestCase
     {
         $data = [
             'discussion_id' => 10,
-            'user_id' => 20,
-            'body' => 'Testing Comment'
+            'user_id'       => 20,
+            'body'          => 'Testing Comment'
         ];
 
         /** @var Comment $comment */

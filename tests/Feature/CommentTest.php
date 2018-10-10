@@ -2,12 +2,12 @@
 
 namespace Tests\Feature;
 
-use App\Models\Discussion;
-use App\Models\User;
-use Illuminate\Auth\AuthenticationException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Validation\ValidationException;
 use Tests\TestCase;
+use App\Models\User;
+use App\Models\Discussion;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class CommentTest extends TestCase
 {
@@ -36,10 +36,10 @@ class CommentTest extends TestCase
 
         $response->assertStatus(201);
         $response->assertJson([
-            'status' => 'success',
+            'status'  => 'success',
             'comment' => [
                 'discussion_id' => 1,
-                'body' => 'Comment body'
+                'body'          => 'Comment body'
             ]
         ]);
 

@@ -39,7 +39,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('discussions/{discussion}/comments', [CommentController::class, 'create']);
 
-
     /**********************************
         Team
     **********************************/

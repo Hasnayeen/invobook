@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Discussion;
-use App\Repositories\CommentRepository;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use App\Repositories\CommentRepository;
 
 class CommentController extends Controller
 {
@@ -23,8 +23,8 @@ class CommentController extends Controller
     }
 
     /**
-     * @param Discussion $discussion
-     * @param Request $request
+     * @param  Discussion $discussion
+     * @param  Request    $request
      * @return JsonResponse
      */
     public function create(Discussion $discussion, Request $request): JsonResponse
@@ -36,7 +36,7 @@ class CommentController extends Controller
         $data = array_merge($data, ['discussion_id' => $discussion->id, 'user_id' => auth()->user()->id]);
 
         return response()->json([
-                'status' => 'success',
+                'status'  => 'success',
                 'comment' => $this->repository
                     ->create($data)
                     ->getAttributes(),
