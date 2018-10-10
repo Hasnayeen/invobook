@@ -81,6 +81,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('categories', 'CategoryController@index');
 
+    Route::post('categories', 'CategoryController@store');
+
     Route::post('discussions/{discussion}/comments', 'CommentController@store');
 
     /**********************************
