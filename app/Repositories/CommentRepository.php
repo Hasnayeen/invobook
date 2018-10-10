@@ -24,7 +24,7 @@ class CommentRepository
      * @param  array         $data
      * @return Comment|Model
      */
-    public function store(array $data): Comment
+    public function create(array $data): Comment
     {
         return $this->model->query()->create([
             'discussion_id' => $data['discussion_id'],
