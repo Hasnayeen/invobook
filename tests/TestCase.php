@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Artisan;
 use Spatie\Permission\Models\Permission;
@@ -15,6 +16,11 @@ abstract class TestCase extends BaseTestCase
     use CreatesApplication;
     use DatabaseMigrations;
     use DatabaseTransactions;
+
+    /**
+     * @var User
+     */
+    protected $user;
 
     public function setUp()
     {
