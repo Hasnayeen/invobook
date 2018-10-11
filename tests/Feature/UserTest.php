@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use App\Models\User;
 use Illuminate\Http\UploadedFile;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Storage;
 
 class UserTest extends TestCase
@@ -48,5 +49,17 @@ class UserTest extends TestCase
         ]);
         $this->assertDatabaseHas('users', ['email' => 'new@email.com']);
         password_verify('new_password', $this->user->password);
+    }
+
+    /** @test */
+    public function guest_can_not_see_admin_page()
+    {
+        $guest_user = factory(User::class)->create();
+        $guest_role = Role::create(['name' => 'guest']);
+        $guest_user->assignRole($guest_role);
+
+        $this->expectException(\Spatie\Permission\Exceptions\UnauthorizedException::class);
+
+        $this->actingAs($guest_user)->get('admin');
     }
 }
