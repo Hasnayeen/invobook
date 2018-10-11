@@ -6,12 +6,6 @@ use Tests\TestCase;
 
 class MessageTest extends TestCase
 {
-    public function setUp()
-    {
-        parent::setUp();
-        $this->user = factory('App\Models\User')->create();
-    }
-
     /** @test */
     public function user_can_read_message_of_a_group()
     {
@@ -95,5 +89,25 @@ class MessageTest extends TestCase
             'messageable_id'   => (string) $office->id,
             'body'             => $user1Messages[0]['body'],
         ]);
+    }
+
+    /** @test */
+    public function user_can_delete_message()
+    {
+        $project = factory('App\Models\Project')->create(['owner_id' => $this->user->id]);
+
+        $message = factory('App\Models\Message')->create([
+            'user_id'          => $this->user->id,
+            'messageable_type' => 'project',
+            'messageable_id'   => $project->id,
+        ]);
+
+        $this->actingAs($this->user)->delete('messages/' . $message->id)
+             ->assertJsonFragment([
+                 'status'  => 'success',
+                 'message' => 'Message has been deleted',
+             ]);
+
+        $this->assertDatabaseMissing('messages', ['id' => $message->id]);
     }
 }

@@ -7,7 +7,7 @@
         404
     </div>
     <div class="mb-8">WHOOPS! Page Not Found</div>
-    <a href="{{ route('home') }}" class="text-teal no-underline text-2xl">← Go To Home</a>
+    <a href="{{ route('/') }}" class="text-teal no-underline text-2xl">← Go To Home</a>
 </div>
 
 @slot('script')
