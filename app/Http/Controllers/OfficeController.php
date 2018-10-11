@@ -34,4 +34,14 @@ class OfficeController extends Controller
             ]);
         }
     }
+
+    public function delete(Office $office)
+    {
+        $office->delete();
+
+        return response()->json([
+            'status'  => 'success',
+            'message' => 'The office has been deleted',
+        ]);
+    }
 }

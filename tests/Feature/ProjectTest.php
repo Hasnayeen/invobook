@@ -92,4 +92,33 @@ class ProjectTest extends TestCase
             ],
         ]);
     }
+
+    /** @test */
+    public function user_with_permission_can_delete_a_project()
+    {
+        $this->user_with_permission_can_create_project();
+
+        $id = Project::where('name', 'New Project')->first()->id;
+
+        $this->actingAs($this->user)->delete('/projects/' . $id)
+             ->assertJsonFragment([
+                 'status'  => 'success',
+                 'message' => 'The project has been deleted',
+             ]);
+    }
+
+    /**
+     * @expectedException Illuminate\Auth\Access\AuthorizationException
+     * @test
+     */
+    public function user_without_permission_cant_delete_a_project()
+    {
+        $user = factory(\App\Models\User::class)->create();
+
+        $this->user_with_permission_can_create_project();
+
+        $id = Project::where('name', 'New Project')->first()->id;
+
+        $this->actingAs($user)->delete('projects/' . $id);
+    }
 }

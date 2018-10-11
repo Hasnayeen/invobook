@@ -53,6 +53,7 @@ class OfficePolicy
      */
     public function delete(User $user, Office $office)
     {
+        return $user->hasPermissionTo('delete office->' . $office->id);
     }
 
     /**
