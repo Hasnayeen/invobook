@@ -23,7 +23,7 @@ Route::get('register/{token}', 'Auth\RegisterController@showRegistrationForm');
 Route::post('register/{token}', 'Auth\RegisterController@confirmNewRegistration');
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/', 'HomeController@index')->name('home');
+    Route::get('/', 'HomeController@index');
 
     /**********************************
         Project
@@ -96,6 +96,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('messages', 'MessageController@index');
 
     Route::post('messages', 'MessageController@store');
+
+    Route::delete('messages/{message}', 'MessageController@delete')->middleware('can:delete,message');
 
     /**********************************
         Events
