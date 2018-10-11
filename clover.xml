@@ -2,7 +2,7 @@
 <coverage generated="1539200664">
   <project timestamp="1539200664">
     <package name="App\Console">
-      <file name="/home/user/projects/php/sites/goodwork/app/Console/Kernel.php">
+      <file name="/home/mehedi/Code/gw/app/Console/Kernel.php">
         <class name="App\Console\Kernel" namespace="App\Console">
           <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="6" coveredelements="6"/>
         </class>
@@ -16,7 +16,7 @@
       </file>
     </package>
     <package name="App\Events">
-      <file name="/home/user/projects/php/sites/goodwork/app/Events/MessageCreated.php">
+      <file name="/home/mehedi/Code/gw/app/Events/MessageCreated.php">
         <class name="App\Events\MessageCreated" namespace="App\Events">
           <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="7" coveredelements="0"/>
         </class>
@@ -31,7 +31,7 @@
       </file>
     </package>
     <package name="App\Exceptions">
-      <file name="/home/user/projects/php/sites/goodwork/app/Exceptions/Handler.php">
+      <file name="/home/mehedi/Code/gw/app/Exceptions/Handler.php">
         <class name="App\Exceptions\Handler" namespace="App\Exceptions">
           <metrics complexity="4" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="9" coveredelements="0"/>
         </class>
@@ -46,7 +46,7 @@
         <line num="63" type="stmt" count="0"/>
         <metrics loc="65" ncloc="38" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="9" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Exceptions/OwnerPermissionCantBeRevoked.php">
+      <file name="/home/mehedi/Code/gw/app/Exceptions/OwnerPermissionCantBeRevoked.php">
         <class name="App\Exceptions\OwnerPermissionCantBeRevoked" namespace="App\Exceptions">
           <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="4" coveredelements="0"/>
         </class>
@@ -56,7 +56,7 @@
         <line num="20" type="stmt" count="0"/>
         <metrics loc="22" ncloc="16" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="4" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Exceptions/RoleCantBeDeleted.php">
+      <file name="/home/mehedi/Code/gw/app/Exceptions/RoleCantBeDeleted.php">
         <class name="App\Exceptions\RoleCantBeDeleted" namespace="App\Exceptions">
           <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="4" coveredelements="0"/>
         </class>
@@ -66,7 +66,7 @@
         <line num="14" type="stmt" count="0"/>
         <metrics loc="16" ncloc="16" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="4" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Exceptions/UserIsAlreadyMember.php">
+      <file name="/home/mehedi/Code/gw/app/Exceptions/UserIsAlreadyMember.php">
         <class name="App\Exceptions\UserIsAlreadyMember" namespace="App\Exceptions">
           <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="4" coveredelements="0"/>
         </class>
@@ -78,7 +78,7 @@
       </file>
     </package>
     <package name="App\Http\Controllers">
-      <file name="/home/user/projects/php/sites/goodwork/app/Http/Controllers/AboutController.php">
+      <file name="/home/mehedi/Code/gw/app/Http/Controllers/AboutController.php">
         <class name="App\Http\Controllers\AboutController" namespace="App\Http\Controllers">
           <metrics complexity="4" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="16" coveredstatements="0" elements="18" coveredelements="0"/>
         </class>
@@ -102,88 +102,88 @@
         <line num="41" type="stmt" count="0"/>
         <metrics loc="43" ncloc="43" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="16" coveredstatements="0" elements="18" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Http/Controllers/ActivityController.php">
+      <file name="/home/mehedi/Code/gw/app/Http/Controllers/ActivityController.php">
         <class name="App\Http\Controllers\ActivityController" namespace="App\Http\Controllers">
-          <metrics complexity="3" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="8" coveredelements="8"/>
+          <metrics complexity="3" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="0" elements="8" coveredelements="0"/>
         </class>
-        <line num="9" type="method" name="index" visibility="public" complexity="3" crap="3" count="4"/>
-        <line num="11" type="stmt" count="4"/>
-        <line num="12" type="stmt" count="4"/>
-        <line num="13" type="stmt" count="4"/>
-        <line num="14" type="stmt" count="4"/>
-        <line num="16" type="stmt" count="4"/>
-        <line num="17" type="stmt" count="4"/>
-        <line num="18" type="stmt" count="4"/>
-        <metrics loc="21" ncloc="21" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="8" coveredelements="8"/>
+        <line num="9" type="method" name="index" visibility="public" complexity="3" crap="12.00" count="0"/>
+        <line num="11" type="stmt" count="0"/>
+        <line num="12" type="stmt" count="0"/>
+        <line num="13" type="stmt" count="0"/>
+        <line num="14" type="stmt" count="0"/>
+        <line num="16" type="stmt" count="0"/>
+        <line num="17" type="stmt" count="0"/>
+        <line num="18" type="stmt" count="0"/>
+        <metrics loc="21" ncloc="21" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="0" elements="8" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Http/Controllers/AdminController.php">
+      <file name="/home/mehedi/Code/gw/app/Http/Controllers/AdminController.php">
         <class name="App\Http\Controllers\AdminController" namespace="App\Http\Controllers">
-          <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
+          <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="4" coveredelements="0"/>
         </class>
-        <line num="9" type="method" name="index" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="11" type="stmt" count="1"/>
-        <line num="12" type="stmt" count="1"/>
-        <line num="15" type="stmt" count="1"/>
-        <metrics loc="17" ncloc="17" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
+        <line num="9" type="method" name="index" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="11" type="stmt" count="0"/>
+        <line num="12" type="stmt" count="0"/>
+        <line num="15" type="stmt" count="0"/>
+        <metrics loc="17" ncloc="17" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="4" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Http/Controllers/CategoryController.php">
+      <file name="/home/mehedi/Code/gw/app/Http/Controllers/CategoryController.php">
         <class name="App\Http\Controllers\CategoryController" namespace="App\Http\Controllers">
-          <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="5" coveredelements="5"/>
+          <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="0" elements="5" coveredelements="0"/>
         </class>
-        <line num="9" type="method" name="index" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="11" type="stmt" count="1"/>
-        <line num="13" type="stmt" count="1"/>
-        <line num="14" type="stmt" count="1"/>
-        <line num="15" type="stmt" count="1"/>
-        <metrics loc="18" ncloc="18" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="5" coveredelements="5"/>
+        <line num="9" type="method" name="index" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="11" type="stmt" count="0"/>
+        <line num="13" type="stmt" count="0"/>
+        <line num="14" type="stmt" count="0"/>
+        <line num="15" type="stmt" count="0"/>
+        <metrics loc="18" ncloc="18" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="0" elements="5" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Http/Controllers/CommentController.php">
+      <file name="/home/mehedi/Code/gw/app/Http/Controllers/CommentController.php">
         <class name="App\Http\Controllers\CommentController" namespace="App\Http\Controllers">
-          <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="13" coveredelements="13"/>
+          <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="0" elements="13" coveredelements="0"/>
         </class>
-        <line num="20" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="4"/>
-        <line num="22" type="stmt" count="4"/>
-        <line num="23" type="stmt" count="4"/>
-        <line num="30" type="method" name="store" visibility="public" complexity="1" crap="1" count="2"/>
-        <line num="32" type="stmt" count="2"/>
-        <line num="33" type="stmt" count="2"/>
-        <line num="36" type="stmt" count="1"/>
-        <line num="38" type="stmt" count="1"/>
-        <line num="39" type="stmt" count="1"/>
-        <line num="40" type="stmt" count="1"/>
-        <line num="41" type="stmt" count="1"/>
-        <line num="42" type="stmt" count="1"/>
-        <line num="43" type="stmt" count="1"/>
-        <metrics loc="45" ncloc="34" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="13" coveredelements="13"/>
+        <line num="20" type="method" name="__construct" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="22" type="stmt" count="0"/>
+        <line num="23" type="stmt" count="0"/>
+        <line num="30" type="method" name="store" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="32" type="stmt" count="0"/>
+        <line num="33" type="stmt" count="0"/>
+        <line num="36" type="stmt" count="0"/>
+        <line num="38" type="stmt" count="0"/>
+        <line num="39" type="stmt" count="0"/>
+        <line num="40" type="stmt" count="0"/>
+        <line num="41" type="stmt" count="0"/>
+        <line num="42" type="stmt" count="0"/>
+        <line num="43" type="stmt" count="0"/>
+        <metrics loc="45" ncloc="34" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="0" elements="13" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Http/Controllers/Controller.php">
+      <file name="/home/mehedi/Code/gw/app/Http/Controllers/Controller.php">
         <class name="App\Http\Controllers\Controller" namespace="App\Http\Controllers">
           <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
         </class>
         <metrics loc="13" ncloc="13" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Http/Controllers/DiscussionController.php">
+      <file name="/home/mehedi/Code/gw/app/Http/Controllers/DiscussionController.php">
         <class name="App\Http\Controllers\DiscussionController" namespace="App\Http\Controllers">
-          <metrics complexity="3" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="13" elements="15" coveredelements="15"/>
+          <metrics complexity="3" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="0" elements="15" coveredelements="0"/>
         </class>
-        <line num="11" type="method" name="index" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="13" type="stmt" count="1"/>
-        <line num="15" type="stmt" count="1"/>
-        <line num="16" type="stmt" count="1"/>
-        <line num="17" type="stmt" count="1"/>
-        <line num="18" type="stmt" count="1"/>
-        <line num="22" type="method" name="store" visibility="public" complexity="2" crap="2" count="1"/>
-        <line num="24" type="stmt" count="1"/>
-        <line num="25" type="stmt" count="1"/>
-        <line num="26" type="stmt" count="1"/>
-        <line num="28" type="stmt" count="1"/>
-        <line num="29" type="stmt" count="1"/>
-        <line num="30" type="stmt" count="1"/>
-        <line num="31" type="stmt" count="1"/>
-        <line num="32" type="stmt" count="1"/>
-        <metrics loc="34" ncloc="34" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="13" elements="15" coveredelements="15"/>
+        <line num="11" type="method" name="index" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="13" type="stmt" count="0"/>
+        <line num="15" type="stmt" count="0"/>
+        <line num="16" type="stmt" count="0"/>
+        <line num="17" type="stmt" count="0"/>
+        <line num="18" type="stmt" count="0"/>
+        <line num="22" type="method" name="store" visibility="public" complexity="2" crap="6.00" count="0"/>
+        <line num="24" type="stmt" count="0"/>
+        <line num="25" type="stmt" count="0"/>
+        <line num="26" type="stmt" count="0"/>
+        <line num="28" type="stmt" count="0"/>
+        <line num="29" type="stmt" count="0"/>
+        <line num="30" type="stmt" count="0"/>
+        <line num="31" type="stmt" count="0"/>
+        <line num="32" type="stmt" count="0"/>
+        <metrics loc="34" ncloc="34" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="0" elements="15" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Http/Controllers/EventController.php">
+      <file name="/home/mehedi/Code/gw/app/Http/Controllers/EventController.php">
         <class name="App\Http\Controllers\EventController" namespace="App\Http\Controllers">
           <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
         </class>
@@ -191,7 +191,7 @@
         <line num="9" type="stmt" count="0"/>
         <metrics loc="11" ncloc="11" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Http/Controllers/FileController.php">
+      <file name="/home/mehedi/Code/gw/app/Http/Controllers/FileController.php">
         <class name="App\Http\Controllers\FileController" namespace="App\Http\Controllers">
           <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
         </class>
@@ -199,26 +199,26 @@
         <line num="9" type="stmt" count="0"/>
         <metrics loc="11" ncloc="11" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Http/Controllers/HomeController.php">
+      <file name="/home/mehedi/Code/gw/app/Http/Controllers/HomeController.php">
         <class name="App\Http\Controllers\HomeController" namespace="App\Http\Controllers">
-          <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="13" coveredelements="13"/>
+          <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="0" elements="13" coveredelements="0"/>
         </class>
-        <line num="15" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="2"/>
-        <line num="17" type="stmt" count="2"/>
-        <line num="18" type="stmt" count="2"/>
-        <line num="19" type="stmt" count="2"/>
-        <line num="20" type="stmt" count="2"/>
-        <line num="27" type="method" name="index" visibility="public" complexity="1" crap="1" count="2"/>
-        <line num="29" type="stmt" count="2"/>
-        <line num="30" type="stmt" count="2"/>
-        <line num="31" type="stmt" count="2"/>
-        <line num="32" type="stmt" count="2"/>
-        <line num="33" type="stmt" count="2"/>
-        <line num="34" type="stmt" count="2"/>
-        <line num="36" type="stmt" count="2"/>
-        <metrics loc="38" ncloc="33" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="13" coveredelements="13"/>
+        <line num="15" type="method" name="__construct" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="17" type="stmt" count="0"/>
+        <line num="18" type="stmt" count="0"/>
+        <line num="19" type="stmt" count="0"/>
+        <line num="20" type="stmt" count="0"/>
+        <line num="27" type="method" name="index" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="29" type="stmt" count="0"/>
+        <line num="30" type="stmt" count="0"/>
+        <line num="31" type="stmt" count="0"/>
+        <line num="32" type="stmt" count="0"/>
+        <line num="33" type="stmt" count="0"/>
+        <line num="34" type="stmt" count="0"/>
+        <line num="36" type="stmt" count="0"/>
+        <metrics loc="38" ncloc="33" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="0" elements="13" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Http/Controllers/MemberController.php">
+      <file name="/home/mehedi/Code/gw/app/Http/Controllers/MemberController.php">
         <class name="App\Http\Controllers\MemberController" namespace="App\Http\Controllers">
           <metrics complexity="5" methods="4" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="20" coveredstatements="19" elements="24" coveredelements="22"/>
         </class>
@@ -250,15 +250,15 @@
       </file>
       <file name="/home/user/projects/php/sites/goodwork/app/Http/Controllers/MessageController.php">
         <class name="App\Http\Controllers\MessageController" namespace="App\Http\Controllers">
-          <metrics complexity="4" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="24" coveredstatements="6" elements="26" coveredelements="6"/>
+          <metrics complexity="4" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="24" coveredstatements="0" elements="26" coveredelements="0"/>
         </class>
-        <line num="15" type="method" name="index" visibility="public" complexity="2" crap="2.15" count="1"/>
-        <line num="17" type="stmt" count="1"/>
-        <line num="19" type="stmt" count="1"/>
-        <line num="21" type="stmt" count="1"/>
-        <line num="22" type="stmt" count="1"/>
-        <line num="23" type="stmt" count="1"/>
-        <line num="24" type="stmt" count="1"/>
+        <line num="15" type="method" name="index" visibility="public" complexity="2" crap="6.00" count="0"/>
+        <line num="17" type="stmt" count="0"/>
+        <line num="19" type="stmt" count="0"/>
+        <line num="21" type="stmt" count="0"/>
+        <line num="22" type="stmt" count="0"/>
+        <line num="23" type="stmt" count="0"/>
+        <line num="24" type="stmt" count="0"/>
         <line num="26" type="stmt" count="0"/>
         <line num="27" type="stmt" count="0"/>
         <line num="28" type="stmt" count="0"/>
@@ -278,70 +278,78 @@
         <line num="52" type="stmt" count="0"/>
         <line num="53" type="stmt" count="0"/>
         <line num="54" type="stmt" count="0"/>
-        <metrics loc="58" ncloc="58" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="24" coveredstatements="6" elements="26" coveredelements="6"/>
+        <metrics loc="58" ncloc="58" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="24" coveredstatements="0" elements="26" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Http/Controllers/OfficeController.php">
+      <file name="/home/mehedi/Code/gw/app/Http/Controllers/OfficeController.php">
         <class name="App\Http\Controllers\OfficeController" namespace="App\Http\Controllers">
-          <metrics complexity="3" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="9" elements="15" coveredelements="10"/>
+          <metrics complexity="4" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="16" coveredstatements="7" elements="19" coveredelements="7"/>
         </class>
-        <line num="11" type="method" name="show" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="13" type="stmt" count="1"/>
-        <line num="15" type="stmt" count="1"/>
-        <line num="18" type="method" name="store" visibility="public" complexity="2" crap="2.19" count="3"/>
-        <line num="21" type="stmt" count="3"/>
-        <line num="22" type="stmt" count="3"/>
-        <line num="23" type="stmt" count="3"/>
-        <line num="25" type="stmt" count="3"/>
-        <line num="26" type="stmt" count="3"/>
-        <line num="27" type="stmt" count="3"/>
-        <line num="28" type="stmt" count="3"/>
+        <line num="11" type="method" name="show" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="13" type="stmt" count="0"/>
+        <line num="15" type="stmt" count="0"/>
+        <line num="18" type="method" name="store" visibility="public" complexity="2" crap="2.19" count="1"/>
+        <line num="21" type="stmt" count="1"/>
+        <line num="22" type="stmt" count="1"/>
+        <line num="23" type="stmt" count="1"/>
+        <line num="25" type="stmt" count="1"/>
+        <line num="26" type="stmt" count="1"/>
+        <line num="27" type="stmt" count="1"/>
+        <line num="28" type="stmt" count="1"/>
         <line num="30" type="stmt" count="0"/>
         <line num="31" type="stmt" count="0"/>
         <line num="32" type="stmt" count="0"/>
         <line num="33" type="stmt" count="0"/>
-        <metrics loc="37" ncloc="37" classes="1" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="9" elements="15" coveredelements="10"/>
+        <line num="38" type="method" name="delete" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="40" type="stmt" count="0"/>
+        <line num="42" type="stmt" count="0"/>
+        <line num="43" type="stmt" count="0"/>
+        <metrics loc="47" ncloc="47" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="16" coveredstatements="7" elements="19" coveredelements="7"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Http/Controllers/PermissionController.php">
+      <file name="/home/mehedi/Code/gw/app/Http/Controllers/PermissionController.php">
         <class name="App\Http\Controllers\PermissionController" namespace="App\Http\Controllers">
-          <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="6" coveredelements="6"/>
+          <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="6" coveredelements="0"/>
         </class>
-        <line num="9" type="method" name="index" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="11" type="stmt" count="1"/>
-        <line num="12" type="stmt" count="1"/>
-        <line num="14" type="stmt" count="1"/>
-        <line num="15" type="stmt" count="1"/>
-        <line num="16" type="stmt" count="1"/>
-        <metrics loc="19" ncloc="19" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="6" coveredelements="6"/>
+        <line num="9" type="method" name="index" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="11" type="stmt" count="0"/>
+        <line num="12" type="stmt" count="0"/>
+        <line num="14" type="stmt" count="0"/>
+        <line num="15" type="stmt" count="0"/>
+        <line num="16" type="stmt" count="0"/>
+        <metrics loc="19" ncloc="19" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="6" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Http/Controllers/ProjectController.php">
+      <file name="/home/mehedi/Code/gw/app/Http/Controllers/ProjectController.php">
         <class name="App\Http\Controllers\ProjectController" namespace="App\Http\Controllers">
-          <metrics complexity="4" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="13" elements="20" coveredelements="15"/>
+          <metrics complexity="5" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="20" coveredstatements="0" elements="24" coveredelements="0"/>
         </class>
-        <line num="16" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="8"/>
-        <line num="18" type="stmt" count="8"/>
-        <line num="19" type="stmt" count="8"/>
-        <line num="21" type="method" name="show" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="23" type="stmt" count="1"/>
-        <line num="24" type="stmt" count="1"/>
-        <line num="26" type="stmt" count="1"/>
-        <line num="29" type="method" name="store" visibility="public" complexity="2" crap="2.15" count="7"/>
-        <line num="32" type="stmt" count="7"/>
-        <line num="33" type="stmt" count="7"/>
-        <line num="34" type="stmt" count="7"/>
-        <line num="35" type="stmt" count="7"/>
-        <line num="37" type="stmt" count="7"/>
-        <line num="38" type="stmt" count="7"/>
-        <line num="39" type="stmt" count="7"/>
-        <line num="40" type="stmt" count="7"/>
+        <line num="16" type="method" name="__construct" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="18" type="stmt" count="0"/>
+        <line num="19" type="stmt" count="0"/>
+        <line num="21" type="method" name="show" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="23" type="stmt" count="0"/>
+        <line num="24" type="stmt" count="0"/>
+        <line num="26" type="stmt" count="0"/>
+        <line num="29" type="method" name="store" visibility="public" complexity="2" crap="6.00" count="0"/>
+        <line num="32" type="stmt" count="0"/>
+        <line num="33" type="stmt" count="0"/>
+        <line num="34" type="stmt" count="0"/>
+        <line num="35" type="stmt" count="0"/>
+        <line num="37" type="stmt" count="0"/>
+        <line num="38" type="stmt" count="0"/>
+        <line num="39" type="stmt" count="0"/>
+        <line num="40" type="stmt" count="0"/>
         <line num="42" type="stmt" count="0"/>
         <line num="43" type="stmt" count="0"/>
         <line num="44" type="stmt" count="0"/>
         <line num="45" type="stmt" count="0"/>
-        <metrics loc="49" ncloc="46" classes="1" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="13" elements="20" coveredelements="15"/>
+        <line num="50" type="method" name="delete" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="52" type="stmt" count="0"/>
+        <line num="54" type="stmt" count="0"/>
+        <line num="55" type="stmt" count="0"/>
+        <metrics loc="59" ncloc="56" classes="1" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="20" coveredstatements="0" elements="24" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Http/Controllers/RoleController.php">
+      <file name="/home/mehedi/Code/gw/app/Http/Controllers/RoleController.php">
         <class name="App\Http\Controllers\RoleController" namespace="App\Http\Controllers">
-          <metrics complexity="4" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="19" coveredstatements="14" elements="22" coveredelements="16"/>
+          <metrics complexity="4" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="19" coveredstatements="0" elements="22" coveredelements="0"/>
         </class>
         <line num="11" type="method" name="index" visibility="public" complexity="1" crap="2.00" count="0"/>
         <line num="13" type="stmt" count="0"/>
@@ -349,159 +357,163 @@
         <line num="16" type="stmt" count="0"/>
         <line num="17" type="stmt" count="0"/>
         <line num="18" type="stmt" count="0"/>
-        <line num="22" type="method" name="store" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="24" type="stmt" count="1"/>
-        <line num="25" type="stmt" count="1"/>
-        <line num="28" type="stmt" count="1"/>
-        <line num="29" type="stmt" count="1"/>
-        <line num="31" type="stmt" count="1"/>
-        <line num="32" type="stmt" count="1"/>
-        <line num="33" type="stmt" count="1"/>
-        <line num="34" type="stmt" count="1"/>
-        <line num="35" type="stmt" count="1"/>
-        <line num="38" type="method" name="delete" visibility="public" complexity="2" crap="2" count="2"/>
-        <line num="40" type="stmt" count="2"/>
-        <line num="41" type="stmt" count="1"/>
-        <line num="43" type="stmt" count="1"/>
-        <line num="44" type="stmt" count="1"/>
-        <line num="49" type="stmt" count="1"/>
-        <metrics loc="51" ncloc="51" classes="1" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="19" coveredstatements="14" elements="22" coveredelements="16"/>
+        <line num="22" type="method" name="store" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="24" type="stmt" count="0"/>
+        <line num="25" type="stmt" count="0"/>
+        <line num="28" type="stmt" count="0"/>
+        <line num="29" type="stmt" count="0"/>
+        <line num="31" type="stmt" count="0"/>
+        <line num="32" type="stmt" count="0"/>
+        <line num="33" type="stmt" count="0"/>
+        <line num="34" type="stmt" count="0"/>
+        <line num="35" type="stmt" count="0"/>
+        <line num="38" type="method" name="delete" visibility="public" complexity="2" crap="6.00" count="0"/>
+        <line num="40" type="stmt" count="0"/>
+        <line num="41" type="stmt" count="0"/>
+        <line num="43" type="stmt" count="0"/>
+        <line num="44" type="stmt" count="0"/>
+        <line num="49" type="stmt" count="0"/>
+        <metrics loc="51" ncloc="51" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="19" coveredstatements="0" elements="22" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Http/Controllers/RolePermissionController.php">
+      <file name="/home/mehedi/Code/gw/app/Http/Controllers/RolePermissionController.php">
         <class name="App\Http\Controllers\RolePermissionController" namespace="App\Http\Controllers">
-          <metrics complexity="3" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="10" elements="13" coveredelements="11"/>
+          <metrics complexity="3" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="0" elements="13" coveredelements="0"/>
         </class>
-        <line num="11" type="method" name="store" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="13" type="stmt" count="1"/>
-        <line num="15" type="stmt" count="1"/>
-        <line num="16" type="stmt" count="1"/>
-        <line num="17" type="stmt" count="1"/>
-        <line num="18" type="stmt" count="1"/>
-        <line num="19" type="stmt" count="1"/>
-        <line num="23" type="method" name="delete" visibility="public" complexity="2" crap="2.03" count="1"/>
-        <line num="25" type="stmt" count="1"/>
+        <line num="11" type="method" name="store" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="13" type="stmt" count="0"/>
+        <line num="15" type="stmt" count="0"/>
+        <line num="16" type="stmt" count="0"/>
+        <line num="17" type="stmt" count="0"/>
+        <line num="18" type="stmt" count="0"/>
+        <line num="19" type="stmt" count="0"/>
+        <line num="23" type="method" name="delete" visibility="public" complexity="2" crap="6.00" count="0"/>
+        <line num="25" type="stmt" count="0"/>
         <line num="26" type="stmt" count="0"/>
-        <line num="28" type="stmt" count="1"/>
-        <line num="30" type="stmt" count="1"/>
-        <line num="31" type="stmt" count="1"/>
-        <metrics loc="35" ncloc="35" classes="1" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="10" elements="13" coveredelements="11"/>
+        <line num="28" type="stmt" count="0"/>
+        <line num="30" type="stmt" count="0"/>
+        <line num="31" type="stmt" count="0"/>
+        <metrics loc="35" ncloc="35" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="0" elements="13" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Http/Controllers/TaskController.php">
+      <file name="/home/mehedi/Code/gw/app/Http/Controllers/TaskController.php">
         <class name="App\Http\Controllers\TaskController" namespace="App\Http\Controllers">
-          <metrics complexity="5" methods="4" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="29" coveredstatements="26" elements="33" coveredelements="29"/>
+          <metrics complexity="5" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="29" coveredstatements="0" elements="33" coveredelements="0"/>
         </class>
-        <line num="14" type="method" name="store" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="16" type="stmt" count="1"/>
-        <line num="17" type="stmt" count="1"/>
-        <line num="18" type="stmt" count="1"/>
-        <line num="19" type="stmt" count="1"/>
-        <line num="20" type="stmt" count="1"/>
-        <line num="21" type="stmt" count="1"/>
-        <line num="22" type="stmt" count="1"/>
-        <line num="23" type="stmt" count="1"/>
-        <line num="25" type="stmt" count="1"/>
-        <line num="27" type="stmt" count="1"/>
-        <line num="28" type="stmt" count="1"/>
-        <line num="29" type="stmt" count="1"/>
-        <line num="30" type="stmt" count="1"/>
-        <line num="31" type="stmt" count="1"/>
-        <line num="34" type="method" name="show" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="36" type="stmt" count="1"/>
-        <line num="38" type="stmt" count="1"/>
-        <line num="39" type="stmt" count="1"/>
-        <line num="40" type="stmt" count="1"/>
-        <line num="44" type="method" name="index" visibility="public" complexity="2" crap="2.21" count="1"/>
-        <line num="47" type="stmt" count="1"/>
-        <line num="49" type="stmt" count="1"/>
-        <line num="50" type="stmt" count="1"/>
-        <line num="51" type="stmt" count="1"/>
-        <line num="52" type="stmt" count="1"/>
+        <line num="14" type="method" name="store" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="16" type="stmt" count="0"/>
+        <line num="17" type="stmt" count="0"/>
+        <line num="18" type="stmt" count="0"/>
+        <line num="19" type="stmt" count="0"/>
+        <line num="20" type="stmt" count="0"/>
+        <line num="21" type="stmt" count="0"/>
+        <line num="22" type="stmt" count="0"/>
+        <line num="23" type="stmt" count="0"/>
+        <line num="25" type="stmt" count="0"/>
+        <line num="27" type="stmt" count="0"/>
+        <line num="28" type="stmt" count="0"/>
+        <line num="29" type="stmt" count="0"/>
+        <line num="30" type="stmt" count="0"/>
+        <line num="31" type="stmt" count="0"/>
+        <line num="34" type="method" name="show" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="36" type="stmt" count="0"/>
+        <line num="38" type="stmt" count="0"/>
+        <line num="39" type="stmt" count="0"/>
+        <line num="40" type="stmt" count="0"/>
+        <line num="44" type="method" name="index" visibility="public" complexity="2" crap="6.00" count="0"/>
+        <line num="47" type="stmt" count="0"/>
+        <line num="49" type="stmt" count="0"/>
+        <line num="50" type="stmt" count="0"/>
+        <line num="51" type="stmt" count="0"/>
+        <line num="52" type="stmt" count="0"/>
         <line num="54" type="stmt" count="0"/>
         <line num="55" type="stmt" count="0"/>
         <line num="56" type="stmt" count="0"/>
-        <line num="62" type="method" name="delete" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="64" type="stmt" count="1"/>
-        <line num="66" type="stmt" count="1"/>
-        <line num="67" type="stmt" count="1"/>
-        <metrics loc="71" ncloc="71" classes="1" methods="4" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="29" coveredstatements="26" elements="33" coveredelements="29"/>
+        <line num="62" type="method" name="delete" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="64" type="stmt" count="0"/>
+        <line num="66" type="stmt" count="0"/>
+        <line num="67" type="stmt" count="0"/>
+        <metrics loc="71" ncloc="71" classes="1" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="29" coveredstatements="0" elements="33" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Http/Controllers/TeamController.php">
+      <file name="/home/mehedi/Code/gw/app/Http/Controllers/TeamController.php">
         <class name="App\Http\Controllers\TeamController" namespace="App\Http\Controllers">
-          <metrics complexity="3" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="10" elements="16" coveredelements="11"/>
+          <metrics complexity="4" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="0" elements="20" coveredelements="0"/>
         </class>
-        <line num="11" type="method" name="show" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="13" type="stmt" count="1"/>
-        <line num="15" type="stmt" count="1"/>
-        <line num="18" type="method" name="store" visibility="public" complexity="2" crap="2.15" count="3"/>
-        <line num="21" type="stmt" count="3"/>
-        <line num="22" type="stmt" count="3"/>
-        <line num="23" type="stmt" count="3"/>
-        <line num="24" type="stmt" count="3"/>
-        <line num="26" type="stmt" count="3"/>
-        <line num="27" type="stmt" count="3"/>
-        <line num="28" type="stmt" count="3"/>
-        <line num="29" type="stmt" count="3"/>
+        <line num="11" type="method" name="show" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="13" type="stmt" count="0"/>
+        <line num="15" type="stmt" count="0"/>
+        <line num="18" type="method" name="store" visibility="public" complexity="2" crap="6.00" count="0"/>
+        <line num="21" type="stmt" count="0"/>
+        <line num="22" type="stmt" count="0"/>
+        <line num="23" type="stmt" count="0"/>
+        <line num="24" type="stmt" count="0"/>
+        <line num="26" type="stmt" count="0"/>
+        <line num="27" type="stmt" count="0"/>
+        <line num="28" type="stmt" count="0"/>
+        <line num="29" type="stmt" count="0"/>
         <line num="30" type="stmt" count="0"/>
         <line num="31" type="stmt" count="0"/>
         <line num="32" type="stmt" count="0"/>
         <line num="33" type="stmt" count="0"/>
-        <metrics loc="37" ncloc="37" classes="1" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="10" elements="16" coveredelements="11"/>
+        <line num="38" type="method" name="delete" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="40" type="stmt" count="0"/>
+        <line num="42" type="stmt" count="0"/>
+        <line num="43" type="stmt" count="0"/>
+        <metrics loc="47" ncloc="47" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="0" elements="20" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Http/Controllers/UserAccountController.php">
+      <file name="/home/mehedi/Code/gw/app/Http/Controllers/UserAccountController.php">
         <class name="App\Http\Controllers\UserAccountController" namespace="App\Http\Controllers">
-          <metrics complexity="3" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="8" elements="9" coveredelements="9"/>
+          <metrics complexity="3" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="0" elements="9" coveredelements="0"/>
         </class>
-        <line num="10" type="method" name="update" visibility="public" complexity="3" crap="3" count="1"/>
-        <line num="12" type="stmt" count="1"/>
-        <line num="13" type="stmt" count="1"/>
-        <line num="14" type="stmt" count="1"/>
-        <line num="16" type="stmt" count="1"/>
-        <line num="17" type="stmt" count="1"/>
-        <line num="19" type="stmt" count="1"/>
-        <line num="21" type="stmt" count="1"/>
-        <line num="22" type="stmt" count="1"/>
-        <metrics loc="26" ncloc="26" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="8" elements="9" coveredelements="9"/>
+        <line num="10" type="method" name="update" visibility="public" complexity="3" crap="12.00" count="0"/>
+        <line num="12" type="stmt" count="0"/>
+        <line num="13" type="stmt" count="0"/>
+        <line num="14" type="stmt" count="0"/>
+        <line num="16" type="stmt" count="0"/>
+        <line num="17" type="stmt" count="0"/>
+        <line num="19" type="stmt" count="0"/>
+        <line num="21" type="stmt" count="0"/>
+        <line num="22" type="stmt" count="0"/>
+        <metrics loc="26" ncloc="26" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="0" elements="9" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Http/Controllers/UserAvatarController.php">
+      <file name="/home/mehedi/Code/gw/app/Http/Controllers/UserAvatarController.php">
         <class name="App\Http\Controllers\UserAvatarController" namespace="App\Http\Controllers">
-          <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
+          <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="4" coveredelements="0"/>
         </class>
-        <line num="9" type="method" name="store" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="11" type="stmt" count="1"/>
-        <line num="12" type="stmt" count="1"/>
-        <line num="15" type="stmt" count="1"/>
-        <metrics loc="17" ncloc="17" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
+        <line num="9" type="method" name="store" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="11" type="stmt" count="0"/>
+        <line num="12" type="stmt" count="0"/>
+        <line num="15" type="stmt" count="0"/>
+        <metrics loc="17" ncloc="17" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="4" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Http/Controllers/UserController.php">
+      <file name="/home/mehedi/Code/gw/app/Http/Controllers/UserController.php">
         <class name="App\Http\Controllers\UserController" namespace="App\Http\Controllers">
-          <metrics complexity="5" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="9" elements="21" coveredelements="9"/>
+          <metrics complexity="5" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="0" elements="21" coveredelements="0"/>
         </class>
         <line num="14" type="method" name="index" visibility="public" complexity="1" crap="2.00" count="0"/>
         <line num="16" type="stmt" count="0"/>
         <line num="18" type="stmt" count="0"/>
         <line num="19" type="stmt" count="0"/>
         <line num="20" type="stmt" count="0"/>
-        <line num="24" type="method" name="sentInvitationToRegister" visibility="public" complexity="3" crap="3.14" count="3"/>
-        <line num="27" type="stmt" count="3"/>
-        <line num="28" type="stmt" count="2"/>
-        <line num="29" type="stmt" count="2"/>
-        <line num="31" type="stmt" count="1"/>
-        <line num="32" type="stmt" count="1"/>
-        <line num="37" type="stmt" count="1"/>
-        <line num="38" type="stmt" count="1"/>
-        <line num="40" type="stmt" count="1"/>
-        <line num="41" type="stmt" count="1"/>
+        <line num="24" type="method" name="sentInvitationToRegister" visibility="public" complexity="3" crap="12.00" count="0"/>
+        <line num="27" type="stmt" count="0"/>
+        <line num="28" type="stmt" count="0"/>
+        <line num="29" type="stmt" count="0"/>
+        <line num="31" type="stmt" count="0"/>
+        <line num="32" type="stmt" count="0"/>
+        <line num="37" type="stmt" count="0"/>
+        <line num="38" type="stmt" count="0"/>
+        <line num="40" type="stmt" count="0"/>
+        <line num="41" type="stmt" count="0"/>
         <line num="42" type="stmt" count="0"/>
         <line num="43" type="stmt" count="0"/>
         <line num="44" type="stmt" count="0"/>
         <line num="49" type="method" name="show" visibility="public" complexity="1" crap="2.00" count="0"/>
         <line num="51" type="stmt" count="0"/>
         <line num="53" type="stmt" count="0"/>
-        <metrics loc="55" ncloc="55" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="9" elements="21" coveredelements="9"/>
+        <metrics loc="55" ncloc="55" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="0" elements="21" coveredelements="0"/>
       </file>
     </package>
     <package name="App\Http\Controllers\Auth">
-      <file name="/home/user/projects/php/sites/goodwork/app/Http/Controllers/Auth/ForgotPasswordController.php">
+      <file name="/home/mehedi/Code/gw/app/Http/Controllers/Auth/ForgotPasswordController.php">
         <class name="App\Http\Controllers\Auth\ForgotPasswordController" namespace="App\Http\Controllers\Auth">
           <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="3" coveredelements="0"/>
         </class>
@@ -510,7 +522,7 @@
         <line num="31" type="stmt" count="0"/>
         <metrics loc="32" ncloc="17" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="3" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Http/Controllers/Auth/LoginController.php">
+      <file name="/home/mehedi/Code/gw/app/Http/Controllers/Auth/LoginController.php">
         <class name="App\Http\Controllers\Auth\LoginController" namespace="App\Http\Controllers\Auth">
           <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="3" coveredelements="0"/>
         </class>
@@ -519,7 +531,7 @@
         <line num="38" type="stmt" count="0"/>
         <metrics loc="39" ncloc="19" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="3" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Http/Controllers/Auth/RegisterController.php">
+      <file name="/home/mehedi/Code/gw/app/Http/Controllers/Auth/RegisterController.php">
         <class name="App\Http\Controllers\Auth\RegisterController" namespace="App\Http\Controllers\Auth">
           <metrics complexity="9" methods="6" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="27" coveredstatements="0" elements="33" coveredelements="0"/>
         </class>
@@ -558,7 +570,7 @@
         <line num="126" type="stmt" count="0"/>
         <metrics loc="127" ncloc="78" classes="1" methods="6" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="27" coveredstatements="0" elements="33" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Http/Controllers/Auth/ResetPasswordController.php">
+      <file name="/home/mehedi/Code/gw/app/Http/Controllers/Auth/ResetPasswordController.php">
         <class name="App\Http\Controllers\Auth\ResetPasswordController" namespace="App\Http\Controllers\Auth">
           <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="3" coveredelements="0"/>
         </class>
@@ -569,7 +581,7 @@
       </file>
     </package>
     <package name="App\Http">
-      <file name="/home/user/projects/php/sites/goodwork/app/Http/Kernel.php">
+      <file name="/home/mehedi/Code/gw/app/Http/Kernel.php">
         <class name="App\Http\Kernel" namespace="App\Http">
           <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
         </class>
@@ -577,13 +589,13 @@
       </file>
     </package>
     <package name="App\Http\Middleware">
-      <file name="/home/user/projects/php/sites/goodwork/app/Http/Middleware/EncryptCookies.php">
+      <file name="/home/mehedi/Code/gw/app/Http/Middleware/EncryptCookies.php">
         <class name="App\Http\Middleware\EncryptCookies" namespace="App\Http\Middleware">
           <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
         </class>
         <metrics loc="17" ncloc="12" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Http/Middleware/RedirectIfAuthenticated.php">
+      <file name="/home/mehedi/Code/gw/app/Http/Middleware/RedirectIfAuthenticated.php">
         <class name="App\Http\Middleware\RedirectIfAuthenticated" namespace="App\Http\Middleware">
           <metrics complexity="2" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="4" coveredelements="0"/>
         </class>
@@ -593,19 +605,19 @@
         <line num="24" type="stmt" count="0"/>
         <metrics loc="26" ncloc="18" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="4" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Http/Middleware/TrimStrings.php">
+      <file name="/home/mehedi/Code/gw/app/Http/Middleware/TrimStrings.php">
         <class name="App\Http\Middleware\TrimStrings" namespace="App\Http\Middleware">
           <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
         </class>
         <metrics loc="18" ncloc="13" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Http/Middleware/TrustProxies.php">
+      <file name="/home/mehedi/Code/gw/app/Http/Middleware/TrustProxies.php">
         <class name="App\Http\Middleware\TrustProxies" namespace="App\Http\Middleware">
           <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
         </class>
         <metrics loc="23" ncloc="13" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Http/Middleware/VerifyCsrfToken.php">
+      <file name="/home/mehedi/Code/gw/app/Http/Middleware/VerifyCsrfToken.php">
         <class name="App\Http\Middleware\VerifyCsrfToken" namespace="App\Http\Middleware">
           <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
         </class>
@@ -613,7 +625,7 @@
       </file>
     </package>
     <package name="App\Http\Requests">
-      <file name="/home/user/projects/php/sites/goodwork/app/Http/Requests/StoreMessageRequest.php">
+      <file name="/home/mehedi/Code/gw/app/Http/Requests/StoreMessageRequest.php">
         <class name="App\Http\Requests\StoreMessageRequest" namespace="App\Http\Requests">
           <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="4" coveredelements="0"/>
         </class>
@@ -623,86 +635,86 @@
         <line num="27" type="stmt" count="0"/>
         <metrics loc="31" ncloc="21" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="4" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Http/Requests/StoreOfficeRequest.php">
+      <file name="/home/mehedi/Code/gw/app/Http/Requests/StoreOfficeRequest.php">
         <class name="App\Http\Requests\StoreOfficeRequest" namespace="App\Http\Requests">
           <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="4" coveredelements="4"/>
         </class>
-        <line num="16" type="method" name="authorize" visibility="public" complexity="1" crap="1" count="3"/>
-        <line num="18" type="stmt" count="3"/>
-        <line num="26" type="method" name="rules" visibility="public" complexity="1" crap="1" count="3"/>
-        <line num="29" type="stmt" count="3"/>
+        <line num="16" type="method" name="authorize" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="18" type="stmt" count="1"/>
+        <line num="26" type="method" name="rules" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="29" type="stmt" count="1"/>
         <metrics loc="33" ncloc="23" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="4" coveredelements="4"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Http/Requests/StoreProjectRequest.php">
+      <file name="/home/mehedi/Code/gw/app/Http/Requests/StoreProjectRequest.php">
         <class name="App\Http\Requests\StoreProjectRequest" namespace="App\Http\Requests">
-          <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="4" coveredelements="4"/>
+          <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="4" coveredelements="0"/>
         </class>
-        <line num="15" type="method" name="authorize" visibility="public" complexity="1" crap="1" count="7"/>
-        <line num="17" type="stmt" count="7"/>
-        <line num="25" type="method" name="rules" visibility="public" complexity="1" crap="1" count="7"/>
-        <line num="28" type="stmt" count="7"/>
-        <metrics loc="34" ncloc="24" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="4" coveredelements="4"/>
+        <line num="15" type="method" name="authorize" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="17" type="stmt" count="0"/>
+        <line num="25" type="method" name="rules" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="28" type="stmt" count="0"/>
+        <metrics loc="34" ncloc="24" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="4" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Http/Requests/UpdateUserAccount.php">
+      <file name="/home/mehedi/Code/gw/app/Http/Requests/UpdateUserAccount.php">
         <class name="App\Http\Requests\UpdateUserAccount" namespace="App\Http\Requests">
-          <metrics complexity="5" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="5" elements="9" coveredelements="7"/>
+          <metrics complexity="5" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="9" coveredelements="0"/>
         </class>
-        <line num="15" type="method" name="authorize" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="17" type="stmt" count="1"/>
-        <line num="25" type="method" name="rules" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="28" type="stmt" count="1"/>
-        <line num="40" type="method" name="withValidator" visibility="public" complexity="3" crap="3.14" count="1"/>
-        <line num="43" type="stmt" count="1"/>
+        <line num="15" type="method" name="authorize" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="17" type="stmt" count="0"/>
+        <line num="25" type="method" name="rules" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="28" type="stmt" count="0"/>
+        <line num="40" type="method" name="withValidator" visibility="public" complexity="3" crap="12.00" count="0"/>
+        <line num="43" type="stmt" count="0"/>
         <line num="44" type="stmt" count="0"/>
-        <line num="46" type="stmt" count="1"/>
-        <line num="47" type="stmt" count="1"/>
-        <metrics loc="48" ncloc="32" classes="1" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="5" elements="9" coveredelements="7"/>
+        <line num="46" type="stmt" count="0"/>
+        <line num="47" type="stmt" count="0"/>
+        <metrics loc="48" ncloc="32" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="9" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Http/Requests/ValidateDiscussionCreation.php">
+      <file name="/home/mehedi/Code/gw/app/Http/Requests/ValidateDiscussionCreation.php">
         <class name="App\Http\Requests\ValidateDiscussionCreation" namespace="App\Http\Requests">
-          <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="4" coveredelements="4"/>
+          <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="4" coveredelements="0"/>
         </class>
-        <line num="14" type="method" name="authorize" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="16" type="stmt" count="1"/>
-        <line num="24" type="method" name="rules" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="27" type="stmt" count="1"/>
-        <metrics loc="36" ncloc="26" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="4" coveredelements="4"/>
+        <line num="14" type="method" name="authorize" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="16" type="stmt" count="0"/>
+        <line num="24" type="method" name="rules" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="27" type="stmt" count="0"/>
+        <metrics loc="36" ncloc="26" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="4" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Http/Requests/ValidateTaskCreation.php">
+      <file name="/home/mehedi/Code/gw/app/Http/Requests/ValidateTaskCreation.php">
         <class name="App\Http\Requests\ValidateTaskCreation" namespace="App\Http\Requests">
-          <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="4" coveredelements="4"/>
+          <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="4" coveredelements="0"/>
         </class>
-        <line num="14" type="method" name="authorize" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="16" type="stmt" count="1"/>
-        <line num="24" type="method" name="rules" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="27" type="stmt" count="1"/>
-        <metrics loc="36" ncloc="26" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="4" coveredelements="4"/>
+        <line num="14" type="method" name="authorize" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="16" type="stmt" count="0"/>
+        <line num="24" type="method" name="rules" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="27" type="stmt" count="0"/>
+        <metrics loc="36" ncloc="26" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="4" coveredelements="0"/>
       </file>
     </package>
     <package name="App\Listeners">
-      <file name="/home/user/projects/php/sites/goodwork/app/Listeners/LogUserRegistration.php">
+      <file name="/home/mehedi/Code/gw/app/Listeners/LogUserRegistration.php">
         <class name="App\Listeners\LogUserRegistration" namespace="App\Listeners">
-          <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="9" coveredelements="9"/>
+          <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="0" elements="9" coveredelements="0"/>
         </class>
-        <line num="18" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="20" type="stmt" count="1"/>
-        <line num="21" type="stmt" count="1"/>
-        <line num="26" type="method" name="handle" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="28" type="stmt" count="1"/>
-        <line num="29" type="stmt" count="1"/>
-        <line num="30" type="stmt" count="1"/>
-        <line num="31" type="stmt" count="1"/>
-        <line num="32" type="stmt" count="1"/>
-        <metrics loc="33" ncloc="24" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="9" coveredelements="9"/>
+        <line num="18" type="method" name="__construct" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="20" type="stmt" count="0"/>
+        <line num="21" type="stmt" count="0"/>
+        <line num="26" type="method" name="handle" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="28" type="stmt" count="0"/>
+        <line num="29" type="stmt" count="0"/>
+        <line num="30" type="stmt" count="0"/>
+        <line num="31" type="stmt" count="0"/>
+        <line num="32" type="stmt" count="0"/>
+        <metrics loc="33" ncloc="24" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="0" elements="9" coveredelements="0"/>
       </file>
     </package>
     <package name="App\Mail">
-      <file name="/home/user/projects/php/sites/goodwork/app/Mail/SendInvitationToRegister.php">
+      <file name="/home/mehedi/Code/gw/app/Mail/SendInvitationToRegister.php">
         <class name="App\Mail\SendInvitationToRegister" namespace="App\Mail">
-          <metrics complexity="3" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="1" elements="12" coveredelements="2"/>
+          <metrics complexity="3" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="0" elements="12" coveredelements="0"/>
         </class>
-        <line num="22" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="2"/>
-        <line num="24" type="stmt" count="2"/>
+        <line num="22" type="method" name="__construct" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="24" type="stmt" count="0"/>
         <line num="31" type="method" name="build" visibility="public" complexity="2" crap="6.00" count="0"/>
         <line num="33" type="stmt" count="0"/>
         <line num="34" type="stmt" count="0"/>
@@ -713,9 +725,9 @@
         <line num="40" type="stmt" count="0"/>
         <line num="41" type="stmt" count="0"/>
         <line num="42" type="stmt" count="0"/>
-        <metrics loc="45" ncloc="35" classes="1" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="1" elements="12" coveredelements="2"/>
+        <metrics loc="45" ncloc="35" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="0" elements="12" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Mail/UserRegistered.php">
+      <file name="/home/mehedi/Code/gw/app/Mail/UserRegistered.php">
         <class name="App\Mail\UserRegistered" namespace="App\Mail">
           <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="8" coveredelements="0"/>
         </class>
@@ -731,29 +743,29 @@
       </file>
     </package>
     <package name="App\Models">
-      <file name="/home/user/projects/php/sites/goodwork/app/Models/Activity.php">
+      <file name="/home/mehedi/Code/gw/app/Models/Activity.php">
         <class name="App\Models\Activity" namespace="App\Models">
-          <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="4" coveredelements="4"/>
+          <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="4" coveredelements="0"/>
         </class>
-        <line num="11" type="method" name="getDateAttribute" visibility="public" complexity="1" crap="1" count="4"/>
-        <line num="13" type="stmt" count="4"/>
-        <line num="16" type="method" name="getTimeAttribute" visibility="public" complexity="1" crap="1" count="4"/>
-        <line num="18" type="stmt" count="4"/>
-        <metrics loc="20" ncloc="20" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="4" coveredelements="4"/>
+        <line num="11" type="method" name="getDateAttribute" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="13" type="stmt" count="0"/>
+        <line num="16" type="method" name="getTimeAttribute" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="18" type="stmt" count="0"/>
+        <metrics loc="20" ncloc="20" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="4" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Models/Attachment.php">
+      <file name="/home/mehedi/Code/gw/app/Models/Attachment.php">
         <class name="App\Models\Attachment" namespace="App\Models">
           <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
         </class>
         <metrics loc="9" ncloc="9" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Models/Board.php">
+      <file name="/home/mehedi/Code/gw/app/Models/Board.php">
         <class name="App\Models\Board" namespace="App\Models">
           <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
         </class>
         <metrics loc="9" ncloc="9" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Models/Category.php">
+      <file name="/home/mehedi/Code/gw/app/Models/Category.php">
         <class name="App\Models\Category" namespace="App\Models">
           <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
         </class>
@@ -761,7 +773,7 @@
         <line num="14" type="stmt" count="0"/>
         <metrics loc="16" ncloc="16" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Models/Comment.php">
+      <file name="/home/mehedi/Code/gw/app/Models/Comment.php">
         <class name="App\Models\Comment" namespace="App\Models">
           <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="4" coveredelements="0"/>
         </class>
@@ -771,85 +783,85 @@
         <line num="32" type="stmt" count="0"/>
         <metrics loc="34" ncloc="25" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="4" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Models/Discussion.php">
+      <file name="/home/mehedi/Code/gw/app/Models/Discussion.php">
         <class name="App\Models\Discussion" namespace="App\Models">
-          <metrics complexity="4" methods="4" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="3" elements="8" coveredelements="6"/>
+          <metrics complexity="4" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="0" elements="8" coveredelements="0"/>
         </class>
-        <line num="20" type="method" name="creator" visibility="public" complexity="1" crap="1" count="2"/>
-        <line num="22" type="stmt" count="2"/>
-        <line num="25" type="method" name="getDateAttribute" visibility="public" complexity="1" crap="1" count="2"/>
-        <line num="27" type="stmt" count="2"/>
-        <line num="30" type="method" name="category" visibility="public" complexity="1" crap="1" count="2"/>
-        <line num="32" type="stmt" count="2"/>
+        <line num="20" type="method" name="creator" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="22" type="stmt" count="0"/>
+        <line num="25" type="method" name="getDateAttribute" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="27" type="stmt" count="0"/>
+        <line num="30" type="method" name="category" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="32" type="stmt" count="0"/>
         <line num="38" type="method" name="comments" visibility="public" complexity="1" crap="2.00" count="0"/>
         <line num="40" type="stmt" count="0"/>
-        <metrics loc="42" ncloc="36" classes="1" methods="4" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="3" elements="8" coveredelements="6"/>
+        <metrics loc="42" ncloc="36" classes="1" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="0" elements="8" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Models/Event.php">
+      <file name="/home/mehedi/Code/gw/app/Models/Event.php">
         <class name="App\Models\Event" namespace="App\Models">
           <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
         </class>
         <metrics loc="11" ncloc="11" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Models/File.php">
+      <file name="/home/mehedi/Code/gw/app/Models/File.php">
         <class name="App\Models\File" namespace="App\Models">
           <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
         </class>
         <metrics loc="11" ncloc="11" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Models/Label.php">
+      <file name="/home/mehedi/Code/gw/app/Models/Label.php">
         <class name="App\Models\Label" namespace="App\Models">
           <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
         </class>
         <metrics loc="9" ncloc="9" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Models/Message.php">
+      <file name="/home/mehedi/Code/gw/app/Models/Message.php">
         <class name="App\Models\Message" namespace="App\Models">
-          <metrics complexity="2" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="1" elements="4" coveredelements="2"/>
+          <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="4" coveredelements="0"/>
         </class>
-        <line num="11" type="method" name="user" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="13" type="stmt" count="1"/>
+        <line num="11" type="method" name="user" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="13" type="stmt" count="0"/>
         <line num="16" type="method" name="messageable" visibility="public" complexity="1" crap="2.00" count="0"/>
         <line num="18" type="stmt" count="0"/>
-        <metrics loc="20" ncloc="20" classes="1" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="1" elements="4" coveredelements="2"/>
+        <metrics loc="20" ncloc="20" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="4" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Models/Milestone.php">
+      <file name="/home/mehedi/Code/gw/app/Models/Milestone.php">
         <class name="App\Models\Milestone" namespace="App\Models">
           <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
         </class>
         <metrics loc="9" ncloc="9" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Models/Notification.php">
+      <file name="/home/mehedi/Code/gw/app/Models/Notification.php">
         <class name="App\Models\Notification" namespace="App\Models">
           <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
         </class>
         <metrics loc="9" ncloc="9" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Models/NotificationSetting.php">
+      <file name="/home/mehedi/Code/gw/app/Models/NotificationSetting.php">
         <class name="App\Models\NotificationSetting" namespace="App\Models">
           <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
         </class>
         <metrics loc="9" ncloc="9" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Models/Office.php">
+      <file name="/home/mehedi/Code/gw/app/Models/Office.php">
         <class name="App\Models\Office" namespace="App\Models">
           <metrics complexity="2" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="1" elements="4" coveredelements="2"/>
         </class>
-        <line num="14" type="method" name="members" visibility="public" complexity="1" crap="1" count="5"/>
-        <line num="16" type="stmt" count="5"/>
+        <line num="14" type="method" name="members" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="16" type="stmt" count="1"/>
         <line num="19" type="method" name="messages" visibility="public" complexity="1" crap="2.00" count="0"/>
         <line num="21" type="stmt" count="0"/>
         <metrics loc="23" ncloc="23" classes="1" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="1" elements="4" coveredelements="2"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Models/OfficeSetting.php">
+      <file name="/home/mehedi/Code/gw/app/Models/OfficeSetting.php">
         <class name="App\Models\OfficeSetting" namespace="App\Models">
           <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
         </class>
         <metrics loc="9" ncloc="9" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Models/Project.php">
+      <file name="/home/mehedi/Code/gw/app/Models/Project.php">
         <class name="App\Models\Project" namespace="App\Models">
-          <metrics complexity="3" methods="3" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="1" elements="6" coveredelements="2"/>
+          <metrics complexity="3" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="6" coveredelements="0"/>
         </class>
         <line num="14" type="method" name="members" visibility="public" complexity="1" crap="1" count="12"/>
         <line num="16" type="stmt" count="12"/>
@@ -857,49 +869,49 @@
         <line num="21" type="stmt" count="0"/>
         <line num="24" type="method" name="tasks" visibility="public" complexity="1" crap="2.00" count="0"/>
         <line num="26" type="stmt" count="0"/>
-        <metrics loc="28" ncloc="28" classes="1" methods="3" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="1" elements="6" coveredelements="2"/>
+        <metrics loc="28" ncloc="28" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="6" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Models/Setting.php">
+      <file name="/home/mehedi/Code/gw/app/Models/Setting.php">
         <class name="App\Models\Setting" namespace="App\Models">
           <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
         </class>
         <metrics loc="9" ncloc="9" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Models/Task.php">
+      <file name="/home/mehedi/Code/gw/app/Models/Task.php">
         <class name="App\Models\Task" namespace="App\Models">
-          <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="4" coveredelements="4"/>
+          <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="4" coveredelements="0"/>
         </class>
-        <line num="29" type="method" name="user" visibility="public" complexity="1" crap="1" count="3"/>
-        <line num="31" type="stmt" count="3"/>
-        <line num="34" type="method" name="taskable" visibility="public" complexity="1" crap="1" count="6"/>
-        <line num="36" type="stmt" count="6"/>
-        <metrics loc="38" ncloc="29" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="4" coveredelements="4"/>
+        <line num="29" type="method" name="user" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="31" type="stmt" count="0"/>
+        <line num="34" type="method" name="taskable" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="36" type="stmt" count="0"/>
+        <metrics loc="38" ncloc="29" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="4" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Models/Team.php">
+      <file name="/home/mehedi/Code/gw/app/Models/Team.php">
         <class name="App\Models\Team" namespace="App\Models">
-          <metrics complexity="2" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="1" elements="4" coveredelements="2"/>
+          <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="4" coveredelements="0"/>
         </class>
-        <line num="14" type="method" name="members" visibility="public" complexity="1" crap="1" count="6"/>
-        <line num="16" type="stmt" count="6"/>
+        <line num="14" type="method" name="members" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="16" type="stmt" count="0"/>
         <line num="19" type="method" name="messages" visibility="public" complexity="1" crap="2.00" count="0"/>
         <line num="21" type="stmt" count="0"/>
-        <metrics loc="23" ncloc="23" classes="1" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="1" elements="4" coveredelements="2"/>
+        <metrics loc="23" ncloc="23" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="4" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Models/TeamSetting.php">
+      <file name="/home/mehedi/Code/gw/app/Models/TeamSetting.php">
         <class name="App\Models\TeamSetting" namespace="App\Models">
           <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
         </class>
         <metrics loc="9" ncloc="9" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Models/Token.php">
+      <file name="/home/mehedi/Code/gw/app/Models/Token.php">
         <class name="App\Models\Token" namespace="App\Models">
           <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
         </class>
         <metrics loc="10" ncloc="10" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Models/User.php">
+      <file name="/home/mehedi/Code/gw/app/Models/User.php">
         <class name="App\Models\User" namespace="App\Models">
-          <metrics complexity="7" methods="6" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="1" elements="12" coveredelements="2"/>
+          <metrics complexity="7" methods="6" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="12" coveredelements="0"/>
         </class>
         <line num="22" type="method" name="getRouteKeyName" visibility="public" complexity="1" crap="2.00" count="0"/>
         <line num="24" type="stmt" count="0"/>
@@ -913,9 +925,9 @@
         <line num="44" type="stmt" count="0"/>
         <line num="50" type="method" name="comments" visibility="public" complexity="1" crap="2.00" count="0"/>
         <line num="52" type="stmt" count="0"/>
-        <metrics loc="54" ncloc="51" classes="1" methods="6" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="1" elements="12" coveredelements="2"/>
+        <metrics loc="54" ncloc="51" classes="1" methods="6" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="12" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Models/UserSetting.php">
+      <file name="/home/mehedi/Code/gw/app/Models/UserSetting.php">
         <class name="App\Models\UserSetting" namespace="App\Models">
           <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
         </class>
@@ -946,14 +958,14 @@
       </file>
     </package>
     <package name="App\Policies">
-      <file name="/home/user/projects/php/sites/goodwork/app/Policies/DiscussionPolicy.php">
+      <file name="/home/mehedi/Code/gw/app/Policies/DiscussionPolicy.php">
         <class name="App\Policies\DiscussionPolicy" namespace="App\Policies">
-          <metrics complexity="6" methods="6" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="1" elements="12" coveredelements="2"/>
+          <metrics complexity="6" methods="6" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="12" coveredelements="0"/>
         </class>
         <line num="20" type="method" name="view" visibility="public" complexity="1" crap="2.00" count="0"/>
         <line num="22" type="stmt" count="0"/>
-        <line num="30" type="method" name="create" visibility="public" complexity="1" crap="1" count="2"/>
-        <line num="32" type="stmt" count="2"/>
+        <line num="30" type="method" name="create" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="32" type="stmt" count="0"/>
         <line num="42" type="method" name="update" visibility="public" complexity="1" crap="2.00" count="0"/>
         <line num="44" type="stmt" count="0"/>
         <line num="53" type="method" name="delete" visibility="public" complexity="1" crap="2.00" count="0"/>
@@ -962,83 +974,83 @@
         <line num="66" type="stmt" count="0"/>
         <line num="75" type="method" name="forceDelete" visibility="public" complexity="1" crap="2.00" count="0"/>
         <line num="77" type="stmt" count="0"/>
-        <metrics loc="78" ncloc="37" classes="1" methods="6" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="1" elements="12" coveredelements="2"/>
+        <metrics loc="78" ncloc="37" classes="1" methods="6" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="12" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Policies/OfficePolicy.php">
+      <file name="/home/mehedi/Code/gw/app/Policies/OfficePolicy.php">
         <class name="App\Policies\OfficePolicy" namespace="App\Policies">
-          <metrics complexity="6" methods="6" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="2" elements="12" coveredelements="4"/>
-        </class>
-        <line num="20" type="method" name="view" visibility="public" complexity="1" crap="1" count="2"/>
-        <line num="22" type="stmt" count="2"/>
-        <line num="31" type="method" name="create" visibility="public" complexity="1" crap="1" count="4"/>
-        <line num="33" type="stmt" count="4"/>
-        <line num="43" type="method" name="update" visibility="public" complexity="1" crap="2.00" count="0"/>
-        <line num="45" type="stmt" count="0"/>
-        <line num="54" type="method" name="delete" visibility="public" complexity="1" crap="2.00" count="0"/>
-        <line num="56" type="stmt" count="0"/>
-        <line num="65" type="method" name="restore" visibility="public" complexity="1" crap="2.00" count="0"/>
-        <line num="67" type="stmt" count="0"/>
-        <line num="76" type="method" name="forceDelete" visibility="public" complexity="1" crap="2.00" count="0"/>
-        <line num="78" type="stmt" count="0"/>
-        <metrics loc="79" ncloc="38" classes="1" methods="6" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="2" elements="12" coveredelements="4"/>
-      </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Policies/ProjectPolicy.php">
-        <class name="App\Policies\ProjectPolicy" namespace="App\Policies">
-          <metrics complexity="6" methods="6" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="2" elements="12" coveredelements="4"/>
-        </class>
-        <line num="20" type="method" name="view" visibility="public" complexity="1" crap="1" count="2"/>
-        <line num="22" type="stmt" count="2"/>
-        <line num="31" type="method" name="create" visibility="public" complexity="1" crap="1" count="8"/>
-        <line num="33" type="stmt" count="8"/>
-        <line num="43" type="method" name="update" visibility="public" complexity="1" crap="2.00" count="0"/>
-        <line num="45" type="stmt" count="0"/>
-        <line num="54" type="method" name="delete" visibility="public" complexity="1" crap="2.00" count="0"/>
-        <line num="56" type="stmt" count="0"/>
-        <line num="65" type="method" name="restore" visibility="public" complexity="1" crap="2.00" count="0"/>
-        <line num="67" type="stmt" count="0"/>
-        <line num="76" type="method" name="forceDelete" visibility="public" complexity="1" crap="2.00" count="0"/>
-        <line num="78" type="stmt" count="0"/>
-        <metrics loc="79" ncloc="38" classes="1" methods="6" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="2" elements="12" coveredelements="4"/>
-      </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Policies/TaskPolicy.php">
-        <class name="App\Policies\TaskPolicy" namespace="App\Policies">
           <metrics complexity="6" methods="6" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="2" elements="12" coveredelements="4"/>
         </class>
         <line num="20" type="method" name="view" visibility="public" complexity="1" crap="2.00" count="0"/>
         <line num="22" type="stmt" count="0"/>
-        <line num="30" type="method" name="create" visibility="public" complexity="1" crap="1" count="2"/>
-        <line num="32" type="stmt" count="2"/>
+        <line num="31" type="method" name="create" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="33" type="stmt" count="1"/>
+        <line num="43" type="method" name="update" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="45" type="stmt" count="0"/>
+        <line num="54" type="method" name="delete" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="56" type="stmt" count="1"/>
+        <line num="66" type="method" name="restore" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="68" type="stmt" count="0"/>
+        <line num="77" type="method" name="forceDelete" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="79" type="stmt" count="0"/>
+        <metrics loc="80" ncloc="39" classes="1" methods="6" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="2" elements="12" coveredelements="4"/>
+      </file>
+      <file name="/home/mehedi/Code/gw/app/Policies/ProjectPolicy.php">
+        <class name="App\Policies\ProjectPolicy" namespace="App\Policies">
+          <metrics complexity="6" methods="6" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="12" coveredelements="0"/>
+        </class>
+        <line num="21" type="method" name="view" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="23" type="stmt" count="0"/>
+        <line num="32" type="method" name="create" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="34" type="stmt" count="0"/>
+        <line num="44" type="method" name="update" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="46" type="stmt" count="0"/>
+        <line num="55" type="method" name="delete" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="57" type="stmt" count="0"/>
+        <line num="67" type="method" name="restore" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="69" type="stmt" count="0"/>
+        <line num="78" type="method" name="forceDelete" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="80" type="stmt" count="0"/>
+        <metrics loc="81" ncloc="40" classes="1" methods="6" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="12" coveredelements="0"/>
+      </file>
+      <file name="/home/mehedi/Code/gw/app/Policies/TaskPolicy.php">
+        <class name="App\Policies\TaskPolicy" namespace="App\Policies">
+          <metrics complexity="6" methods="6" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="12" coveredelements="0"/>
+        </class>
+        <line num="20" type="method" name="view" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="22" type="stmt" count="0"/>
+        <line num="30" type="method" name="create" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="32" type="stmt" count="0"/>
         <line num="42" type="method" name="update" visibility="public" complexity="1" crap="2.00" count="0"/>
         <line num="44" type="stmt" count="0"/>
-        <line num="53" type="method" name="delete" visibility="public" complexity="1" crap="1" count="2"/>
-        <line num="55" type="stmt" count="2"/>
+        <line num="53" type="method" name="delete" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="55" type="stmt" count="0"/>
         <line num="65" type="method" name="restore" visibility="public" complexity="1" crap="2.00" count="0"/>
         <line num="67" type="stmt" count="0"/>
         <line num="76" type="method" name="forceDelete" visibility="public" complexity="1" crap="2.00" count="0"/>
         <line num="78" type="stmt" count="0"/>
-        <metrics loc="79" ncloc="38" classes="1" methods="6" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="2" elements="12" coveredelements="4"/>
+        <metrics loc="79" ncloc="38" classes="1" methods="6" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="12" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Policies/TeamPolicy.php">
+      <file name="/home/mehedi/Code/gw/app/Policies/TeamPolicy.php">
         <class name="App\Policies\TeamPolicy" namespace="App\Policies">
-          <metrics complexity="6" methods="6" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="2" elements="12" coveredelements="4"/>
+          <metrics complexity="6" methods="6" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="12" coveredelements="0"/>
         </class>
-        <line num="20" type="method" name="view" visibility="public" complexity="1" crap="1" count="2"/>
-        <line num="22" type="stmt" count="2"/>
-        <line num="31" type="method" name="create" visibility="public" complexity="1" crap="1" count="4"/>
-        <line num="33" type="stmt" count="4"/>
+        <line num="20" type="method" name="view" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="22" type="stmt" count="0"/>
+        <line num="31" type="method" name="create" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="33" type="stmt" count="0"/>
         <line num="43" type="method" name="update" visibility="public" complexity="1" crap="2.00" count="0"/>
         <line num="45" type="stmt" count="0"/>
         <line num="54" type="method" name="delete" visibility="public" complexity="1" crap="2.00" count="0"/>
         <line num="56" type="stmt" count="0"/>
-        <line num="65" type="method" name="restore" visibility="public" complexity="1" crap="2.00" count="0"/>
-        <line num="67" type="stmt" count="0"/>
-        <line num="76" type="method" name="forceDelete" visibility="public" complexity="1" crap="2.00" count="0"/>
-        <line num="78" type="stmt" count="0"/>
-        <metrics loc="79" ncloc="38" classes="1" methods="6" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="2" elements="12" coveredelements="4"/>
+        <line num="66" type="method" name="restore" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="68" type="stmt" count="0"/>
+        <line num="77" type="method" name="forceDelete" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="79" type="stmt" count="0"/>
+        <metrics loc="80" ncloc="39" classes="1" methods="6" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="12" coveredelements="0"/>
       </file>
     </package>
     <package name="App\Providers">
-      <file name="/home/user/projects/php/sites/goodwork/app/Providers/AppServiceProvider.php">
+      <file name="/home/mehedi/Code/gw/app/Providers/AppServiceProvider.php">
         <class name="App\Providers\AppServiceProvider" namespace="App\Providers">
           <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="6" coveredelements="6"/>
         </class>
@@ -1050,7 +1062,7 @@
         <line num="34" type="stmt" count="51"/>
         <metrics loc="35" ncloc="25" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="6" coveredelements="6"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Providers/AuthServiceProvider.php">
+      <file name="/home/mehedi/Code/gw/app/Providers/AuthServiceProvider.php">
         <class name="App\Providers\AuthServiceProvider" namespace="App\Providers">
           <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
         </class>
@@ -1059,7 +1071,7 @@
         <line num="30" type="stmt" count="51"/>
         <metrics loc="31" ncloc="21" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Providers/BroadcastServiceProvider.php">
+      <file name="/home/mehedi/Code/gw/app/Providers/BroadcastServiceProvider.php">
         <class name="App\Providers\BroadcastServiceProvider" namespace="App\Providers">
           <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
         </class>
@@ -1069,7 +1081,7 @@
         <line num="20" type="stmt" count="51"/>
         <metrics loc="21" ncloc="16" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Providers/EventServiceProvider.php">
+      <file name="/home/mehedi/Code/gw/app/Providers/EventServiceProvider.php">
         <class name="App\Providers\EventServiceProvider" namespace="App\Providers">
           <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
         </class>
@@ -1078,7 +1090,7 @@
         <line num="30" type="stmt" count="51"/>
         <metrics loc="31" ncloc="21" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Providers/RouteServiceProvider.php">
+      <file name="/home/mehedi/Code/gw/app/Providers/RouteServiceProvider.php">
         <class name="App\Providers\RouteServiceProvider" namespace="App\Providers">
           <metrics complexity="4" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="14" elements="18" coveredelements="18"/>
         </class>
@@ -1104,146 +1116,146 @@
       </file>
     </package>
     <package name="App\Repositories">
-      <file name="/home/user/projects/php/sites/goodwork/app/Repositories/CommentRepository.php">
+      <file name="/home/mehedi/Code/gw/app/Repositories/CommentRepository.php">
         <class name="App\Repositories\CommentRepository" namespace="App\Repositories">
-          <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="8" coveredelements="8"/>
+          <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="8" coveredelements="0"/>
         </class>
-        <line num="18" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="4"/>
-        <line num="20" type="stmt" count="4"/>
-        <line num="21" type="stmt" count="4"/>
-        <line num="27" type="method" name="create" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="29" type="stmt" count="1"/>
-        <line num="30" type="stmt" count="1"/>
-        <line num="31" type="stmt" count="1"/>
-        <line num="32" type="stmt" count="1"/>
-        <metrics loc="35" ncloc="25" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="8" coveredelements="8"/>
+        <line num="18" type="method" name="__construct" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="20" type="stmt" count="0"/>
+        <line num="21" type="stmt" count="0"/>
+        <line num="27" type="method" name="create" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="29" type="stmt" count="0"/>
+        <line num="30" type="stmt" count="0"/>
+        <line num="31" type="stmt" count="0"/>
+        <line num="32" type="stmt" count="0"/>
+        <metrics loc="35" ncloc="25" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="8" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Repositories/DiscussionRepository.php">
+      <file name="/home/mehedi/Code/gw/app/Repositories/DiscussionRepository.php">
         <class name="App\Repositories\DiscussionRepository" namespace="App\Repositories">
-          <metrics complexity="3" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="12" elements="15" coveredelements="15"/>
+          <metrics complexity="3" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="0" elements="15" coveredelements="0"/>
         </class>
-        <line num="11" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="2"/>
-        <line num="13" type="stmt" count="2"/>
-        <line num="14" type="stmt" count="2"/>
-        <line num="16" type="method" name="create" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="18" type="stmt" count="1"/>
-        <line num="19" type="stmt" count="1"/>
-        <line num="20" type="stmt" count="1"/>
-        <line num="21" type="stmt" count="1"/>
-        <line num="22" type="stmt" count="1"/>
-        <line num="23" type="stmt" count="1"/>
-        <line num="24" type="stmt" count="1"/>
-        <line num="25" type="stmt" count="1"/>
-        <line num="26" type="stmt" count="1"/>
-        <line num="30" type="method" name="getAllDiscussionWithCreator" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="32" type="stmt" count="1"/>
-        <metrics loc="34" ncloc="34" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="12" elements="15" coveredelements="15"/>
+        <line num="11" type="method" name="__construct" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="13" type="stmt" count="0"/>
+        <line num="14" type="stmt" count="0"/>
+        <line num="16" type="method" name="create" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="18" type="stmt" count="0"/>
+        <line num="19" type="stmt" count="0"/>
+        <line num="20" type="stmt" count="0"/>
+        <line num="21" type="stmt" count="0"/>
+        <line num="22" type="stmt" count="0"/>
+        <line num="23" type="stmt" count="0"/>
+        <line num="24" type="stmt" count="0"/>
+        <line num="25" type="stmt" count="0"/>
+        <line num="26" type="stmt" count="0"/>
+        <line num="30" type="method" name="getAllDiscussionWithCreator" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="32" type="stmt" count="0"/>
+        <metrics loc="34" ncloc="34" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="0" elements="15" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Repositories/MessageRepository.php">
+      <file name="/home/mehedi/Code/gw/app/Repositories/MessageRepository.php">
         <class name="App\Repositories\MessageRepository" namespace="App\Repositories">
-          <metrics complexity="3" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="7" elements="15" coveredelements="9"/>
+          <metrics complexity="3" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="0" elements="15" coveredelements="0"/>
         </class>
-        <line num="17" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="19" type="stmt" count="1"/>
-        <line num="20" type="stmt" count="1"/>
+        <line num="17" type="method" name="__construct" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="19" type="stmt" count="0"/>
+        <line num="20" type="stmt" count="0"/>
         <line num="26" type="method" name="saveMessage" visibility="public" complexity="1" crap="2.00" count="0"/>
         <line num="28" type="stmt" count="0"/>
         <line num="29" type="stmt" count="0"/>
         <line num="30" type="stmt" count="0"/>
         <line num="31" type="stmt" count="0"/>
         <line num="32" type="stmt" count="0"/>
-        <line num="36" type="method" name="getAllMessages" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="38" type="stmt" count="1"/>
-        <line num="39" type="stmt" count="1"/>
-        <line num="40" type="stmt" count="1"/>
-        <line num="41" type="stmt" count="1"/>
-        <line num="42" type="stmt" count="1"/>
-        <metrics loc="44" ncloc="34" classes="1" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="7" elements="15" coveredelements="9"/>
+        <line num="36" type="method" name="getAllMessages" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="38" type="stmt" count="0"/>
+        <line num="39" type="stmt" count="0"/>
+        <line num="40" type="stmt" count="0"/>
+        <line num="41" type="stmt" count="0"/>
+        <line num="42" type="stmt" count="0"/>
+        <metrics loc="44" ncloc="34" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="0" elements="15" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Repositories/OfficeRepository.php">
+      <file name="/home/mehedi/Code/gw/app/Repositories/OfficeRepository.php">
         <class name="App\Repositories\OfficeRepository" namespace="App\Repositories">
-          <metrics complexity="3" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="10" coveredelements="10"/>
+          <metrics complexity="3" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="6" elements="10" coveredelements="8"/>
         </class>
-        <line num="17" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="5"/>
-        <line num="19" type="stmt" count="5"/>
-        <line num="20" type="stmt" count="5"/>
-        <line num="26" type="method" name="getLatestOffices" visibility="public" complexity="1" crap="1" count="2"/>
-        <line num="28" type="stmt" count="2"/>
-        <line num="31" type="method" name="store" visibility="public" complexity="1" crap="1" count="3"/>
-        <line num="33" type="stmt" count="3"/>
-        <line num="34" type="stmt" count="3"/>
-        <line num="35" type="stmt" count="3"/>
-        <line num="36" type="stmt" count="3"/>
-        <metrics loc="39" ncloc="29" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="7" elements="10" coveredelements="10"/>
+        <line num="17" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="19" type="stmt" count="1"/>
+        <line num="20" type="stmt" count="1"/>
+        <line num="26" type="method" name="getLatestOffices" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="28" type="stmt" count="0"/>
+        <line num="31" type="method" name="store" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="33" type="stmt" count="1"/>
+        <line num="34" type="stmt" count="1"/>
+        <line num="35" type="stmt" count="1"/>
+        <line num="36" type="stmt" count="1"/>
+        <metrics loc="39" ncloc="29" classes="1" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="6" elements="10" coveredelements="8"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Repositories/ProjectRepository.php">
+      <file name="/home/mehedi/Code/gw/app/Repositories/ProjectRepository.php">
         <class name="App\Repositories\ProjectRepository" namespace="App\Repositories">
-          <metrics complexity="4" methods="4" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="9" elements="14" coveredelements="12"/>
+          <metrics complexity="4" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="0" elements="14" coveredelements="0"/>
         </class>
-        <line num="11" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="10"/>
-        <line num="13" type="stmt" count="10"/>
-        <line num="14" type="stmt" count="10"/>
+        <line num="11" type="method" name="__construct" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="13" type="stmt" count="0"/>
+        <line num="14" type="stmt" count="0"/>
         <line num="16" type="method" name="getAllProjects" visibility="public" complexity="1" crap="2.00" count="0"/>
         <line num="18" type="stmt" count="0"/>
-        <line num="21" type="method" name="getLatestProjects" visibility="public" complexity="1" crap="1" count="2"/>
-        <line num="23" type="stmt" count="2"/>
-        <line num="26" type="method" name="storeProject" visibility="public" complexity="1" crap="1" count="7"/>
-        <line num="28" type="stmt" count="7"/>
-        <line num="29" type="stmt" count="7"/>
-        <line num="30" type="stmt" count="7"/>
-        <line num="31" type="stmt" count="7"/>
-        <line num="32" type="stmt" count="7"/>
-        <line num="33" type="stmt" count="7"/>
-        <metrics loc="36" ncloc="36" classes="1" methods="4" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="9" elements="14" coveredelements="12"/>
+        <line num="21" type="method" name="getLatestProjects" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="23" type="stmt" count="0"/>
+        <line num="26" type="method" name="storeProject" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="28" type="stmt" count="0"/>
+        <line num="29" type="stmt" count="0"/>
+        <line num="30" type="stmt" count="0"/>
+        <line num="31" type="stmt" count="0"/>
+        <line num="32" type="stmt" count="0"/>
+        <line num="33" type="stmt" count="0"/>
+        <metrics loc="36" ncloc="36" classes="1" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="0" elements="14" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Repositories/TaskRepository.php">
+      <file name="/home/mehedi/Code/gw/app/Repositories/TaskRepository.php">
         <class name="App\Repositories\TaskRepository" namespace="App\Repositories">
-          <metrics complexity="3" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="3" elements="7" coveredelements="5"/>
+          <metrics complexity="3" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="0" elements="7" coveredelements="0"/>
         </class>
-        <line num="11" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="13" type="stmt" count="1"/>
-        <line num="14" type="stmt" count="1"/>
-        <line num="16" type="method" name="getAllTaskWithAssignee" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="18" type="stmt" count="1"/>
+        <line num="11" type="method" name="__construct" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="13" type="stmt" count="0"/>
+        <line num="14" type="stmt" count="0"/>
+        <line num="16" type="method" name="getAllTaskWithAssignee" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="18" type="stmt" count="0"/>
         <line num="25" type="method" name="getLatestProject" visibility="public" complexity="1" crap="2.00" count="0"/>
         <line num="27" type="stmt" count="0"/>
-        <metrics loc="29" ncloc="25" classes="1" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="3" elements="7" coveredelements="5"/>
+        <metrics loc="29" ncloc="25" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="0" elements="7" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Repositories/TeamRepository.php">
+      <file name="/home/mehedi/Code/gw/app/Repositories/TeamRepository.php">
         <class name="App\Repositories\TeamRepository" namespace="App\Repositories">
-          <metrics complexity="4" methods="4" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="8" elements="13" coveredelements="11"/>
+          <metrics complexity="4" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="0" elements="13" coveredelements="0"/>
         </class>
-        <line num="17" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="5"/>
-        <line num="19" type="stmt" count="5"/>
-        <line num="20" type="stmt" count="5"/>
+        <line num="17" type="method" name="__construct" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="19" type="stmt" count="0"/>
+        <line num="20" type="stmt" count="0"/>
         <line num="25" type="method" name="getLatestThreeTeam" visibility="public" complexity="1" crap="2.00" count="0"/>
         <line num="27" type="stmt" count="0"/>
-        <line num="30" type="method" name="getLatestTeams" visibility="public" complexity="1" crap="1" count="2"/>
-        <line num="32" type="stmt" count="2"/>
-        <line num="35" type="method" name="createNewTeam" visibility="public" complexity="1" crap="1" count="3"/>
-        <line num="37" type="stmt" count="3"/>
-        <line num="38" type="stmt" count="3"/>
-        <line num="39" type="stmt" count="3"/>
-        <line num="40" type="stmt" count="3"/>
-        <line num="41" type="stmt" count="3"/>
-        <metrics loc="44" ncloc="35" classes="1" methods="4" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="8" elements="13" coveredelements="11"/>
+        <line num="30" type="method" name="getLatestTeams" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="32" type="stmt" count="0"/>
+        <line num="35" type="method" name="createNewTeam" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="37" type="stmt" count="0"/>
+        <line num="38" type="stmt" count="0"/>
+        <line num="39" type="stmt" count="0"/>
+        <line num="40" type="stmt" count="0"/>
+        <line num="41" type="stmt" count="0"/>
+        <metrics loc="44" ncloc="35" classes="1" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="0" elements="13" coveredelements="0"/>
       </file>
-      <file name="/home/user/projects/php/sites/goodwork/app/Repositories/UserRepository.php">
+      <file name="/home/mehedi/Code/gw/app/Repositories/UserRepository.php">
         <class name="App\Repositories\UserRepository" namespace="App\Repositories">
-          <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="5" coveredelements="5"/>
+          <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="5" coveredelements="0"/>
         </class>
-        <line num="11" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="13" type="stmt" count="1"/>
-        <line num="14" type="stmt" count="1"/>
-        <line num="16" type="method" name="getAllUsers" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="18" type="stmt" count="1"/>
-        <metrics loc="20" ncloc="20" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="5" coveredelements="5"/>
+        <line num="11" type="method" name="__construct" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="13" type="stmt" count="0"/>
+        <line num="14" type="stmt" count="0"/>
+        <line num="16" type="method" name="getAllUsers" visibility="public" complexity="1" crap="2.00" count="0"/>
+        <line num="18" type="stmt" count="0"/>
+        <metrics loc="20" ncloc="20" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="5" coveredelements="0"/>
       </file>
     </package>
     <package name="App\Utilities">
-      <file name="/home/user/projects/php/sites/goodwork/app/Utilities/EntityTrait.php">
+      <file name="/home/mehedi/Code/gw/app/Utilities/EntityTrait.php">
         <class name="EntityTrait" namespace="App\Utilities">
-          <metrics complexity="3" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="7" coveredelements="7"/>
+          <metrics complexity="3" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="7" coveredelements="0"/>
         </class>
         <line num="11" type="method" name="getEntityModel" visibility="private" complexity="3" crap="3" count="5"/>
         <line num="13" type="stmt" count="5"/>
@@ -1255,37 +1267,37 @@
         <metrics loc="22" ncloc="22" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="7" coveredelements="7"/>
       </file>
     </package>
-    <file name="/home/user/projects/php/sites/goodwork/app/Utilities/helpers.php">
-      <line num="16" type="stmt" count="6"/>
-      <line num="17" type="stmt" count="6"/>
-      <line num="19" type="stmt" count="6"/>
-      <line num="20" type="stmt" count="6"/>
+    <file name="/home/mehedi/Code/gw/app/Utilities/helpers.php">
+      <line num="16" type="stmt" count="0"/>
+      <line num="17" type="stmt" count="0"/>
+      <line num="19" type="stmt" count="0"/>
+      <line num="20" type="stmt" count="0"/>
       <line num="23" type="stmt" count="0"/>
       <line num="24" type="stmt" count="0"/>
       <line num="26" type="stmt" count="0"/>
-      <line num="39" type="stmt" count="19"/>
-      <line num="40" type="stmt" count="19"/>
-      <line num="42" type="stmt" count="19"/>
-      <line num="43" type="stmt" count="19"/>
-      <line num="44" type="stmt" count="19"/>
-      <line num="45" type="stmt" count="19"/>
-      <line num="46" type="stmt" count="19"/>
-      <line num="47" type="stmt" count="19"/>
-      <line num="48" type="stmt" count="19"/>
-      <line num="49" type="stmt" count="19"/>
-      <line num="50" type="stmt" count="19"/>
-      <line num="51" type="stmt" count="19"/>
-      <line num="52" type="stmt" count="19"/>
-      <line num="53" type="stmt" count="19"/>
-      <line num="54" type="stmt" count="19"/>
-      <line num="55" type="stmt" count="19"/>
-      <line num="56" type="stmt" count="19"/>
-      <line num="57" type="stmt" count="19"/>
-      <line num="58" type="stmt" count="19"/>
-      <line num="59" type="stmt" count="19"/>
-      <line num="60" type="stmt" count="19"/>
-      <line num="61" type="stmt" count="19"/>
-      <metrics loc="62" ncloc="49" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="29" coveredstatements="26" elements="29" coveredelements="26"/>
+      <line num="39" type="stmt" count="1"/>
+      <line num="40" type="stmt" count="1"/>
+      <line num="42" type="stmt" count="1"/>
+      <line num="43" type="stmt" count="1"/>
+      <line num="44" type="stmt" count="1"/>
+      <line num="45" type="stmt" count="1"/>
+      <line num="46" type="stmt" count="1"/>
+      <line num="47" type="stmt" count="1"/>
+      <line num="48" type="stmt" count="1"/>
+      <line num="49" type="stmt" count="1"/>
+      <line num="50" type="stmt" count="1"/>
+      <line num="51" type="stmt" count="1"/>
+      <line num="52" type="stmt" count="1"/>
+      <line num="53" type="stmt" count="1"/>
+      <line num="54" type="stmt" count="1"/>
+      <line num="55" type="stmt" count="1"/>
+      <line num="56" type="stmt" count="1"/>
+      <line num="57" type="stmt" count="1"/>
+      <line num="58" type="stmt" count="1"/>
+      <line num="59" type="stmt" count="1"/>
+      <line num="60" type="stmt" count="1"/>
+      <line num="61" type="stmt" count="1"/>
+      <metrics loc="62" ncloc="49" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="29" coveredstatements="22" elements="29" coveredelements="22"/>
     </file>
     <metrics files="91" loc="3140" ncloc="2421" classes="71" methods="174" coveredmethods="93" conditionals="0" coveredconditionals="0" statements="537" coveredstatements="343" elements="711" coveredelements="436"/>
   </project>

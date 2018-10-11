@@ -93,4 +93,33 @@ class TeamTest extends TestCase
             ],
         ]);
     }
+
+    /** @test */
+    public function user_with_permission_can_delete_a_team()
+    {
+        $this->user_with_permission_can_create_team();
+
+        $id = Team::where('name', 'New Team')->first()->id;
+
+        $this->actingAs($this->user)->delete('/teams/' . $id)
+             ->assertJsonFragment([
+                 'status'  => 'success',
+                 'message' => 'The team has been deleted',
+             ]);
+    }
+
+    /**
+     * @expectedException Illuminate\Auth\Access\AuthorizationException
+     * @test
+     */
+    public function user_without_permission_cant_delete_a_team()
+    {
+        $user = factory(\App\Models\User::class)->create();
+
+        $this->user_with_permission_can_create_team();
+
+        $id = Team::where('name', 'New Team')->first()->id;
+
+        $this->actingAs($user)->delete('teams/' . $id);
+    }
 }

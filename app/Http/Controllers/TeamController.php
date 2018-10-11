@@ -34,4 +34,14 @@ class TeamController extends Controller
             ]);
         }
     }
+
+    public function delete(Team $team)
+    {
+        $team->delete();
+
+        return response()->json([
+            'status'  => 'success',
+            'message' => 'The team has been deleted',
+        ]);
+    }
 }

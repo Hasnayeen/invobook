@@ -37,6 +37,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('projects/{project}', 'ProjectController@show')->middleware('can:view,project');
 
+    Route::delete('projects/{project}', 'ProjectController@delete')->middleware('can:delete,project');
+
     /**********************************
         Team
     **********************************/
@@ -49,6 +51,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('teams/{team}', 'TeamController@show')->middleware('can:view,team');
 
+    Route::delete('teams/{team}', 'TeamController@delete')->middleware('can:delete,team');
+
     /**********************************
      Office
      **********************************/
@@ -60,6 +64,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('offices', 'OfficeController@store')->middleware('can:create,App\Models\Office');
 
     Route::get('offices/{office}', 'OfficeController@show')->middleware('can:view,office');
+
+    Route::delete('offices/{office}', 'OfficeController@delete')->middleware('can:delete,office');
 
     /**********************************
         Member

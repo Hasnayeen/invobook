@@ -46,4 +46,14 @@ class ProjectController extends Controller
             ]);
         }
     }
+
+    public function delete(Project $project)
+    {
+        $project->delete();
+
+        return response()->json([
+            'status'  => 'success',
+            'message' => 'The project has been deleted',
+        ]);
+    }
 }
