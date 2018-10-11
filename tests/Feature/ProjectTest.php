@@ -105,7 +105,6 @@ class ProjectTest extends TestCase
              ]);
     }
 
-
     /**
      * @expectedException Illuminate\Auth\Access\AuthorizationException
      * @test
