@@ -4,8 +4,8 @@ namespace App\Policies;
 
 use App\Models\User;
 use App\Models\Project;
-use Illuminate\Auth\Access\HandlesAuthorization;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ProjectPolicy
 {
