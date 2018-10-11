@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Exception;
+use App\Models\Message;
 use App\Events\MessageCreated;
 use App\Utilities\EntityTrait;
 use App\Repositories\MessageRepository;
@@ -54,5 +55,15 @@ class MessageController extends Controller
                 'message' => $e->getMessage(),
             ]);
         }
+    }
+
+    public function delete(Message $message)
+    {
+        $message->delete();
+
+        return response()->json([
+            'status'  => 'success',
+            'message' => 'Message has been deleted',
+        ]);
     }
 }
