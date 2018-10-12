@@ -21,6 +21,7 @@ class TaskController extends Controller
             'related_to'        => $request->input('related_to'),
             'taskable_type'     => $request->input('taskable_type'),
             'taskable_id'       => $request->input('taskable_id'),
+            'status_id'         => $request->input('status_id'),
         ]);
         $task->load('user:id,avatar');
 
