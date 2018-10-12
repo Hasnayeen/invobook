@@ -7,7 +7,7 @@
         403
     </div>
     <div class="mb-8">WHOOPS! Access Denied</div>
-    <a href="{{ route('/') }}" class="text-teal no-underline text-2xl">← Go To Home</a>
+    <a href="{{ url('/') }}" class="text-teal no-underline text-2xl">← Go To Home</a>
 </div>
 
 @slot('script')

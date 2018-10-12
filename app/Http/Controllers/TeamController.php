@@ -23,15 +23,14 @@ class TeamController extends Controller
             $team->load('members');
             create_permissions($team);
 
-            return response()->json([
-                'status' => 'success',
-                'team'   => $team->load('members'),
-            ], 201);
+            return $this->successResponse(
+                'New team has been created',
+                'team',
+                $team,
+                201
+            );
         } catch (Exception $e) {
-            return response()->json([
-                'status'  => 'error',
-                'message' => $e->getMessage(),
-            ]);
+            return $this->errorResponse($e->getMessage());
         }
     }
 

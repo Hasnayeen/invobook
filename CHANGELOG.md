@@ -8,8 +8,10 @@
 - Added Discussion details modal on Discussion Board section ([issue-40](https://github.com/iluminar/goodwork/issues/40))
 - Added delete option for message, project, team and office
 - Added email notification on member add to project/team/office
+
 ### Changed
 - Updated to Laravel 5.7
+- Updated docker compose to use `php:7.2-fpm` & `php:7.2-cli`
 
 ## v0.6 (2018-10-04)
 

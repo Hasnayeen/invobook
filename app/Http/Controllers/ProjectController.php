@@ -8,16 +8,6 @@ use App\Http\Requests\StoreProjectRequest;
 
 class ProjectController extends Controller
 {
-    private $projectRepository;
-
-    /**
-     * @param \App\Repositories\ProjectRepository $projectRepository
-     */
-    public function __construct(ProjectRepository $projectRepository)
-    {
-        $this->projectRepository = $projectRepository;
-    }
-
     public function show(Project $project)
     {
         $this->authorize('view', $project);
@@ -26,24 +16,22 @@ class ProjectController extends Controller
         return view('projects.single', ['project' => $project]);
     }
 
-    public function store(StoreProjectRequest $request)
+    public function store(StoreProjectRequest $request, ProjectRepository $repository)
     {
         try {
-            $project = $this->projectRepository->storeProject($request->all());
+            $project = $repository->storeProject($request->all());
             $project->members()->save(auth()->user());
             $project->load('members');
             create_permissions($project);
 
-            return response()->json([
-                'status'  => 'success',
-                'project' => $project,
-                'message' => 'New project has been created',
-                ]);
+            return $this->successResponse(
+                'New project has been created',
+                'project',
+                $project,
+                201
+            );
         } catch (Exception $e) {
-            return response()->json([
-                'status'  => 'error',
-                'message' => $e->getMessage(),
-            ]);
+            return $this->errorResponse($e->getMessage());
         }
     }
 

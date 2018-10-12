@@ -37,6 +37,6 @@ class MessageCreated implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PresenceChannel([$this->message->messageable_type . '.' . $this->message->messageable_id]);
+        return new PresenceChannel($this->message->messageable_type . '.' . $this->message->messageable_id);
     }
 }
