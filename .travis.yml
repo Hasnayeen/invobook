@@ -24,7 +24,7 @@ before_script:
   - php artisan config:clear
 
 script:
-  - vendor/bin/phpunit --coverage-clover=coverage.xml
+  - vendor/bin/phpunit --coverage-clover=clover.xml
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
