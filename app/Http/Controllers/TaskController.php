@@ -18,6 +18,7 @@ class TaskController extends Controller
             'assigned_to'       => $request->input('assigned_to'),
             'notes'             => $request->input('notes'),
             'due_on'            => $request->input('due_on'),
+            'status'            => $request->input('status'),
             'related_to'        => $request->input('related_to'),
             'taskable_type'     => $request->input('taskable_type'),
             'taskable_id'       => $request->input('taskable_id'),

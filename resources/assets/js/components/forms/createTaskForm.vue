@@ -9,6 +9,20 @@
           <input v-model="name" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-last-name" type="text" placeholder="New Task" required>
         </div>
         <div class="p-4">
+          <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-status">
+            Status
+          </label>
+          <div class="flex flex-row items-center">
+            <select v-model="status" class="w-5/6 block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" id="user">
+              <option selected disabled hidden>Select Task Status</option>
+              <option value="in-progress" class="my-2 text-lg">In Progress</option>
+              <option value="completed" class="my-2 text-lg">Completed</option>
+              <option value="in-review" class="my-2 text-lg">In Review</option>
+            </select>
+            <i class="w-1/6 fa fa-chevron-down pointer-events-none flex items-center text-grey-darker -ml-8"></i>
+          </div>
+        </div>
+        <div class="p-4">
           <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name">
             Notes
           </label>
@@ -59,6 +73,7 @@ export default {
   data: () => ({
     name: '',
     notes: '',
+    status: '',
     assigned_to: null,
     related_to: '',
   }),
@@ -67,6 +82,7 @@ export default {
       axios.post('/tasks', {
         name: this.name,
         notes: this.notes,
+        status: this.status,
         assigned_to: this.assigned_to,
         related_to: this.related_to,
         due_on: this.$refs.dueOnDate.formattedValue,
