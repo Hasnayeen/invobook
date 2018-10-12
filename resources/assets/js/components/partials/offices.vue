@@ -5,12 +5,12 @@
             <div class="absolute pin opacity-75 bg-grey"></div>
             <div id="create-project-form" class="fixed pin-x w-1/3 z-10 bg-grey-lighter mx-auto p-8 rounded">
                 <p class="py-2">
-                    <input class="w-full shadow appearance-none border rounded py-2 px-3 text-grey-darker" 
+                    <input class="w-full shadow appearance-none border rounded py-2 px-3 text-grey-darker"
                         type="text" placeholder="Name" v-model="name">
                     <span class="hidden"></span>
                 </p>
                 <p class="py-2">
-                    <input class="w-full shadow appearance-none border rounded py-2 px-3 text-grey-darker" 
+                    <input class="w-full shadow appearance-none border rounded py-2 px-3 text-grey-darker"
                         type="text" placeholder="Description" v-model="description">
                     <span class="hidden"></span>
                 </p>
@@ -22,36 +22,22 @@
         </div>
 
         <div class="flex flex-row flex-wrap justify-center">
-            <div class="bg-white shadow-md w-64 h-64 flex flex-col justify-center items-center text-center rounded m-4 cursor-pointer" 
+            <div class="bg-white shadow-md w-64 h-64 flex flex-col justify-center items-center text-center rounded m-4 cursor-pointer"
                 @click="openCreateOfficeModal">
                 <i class="fa fa-plus text-grey-dark text-4xl"></i>
                 <span class="text-grey-darker pt-4">Add a new office</span>
             </div>
 
-            <div class="bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center items-center text-center rounded m-4" 
-                v-for="office in offices">
-                <span class="w-full h-8 pr-4 pt-2">
-                    <i class="fa fa-ellipsis-h float-right text-grey-darker cursor-pointer"></i>
-                </span>
-                <div class="w-full p-2 h-24 flex flex-col justify-end">
-                    <a class="text-pink text-xl no-underline" :href="office.url">{{ office.name }}</a>
-                </div>
-                <span class="text-grey text-sm w-full px-2 h-16 self-start">{{ office.description }}</span>
-                <div class="border-t w-full h-16 flex flex-row justify-around items-center px-2">
-                    <a v-for="(member, index) in office.members" v-if="index < 5" :href="'/users/' + member.username">
-                        <img :src="generateUrl(member.avatar)" class="rounded-full w-8 h-8 mr-1">
-                    </a>
-                    <span v-if="office.members.length > 5" class="bg-grey-lighter border-teal border p-2 rounded-full">{{ office.members.length - 5 }}+</span>
-                    <span v-if="office.members.length == 0" class="text-grey-dark text-center">No members yet</span>
-                </div>
-            </div>
+            <office v-for="(office, index) in offices" :key="index" :details="office" @deleted="deleteOffice(index)"></office>
         </div>
-
     </div>
 </template>
 
 <script>
+    import office from './office'
+
     export default {
+      components: { office },
       data: () => ({
         offices: data.offices.map((office) => {
           office.url = 'offices/' + office.id
@@ -90,6 +76,9 @@
         },
         openCreateOfficeModal () {
           this.showCreateOfficeForm = true
+        },
+        deleteOffice(index) {
+          this.offices.splice(index, 1)
         }
       }
     }

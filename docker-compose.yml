@@ -44,7 +44,7 @@ services:
     hostname: redis
 
   worker:
-    image: php:7.1-cli
+    image: php:7.2-cli
     volumes:
       - ./:/var/www
     links:

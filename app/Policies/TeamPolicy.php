@@ -53,6 +53,7 @@ class TeamPolicy
      */
     public function delete(User $user, Team $team)
     {
+        return $user->hasPermissionTo('delete team->' . $team->id);
     }
 
     /**

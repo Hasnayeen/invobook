@@ -17,6 +17,7 @@ class AuthServiceProvider extends ServiceProvider
         \App\Models\Office::class     => \App\Policies\OfficePolicy::class,
         \App\Models\Task::class       => \App\Policies\TaskPolicy::class,
         \App\Models\Discussion::class => \App\Policies\DiscussionPolicy::class,
+        \App\Models\Message::class    => \App\Policies\MessagePolicy::class,
     ];
 
     /**

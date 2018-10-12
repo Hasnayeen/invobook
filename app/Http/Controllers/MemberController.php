@@ -22,7 +22,7 @@ class MemberController extends Controller
         $entity->members()->save($user);
         $this->givePermissionTo($user, $entity->id);
 
-        $user->notify(new BecameNewMember(request('resource_type'), $entity->name));
+        $user->notify(new BecameNewMember($entity, $user, auth()->user()));
 
         return response()->json([
             'status'   => 'success',
