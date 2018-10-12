@@ -2,6 +2,8 @@
 
 namespace App\Notifications;
 
+use App\Models\User;
+use App\Models\Entity;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -14,32 +16,43 @@ class BecameNewMember extends Notification implements ShouldQueue
     /**
      * @var string
      */
-    private $groupType;
+    private $entityType;
 
     /**
      * @var string
      */
-    private $groupName;
+    private $entityName;
 
     /**
-     * @param string $groupType
-     * @param string $groupName
+     * @var \App\Models\User
      */
-    public function __construct(string $groupType, string $groupName)
+    private $adder;
+
+    /**
+     * @var \App\Models\User
+     */
+    private $added;
+
+    /**
+     * @param string $entityType
+     * @param string $entityName
+     */
+    public function __construct(Entity $entity, User $adder, User $added)
     {
-        $this->groupType = $groupType;
-        $this->groupName = $groupName;
+        $this->entityType = $entity->getType();
+        $this->entityName = $entity->name;
+        $this->adder = $adder;
+        $this->added = $added;
     }
 
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed $notifiable
      * @return array
      */
-    public function via($notifiable): array
+    public function via(): array
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -51,11 +64,11 @@ class BecameNewMember extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject('Membership granted')
+            ->subject('You have been added to ' . $this->entityName)
             ->line(sprintf(
-                'You have become a member of the %s: %s',
-                $this->groupType,
-                $this->groupName
+                '%s added you to the %s: %s',
+                $this->entityType,
+                $this->entityName
             ));
     }
 
@@ -67,6 +80,11 @@ class BecameNewMember extends Notification implements ShouldQueue
      */
     public function toArray($notifiable)
     {
-        return [];
+        return [
+            'type'  => $this->entityType,
+            'name'  => $this->entityName,
+            'adder' => $this->adder,
+            'added' => $this->added,
+        ];
     }
 }

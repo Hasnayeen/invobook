@@ -22,16 +22,14 @@ class OfficeController extends Controller
             $office->load('members');
             create_permissions($office);
 
-            return response()->json([
-                'status'  => 'success',
-                'office'  => $office,
-                'message' => 'New office has been created',
-                ]);
+            return $this->successResponse(
+                'New office has been created',
+                'office',
+                $office,
+                201
+            );
         } catch (Exception $e) {
-            return response()->json([
-                'status'  => 'error',
-                'message' => $e->getMessage(),
-            ]);
+            return $this->errorResponse($e->getMessage());
         }
     }
 

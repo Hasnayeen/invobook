@@ -24,5 +24,7 @@ class HeadquarterOfficeSeeder extends Seeder
         $office = Office::where('name', 'Headquarter')->first();
         $user = User::find(1);
         $user->offices()->attach($office->id);
+        $permission = Permission::create(['name' => 'view office->' . $office->id]);
+        $user->givePermissionTo($permission);
     }
 }
