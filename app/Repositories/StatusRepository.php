@@ -25,5 +25,4 @@ class StatusRepository
             'color'  => $data['color'],
         ]);
     }
-
 }

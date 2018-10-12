@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Status;
-use Illuminate\Http\Request;
 use App\Repositories\StatusRepository;
 use App\Http\Requests\ValidateStatusCreation;
 
