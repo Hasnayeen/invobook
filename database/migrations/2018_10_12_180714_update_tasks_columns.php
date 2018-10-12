@@ -14,7 +14,7 @@ class UpdateTasksColumns extends Migration
     public function up()
     {
         Schema::table('tasks', function (Blueprint $table) {
-            $table->integer('status_id')->unsigned();
+            $table->integer('status_id')->unsigned()->nullable();
         });
     }
 
