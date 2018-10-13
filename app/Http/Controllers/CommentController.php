@@ -37,6 +37,7 @@ class CommentController extends Controller
             $data['commentable_id'] = $request->get('commentable_id');
 
             $comment = $this->repository->create($data);
+            $comment->load('user:id,name,avatar');
 
             return $this->successResponse(
                 'Comment has been saved',
