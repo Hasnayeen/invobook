@@ -27,9 +27,10 @@ class CommentRepository
     public function create(array $data): Comment
     {
         return $this->model->query()->create([
-            'discussion_id' => $data['discussion_id'],
-            'user_id'       => $data['user_id'],
-            'body'          => $data['body'],
+            'user_id'          => auth()->user()->id,
+            'commentable_type' => $data['commentable_type'],
+            'commentable_id'   => $data['commentable_id'],
+            'body'             => $data['body'],
         ]);
     }
 }

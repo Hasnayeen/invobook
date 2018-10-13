@@ -6,19 +6,17 @@ use Tests\TestCase;
 use App\Models\Discussion;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Validation\ValidationException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class CommentTest extends TestCase
 {
     /**
      * @var string
      */
-    private static $endpoint = '/discussions/1/comments';
+    private static $endpoint = '/comments';
 
     public function setUp()
     {
         parent::setUp();
-        factory(Discussion::class)->create(['id' => 1]);
     }
 
     /**
@@ -26,23 +24,31 @@ class CommentTest extends TestCase
      */
     public function user_can_create_comment()
     {
+        factory(Discussion::class)->create(['id' => 1]);
         $this->actingAs($this->user);
 
         $response = $this->post(
             self::$endpoint,
-            ['body' => 'Comment body']
+            [
+                'body'             => 'Comment body',
+                'commentable_type' => 'discussion',
+                'commentable_id'   => 1,
+            ]
         );
 
         $response->assertStatus(201);
         $response->assertJson([
             'status'  => 'success',
+            'message' => 'Comment has been saved',
             'comment' => [
-                'discussion_id' => 1,
-                'body'          => 'Comment body',
+                'commentable_id'   => 1,
+                'commentable_type' => 'discussion',
+                'user_id'          => $this->user->id,
+                'body'             => 'Comment body',
             ],
         ]);
 
-        $this->assertDatabaseHas('comments', ['discussion_id' => 1, 'body' => 'Comment body']);
+        $this->assertDatabaseHas('comments', ['commentable_id' => 1, 'commentable_type' => 'discussion', 'body' => 'Comment body', 'user_id' => $this->user->id]);
     }
 
     /**
@@ -54,21 +60,29 @@ class CommentTest extends TestCase
 
         $this->post(
             self::$endpoint,
-            ['body' => 'Comment body']
+            [
+                'body'             => 'Comment body',
+                'commentable_type' => 'discussion',
+                'commentable_id'   => 1,
+            ]
         );
     }
 
     /**
      * @test
      */
-    public function user_can_not_create_comment_for_not_existing_discussion()
+    public function user_can_not_create_comment_for_non_existing_commentable_resource()
     {
         $this->actingAs($this->user);
 
-        $this->expectException(ModelNotFoundException::class);
+        $this->expectException(ValidationException::class);
         $response = $this->post(
             str_replace('1', '999', self::$endpoint),
-            ['body' => 'Comment body']
+            [
+                'body'             => 'Comment body',
+                'commentable_type' => 'discussion',
+                'commentable_id'   => 1,
+            ]
         );
 
         $response->assertStatus(404);
