@@ -31,6 +31,7 @@ class ValidateTaskCreation extends FormRequest
             'related_to'    => 'nullable|string',
             'taskable_type' => 'required',
             'taskable_id'   => 'required',
+            'status_id'     => 'nullable|exists:statuses,id',
         ];
     }
 }
