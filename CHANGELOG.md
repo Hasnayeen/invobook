@@ -1,6 +1,6 @@
 # Release Notes
 
-## v0.7 (Yet to Release)
+## v0.7 (2018-10-13)
 
 ### Added
 - Added `Quill` rich text editor on discussion section ([issue-165](https://github.com/iluminar/goodwork/issues/165))
@@ -8,6 +8,7 @@
 - Added Discussion details modal on Discussion Board section ([issue-40](https://github.com/iluminar/goodwork/issues/40))
 - Added delete option for message, project, team and office
 - Added email notification on member add to project/team/office
+- Added comment option to discussions
 
 ### Changed
 - Updated to Laravel 5.7

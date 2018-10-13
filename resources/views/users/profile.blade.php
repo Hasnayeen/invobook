@@ -5,7 +5,7 @@
 <profile :user="{{ $user }}" :timezones="{{ json_encode($timezones) }}"></profile>
 
 @slot('script')
-<script src="{{ mix('/js/users/profile.js') }}"></script>
+<script src="{{ mix('/js/users/profile.min.js') }}"></script>
 @endslot
 
 @endcomponent

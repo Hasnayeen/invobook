@@ -11,7 +11,7 @@
 </div>
 
 @slot('script')
-<script src="{{ mix('/js/errors/404.js') }}"></script>
+<script src="{{ mix('/js/errors/404.min.js') }}"></script>
 @endslot
 
 @endcomponent

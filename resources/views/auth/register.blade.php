@@ -20,6 +20,6 @@
     window.url = "{{ url('/register/' . $token) }}"
     window.errors = <?php echo json_encode($errors->toArray()); ?>
 </script>
-<script src="{{ mix('/js/auth/register.js') }}"></script>
+<script src="{{ mix('/js/auth/register.min.js') }}"></script>
 @endslot
 @endcomponent

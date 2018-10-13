@@ -34,17 +34,6 @@ class OfficePolicy
     }
 
     /**
-     * Determine whether the user can update the office.
-     *
-     * @param  \App\Models\User $user
-     * @param  \App\Office      $office
-     * @return mixed
-     */
-    public function update(User $user, Office $office)
-    {
-    }
-
-    /**
      * Determine whether the user can delete the office.
      *
      * @param  \App\Models\User $user
@@ -54,27 +43,5 @@ class OfficePolicy
     public function delete(User $user, Office $office)
     {
         return $user->hasPermissionTo('delete office->' . $office->id);
-    }
-
-    /**
-     * Determine whether the user can restore the office.
-     *
-     * @param  \App\Models\User $user
-     * @param  \App\Office      $office
-     * @return mixed
-     */
-    public function restore(User $user, Office $office)
-    {
-    }
-
-    /**
-     * Determine whether the user can permanently delete the office.
-     *
-     * @param  \App\Models\User $user
-     * @param  \App\Office      $office
-     * @return mixed
-     */
-    public function forceDelete(User $user, Office $office)
-    {
     }
 }

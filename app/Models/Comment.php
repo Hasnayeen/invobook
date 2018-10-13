@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
@@ -11,10 +12,17 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Comment extends Model
 {
     protected $fillable = [
-        'discussion_id',
-        'user_id',
         'body',
+        'user_id',
+        'commentable_id',
+        'commentable_type',
     ];
+
+    protected $casts = [
+        'commentable_id' => 'integer',
+    ];
+
+    protected $appends = ['date'];
 
     /**
      * @return BelongsTo
@@ -25,10 +33,15 @@ class Comment extends Model
     }
 
     /**
-     * @return BelongsTo
+     * @return MorphTo
      */
-    public function discussion(): BelongsTo
+    public function commentable(): MorphTo
     {
-        return $this->belongsTo(Discussion::class, 'discussion_id');
+        return $this->morphTo();
+    }
+
+    public function getDateAttribute()
+    {
+        return $this->created_at->format('M j,Y');
     }
 }

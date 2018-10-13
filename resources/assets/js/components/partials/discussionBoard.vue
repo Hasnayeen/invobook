@@ -2,7 +2,7 @@
 <div :class="{'hidden': (activeTab != 'discussions')}" class="w-full">
   <create-discussion-form :resourceId="resource.id" :resourceType="resourceType" @close="closeCreateDiscussionForm" :form-shown="createDiscussionFormShown"></create-discussion-form>
 
-  <discussion-details v-if="discussionDetailsShown" :discussion="discussion" @close="closeDiscussionDetails"></discussion-details>
+  <discussion-details :discussionDetailsShown="discussionDetailsShown" :discussion="discussion" @close="closeDiscussionDetails"></discussion-details>
 
   <div class="text-center">
     <button @click="showCreateDiscussionForm" class="no-underline p-3 my-4 bg-white text-base text-teal rounded shadow">Create New Post</button>

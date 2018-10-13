@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 /**
  * @property int id
@@ -33,10 +33,10 @@ class Discussion extends Model
     }
 
     /**
-     * @return HasMany
+     * @return MorphMany
      */
-    public function comments(): HasMany
+    public function comments(): MorphMany
     {
-        return $this->hasMany(Comment::class, 'discussion_id');
+        return $this->morphMany(Comment::class, 'commentable');
     }
 }
