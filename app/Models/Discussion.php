@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 /**
@@ -34,7 +33,7 @@ class Discussion extends Model
     }
 
     /**
-     * @return HasMany
+     * @return MorphMany
      */
     public function comments(): MorphMany
     {

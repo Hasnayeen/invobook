@@ -15,9 +15,8 @@ class MessageController extends Controller
 
     public function index(MessageRepository $repository)
     {
-        $messages = $repository->getAllMessages(request('resource_type'), request('resource_id'));
         try {
-            $entity = $this->getEntityModel();
+            $messages = $repository->getAllMessages(request('resource_type'), request('resource_id'));
 
             return response()->json([
                 'status'   => 'success',
@@ -35,7 +34,6 @@ class MessageController extends Controller
     public function store(StoreMessageRequest $request, MessageRepository $repository)
     {
         try {
-            $entity = $this->getEntityModel();
             $message = $repository->saveMessage([
                 'message'          => request('message'),
                 'user_id'          => auth()->user()->id,

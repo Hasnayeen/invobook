@@ -11,7 +11,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function successResponse(string $message, ?string $dataType, $data, int $code = 200): \Illuminate\Http\JsonResponse
+    public function successResponse(?string $message, ?string $dataType, $data = null, int $code = 200): \Illuminate\Http\JsonResponse
     {
         return response()->json([
             'status'  => 'success',
@@ -20,7 +20,7 @@ class Controller extends BaseController
         ], $code);
     }
 
-    public function errorResponse(string $message, ?string $dataType, $data, int $code = 400): \Illuminate\Http\JsonResponse
+    public function errorResponse(string $message, ?string $dataType, $data = null, int $code = 400): \Illuminate\Http\JsonResponse
     {
         return response()->json([
             'status'  => 'error',
