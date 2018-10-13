@@ -18,7 +18,11 @@
 <script>
 export default {
   props: {
-    discussion: {
+    resourceType: {
+      required: true,
+      type: String
+    },
+    resource: {
       required: true,
       type: Object
     }
@@ -33,8 +37,8 @@ export default {
       } else {
         axios.post('/comments', {
           body: this.comment,
-          commentable_type: 'discussion',
-          commentable_id: this.discussion.id
+          commentable_type: this.resourceType,
+          commentable_id: this.resource.id
         })
           .then((response) => {
             this.comment = ''

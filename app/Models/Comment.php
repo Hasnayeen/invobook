@@ -18,6 +18,10 @@ class Comment extends Model
         'commentable_type',
     ];
 
+    protected $casts = [
+        'commentable_id' => 'integer',
+    ];
+
     /**
      * @return BelongsTo
      */

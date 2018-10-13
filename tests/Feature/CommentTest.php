@@ -19,9 +19,7 @@ class CommentTest extends TestCase
         parent::setUp();
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function user_can_create_comment()
     {
         factory(Discussion::class)->create(['id' => 1]);
@@ -51,9 +49,7 @@ class CommentTest extends TestCase
         $this->assertDatabaseHas('comments', ['commentable_id' => 1, 'commentable_type' => 'discussion', 'body' => 'Comment body', 'user_id' => $this->user->id]);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function guest_can_not_create_comment()
     {
         $this->expectException(AuthenticationException::class, 'Unauthenticated');
@@ -68,9 +64,7 @@ class CommentTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function user_can_not_create_comment_for_non_existing_commentable_resource()
     {
         $this->actingAs($this->user);
@@ -88,9 +82,7 @@ class CommentTest extends TestCase
         $response->assertStatus(404);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function body_attribute_is_required()
     {
         $this->actingAs($this->user);
@@ -101,5 +93,22 @@ class CommentTest extends TestCase
             self::$endpoint,
             []
         );
+    }
+
+    /** @test */
+    public function user_can_see_all_comment()
+    {
+        $discussion = factory(\App\Models\Discussion::class)->create();
+        $comments = factory(\App\Models\Comment::class, 3)->create(['commentable_type' => 'discussion', 'commentable_id' => $discussion->id]);
+
+        $this->actingAs($this->user)->call('GET', self::$endpoint, ['commentable_type' => 'discussion', 'commentable_id' => $discussion->id])
+             ->assertJsonFragment([
+                 'status'           => 'success',
+                 'body'             => $comments[0]->body,
+                 'body'             => $comments[1]->body,
+                 'body'             => $comments[2]->body,
+                 'commentable_type' => 'discussion',
+                 'commentable_id'   => $discussion->id,
+             ]);
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Discussion;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Repositories\CommentRepository;
@@ -23,7 +22,6 @@ class CommentController extends Controller
     }
 
     /**
-     * @param  Discussion   $discussion
      * @param  Request      $request
      * @return JsonResponse
      */
@@ -49,5 +47,12 @@ class CommentController extends Controller
         } catch (Exception $e) {
             return $this->errorResponse($e->getMessage());
         }
+    }
+
+    public function index()
+    {
+        $comments = $this->repository->getAllCommentsWithUser();
+
+        return $this->successResponse(null, 'comments', $comments);
     }
 }
