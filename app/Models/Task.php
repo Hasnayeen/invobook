@@ -15,7 +15,7 @@ class Task extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'assigned_to', 'notes', 'due_on', 'taskable_type', 'taskable_id',
+        'name', 'assigned_to', 'notes', 'due_on', 'taskable_type', 'taskable_id', 'status_id',
     ];
 
     protected $casts = [
@@ -34,5 +34,10 @@ class Task extends Model
     public function taskable()
     {
         return $this->morphTo();
+    }
+
+    public function status()
+    {
+        return $this->belongsTo('App\Models\Status');
     }
 }
