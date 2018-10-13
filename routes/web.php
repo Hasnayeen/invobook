@@ -87,8 +87,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('categories', 'CategoryController@index');
 
-    Route::post('discussions/{discussion}/comments', 'CommentController@store');
-
     /**********************************
         Messages
      **********************************/
@@ -122,6 +120,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('tasks/{task}', 'TaskController@show');
 
     Route::delete('tasks/{task}', 'TaskController@delete')->middleware('can:delete,task');
+
+    /**********************************
+        Comment
+    **********************************/
+
+    Route::post('/comments', 'CommentController@store');
 
     /**********************************
         User

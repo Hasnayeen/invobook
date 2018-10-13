@@ -24,6 +24,8 @@
       </div>
     </div>
     <div v-html="discussion.content" class="py-8 text-grey-darkest"></div>
+
+    <comment-box :discussion="discussion"></comment-box>
   </div>  
 
   <div @click="closeDiscussionDetails" class="h-screen w-screen fixed pin bg-grey-darkest opacity-25"></div>
@@ -31,7 +33,11 @@
 </template>
 
 <script>
+import commentBox from './commentBox.vue'
 export default {
+  components: {
+    commentBox
+  },
   props: {
     discussion: {
       required: true,
