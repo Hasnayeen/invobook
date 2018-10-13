@@ -1,5 +1,5 @@
 <template>
-<div>
+<div v-if="discussionDetailsShown">
   <div class="absolute container mx-auto md:w-5/6 lg:4/5 xl:w-3/4 xxl:w-2/3 bg-white rounded shadow-lg z-10 py-8 px-16 mb-8" style="top: 12vh;left: 0;right: 0;">
       <div class="flex flex-row justify-between relative">
         <div @click="closeDiscussionDetails" class="cursor-pointer">
@@ -25,7 +25,7 @@
     </div>
     <div v-html="discussion.content" class="py-8 text-grey-darkest"></div>
 
-    <comment-box resourceType="discussion" :resource="discussion"></comment-box>
+    <comment-box resourceType="discussion" :resource="discussion" :discussionDetailsShown="discussionDetailsShown"></comment-box>
   </div>  
 
   <div @click="closeDiscussionDetails" class="h-screen w-screen fixed pin bg-grey-darkest opacity-25"></div>
@@ -39,6 +39,10 @@ export default {
     commentBox
   },
   props: {
+    discussionDetailsShown: {
+      required: true,
+      type: Boolean
+    },
     discussion: {
       required: true,
       type: Object

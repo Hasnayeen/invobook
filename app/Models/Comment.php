@@ -22,6 +22,8 @@ class Comment extends Model
         'commentable_id' => 'integer',
     ];
 
+    protected $appends = ['date'];
+
     /**
      * @return BelongsTo
      */
@@ -36,5 +38,10 @@ class Comment extends Model
     public function commentable(): MorphTo
     {
         return $this->morphTo();
+    }
+
+    public function getDateAttribute()
+    {
+        return $this->created_at->format('M j,Y');
     }
 }
