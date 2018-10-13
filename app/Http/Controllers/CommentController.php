@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Discussion;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Repositories\CommentRepository;
@@ -23,23 +22,38 @@ class CommentController extends Controller
     }
 
     /**
-     * @param  Discussion   $discussion
      * @param  Request      $request
      * @return JsonResponse
      */
-    public function store(Discussion $discussion, Request $request): JsonResponse
+    public function store(Request $request): JsonResponse
     {
-        $data = $request->validate([
-            'body' => 'required',
-        ]);
+        try {
+            $data = $request->validate([
+                'body'             => 'required',
+                'commentable_type' => 'required|string',
+                'commentable_id'   => 'required|integer|exists:' . $request->get('commentable_type') . 's,id',
+            ]);
+            $data['commentable_type'] = $request->get('commentable_type');
+            $data['commentable_id'] = $request->get('commentable_id');
 
-        $data = array_merge($data, ['discussion_id' => $discussion->id, 'user_id' => auth()->user()->id]);
+            $comment = $this->repository->create($data);
+            $comment->load('user:id,name,avatar');
 
-        return response()->json([
-                'status'  => 'success',
-                'comment' => $this->repository
-                    ->create($data)
-                    ->getAttributes(),
-        ], 201);
+            return $this->successResponse(
+                'Comment has been saved',
+                'comment',
+                $comment,
+                201
+            );
+        } catch (Exception $e) {
+            return $this->errorResponse($e->getMessage());
+        }
+    }
+
+    public function index()
+    {
+        $comments = $this->repository->getAllCommentsWithUser();
+
+        return $this->successResponse(null, 'comments', $comments);
     }
 }
