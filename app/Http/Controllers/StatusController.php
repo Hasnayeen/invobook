@@ -24,7 +24,7 @@ class StatusController extends Controller
             'name'  => $request->input('name'),
             'color' => $request->input('color'),
         ]);
-        $status->load();
+        $status->load([]);
 
         return response()->json([
             'status'  => 'success',
