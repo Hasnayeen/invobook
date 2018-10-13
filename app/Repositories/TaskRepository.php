@@ -32,6 +32,7 @@ class TaskRepository
             'related_to'        => $data['related_to'] ?? null,
             'taskable_type'     => $data['taskable_type'],
             'taskable_id'       => $data['taskable_id'],
+            'status_id'         => $data['status_id'] ?? null,
         ]);
     }
 }
