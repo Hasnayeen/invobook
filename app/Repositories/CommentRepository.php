@@ -33,4 +33,12 @@ class CommentRepository
             'body'             => $data['body'],
         ]);
     }
+
+    public function getAllCommentsWithUser()
+    {
+        return $this->model
+            ->where(['commentable_type' => request('commentable_type'), 'commentable_id' => request('commentable_id')])
+            ->with('user:id,name,avatar')
+            ->get();
+    }
 }

@@ -8,7 +8,6 @@
 [![Scrutinizer](https://scrutinizer-ci.com/g/iluminar/goodwork/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/iluminar/goodwork)
 [![codecov](https://codecov.io/gh/iluminar/goodwork/branch/master/graph/badge.svg)](https://codecov.io/gh/iluminar/goodwork)
 [![StyleCI](https://styleci.io/repos/81873619/shield?branch=dev&style=flat)](https://styleci.io/repos/81873619)
-[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 Self hosted project management and collaboration tool inspired by basecamp
 

@@ -1,12 +1,18 @@
 <?php
 
-use App\Http\Controllers\CommentController;
+/**********************************
+    Login
+**********************************/
 
 Route::get('login', 'Auth\LoginController@showLoginForm');
 
 Route::post('login', 'Auth\LoginController@login');
 
 Route::post('logout', 'Auth\LoginController@logout');
+
+/**********************************
+    Password
+**********************************/
 
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
 
@@ -15,6 +21,10 @@ Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm'
 Route::post('password/reset', 'Auth\ForgotPasswordController@reset');
 
 Route::get('password/reset/{token}', 'Auth\ForgotPasswordController@showResetForm');
+
+/**********************************
+    Registration
+**********************************/
 
 Route::post('register/invite', 'UserController@sentInvitationToRegister')->middleware('auth');
 
@@ -54,7 +64,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('teams/{team}', 'TeamController@delete')->middleware('can:delete,team');
 
     /**********************************
-     Office
+        Office
      **********************************/
 
     Route::get('offices', function () {
@@ -76,7 +86,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('members', 'MemberController@store');
 
     /**********************************
-        Discussions
+        Discussion
      **********************************/
 
     Route::get('discussions', 'DiscussionController@index');
@@ -88,7 +98,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('categories', 'CategoryController@index');
 
     /**********************************
-        Messages
+        Message
      **********************************/
 
     Route::get('messages', 'MessageController@index');
@@ -98,7 +108,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('messages/{message}', 'MessageController@delete')->middleware('can:delete,message');
 
     /**********************************
-        Events
+        Event
      **********************************/
 
     Route::get('events', 'EventController@index');
@@ -124,6 +134,8 @@ Route::group(['middleware' => 'auth'], function () {
     /**********************************
         Comment
     **********************************/
+
+    Route::get('/comments', 'CommentController@index');
 
     Route::post('/comments', 'CommentController@store');
 
