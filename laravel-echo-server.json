@@ -1,5 +1,5 @@
 {
-	"authHost": "http://nginx",
+	"authHost": "https://nginx",
 	"authEndpoint": "/broadcasting/auth",
 	"clients": [
 		{
