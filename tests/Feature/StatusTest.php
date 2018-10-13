@@ -27,5 +27,4 @@ class StatusTest extends TestCase
             'color'     => $status->color,
         ]);
     }
-
 }
