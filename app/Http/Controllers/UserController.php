@@ -24,7 +24,7 @@ class UserController extends Controller
     public function sentInvitationToRegister(Request $request)
     {
         try {
-            if (! User::where('email', $request->email)->first()) {
+            if (!User::where('email', $request->email)->first()) {
                 Mail::to($request->email)
                     ->send(new SendInvitationToRegister());
 
@@ -50,6 +50,10 @@ class UserController extends Controller
     {
         $user->load('projects', 'teams');
 
-        return view('users.profile', ['user' => $user, 'timezones' => DateTimeZone::listIdentifiers()]);
+        return view('users.profile', [
+            'user'      => $user,
+            'timezones' => DateTimeZone::listIdentifiers(),
+            'locales'   => config('locale.lang'),
+        ]);
     }
 }
