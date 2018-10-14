@@ -14,7 +14,7 @@ class RolePermissionController extends Controller
 
         return response()->json([
             'status'     => 'success',
-            'message'    => 'Permission has been assigned to the role',
+            'message'    => trans('misc.Permission has been assigned to the role'),
             'permission' => $role->permissions()->find(request('permission_id')),
             'role'       => $role,
         ]);
@@ -29,7 +29,7 @@ class RolePermissionController extends Controller
 
         return response()->json([
             'status'  => 'success',
-            'message' => 'Permission has been revoked from the role',
+            'message' => trans('misc.Permission has been revoked from the role'),
         ]);
     }
 }

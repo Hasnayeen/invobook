@@ -2,7 +2,7 @@
     "/js/teams/single.js": "/js/teams/single.js?id=ddc4ae9d0eb084f641cb",
     "/js/projects/single.js": "/js/projects/single.js?id=7403eceb1ee8c35b83cb",
     "/js/offices/single.js": "/js/offices/single.js?id=11de0025c6849675eb8d",
-    "/js/admin/index.js": "/js/admin/index.js?id=8e5f2e9785850363ee99",
+    "/js/admin/index.js": "/js/admin/index.js?id=b02660432edca703653b",
     "/js/home.js": "/js/home.js?id=60b9f853e6d7566dbb0f",
     "/js/users/profile.js": "/js/users/profile.js?id=e0616a64a45d8df204a7",
     "/js/vendor.js": "/js/vendor.js?id=577ff931509494d8b992",
@@ -10,7 +10,7 @@
     "/js/auth/login.js": "/js/auth/login.js?id=ca32edd23ae68e0be7fd",
     "/css/main.css": "/css/main.css?id=ba60a4e4decc77d3a588",
     "/js/auth/register.js": "/js/auth/register.js?id=73a4a9b10bb1d6ca1258",
-    "/js/manifest.js": "/js/manifest.js?id=cb72c9aebb402f20838d",
+    "/js/manifest.js": "/js/manifest.js?id=8a1602efc0f121923e5f",
     "/css/main.min.css": "/css/main.min.css?id=ba60a4e4decc77d3a588",
     "/css/editor.css": "/css/editor.css?id=416ddc3977523e1012ae",
     "/css/editor.min.css": "/css/editor.min.css?id=416ddc3977523e1012ae",
@@ -21,7 +21,7 @@
     "/js/teams/single.min.js": "/js/teams/single.min.js?id=ddc4ae9d0eb084f641cb",
     "/js/offices/single.min.js": "/js/offices/single.min.js?id=11de0025c6849675eb8d",
     "/js/users/profile.min.js": "/js/users/profile.min.js?id=e0616a64a45d8df204a7",
-    "/js/admin/index.min.js": "/js/admin/index.min.js?id=8e5f2e9785850363ee99",
+    "/js/admin/index.min.js": "/js/admin/index.min.js?id=b02660432edca703653b",
     "/js/home.min.js": "/js/home.min.js?id=60b9f853e6d7566dbb0f",
     "/js/vendor.min.js": "/js/vendor.min.js?id=577ff931509494d8b992"
 }

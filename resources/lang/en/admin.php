@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'Users'                          => 'Users',
+    'Roles & Permissions'            => 'Roles & Permissions',
+    'Activities'                     => 'Activities',
+    'About'                          => 'About',
+    'Roles'                          => 'Roles',
+    'Roles'                          => 'Roles',
+    'Permissions'                    => 'Permissions',
+    'Invite New Member'              => 'Invite New Member',
+    'Add New Role'                   => 'Add New Role',
+    'Cancel'                         => 'Cancel',
+    'Assign'                         => 'Assign',
+    'Attach'                         => 'Attach',
+    'Filters'                        => 'Filters',
+    'Apply'                          => 'Apply',
+    'Load More'                      => 'Load More',
+    'Check for Updates'              => 'Check for Updates',
+    'Filter by Activity'             => 'Filter by Activity',
+    'Filter by User'                 => 'Filter by User',
+    'Filter by Date'                 => 'Filter by Date',
+    'Last Updated'                   => 'Last Updated',
+    'Author'                         => 'Author',
+    'Submit issue & feedback at'     => 'Submit issue & feedback at',
+    'Don\'t belongs to any role yet' => 'Don\'t belongs to any role yet',
+    'Don\'t have any permission yet' => 'Don\'t have any permission yet',
+];

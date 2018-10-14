@@ -26,7 +26,7 @@ class MemberController extends Controller
 
         return response()->json([
             'status'   => 'success',
-            'message'  => 'User added to the ' . request('resource_type'),
+            'message'  => trans('misc.User added', ['type' => request('resource_type')]),
             'user'     => $user,
         ]);
     }
