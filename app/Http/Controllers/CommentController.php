@@ -40,7 +40,7 @@ class CommentController extends Controller
             $comment->load('user:id,name,avatar');
 
             return $this->successResponse(
-                'Comment has been saved',
+                trans('misc.Comment has been saved'),
                 'comment',
                 $comment,
                 201

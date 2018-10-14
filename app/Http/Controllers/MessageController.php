@@ -61,7 +61,7 @@ class MessageController extends Controller
 
         return response()->json([
             'status'  => 'success',
-            'message' => 'Message has been deleted',
+            'message' => trans('misc.Message has been deleted'),
         ]);
     }
 }

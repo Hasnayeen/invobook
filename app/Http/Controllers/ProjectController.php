@@ -25,7 +25,7 @@ class ProjectController extends Controller
             create_permissions($project);
 
             return $this->successResponse(
-                'New project has been created',
+                trans('misc.New project has been created'),
                 'project',
                 $project,
                 201
@@ -41,7 +41,7 @@ class ProjectController extends Controller
 
         return response()->json([
             'status'  => 'success',
-            'message' => 'The project has been deleted',
+            'message' => trans('misc.The project has been deleted'),
         ]);
     }
 }

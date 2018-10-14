@@ -18,19 +18,19 @@ class AboutController extends Controller
 
                 return response()->json([
                     'status'           => 'success',
-                    'message'          => 'New version ' . $latestVersion . ' is available. Please update.',
+                    'message'          => trans('misc.New version available', ['latest_version', $latestVersion]),
                 ]);
             }
 
             return response()->json([
                     'status'           => 'success',
-                    'message'          => 'Version ' . about('current_version') . ' is the latest version.',
+                    'message'          => trans('misc.Current version is the latest version', ['current_version' => about('current_version')]),
                 ]);
         }
 
         return response()->json([
                 'status'  => 'error',
-                'message' => "Couldn't check for updates at this moment.",
+                'message' => trans('misc.Couldn\'t check for updates at this moment.'),
             ]);
     }
 

@@ -18,7 +18,7 @@ class TaskController extends Controller
 
         return response()->json([
             'status'  => 'success',
-            'message' => 'New task has been created',
+            'message' => trans('misc.New task has been created'),
             'task'    => $task,
         ], 201);
     }
@@ -57,7 +57,7 @@ class TaskController extends Controller
 
         return response()->json([
             'status'  => 'success',
-            'message' => 'The task has been deleted',
+            'message' => trans('misc.The task has been deleted'),
         ]);
     }
 }
