@@ -59,4 +59,20 @@ if (! function_exists('create_permissions')) {
         $permission = Permission::create(['name' => 'delete discussion.' . $resourceType . '->' . $resource->$key, 'guard_name' => 'web']);
         $role->givePermissionTo($permission);
     }
+
+    if (! function_exists('get_locale')) {
+        /**
+         * Get user set locale or default locale.
+         *
+         * @return string
+         */
+        function get_locale(): ?string
+        {
+            if ($user = auth()->user()) {
+                return $user->lang;
+            }
+
+            return 'en';
+        }
+    }
 }

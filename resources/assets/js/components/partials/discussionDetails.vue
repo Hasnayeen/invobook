@@ -5,8 +5,13 @@
         <div @click="closeDiscussionDetails" class="cursor-pointer">
           <i class="fas fa-arrow-left text-base text-grey-dark"></i>
         </div>
-        <div class="cursor-pointer">
+        <div @click="toggleMenu" class="cursor-pointer">
           <i class="fas fa-ellipsis-h text-base text-grey-dark"></i>
+        </div>
+        <div v-if="dropdownMenuShown" class="absolute rounded shadow-lg pin-r pin-t mt-4 p-3 text-grey-darker hover:bg-grey-light">
+          <div @click="deleteDiscussion" class="cursor-pointer">
+            Delete
+          </div>
         </div>
       </div>
     <div :data-discussion-id="discussion.id" class="text-grey-darkest text-left text-3xl font-medium py-4">
@@ -26,7 +31,7 @@
     <div v-html="discussion.content" class="py-8 text-grey-darkest"></div>
 
     <comment-box resourceType="discussion" :resource="discussion" :discussionDetailsShown="discussionDetailsShown"></comment-box>
-  </div>  
+  </div>
 
   <div @click="closeDiscussionDetails" class="h-screen w-screen fixed pin bg-grey-darkest opacity-25"></div>
 </div>
@@ -46,11 +51,38 @@ export default {
     discussion: {
       required: true,
       type: Object
+    },
+    index: {
+      required: true
+    }
+  },
+  data() {
+    return {
+      dropdownMenuShown: false,
     }
   },
   methods: {
     closeDiscussionDetails () {
+      this.dropdownMenuShown = false
       this.$emit('close')
+    },
+    toggleMenu() {
+      this.dropdownMenuShown = ! this.dropdownMenuShown
+    },
+    deleteDiscussion() {
+      axios.delete(`/discussions/${this.discussion.id}`)
+        .then((response) => {
+          this.$emit('deleted', this.index);
+
+          this.closeDiscussionDetails()
+
+          EventBus.$emit('notification', response.data.message, response.data.status)
+        })
+        .catch((error) => {
+          this.closeDiscussionDetails()
+
+          EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+        })
     }
   }
 }

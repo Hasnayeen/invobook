@@ -31,4 +31,14 @@ class DiscussionController extends Controller
             'discussion' => $discussion,
         ], 201);
     }
+
+    public function delete(Discussion $discussion)
+    {
+        $discussion->delete();
+
+        return response()->json([
+            'status'  => 'success',
+            'message' => 'The discussion has been deleted',
+        ]);
+    }
 }

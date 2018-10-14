@@ -33,4 +33,10 @@ window.Vue.mixin({
   }
 })
 
+window.Vue.filter('localize', function (value) {
+  if (!value) return ''
+  value = value.toString()
+  return window.lang[value] ? window.lang[value] : value
+})
+
 window.EventBus = new Vue()
