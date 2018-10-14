@@ -1,5 +1,12 @@
 # Release Notes
 
+## v0.8 (Yet to release)
+
+### Added
+- Added `LocalizationMiddleware` & `locale` config ([issue-211](https://github.com/iluminar/goodwork/issues/211))
+- Added `lang` column in `users` table ([issue-211](https://github.com/iluminar/goodwork/issues/211))
+- Added `localize` filter in global Vue ([issue-211](https://github.com/iluminar/goodwork/issues/211))
+
 ## v0.7 (2018-10-13)
 
 ### Added
