@@ -83,4 +83,33 @@ class DiscussionTest extends TestCase
                  'content' => $discussions[1]->content,
              ]);
     }
+
+
+    /** @test */
+    public function user_with_permission_can_delete_a_discussion()
+    {
+        $discussion = factory(\App\Models\Discussion::class)->create();
+
+        $permission = Permission::create(['name' => 'delete discussion->' . $discussion->id]);
+        $this->user->givePermissionTo($permission);
+
+        $this->actingAs($this->user)->delete("/discussions/{$discussion->id}")
+             ->assertJsonFragment([
+                 'status'  => 'success',
+                 'message' => 'The discussion has been deleted',
+             ]);
+    }
+
+    /**
+     * @expectedException Illuminate\Auth\Access\AuthorizationException
+     * @test
+     */
+    public function user_without_permission_cant_delete_a_discussion()
+    {
+        $discussion = factory(\App\Models\Discussion::class)->create();
+
+        $permission = Permission::create(['name' => 'delete discussion->' . $discussion->id]);
+
+        $this->actingAs($this->user)->delete("/discussions/{$discussion->id}");
+    }
 }

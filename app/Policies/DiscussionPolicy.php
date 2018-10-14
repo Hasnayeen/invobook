@@ -52,6 +52,7 @@ class DiscussionPolicy
      */
     public function delete(User $user, Discussion $discussion)
     {
+        return $user->hasPermissionTo('delete discussion->' . $discussion->id);
     }
 
     /**
