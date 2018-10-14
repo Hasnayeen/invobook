@@ -84,7 +84,6 @@ class DiscussionTest extends TestCase
              ]);
     }
 
-
     /** @test */
     public function user_with_permission_can_delete_a_discussion()
     {
