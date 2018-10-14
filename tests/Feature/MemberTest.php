@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use App\Models\User;
 use App\Models\Project;
 use App\Notifications\BecameNewMember;
 use Spatie\Permission\Models\Permission;
@@ -75,11 +76,13 @@ class MemberTest extends TestCase
 
         $this->actingAs($this->user);
 
+        $user = factory(User::class)->create();
         $project = factory(Project::class)->create();
+
         factory(Permission::class)->create(['name' => 'view project->' . $project->id]);
 
         $payload = [
-            'user_id'       => $this->user->id,
+            'user_id'       => $user->id,
             'resource_type' => 'project',
             'resource_id'   => $project->getKey(),
         ];
@@ -87,22 +90,33 @@ class MemberTest extends TestCase
         $response = $this->post('members', $payload);
 
         $response->assertStatus(200);
+
         $response->assertJson([
             'status'   => 'success',
             'message'  => 'User added to the project',
             'user'     => [
-                'id'        => $this->user->id,
-                'name'      => $this->user->name,
-                'username'  => $this->user->username,
-                'avatar'    => $this->user->avatar,
+                'id'        => $user->id,
+                'name'      => $user->name,
+                'username'  => $user->username,
+                'avatar'    => $user->avatar,
             ],
         ]);
 
-        $this->assertDatabaseHas('project_user', ['project_id' => $project->id, 'user_id' => $this->user->id]);
+        $this->assertDatabaseHas('project_user', ['project_id' => $project->id, 'user_id' => $user->id]);
 
-        Notification::assertSentTo(
-            $this->user,
-            BecameNewMember::class
-        );
+        Notification::assertSentTo($user, BecameNewMember::class, function ($notification) use ($user, $project) {
+            $mailData = $notification->toMail($user)->toArray();
+
+            $this->assertEquals("You have been added to {$project->name}", $mailData['subject']);
+
+            $this->assertContains(sprintf(
+                '%s added you to the %s: %s',
+                auth()->user()->name,
+                $project->getType(),
+                $project->name
+            ), $mailData['introLines']);
+
+            return true;
+        });
     }
 }

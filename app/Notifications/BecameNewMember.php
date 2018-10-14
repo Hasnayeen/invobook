@@ -67,6 +67,7 @@ class BecameNewMember extends Notification implements ShouldQueue
             ->subject('You have been added to ' . $this->entityName)
             ->line(sprintf(
                 '%s added you to the %s: %s',
+                $this->adder->name,
                 $this->entityType,
                 $this->entityName
             ));
