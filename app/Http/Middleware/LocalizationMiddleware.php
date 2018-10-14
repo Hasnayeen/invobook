@@ -16,9 +16,10 @@ class LocalizationMiddleware
      */
     public function handle($request, Closure $next)
     {
+        $locale = get_locale();
+        app()->setLocale($locale);
         $response = $next($request);
 
-        $locale = get_locale();
         $file = config('locale.route_to_file.' . $request->route()->uri);
         if (! is_null($file)) {
             $localeData = array_merge(Lang::get('navbar', [], $locale), Lang::get($file, [], $locale));

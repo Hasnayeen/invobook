@@ -50,6 +50,10 @@ class UserController extends Controller
     {
         $user->load('projects', 'teams');
 
-        return view('users.profile', ['user' => $user, 'timezones' => DateTimeZone::listIdentifiers()]);
+        return view('users.profile', [
+            'user'      => $user,
+            'timezones' => DateTimeZone::listIdentifiers(),
+            'locales'   => config('locale.lang'),
+        ]);
     }
 }
