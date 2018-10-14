@@ -25,9 +25,6 @@ class UpdateUserAccount extends FormRequest
     public function rules()
     {
         return [
-            'name'              => 'sometimes|required|string',
-            'timezone'          => 'sometimes|string',
-            'week_start'        => 'sometimes|string',
             'email'             => 'sometimes|required|max:255|email|unique:users',
             'current_password'  => 'sometimes|required',
             'new_password'      => 'required_with:current_password|min:8|confirmed',

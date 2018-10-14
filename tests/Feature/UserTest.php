@@ -79,7 +79,7 @@ class UserTest extends TestCase
             'week_start'    => $this->faker->dayOfWeek,
         ];
 
-        $this->put("users/{$this->user->id}/account", $updatedData)
+        $this->put("users/{$this->user->id}/profile", $updatedData)
             ->assertSessionHasNoErrors();
 
         $this->assertDatabaseHas('users', $updatedData);
@@ -100,6 +100,6 @@ class UserTest extends TestCase
             'week_start'    => '',
         ];
 
-        $this->put("users/{$this->user->id}/account", $updatedData);
+        $this->put("users/{$this->user->id}/profile", $updatedData);
     }
 }
