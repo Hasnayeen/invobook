@@ -16,6 +16,6 @@ return [
     'reset'    => 'Sua senha foi redefinida!',
     'sent'     => 'Enviamos um e-mail com um link de redefinição de senha!',
     'token'    => 'O token de redefiniç~ao de senha é inválido.',
-    'user'     => "Não foi possível encontrar o usuário com este endereço de e-mail.",
+    'user'     => 'Não foi possível encontrar o usuário com este endereço de e-mail.',
 
 ];
