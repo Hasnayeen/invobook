@@ -90,13 +90,13 @@ class DiscussionTest extends TestCase
     {
         $discussion = factory(\App\Models\Discussion::class)->create();
 
-        $permission = Permission::create(['name' => 'delete discussion->' . $discussion->id]);
+        $permission = Permission::create(['name' => "delete discussion->{$discussion->id}"]);
         $this->user->givePermissionTo($permission);
 
         $this->actingAs($this->user)->delete("/discussions/{$discussion->id}")
              ->assertJsonFragment([
-                 'status'  => 'success',
-                 'message' => 'The discussion has been deleted',
+                'status'  => 'success',
+                'message' => 'The discussion has been deleted',
              ]);
     }
 
@@ -108,7 +108,7 @@ class DiscussionTest extends TestCase
     {
         $discussion = factory(\App\Models\Discussion::class)->create();
 
-        $permission = Permission::create(['name' => 'delete discussion->' . $discussion->id]);
+        $permission = Permission::create(['name' => "delete discussion->{$discussion->id}"]);
 
         $this->actingAs($this->user)->delete("/discussions/{$discussion->id}");
     }
