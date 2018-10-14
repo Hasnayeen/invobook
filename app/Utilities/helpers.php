@@ -3,7 +3,7 @@
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
-if (!function_exists('about')) {
+if (! function_exists('about')) {
     /**
      * Get or set software related values.
      *
@@ -27,7 +27,7 @@ if (!function_exists('about')) {
     }
 }
 
-if (!function_exists('create_permissions')) {
+if (! function_exists('create_permissions')) {
     /**
      * Create permissions for a single resource.
      *
@@ -60,9 +60,9 @@ if (!function_exists('create_permissions')) {
         $role->givePermissionTo($permission);
     }
 
-    if (!function_exists('get_locale')) {
+    if (! function_exists('get_locale')) {
         /**
-         * Get user set locale or default locale
+         * Get user set locale or default locale.
          *
          * @return string
          */
