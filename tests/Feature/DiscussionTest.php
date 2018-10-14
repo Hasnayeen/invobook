@@ -99,6 +99,24 @@ class DiscussionTest extends TestCase
              ]);
     }
 
+    /** @test */
+    public function user_can_delete_his_own_discussion()
+    {
+        $user = factory(\App\Models\User::class)->create();
+
+        $discussion = factory(\App\Models\Discussion::class)->create([
+            'posted_by' => $user->id,
+        ]);
+
+        Permission::create(['name' => 'delete discussion.' . $discussion->discussionable_type . '->' . $discussion->discussionable->id]);
+
+        $this->actingAs($user)->delete("/discussions/{$discussion->id}")
+             ->assertJsonFragment([
+                'status'  => 'success',
+                'message' => 'The discussion has been deleted',
+             ]);
+    }
+
     /**
      * @expectedException Illuminate\Auth\Access\AuthorizationException
      * @test

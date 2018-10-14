@@ -52,7 +52,8 @@ class DiscussionPolicy
      */
     public function delete(User $user, Discussion $discussion)
     {
-        return $user->hasPermissionTo('delete discussion.' . $discussion->discussionable_type . '->' . $discussion->discussionable->id);
+        return $user->id === $discussion->posted_by ||
+            $user->hasPermissionTo('delete discussion.' . $discussion->discussionable_type . '->' . $discussion->discussionable->id);
     }
 
     /**

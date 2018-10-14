@@ -18,6 +18,10 @@ class Discussion extends Model
 
     protected $appends = ['date'];
 
+    protected $casts = [
+        'posted_by' => 'integer',
+    ];
+
     public function creator()
     {
         return $this->belongsTo(\App\Models\User::class, 'posted_by');
