@@ -65,7 +65,7 @@ class UserRegistrationTest extends TestCase
     public function guest_with_valid_token_can_register_account()
     {
         factory(Office::class)->create([
-            'name' => 'Headquarter'
+            'name' => 'Headquarter',
         ]);
 
         $newUser = [
