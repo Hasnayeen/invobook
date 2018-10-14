@@ -4,6 +4,7 @@ use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Office;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Permission;
 
 class HeadquarterOfficeSeeder extends Seeder
 {
