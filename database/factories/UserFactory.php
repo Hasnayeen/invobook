@@ -15,6 +15,7 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
         'designation'    => '',
         'avatar'         => '',
         'timezone'       => $faker->timezone,
+        'week_start'     => $faker->dayOfWeek,
         'active'         => 1,
         'password'       => $password ?: $password = bcrypt('secret'),
         'created_at'     => $now,
