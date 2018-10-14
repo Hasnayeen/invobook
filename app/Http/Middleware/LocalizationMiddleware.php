@@ -21,7 +21,7 @@ class LocalizationMiddleware
         $response = $next($request);
 
         $file = config('locale.route_to_file.' . $request->route()->uri);
-        if (!is_null($file)) {
+        if (! is_null($file)) {
             $localeData = array_merge(Lang::get('navbar', [], $locale), Lang::get($file, [], $locale));
             $localeString = json_encode($localeData);
             $content = str_replace_first('</head>', "<script>window.lang=$localeString</script>\n</head>", $response->content());
