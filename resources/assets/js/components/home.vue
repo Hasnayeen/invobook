@@ -3,15 +3,15 @@
         <div class="flex flex-row justify-around mb-8 pb-3 border-b-2 text-grey">
             <span @click="activeThisTab('projects')"
                 :class="{'text-grey-darker font-semibold border-teal border-b-4 pb-3 -mb-4':(active === 'projects'), 'cursor-pointer': (active != 'projects')}">
-                Projects
+                {{ 'Projects' | localize }}
             </span>
             <span @click="activeThisTab('teams')"
                   :class="{'text-grey-darker font-semibold border-teal border-b-4 pb-3 -mb-4':(active === 'teams'), 'cursor-pointer': (active != 'teams')}">
-                Teams
+                {{ 'Teams' | localize }}
             </span>
             <span @click="activeThisTab('offices')"
                   :class="{'text-grey-darker font-semibold border-teal border-b-4 pb-3 -mb-4':(active === 'offices'), 'cursor-pointer': (active != 'offices')}">
-                Offices
+                {{ 'Offices' | localize }}
             </span>
         </div>
         <projects :active-tab="active"></projects>
