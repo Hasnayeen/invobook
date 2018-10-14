@@ -24,7 +24,7 @@ class TeamController extends Controller
             create_permissions($team);
 
             return $this->successResponse(
-                'New team has been created',
+                trans('misc.New team has been created'),
                 'team',
                 $team,
                 201
@@ -40,7 +40,7 @@ class TeamController extends Controller
 
         return response()->json([
             'status'  => 'success',
-            'message' => 'The team has been deleted',
+            'message' => trans('misc.The team has been deleted'),
         ]);
     }
 }

@@ -19,7 +19,7 @@ class UserAccountController extends Controller
 
         return response()->json([
             'status'  => 'success',
-            'message' => 'Account details are updated',
+            'message' => trans('misc.Account details are updated'),
         ]);
     }
 }

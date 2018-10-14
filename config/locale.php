@@ -17,5 +17,8 @@ return [
     'route_to_file' => [
         '/'                  => 'home',
         'projects/{project}' => 'project',
+        'teams/{team}'       => 'project',
+        'offices/{office}'   => 'project',
+        'admin'              => 'admin',
     ],
 ];

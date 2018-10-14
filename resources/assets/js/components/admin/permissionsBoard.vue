@@ -9,7 +9,7 @@
       </div>
       <div class="px-4 pb-2 bg-grey-lighter text-sm flex flex-row">
         <span>
-          Roles
+          {{ 'Roles' | localize }}
         </span>
         <div @click="showAttachPermissionForm(permission.id)">
           <i class="ml-2 fas fa-plus-circle text-indigo cursor-pointer"></i>
@@ -21,7 +21,7 @@
         </div>
       </div>
       <div v-else class="py-1 px-2 m-2 font-medium text-grey-darker">
-        Don't belongs to any role yet
+        {{ 'Don\'t belongs to any role yet' | localize }}
       </div>
     </div>      
   </div>

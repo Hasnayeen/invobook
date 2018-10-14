@@ -4,22 +4,22 @@
     <div @click="activateThisTab('users')"
       :class="[(active === 'users') ? 'text-teal-dark font-semibold border-teal border-b-2 pb-2 md:pb-4 -mb-2 md:-mb-4' : 'cursor-pointer', 'text-center w-1/2']">
       <i class="fas fa-users text-xl md:text-2xl"></i>
-      <span class="block text-xs font-regular pt-2">Users</span>
+      <span class="block text-xs font-regular pt-2">{{ 'Users' | localize }}</span>
     </div>
     <div @click="activateThisTab('auth')"
       :class="[(active === 'auth') ? 'text-teal-dark font-semibold border-teal border-b-2 pb-2 md:pb-4 -mb-2 md:-mb-4' : 'cursor-pointer', 'text-center w-1/2']">
       <i class="fas fa-lock-open text-xl md:text-2xl"></i>
-      <span class="block text-xs font-regular pt-2">Roles & Permissions</span>
+      <span class="block text-xs font-regular pt-2">{{ 'Roles & Permissions' | localize }}</span>
     </div>
     <div @click="activateThisTab('activity')"
       :class="[(active === 'activity') ? 'text-teal-dark font-semibold border-teal border-b-2 pb-2 md:pb-4 -mb-2 md:-mb-4' : 'cursor-pointer', 'text-center w-1/2']">
       <i class="fas fa-bolt text-xl md:text-2xl"></i>
-      <span class="block text-xs font-regular pt-2">Activities</span>
+      <span class="block text-xs font-regular pt-2">{{ 'Activities' | localize }}</span>
     </div>
     <div @click="activateThisTab('about')"
       :class="[(active === 'about') ? 'text-teal-dark font-semibold border-teal border-b-2 pb-4 -mb-2 md:-mb-4' : 'cursor-pointer', 'text-center w-1/2']">
       <i class="fas fa-info-circle text-xl md:text-2xl"></i>
-      <span class="block text-xs font-regular pt-2">About</span>
+      <span class="block text-xs font-regular pt-2">{{ 'About' | localize }}</span>
     </div>
   </div>
 

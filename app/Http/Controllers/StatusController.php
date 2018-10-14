@@ -28,7 +28,7 @@ class StatusController extends Controller
 
         return response()->json([
             'status'  => 'success',
-            'message' => 'New status has been created',
+            'message' => trans('misc.New status has been created'),
             'task'    => $status,
         ], 201);
     }

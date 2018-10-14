@@ -16,7 +16,7 @@
       </div>
       <div class="px-4 pb-2 bg-grey-lighter text-sm flex flex-row">
         <span>
-          Permissions
+          {{ 'Permissions' | localize }}
         </span>
         <div @click="showAssignPermissionForm(role.id)">
           <i class="ml-2 fas fa-plus-circle text-indigo cursor-pointer"></i>
@@ -31,7 +31,7 @@
         </div>
       </div>
       <div v-else class="py-1 px-2 m-2 font-medium text-grey-darker">
-        Don't have any permission yet
+        {{ 'Don\'t have any permission yet' | localize }}
       </div>
     </div>      
   </div>

@@ -30,7 +30,7 @@ class RoleController extends Controller
 
         return response()->json([
             'status'  => 'success',
-            'message' => 'New role has been created',
+            'message' => trans('misc.New role has been created'),
             'role'    => $role,
         ], 201);
     }
@@ -42,7 +42,7 @@ class RoleController extends Controller
 
             return response()->json([
                 'status'  => 'success',
-                'message' => 'Role has been deleted',
+                'message' => trans('misc.Role has been deleted'),
             ]);
         }
 
