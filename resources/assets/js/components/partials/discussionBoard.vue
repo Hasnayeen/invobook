@@ -8,7 +8,7 @@
     <button @click="showCreateDiscussionForm" class="no-underline p-3 my-4 bg-white text-base text-teal rounded shadow">Create New Post</button>
   </div>
   <div class="flex flex-row flex-wrap justify-center items-start">
-    <div @click="showDiscussionDetails(index)" v-for="(discussion, index) in discussions" :key="discussion.id" class="w-80 my-6 md:m-6 bg-white shadow-md flex flex-col items-center rounded cursor-pointer">
+    <div @click="showDiscussionDetails(index)" v-for="(discussion, index) in discussions" :key="index" class="w-80 my-6 md:m-6 bg-white shadow-md flex flex-col items-center rounded cursor-pointer">
       <div class="bg-teal flex flex-col items-center w-full text-white rounded-t">
         <div class="w-10 h-10 flex-none py-4">
           <img :src="generateUrl(discussion.creator.avatar)" class="rounded-full w-10 h-10">
