@@ -34,7 +34,7 @@ class AddWeekstartColumnToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->dropColumn('week_start');
         });
     }
 }
