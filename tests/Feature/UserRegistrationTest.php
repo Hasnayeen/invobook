@@ -2,12 +2,12 @@
 
 namespace Tests\Feature;
 
-use App\Mail\UserRegistered;
-use App\Models\Office;
-use App\Models\Token;
-use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 use App\Models\User;
+use App\Models\Token;
+use App\Models\Office;
+use App\Mail\UserRegistered;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Testing\WithFaker;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -69,10 +69,10 @@ class UserRegistrationTest extends TestCase
         ]);
 
         $newUser = [
-            'name' => $this->faker->name,
-            'username' => $this->faker->userName,
-            'email' => $this->token->email,
-            'password' => 'secret12',
+            'name'                  => $this->faker->name,
+            'username'              => $this->faker->userName,
+            'email'                 => $this->token->email,
+            'password'              => 'secret12',
             'password_confirmation' => 'secret12',
         ];
 
@@ -94,10 +94,10 @@ class UserRegistrationTest extends TestCase
         $this->expectException(HttpException::class);
 
         $newUser = [
-            'name' => $this->faker->name,
-            'username' => $this->faker->userName,
-            'email' => $this->token->email,
-            'password' => 'secret12',
+            'name'                  => $this->faker->name,
+            'username'              => $this->faker->userName,
+            'email'                 => $this->token->email,
+            'password'              => 'secret12',
             'password_confirmation' => 'secret12',
         ];
 
