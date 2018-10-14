@@ -89,7 +89,7 @@ class DiscussionTest extends TestCase
     {
         $discussion = factory(\App\Models\Discussion::class)->create();
 
-        $permission = Permission::create(['name' => "delete discussion->{$discussion->id}"]);
+        $permission = Permission::create(['name' => 'delete discussion.' . $discussion->discussionable_type . '->' . $discussion->discussionable->id]);
         $this->user->givePermissionTo($permission);
 
         $this->actingAs($this->user)->delete("/discussions/{$discussion->id}")
@@ -107,7 +107,7 @@ class DiscussionTest extends TestCase
     {
         $discussion = factory(\App\Models\Discussion::class)->create();
 
-        $permission = Permission::create(['name' => "delete discussion->{$discussion->id}"]);
+        $permission = Permission::create(['name' => 'delete discussion.' . $discussion->discussionable_type . '->' . $discussion->discussionable->id]);
 
         $this->actingAs($this->user)->delete("/discussions/{$discussion->id}");
     }

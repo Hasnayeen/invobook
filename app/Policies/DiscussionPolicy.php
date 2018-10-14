@@ -52,7 +52,7 @@ class DiscussionPolicy
      */
     public function delete(User $user, Discussion $discussion)
     {
-        return $user->hasPermissionTo('delete discussion->' . $discussion->id);
+        return $user->hasPermissionTo('delete discussion.' . $discussion->discussionable_type . '->' . $discussion->discussionable->id);
     }
 
     /**
