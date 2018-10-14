@@ -11,7 +11,9 @@ return [
     */
 
     'lang' => [
-        'en' => 'english',
+        'en'    => 'English',
+        'es-ES' => 'Spanish (Spain)',
+        'pt-BR' => 'Portuguese (Brazil)',
     ],
 
     'route_to_file' => [
@@ -20,5 +22,6 @@ return [
         'teams/{team}'       => 'project',
         'offices/{office}'   => 'project',
         'admin'              => 'admin',
+        'users/{user}'       => 'user',
     ],
 ];

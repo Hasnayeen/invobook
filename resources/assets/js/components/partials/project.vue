@@ -1,5 +1,5 @@
 <template>
-    <div class="relative bg-white shadow-md w-64 h-64 flex flex-col justify-center items-center text-center rounded m-4">
+    <div class="bg-white shadow-md w-64 h-64 flex flex-col justify-center items-center text-center rounded m-4">
         <span @click="toggleMenu" class="w-full h-8 pr-4 pt-2">
             <i class="fas fa-ellipsis-h float-right text-grey-darker cursor-pointer"></i>
         </span>
