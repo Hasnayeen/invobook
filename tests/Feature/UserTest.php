@@ -2,12 +2,12 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
 use Illuminate\Http\UploadedFile;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Foundation\Testing\WithFaker;
 
 class UserTest extends TestCase
 {
@@ -72,11 +72,11 @@ class UserTest extends TestCase
         $this->actingAs($this->user);
 
         $updatedData = [
-            'name' => $this->faker->name,
-            'bio' => $this->faker->paragraph,
-            'designation' => $this->faker->jobTitle,
-            'timezone' => $this->faker->timezone,
-            'week_start' => $this->faker->dayOfWeek,
+            'name'          => $this->faker->name,
+            'bio'           => $this->faker->paragraph,
+            'designation'   => $this->faker->jobTitle,
+            'timezone'      => $this->faker->timezone,
+            'week_start'    => $this->faker->dayOfWeek,
         ];
 
         $this->put("users/{$this->user->id}/account", $updatedData)
@@ -93,11 +93,11 @@ class UserTest extends TestCase
         $this->expectException('Illuminate\Validation\ValidationException');
 
         $updatedData = [
-            'name' => '',
-            'bio' => $this->faker->paragraph,
-            'designation' => $this->faker->jobTitle,
-            'timezone' => '',
-            'week_start' => '',
+            'name'          => '',
+            'bio'           => $this->faker->paragraph,
+            'designation'   => $this->faker->jobTitle,
+            'timezone'      => '',
+            'week_start'    => '',
         ];
 
         $this->put("users/{$this->user->id}/account", $updatedData);
