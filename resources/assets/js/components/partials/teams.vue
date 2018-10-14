@@ -26,7 +26,7 @@
     		<div class="bg-white shadow-md w-64 h-64 flex flex-col justify-center items-center text-center rounded m-4 cursor-pointer"
     			@click="openCreateTeamModal">
                 <i class="fa fa-plus text-grey-dark text-4xl"></i>
-                <span class="text-grey-darker pt-4">Add a new team</span>
+                <span class="text-grey-darker pt-4">{{ 'Add a new team' | localize }}</span>
             </div>
 
           <team v-for="(team, index) in teams" :key="index" :details="team" @deleted="deleteTeam(index)"></team>
