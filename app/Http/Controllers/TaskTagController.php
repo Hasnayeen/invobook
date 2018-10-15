@@ -28,7 +28,6 @@ class TaskTagController extends Controller
         return response()->json([
             'status'  => 'success',
             'message' => 'Tag has been deleted from the task',
-            'label' => $tag->label,
         ]);
     }
 }
