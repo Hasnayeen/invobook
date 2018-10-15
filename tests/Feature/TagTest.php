@@ -5,10 +5,7 @@ namespace Tests\Feature;
 use App\Models\Tag;
 use Tests\TestCase;
 use App\Models\Task;
-use App\Models\Project;
 use Spatie\Permission\Models\Permission;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class TagTest extends TestCase
 {
@@ -23,9 +20,9 @@ class TagTest extends TestCase
         $this->actingAs($this->user)->post("tasks/{$task->id}/tags", [
             'label' => 'dummy',
         ])->assertJsonFragment([
-            'status' => 'success',
+            'status'  => 'success',
             'message' => 'Tag has been added to the task',
-            'label' => 'dummy',
+            'label'   => 'dummy',
         ]);
 
         $tag = Tag::where('label', 'dummy')->first();
@@ -33,7 +30,7 @@ class TagTest extends TestCase
         $this->assertEquals('dummy', $tag->label);
         $this->assertDatabaseHas('task_tags', [
             'task_id' => $task->id,
-            'tag_id' => $tag->id,
+            'tag_id'  => $tag->id,
         ]);
     }
 
@@ -64,14 +61,14 @@ class TagTest extends TestCase
         $this->actingAs($this->user)->post("tasks/{$task->id}/tags", [
             'label' => $tag->label,
         ])->assertJsonFragment([
-            'status' => 'success',
+            'status'  => 'success',
             'message' => 'Tag has been added to the task',
-            'label' => $tag->label,
+            'label'   => $tag->label,
         ]);
 
         $this->assertDatabaseHas('task_tags', [
             'task_id' => $task->id,
-            'tag_id' => $tag->id,
+            'tag_id'  => $tag->id,
         ]);
     }
 
@@ -88,13 +85,13 @@ class TagTest extends TestCase
 
         $this->actingAs($this->user)->delete("tasks/{$task->id}/tags/{$tag->id}")
             ->assertJsonFragment([
-                'status' => 'success',
+                'status'  => 'success',
                 'message' => 'Tag has been deleted from the task',
             ]);
 
         $this->assertDatabaseMissing('task_tags', [
             'task_id' => $task->id,
-            'tag_id' => $tag->id,
+            'tag_id'  => $tag->id,
         ]);
     }
 
