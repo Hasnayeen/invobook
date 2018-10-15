@@ -16,5 +16,5 @@ return [
     'reset'    => 'Votre mot de passe a été réinitialisé!',
     'sent'     => 'Nous avons envoyé par courriel votre lien de réinitialisation de mot de passe!',
     'token'    => 'Ce token de réinitialisation de mot de passe est invalide.',
-    'user'     => "Nous ne pouvons pas trouver un utilisateur avec cette address courriel.",
+    'user'     => 'Nous ne pouvons pas trouver un utilisateur avec cette address courriel.',
 ];
