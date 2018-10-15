@@ -4,7 +4,7 @@
 
     <div class="text-grey-dark bg-white shadow p-4 text-xl flex flex-row items-center">
       <div>
-        Currently in room:
+        {{ 'Currently in room' | localize }}:
       </div>
       <template v-for="user in users">
         <img :src="generateUrl(user.avatar)" alt="" class="w-8 h-8 rounded-full mr-2 ml-4">
@@ -21,7 +21,7 @@
         <div class="static text-center p-8">
           <textarea class="static textarea resize-none rounded w-full p-4 text-grey-darker"
             id="send-message"
-            placeholder="write your message here"
+            :placeholder="'write your message here' | localize"
             rows=1
             v-model="message"
             @keydown.enter.prevent="sendMessage($event)"

@@ -108,7 +108,6 @@ export default {
         timezone: this.user.timezone,
         week_start: this.user.week_start,
         lang: this.user.lang,
-
       })
         .then((response) => {
           if (response.data.status == 'success') {

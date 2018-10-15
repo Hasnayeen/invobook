@@ -5,7 +5,7 @@
   <discussion-details :discussionDetailsShown="discussionDetailsShown" :discussion="discussion" :index="index" @close="closeDiscussionDetails" @deleted="deleteDiscussion"></discussion-details>
 
   <div class="text-center">
-    <button @click="showCreateDiscussionForm" class="no-underline p-3 my-4 bg-white text-base text-teal rounded shadow">Create New Post</button>
+    <button @click="showCreateDiscussionForm" class="no-underline p-3 my-4 bg-white text-base text-teal rounded shadow">{{ 'Create New Post' | localize }}</button>
   </div>
   <div class="flex flex-row flex-wrap justify-center items-start">
     <div @click="showDiscussionDetails(index)" v-for="(discussion, index) in discussions" :key="index" class="w-80 my-6 md:m-6 bg-white shadow-md flex flex-col items-center rounded cursor-pointer">
