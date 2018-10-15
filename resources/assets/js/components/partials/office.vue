@@ -1,5 +1,5 @@
 <template>
-	<div class="relative bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center items-center text-center rounded m-4">
+	<div class="bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center items-center text-center rounded m-4">
 		<span @click="toggleMenu" class="w-full h-8 pr-4 pt-2">
 			<i class="fa fa-ellipsis-h float-right text-grey-darker cursor-pointer"></i>
 		</span>
@@ -12,7 +12,7 @@
 			<a class="text-pink text-xl no-underline" :href="office.url">{{ office.name }}</a>
 		</div>
 		<span class="text-grey text-sm w-full px-2 h-16 self-start">{{ office.description }}</span>
-		<div class="border-t w-full h-16 flex flex-row justify-around items-center px-2">
+		<div class="border-t w-full h-16 flex flex-row justify-start items-center px-2">
 			<a v-for="(member, index) in office.members" :key="index" v-if="index < 5" :href="'/users/' + member.username" class="px-1">
 				<img :src="generateUrl(member.avatar)" class="rounded-full w-8 h-8">
 			</a>

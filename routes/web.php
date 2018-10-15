@@ -33,7 +33,7 @@ Route::get('register/{token}', 'Auth\RegisterController@showRegistrationForm');
 Route::post('register/{token}', 'Auth\RegisterController@confirmNewRegistration');
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/', 'HomeController@index');
+    Route::get('/', 'HomeController@index')->name('home');
 
     /**********************************
         Project
@@ -94,6 +94,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('discussions', 'DiscussionController@store')->middleware('can:create,App\Models\Discussion');
 
     Route::get('discussions/{discussion}', 'DiscussionController@index');
+
+    Route::delete('discussions/{discussion}', 'DiscussionController@delete')->middleware('can:delete,discussion');
 
     Route::get('categories', 'CategoryController@index');
 
@@ -156,6 +158,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('users/{user}', 'UserController@show');
 
     Route::put('users/{user}/account', 'UserAccountController@update');
+
+    Route::put('users/{user}/profile', 'UserProfileController@update');
 
     Route::post('users/{user}/avatar', 'UserAvatarController@store');
 

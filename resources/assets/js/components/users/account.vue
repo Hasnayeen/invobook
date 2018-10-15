@@ -3,7 +3,7 @@
     <div class="flex flex-col py-4">
       <div class="mb-4 px-8">
         <label class="block text-grey-darker text-sm font-bold mb-2" for="username">
-          Email
+          {{ 'Email' | localize }}
         </label>
         <input v-model="user.email" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="email" type="email" placeholder="john@example.com">
         <div v-if="errorMessage.email" class="text-red text-base pt-2">
@@ -14,7 +14,7 @@
       </div>
       <div class="mb-8 px-8">
         <label class="block text-grey-darker text-sm font-bold mb-2" for="username">
-          Current Password
+          {{ 'Current Password' | localize }}
         </label>
         <input v-model="currentPassword" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="current_password" type="password" placeholder="******">
         <div v-if="errorMessage.current_password" class="text-red text-base pt-2">
@@ -23,7 +23,7 @@
       </div>
       <div class="mb-8 px-8">
         <label class="block text-grey-darker text-sm font-bold mb-2" for="username">
-          New Password
+          {{ 'New Password' | localize }}
         </label>
         <input v-model="newPassword" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="new_password" type="password" placeholder="******">
         <div v-if="errorMessage.new_password" class="text-red text-base pt-2">
@@ -32,7 +32,7 @@
       </div>
       <div class="mb-8 px-8">
         <label class="block text-grey-darker text-sm font-bold mb-2" for="username">
-          Confirm Password
+          {{ 'Confirm Password' | localize}}
         </label>
         <input v-model="newPasswordConfirmation" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="confirm_password" type="password" placeholder="******">
         <div v-if="errorMessage.new_password_confirmation" class="text-red text-base pt-2">
@@ -41,14 +41,14 @@
       </div>
       <div class="my-6 px-8">
         <a @click="update" class="font-bold rounded shadow bg-teal-light p-4 text-white hover:shadow-lg hover:font-bold hover:bg-teal-dark no-underline" href="#">
-          Update
+          {{ 'Update' | localize }}
         </a>
       </div>
       <div class="border-half mt-4 mb-8">
       </div>
       <div class="mt-4 px-8">
         <a class="rounded p-4 text-red-light border border-grey-light hover:font-bold hover:border-0 hover:shadow-lg hover:bg-red-light hover:text-white no-underline" href="#">
-          Delete account
+          {{ 'Delete account' | localize }}
         </a>
       </div>
     </div>

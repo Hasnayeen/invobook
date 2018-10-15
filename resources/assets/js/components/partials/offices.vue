@@ -25,7 +25,7 @@
             <div class="bg-white shadow-md w-64 h-64 flex flex-col justify-center items-center text-center rounded m-4 cursor-pointer"
                 @click="openCreateOfficeModal">
                 <i class="fa fa-plus text-grey-dark text-4xl"></i>
-                <span class="text-grey-darker pt-4">Add a new office</span>
+                <span class="text-grey-darker pt-4">{{ 'Add a new office' | localize }}</span>
             </div>
 
             <office v-for="(office, index) in offices" :key="index" :details="office" @deleted="deleteOffice(index)"></office>

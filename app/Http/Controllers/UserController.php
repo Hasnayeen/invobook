@@ -30,13 +30,13 @@ class UserController extends Controller
 
                 return response()->json([
                     'status'  => 'success',
-                    'message' => 'Invitation sent successfully',
+                    'message' => trans('misc.Invitation sent successfully'),
                 ]);
             }
 
             return response()->json([
                 'status'  => 'error',
-                'message' => 'Email already exist',
+                'message' => trans('misc.Email already exist'),
             ], 409);
         } catch (Exception $e) {
             return response()->json([
@@ -50,6 +50,10 @@ class UserController extends Controller
     {
         $user->load('projects', 'teams');
 
-        return view('users.profile', ['user' => $user, 'timezones' => DateTimeZone::listIdentifiers()]);
+        return view('users.profile', [
+            'user'      => $user,
+            'timezones' => DateTimeZone::listIdentifiers(),
+            'locales'   => config('locale.lang'),
+        ]);
     }
 }

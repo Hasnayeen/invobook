@@ -22,11 +22,11 @@ class MemberController extends Controller
         $entity->members()->save($user);
         $this->givePermissionTo($user, $entity->id);
 
-        $user->notify(new BecameNewMember($entity, $user, auth()->user()));
+        $user->notify(new BecameNewMember($entity, auth()->user(), $user));
 
         return response()->json([
             'status'   => 'success',
-            'message'  => 'User added to the ' . request('resource_type'),
+            'message'  => trans('misc.User added', ['type' => request('resource_type')]),
             'user'     => $user,
         ]);
     }
