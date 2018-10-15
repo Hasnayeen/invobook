@@ -17,7 +17,7 @@ class TaskTagController extends Controller
         return response()->json([
             'status'  => 'success',
             'message' => 'Tag has been added to the task',
-            'label' => $tag->label,
+            'label'   => $tag->label,
         ]);
     }
 
