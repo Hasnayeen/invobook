@@ -15,6 +15,7 @@ return [
         'es-ES' => 'Spanish (Spain)',
         'pt-BR' => 'Portuguese (Brazil)',
         'nl-NL' => 'Dutch (Netherlands)',
+		'it-IT' => 'Italian (Italy)'
     ],
 
     'route_to_file' => [
