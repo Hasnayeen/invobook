@@ -14,26 +14,26 @@
                 <label class="block text-grey-darker text-sm font-bold mb-2" for="username">
                     {{ 'Name' | localize }}
                 </label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="username" type="text" placeholder="Nehal Hasnayeen">
+                <input v-model='user.name' class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="username" type="text" placeholder="Nehal Hasnayeen">
             </div>
             <div class="mb-6">
                 <label class="block text-grey-darker text-sm font-bold mb-2" for="title">
                     {{ 'Title at Goodwork' | localize }}
                 </label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="title" type="text" placeholder="Developer">
+                <input v-model='user.designation' class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="title" type="text" placeholder="Developer">
             </div>
             <div class="mb-6">
                 <label class="block text-grey-darker text-sm font-bold mb-2" for="title">
                     {{ 'Short Bio' | localize }}
                 </label>
-                <textarea class="shadow appearance-none resize-none border rounded w-full py-2 px-3 text-grey-darker" id="bio" type="text" rows="3" placeholder="About Yourself"></textarea>
+                <textarea v-model='user.bio' class="shadow appearance-none resize-none border rounded w-full py-2 px-3 text-grey-darker" id="bio" type="text" rows="3" placeholder="About Yourself"></textarea>
             </div>
             <div class="mb-6">
                 <label class="block text-grey-darker text-sm font-bold mb-2" for="timezone">
                     {{ 'Time Zone' | localize }}
                 </label>
                 <div class="relative">
-                    <select class="shadow appearance-none border rounded w-full px-3 py-2 text-grey-darker bg-grey-lighter text-grey-darker" id="grid-state">
+                    <select v-model='user.timezone' class="shadow appearance-none border rounded w-full px-3 py-2 text-grey-darker bg-grey-lighter text-grey-darker" id="grid-state">
                         <template v-for="timezone in timezones">
                             <option :value="timezone">{{ timezone}}</option>
                         </template>
@@ -48,7 +48,7 @@
                     {{ 'First Day of the Week' | localize }}
                 </label>
                 <div class="relative">
-                    <select class="shadow appearance-none border rounded w-full px-3 py-2 text-grey-darker bg-grey-lighter text-grey-darker" id="weekstart">
+                    <select v-model='user.week_start' class="shadow appearance-none border rounded w-full px-3 py-2 text-grey-darker bg-grey-lighter text-grey-darker" id="weekstart">
                         <option>Saturday</option>
                         <option>Sunday</option>
                         <option>Monday</option>
@@ -67,7 +67,7 @@
                     {{ 'Preffered Language' | localize }}
                 </label>
                 <div class="relative">
-                    <select class="shadow appearance-none border rounded w-full px-3 py-2 text-grey-darker bg-grey-lighter text-grey-darker" id="weekstart">
+                    <select v-model='user.lang' class="shadow appearance-none border rounded w-full px-3 py-2 text-grey-darker bg-grey-lighter text-grey-darker" id="weekstart">
                         <template v-for="(locale, key) in locales">
                             <option :value="key">{{ locale }}</option>
                         </template>
@@ -78,7 +78,7 @@
                 </div>
             </div>
             <div class="mt-8">
-                <button class="bg-teal hover:bg-teal-dark text-white font-bold p-4 rounded shadow hover:shadow-lg" type="button">
+                <button @click="updateProfile" class="bg-teal hover:bg-teal-dark text-white font-bold p-4 rounded shadow hover:shadow-lg" type="button">
                     {{ 'Update' | localize }}
                 </button>
                 <div></div>
@@ -99,7 +99,26 @@ export default {
   methods: {
     updateImage (imageUrl) {
       this.avatar = imageUrl
-    }
+    },
+    updateProfile () {
+      axios.put('/users/'+this.user.username+'/profile', {
+        name: this.user.name,
+        bio: this.user.bio,
+        designation: this.user.designation,
+        timezone: this.user.timezone,
+        week_start: this.user.week_start,
+        lang: this.user.lang,
+
+      })
+        .then((response) => {
+          if (response.data.status == 'success') {
+            EventBus.$emit('notification', response.data.message, response.data.status)
+          }
+        })
+        .catch((error) => {
+          EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+        })
+    },
   },
   mounted () {
     this.avatar = this.generateUrl(this.user.avatar)
