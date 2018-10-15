@@ -26,8 +26,8 @@ class UpdateUserProfile extends FormRequest
     {
         return [
             'name'          => 'sometimes|required|string',
-            'timezone'      => 'sometimes|string',
-            'week_start'    => 'sometimes|string',
+            'timezone'      => 'sometimes|string|nullable',
+            'week_start'    => 'sometimes|string|nullable',
         ];
     }
 }
