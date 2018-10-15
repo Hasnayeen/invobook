@@ -16,6 +16,7 @@ return [
         'es-ES' => 'Spanish (Spain)',
         'fr-FR' => 'French (France)',
         'nl-NL' => 'Dutch (Netherlands)',
+        'it-IT' => 'Italian (Italy)',
         'pt-BR' => 'Portuguese (Brazil)',
     ],
 
