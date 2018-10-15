@@ -11,11 +11,12 @@ return [
     */
 
     'lang' => [
+        'ar'    => 'Arabic',
         'en'    => 'English',
         'es-ES' => 'Spanish (Spain)',
-        'pt-BR' => 'Portuguese (Brazil)',
+        'fr-FR' => 'French (France)',
         'nl-NL' => 'Dutch (Netherlands)',
-        'ar'    => 'Arabic',
+        'pt-BR' => 'Portuguese (Brazil)',
     ],
 
     'route_to_file' => [
