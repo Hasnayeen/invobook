@@ -134,6 +134,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('tasks/{task}', 'TaskController@delete')->middleware('can:delete,task');
 
     /**********************************
+        tags
+    **********************************/
+
+    Route::post('tasks/{task}/tags', 'TaskTagController@store')->middleware('can:create,App\Models\Tag,task');
+
+    Route::delete('tasks/{task}/tags/{tag}', 'TaskTagController@delete')->middleware('can:delete,App\Models\Tag,task,tag');
+
+    /**********************************
         Comment
     **********************************/
 
