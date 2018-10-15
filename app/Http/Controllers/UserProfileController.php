@@ -8,7 +8,7 @@ class UserProfileController extends Controller
 {
     public function update(UpdateUserProfile $request)
     {
-        $request->user()->update($request->all());
+        auth()->user()->update($request->all());
 
         return response()->json([
             'status'  => 'success',

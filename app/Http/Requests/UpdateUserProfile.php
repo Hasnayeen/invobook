@@ -28,6 +28,7 @@ class UpdateUserProfile extends FormRequest
             'name'          => 'sometimes|required|string',
             'timezone'      => 'sometimes|string|nullable',
             'week_start'    => 'sometimes|string|nullable',
+            'lang'          => 'sometimes|string|nullable',
         ];
     }
 }
