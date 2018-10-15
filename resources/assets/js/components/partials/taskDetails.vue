@@ -74,37 +74,8 @@
         Progress
       </div>
     </div>
-    <div class="px-8 pt-8">
-      <div class="flex flex-row items-center text-grey-dark">
-        <img src="/image/avatar.jpg" class="rounded-full w-8 h-8 mx-2 self-start">
-        <div class="px-4">
-          Olen Ulrich
-        </div>
-        <div class="px-4">
-          12:34 am on Aug 3, 2018
-        </div>
-      </div>
-    </div>
-    <div class="px-8">
-      <div class="ml-16 border-grey-light border rounded text-grey-darkest p-4">
-        <span class="font-semibold text-blue">@Nehal</span> Should it be auto-filling component?
-      </div>
-    </div>
-    <div class="px-8 pt-8">
-      <div class="flex flex-row items-center text-grey-dark">
-        <img :src="generateUrl(task.user.avatar)" class="rounded-full w-8 h-8 mx-2 self-start">
-        <div class="px-4">
-          Nehal Hasnayeen
-        </div>
-        <div class="px-4">
-          12:34 am on Aug 3, 2018
-        </div>
-      </div>
-    </div>
-    <div class="px-8">
-      <div class="ml-16 border-grey-light border rounded text-grey-darkest p-4">
-        <span class="font-semibold text-blue">@Olan</span> yes please, make it auto-complete
-      </div>
+    <div class="px-4">
+      <comment-box resourceType="task" :resource="task" :discussionDetailsShown="taskDetailsShown"></comment-box>
     </div>
   </div>
   <div @click="closeTaskDetails" :class="{'hidden': !taskDetailsShown}" class="h-screen w-screen fixed pin bg-grey-darkest opacity-25"></div>
@@ -112,7 +83,12 @@
 </template>
 
 <script>
+import commentBox from './commentBox.vue'
+
 export default {
+  components: {
+    commentBox
+  },
   props: {
     taskDetailsShown: {
       required: true,
