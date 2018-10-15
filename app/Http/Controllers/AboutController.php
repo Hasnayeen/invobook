@@ -18,7 +18,7 @@ class AboutController extends Controller
 
                 return response()->json([
                     'status'           => 'success',
-                    'message'          => trans('misc.New version available', ['latest_version', $latestVersion]),
+                    'message'          => trans('misc.New version available', ['latest_version' => $latestVersion]),
                 ]);
             }
 
