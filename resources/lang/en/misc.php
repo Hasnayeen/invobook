@@ -27,4 +27,10 @@ return [
     'Invitation sent successfully'               => 'Invitation sent successfully',
     'Email already exist'                        => 'Email already exist',
     'Account profile are updated'                => 'Account profile are updated',
+    'Tasks'                                      => 'Tasks',
+    'Discussions'                                => 'Discussions',
+    'Messages'                                   => 'Messages',
+    'Events'                                     => 'Events',
+    'Files'                                      => 'Files',
+    'Activities'                                 => 'Activities',
 ];
