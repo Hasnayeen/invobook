@@ -95,7 +95,7 @@ export default {
       this.taskDetailsShown = false
       this.task = {}
     },
-    deleteTask(index) {
+    deleteTask (index) {
       this.tasks.splice(index, 1)
     }
   },
