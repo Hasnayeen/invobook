@@ -5,14 +5,14 @@
                 Schedules
             </a>
             <span class="text-grey-darker absolute pin-r mr-2">
-                <i class="fa fa-ellipsis-h"></i>
+                <font-awesome-icon :icon="faEllipsisH"></font-awesome-icon>
             </span>
         </header>
         <div class="w-full h-48 self-start">
             <div class="px-2 py-4">
                 <a href="#" class="no-underline text-grey-dark text-lg">
                     <span>
-                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                        <font-awesome-icon :icon="faCalendar"></font-awesome-icon>
                         25 Feb, 2017
                     </span>
                     <p>
@@ -23,7 +23,7 @@
             <div class="px-2 py-4">
                 <a href="#" class="no-underline text-grey-dark text-lg">
                     <span>
-                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                        <font-awesome-icon :icon="faCalendar"></font-awesome-icon>
                         26 Feb, 2017
                     </span>
                     <p>
@@ -36,7 +36,16 @@
 </template>
 
 <script>
+import {
+  faCalendar,
+  faEllipsisH,
+} from '@fortawesome/free-solid-svg-icons'
+
 export default {
-  props: ['resource']
+  props: ['resource'],
+  data: () => ({
+    faCalendar,
+    faEllipsisH,
+  })
 }
 </script>

@@ -13,7 +13,9 @@
                         <option :value="permission.id" class="my-2 text-lg">{{ permission.name }}</option>
                     </template>
                 </select>
-                <i class="w-1/6 fa fa-chevron-down pointer-events-none flex items-center text-grey-darker -ml-8"></i>
+                <font-awesome-icon :icon="faChevronDown"
+                  class="w-1/6 pointer-events-none flex items-center text-grey-darker -ml-8">
+                </font-awesome-icon>
               </div>
           </div>
       </div>
@@ -27,11 +29,14 @@
 </template>
 
 <script>
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
+
 export default {
   props: ['formShown', 'roleId'],
   data: () => ({
     permissions: [],
-    permission_id: null
+    permission_id: null,
+    faChevronDown,
   }),
   mounted () {
     axios.get('admin/permissions')

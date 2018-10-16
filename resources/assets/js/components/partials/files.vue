@@ -5,13 +5,13 @@
                 Files
             </a>
             <span class="text-grey-darker absolute pin-r mr-2">
-                <i class="fa fa-ellipsis-h"></i>
+                <font-awesome-icon :icon="faEllipsisH"></font-awesome-icon>
             </span>
         </header>
         <div class="w-full h-48 self-start text-left">
             <a href="#" class="flex flex-row items-center p-4 no-underline text-grey-darker">
                 <span class="pr-4">
-                    <i class="text-xl fas fa-file-image-o"></i>
+                    <font-awesome-icon :icon="faFileImage" class="text-xl"></font-awesome-icon>
                 </span>
                 <div class="text-xs">
                     <p class="text-base">landing-page-v.1.png</p>
@@ -22,7 +22,7 @@
             </a>
             <a href="#" class="flex flex-row items-center p-4 no-underline text-grey-darker">
                 <span class="pr-4">
-                    <i class="text-xl fas fa-file-pdf-o"></i>
+                    <font-awesome-icon :icon="faFilePdf" class="text-xl"></font-awesome-icon>
                 </span>
                 <div class="text-xs">
                     <p class="text-base">api-doc-v.1.pdf</p>
@@ -33,7 +33,7 @@
             </a>
             <a href="#" class="flex flex-row items-center p-4 no-underline text-grey-darker">
                 <span class="pr-4">
-                    <i class="text-xl fas fa-file-text-o"></i>
+                    <font-awesome-icon :icon="faFileAlt" class="text-xl"></font-awesome-icon>
                 </span>
                 <div class="text-xs">
                     <p class="text-base">features list.txt</p>
@@ -47,7 +47,20 @@
 </template>
 
 <script>
+import {
+  faEllipsisH,
+  faFileAlt,
+  faFileImage,
+  faFilePdf,
+} from '@fortawesome/free-solid-svg-icons'
+
 export default {
-  props: ['resource', 'resourceType']
+  props: ['resource', 'resourceType'],
+  data: () => ({
+    faEllipsisH,
+    faFileAlt,
+    faFileImage,
+    faFilePdf,
+  })
 }
 </script>

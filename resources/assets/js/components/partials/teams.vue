@@ -25,7 +25,7 @@
     	<div class="flex flex-row flex-wrap justify-center">
     		<div class="bg-white shadow-md w-64 h-64 flex flex-col justify-center items-center text-center rounded m-4 cursor-pointer"
     			@click="openCreateTeamModal">
-                <i class="fa fa-plus text-grey-dark text-4xl"></i>
+                <font-awesome-icon :icon="faPlus" class="text-grey-dark text-4xl"></font-awesome-icon>
                 <span class="text-grey-darker pt-4">{{ 'Add a new team' | localize }}</span>
             </div>
 
@@ -37,6 +37,7 @@
 
 <script>
 import team from './team'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 export default {
   components: { team },
@@ -47,7 +48,8 @@ export default {
     }),
     showCreateTeamForm: false,
     name: '',
-    description: ''
+    description: '',
+    faPlus,
   }),
   props: {
     activeTab: {
