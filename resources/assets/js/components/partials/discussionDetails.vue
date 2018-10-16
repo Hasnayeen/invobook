@@ -30,7 +30,7 @@
     </div>
     <div v-html="discussion.content" class="py-8 text-grey-darkest"></div>
 
-    <comment-box resourceType="discussion" :resource="discussion" :discussionDetailsShown="discussionDetailsShown"></comment-box>
+    <comment-box resourceType="discussion" :resource="discussion" :detailsShown="discussionDetailsShown"></comment-box>
   </div>
 
   <div @click="closeDiscussionDetails" class="h-screen w-screen fixed pin bg-grey-darkest opacity-25"></div>
