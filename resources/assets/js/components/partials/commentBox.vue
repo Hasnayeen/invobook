@@ -41,7 +41,7 @@ export default {
       required: true,
       type: Object
     },
-    discussionDetailsShown: {
+    detailsShown: {
       required: true,
       type: Boolean
     }
