@@ -95,9 +95,19 @@ export default {
           })
           .joining(user => {
             this.users.push(user)
+            this.pushSystemMessage(`${user.name} has joined`)
+            if ((document.activeElement != document.getElementById('send-message')) || (!document.hasFocus())) {
+              this.unreadMessage += 1
+              document.title = '(' + this.unreadMessage + ') ' + this.title
+            }
           })
           .leaving(user => {
             this.users = this.users.filter(u => u.username !== user.username)
+            this.pushSystemMessage(`${user.name} has left`)
+            if ((document.activeElement != document.getElementById('send-message')) || (!document.hasFocus())) {
+              this.unreadMessage += 1
+              document.title = '(' + this.unreadMessage + ') ' + this.title
+            }
           })
           .listen('MessageCreated', event => {
             event.message.user = event.user
@@ -114,6 +124,12 @@ export default {
     },
     deleteMessage(index) {
       this.messages.splice(index, 1)
+    },
+    pushSystemMessage (body) {
+      this.messages.push({
+        body,
+        system: true,
+      })
     }
   }
 }
