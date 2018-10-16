@@ -73,7 +73,7 @@ return [
     'required_with'        => 'O campo :attribute é obrigatório quando :values está presente.',
     'required_with_all'    => 'O campo :attribute é obrigatório quando :values está presente.',
     'required_without'     => 'O campo :attribute é obrigatório quando :values não está presente.',
-    'required_without_all' => 'O campo :attribute é obrigatório quando nenhum dos :values estão presentes.',
+    'required_without_all' => 'O campo :attribute é obrigatório quando nenhum dos :values estiverem presentes.',
     'same'                 => 'Os campos :attribute e :other devem corresponder.',
     'size'                 => [
         'numeric' => 'O campo :attribute deve ser :size.',
