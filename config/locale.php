@@ -13,6 +13,7 @@ return [
     'lang' => [
         'ar'    => 'Arabic',
         'en'    => 'English',
+        'de'    => 'German',
         'es-ES' => 'Spanish (Spain)',
         'fr-FR' => 'French (France)',
         'it-IT' => 'Italian (Italy)',
