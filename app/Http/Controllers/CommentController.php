@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Repositories\CommentRepository;
@@ -55,5 +56,16 @@ class CommentController extends Controller
         $comments = $this->repository->getAllCommentsWithUser();
 
         return $this->successResponse(null, 'comments', $comments);
+    }
+
+    public function delete(Comment $comment)
+    {
+        $comment->delete();
+
+        return response()->json([
+            'status'  => 'success',
+            'message' => trans('misc.Comment has been deleted'),
+        ]);
+
     }
 }
