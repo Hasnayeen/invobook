@@ -1,6 +1,6 @@
 <template>
-<div>
-  <div :class="{'hidden': !taskDetailsShown}" class="absolute container mx-auto md:w-3/4 lg:2/3 xl:w-1/2 xxl:w-2/5 bg-white rounded shadow-lg z-10 pt-4 pb-8" style="top: 12vh;left: 0;right: 0;">
+<div v-if="taskDetailsShown">
+  <div class="absolute container mx-auto md:w-3/4 lg:2/3 xl:w-1/2 xxl:w-2/5 bg-white rounded shadow-lg z-10 pt-4 pb-4 mb-16" style="top: 12vh;left: 0;right: 0;">
     <div class="flex flex-row justify-between px-8 relative">
       <div @click="closeTaskDetails" class="cursor-pointer">
         <i class="fas fa-arrow-left text-base text-grey-dark"></i>
@@ -74,8 +74,8 @@
         Progress
       </div>
     </div>
-    <div class="px-4">
-      <comment-box resourceType="task" :resource="task" :discussionDetailsShown="taskDetailsShown"></comment-box>
+    <div class="px-2 md:px-8">
+      <comment-box resourceType="task" :resource="task" :detailsShown="taskDetailsShown"></comment-box>
     </div>
   </div>
   <div @click="closeTaskDetails" :class="{'hidden': !taskDetailsShown}" class="h-screen w-screen fixed pin bg-grey-darkest opacity-25"></div>
@@ -99,8 +99,7 @@ export default {
       type: Object
     },
     index: {
-      required: false,
-      type: Number
+      required: true
     }
   },
   data: () => ({
