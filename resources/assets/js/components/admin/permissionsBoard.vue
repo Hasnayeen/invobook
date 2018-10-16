@@ -12,12 +12,17 @@
           {{ 'Roles' | localize }}
         </span>
         <div @click="showAttachPermissionForm(permission.id)">
-          <i class="ml-2 fas fa-plus-circle text-indigo cursor-pointer"></i>
+          <font-awesome-icon :icon="faPlusCircle"
+            class="ml-2 text-indigo cursor-pointer">
+          </font-awesome-icon>
         </div>
       </div>
       <div v-if="permission.roles.length > 0" class="flex flex-row flex-wrap m-2">
         <div v-for="role in permission.roles" class="py-1 px-2 m-2 rounded-full font-medium bg-pink text-white text-sm flex flex-row items-center">
-          {{ role.name }} <i class="ml-1 pl-1 fas fa-trash-alt cursor-pointer"></i>
+          {{ role.name }}
+          <font-awesome-icon :icon="faTrashAlt"
+            class="ml-1 pl-1 cursor-pointer">
+          </font-awesome-icon>
         </div>
       </div>
       <div v-else class="py-1 px-2 m-2 font-medium text-grey-darker">
@@ -30,6 +35,11 @@
 
 <script>
 import attachPermissionForm from './../forms/attachPermissionForm'
+import {
+  faPlusCircle,
+  faTrashAlt,
+} from '@fortawesome/free-solid-svg-icons'
+
 export default {
   components: {attachPermissionForm},
   props: {
@@ -41,7 +51,9 @@ export default {
   data: () => ({
     permissions: [],
     attachPermissionFormShown: false,
-    permissionId: null
+    permissionId: null,
+    faPlusCircle,
+    faTrashAlt,
   }),
   watch: {
     activeColumn: 'getPermissions'
