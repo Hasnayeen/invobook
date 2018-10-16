@@ -7,12 +7,10 @@
     </div>
     <div class="border-b w-1/5 flex-grow mb-2"></div>
   </div>
-  <div v-if="message.system" class="w-full flex flex-row">
-    <div class="w-1/5 flex-grow mb-2"></div>
-    <div class="text-grey-dark text-xs text-center px-4">
+  <div v-if="message.system" class="flex flex-row justify-center">
+    <div class="bg-blue-lighter text-grey-darker text-xs text-center px-4 rounded p-2">
       {{ message.body }}
     </div>
-    <div class="w-1/5 flex-grow mb-2"></div>
   </div>
   <div v-else class="flex flex-row text-grey-darker py-3"
     :class="[(message.user_id === user.id) ? 'self-end flex-row-reverse' : '']">
