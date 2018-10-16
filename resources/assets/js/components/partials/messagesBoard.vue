@@ -95,11 +95,19 @@ export default {
           })
           .joining(user => {
             this.users.push(user)
-            this.pushSystemMessage(`${user.username} has joined`)
+            this.pushSystemMessage(`${user.name} has joined`)
+            if ((document.activeElement != document.getElementById('send-message')) || (!document.hasFocus())) {
+              this.unreadMessage += 1
+              document.title = '(' + this.unreadMessage + ') ' + this.title
+            }
           })
           .leaving(user => {
             this.users = this.users.filter(u => u.username !== user.username)
-            this.pushSystemMessage(`${user.username} has left`)
+            this.pushSystemMessage(`${user.name} has left`)
+            if ((document.activeElement != document.getElementById('send-message')) || (!document.hasFocus())) {
+              this.unreadMessage += 1
+              document.title = '(' + this.unreadMessage + ') ' + this.title
+            }
           })
           .listen('MessageCreated', event => {
             event.message.user = event.user
