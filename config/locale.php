@@ -18,6 +18,7 @@ return [
         'it-IT' => 'Italian (Italy)',
         'nl-NL' => 'Dutch (Netherlands)',
         'pt-BR' => 'Portuguese (Brazil)',
+        'ru-RU' => 'Russian (Russia)',
     ],
 
     'route_to_file' => [
