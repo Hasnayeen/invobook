@@ -16,6 +16,9 @@
     <div v-for="(comment, index) in comments" class="my-6">
       <div class="text-xs text-grey-dark pb-2 ml-10">
         {{ comment.user.name }} on {{ comment.date }}
+        <div @click="deleteComment(comment,index)" class="text-xs text-red-dark pb-2 ml-10 cursor-pointer float-right">
+        Delete
+        </div>
       </div>
       <div class="flex flex-row items-center">
         <div class="z-10">
@@ -69,6 +72,16 @@ export default {
             EventBus.$emit('notification', error.response.data.message, error.response.data.status)
           })
       }
+    },
+    deleteComment (c,index) {
+      axios.delete('/comments/'+c.id)
+        .then((response) => {
+          this.comments.splice(index, 1);
+          EventBus.$emit('notification', response.data.message, response.data.status)
+        })
+        .catch((error) => {
+          EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+        })
     }
   },
   created () {
