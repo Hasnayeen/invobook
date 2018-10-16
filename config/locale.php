@@ -12,8 +12,8 @@ return [
 
     'lang' => [
         'ar'    => 'Arabic',
-        'en'    => 'English',
         'de'    => 'German',
+        'en'    => 'English',
         'es-ES' => 'Spanish (Spain)',
         'fr-FR' => 'French (France)',
         'it-IT' => 'Italian (Italy)',

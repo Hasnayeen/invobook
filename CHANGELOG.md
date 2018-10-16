@@ -7,7 +7,15 @@
 - Added `lang` column in `users` table ([issue-211](https://github.com/iluminar/goodwork/issues/211))
 - Added `localize` filter in global Vue ([issue-211](https://github.com/iluminar/goodwork/issues/211))
 - Added comment option to tasks ([issue-205](https://github.com/iluminar/goodwork/issues/205))
-- Added german translation ([issue-249](https://github.com/iluminar/goodwork/issues/249))
+- Added localization
+- Added german translation
+- Added spanish (Spain) translation
+- Added portuguese (Brazil) translation
+- Added italian translation
+- Added russian translation
+- Added dutch translation
+- Added arabic translation
+- Added french translation
 
 ## v0.7 (2018-10-13)
 
