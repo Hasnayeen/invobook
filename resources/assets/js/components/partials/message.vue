@@ -1,13 +1,20 @@
 <template>
 <div class="flex flex-col p-4">
-  <div v-if="showDate(message.created_at)" class="w-full flex flex-row py-4">
+  <div v-if="displayDate" class="w-full flex flex-row py-4">
     <div class="border-b w-1/5 flex-grow mb-2"></div>
     <div class="text-grey-dark text-sm text-center px-4">
       {{ getDate(message.created_at) }}
     </div>
     <div class="border-b w-1/5 flex-grow mb-2"></div>
   </div>
-  <div class="flex flex-row text-grey-darker py-3"
+  <div v-if="message.system" class="w-full flex flex-row">
+    <div class="w-1/5 flex-grow mb-2"></div>
+    <div class="text-grey-dark text-xs text-center px-4">
+      {{ message.body }}
+    </div>
+    <div class="w-1/5 flex-grow mb-2"></div>
+  </div>
+  <div v-else class="flex flex-row text-grey-darker py-3"
     :class="[(message.user_id === user.id) ? 'self-end flex-row-reverse' : '']">
     <div class="flex flex-col items-center relative"
       :class="[(message.user_id === user.id) ? 'flex-col-reverse justify-end' : '']">
@@ -63,6 +70,12 @@ export default {
   data: () => ({
     dropdownMenuShown: false
   }),
+  computed: {
+    displayDate () {
+      return ! this.message.system
+        && this.showDate(this.message.created_at)
+    }
+  },
   methods: {
     deleteMessage () {
       axios.delete(`/messages/${this.message.id}`)
