@@ -21,9 +21,15 @@
         <div class="z-10">
           <img :src="generateUrl(comment.user.avatar)" class="rounded-full w-8 h-8">
         </div>
-        <div class="flex-1 bg-grey-lighter text-grey-darker rounded ml-2 p-4">
-          {{ comment.body }}
-        </div>
+        <div class="flex-1 bg-grey-lighter text-grey-darker rounded ml-2 p-4 flex flex-row justify-between">
+          <div>
+            {{ comment.body }}
+          </div>
+          <div v-if="user.id === comment.user_id" @click="deleteComment(comment,index)" class="text-xs text-red pb-2 ml-10 cursor-pointer">
+            <font-awesome-icon :icon="faTrashAlt">
+            </font-awesome-icon>
+          </div>
+          </div>
       </div>
     </div>
   </div>
@@ -31,6 +37,7 @@
 </template>
 
 <script>
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 export default {
   props: {
     resourceType: {
@@ -48,7 +55,9 @@ export default {
   },
   data: () => ({
     body: '',
-    comments: []
+    comments: [],
+    user: navbar.user,
+    faTrashAlt
   }),
   methods: {
     saveComment (e) {
@@ -69,6 +78,16 @@ export default {
             EventBus.$emit('notification', error.response.data.message, error.response.data.status)
           })
       }
+    },
+    deleteComment (c,index) {
+      axios.delete('/comments/'+c.id)
+        .then((response) => {
+          this.comments.splice(index, 1);
+          EventBus.$emit('notification', response.data.message, response.data.status)
+        })
+        .catch((error) => {
+          EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+        })
     }
   },
   created () {

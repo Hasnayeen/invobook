@@ -149,6 +149,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/comments', 'CommentController@store');
 
+    Route::delete('/comments/{comment}', 'CommentController@delete')->middleware('can:delete,comment');
+
     /**********************************
         User
     **********************************/
