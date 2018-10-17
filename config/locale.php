@@ -20,6 +20,7 @@ return [
         'nl-NL' => 'Dutch (Netherlands)',
         'pt-BR' => 'Portuguese (Brazil)',
         'ru-RU' => 'Russian (Russia)',
+        'th'    => 'Thai (Thai)',
     ],
 
     'route_to_file' => [
