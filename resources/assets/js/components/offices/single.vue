@@ -11,7 +11,7 @@
 
     <div class="h-16 flex flex-row justify-center items-center px-2">
       <span @click="showAddMemberForm" class="bg-white shadow w-8 h-8 rounded-full text-teal hover:cursor-pointer text-center p-2">
-        <i class="fas fa-plus"></i>
+        <font-awesome-icon :icon="faPlus"></font-awesome-icon>
       </span>
       <a v-for="(member, index) in office.members" v-if="index < 5" :href="'/users/' + member.username" class="pl-2">
         <img :src="generateUrl(member.avatar)" class="rounded-full w-8 h-8 mr-1">
@@ -44,6 +44,7 @@ import activity from './../partials/activity.vue'
 import addMemberForm from './../partials/addMemberForm.vue'
 import notificationPopup from '../partials/notificationPopup.vue'
 import tabMenu from './../partials/tabMenu.vue'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 export default {
   components: {
@@ -56,6 +57,7 @@ export default {
     showNotification: false,
     message: '',
     messageType: '',
+    faPlus,
   }),
   methods: {
     showAddMemberForm () {

@@ -21,7 +21,7 @@
       <button @click="checkForUpdates" class="no-underline p-4 m-4 mb-0 bg-white text-base text-teal rounded border border-grey-light">
         {{ 'Check for Updates' | localize }}
         <div v-if="loading" class="inline">
-          <i class="fas fa-spinner fa-spin"></i>
+          <font-awesome-icon :icon="faSpinner" spin></font-awesome-icon>
         </div>
       </button>
     </div>
@@ -42,6 +42,8 @@
 </template>
 
 <script>
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+
 export default {
   props: {
     activeTab: {
@@ -55,6 +57,7 @@ export default {
     version: 0.0,
     lastUpdated: '',
     message: '',
+    faSpinner,
   }),
   created () {
     this.version = document.querySelector('meta[name="app-version"]').content
