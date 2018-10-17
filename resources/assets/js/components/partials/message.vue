@@ -105,7 +105,8 @@ export default {
       return luxon.DateTime.fromSQL(created_at).toLocaleString(luxon.DateTime.DATE_MED)
     },
     getTime (created_at) {
-      return luxon.DateTime.fromSQL(created_at).toLocaleString(luxon.DateTime.TIME_SIMPLE)
+      let offset = - (new Date().getTimezoneOffset() / 60);
+      return luxon.DateTime.fromSQL(created_at).plus({hours: offset}).toLocaleString(luxon.DateTime.TIME_SIMPLE)
     }
   }
 }

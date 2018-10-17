@@ -1,5 +1,10 @@
 # Release Notes
 
+## v0.9 (Yet to release)
+
+### Changed
+- Showing Time in Teamchat based on the users timezone ([issue-280](https://github.com/iluminar/goodwork/issues/280))
+
 ## v0.8 (Yet to release)
 
 ### Added
