@@ -30,7 +30,7 @@ class SendInvitationToRegister extends Mailable
      */
     public function build(Request $request)
     {
-        $token = hash_hmac('sha256', str_random('40'), env('APP_KEY'));
+        $token = encrypt($request->role);
         Token::create(['token' => $token, 'email' => $request->email]);
         $setting = Setting::first();
 
