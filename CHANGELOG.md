@@ -10,6 +10,7 @@
 - Added localization
 - Added german translation
 - Added spanish (Spain) translation
+- Added spanish (Mexican) translation
 - Added portuguese (Brazil) translation
 - Added italian translation
 - Added russian translation
