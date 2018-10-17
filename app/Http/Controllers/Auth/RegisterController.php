@@ -109,6 +109,8 @@ class RegisterController extends Controller
             $user->assignRole($role);
 
             $token->delete();
+            $user = User::where('email', $token->email)->first();
+            $user->assignRole($token->role_id);
 
             return redirect('/');
         }

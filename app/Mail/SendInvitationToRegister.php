@@ -31,7 +31,7 @@ class SendInvitationToRegister extends Mailable
     public function build(Request $request)
     {
         $token = encrypt($request->role);
-        Token::create(['token' => $token, 'email' => $request->email]);
+        Token::create(['token' => $token, 'email' => $request->email, 'role_id'=> $request->role]);
         $setting = Setting::first();
 
         return $this->markdown('emails.invite')
