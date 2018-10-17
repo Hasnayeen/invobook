@@ -66,6 +66,5 @@ class CommentController extends Controller
             'status'  => 'success',
             'message' => trans('misc.Comment has been deleted'),
         ]);
-
     }
 }

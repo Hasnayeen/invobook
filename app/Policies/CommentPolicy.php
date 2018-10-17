@@ -13,7 +13,7 @@ class CommentPolicy
     /**
      * Determine whether the user can view the app models comment.
      *
-     * @param  \App\Models\User       $user
+     * @param  \App\Models\User $user
      * @param  \App\Models\Comment $comment
      * @return mixed
      */
@@ -35,7 +35,7 @@ class CommentPolicy
     /**
      * Determine whether the user can update the app models comment.
      *
-     * @param  \App\Models\User       $user
+     * @param  \App\Models\User $user
      * @param  \App\Models\Comment $comment
      * @return mixed
      */
@@ -46,7 +46,7 @@ class CommentPolicy
     /**
      * Determine whether the user can delete the app models comment.
      *
-     * @param  \App\Models\User       $user
+     * @param  \App\Models\User $user
      * @param  \App\Models\Comment $comment
      * @return mixed
      */
@@ -60,7 +60,7 @@ class CommentPolicy
     /**
      * Determine whether the user can restore the app models comment.
      *
-     * @param  \App\Models\User       $user
+     * @param  \App\Models\User $user
      * @param  \App\Models\Comment $comment
      * @return mixed
      */
@@ -71,7 +71,7 @@ class CommentPolicy
     /**
      * Determine whether the user can permanently delete the app models comment.
      *
-     * @param  \App\Models\User       $user
+     * @param  \App\Models\User $user
      * @param  \App\Models\Comment $comment
      * @return mixed
      */
