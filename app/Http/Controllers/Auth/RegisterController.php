@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\User;
-use App\Models\Token;
-use App\Models\Office;
-use App\Mail\UserRegistered;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Mail\UserRegistered;
+use App\Models\Office;
+use App\Models\Token;
+use App\Models\User;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use Spatie\Permission\Models\Role;
 
 class RegisterController extends Controller
 {
@@ -102,6 +103,11 @@ class RegisterController extends Controller
         $token = Token::where('token', $token)->first();
         if ($token && ($token->email == $request->email)) {
             $this->register($request, $token);
+
+            $user = User::whereEmail($request->email)->first();
+            $role = Role::find(decrypt($token->token));
+            $user->assignRole($role);
+
             $token->delete();
 
             return redirect('/');
