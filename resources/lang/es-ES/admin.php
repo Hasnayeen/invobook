@@ -15,7 +15,7 @@ return [
     'Attach'                         => 'Adjuntar',
     'Filters'                        => 'Filtros',
     'Apply'                          => 'Aplicar',
-    'Load More'                      => 'Cargar Mas',
+    'Load More'                      => 'Cargar Más',
     'Check for Updates'              => 'Chequear por Actualizaciones',
     'Filter by Activity'             => 'Filtrar por Actividades',
     'Filter by User'                 => 'Filtrar por Usuario',

@@ -12,10 +12,10 @@ return [
     |
     */
 
-    'password' => 'Las contraseñas deben tener al menos 6 caracteres y concordar con la validación',
+    'password' => 'Las contraseñas deben tener al menos 6 carácteres y concordar con la validación',
     'reset'    => 'Tu contraseña ha sido reiniciada!',
     'sent'     => 'Te hemos enviado un e-mail con el link para reiniciar tu contraseña!',
-    'token'    => 'Este token de renicio de contraseña es invalido.',
+    'token'    => 'Este token de renicio de contraseña es inválido.',
     'user'     => 'No hemos encontrado ningun usuario con ese e-mail.',
 
 ];
