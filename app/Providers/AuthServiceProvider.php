@@ -18,6 +18,7 @@ class AuthServiceProvider extends ServiceProvider
         \App\Models\Task::class       => \App\Policies\TaskPolicy::class,
         \App\Models\Tag::class        => \App\Policies\TagPolicy::class,
         \App\Models\Discussion::class => \App\Policies\DiscussionPolicy::class,
+        \App\Models\Comment::class    => \App\Policies\CommentPolicy::class,
         \App\Models\Message::class    => \App\Policies\MessagePolicy::class,
     ];
 
