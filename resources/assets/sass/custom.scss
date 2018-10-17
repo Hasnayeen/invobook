@@ -305,6 +305,11 @@ a.avatar-link:hover {
     overflow-y: hidden;
 }
 
+// word wrapping to avoid overflow
+.wrap-word{
+    word-wrap:break-word;
+}
+
 .homepage {
     padding: 0.8rem 1.5rem;
     .menu-list {
