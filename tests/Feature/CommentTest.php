@@ -4,9 +4,9 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Models\Discussion;
+use Spatie\Permission\Models\Permission;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Validation\ValidationException;
-use Spatie\Permission\Models\Permission;
 
 class CommentTest extends TestCase
 {
@@ -119,7 +119,7 @@ class CommentTest extends TestCase
         $user = factory(\App\Models\User::class)->create();
 
         $comment = factory(\App\Models\Comment::class)->create([
-            'user_id' => $user->id,
+            'user_id'          => $user->id,
             'body'             => 'Comment body',
             'commentable_type' => 'task',
             'commentable_id'   => 1,
