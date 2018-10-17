@@ -19,7 +19,7 @@
       <img :src="generateUrl(message.user.avatar)" :alt="message.user.name" class="w-10 h-10 rounded-full"
         :class="[(message.user_id === user.id) ? 'order-1' : '']">
       <div v-if="(message.user_id === user.id)" @click="toggleMessageMenu" class="cursor-pointer">
-        <i class="fas fa-ellipsis-h"></i>
+        <font-awesome-icon :icon="faEllipsisH"></font-awesome-icon>
       </div>
       <div v-if="(message.user_id === user.id) && dropdownMenuShown" class="absolute rounded shadow-lg pin-t mt-16 mr-2 p-3 text-grey-darker hover:bg-grey-light"
         :class="[(message.user_id === user.id) ? 'pin-r' : 'pin-l']">
@@ -49,6 +49,8 @@
 </template>
 
 <script>
+import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
+
 let day = null
 export default {
   props: {
@@ -66,7 +68,8 @@ export default {
     }
   },
   data: () => ({
-    dropdownMenuShown: false
+    dropdownMenuShown: false,
+    faEllipsisH,
   }),
   computed: {
     displayDate () {

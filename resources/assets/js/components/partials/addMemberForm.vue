@@ -13,7 +13,9 @@
                     <option :value="user.id" class="my-2 text-lg">{{ user.name }}</option>
                 </template>
             </select>
-            <i class="w-1/6 fa fa-chevron-down pointer-events-none flex items-center text-grey-darker -ml-8"></i>
+            <font-awesome-icon :icon="faChevronDown"
+              class="w-1/6 pointer-events-none flex items-center text-grey-darker -ml-8">
+            </font-awesome-icon>
         </div>
       </div>
     </div>
@@ -21,7 +23,7 @@
       <button @click="closeAddMemberForm" class="text-red-lighter hover:font-bold hover:text-red-light">Cancel</button>
       <button @click="addMember" class="bg-teal-light text-white font-medium hover:bg-teal-dark py-4 px-8 rounded">
         <template v-if="loading">
-          <i class="fas fa-spinner fa-spin"></i>
+          <font-awesome-icon :icon="faSpinner" spin></font-awesome-icon>
         </template>
         Add
       </button>
@@ -32,12 +34,19 @@
 </template>
 
 <script>
+import {
+  faChevronDown,
+  faSpinner,
+} from '@fortawesome/free-solid-svg-icons'
+
 export default {
   props: ['resource', 'resourceType'],
   data: () => ({
     users: [],
     newMember: null,
     loading: false,
+    faChevronDown,
+    faSpinner,
   }),
   created () {
     axios.get('/users')

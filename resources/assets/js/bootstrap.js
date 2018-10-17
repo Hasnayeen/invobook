@@ -1,4 +1,6 @@
 import Echo from 'laravel-echo'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
 window.Vue = require('vue')
 
 window.axios = require('axios')
@@ -38,5 +40,7 @@ window.Vue.filter('localize', function (value) {
   value = value.toString()
   return window.lang[value] ? window.lang[value] : value
 })
+
+window.Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 window.EventBus = new Vue()
