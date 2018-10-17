@@ -21,6 +21,8 @@
         <div class="static text-center p-8">
           <textarea class="static textarea resize-none rounded w-full p-4 text-grey-darker"
             id="send-message"
+            :style="{height: messageTextareaHeight}"
+            ref="messageTextarea"
             :placeholder="'write your message here' | localize"
             rows=1
             v-model="message"
@@ -40,6 +42,7 @@ export default {
   data: () => ({
     messages: [],
     message: '',
+    messageTextareaHeight: 'auto',
     user: navbar.user,
     unreadMessage: 0,
     title: '',
@@ -64,6 +67,12 @@ export default {
   },
   updated () {
     document.getElementById('message-box').scrollTop = document.getElementById('message-box').scrollHeight
+  },
+  watch: {
+    message (newVal) {
+      // increase the height of textarea based on text present there
+      this.messageTextareaHeight = `${this.$refs.messageTextarea.scrollHeight}px`
+    }
   },
   methods: {
     sendMessage (e) {

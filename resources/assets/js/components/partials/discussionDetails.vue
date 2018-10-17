@@ -3,10 +3,14 @@
   <div class="absolute container mx-auto md:w-5/6 lg:4/5 xl:w-3/4 xxl:w-2/3 bg-white rounded shadow-lg z-10 py-8 px-16 mb-16" style="top: 12vh;left: 0;right: 0;">
       <div class="flex flex-row justify-between relative">
         <div @click="closeDiscussionDetails" class="cursor-pointer">
-          <i class="fas fa-arrow-left text-base text-grey-dark"></i>
+          <font-awesome-icon :icon="faArrowLeft"
+            class="text-base text-grey-dark">
+          </font-awesome-icon>
         </div>
         <div @click="toggleMenu" class="cursor-pointer">
-          <i class="fas fa-ellipsis-h text-base text-grey-dark"></i>
+          <font-awesome-icon :icon="faEllipsisH"
+            class="text-base text-grey-dark">
+          </font-awesome-icon>
         </div>
         <div v-if="dropdownMenuShown" class="absolute rounded shadow-lg pin-r pin-t mt-4 p-3 text-grey-darker hover:bg-grey-light">
           <div @click="deleteDiscussion" class="cursor-pointer">
@@ -39,6 +43,11 @@
 
 <script>
 import commentBox from './commentBox.vue'
+import {
+  faArrowLeft,
+  faEllipsisH,
+} from '@fortawesome/free-solid-svg-icons'
+
 export default {
   components: {
     commentBox
@@ -59,6 +68,8 @@ export default {
   data() {
     return {
       dropdownMenuShown: false,
+      faArrowLeft,
+      faEllipsisH,
     }
   },
   methods: {

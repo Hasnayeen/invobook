@@ -25,7 +25,9 @@
                 <option :value="member.id" class="my-2 text-lg">{{ member.name }}</option>
               </template>
             </select>
-            <i class="w-1/6 fa fa-chevron-down pointer-events-none flex items-center text-grey-darker -ml-8"></i>
+            <font-awesome-icon :icon="faChevronDown"
+              class="w-1/6 pointer-events-none flex items-center text-grey-darker -ml-8">
+            </font-awesome-icon>
           </div>
         </div>
         <div class="p-4">
@@ -53,6 +55,8 @@
 
 <script>
 import Datepicker from 'vuejs-datepicker'
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
+
 export default {
   components: {Datepicker},
   props: ['resource', 'resourceType', 'formShown'],
@@ -61,6 +65,7 @@ export default {
     notes: '',
     assigned_to: null,
     related_to: '',
+    faChevronDown,
   }),
   methods: {
     createTask () {

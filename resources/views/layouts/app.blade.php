@@ -14,8 +14,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300,400,600">
     <link href="{{ mix('css/main.min.css') }}" rel="stylesheet">
 
-    <script defer src="{{ asset('js/fontawesome-all.min.js') }}" integrity="sha384-kW+oWsYx3YpxvjtZjFXqazFpA7UP/MbiY4jvs+RWZo2+N94PFZ36T6TFkc9O3qoB" crossorigin="anonymous"></script>
-
     @yield('style')
 
     <script>
