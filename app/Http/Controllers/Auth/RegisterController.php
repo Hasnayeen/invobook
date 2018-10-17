@@ -103,7 +103,7 @@ class RegisterController extends Controller
         if ($token && ($token->email == $request->email)) {
             $this->register($request, $token);
             $token->delete();
-            $user = User::where('email',$token->email)->first();
+            $user = User::where('email', $token->email)->first();
             $user->assignRole($token->role_id);
             return redirect('/');
         }
