@@ -6,6 +6,7 @@ use Tests\TestCase;
 use App\Models\Discussion;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Validation\ValidationException;
+use Spatie\Permission\Models\Permission;
 
 class CommentTest extends TestCase
 {
@@ -110,5 +111,55 @@ class CommentTest extends TestCase
                  'commentable_type' => 'discussion',
                  'commentable_id'   => $discussion->id,
              ]);
+    }
+
+    /** @test */
+    public function user_can_delete_his_own_comment()
+    {
+        $user = factory(\App\Models\User::class)->create();
+
+        $comment = factory(\App\Models\Comment::class)->create([
+            'user_id' => $user->id,
+            'body'             => 'Comment body',
+            'commentable_type' => 'task',
+            'commentable_id'   => 1,
+        ]);
+
+        //Permission::create(['name' => 'delete comment.' . $comment->commentable_type . '->' . $comment->commentable_id]);
+
+        $this->actingAs($user)->delete("/comments/{$comment->id}")
+             ->assertJsonFragment([
+                'status'  => 'success',
+                'message' => 'misc.Comment has been deleted',
+             ]);
+    }
+
+    /** @test */
+    public function user_with_permission_can_delete_a_comment()
+    {
+        $comment = factory(\App\Models\Comment::class)->create();
+
+        $permission = Permission::create(['name' => 'delete comment.' . $comment->commentable_type . '->' . $comment->commentable_id]);
+
+        $this->user->givePermissionTo($permission);
+
+        $this->actingAs($this->user)->delete("/comments/{$comment->id}")
+             ->assertJsonFragment([
+                'status'  => 'success',
+                'message' => 'misc.Comment has been deleted',
+             ]);
+    }
+
+    /**
+     * @expectedException Illuminate\Auth\Access\AuthorizationException
+     * @test
+     */
+    public function user_without_permission_cant_delete_a_comment()
+    {
+        $comment = factory(\App\Models\Comment::class)->create();
+
+        $permission = Permission::create(['name' => 'delete comment.' . $comment->commentable_type . '->' . $comment->commentable_id]);
+
+        $this->actingAs($this->user)->delete("/comments/{$comment->id}");
     }
 }
