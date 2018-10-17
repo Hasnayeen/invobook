@@ -29,7 +29,7 @@
       </div>
     </div>
     <div class="mx-2">
-      <div  class="rounded-lg p-3 w-64 leading-normal text-grey-darkest"
+      <div  class="rounded-lg p-3 w-64 leading-normal text-grey-darkest break-words"
         :class="[(message.user_id === user.id) ? 'bg-teal-lightest rounded-tr-none' : 'bg-pink-lightest rounded-tl-none']">
         {{ message.body }}
       </div>
