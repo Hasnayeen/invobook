@@ -26,7 +26,7 @@ class AddRoleIdColumnToTokensTable extends Migration
     public function down()
     {
         Schema::table('tokens', function (Blueprint $table) {
-            //
+            $table->dropColumn('role_id');
         });
     }
 }
