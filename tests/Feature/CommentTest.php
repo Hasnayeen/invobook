@@ -125,8 +125,6 @@ class CommentTest extends TestCase
             'commentable_id'   => 1,
         ]);
 
-        //Permission::create(['name' => 'delete comment.' . $comment->commentable_type . '->' . $comment->commentable_id]);
-
         $this->actingAs($user)->delete("/comments/{$comment->id}")
              ->assertJsonFragment([
                 'status'  => 'success',
