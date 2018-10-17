@@ -14,7 +14,7 @@
     </div>
     <div v-for="user in users" class="flex flex-row items-center text-left m-4 md:m-0 md:p-4 bg-teal-lighter md:bg-white rounded md:rounded-none shadow md:shadow-none relative">
       <div class="absolute pin-t pin-r m-2 text-grey-darker h-full md:flex flex-row items-center md:m-0 md:mr-4">
-        <i class="fas fa-ellipsis-h cursor-pointer"></i>
+        <font-awesome-icon :icon="faEllipsisH" class="cursor-pointer"></font-awesome-icon>
       </div>
       <div class="w-1/4 md:w-1/6 px-2 md:px-0"><img class="w-12 h-12 rounded-full" :src="generateUrl(user.avatar)"></div>
       <div class="w-3/4 md:w-5/6 flex flex-col md:flex-row md:items-center md:px-0 bg-white">
@@ -35,6 +35,8 @@
 
 <script>
 import inviteModal from './../partials/inviteModal.vue'
+import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
+
 export default {
   props: {
     activeTab: {
@@ -46,6 +48,9 @@ export default {
       type: Array,
     }
   },
+  data: () => ({
+    faEllipsisH,
+  }),
   components: {inviteModal}
 }
 </script>

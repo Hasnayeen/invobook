@@ -19,14 +19,18 @@
           {{ 'Permissions' | localize }}
         </span>
         <div @click="showAssignPermissionForm(role.id)">
-          <i class="ml-2 fas fa-plus-circle text-indigo cursor-pointer"></i>
+          <font-awesome-icon :icon="faPlusCircle"
+            class="ml-2 text-indigo cursor-pointer">
+          </font-awesome-icon>
         </div>
       </div>
       <div v-if="role.permissions.length > 0" class="flex flex-row flex-wrap m-2">
         <div v-for="(permission, index) in role.permissions" class="py-1 px-2 m-2 rounded-full font-medium bg-pink text-white text-sm flex flex-row items-center">
           {{ permission.name }} 
           <div @click="revokePermission(role.id, permission.id, index)">
-            <i class="ml-1 pl-1 fas fa-trash-alt cursor-pointer"></i>
+            <font-awesome-icon :icon="faTrashAlt"
+              class="ml-1 pl-1 cursor-pointer">
+            </font-awesome-icon>
           </div>
         </div>
       </div>
@@ -41,6 +45,11 @@
 <script>
 import createRoleForm from './../forms/createRoleForm'
 import assignPermissionForm from './../forms/assignPermissionForm'
+import {
+  faPlusCircle,
+  faTrashAlt,
+} from '@fortawesome/free-solid-svg-icons'
+
 export default {
   components: {createRoleForm, assignPermissionForm},
   props: {
@@ -53,7 +62,9 @@ export default {
     roles: [],
     createRoleFormShown: false,
     assignPermissionFormShown: false,
-    roleId: 0
+    roleId: 0,
+    faPlusCircle,
+    faTrashAlt,
   }),
   beforeUpdate () {
     if (this.roles.length < 1) {

@@ -7,26 +7,32 @@
           <option value="activity" disabled hidden>{{ 'Filter by Activity' | localize }}</option>
           <option :value="1" class="my-2 text-lg">name</option>
         </select>
-        <i class="fa fa-chevron-down pointer-events-none items-center text-grey-dark absolute pin-r mr-3"></i>
+        <font-awesome-icon :icon="faChevronDown"
+          class="pointer-events-none items-center text-grey-dark absolute pin-r mr-3">
+        </font-awesome-icon>
       </div>
       <div class="mx-4 py-4 flex flex-row items-center relative">
         <select v-model="user" class="w-full block appearance-none bg-white border border-grey rounded text-grey-darker py-3 px-4 pr-8">
           <option value="user" disabled hidden>{{ 'Filter by User' | localize }}</option>
           <option :value="2" class="my-2 text-lg">name</option>
         </select>
-        <i class="w-1/6 fa fa-chevron-down pointer-events-none items-center text-grey-dark absolute pin-r mr-3"></i>
+        <font-awesome-icon :icon="faChevronDown"
+          class="w-1/6 pointer-events-none items-center text-grey-dark absolute pin-r mr-3">
+        </font-awesome-icon>
       </div>
       <div class="mx-4 py-4 flex flex-row items-center relative">
         <select v-model="date" class="w-full block appearance-none bg-white border border-grey rounded text-grey-darker py-3 px-4 pr-8">
           <option value="date" disabled hidden>{{ 'Filter by Date' | localize }}</option>
           <option :value="3" class="my-2 text-lg">name</option>
         </select>
-        <i class="w-1/6 fa fa-chevron-down pointer-events-none items-center text-grey-dark absolute pin-r mr-3"></i>
+        <font-awesome-icon :icon="faChevronDown"
+          class="w-1/6 pointer-events-none items-center text-grey-dark absolute pin-r mr-3">
+        </font-awesome-icon>
       </div>
       <div class="mx-4 py-4">
       <button class="bg-teal-light text-white font-medium hover:bg-teal-dark py-3 px-8 rounded">
         <template v-if="loading">
-          <i class="fas fa-spinner fa-spin"></i>
+          <font-awesome-icon :icon="faSpinner" spin></font-awesome-icon>
         </template>
         {{ 'Apply' | localize }}
       </button>
@@ -66,6 +72,11 @@
 </template>
 
 <script>
+import {
+  faChevronDown,
+  faSpinner,
+} from '@fortawesome/free-solid-svg-icons'
+
 export default {
   props: {
     activeTab: {
@@ -78,7 +89,9 @@ export default {
     user: 'user',
     date: 'date',
     loading: false,
-    activities: []
+    activities: [],
+    faChevronDown,
+    faSpinner,
   }),
   created () {
     axios.get('admin/activities')

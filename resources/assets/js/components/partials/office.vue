@@ -1,7 +1,9 @@
 <template>
 	<div class="bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center items-center text-center rounded m-4">
 		<span @click="toggleMenu" class="w-full h-8 pr-4 pt-2">
-			<i class="fa fa-ellipsis-h float-right text-grey-darker cursor-pointer"></i>
+			<font-awesome-icon :icon="faEllipsisH"
+				class="float-right text-grey-darker cursor-pointer">
+			</font-awesome-icon>
 		</span>
 		<div v-if="dropdownMenuShown" class="absolute rounded shadow-lg pin-r pin-t mt-8 mr-2 p-3 text-grey-darker hover:bg-grey-light">
 			<div @click="deleteOffice(office)" class="cursor-pointer">
@@ -23,12 +25,15 @@
 </template>
 
 <script>
+	import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
+
 	export default {
 		props: ['details'],
 		data() {
 			return {
 				office: this.details,
-				dropdownMenuShown: false
+				dropdownMenuShown: false,
+				faEllipsisH,
 			}
 		},
 		methods: {

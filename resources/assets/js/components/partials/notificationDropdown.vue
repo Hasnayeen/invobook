@@ -1,7 +1,7 @@
 <template>
 <div class="px-4 self-center">
     <div id="notification" class="text-teal-light text-base no-underline cursor-pointer" @click="toggleNotification">
-        <i class="far fa-bell font-bold text-xl" aria-hidden="true"></i>
+        <font-awesome-icon :icon="faBell" class="font-bold text-xl"></font-awesome-icon>
         <i v-if="unreadNotification" class="fa fa-circle text-red-light text-sm absolute pin-t mt-3 ml-3" aria-hidden="true"></i>
     </div>
     <div v-if="notificationShown" class="absolute bg-white w-64 mt-5 mr-8 py-4 shadow-lg rounded z-50" style="right: 5%;">
@@ -36,6 +36,8 @@
 </template>
 
 <script>
+import { faBell } from '@fortawesome/free-solid-svg-icons'
+
 export default {
   data: () => ({
     user: navbar.user,
@@ -43,6 +45,7 @@ export default {
     url: navbar.navUrl,
     notificationShown: false,
     unreadNotification: false,
+    faBell,
   }),
   methods: {
     toggleNotification(event) {

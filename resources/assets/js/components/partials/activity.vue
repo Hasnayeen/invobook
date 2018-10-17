@@ -5,7 +5,7 @@
                 Activities
             </a>
             <span class="text-grey-darker absolute pin-r mr-2">
-                <i class="fa fa-ellipsis-h"></i>
+                <font-awesome-icon :icon="faEllipsisH"></font-awesome-icon>
             </span>
         </header>
         <div class="w-full h-48 self-start text-left">
@@ -41,7 +41,12 @@
 </template>
 
 <script>
+import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
+
 export default {
-  props: ['resource', 'resourceType']
+  props: ['resource', 'resourceType'],
+  data: () => ({
+    faEllipsisH,
+  })
 }
 </script>
