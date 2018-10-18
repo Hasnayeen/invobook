@@ -77,7 +77,7 @@ export default {
   watch: {
     message (newVal) {
       // increase the height of textarea based on text present there
-      this.messageTextareaHeight = `${this.$refs.messageTextarea.scrollHeight}px`
+      this.messageTextareaHeight = newVal ? `${this.$refs.messageTextarea.scrollHeight}px` : 'auto'
     }
   },
   methods: {
