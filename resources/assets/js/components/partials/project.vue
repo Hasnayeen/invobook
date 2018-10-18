@@ -1,6 +1,6 @@
 <template>
     <div class="relative bg-white shadow-md w-64 h-64 flex flex-col justify-center items-center text-center rounded m-4">
-        <span @click="toggleMenu" v-click-outside="hideMenu" class="w-full h-8 pr-4 pt-2">
+        <span @click="toggleMenu" class="w-full h-8 pr-4 pt-2" v-click-outside="hideMenu">
             <font-awesome-icon :icon="faEllipsisH"
                 class="float-right text-grey-darker cursor-pointer">
             </font-awesome-icon>
