@@ -9,6 +9,8 @@ class Task extends Model
 {
     use LogsActivity;
 
+    protected $with = ['subtasks'];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -44,5 +46,10 @@ class Task extends Model
     public function tags()
     {
         return $this->belongsToMany(Tag::class, 'task_tags');
+    }
+
+    public function subtasks()
+    {
+        return $this->hasMany(self::class, 'parent_id');
     }
 }
