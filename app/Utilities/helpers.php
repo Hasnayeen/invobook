@@ -3,9 +3,9 @@
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
-if (!function_exists('application_last_updated')) {
+if (! function_exists('application_last_updated')) {
     /**
-     * Return the date when the application was last updated
+     * Return the date when the application was last updated.
      *
      * @return string
      */
@@ -15,7 +15,7 @@ if (!function_exists('application_last_updated')) {
     }
 }
 
-if (!function_exists('create_permissions')) {
+if (! function_exists('create_permissions')) {
     /**
      * Create permissions for a single resource.
      *
@@ -48,7 +48,7 @@ if (!function_exists('create_permissions')) {
         $role->givePermissionTo($permission);
     }
 
-    if (!function_exists('get_locale')) {
+    if (! function_exists('get_locale')) {
         /**
          * Get user set locale or default locale.
          *
