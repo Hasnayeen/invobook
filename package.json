@@ -73,7 +73,9 @@
       "test",
       "expect",
       "jest",
-      "it"
+      "it",
+      "navbar",
+      "EventBus"
     ]
   }
 }
