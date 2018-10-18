@@ -2,6 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\Exceptions\UserIsNotMember;
+use Illuminate\Support\Facades\Notification;
+use Spatie\Permission\Models\Permission;
 use Tests\TestCase;
 use App\Models\Office;
 
@@ -95,5 +98,55 @@ class OfficeTest extends TestCase
         $id = Office::where('name', 'New Office')->first()->id;
 
         $this->actingAs($user)->delete('offices/' . $id);
+    }
+
+    /** @test */
+    public function remove_user_from_office()
+    {
+        Notification::fake();
+        Permission::create(['name' => 'view office->' . $this->office->id]);
+        $user = factory('App\Models\User')->create();
+        $this->office->members()->save($user);
+        $user->givePermissionTo(
+            'view office->' . $this->office->id
+        );
+
+        $this->assertCount(1, $this->office->members);
+
+        $this->actingAs($this->user)->delete('/members', [
+            'user_id'       => $user->id,
+            'resource_type' => 'office',
+            'resource_id'   => $this->office->id,
+        ])->assertJson([
+            'status'  => 'success',
+            'message' => 'User removed from the office',
+            'user'    => [
+                'id'       => $user->id,
+                'name'     => $user->name,
+                'username' => $user->username,
+                'avatar'   => $user->avatar,
+            ],
+        ]);
+
+        $this->assertEmpty($this->office->fresh()->members);
+    }
+
+    /**
+     * @expectedException App\Exceptions\UserIsNotMember
+     * @test
+     */
+    public function cannot_remove_user_from_office_if_not_a_member()
+    {
+        $this->expectException(UserIsNotMember::class);
+
+        Permission::create(['name' => 'view office->' . $this->office->id]);
+        $user = factory('App\Models\User')->create();
+
+        $this->actingAs($this->user)
+             ->delete('/members', [
+                 'user_id'       => $user->id,
+                 'resource_type' => 'office',
+                 'resource_id'   => $this->office->id,
+             ]);
     }
 }

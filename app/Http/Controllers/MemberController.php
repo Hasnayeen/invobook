@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\UserIsNotMember;
 use App\Models\User;
+use App\Notifications\RevokedMembership;
 use App\Utilities\EntityTrait;
 use App\Notifications\BecameNewMember;
 use App\Exceptions\UserIsAlreadyMember;
@@ -27,6 +29,29 @@ class MemberController extends Controller
         return response()->json([
             'status'   => 'success',
             'message'  => trans('misc.User added', ['type' => request('resource_type')]),
+            'user'     => $user,
+        ]);
+    }
+
+    public function destroy()
+    {
+        $entity = $this->getEntityModel();
+
+        $user = $entity->members()->where('user_id', request('user_id'))->first();
+
+        throw_if(!$user, new UserIsNotMember());
+
+        $entity->members()->detach($user);
+
+        $user->revokePermissionTo(
+            'view ' . request('resource_type') . '->' . $entity->id
+        );
+
+        $user->notify(new RevokedMembership($entity, auth()->user(), $user));
+
+        return response()->json([
+            'status'   => 'success',
+            'message'  => trans('misc.User removed', ['type' => request('resource_type')]),
             'user'     => $user,
         ]);
     }
