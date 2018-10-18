@@ -1,5 +1,6 @@
 import Echo from 'laravel-echo'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import ClickOutside from 'vue-click-outside'
 
 window.Vue = require('vue')
 
@@ -40,6 +41,8 @@ window.Vue.filter('localize', function (value) {
   value = value.toString()
   return window.lang[value] ? window.lang[value] : value
 })
+
+window.Vue.directive('click-outside', ClickOutside)
 
 window.Vue.component('font-awesome-icon', FontAwesomeIcon)
 

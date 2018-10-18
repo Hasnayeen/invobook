@@ -1,6 +1,6 @@
 <template>
 <div class="px-4 self-center">
-    <div id="notification" class="text-teal-light text-base no-underline cursor-pointer" @click="toggleNotification">
+    <div id="notification" class="text-teal-light text-base no-underline cursor-pointer" @click="toggleNotification" v-click-outside="hideNotification">
         <font-awesome-icon :icon="faBell" class="font-bold text-xl"></font-awesome-icon>
         <i v-if="unreadNotification" class="fa fa-circle text-red-light text-sm absolute pin-t mt-3 ml-3" aria-hidden="true"></i>
     </div>
