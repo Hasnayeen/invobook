@@ -1,6 +1,6 @@
 # Release Notes
 
-## v0.8 (Yet to release)
+## v0.8 (2018-10-18)
 
 ### Added
 
@@ -19,6 +19,8 @@
 - Added arabic translation
 - Added french translation
 - Added thai translation
+- Added sub task option ([issue-195](https://github.com/iluminar/goodwork/issues/195))
+- Added indicator in tab menu for unread message
 
 ### Changed
 
