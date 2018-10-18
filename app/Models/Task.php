@@ -50,6 +50,6 @@ class Task extends Model
 
     public function subtasks()
     {
-        return $this->hasMany(Task::class, 'parent_id');
+        return $this->hasMany(self::class, 'parent_id');
     }
 }
