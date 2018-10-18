@@ -48,6 +48,12 @@ export default {
     title: '',
     users: []
   }),
+  created () {
+    EventBus.$on('clear-title-notification', this.clearTitleNotification)
+  },
+  beforeDestroy () {
+    EventBus.$off('clear-title-notification', this.clearTitleNotification)
+  },
   mounted () {
     axios.get('/messages', {
       params: {
@@ -89,7 +95,7 @@ export default {
           .then((response) => {
             if (response.data.status == 'success') {
               response.data.message.user = navbar.user
-              this.messages.push(response.data.message)
+              this.pushMessage(response.data.message)
             }
           })
           .catch((error) => {
@@ -120,7 +126,7 @@ export default {
           })
           .listen('MessageCreated', event => {
             event.message.user = event.user
-            this.messages.push(event.message)
+            this.pushMessage(event.message)
             if ((document.activeElement != document.getElementById('send-message')) || (!document.hasFocus())) {
               this.unreadMessage += 1
               document.title = '(' + this.unreadMessage + ') ' + this.title
@@ -134,8 +140,12 @@ export default {
     deleteMessage(index) {
       this.messages.splice(index, 1)
     },
+    pushMessage (message) {
+      this.messages.push(message)
+      EventBus.$emit('messagePushed')
+    },
     pushSystemMessage (body) {
-      this.messages.push({
+      this.pushMessage({
         body,
         system: true,
       })

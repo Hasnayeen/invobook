@@ -1,6 +1,6 @@
 <template>
-	<div class="bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center items-center text-center rounded m-4">
-		<span @click="toggleMenu" class="w-full h-8 pr-4 pt-2">
+	<div class="relative bg-white shadow-md w-64 h-64 flex flex-row flex-wrap justify-center items-center text-center rounded m-4">
+		<span @click="toggleMenu" v-click-outside="hideMenu" class="w-full h-8 pr-4 pt-2">
 			<font-awesome-icon :icon="faEllipsisH"
 				class="float-right text-grey-darker cursor-pointer">
 			</font-awesome-icon>
@@ -40,6 +40,9 @@
 			toggleMenu() {
 				this.dropdownMenuShown = ! this.dropdownMenuShown
 			},
+      hideMenu() {
+        this.dropdownMenuShown = false
+      },
 			deleteOffice(office) {
 				axios.delete(`/offices/${office.id}`)
 					.then((response) => {

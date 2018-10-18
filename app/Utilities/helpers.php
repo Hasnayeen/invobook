@@ -3,27 +3,15 @@
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
-if (! function_exists('about')) {
+if (! function_exists('application_last_updated')) {
     /**
-     * Get or set software related values.
+     * Return the date when the application was last updated.
      *
-     * @param  string $key
-     * @param  string $value
-     * @return array
+     * @return string
      */
-    function about($key, $value = null)
+    function application_last_updated()
     {
-        $string = file_get_contents(storage_path() . '/config/about.json');
-        $config = json_decode($string, true);
-
-        if (is_null($value)) {
-            return $config[$key];
-        }
-
-        $config[$key] = $value;
-        file_put_contents(storage_path() . '/config/about.json', json_encode($config));
-
-        return $config;
+        return date('F d Y', filemtime(base_path() . '/config/app.php'));
     }
 }
 
