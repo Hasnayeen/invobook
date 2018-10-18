@@ -20,6 +20,11 @@
 - Added french translation
 - Added thai translation
 
+### Changed
+
+- Time showed in Teamchat is now based on the user preferred timezone if set otherwise local time based on browser ([issue-280](https://github.com/iluminar/goodwork/issues/280))
+
+
 ## v0.7 (2018-10-13)
 
 ### Added
@@ -35,6 +40,7 @@
 
 - Updated to Laravel 5.7
 - Updated docker compose to use `php:7.2-fpm` & `php:7.2-cli`
+
 
 ## v0.6 (2018-10-04)
 
@@ -54,6 +60,7 @@
 - Use `mix` helper instead of `asset`
 - Use minified version of all asset
 - Versionify & minify all assets file
+
 
 ## v0.5 (2018-09-16)
 

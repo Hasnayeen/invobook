@@ -105,7 +105,10 @@ export default {
       return luxon.DateTime.fromSQL(created_at).toLocaleString(luxon.DateTime.DATE_MED)
     },
     getTime (created_at) {
-      return luxon.DateTime.fromSQL(created_at).toLocaleString(luxon.DateTime.TIME_SIMPLE)
+      if (this.user.timezone) {
+        return luxon.DateTime.fromSQL(created_at, {zone: 'UTC'}).setZone(this.user.timezone).toLocaleString(luxon.DateTime.TIME_SIMPLE)
+      }
+      return luxon.DateTime.fromSQL(created_at, {zone: 'UTC'}).setZone('local').toLocaleString(luxon.DateTime.TIME_SIMPLE)
     }
   }
 }
