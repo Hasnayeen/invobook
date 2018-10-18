@@ -13,9 +13,7 @@ class AboutController extends Controller
 
         if ($response->getStatusCode() === 200) {
             $latestVersion = $this->getLatestVersion($response);
-            if ($latestVersion > about('current_version')) {
-                about('latest_version', $latestVersion);
-
+            if ($latestVersion > config('app.version')) {
                 return response()->json([
                     'status'           => 'success',
                     'message'          => trans('misc.New version available', ['latest_version' => $latestVersion]),
@@ -24,7 +22,7 @@ class AboutController extends Controller
 
             return response()->json([
                     'status'           => 'success',
-                    'message'          => trans('misc.Current version is the latest version', ['current_version' => about('current_version')]),
+                    'message'          => trans('misc.Current version is the latest version', ['current_version' => config('app.version')]),
                 ]);
         }
 
