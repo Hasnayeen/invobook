@@ -18,7 +18,6 @@ services:
 before_script:
   - mysql -e 'CREATE DATABASE goodwork;'
   - php artisan migrate
-  - phantomjs --webdriver=127.0.0.1:9515 &
   - php artisan serve &
   - sleep 5
   - php artisan config:clear
