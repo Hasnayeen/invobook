@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white shadow-md w-64 h-64 flex flex-col justify-center items-center text-center rounded m-4">
+    <div class="relative bg-white shadow-md w-64 h-64 flex flex-col justify-center items-center text-center rounded m-4">
         <span @click="toggleMenu" class="w-full h-8 pr-4 pt-2" v-click-outside="hideMenu">
             <font-awesome-icon :icon="faEllipsisH"
                 class="float-right text-grey-darker cursor-pointer">
@@ -37,24 +37,24 @@ export default {
         }
     },
     methods: {
-        toggleMenu() {
-            this.dropdownMenuShown = ! this.dropdownMenuShown
-        },
-        hideMenu() {
-          this.dropdownMenuShown = false
-        },
-        deleteProject(project) {
-            axios.delete(`/projects/${project.id}`)
-                .then((response) => {
-                    this.$emit('deleted')
-                    this.dropdownMenuShown = false
-                    EventBus.$emit('notification', response.data.message, response.data.status)
-                })
-                .catch((error) => {
-                    this.dropdownMenuShown = false
-                    EventBus.$emit('notification', error.response.data.message, error.response.data.status)
-                })
-        }
+      toggleMenu() {
+        this.dropdownMenuShown = ! this.dropdownMenuShown
+      },
+      hideMenu() {
+        this.dropdownMenuShown = false
+      },
+      deleteProject(project) {
+        axios.delete(`/projects/${project.id}`)
+          .then((response) => {
+            this.$emit('deleted')
+            this.dropdownMenuShown = false
+            EventBus.$emit('notification', response.data.message, response.data.status)
+          })
+          .catch((error) => {
+            this.dropdownMenuShown = false
+            EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+          })
+      }
     }
 }
 </script>

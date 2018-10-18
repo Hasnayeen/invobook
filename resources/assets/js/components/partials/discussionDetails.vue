@@ -7,12 +7,12 @@
             class="text-base text-grey-dark">
           </font-awesome-icon>
         </div>
-        <div @click="toggleMenu" class="cursor-pointer">
+        <div @click="toggleMenu" v-click-outside="hideMenu" class="cursor-pointer">
           <font-awesome-icon :icon="faEllipsisH"
             class="text-base text-grey-dark">
           </font-awesome-icon>
         </div>
-        <div v-if="dropdownMenuShown" class="absolute rounded shadow-lg pin-r pin-t mt-4 p-3 text-grey-darker hover:bg-grey-light">
+        <div v-if="dropdownMenuShown" class="absolute rounded shadow-lg pin-r pin-t mt-6 p-3 text-grey-darker hover:bg-grey-light">
           <div @click="deleteDiscussion" class="cursor-pointer">
             Delete
           </div>

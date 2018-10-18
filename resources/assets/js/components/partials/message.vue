@@ -18,7 +18,7 @@
       :class="[(message.user_id === user.id) ? 'flex-col-reverse justify-end' : '']">
       <img :src="generateUrl(message.user.avatar)" :alt="message.user.name" class="w-10 h-10 rounded-full"
         :class="[(message.user_id === user.id) ? 'order-1' : '']">
-      <div v-if="(message.user_id === user.id)" @click="toggleMessageMenu" class="cursor-pointer">
+      <div v-if="(message.user_id === user.id)" @click="toggleMessageMenu" v-click-outside="hideMessageMenu" class="cursor-pointer">
         <font-awesome-icon :icon="faEllipsisH"></font-awesome-icon>
       </div>
       <div v-if="(message.user_id === user.id) && dropdownMenuShown" class="absolute rounded shadow-lg pin-t mt-16 mr-2 p-3 text-grey-darker hover:bg-grey-light"
@@ -92,6 +92,9 @@ export default {
     },
     toggleMessageMenu() {
       this.dropdownMenuShown = ! this.dropdownMenuShown
+    },
+    hideMessageMenu() {
+      this.dropdownMenuShown = false
     },
    showDate (created_at) {
       let createdDay = luxon.DateTime.fromSQL(created_at).toLocaleString(luxon.DateTime.DATE_MED)
