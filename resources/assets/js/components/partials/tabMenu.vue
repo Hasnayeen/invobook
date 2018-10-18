@@ -10,9 +10,16 @@
         <font-awesome-icon :icon="faClipboardList" class="text-2xl"></font-awesome-icon>
         <span class="block text-xs font-regular pt-2">{{ 'Discussions' | localize }}</span>
       </div>
-      <div @click="activateThisTab('messages')"
+      <div @click="onMessagesTabClicked"
         :class="[(active === 'messages') ? 'text-teal-dark font-semibold border-teal border-b-2 pb-4 -mb-4' : 'cursor-pointer', 'text-center w-1/6']">
-        <font-awesome-icon :icon="faComments" class="text-2xl"></font-awesome-icon>
+        <span class="relative inline-block">
+          <font-awesome-icon :icon="faComments" class="text-2xl"></font-awesome-icon>
+          <font-awesome-icon :icon="faCircle"
+            v-if="displayUnreadMessageBadge"
+            class="absolute text-xs text-teal"
+            style="right:-3px; top:-6px;">
+          </font-awesome-icon>
+        </span>
         <span class="block text-xs font-regular pt-2">{{ 'Messages' | localize }}</span>
       </div>
       <div @click="activateThisTab('events')"
@@ -37,6 +44,7 @@
 import {
   faBolt,
   faCalendarAlt,
+  faCircle,
   faClipboardList,
   faComments,
   faFileAlt,
@@ -53,15 +61,39 @@ export default {
   data: () => ({
     faBolt,
     faCalendarAlt,
+    faCircle,
     faClipboardList,
     faComments,
     faFileAlt,
     faTasks,
+    hasUnreadMessage: false,
   }),
+  computed: {
+    displayUnreadMessageBadge () {
+      return this.hasUnreadMessage
+        && ! this.isTabActive('messages')
+    }
+  },
   methods: {
     activateThisTab (tab) {
       this.$emit('activate', tab)
+    },
+    isTabActive (tab) {
+      return this.active === tab
+    },
+    onMessagePushed () {
+      this.setHasUnreadMessage(! this.isTabActive('messages'))
+    },
+    onMessagesTabClicked () {
+      this.setHasUnreadMessage(false)
+      this.activateThisTab('messages')
+    },
+    setHasUnreadMessage (flag) {
+      this.hasUnreadMessage = flag
     }
+  },
+  mounted () {
+    EventBus.$on('messagePushed', this.onMessagePushed)
   }
 }
 </script>
