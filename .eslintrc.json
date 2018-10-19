@@ -16,7 +16,7 @@
         "node",
         "promise",
         "standard",
-        "vue/essential"
+        "vue"
     ],
     "globals": {
         "document": false,
