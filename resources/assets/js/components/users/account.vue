@@ -48,7 +48,7 @@
       </div>
       <div class="mt-4 px-8">
         <a class="rounded p-4 text-red-light border border-grey-light hover:font-bold hover:border-0 hover:shadow-lg hover:bg-red-light hover:text-white no-underline" href="#">
-          {{ 'Delete account' | localize }}
+          {{ 'Delete Account' | localize }}
         </a>
       </div>
     </div>
