@@ -18,7 +18,7 @@
             </div>
             <div class="mb-6">
                 <label class="block text-grey-darker text-sm font-bold mb-2" for="title">
-                    {{ 'Title' | localize }}
+                    {{ 'Title at Goodwork' | localize }}
                 </label>
                 <input v-model='user.designation' class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="title" type="text" placeholder="Developer">
             </div>
@@ -64,7 +64,7 @@
             </div>
             <div class="mb-6">
                 <label class="block text-grey-darker text-sm font-bold mb-2" for="weekstart">
-                    {{ 'Preferred Language' | localize }}
+                    {{ 'Preffered Language' | localize }}
                 </label>
                 <div class="relative">
                     <select v-model='user.lang' class="shadow appearance-none border rounded w-full px-3 py-2 text-grey-darker bg-grey-lighter text-grey-darker" id="weekstart">
