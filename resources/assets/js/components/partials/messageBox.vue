@@ -59,7 +59,7 @@ export default {
   }),
   created () {
     EventBus.$on('show-message-box', this.showMessageBox)
-    axios.get('users')
+    axios.get('/users')
       .then((response) => {
         this.users = response.data.users
       })
@@ -115,7 +115,7 @@ export default {
     selectUserMessage (user) {
       this.selectedUser = user
       this.isDisabled = false
-      axios.get('direct-messages', {
+      axios.get('/direct-messages', {
         params: {
           resource_type: 'user',
           resource_id: user.id
