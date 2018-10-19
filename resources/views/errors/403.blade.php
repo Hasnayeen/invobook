@@ -11,6 +11,7 @@
 </div>
 
 @slot('script')
+<script src="//{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>
 <script src="{{ mix('/js/errors/404.min.js') }}"></script>
 @endslot
 
