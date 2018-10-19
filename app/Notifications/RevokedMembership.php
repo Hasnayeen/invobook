@@ -82,8 +82,8 @@ class RevokedMembership extends Notification implements ShouldQueue
     public function toArray($notifiable)
     {
         return [
-            'type'  => $this->entityType,
-            'name'  => $this->entityName,
+            'type'    => $this->entityType,
+            'name'    => $this->entityName,
             'remover' => $this->remover,
             'removed' => $this->removed,
         ];
