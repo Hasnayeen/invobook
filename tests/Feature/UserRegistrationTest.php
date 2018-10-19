@@ -38,7 +38,7 @@ class UserRegistrationTest extends TestCase
 
         $this->assertDatabaseHas('activity_log', [
             'causer_id'   => $user->getKey(),
-            'causer_type' => get_class($user),
+            'causer_type' => 'user',
             'description' => 'User John Doe has registered',
         ]);
     }
