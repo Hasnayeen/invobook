@@ -1,15 +1,15 @@
 <template>
 <div :class="{'hidden': (activeTab != 'about')}" class="w-full mb-8">
   <div :class="{'hidden': !showUpdateModal}">
-      <div @click="closeUpdateModal" class="absolute pin opacity-75 bg-grey"></div>
-      <div class="fixed pin-x w-1/3 z-10 bg-grey-lighter mx-auto p-8 rounded">
-          <p class="py-2">
-            {{ message }}
-          </p>
-          <div class="flex flex-row justify-between pt-8 bg-grey-lighter rounded">
-              <button @click="closeUpdateModal" class="text-red-lighter hover:font-bold hover:text-red-light hover:border-red-light border-red-lighter border px-4 py-3 rounded">Ok</button>
-          </div>
+    <div @click="closeUpdateModal" class="absolute pin opacity-75 bg-grey"></div>
+    <div class="fixed pin-x w-1/3 z-10 bg-grey-lighter mx-auto p-8 rounded">
+      <p class="py-2">
+      {{ message }}
+      </p>
+      <div class="flex flex-row justify-between pt-8 bg-grey-lighter rounded">
+        <button @click="closeUpdateModal" class="text-red-lighter hover:font-bold hover:text-red-light hover:border-red-light border-red-lighter border px-4 py-3 rounded">Ok</button>
       </div>
+    </div>
   </div>
 
   <div class="container mx-4 md:mx-auto py-8 bg-white rounded shadow text-center text-grey-darker">
@@ -48,7 +48,7 @@ export default {
   props: {
     activeTab: {
       required: true,
-      type: String,
+      type: String
     }
   },
   data: () => ({
@@ -57,7 +57,7 @@ export default {
     version: 0.0,
     lastUpdated: '',
     message: '',
-    faSpinner,
+    faSpinner
   }),
   created () {
     this.version = document.querySelector('meta[name="app-version"]').content
@@ -67,16 +67,16 @@ export default {
     checkForUpdates () {
       this.loading = true
       axios.get('/admin/check-for-update')
-           .then((response) => {
-             this.loading = false
-             this.message = response.data.message
-             this.showUpdateModal = true
-           })
-           .catch((error) => {
-             this.loading = false
-             this.message = error.response.data.message
-             this.showUpdateModal = true
-           })
+        .then((response) => {
+          this.loading = false
+          this.message = response.data.message
+          this.showUpdateModal = true
+        })
+        .catch((error) => {
+          this.loading = false
+          this.message = error.response.data.message
+          this.showUpdateModal = true
+        })
     },
     closeUpdateModal () {
       this.loading = false
@@ -85,16 +85,16 @@ export default {
     updateSoftware () {
       this.loading = true
       axios.get('/admin/update-software')
-           .then((response) => {
-             this.loading = false
-             this.message = response.data.message
-             this.showUpdateModal = false
-           })
-           .catch((error) => {
-             this.loading = false
-             this.message = error.response.data.message
-             this.showUpdateModal = false
-           })
+        .then((response) => {
+          this.loading = false
+          this.message = response.data.message
+          this.showUpdateModal = false
+        })
+        .catch((error) => {
+          this.loading = false
+          this.message = error.response.data.message
+          this.showUpdateModal = false
+        })
     }
   }
 }

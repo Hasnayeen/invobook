@@ -60,11 +60,12 @@ export default {
       this.addMemberFormShown = false
     },
     addMember (data) {
+      var messageType
       if (data.user) {
-        var messageType = 'success'
+        messageType = 'success'
         this.project.members.push(data.user)
       } else {
-        var messageType = 'error'
+        messageType = 'error'
       }
       EventBus.$emit('notification', data.message, messageType)
       this.addMemberFormShown = false
