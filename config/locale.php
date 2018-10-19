@@ -22,6 +22,7 @@ return [
         'pl'    => 'Polish',
         'pt-BR' => 'Portuguese (Brazil)',
         'ru-RU' => 'Russian (Russia)',
+        'sv-se' => 'Swedish (Sweden)',
         'th'    => 'Thai (Thai)',
     ],
 
