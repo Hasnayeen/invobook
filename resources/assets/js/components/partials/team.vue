@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="w-full p-2 h-24 flex flex-col justify-end">
-      <a class="text-pink text-xl no-underline" :href="team.url">{{ team.name }}</a>
+      <a class="text-pink text-xl no-underline" :href="'/teams/' + team.id">{{ team.name }}</a>
     </div>
     <span class="text-grey text-sm w-full px-2 h-16 self-start">{{ team.description }}</span>
     <div class="border-t w-full h-16 flex flex-row justify-start items-center px-2">
@@ -29,21 +29,21 @@ import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
 
 export default {
   props: ['details'],
-  data() {
-      return {
-          team: this.details,
-          dropdownMenuShown: false,
-          faEllipsisH,
-      }
+  data () {
+    return {
+      team: this.details,
+      dropdownMenuShown: false,
+      faEllipsisH
+    }
   },
   methods: {
-    toggleMenu() {
-        this.dropdownMenuShown = ! this.dropdownMenuShown
+    toggleMenu () {
+      this.dropdownMenuShown = !this.dropdownMenuShown
     },
-    hideMenu() {
+    hideMenu () {
       this.dropdownMenuShown = false
     },
-    deleteTeam(team) {
+    deleteTeam (team) {
       axios.delete(`/teams/${team.id}`)
         .then((response) => {
           this.$emit('deleted')

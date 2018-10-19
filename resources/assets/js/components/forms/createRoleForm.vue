@@ -30,13 +30,13 @@ export default {
     },
     createRole () {
       axios.post('/admin/roles', {name: this.name})
-           .then((response) => {
-             this.name = ''
-             this.$emit('role-created', response.data.role)
-           })
-           .catch((error) => {
-             console.log(error.message)
-           })
+        .then((response) => {
+          this.name = ''
+          this.$emit('role-created', response.data.role)
+        })
+        .catch((error) => {
+          console.log(error.message)
+        })
     }
   }
 }

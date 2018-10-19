@@ -86,7 +86,7 @@
 import commentBox from './commentBox.vue'
 import {
   faArrowLeft,
-  faEllipsisH,
+  faEllipsisH
 } from '@fortawesome/free-solid-svg-icons'
 
 export default {
@@ -109,7 +109,7 @@ export default {
   data: () => ({
     dropdownMenuShown: false,
     faArrowLeft,
-    faEllipsisH,
+    faEllipsisH
   }),
   methods: {
     closeTaskDetails () {
@@ -119,7 +119,7 @@ export default {
     toggleMenu () {
       this.dropdownMenuShown = !this.dropdownMenuShown
     },
-    hideMenu() {
+    hideMenu () {
       this.dropdownMenuShown = false
     },
     deleteTask () {
@@ -130,7 +130,7 @@ export default {
           EventBus.$emit('notification', response.data.message, response.data.status)
           this.$emit('close')
         })
-          this.dropdownMenuShown = false
+      this.dropdownMenuShown = false
         .catch((error) => {
           EventBus.$emit('notification', error.response.data.message, error.response.data.status)
           this.$emit('close')

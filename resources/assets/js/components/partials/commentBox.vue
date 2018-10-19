@@ -79,10 +79,10 @@ export default {
           })
       }
     },
-    deleteComment (c,index) {
-      axios.delete('/comments/'+c.id)
+    deleteComment (comment, index) {
+      axios.delete('/comments/' + comment.id)
         .then((response) => {
-          this.comments.splice(index, 1);
+          this.comments.splice(index, 1)
           EventBus.$emit('notification', response.data.message, response.data.status)
         })
         .catch((error) => {
@@ -97,12 +97,12 @@ export default {
         commentable_id: this.resource.id
       }
     })
-    .then((response) => {
-      this.comments = response.data.comments
-    })
-    .catch((error) => {
-      
-    })
+      .then((response) => {
+        this.comments = response.data.comments
+      })
+      .catch((error) => {
+        console.log(error.response.data.message)
+      })
   }
 }
 </script>

@@ -36,7 +36,7 @@
 <script>
 import {
   faChevronDown,
-  faSpinner,
+  faSpinner
 } from '@fortawesome/free-solid-svg-icons'
 
 export default {
@@ -46,7 +46,7 @@ export default {
     newMember: null,
     loading: false,
     faChevronDown,
-    faSpinner,
+    faSpinner
   }),
   created () {
     axios.get('/users')
@@ -60,13 +60,13 @@ export default {
   methods: {
     addMember () {
       this.loading = true
-      axios.post( '/members', {
+      axios.post('/members', {
         user_id: this.newMember,
         resource_type: this.resourceType,
         resource_id: this.resource.id
       })
         .then((response) => {
-          if (response.data.status == 'success') {
+          if (response.data.status === 'success') {
             this.loading = false
             EventBus.$emit('notification', response.data.message, response.data.status)
             this.$emit('addMember', response.data)

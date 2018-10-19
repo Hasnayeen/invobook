@@ -53,14 +53,14 @@ export default {
     discussions: [],
     discussion: {},
     discussionDetailsShown: false,
-    index: null,
+    index: null
   }),
   methods: {
     showCreateDiscussionForm () {
       this.createDiscussionFormShown = true
     },
     closeCreateDiscussionForm (newDiscussion = null) {
-      (newDiscussion) ? this.discussions.push(newDiscussion) : null
+      if (newDiscussion) this.discussions.push(newDiscussion)
       this.createDiscussionFormShown = false
     },
     getAllDiscussions () {
@@ -71,12 +71,12 @@ export default {
             resource_id: this.resource.id
           }
         })
-        .then((response) => {
-          this.discussions = response.data.discussions
-        })
-        .catch((error) => {
-          console.log(error.response.data.message)
-        })
+          .then((response) => {
+            this.discussions = response.data.discussions
+          })
+          .catch((error) => {
+            console.log(error.response.data.message)
+          })
       }
     },
     showDiscussionDetails (index) {
@@ -88,8 +88,8 @@ export default {
       this.discussionDetailsShown = false
       this.discussion = {}
     },
-    deleteDiscussion(index) {
-      this.discussions.splice(index, 1);
+    deleteDiscussion (index) {
+      this.discussions.splice(index, 1)
     }
   },
   watch: {

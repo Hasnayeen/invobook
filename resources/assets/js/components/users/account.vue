@@ -48,7 +48,7 @@
       </div>
       <div class="mt-4 px-8">
         <a class="rounded p-4 text-red-light border border-grey-light hover:font-bold hover:border-0 hover:shadow-lg hover:bg-red-light hover:text-white no-underline" href="#">
-          {{ 'Delete account' | localize }}
+          {{ 'Delete Account' | localize }}
         </a>
       </div>
     </div>
@@ -86,29 +86,29 @@ export default {
         params.new_password = this.newPassword
         params.new_password_confirmation = this.newPasswordConfirmation
       }
-      axios.put('/users/' + this.user.username + '/account' , params)
-      .then((response) => {
-        EventBus.$emit('notification', response.data.message, response.data.status)
-        this.email = '',
-        this.currentPassword = '',
-        this.newPassword = '',
-        this.newPasswordConfirmation = ''
-      })
-      .catch((error) => {
-        for (const prop in error.response.data.errors) {
-          if (error.response.data.errors.hasOwnProperty(prop)) {
-           this.$set(this.errorMessage, prop, error.response.data.errors[prop][0])
+      axios.put('/users/' + this.user.username + '/account', params)
+        .then((response) => {
+          EventBus.$emit('notification', response.data.message, response.data.status)
+          this.email = '',
+          this.currentPassword = '',
+          this.newPassword = '',
+          this.newPasswordConfirmation = ''
+        })
+        .catch((error) => {
+          for (const prop in error.response.data.errors) {
+            if (error.response.data.errors.hasOwnProperty(prop)) {
+              this.$set(this.errorMessage, prop, error.response.data.errors[prop][0])
+            }
           }
-        }
-        setTimeout(() => {
-          this.errorMessage = {
-            email: '',
-            current_password: '',
-            new_password: '',
-            new_password_confirmation: ''
-          }
-        }, 2000)
-      })
+          setTimeout(() => {
+            this.errorMessage = {
+              email: '',
+              current_password: '',
+              new_password: '',
+              new_password_confirmation: ''
+            }
+          }, 2000)
+        })
     }
   }
 }
