@@ -4,6 +4,7 @@
         "ecmaFeatures": {
             "jsx": true
         },
+        "parser": "babel-eslint",
         "sourceType": "module"
     },
     "env": {
@@ -15,7 +16,7 @@
         "node",
         "promise",
         "standard",
-        "vue"
+        "vue/essential"
     ],
     "globals": {
         "document": false,

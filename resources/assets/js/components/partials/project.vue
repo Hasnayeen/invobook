@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="w-full p-2 h-24 flex flex-col justify-end">
-            <a class="text-pink text-xl no-underline" :href="project.url">{{ project.name }}</a>
+            <a class="text-pink text-xl no-underline" :href="'/projects/' + project.id">{{ project.name }}</a>
         </div>
         <span class="text-grey text-sm w-full px-2 h-16 self-start">{{ project.description }}</span>
         <div class="border-t w-full h-16 flex flex-row justify-start items-center px-4">
@@ -28,34 +28,34 @@
 import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
 
 export default {
-    props: ['details'],
-    data() {
-        return {
-            project: this.details,
-            dropdownMenuShown: false,
-            faEllipsisH,
-        }
-    },
-    methods: {
-      toggleMenu() {
-        this.dropdownMenuShown = ! this.dropdownMenuShown
-      },
-      hideMenu() {
-        this.dropdownMenuShown = false
-      },
-      deleteProject(project) {
-        axios.delete(`/projects/${project.id}`)
-          .then((response) => {
-            this.$emit('deleted')
-            this.dropdownMenuShown = false
-            EventBus.$emit('notification', response.data.message, response.data.status)
-          })
-          .catch((error) => {
-            this.dropdownMenuShown = false
-            EventBus.$emit('notification', error.response.data.message, error.response.data.status)
-          })
-      }
+  props: ['details'],
+  data () {
+    return {
+      project: this.details,
+      dropdownMenuShown: false,
+      faEllipsisH
     }
+  },
+  methods: {
+    toggleMenu () {
+      this.dropdownMenuShown = !this.dropdownMenuShown
+    },
+    hideMenu () {
+      this.dropdownMenuShown = false
+    },
+    deleteProject (project) {
+      axios.delete(`/projects/${project.id}`)
+        .then((response) => {
+          this.$emit('deleted')
+          this.dropdownMenuShown = false
+          EventBus.$emit('notification', response.data.message, response.data.status)
+        })
+        .catch((error) => {
+          this.dropdownMenuShown = false
+          EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+        })
+    }
+  }
 }
 </script>
 

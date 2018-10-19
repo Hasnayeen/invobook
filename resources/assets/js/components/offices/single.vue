@@ -57,7 +57,7 @@ export default {
     showNotification: false,
     message: '',
     messageType: '',
-    faPlus,
+    faPlus
   }),
   methods: {
     showAddMemberForm () {
@@ -82,7 +82,7 @@ export default {
       }, 3000)
     },
     activateTab (tab) {
-      if (tab != this.active) {
+      if (tab !== this.active) {
         this.active = tab
       }
     },

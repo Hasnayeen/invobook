@@ -37,7 +37,7 @@
 import attachPermissionForm from './../forms/attachPermissionForm'
 import {
   faPlusCircle,
-  faTrashAlt,
+  faTrashAlt
 } from '@fortawesome/free-solid-svg-icons'
 
 export default {
@@ -53,7 +53,7 @@ export default {
     attachPermissionFormShown: false,
     permissionId: null,
     faPlusCircle,
-    faTrashAlt,
+    faTrashAlt
   }),
   watch: {
     activeColumn: 'getPermissions'
@@ -62,12 +62,12 @@ export default {
     getPermissions () {
       if (this.activeColumn === 'permissions' && this.permissions.length < 1) {
         axios.get('/admin/permissions')
-            .then((response) => {
-              this.permissions = response.data.permissions
-            })
-            .catch((error) => {
-              console.log(error)
-            })
+          .then((response) => {
+            this.permissions = response.data.permissions
+          })
+          .catch((error) => {
+            console.log(error)
+          })
       }
     },
     showAttachPermissionForm (id) {
@@ -78,7 +78,7 @@ export default {
       this.attachPermissionFormShown = false
     },
     permissionAttachedToRole (role) {
-      if (! this.permissions.filter(permission => permission.id === this.permissionId)[0].roles.some(item => item.id === role.id)) {
+      if (!this.permissions.filter(permission => permission.id === this.permissionId)[0].roles.some(item => item.id === role.id)) {
         this.permissions.filter(permission => permission.id === this.permissionId)[0].roles.push(role)
       }
       this.attachPermissionFormShown = false

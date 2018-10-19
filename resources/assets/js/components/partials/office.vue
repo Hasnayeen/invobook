@@ -11,7 +11,7 @@
 			</div>
 		</div>
 		<div class="w-full p-2 h-24 flex flex-col justify-end">
-			<a class="text-pink text-xl no-underline" :href="office.url">{{ office.name }}</a>
+			<a class="text-pink text-xl no-underline" :href="'/offices/' + office.id">{{ office.name }}</a>
 		</div>
 		<span class="text-grey text-sm w-full px-2 h-16 self-start">{{ office.description }}</span>
 		<div class="border-t w-full h-16 flex flex-row justify-start items-center px-2">
@@ -25,40 +25,40 @@
 </template>
 
 <script>
-	import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
+import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
 
-	export default {
-		props: ['details'],
-		data() {
-			return {
-				office: this.details,
-				dropdownMenuShown: false,
-				faEllipsisH,
-			}
-		},
-		methods: {
-			toggleMenu() {
-				this.dropdownMenuShown = ! this.dropdownMenuShown
-			},
-			hideMenu() {
-        this.dropdownMenuShown = false
-			},
-			deleteOffice(office) {
-				axios.delete(`/offices/${office.id}`)
-					.then((response) => {
-						this.$emit('deleted')
+export default {
+  props: ['details'],
+  data () {
+    return {
+      office: this.details,
+      dropdownMenuShown: false,
+      faEllipsisH
+    }
+  },
+  methods: {
+    toggleMenu () {
+      this.dropdownMenuShown = !this.dropdownMenuShown
+    },
+    hideMenu () {
+      this.dropdownMenuShown = false
+    },
+    deleteOffice (office) {
+      axios.delete(`/offices/${office.id}`)
+        .then((response) => {
+          this.$emit('deleted')
 
-						this.dropdownMenuShown = false
+          this.dropdownMenuShown = false
 
-						EventBus.$emit('notification', response.data.message, response.data.status)
-					})
-					.catch((error) => {
-						this.dropdownMenuShown = false
+          EventBus.$emit('notification', response.data.message, response.data.status)
+        })
+        .catch((error) => {
+          this.dropdownMenuShown = false
 
-						EventBus.$emit('notification', error.response.data.message, error.response.data.status)
-					})
-			}
-		}
-	}
+          EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+        })
+    }
+  }
+}
 </script>
 
