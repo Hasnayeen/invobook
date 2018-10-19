@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Models\Team;
+use App\Exceptions\UserIsNotMember;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Notification;
 
@@ -121,5 +122,51 @@ class TeamTest extends TestCase
         $id = Team::where('name', 'New Team')->first()->id;
 
         $this->actingAs($user)->delete('teams/' . $id);
+    }
+
+    /** @test */
+    public function remove_user_from_team()
+    {
+        $this->add_user_to_team();
+
+        $this->assertCount(1, $this->team->members);
+
+        $user = $this->team->members->first();
+
+        $this->actingAs($this->user)->delete('/members', [
+            'user_id'       => $user->id,
+            'resource_type' => 'team',
+            'resource_id'   => $this->team->id,
+        ])->assertJson([
+            'status'  => 'success',
+            'message' => 'User removed from the team',
+            'user'    => [
+                'id'       => $user->id,
+                'name'     => $user->name,
+                'username' => $user->username,
+                'avatar'   => $user->avatar,
+            ],
+        ]);
+
+        $this->assertEmpty($this->team->fresh()->members);
+    }
+
+    /**
+     * @expectedException App\Exceptions\UserIsNotMember
+     * @test
+     */
+    public function cannot_remove_user_from_team_if_not_a_member()
+    {
+        $this->expectException(UserIsNotMember::class);
+
+        Permission::create(['name' => 'view team->' . $this->team->id]);
+        $user = factory('App\Models\User')->create();
+
+        $this->actingAs($this->user)
+             ->delete('/members', [
+                 'user_id'       => $user->id,
+                 'resource_type' => 'team',
+                 'resource_id'   => $this->team->id,
+             ]);
     }
 }
