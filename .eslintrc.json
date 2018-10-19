@@ -14,12 +14,14 @@
         "import",
         "node",
         "promise",
-        "standard"
+        "standard",
+        "vue"
     ],
     "globals": {
         "document": false,
         "navigator": false,
-        "window": false
+        "window": false,
+        "Vue": false
     },
     "rules": {
         "accessor-pairs": "error",

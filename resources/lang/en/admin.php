@@ -6,7 +6,7 @@ return [
     'Activities'                     => 'Activities',
     'About'                          => 'About',
     'Roles'                          => 'Roles',
-    'Roles'                          => 'Roles',
+    'Role'                           => 'Role',
     'Permissions'                    => 'Permissions',
     'Invite New Member'              => 'Invite New Member',
     'Add New Role'                   => 'Add New Role',

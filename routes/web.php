@@ -105,6 +105,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('messages', 'MessageController@index');
 
+    Route::get('direct-messages', 'DirectMessageController@index');
+
     Route::post('messages', 'MessageController@store');
 
     Route::delete('messages/{message}', 'MessageController@delete')->middleware('can:delete,message');
