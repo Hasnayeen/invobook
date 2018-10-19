@@ -19,8 +19,10 @@ return [
         'fr-FR' => 'French (France)',
         'it-IT' => 'Italian (Italy)',
         'nl-NL' => 'Dutch (Netherlands)',
+        'pl'    => 'Polish',
         'pt-BR' => 'Portuguese (Brazil)',
         'ru-RU' => 'Russian (Russia)',
+        'sv-se' => 'Swedish (Sweden)',
         'th'    => 'Thai (Thai)',
     ],
 
