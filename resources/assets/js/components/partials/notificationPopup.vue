@@ -17,6 +17,12 @@ export default {
     messageType: '',
     faTimes,
   }),
+  created () {
+    EventBus.$on('notification', this.showNotification)
+  },
+  beforeDestroy () {
+    EventBus.$off('notification', this.showNotification)
+  },
   methods: {
     closeNotification () {
       this.notificationShown = false
@@ -29,12 +35,6 @@ export default {
         this.closeNotification()
       }, 3000)
     }
-  },
-  created () {
-    EventBus.$on('notification', this.showNotification)
-  },
-  beforeDestroy () {
-    EventBus.$off('notification', this.showNotification)
   }
 }
 </script>

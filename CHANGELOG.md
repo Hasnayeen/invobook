@@ -1,5 +1,9 @@
 # Release Notes
 
+## v0.9 (Yet to release)
+
+- Added direct message to a user functionality
+
 ## v0.8 (2018-10-18)
 
 ### Added
