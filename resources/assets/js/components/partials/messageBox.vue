@@ -64,15 +64,15 @@ export default {
         this.users = response.data.users
       })
       .catch((error) => {
-        
+        console.log(error)
       })
     this.title = document.title
     this.listen()
-    document.addEventListener("visibilitychange", this.clearTitleNotification)
+    document.addEventListener('visibilitychange', this.clearTitleNotification)
   },
   beforeDestroy () {
     EventBus.$off('show-message-box', this.showMessageBox)
-    document.removeEventListener("visibilitychange", this.clearTitleNotification)
+    document.removeEventListener('visibilitychange', this.clearTitleNotification)
   },
   watch: {
     message (newVal) {
@@ -102,7 +102,7 @@ export default {
           resource_id: this.selectedUser.id
         })
           .then((response) => {
-            if (response.data.status == 'success') {
+            if (response.data.status === 'success') {
               response.data.message.user = navbar.user
               this.messages.push(response.data.message)
             }
@@ -115,7 +115,7 @@ export default {
     selectUserMessage (user) {
       this.selectedUser = user
       this.isDisabled = false
-      axios.get('direct-messages',{
+      axios.get('direct-messages', {
         params: {
           resource_type: 'user',
           resource_id: user.id
@@ -125,29 +125,29 @@ export default {
           this.messages = response.data.messages.reverse()
         })
         .catch((error) => {
-          
+          console.log(error)
         })
     },
-    deleteMessage(index) {
+    deleteMessage (index) {
       this.messages.splice(index, 1)
     },
     listen () {
       Echo.join('user.' + this.authUser.id)
         .listen('MessageCreated', event => {
-        event.message.user = event.user
-        this.messages.push(event.message)
-        if (document.hidden) {
-          this.unreadMessage += 1
-          document.title = '(' + this.unreadMessage + ') ' + this.title
-        }
-      })
+          event.message.user = event.user
+          this.messages.push(event.message)
+          if (document.hidden) {
+            this.unreadMessage += 1
+            document.title = '(' + this.unreadMessage + ') ' + this.title
+          }
+        })
     },
     clearTitleNotification () {
       if (!document.hidden) {
         document.title = this.title
         this.unreadMessage = 0
       }
-    },
+    }
   }
 }
 </script>

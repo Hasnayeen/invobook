@@ -93,7 +93,7 @@ export default {
           resource_id: this.resource.id
         })
           .then((response) => {
-            if (response.data.status == 'success') {
+            if (response.data.status === 'success') {
               response.data.message.user = navbar.user
               this.pushMessage(response.data.message)
             }
@@ -111,7 +111,7 @@ export default {
         .joining(user => {
           this.users.push(user)
           this.pushSystemMessage(`${user.name} has joined`)
-          if ((document.activeElement != document.getElementById('send-message')) || (!document.hasFocus())) {
+          if ((document.activeElement !== document.getElementById('send-message')) || (!document.hasFocus())) {
             this.unreadMessage += 1
             document.title = '(' + this.unreadMessage + ') ' + this.title
           }
@@ -119,7 +119,7 @@ export default {
         .leaving(user => {
           this.users = this.users.filter(u => u.username !== user.username)
           this.pushSystemMessage(`${user.name} has left`)
-          if ((document.activeElement != document.getElementById('send-message')) || (!document.hasFocus())) {
+          if ((document.activeElement !== document.getElementById('send-message')) || (!document.hasFocus())) {
             this.unreadMessage += 1
             document.title = '(' + this.unreadMessage + ') ' + this.title
           }
@@ -127,7 +127,7 @@ export default {
         .listen('MessageCreated', event => {
           event.message.user = event.user
           this.pushMessage(event.message)
-          if ((document.activeElement != document.getElementById('send-message')) || (!document.hasFocus())) {
+          if ((document.activeElement !== document.getElementById('send-message')) || (!document.hasFocus())) {
             this.unreadMessage += 1
             document.title = '(' + this.unreadMessage + ') ' + this.title
           }
@@ -137,7 +137,7 @@ export default {
       document.title = this.title
       this.unreadMessage = 0
     },
-    deleteMessage(index) {
+    deleteMessage (index) {
       this.messages.splice(index, 1)
     },
     pushMessage (message) {
@@ -147,7 +147,7 @@ export default {
     pushSystemMessage (body) {
       this.pushMessage({
         body,
-        system: true,
+        system: true
       })
     }
   }
