@@ -41,7 +41,7 @@ import {
   faBolt,
   faInfoCircle,
   faLockOpen,
-  faUsers,
+  faUsers
 } from '@fortawesome/free-solid-svg-icons'
 
 export default {
@@ -57,14 +57,14 @@ export default {
     faBolt,
     faInfoCircle,
     faLockOpen,
-    faUsers,
+    faUsers
   }),
   methods: {
     activateThisTab (tab) {
-      if (tab != this.active) {
+      if (tab !== this.active) {
         this.active = tab
       }
-    },
+    }
   }
 }
 </script>
