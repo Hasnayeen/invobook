@@ -21,6 +21,7 @@ return [
         'nl-NL' => 'Dutch (Netherlands)',
         'pt-BR' => 'Portuguese (Brazil)',
         'ru-RU' => 'Russian (Russia)',
+        'sv-se' => 'Swedish (Sweden)',
         'th'    => 'Thai (Thai)',
     ],
 

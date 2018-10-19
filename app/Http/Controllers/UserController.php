@@ -16,15 +16,15 @@ class UserController extends Controller
         $users = $userRepository->getAllUsers();
 
         return response()->json([
-            'status' => 'success',
-            'data'   => $users,
+            'status'  => 'success',
+            'users'   => $users,
         ]);
     }
 
     public function sentInvitationToRegister(Request $request)
     {
         try {
-            if (! User::where('email', $request->email)->first()) {
+            if (!User::where('email', $request->email)->first()) {
                 Mail::to($request->email)
                     ->send(new SendInvitationToRegister());
 

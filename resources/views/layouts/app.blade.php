@@ -36,6 +36,7 @@
         @if (!Auth::guest())
         <navbar></navbar>
         <notification-popup></notification-popup>
+        <message-box></message-box>
         @endif
 
 
