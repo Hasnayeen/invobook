@@ -1,0 +1,27 @@
+<?php
+
+return [
+    'Users'                          => 'Usuarios',
+    'Roles & Permissions'            => 'Roles Y Permisos',
+    'Activities'                     => 'Actividades',
+    'About'                          => 'Acerca De',
+    'Roles'                          => 'Roles',
+    'Permissions'                    => 'Permisos',
+    'Invite New Member'              => 'Invitar A Un Miembro',
+    'Add New Role'                   => 'Agregar Nuevo Rol',
+    'Cancel'                         => 'Cancelar',
+    'Assign'                         => 'Asignar',
+    'Attach'                         => 'Adjuntar',
+    'Filters'                        => 'Filtros',
+    'Apply'                          => 'Aplicar',
+    'Load More'                      => 'Cargar Más',
+    'Check for Updates'              => 'Buscar Actualizaciones',
+    'Filter by Activity'             => 'Filtrar Por Actividad',
+    'Filter by User'                 => 'Filtrar Por Usuario',
+    'Filter by Date'                 => 'Filtrar Por Fecha',
+    'Last Updated'                   => 'Última Actualización',
+    'Author'                         => 'Autor',
+    'Submit issue & feedback at'     => 'Enviar Problema Y Comentarios',
+    'Don\'t belongs to any role yet' => 'Aún No Tiene Ningún Rol',
+    'Don\'t have any permission yet' => 'Aún No Tiene Ningún Permiso',
+];

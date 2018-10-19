@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use App\Models\Team;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\Notification;
 
 class TeamTest extends TestCase
 {
@@ -73,6 +74,7 @@ class TeamTest extends TestCase
     /** @test */
     public function add_user_to_team()
     {
+        Notification::fake();
         Permission::create(['name' => 'view team->' . $this->team->id]);
 
         $user = factory('App\Models\User')->create();
@@ -90,5 +92,34 @@ class TeamTest extends TestCase
                 'avatar'   => $user->avatar,
             ],
         ]);
+    }
+
+    /** @test */
+    public function user_with_permission_can_delete_a_team()
+    {
+        $this->user_with_permission_can_create_team();
+
+        $id = Team::where('name', 'New Team')->first()->id;
+
+        $this->actingAs($this->user)->delete('/teams/' . $id)
+             ->assertJsonFragment([
+                 'status'  => 'success',
+                 'message' => 'The team has been deleted',
+             ]);
+    }
+
+    /**
+     * @expectedException Illuminate\Auth\Access\AuthorizationException
+     * @test
+     */
+    public function user_without_permission_cant_delete_a_team()
+    {
+        $user = factory(\App\Models\User::class)->create();
+
+        $this->user_with_permission_can_create_team();
+
+        $id = Team::where('name', 'New Team')->first()->id;
+
+        $this->actingAs($user)->delete('teams/' . $id);
     }
 }

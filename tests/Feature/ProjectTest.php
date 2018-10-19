@@ -6,6 +6,7 @@ use Tests\TestCase;
 use App\Models\User;
 use App\Models\Project;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\Notification;
 
 class ProjectTest extends TestCase
 {
@@ -72,6 +73,7 @@ class ProjectTest extends TestCase
     /** @test */
     public function add_user_to_project()
     {
+        Notification::fake();
         Permission::create(['name' => 'view project->' . $this->project->id]);
 
         $user = factory('App\Models\User')->create();
@@ -89,5 +91,34 @@ class ProjectTest extends TestCase
                 'avatar'   => $user->avatar,
             ],
         ]);
+    }
+
+    /** @test */
+    public function user_with_permission_can_delete_a_project()
+    {
+        $this->user_with_permission_can_create_project();
+
+        $id = Project::where('name', 'New Project')->first()->id;
+
+        $this->actingAs($this->user)->delete('/projects/' . $id)
+             ->assertJsonFragment([
+                 'status'  => 'success',
+                 'message' => 'The project has been deleted',
+             ]);
+    }
+
+    /**
+     * @expectedException Illuminate\Auth\Access\AuthorizationException
+     * @test
+     */
+    public function user_without_permission_cant_delete_a_project()
+    {
+        $user = factory(\App\Models\User::class)->create();
+
+        $this->user_with_permission_can_create_project();
+
+        $id = Project::where('name', 'New Project')->first()->id;
+
+        $this->actingAs($user)->delete('projects/' . $id);
     }
 }

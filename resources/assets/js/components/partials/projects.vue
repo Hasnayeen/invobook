@@ -22,32 +22,21 @@
         <!-- Projects -->
         <div class="flex flex-row flex-wrap justify-center">
             <div class="bg-white shadow-md w-64 h-64 flex flex-col justify-center items-center text-center rounded m-4 cursor-pointer" @click="openCreateProjectModal">
-                <i class="fa fa-plus text-grey-dark text-4xl"></i>
-                <span class="text-grey-darker pt-4">Add a new project</span>
+                <font-awesome-icon :icon="faPlus" class="text-grey-dark text-4xl"></font-awesome-icon>
+                <span class="text-grey-darker pt-4">{{ 'Add a new project' | localize }}</span>
             </div>
-            <!-- Projects list -->
-            <div v-for="project in projects" class="bg-white shadow-md w-64 h-64 flex flex-col justify-center items-center text-center rounded m-4">
-                <span class="w-full h-8 pr-4 pt-2">
-                    <i class="fas fa-ellipsis-h float-right text-grey-darker cursor-pointer"></i>
-                </span>
-                <div class="w-full p-2 h-24 flex flex-col justify-end">
-                    <a class="text-pink text-xl no-underline" :href="project.url">{{ project.name }}</a>
-                </div>
-                <span class="text-grey text-sm w-full px-2 h-16 self-start">{{ project.description }}</span>
-                <div class="border-t w-full h-16 flex flex-row justify-around items-center px-2">
-                    <a v-for="(member, index) in project.members" v-if="index < 5" :href="'/users/' + member.username">
-                        <img :src="generateUrl(member.avatar)" class="rounded-full w-8 h-8 mr-1">
-                    </a>
-                    <span v-if="project.members.length > 5" class="bg-grey-lighter border-teal border p-2 rounded-full">{{ project.members.length - 5 }}+</span>
-                    <span v-if="project.members.length == 0" class="text-grey-dark text-center">No members yet</span>
-                </div>
-            </div>
+
+            <project v-for="(project, index) in projects" :key="index" :details="project" @deleted="deleteProject(index)"></project>
         </div>
     </div>
 </template>
 
 <script>
+    import project from './project'
+    import { faPlus } from '@fortawesome/free-solid-svg-icons'
+
     export default {
+      components: { project },
       data: () => ({
         projects: data.projects.map((project) => {
           project.url = 'projects/' + project.id
@@ -55,7 +44,8 @@
         }),
         showCreateProjectForm: false,
         name: '',
-        description: ''
+        description: '',
+        faPlus,
       }),
       props: {
         activeTab: {
@@ -86,7 +76,10 @@
             .catch((error) => {
               EventBus.$emit('notification', error.response.data.message, error.response.data.status)
             })
-    }
+        },
+        deleteProject(index) {
+          this.projects.splice(index, 1)
+        }
       }
     }
 </script>

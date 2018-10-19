@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Team;
 use App\Models\User;
-use App\Models\Office;
-use App\Models\Project;
 use App\Utilities\EntityTrait;
+use App\Notifications\BecameNewMember;
 use App\Exceptions\UserIsAlreadyMember;
 
 class MemberController extends Controller
@@ -24,9 +22,11 @@ class MemberController extends Controller
         $entity->members()->save($user);
         $this->givePermissionTo($user, $entity->id);
 
+        $user->notify(new BecameNewMember($entity, auth()->user(), $user));
+
         return response()->json([
             'status'   => 'success',
-            'message'  => 'User added to the ' . request('resource_type'),
+            'message'  => trans('misc.User added', ['type' => request('resource_type')]),
             'user'     => $user,
         ]);
     }

@@ -4,6 +4,7 @@ use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Office;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Permission;
 
 class HeadquarterOfficeSeeder extends Seeder
 {
@@ -24,5 +25,7 @@ class HeadquarterOfficeSeeder extends Seeder
         $office = Office::where('name', 'Headquarter')->first();
         $user = User::find(1);
         $user->offices()->attach($office->id);
+        $permission = Permission::create(['name' => 'view office->' . $office->id]);
+        $user->givePermissionTo($permission);
     }
 }

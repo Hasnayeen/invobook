@@ -1,14 +1,14 @@
 <template>
-<div>
-  <div :class="{'hidden': !taskDetailsShown}" class="absolute container mx-auto md:w-3/4 lg:2/3 xl:w-1/2 xxl:w-2/5 bg-white rounded shadow-lg z-10 pt-4 pb-8" style="top: 12vh;left: 0;right: 0;">
-    <div class="flex flex-row justify-between px-8 relative">
+<div v-if="taskDetailsShown">
+  <div class="absolute container mx-auto md:w-3/4 lg:2/3 xl:w-1/2 xxl:w-2/5 bg-white rounded shadow-lg z-10 pt-4 pb-4 mb-16" style="top: 12vh;left: 0;right: 0;">
+    <div class="flex flex-row justify-between px-8 pb-4 relative">
       <div @click="closeTaskDetails" class="cursor-pointer">
-        <i class="fas fa-arrow-left text-base text-grey-dark"></i>
+        <font-awesome-icon :icon="faArrowLeft" class="text-base text-grey-dark"></font-awesome-icon>
       </div>
-      <div @click="toggleMenu" class="cursor-pointer">
-        <i class="fas fa-ellipsis-h text-base text-grey-dark"></i>
+      <div @click="toggleMenu" v-click-outside="hideMenu" class="cursor-pointer">
+        <font-awesome-icon :icon="faEllipsisH" class="text-base text-grey-dark"></font-awesome-icon>
       </div>
-      <div v-if="dropdownMenuShown" class="absolute rounded shadow-lg pin-r pin-t mt-4 mr-4 p-4 text-grey-darker">
+      <div v-if="dropdownMenuShown" class="absolute rounded shadow-lg pin-r pin-t mt-6 mr-4 p-3 text-grey-darker">
         <div @click="deleteTask" class="cursor-pointer">
           Delete
         </div>
@@ -74,37 +74,8 @@
         Progress
       </div>
     </div>
-    <div class="px-8 pt-8">
-      <div class="flex flex-row items-center text-grey-dark">
-        <img src="/image/avatar.jpg" class="rounded-full w-8 h-8 mx-2 self-start">
-        <div class="px-4">
-          Olen Ulrich
-        </div>
-        <div class="px-4">
-          12:34 am on Aug 3, 2018
-        </div>
-      </div>
-    </div>
-    <div class="px-8">
-      <div class="ml-16 border-grey-light border rounded text-grey-darkest p-4">
-        <span class="font-semibold text-blue">@Nehal</span> Should it be auto-filling component?
-      </div>
-    </div>
-    <div class="px-8 pt-8">
-      <div class="flex flex-row items-center text-grey-dark">
-        <img :src="generateUrl(task.user.avatar)" class="rounded-full w-8 h-8 mx-2 self-start">
-        <div class="px-4">
-          Nehal Hasnayeen
-        </div>
-        <div class="px-4">
-          12:34 am on Aug 3, 2018
-        </div>
-      </div>
-    </div>
-    <div class="px-8">
-      <div class="ml-16 border-grey-light border rounded text-grey-darkest p-4">
-        <span class="font-semibold text-blue">@Olan</span> yes please, make it auto-complete
-      </div>
+    <div class="px-2 md:px-8">
+      <comment-box resourceType="task" :resource="task" :detailsShown="taskDetailsShown"></comment-box>
     </div>
   </div>
   <div @click="closeTaskDetails" :class="{'hidden': !taskDetailsShown}" class="h-screen w-screen fixed pin bg-grey-darkest opacity-25"></div>
@@ -112,7 +83,16 @@
 </template>
 
 <script>
+import commentBox from './commentBox.vue'
+import {
+  faArrowLeft,
+  faEllipsisH,
+} from '@fortawesome/free-solid-svg-icons'
+
 export default {
+  components: {
+    commentBox
+  },
   props: {
     taskDetailsShown: {
       required: true,
@@ -123,12 +103,13 @@ export default {
       type: Object
     },
     index: {
-      required: false,
-      type: Number
+      required: true
     }
   },
   data: () => ({
-    dropdownMenuShown: false
+    dropdownMenuShown: false,
+    faArrowLeft,
+    faEllipsisH,
   }),
   methods: {
     closeTaskDetails () {
@@ -137,6 +118,9 @@ export default {
     },
     toggleMenu () {
       this.dropdownMenuShown = !this.dropdownMenuShown
+    },
+    hideMenu() {
+      this.dropdownMenuShown = false
     },
     deleteTask () {
       axios.delete('/tasks/' + this.task.id)

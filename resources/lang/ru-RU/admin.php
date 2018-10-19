@@ -1,0 +1,27 @@
+<?php
+
+return [
+    'Users'                          => 'Пользователи',
+    'Roles & Permissions'            => 'Роли и Права доступа',
+    'Activities'                     => 'Действия',
+    'About'                          => 'Описание',
+    'Roles'                          => 'Роли',
+    'Permissions'                    => 'Права доступа',
+    'Invite New Member'              => 'Пригласить нового пользователя',
+    'Add New Role'                   => 'Добавить Новую Роль',
+    'Cancel'                         => 'Отменить',
+    'Assign'                         => 'Назначить',
+    'Attach'                         => 'Прикрепить',
+    'Filters'                        => 'Фильтры',
+    'Apply'                          => 'Применить',
+    'Load More'                      => 'Загрузить Больше',
+    'Check for Updates'              => 'Проверить на Обновления',
+    'Filter by Activity'             => 'Фильтровать по Активности',
+    'Filter by User'                 => 'Фильтровать по Пользователю',
+    'Filter by Date'                 => 'Фильтровать по Дате',
+    'Last Updated'                   => 'Последнее обновление',
+    'Author'                         => 'Автор',
+    'Submit issue & feedback at'     => 'Зарегистрировать задачу и отзыв',
+    'Don\'t belongs to any role yet' => 'Не назначено еще ни одной роли',
+    'Don\'t have any permission yet' => 'Не имеет еще никаких прав',
+];

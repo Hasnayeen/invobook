@@ -13,24 +13,22 @@ class AboutController extends Controller
 
         if ($response->getStatusCode() === 200) {
             $latestVersion = $this->getLatestVersion($response);
-            if ($latestVersion > about('current_version')) {
-                about('latest_version', $latestVersion);
-
+            if ($latestVersion > config('app.version')) {
                 return response()->json([
                     'status'           => 'success',
-                    'message'          => 'New version ' . $latestVersion . ' is available. Please update.',
+                    'message'          => trans('misc.New version available', ['latest_version' => $latestVersion]),
                 ]);
             }
 
             return response()->json([
                     'status'           => 'success',
-                    'message'          => 'Version ' . about('current_version') . ' is the latest version.',
+                    'message'          => trans('misc.Current version is the latest version', ['current_version' => config('app.version')]),
                 ]);
         }
 
         return response()->json([
                 'status'  => 'error',
-                'message' => "Couldn't check for updates at this moment.",
+                'message' => trans('misc.Couldn\'t check for updates at this moment.'),
             ]);
     }
 

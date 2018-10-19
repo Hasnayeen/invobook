@@ -53,6 +53,7 @@ class ProjectPolicy
      */
     public function delete(User $user, Project $project)
     {
+        return $user->hasPermissionTo('delete project->' . $project->id);
     }
 
     /**

@@ -23,12 +23,22 @@ class DiscussionController extends Controller
     {
         $discussion = $repository->create($request->all());
         $discussion->load(['creator:id,avatar,name,username', 'category:id,name']);
-        $message = request('draft') ? 'Your post has been saved' : 'New discussion post has been created';
+        $message = request('draft') ? trans('misc.Your post has been saved') : trans('misc.New discussion post has been created');
 
         return response()->json([
             'status'     => 'success',
             'message'    => $message,
             'discussion' => $discussion,
         ], 201);
+    }
+
+    public function delete(Discussion $discussion)
+    {
+        $discussion->delete();
+
+        return response()->json([
+            'status'  => 'success',
+            'message' => trans('misc.The discussion has been deleted'),
+        ]);
     }
 }

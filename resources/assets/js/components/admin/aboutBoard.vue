@@ -19,20 +19,20 @@
     <div class="p-2">
       Version: <span class="pl-2 text-xl text-grey-darkest">{{ version }}</span>
       <button @click="checkForUpdates" class="no-underline p-4 m-4 mb-0 bg-white text-base text-teal rounded border border-grey-light">
-        Check for Updates
+        {{ 'Check for Updates' | localize }}
         <div v-if="loading" class="inline">
-          <i class="fas fa-spinner fa-spin"></i>
+          <font-awesome-icon :icon="faSpinner" spin></font-awesome-icon>
         </div>
       </button>
     </div>
     <div class="p-2">
-      Last Updated: <span class="pl-2 text-xl text-grey-darkest">{{ lastUpdated }}</span>
+      {{ 'Last Updated' | localize }}: <span class="pl-2 text-xl text-grey-darkest">{{ lastUpdated }}</span>
     </div>
     <div class="p-2">
-      Author: <a href="https://hasnayeen.github.io/" class="pl-2 text-xl text-blue-light no-underline">Nehal Hasnayeen</a>
+      {{ 'Author' | localize }}: <a href="https://hasnayeen.github.io/" class="pl-2 text-xl text-blue-light no-underline">Nehal Hasnayeen</a>
     </div>
     <div class="p-2">
-      Submit issue & feedback at: <a href="https://github.com/iluminar/goodwork/issues" class="pl-2 text-xl text-blue-light no-underline">Goodwork Issues</a>
+      {{ 'Submit issue & feedback at' | localize }}: <a href="https://github.com/iluminar/goodwork/issues" class="pl-2 text-xl text-blue-light no-underline">Goodwork Issues</a>
     </div>
     <div class="pt-8">
       © {{ (new Date()).getFullYear() }} <a href="https://github.com/iluminar/" class="text-xl text-blue-light no-underline">Iluminar</a>
@@ -42,6 +42,8 @@
 </template>
 
 <script>
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+
 export default {
   props: {
     activeTab: {
@@ -55,6 +57,7 @@ export default {
     version: 0.0,
     lastUpdated: '',
     message: '',
+    faSpinner,
   }),
   created () {
     this.version = document.querySelector('meta[name="app-version"]').content

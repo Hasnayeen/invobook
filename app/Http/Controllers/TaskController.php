@@ -11,22 +11,15 @@ class TaskController extends Controller
 {
     use EntityTrait;
 
-    public function store(ValidateTaskCreation $request)
+    public function store(ValidateTaskCreation $request, TaskRepository $repository)
     {
-        $task = Task::create([
-            'name'              => $request->input('name'),
-            'assigned_to'       => $request->input('assigned_to'),
-            'notes'             => $request->input('notes'),
-            'due_on'            => $request->input('due_on'),
-            'related_to'        => $request->input('related_to'),
-            'taskable_type'     => $request->input('taskable_type'),
-            'taskable_id'       => $request->input('taskable_id'),
-        ]);
+        $task = $repository->create($request->all());
         $task->load('user:id,avatar');
 
         return response()->json([
-            'status' => 'success',
-            'task'   => $task,
+            'status'  => 'success',
+            'message' => trans('misc.New task has been created'),
+            'task'    => $task,
         ], 201);
     }
 
@@ -64,7 +57,7 @@ class TaskController extends Controller
 
         return response()->json([
             'status'  => 'success',
-            'message' => 'The task has been deleted',
+            'message' => trans('misc.The task has been deleted'),
         ]);
     }
 }

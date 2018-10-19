@@ -5,10 +5,14 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use App\Models\User;
 use Illuminate\Http\UploadedFile;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Foundation\Testing\WithFaker;
 
 class UserTest extends TestCase
 {
+    use WithFaker;
+
     /** @test */
     public function owner_can_see_all_users()
     {
@@ -48,5 +52,54 @@ class UserTest extends TestCase
         ]);
         $this->assertDatabaseHas('users', ['email' => 'new@email.com']);
         password_verify('new_password', $this->user->password);
+    }
+
+    /** @test */
+    public function guest_can_not_see_admin_page()
+    {
+        $guest_user = factory(User::class)->create();
+        $guest_role = Role::create(['name' => 'guest']);
+        $guest_user->assignRole($guest_role);
+
+        $this->expectException(\Spatie\Permission\Exceptions\UnauthorizedException::class);
+
+        $this->actingAs($guest_user)->get('admin');
+    }
+
+    /** @test */
+    public function user_can_update_their_profile()
+    {
+        $this->actingAs($this->user);
+
+        $updatedData = [
+            'name'          => $this->faker->name,
+            'bio'           => $this->faker->paragraph,
+            'designation'   => $this->faker->jobTitle,
+            'timezone'      => $this->faker->timezone,
+            'week_start'    => $this->faker->dayOfWeek,
+        ];
+
+        $this->put("users/{$this->user->id}/profile", $updatedData)
+            ->assertSessionHasNoErrors();
+
+        $this->assertDatabaseHas('users', $updatedData);
+    }
+
+    /** @test */
+    public function user_cant_update_profile_if_required_properties_are_missing()
+    {
+        $this->actingAs($this->user);
+
+        $this->expectException('Illuminate\Validation\ValidationException');
+
+        $updatedData = [
+            'name'          => '',
+            'bio'           => $this->faker->paragraph,
+            'designation'   => $this->faker->jobTitle,
+            'timezone'      => '',
+            'week_start'    => '',
+        ];
+
+        $this->put("users/{$this->user->id}/profile", $updatedData);
     }
 }

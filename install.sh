@@ -51,7 +51,12 @@ fi
 
 $COMPOSE build php
 
-$COMPOSE run --rm -w /var/www php composer install --optimize-autoloader --no-dev
+if [[ $# -gt 0 && local -eq "local" ]]
+then
+  $COMPOSE run --rm -w /var/www php composer install
+else
+  $COMPOSE run --rm -w /var/www php composer install --optimize-autoloader --no-dev
+fi
 
 $COMPOSE up -d
 
