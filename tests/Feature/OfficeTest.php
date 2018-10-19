@@ -2,11 +2,11 @@
 
 namespace Tests\Feature;
 
-use App\Exceptions\UserIsNotMember;
-use Illuminate\Support\Facades\Notification;
-use Spatie\Permission\Models\Permission;
 use Tests\TestCase;
 use App\Models\Office;
+use App\Exceptions\UserIsNotMember;
+use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\Notification;
 
 class OfficeTest extends TestCase
 {
