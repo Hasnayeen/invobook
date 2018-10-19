@@ -14,6 +14,12 @@
       </span>
       {{ 'Your Profile' | localize }}
     </a>
+    <div @click="showMessageBox" class="px-4 py-2 hover:bg-teal hover:text-white no-underline text-grey-dark block font-medium">
+      <span class="w-6 inline-block">
+        <font-awesome-icon :icon="faEnvelope" class="pr-1"></font-awesome-icon>
+      </span>
+      {{ 'Your Messages' | localize }}
+    </div>
     <a class="px-4 py-2 hover:bg-teal hover:text-white text-grey-dark font-medium no-underline block" href="/admin">
       <span class="w-6 inline-block">
         <font-awesome-icon :icon="faShieldAlt" class="pr-1 font-regular"></font-awesome-icon>
@@ -47,6 +53,7 @@ import {
   faShieldAlt,
   faSignOutAlt,
   faUser,
+  faEnvelope
 } from '@fortawesome/free-solid-svg-icons'
 
 export default {
@@ -54,41 +61,46 @@ export default {
     user: navbar.user,
     token: Laravel.csrfToken,
     url: navbar.navUrl,
-    avatar: "",
-    profileUrl: navbar.navUrl.site + "/users/" + navbar.user.username,
+    avatar: '',
+    profileUrl: navbar.navUrl.site + '/users/' + navbar.user.username,
     profileDropdownShown: false,
     faAngleDown,
     faCog,
     faShieldAlt,
     faSignOutAlt,
     faUser,
+    faEnvelope
   }),
   methods: {
-    logoutUser(event) {
+    logoutUser (event) {
       event.preventDefault()
-      document.getElementById("logout-form").submit()
+      document.getElementById('logout-form').submit()
     },
-    toggleProfileDropdown(event) {
+    toggleProfileDropdown (event) {
       if (this.profileDropdownShown) {
         this.hideProfileDropdown(event)
-        document.body.removeEventListener("keyup", this.hideProfileDropdown)
+        document.body.removeEventListener('keyup', this.hideProfileDropdown)
       } else {
         this.showProfileDropdown()
-        document.body.addEventListener("keyup", this.hideProfileDropdown)
+        document.body.addEventListener('keyup', this.hideProfileDropdown)
       }
     },
-    showProfileDropdown(event) {
+    showProfileDropdown (event) {
       if (this.notificationShown) {
         this.notificationShown = false
       }
       this.profileDropdownShown = true
     },
-    hideProfileDropdown(event) {
-      if (event.type === "keyup" && event.key !== "Escape") {
+    hideProfileDropdown (event) {
+      if (event.type === 'keyup' && event.key !== 'Escape') {
         return false
       }
       this.profileDropdownShown = false
+    },
+    showMessageBox () {
+      this.profileDropdownShown = false
+      EventBus.$emit('show-message-box')
     }
-  },
+  }
 }
 </script>

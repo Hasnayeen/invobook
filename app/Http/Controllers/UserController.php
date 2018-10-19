@@ -16,8 +16,8 @@ class UserController extends Controller
         $users = $userRepository->getAllUsers();
 
         return response()->json([
-            'status' => 'success',
-            'data'   => $users,
+            'status'  => 'success',
+            'users'   => $users,
         ]);
     }
 

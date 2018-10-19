@@ -9,6 +9,7 @@ return [
     'New discussion post has been created'       => 'New discussion post has been created',
     'The discussion has been deleted'            => 'The discussion has been deleted',
     'User added'                                 => 'User added to the :type',
+    'User removed'                               => 'User removed from the :type',
     'Message has been deleted'                   => 'Message has been deleted',
     'New office has been created'                => 'New office has been created',
     'The office has been deleted'                => 'The office has been deleted',

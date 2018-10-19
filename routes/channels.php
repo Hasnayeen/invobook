@@ -16,6 +16,14 @@ Broadcast::channel('App.User.{id}', function ($user, $id) {
 });
 
 Broadcast::channel('{type}.{id}', function ($user, $messageableType, $messageableId) {
+    if ($messageableType === 'user') {
+        return [
+            'id'          => $user->id,
+            'name'        => $user->name,
+            'username'    => $user->username,
+            'avatar'      => $user->avatar,
+        ];
+    }
     $entity = $messageableType . 's';
     if ($user->$entity()->find($messageableId)) {
         return [

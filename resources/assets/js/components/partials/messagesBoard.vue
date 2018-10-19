@@ -43,9 +43,9 @@ export default {
     messages: [],
     message: '',
     messageTextareaHeight: 'auto',
-    user: navbar.user,
-    unreadMessage: 0,
     title: '',
+    unreadMessage: 0,
+    user: navbar.user,
     users: []
   }),
   created () {
@@ -93,7 +93,7 @@ export default {
           resource_id: this.resource.id
         })
           .then((response) => {
-            if (response.data.status == 'success') {
+            if (response.data.status === 'success') {
               response.data.message.user = navbar.user
               this.pushMessage(response.data.message)
             }
@@ -105,39 +105,39 @@ export default {
     },
     listen () {
       Echo.join(this.resourceType + '.' + this.resource.id)
-          .here(users => {
-            this.users = users
-          })
-          .joining(user => {
-            this.users.push(user)
-            this.pushSystemMessage(`${user.name} has joined`)
-            if ((document.activeElement != document.getElementById('send-message')) || (!document.hasFocus())) {
-              this.unreadMessage += 1
-              document.title = '(' + this.unreadMessage + ') ' + this.title
-            }
-          })
-          .leaving(user => {
-            this.users = this.users.filter(u => u.username !== user.username)
-            this.pushSystemMessage(`${user.name} has left`)
-            if ((document.activeElement != document.getElementById('send-message')) || (!document.hasFocus())) {
-              this.unreadMessage += 1
-              document.title = '(' + this.unreadMessage + ') ' + this.title
-            }
-          })
-          .listen('MessageCreated', event => {
-            event.message.user = event.user
-            this.pushMessage(event.message)
-            if ((document.activeElement != document.getElementById('send-message')) || (!document.hasFocus())) {
-              this.unreadMessage += 1
-              document.title = '(' + this.unreadMessage + ') ' + this.title
-            }
-          })
+        .here(users => {
+          this.users = users
+        })
+        .joining(user => {
+          this.users.push(user)
+          this.pushSystemMessage(`${user.name} has joined`)
+          if ((document.activeElement !== document.getElementById('send-message')) || (!document.hasFocus())) {
+            this.unreadMessage += 1
+            document.title = '(' + this.unreadMessage + ') ' + this.title
+          }
+        })
+        .leaving(user => {
+          this.users = this.users.filter(u => u.username !== user.username)
+          this.pushSystemMessage(`${user.name} has left`)
+          if ((document.activeElement !== document.getElementById('send-message')) || (!document.hasFocus())) {
+            this.unreadMessage += 1
+            document.title = '(' + this.unreadMessage + ') ' + this.title
+          }
+        })
+        .listen('MessageCreated', event => {
+          event.message.user = event.user
+          this.pushMessage(event.message)
+          if ((document.activeElement !== document.getElementById('send-message')) || (!document.hasFocus())) {
+            this.unreadMessage += 1
+            document.title = '(' + this.unreadMessage + ') ' + this.title
+          }
+        })
     },
     clearTitleNotification () {
       document.title = this.title
       this.unreadMessage = 0
     },
-    deleteMessage(index) {
+    deleteMessage (index) {
       this.messages.splice(index, 1)
     },
     pushMessage (message) {
@@ -147,7 +147,7 @@ export default {
     pushSystemMessage (body) {
       this.pushMessage({
         body,
-        system: true,
+        system: true
       })
     }
   }
