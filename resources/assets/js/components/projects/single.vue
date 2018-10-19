@@ -23,8 +23,8 @@
       <taskBoard resourceType="project" :resource="project"  :activeTab="active"></taskBoard>
       <discussionBoard resourceType="project" :resource="project" :activeTab="active"></discussionBoard>
       <messagesBoard resourceType="project" :resource="project" :activeTab="active"></messagesBoard>
+      <eventBoard resourceType="projects" :resource="project" :activeTab="active"></eventBoard>
       <!-- <messagesBoard resourceType="projects" :resource="project"></messagesBoard>
-      <schedule resourceType="projects" :resource="project"></schedule>
       <files resourceType="projects" :resource="project"></files>
       <activity resourceType="projects" :resource="project"></activity> -->
     </div>
@@ -35,7 +35,7 @@
 import taskBoard from './../partials/taskBoard.vue'
 import discussionBoard from './../partials/discussionBoard.vue'
 import messagesBoard from './../partials/messagesBoard.vue'
-import schedule from './../partials/schedule.vue'
+import eventBoard from './../partials/eventBoard.vue'
 import files from './../partials/files.vue'
 import activity from './../partials/activity.vue'
 import addMemberForm from './../partials/addMemberForm.vue'
@@ -44,13 +44,13 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 export default {
   components: {
-    taskBoard, discussionBoard, messagesBoard, schedule, files, activity, addMemberForm, tabMenu
+    taskBoard, discussionBoard, messagesBoard, eventBoard, files, activity, addMemberForm, tabMenu
   },
   props: ['project'],
   data: () => ({
     addMemberFormShown: false,
     active: 'tasks',
-    faPlus,
+    faPlus
   }),
   methods: {
     showAddMemberForm () {
@@ -70,7 +70,7 @@ export default {
       this.addMemberFormShown = false
     },
     activateTab (tab) {
-      if (tab != this.active) {
+      if (tab !== this.active) {
         this.active = tab
       }
     }

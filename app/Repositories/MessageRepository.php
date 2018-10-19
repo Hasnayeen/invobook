@@ -41,4 +41,17 @@ class MessageRepository
                            ->take(15)
                            ->get();
     }
+
+    public function getAllDirectMessages($type, $senderId, $recieverId)
+    {
+        // return $this->model->where(['user_id' => $recieverId, 'messageable_id' => $senderId, 'messageable_type' => $type])
+        return $this->model->where(['user_id' => $senderId, 'messageable_id' => $recieverId, 'messageable_type' => $type])
+                           ->orWhere(function ($query) use ($type, $senderId, $recieverId) {
+                               $query->where(['user_id' => $recieverId, 'messageable_id' => $senderId, 'messageable_type' => $type]);
+                           })
+                           ->with('user')
+                           ->orderBy('id', 'desc')
+                           ->take(15)
+                           ->get();
+    }
 }

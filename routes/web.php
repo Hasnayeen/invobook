@@ -85,6 +85,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('members', 'MemberController@store');
 
+    Route::delete('members', 'MemberController@destroy');
+
     /**********************************
         Discussion
      **********************************/
@@ -104,6 +106,8 @@ Route::group(['middleware' => 'auth'], function () {
      **********************************/
 
     Route::get('messages', 'MessageController@index');
+
+    Route::get('direct-messages', 'DirectMessageController@index');
 
     Route::post('messages', 'MessageController@store');
 
