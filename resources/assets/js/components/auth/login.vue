@@ -30,11 +30,11 @@
 </template>
 
 <script>
-    export default {
-      data: () => ({
-        token: Laravel.csrfToken,
-        errors: errors,
-        url: url
-      })
-    }
+export default {
+  data: () => ({
+    token: Laravel.csrfToken,
+    errors: errors,
+    url: url
+  })
+}
 </script>

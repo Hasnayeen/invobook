@@ -74,7 +74,7 @@
 <script>
 import {
   faChevronDown,
-  faSpinner,
+  faSpinner
 } from '@fortawesome/free-solid-svg-icons'
 
 export default {
@@ -91,7 +91,7 @@ export default {
     loading: false,
     activities: [],
     faChevronDown,
-    faSpinner,
+    faSpinner
   }),
   created () {
     axios.get('admin/activities')
