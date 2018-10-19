@@ -25,37 +25,46 @@
 </template>
 
 <script>
-import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
+import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
 
 export default {
-    props: ['details'],
+    props: ["details"],
     data() {
         return {
             project: this.details,
             dropdownMenuShown: false,
-            faEllipsisH,
-        }
+            faEllipsisH
+        };
     },
     methods: {
-      toggleMenu() {
-        this.dropdownMenuShown = ! this.dropdownMenuShown
-      },
-      hideMenu() {
-        this.dropdownMenuShown = false
-      },
-      deleteProject(project) {
-        axios.delete(`/projects/${project.id}`)
-          .then((response) => {
-            this.$emit('deleted')
-            this.dropdownMenuShown = false
-            EventBus.$emit('notification', response.data.message, response.data.status)
-          })
-          .catch((error) => {
-            this.dropdownMenuShown = false
-            EventBus.$emit('notification', error.response.data.message, error.response.data.status)
-          })
-      }
+        toggleMenu() {
+            this.dropdownMenuShown = !this.dropdownMenuShown;
+        },
+        hideMenu() {
+            this.dropdownMenuShown = false;
+        },
+        deleteProject(project) {
+            axios
+                .delete(`/projects/${project.id}`)
+                .then(response => {
+                    this.$emit("deleted");
+                    this.dropdownMenuShown = false;
+                    EventBus.$emit(
+                        "notification",
+                        response.data.message,
+                        response.data.status
+                    );
+                })
+                .catch(error => {
+                    this.dropdownMenuShown = false;
+                    EventBus.$emit(
+                        "notification",
+                        error.response.data.message,
+                        error.response.data.status
+                    );
+                });
+        }
     }
-}
+};
 </script>
 

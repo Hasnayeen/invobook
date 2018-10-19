@@ -36,53 +36,61 @@
 </template>
 
 <script>
-import team from './team'
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import team from "./team";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 export default {
-  components: { team },
-  data: () => ({
-    teams: data.teams.map((team) => {
-      team.url = 'teams/' + team.id
-      return team
+    components: { team },
+    data: () => ({
+        teams: data.teams.map(team => {
+            team.url = "teams/" + team.id;
+            return team;
+        }),
+        showCreateTeamForm: false,
+        name: "",
+        description: "",
+        faPlus
     }),
-    showCreateTeamForm: false,
-    name: '',
-    description: '',
-    faPlus,
-  }),
-  props: {
-    activeTab: {
-      required: true,
-      type: String
-    }
-  },
-  methods: {
-    openCreateTeamModal () {
-      this.showCreateTeamForm = true
-    },
-    closeCreateTeamModal () {
-      this.showCreateTeamForm = false
-    },
-    createNewTeam () {
-      axios.post('/teams', {
-        name: this.name,
-        description: this.description
-      }).then((response) => {
-        if (response.data.status == 'success') {
-          EventBus.$emit('notification', response.data.message, response.data.status)
-          response.data.project.url = 'projects/' + response.data.project.id
-          this.teams.push(response.data.team)
-          this.showCreateTeamForm = false
+    props: {
+        activeTab: {
+            required: true,
+            type: String
         }
-      }).catch((error) => {
-        console.log(error)
-          this.showCreateTeamForm = false
-      })
     },
-    deleteTeam(index) {
-      this.teams.splice(index, 1)
+    methods: {
+        openCreateTeamModal() {
+            this.showCreateTeamForm = true;
+        },
+        closeCreateTeamModal() {
+            this.showCreateTeamForm = false;
+        },
+        createNewTeam() {
+            axios
+                .post("/teams", {
+                    name: this.name,
+                    description: this.description
+                })
+                .then(response => {
+                    if (response.data.status == "success") {
+                        EventBus.$emit(
+                            "notification",
+                            response.data.message,
+                            response.data.status
+                        );
+                        response.data.team.url =
+                            "teams/" + response.data.team.id;
+                        this.teams.push(response.data.team);
+                        this.showCreateTeamForm = false;
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                    this.showCreateTeamForm = false;
+                });
+        },
+        deleteTeam(index) {
+            this.teams.splice(index, 1);
+        }
     }
-  }
-}
+};
 </script>
