@@ -10,7 +10,6 @@ class ProjectController extends Controller
 {
     public function show(Project $project)
     {
-        $this->authorize('view', $project);
         $project->load('members');
 
         return view('projects.single', ['project' => $project]);

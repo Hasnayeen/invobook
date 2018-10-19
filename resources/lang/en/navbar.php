@@ -1,7 +1,8 @@
 <?php
 
 return [
-    'Your Profile' => 'Your Profile',
-    'Admin'        => 'Admin',
-    'Logout'       => 'Logout',
+    'Your Profile'  => 'Your Profile',
+    'Your Messages' => 'Your Messages',
+    'Admin'         => 'Admin',
+    'Logout'        => 'Logout',
 ];

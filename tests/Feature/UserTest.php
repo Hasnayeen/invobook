@@ -14,17 +14,32 @@ class UserTest extends TestCase
     use WithFaker;
 
     /** @test */
-    public function owner_can_see_all_users()
+    public function owner_can_see_all_users_in_admin_page()
     {
-        factory('App\Models\User', 5)->create();
+        factory('App\Models\User', 2)->create();
         $users = User::all(['name', 'username', 'email', 'timezone', 'avatar']);
         $this->actingAs($this->user)->get('admin')
             ->assertSee($users[0]['name'])
             ->assertSee($users[0]['username'])
             ->assertSee($users[0]['email'])
-            ->assertSee($users[5]['name'])
-            ->assertSee($users[5]['username'])
-            ->assertSee($users[5]['email']);
+            ->assertSee($users[1]['name'])
+            ->assertSee($users[1]['username'])
+            ->assertSee($users[1]['email']);
+    }
+
+    /** @test */
+    public function owner_can_see_all_users()
+    {
+        factory('App\Models\User', 2)->create();
+        $users = User::all(['name', 'username', 'email', 'timezone', 'avatar']);
+        $this->actingAs($this->user)->get('users')
+            ->assertJsonFragment([
+                'status'   => 'success',
+                'name'     => $users[0]->name,
+                'username' => $users[0]->username,
+                'name'     => $users[1]->name,
+                'username' => $users[1]->username,
+            ]);
     }
 
     /** @test */
