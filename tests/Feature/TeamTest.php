@@ -2,9 +2,9 @@
 
 namespace Tests\Feature;
 
-use App\Exceptions\UserIsNotMember;
 use Tests\TestCase;
 use App\Models\Team;
+use App\Exceptions\UserIsNotMember;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Notification;
 
