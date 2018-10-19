@@ -14,9 +14,9 @@
       {{ 'Offices' | localize }}
     </span>
   </div>
-  <projects :active-tab="active"></projects>
-  <teams :active-tab="active"></teams>
-  <offices :active-tab="active"></offices>
+  <projects :projects="projects" :active-tab="active"></projects>
+  <teams :teams="teams" :active-tab="active"></teams>
+  <offices :offices="offices" :active-tab="active"></offices>
 </div>
 </template>
 
@@ -29,6 +29,20 @@ import activity from './partials/activity.vue'
 export default {
   components: {
     projects, teams, offices, activity
+  },
+  props: {
+    projects: {
+      required: true,
+      type: Array
+    },
+    teams: {
+      required: true,
+      type: Array
+    },
+    offices: {
+      required: true,
+      type: Array
+    }
   },
   data: () => ({
     active: 'projects'

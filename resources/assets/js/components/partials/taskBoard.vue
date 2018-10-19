@@ -52,7 +52,7 @@ export default {
       this.createTaskFormShown = true
     },
     closeCreateTaskForm (newTask = null) {
-      (newTask) ? this.tasks.push(newTask) : null
+      if (newTask) this.tasks.push(newTask)
       this.createTaskFormShown = false
     },
     getAllTasks () {

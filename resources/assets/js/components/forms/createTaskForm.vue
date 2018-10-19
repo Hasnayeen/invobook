@@ -65,7 +65,7 @@ export default {
     notes: '',
     assigned_to: null,
     related_to: '',
-    faChevronDown,
+    faChevronDown
   }),
   methods: {
     createTask () {
@@ -79,7 +79,7 @@ export default {
         taskable_type: this.resourceType
       })
         .then((response) => {
-          if (response.data.status == 'success') {
+          if (response.data.status === 'success') {
             this.name = ''
             this.notes = ''
             this.assigned_to = null

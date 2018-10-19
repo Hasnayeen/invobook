@@ -45,7 +45,7 @@
 import commentBox from './commentBox.vue'
 import {
   faArrowLeft,
-  faEllipsisH,
+  faEllipsisH
 } from '@fortawesome/free-solid-svg-icons'
 
 export default {
@@ -65,11 +65,11 @@ export default {
       required: true
     }
   },
-  data() {
+  data () {
     return {
       dropdownMenuShown: false,
       faArrowLeft,
-      faEllipsisH,
+      faEllipsisH
     }
   },
   methods: {
@@ -77,16 +77,16 @@ export default {
       this.dropdownMenuShown = false
       this.$emit('close')
     },
-    toggleMenu() {
-      this.dropdownMenuShown = ! this.dropdownMenuShown
+    toggleMenu () {
+      this.dropdownMenuShown = !this.dropdownMenuShown
     },
-    hideMenu() {
+    hideMenu () {
       this.dropdownMenuShown = false
     },
-    deleteDiscussion() {
+    deleteDiscussion () {
       axios.delete(`/discussions/${this.discussion.id}`)
         .then((response) => {
-          this.$emit('deleted', this.index);
+          this.$emit('deleted', this.index)
 
           this.closeDiscussionDetails()
 

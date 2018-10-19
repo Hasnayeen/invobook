@@ -39,19 +39,19 @@
 </template>
 
 <script>
+import Quill from 'quill'
 let options = {
   modules: {
     toolbar: [
       [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
       ['bold', 'italic', 'underline', 'strike'],
-      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+      [{ 'list': 'ordered' }, { 'list': 'bullet' }],
       ['blockquote', 'code-block'],
       ['image', 'link']
     ]
   },
   theme: 'snow'
 }
-import Quill from 'quill'
 export default {
   props: {
     formShown: {
@@ -64,7 +64,7 @@ export default {
     },
     resourceType: {
       required: true,
-      type: String      
+      type: String
     }
   },
   data: () => ({
@@ -87,17 +87,17 @@ export default {
         discussionable_type: this.resourceType,
         discussionable_id: this.resourceId
       })
-      .then((response) => {
-        this.name = ''
-        this.categoryId = ''
-        this.quill.setContents([])
-        EventBus.$emit('notification', response.data.message, response.data.status)
-        this.$emit('close', response.data.discussion)
-      })
-      .catch((error) => {
-        EventBus.$emit('notification', error.response.data.message, error.response.data.status)
-        this.$emit('close')
-      })
+        .then((response) => {
+          this.name = ''
+          this.categoryId = ''
+          this.quill.setContents([])
+          EventBus.$emit('notification', response.data.message, response.data.status)
+          this.$emit('close', response.data.discussion)
+        })
+        .catch((error) => {
+          EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+          this.$emit('close')
+        })
     },
     closeEditor () {
       this.$emit('close')

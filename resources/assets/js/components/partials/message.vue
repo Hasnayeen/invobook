@@ -69,12 +69,12 @@ export default {
   },
   data: () => ({
     dropdownMenuShown: false,
-    faEllipsisH,
+    faEllipsisH
   }),
   computed: {
     displayDate () {
-      return ! this.message.system
-        && this.showDate(this.message.created_at)
+      return !this.message.system &&
+        this.showDate(this.message.created_at)
     }
   },
   methods: {
@@ -90,28 +90,28 @@ export default {
           EventBus.$emit('notification', error.response.data.message, error.response.data.status)
         })
     },
-    toggleMessageMenu() {
-      this.dropdownMenuShown = ! this.dropdownMenuShown
+    toggleMessageMenu () {
+      this.dropdownMenuShown = !this.dropdownMenuShown
     },
-    hideMessageMenu() {
+    hideMessageMenu () {
       this.dropdownMenuShown = false
     },
-   showDate (created_at) {
-      let createdDay = luxon.DateTime.fromSQL(created_at).toLocaleString(luxon.DateTime.DATE_MED)
-      if (day === null || day != createdDay) {
+    showDate (createdAt) {
+      let createdDay = luxon.DateTime.fromSQL(createdAt).toLocaleString(luxon.DateTime.DATE_MED)
+      if (day === null || day !== createdDay) {
         day = createdDay
         return true
       }
       return false
     },
-    getDate (created_at) {
-      return luxon.DateTime.fromSQL(created_at).toLocaleString(luxon.DateTime.DATE_MED)
+    getDate (createdAt) {
+      return luxon.DateTime.fromSQL(createdAt).toLocaleString(luxon.DateTime.DATE_MED)
     },
-    getTime (created_at) {
+    getTime (createdAt) {
       if (this.user.timezone) {
-        return luxon.DateTime.fromSQL(created_at, {zone: 'UTC'}).setZone(this.user.timezone).toLocaleString(luxon.DateTime.TIME_SIMPLE)
+        return luxon.DateTime.fromSQL(createdAt, {zone: 'UTC'}).setZone(this.user.timezone).toLocaleString(luxon.DateTime.TIME_SIMPLE)
       }
-      return luxon.DateTime.fromSQL(created_at, {zone: 'UTC'}).setZone('local').toLocaleString(luxon.DateTime.TIME_SIMPLE)
+      return luxon.DateTime.fromSQL(createdAt, {zone: 'UTC'}).setZone('local').toLocaleString(luxon.DateTime.TIME_SIMPLE)
     }
   }
 }
