@@ -1,12 +1,12 @@
 import './../../bootstrap'
+import componentMixin from './../commonComponent'
 import index from './../../components/admin/index.vue'
-import navbar from './../../components/partials/navbar.vue'
-import notificationPopup from './../../components/partials/notificationPopup.vue'
 
 /* eslint-disable no-unused-vars */
 const app = new Vue({
   el: '#app',
+  mixins: [componentMixin],
   components: {
-    index, navbar, notificationPopup
+    index
   }
 })
