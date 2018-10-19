@@ -41,15 +41,15 @@ export default {
   props: {
     activeTab: {
       required: true,
-      type: String,
+      type: String
     },
     users: {
       required: true,
-      type: Array,
+      type: Array
     }
   },
   data: () => ({
-    faEllipsisH,
+    faEllipsisH
   }),
   components: {inviteModal}
 }

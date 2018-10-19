@@ -14,14 +14,14 @@
 </template>
 
 <script>
-import notificationDropdown from "./notificationDropdown";
-import profileDropdown from "./profileDropdown";
+import notificationDropdown from './notificationDropdown'
+import profileDropdown from './profileDropdown'
 export default {
   components: {notificationDropdown, profileDropdown},
   data: () => ({
     user: navbar.user,
     token: Laravel.csrfToken,
-    url: navbar.navUrl,
+    url: navbar.navUrl
   })
 }
 </script>

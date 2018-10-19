@@ -36,10 +36,10 @@ export default {
   },
   methods: {
     activateThisColumn (column) {
-      if (column != this.active) {
+      if (column !== this.active) {
         this.activeColumn = column
       }
-    },
+    }
   }
 }
 </script>

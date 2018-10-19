@@ -53,7 +53,7 @@ export default {
     showNotification: false,
     message: '',
     messageType: '',
-    faPlus,
+    faPlus
   }),
   methods: {
     showAddMemberForm () {
@@ -63,17 +63,18 @@ export default {
       this.addMemberFormShown = false
     },
     addMember (data) {
+      let messageType
       if (data.user) {
-        var messageType = 'success'
+        messageType = 'success'
         this.project.members.push(data.user)
       } else {
-        var messageType = 'error'
+        messageType = 'error'
       }
       EventBus.$emit('notification', data.message, messageType)
       this.addMemberFormShown = false
     },
     activateTab (tab) {
-      if (tab != this.active) {
+      if (tab !== this.active) {
         this.active = tab
       }
     },

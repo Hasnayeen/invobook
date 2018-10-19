@@ -4,6 +4,7 @@
         "ecmaFeatures": {
             "jsx": true
         },
+        "parser": "babel-eslint",
         "sourceType": "module"
     },
     "env": {

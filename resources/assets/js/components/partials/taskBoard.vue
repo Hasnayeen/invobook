@@ -52,7 +52,7 @@ export default {
       this.createTaskFormShown = true
     },
     closeCreateTaskForm (newTask = null) {
-      (newTask) ? this.tasks.push(newTask) : null
+      if (newTask) this.tasks.push(newTask)
       this.createTaskFormShown = false
     },
     getAllTasks () {
@@ -77,10 +77,10 @@ export default {
       if (typeof this.task.user.username === 'undefined') {
         axios.get('/users')
           .then((response) => {
-            for (let i = 0; i < response.data.data.length; i++) {
-              if (response.data.data[i].id === this.task.user.id) {
-                this.task.user.username = response.data.data[i].username
-                this.task.user.name = response.data.data[i].name
+            for (let i = 0; i < response.data.users.length; i++) {
+              if (response.data.users[i].id === this.task.user.id) {
+                this.task.user.username = response.data.users[i].username
+                this.task.user.name = response.data.users[i].name
               }
             }
             this.taskDetailsShown = true

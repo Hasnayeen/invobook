@@ -47,7 +47,7 @@ import createRoleForm from './../forms/createRoleForm'
 import assignPermissionForm from './../forms/assignPermissionForm'
 import {
   faPlusCircle,
-  faTrashAlt,
+  faTrashAlt
 } from '@fortawesome/free-solid-svg-icons'
 
 export default {
@@ -64,17 +64,17 @@ export default {
     assignPermissionFormShown: false,
     roleId: 0,
     faPlusCircle,
-    faTrashAlt,
+    faTrashAlt
   }),
   beforeUpdate () {
     if (this.roles.length < 1) {
       axios.get('/admin/roles')
-          .then((response) => {
-            this.roles = response.data.roles
-          })
-          .catch((error) => {
-            console.log(error)
-          })
+        .then((response) => {
+          this.roles = response.data.roles
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     }
   },
   methods: {
@@ -90,12 +90,12 @@ export default {
     },
     deleteRole (id, index) {
       axios.delete('/admin/roles/' + id)
-           .then((response) => {
-             this.roles.splice(index, 1)
-           })
-           .catch((error) => {
-             console.log(error.response.data.message)
-           })
+        .then((response) => {
+          this.roles.splice(index, 1)
+        })
+        .catch((error) => {
+          console.log(error.response.data.message)
+        })
     },
     showAssignPermissionForm (id) {
       this.roleId = id
@@ -105,19 +105,19 @@ export default {
       this.assignPermissionFormShown = false
     },
     permissionAssigned (permission) {
-      if (! this.roles.filter(role => role.id === this.roleId)[0].permissions.some(perm => perm.id === permission.id)) {
+      if (!this.roles.filter(role => role.id === this.roleId)[0].permissions.some(perm => perm.id === permission.id)) {
         this.roles.filter(role => role.id === this.roleId)[0].permissions.push(permission)
       }
       this.assignPermissionFormShown = false
     },
     revokePermission (roleId, permissionId, index) {
       axios.delete('/admin/roles/' + roleId + '/permissions', {permission_id: permissionId})
-           .then((response) => {
-             this.roles.filter(role => role.id === roleId)[0].permissions.splice(index, 1)
-           })
-           .catch((error) => {
-             console.log(error.response.data.message)
-           })
+        .then((response) => {
+          this.roles.filter(role => role.id === roleId)[0].permissions.splice(index, 1)
+        })
+        .catch((error) => {
+          console.log(error.response.data.message)
+        })
     }
   }
 }
