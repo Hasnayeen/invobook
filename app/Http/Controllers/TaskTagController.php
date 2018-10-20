@@ -10,14 +10,11 @@ class TaskTagController extends Controller
 {
     public function store(Task $task)
     {
-        $tag = Tag::firstOrCreate(request()->only('label'));
-
-        $task->tags()->attach($tag);
+        $task->tags()->attach(request('labels'));
 
         return response()->json([
             'status'  => 'success',
             'message' => 'Tag has been added to the task',
-            'label'   => $tag->label,
         ]);
     }
 

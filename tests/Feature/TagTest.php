@@ -11,28 +11,20 @@ use Illuminate\Auth\AuthenticationException;
 class TagTest extends TestCase
 {
     /** @test */
-    public function user_with_permission_can_add_a_tag_to_a_task()
+    public function user_with_permission_can_create_tag()
     {
-        $task = factory(Task::class)->create();
-
-        $permission = Permission::create(['name' => "edit {$task->taskable_type}->{$task->taskable_id}"]);
+        $permission = Permission::create(['name' => 'create tag']);
         $this->user->givePermissionTo($permission);
 
-        $this->actingAs($this->user)->post("tasks/{$task->id}/tags", [
+        $this->actingAs($this->user)->post('tags', [
             'label' => 'dummy',
         ])->assertJsonFragment([
             'status'  => 'success',
-            'message' => 'Tag has been added to the task',
+            'message' => 'Tag has been created',
             'label'   => 'dummy',
         ]);
 
-        $tag = Tag::where('label', 'dummy')->first();
-
-        $this->assertEquals('dummy', $tag->label);
-        $this->assertDatabaseHas('task_tags', [
-            'task_id' => $task->id,
-            'tag_id'  => $tag->id,
-        ]);
+        $this->assertDatabaseHas('tags', ['label' => 'dummy']);
     }
 
     /**
@@ -41,11 +33,9 @@ class TagTest extends TestCase
      */
     public function user_without_permission_can_not_add_a_tag_to_a_task()
     {
-        $task = factory(Task::class)->create();
+        $permission = Permission::create(['name' => 'create tag']);
 
-        $permission = Permission::create(['name' => "edit {$task->taskable_type}->{$task->taskable_id}"]);
-
-        $this->actingAs($this->user)->post("tasks/{$task->id}/tags", [
+        $this->actingAs($this->user)->post('tags', [
             'label' => 'dummy',
         ]);
     }
@@ -60,11 +50,10 @@ class TagTest extends TestCase
         $this->user->givePermissionTo($permission);
 
         $this->actingAs($this->user)->post("tasks/{$task->id}/tags", [
-            'label' => $tag->label,
+            'labels' => $tag->id,
         ])->assertJsonFragment([
             'status'  => 'success',
             'message' => 'Tag has been added to the task',
-            'label'   => $tag->label,
         ]);
 
         $this->assertDatabaseHas('task_tags', [

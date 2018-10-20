@@ -6,15 +6,22 @@ use App\Models\Tag;
 
 class TagRepository
 {
-    protected $tag;
+    protected $model;
 
     public function __construct(Tag $tag)
     {
-        $this->tag = $tag;
+        $this->model = $tag;
     }
 
     public function getAllTags()
     {
-        return $this->tag->get(['id', 'label']);
+        return $this->model->get(['id', 'label']);
+    }
+
+    public function create()
+    {
+        return $this->model->create([
+            'label' => request('label'),
+        ]);
     }
 }
