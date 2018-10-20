@@ -2,17 +2,38 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoryStoreRequest;
 use App\Models\Category;
+use App\Repositories\CategoryRepository;
 
 class CategoryController extends Controller
 {
+    private $repository;
+
+    public function __construct(CategoryRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
     public function index()
     {
-        $categories = Category::all();
+        $categories = $this->repository->getAllCategories();
 
         return response()->json([
             'status'     => 'success',
             'categories' => $categories,
         ]);
+    }
+
+    public function store(CategoryStoreRequest $request)
+    {
+        $category = $this->repository->create($request->all());
+
+        return $this->successResponse(
+            trans('misc.New category has been created'),
+            'category',
+            $category,
+            201
+        );
     }
 }
