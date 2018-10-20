@@ -21,7 +21,7 @@ class ActivityRepository
     }
 
     /**
-     * Return all company wide activities
+     * Return all company wide activities.
      *
      * @return \Illuminate\Database\Eloquent\Collection
      */
