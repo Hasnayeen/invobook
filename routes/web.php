@@ -99,7 +99,13 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::delete('discussions/{discussion}', 'DiscussionController@delete')->middleware('can:delete,discussion');
 
+    /**********************************
+        Category
+    **********************************/
+
     Route::get('categories', 'CategoryController@index');
+
+    Route::post('categories', 'CategoryController@store');
 
     /**********************************
         Message
