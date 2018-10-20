@@ -5,7 +5,7 @@
         <div class="absolute pin opacity-75 bg-grey"></div>
         <div class="fixed pin-x w-1/3 z-10 bg-grey-lighter mx-auto p-8 rounded">
             <p class="py-2">
-                <input class="w-full shadow appearance-none border rounded py-2 px-3 text-grey-darker" type="text" placeholder="Name" v-model="name">
+                <input ref="focusInput" class="w-full shadow appearance-none border rounded py-2 px-3 text-grey-darker" type="text" placeholder="Name" v-model="name">
                 <span class="hidden"></span>
             </p>
             <p class="py-2">
@@ -55,7 +55,10 @@ export default {
   }),
   methods: {
     openCreateProjectModal () {
-      this.showCreateProjectForm = true
+      this.showCreateProjectForm = true;
+      this.$nextTick(() => {
+        this.$refs.focusInput.focus()
+      })
     },
     closeCreateProjectModal () {
       this.showCreateProjectForm = false

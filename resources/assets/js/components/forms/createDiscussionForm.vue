@@ -6,7 +6,7 @@
         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name">
           Title <span class="text-grey capitalize">(required)</span>
         </label>
-        <input v-model="name" class="appearance-none block w-full bg-white text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-last-name" type="text" placeholder="New Discussion Post" required>
+        <input ref="inputFocus" v-model="name" class="appearance-none block w-full bg-white text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-last-name" type="text" placeholder="New Discussion Post" required>
       </div>
       <div class="p-4 bg-grey-lighter">
         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name">
