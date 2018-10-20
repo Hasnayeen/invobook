@@ -14,6 +14,7 @@ class TaskController extends Controller
     public function store(ValidateTaskCreation $request, TaskRepository $repository)
     {
         $task = $repository->create($request->all());
+        $task->tags()->attach(request('labels'));
         $task->load('user:id,avatar');
 
         return response()->json([
