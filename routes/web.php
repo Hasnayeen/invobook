@@ -138,8 +138,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('tasks/{task}', 'TaskController@delete')->middleware('can:delete,task');
 
     /**********************************
-        tags
+        Tags
     **********************************/
+
+    Route::get('tags', 'TagController@index');
 
     Route::post('tasks/{task}/tags', 'TaskTagController@store')->middleware('can:create,App\Models\Tag,task');
 
