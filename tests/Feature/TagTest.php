@@ -3,10 +3,10 @@
 namespace Tests\Feature;
 
 use App\Models\Tag;
-use Illuminate\Auth\AuthenticationException;
 use Tests\TestCase;
 use App\Models\Task;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Auth\AuthenticationException;
 
 class TagTest extends TestCase
 {
@@ -121,12 +121,12 @@ class TagTest extends TestCase
             ->get('/tags')
             ->assertJsonFragment([
                 'status' => 'success',
-                'total' => 1,
-                'tags' => [
+                'total'  => 1,
+                'tags'   => [
                     [
-                        'id' => $tag->id,
+                        'id'    => $tag->id,
                         'label' => $tag->label,
-                    ]
+                    ],
                 ],
             ]);
     }

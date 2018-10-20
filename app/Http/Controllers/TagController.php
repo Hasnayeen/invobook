@@ -20,7 +20,7 @@ class TagController extends Controller
         return response()->json([
             'status'   => 'success',
             'total'    => \count($tags),
-            'tags'    => $tags,
+            'tags'     => $tags,
         ]);
     }
 }
