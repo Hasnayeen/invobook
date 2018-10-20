@@ -141,6 +141,8 @@ Route::group(['middleware' => 'auth'], function () {
         tags
     **********************************/
 
+    Route::get('tags', 'TagController@index');
+
     Route::post('tasks/{task}/tags', 'TaskTagController@store')->middleware('can:create,App\Models\Tag,task');
 
     Route::delete('tasks/{task}/tags/{tag}', 'TaskTagController@delete')->middleware('can:delete,App\Models\Tag,task,tag');

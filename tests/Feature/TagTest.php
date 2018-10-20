@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Tag;
+use Illuminate\Auth\AuthenticationException;
 use Tests\TestCase;
 use App\Models\Task;
 use Spatie\Permission\Models\Permission;
@@ -109,5 +110,32 @@ class TagTest extends TestCase
         $permission = Permission::create(['name' => "edit {$task->taskable_type}->{$task->taskable_id}"]);
 
         $this->actingAs($this->user)->delete("tasks/{$task->id}/tags/{$tag->id}");
+    }
+
+    /** @test */
+    public function authenticated_user_can_access_all_tags()
+    {
+        $tag = factory(Tag::class)->create();
+
+        $this->actingAs($this->user)
+            ->get('/tags')
+            ->assertJsonFragment([
+                'status' => 'success',
+                'total' => 1,
+                'tags' => [
+                    [
+                        'id' => $tag->id,
+                        'label' => $tag->label,
+                    ]
+                ],
+            ]);
+    }
+
+    /** @test */
+    public function guest_user_cant_access_all_tags()
+    {
+        $this->expectException(AuthenticationException::class);
+
+        $this->get('/tags');
     }
 }
