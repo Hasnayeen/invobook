@@ -22,6 +22,7 @@ class AppServiceProvider extends ServiceProvider
             'event'      => 'App\Models\Event',
             'discussion' => 'App\Models\Discussion',
             'user'       => 'App\Models\User',
+            'comment'    => 'App\Models\Comment',
         ]);
     }
 
