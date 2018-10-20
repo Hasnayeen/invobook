@@ -63,7 +63,7 @@ class TagTest extends TestCase
     }
 
     /** @test */
-    public function user_with_permission_can_delete_a_tag_from_a_task()
+    public function user_with_permission_can_detach_a_tag_from_a_task()
     {
         $tag = factory(Tag::class)->create();
         $task = factory(Task::class)->create();
@@ -89,7 +89,7 @@ class TagTest extends TestCase
      * @test
      * @expectedException Illuminate\Auth\Access\AuthorizationException
      */
-    public function user_without_permission_can_not_delete_a_tag_from_a_task()
+    public function user_without_permission_can_not_detach_a_tag_from_a_task()
     {
         $tag = factory(Tag::class)->create();
         $task = factory(Task::class)->create();
