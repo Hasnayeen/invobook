@@ -2,9 +2,9 @@
 
 namespace Tests\Feature;
 
+use Tests\TestCase;
 use App\Models\Category;
 use Illuminate\Auth\AuthenticationException;
-use Tests\TestCase;
 
 class CategoryTest extends TestCase
 {
