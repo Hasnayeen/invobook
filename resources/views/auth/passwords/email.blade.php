@@ -1,46 +1,33 @@
 @component('layouts.app')
     @slot('title') Reset password @endslot
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Reset Password</div>
-                    <div class="panel-body">
-                        @if (session('status'))
-                            <div class="alert alert-success">
-                                {{ session('status') }}
-                            </div>
-                        @endif
-
-                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/password/email') }}">
-                            {{ csrf_field() }}
-
-                            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                                <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-
-                                    @if ($errors->has('email'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('email') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-md-6 col-md-offset-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        Send Password Reset Link
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+    <div class="bg-white container mx-4 md:mx-auto shadow-lg mt-32 flex flex-row md:w-3/5 xxl:w-2/5 justify-between">
+        <div class="w-1/2 text-center bg-teal-light p-4 hidden md:block">
+            <p class="text-white font-bold text-4xl pt-8 mt-8">GOODWORK</p>
+            <p class="text-white text-xl pt-4">Sane way to manage work</p>
+        </div>
+        <div class=""></div>
+        <div class="w-full md:w-1/2 p-8">
+            <h3>Reset Password</h3>
+            <hr>
+            @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
                 </div>
-            </div>
+            @endif
+            <form role="form" method="POST" action="{{ url('/password/email') }}">
+                {{ csrf_field() }}
+
+                <p class="py-4">
+                    <input id="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" type="email" placeholder="E-mail" name="email" value="{{ old('email') }}" required>
+                    @if ($errors->has('email'))
+                        <span class="text-red-light block pt-5" style="font-size: 14px;">{{ $errors->first('email') }}</span>
+                    @endif
+                </p>
+                <p class="py-4">
+                    <button type="submit" class="btn">Send Password Reset Link</button>
+                </p>
+            </form>
         </div>
     </div>
 
