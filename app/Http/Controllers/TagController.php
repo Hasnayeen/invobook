@@ -19,8 +19,19 @@ class TagController extends Controller
 
         return response()->json([
             'status'   => 'success',
-            'total'    => \count($tags),
+            'total'    => count($tags),
             'tags'     => $tags,
+        ]);
+    }
+
+    public function store()
+    {
+        $tag = $this->repository->create();
+
+        return response()->json([
+            'status'  => 'success',
+            'message' => 'Tag has been created',
+            'tag'     => $tag,
         ]);
     }
 }

@@ -141,7 +141,8 @@ class TaskTest extends TestCase
         $this->actingAs($user)->delete('/tasks/' . $this->task->id);
     }
 
-    public function test_create_new_task_with_status()
+    /** @test */
+    public function create_new_task_with_status()
     {
         $task = factory(\App\Models\Task::class)->make();
         $status = factory(\App\Models\Status::class)->create();
