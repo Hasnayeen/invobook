@@ -3,6 +3,7 @@
 ## v0.9 (Yet to release)
 
 - Added direct message to a user functionality
+- Added endpoint to list all tags
 
 ## v0.8 (2018-10-18)
 
