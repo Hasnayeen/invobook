@@ -18,6 +18,7 @@ return [
         'es-MX' => 'Spanish (Mexican)',
         'fa'    => 'Farsi',
         'fr-FR' => 'French (France)',
+        'id'    => 'Bahasa (Indonesia)',
         'it-IT' => 'Italian (Italy)',
         'nl-NL' => 'Dutch (Netherlands)',
         'pl'    => 'Polish',
