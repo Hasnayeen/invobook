@@ -18,9 +18,9 @@ Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 
 Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
 
-Route::post('password/reset', 'Auth\ForgotPasswordController@reset');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
-Route::get('password/reset/{token}', 'Auth\ForgotPasswordController@showResetForm');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm');
 
 /**********************************
     Registration
@@ -99,7 +99,13 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::delete('discussions/{discussion}', 'DiscussionController@delete')->middleware('can:delete,discussion');
 
+    /**********************************
+        Category
+    **********************************/
+
     Route::get('categories', 'CategoryController@index');
+
+    Route::post('categories', 'CategoryController@store');
 
     /**********************************
         Message
@@ -138,12 +144,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('tasks/{task}', 'TaskController@delete')->middleware('can:delete,task');
 
     /**********************************
-        tags
+        Tags
     **********************************/
 
-    Route::post('tasks/{task}/tags', 'TaskTagController@store')->middleware('can:create,App\Models\Tag,task');
+    Route::get('tags', 'TagController@index');
 
-    Route::delete('tasks/{task}/tags/{tag}', 'TaskTagController@delete')->middleware('can:delete,App\Models\Tag,task,tag');
+    Route::post('tags', 'TagController@store')->middleware('can:create,App\Models\Tag');
+
+    Route::post('tasks/{task}/tags', 'TaskTagController@store')->middleware('can:attach,App\Models\Tag,task');
+
+    Route::delete('tasks/{task}/tags/{tag}', 'TaskTagController@delete')->middleware('can:detach,App\Models\Tag,task');
 
     /**********************************
         Comment

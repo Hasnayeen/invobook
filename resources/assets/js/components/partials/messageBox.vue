@@ -8,7 +8,7 @@
       <div class="text-sm text-center text-grey-dark">Send direct meesage</div>
       <div class="flex flex-row justify-center px-4 py-2">
         <div @click="selectUserMessage(user)" v-for="user in users" v-if="user.id !== authUser.id">
-          <img class="w-10 h-10 rounded-full md:mr-2 cursor-pointer" :src="generateUrl(user.avatar)">
+          <img class="w-10 h-10 rounded-full md:mr-2 cursor-pointer" :title="user.name" :src="generateUrl(user.avatar)">
         </div>
       </div>
     </div>

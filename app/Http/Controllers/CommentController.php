@@ -6,6 +6,8 @@ use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Repositories\CommentRepository;
+use App\Repositories\MentionRepository;
+use App\Http\Requests\ValidateCommentCreation;
 
 class CommentController extends Controller
 {
@@ -26,18 +28,13 @@ class CommentController extends Controller
      * @param  Request      $request
      * @return JsonResponse
      */
-    public function store(Request $request): JsonResponse
+    public function store(ValidateCommentCreation $request, MentionRepository $mentionRepository): JsonResponse
     {
         try {
-            $data = $request->validate([
-                'body'             => 'required',
-                'commentable_type' => 'required|string',
-                'commentable_id'   => 'required|integer|exists:' . $request->get('commentable_type') . 's,id',
-            ]);
-            $data['commentable_type'] = $request->get('commentable_type');
-            $data['commentable_id'] = $request->get('commentable_id');
-
-            $comment = $this->repository->create($data);
+            $comment = $this->repository->create($request->all());
+            if (request('mentions')) {
+                $mentionRepository->create('comment', $comment->id);
+            }
             $comment->load('user:id,name,avatar');
 
             return $this->successResponse(

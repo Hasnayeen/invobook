@@ -4,18 +4,18 @@
     <div class="p-4">
       <div class="p-4">
         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold text-center text-lg mb-4" for="user">
-            Add Member
+          Add Member
         </label>
         <div class="flex flex-row items-center">
-            <select v-model="newMember" class="w-5/6 block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" id="user">
-                <option selected disabled hidden>Select User to Add</option>
-                <template v-for="user in users">
-                    <option :value="user.id" class="my-2 text-lg">{{ user.name }}</option>
-                </template>
-            </select>
-            <font-awesome-icon :icon="faChevronDown"
-              class="w-1/6 pointer-events-none flex items-center text-grey-darker -ml-8">
-            </font-awesome-icon>
+          <select v-model="newMember" class="w-5/6 block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" id="user">
+            <option selected disabled hidden>Select User to Add</option>
+            <template v-for="user in users">
+              <option :value="user.id" class="my-2 text-lg">{{ user.name }}</option>
+            </template>
+          </select>
+          <font-awesome-icon :icon="faChevronDown"
+            class="w-1/6 pointer-events-none flex items-center text-grey-darker -ml-8">
+          </font-awesome-icon>
         </div>
       </div>
     </div>
@@ -51,7 +51,7 @@ export default {
   created () {
     axios.get('/users')
       .then((response) => {
-        this.users = response.data.data
+        this.users = response.data.users
       })
       .catch((error) => {
         console.log(error)
