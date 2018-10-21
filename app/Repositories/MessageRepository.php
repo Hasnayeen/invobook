@@ -26,7 +26,7 @@ class MessageRepository
     public function saveMessage($data)
     {
         return $this->model->create([
-            'body'             => $data['message'],
+            'body'             => $data['body'],
             'user_id'          => $data['user_id'],
             'messageable_type' => $data['messageable_type'],
             'messageable_id'   => $data['messageable_id'],
