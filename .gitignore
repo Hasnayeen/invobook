@@ -14,4 +14,3 @@ npm-debug.log
 docker.env
 /storage/framework/testing
 .vscode
-config
