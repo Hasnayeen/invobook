@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'Users'                          => 'Pengguna',
+    'Roles & Permissions'            => 'Peran & Hak Akses',
+    'Activities'                     => 'Aktivitas',
+    'About'                          => 'Tentang',
+    'Roles'                          => 'Peran',
+    'Role'                           => 'Peran',
+    'Permissions'                    => 'Hak Akses',
+    'Invite New Member'              => 'Undang Pengguna Baru',
+    'Add New Role'                   => 'Tambah Peran Baru',
+    'Cancel'                         => 'Batal',
+    'Assign'                         => 'Berikan',
+    'Attach'                         => 'Lampirkan',
+    'Filters'                        => 'Penyaring',
+    'Apply'                          => 'Terapkan',
+    'Load More'                      => 'Muat Berikutnya',
+    'Check for Updates'              => 'Periksa Pembaruan',
+    'Filter by Activity'             => 'Saring dari Aktivitas',
+    'Filter by User'                 => 'Saring dari Pengguna',
+    'Filter by Date'                 => 'Saring dari Tanggal',
+    'Last Updated'                   => 'Terakhir Diubah',
+    'Author'                         => 'Pencipta',
+    'Submit issue & feedback at'     => 'Ajukan kendala & solusi pada',
+    'Don\'t belongs to any role yet' => 'Belum memiliki peran apapun',
+    'Don\'t have any permission yet' => 'Belum memiliki hak akses',
+];
