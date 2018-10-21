@@ -8,5 +8,10 @@ const app = new Vue({
   mixins: [componentMixin],
   components: {
     home
-  }
+  },
+  data: () => ({
+    projects: projects,
+    teams: teams,
+    offices: offices
+  })
 })
