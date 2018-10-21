@@ -6,7 +6,7 @@
       {{user.name}}
     </div>
     <div class="">
-      <file-upload :user="user" @image-loaded="updateImage"></file-upload>
+      <file-upload @image-loaded="updateImage"></file-upload>
     </div>
   </div>
   <form class="px-8 pt-6">

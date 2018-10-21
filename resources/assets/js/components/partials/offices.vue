@@ -28,7 +28,7 @@
       <span class="text-grey-darker pt-4">{{ 'Add a new office' | localize }}</span>
     </div>
 
-    <office v-for="(office, index) in offices" :key="index" :details="office" @deleted="deleteOffice(index)"></office>
+    <office v-for="(office, index) in offices" :key="index" :index="index" :details="office" @deleted="deleteOffice"></office>
   </div>
 </div>
 </template>
