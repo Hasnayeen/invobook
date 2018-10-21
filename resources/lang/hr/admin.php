@@ -26,4 +26,3 @@ return [
     'Don\'t belongs to any role yet'   => 'Ne pripada još nijednoj ulozi',
     'Don\'t have any permission yet'   => 'Nema još nikakvih dozvola',
 ];
-
