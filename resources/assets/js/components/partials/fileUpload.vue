@@ -12,7 +12,9 @@
 
 <script>
 export default {
-  props: ['user'],
+  data: () => ({
+    user: navbar.user
+  }),
   methods: {
     selectFile (e) {
       if (!e.target.files.length) return

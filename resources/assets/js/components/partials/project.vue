@@ -28,7 +28,7 @@
 import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
 
 export default {
-  props: ['details'],
+  props: ['details', 'index'],
   data () {
     return {
       project: this.details,
@@ -46,7 +46,7 @@ export default {
     deleteProject (project) {
       axios.delete(`/projects/${project.id}`)
         .then((response) => {
-          this.$emit('deleted')
+          this.$emit('deleted', this.index)
           this.dropdownMenuShown = false
           EventBus.$emit('notification', response.data.message, response.data.status)
         })
