@@ -26,7 +26,7 @@
             <span class="text-grey-darker pt-4">{{ 'Add a new project' | localize }}</span>
         </div>
 
-        <project v-for="(project, index) in projects" :key="index" :details="project" @deleted="deleteProject(index)"></project>
+        <project v-for="(project, index) in projects" :key="index" :index="index" :details="project" @deleted="deleteProject"></project>
     </div>
 </div>
 </template>
@@ -55,10 +55,7 @@ export default {
   }),
   methods: {
     openCreateProjectModal () {
-      this.showCreateProjectForm = true;
-      this.$nextTick(() => {
-        this.$refs.focusInput.focus()
-      })
+      this.showCreateProjectForm = true
     },
     closeCreateProjectModal () {
       this.showCreateProjectForm = false

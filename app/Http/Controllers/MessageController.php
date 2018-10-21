@@ -36,10 +36,10 @@ class MessageController extends Controller
     {
         try {
             $message = $repository->saveMessage([
-                'body'             => request('message'),
+                'body'             => $request->get('message'),
                 'user_id'          => auth()->user()->id,
-                'messageable_type' => request('resource_type'),
-                'messageable_id'   => request('resource_id'),
+                'messageable_type' => $request->get('resource_type'),
+                'messageable_id'   => $request->get('resource_id'),
             ]);
             if (request('mentions')) {
                 $mentionRepository->create('message', $message->id);
