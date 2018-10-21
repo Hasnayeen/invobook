@@ -11,7 +11,7 @@ return [
     'Invite New Member'  => 'Pozovi novog člana',
     'Add New Role'            => 'Dodaj novu ulogu',
     'Cancel'                        => 'Otkaži',
-    'Assign'                         => 'Assign',
+    'Assign'                         => 'Dodijeli',
     'Attach'                        => 'Priloži',
     'Filters'                        => 'Filteri',
     'Apply'                         => 'Primijeni',
