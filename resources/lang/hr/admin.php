@@ -23,6 +23,6 @@ return [
     'Last Updated'          => 'Posljednji put ažurirano',
     'Author'                      => 'Autor',
     'Submit issue & feedback at'     => 'Probleme & feedback šaljite na',
-    'Don\'t belongs to any role yet' => 'Ne pripda još nijednoj ulozi',
+    'Don\'t belongs to any role yet' => 'Ne pripada još nijednoj ulozi',
     'Don\'t have any permission yet' => 'Nema još nikakvih dozvola',
 ];
