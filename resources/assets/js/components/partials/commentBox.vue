@@ -66,6 +66,7 @@ export default {
     mentionStarted: false,
     startIndex: 0,
     suggestionShown: false,
+    mentions: [],
     faTrashAlt
   }),
   created () {
@@ -97,7 +98,8 @@ export default {
         axios.post('/comments', {
           body: this.body,
           commentable_type: this.resourceType,
-          commentable_id: this.resource.id
+          commentable_id: this.resource.id,
+          mentions: this.mentions
         })
           .then((response) => {
             this.body = ''
@@ -134,6 +136,7 @@ export default {
     },
     userSelected (text) {
       this.body = this.body.substring(0, this.startIndex) + text
+      this.mentions.push(text)
       this.suggestionShown = false
       this.name = ''
       document.getElementById('save-comment').focus()

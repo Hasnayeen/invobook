@@ -24,8 +24,8 @@
       <discussionBoard resourceType="project" :resource="project" :activeTab="active"></discussionBoard>
       <messagesBoard resourceType="project" :resource="project" :activeTab="active"></messagesBoard>
       <eventBoard resourceType="projects" :resource="project" :activeTab="active"></eventBoard>
+      <file-board resourceType="projects" :resource="project" :activeTab="active"></file-board>
       <!-- <messagesBoard resourceType="projects" :resource="project"></messagesBoard>
-      <files resourceType="projects" :resource="project"></files>
       <activity resourceType="projects" :resource="project"></activity> -->
     </div>
   </div>
@@ -36,7 +36,7 @@ import taskBoard from './../partials/taskBoard.vue'
 import discussionBoard from './../partials/discussionBoard.vue'
 import messagesBoard from './../partials/messagesBoard.vue'
 import eventBoard from './../partials/eventBoard.vue'
-import files from './../partials/files.vue'
+import fileBoard from './../partials/fileBoard.vue'
 import activity from './../partials/activity.vue'
 import addMemberForm from './../partials/addMemberForm.vue'
 import tabMenu from './../partials/tabMenu.vue'
@@ -44,7 +44,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 export default {
   components: {
-    taskBoard, discussionBoard, messagesBoard, eventBoard, files, activity, addMemberForm, tabMenu
+    taskBoard, discussionBoard, messagesBoard, eventBoard, fileBoard, activity, addMemberForm, tabMenu
   },
   props: ['project'],
   data: () => ({

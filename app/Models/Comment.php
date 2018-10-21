@@ -44,4 +44,9 @@ class Comment extends Model
     {
         return $this->created_at->format('M j,Y');
     }
+
+    public function mentions()
+    {
+        return $this->morphMany(Mention::class, 'mentionable');
+    }
 }

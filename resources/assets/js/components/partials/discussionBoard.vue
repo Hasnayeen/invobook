@@ -1,6 +1,6 @@
 <template>
 <div :class="{'hidden': (activeTab != 'discussions')}" class="w-full">
-  <create-discussion-form :resourceId="resource.id" :resourceType="resourceType" @close="closeCreateDiscussionForm" :form-shown="createDiscussionFormShown"></create-discussion-form>
+  <create-discussion-form ref="discussionForm" :resourceId="resource.id" :resourceType="resourceType" @close="closeCreateDiscussionForm" :form-shown="createDiscussionFormShown"></create-discussion-form>
 
   <discussion-details :discussionDetailsShown="discussionDetailsShown" :discussion="discussion" :index="index" @close="closeDiscussionDetails" @deleted="deleteDiscussion"></discussion-details>
 
@@ -58,6 +58,9 @@ export default {
   methods: {
     showCreateDiscussionForm () {
       this.createDiscussionFormShown = true
+      this.$nextTick(() => {
+        this.$refs.discussionForm.$refs.inputFocus.focus();
+      })
     },
     closeCreateDiscussionForm (newDiscussion = null) {
       if (newDiscussion) this.discussions.push(newDiscussion)
