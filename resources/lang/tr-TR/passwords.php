@@ -16,5 +16,5 @@ return [
     'reset'    => 'Parolanız sıfırlanmıştır!',
     'sent'     => 'Parola sıfırlama linkini email adresinize gönderdik!',
     'token'    => 'Parola sıfırlama anahtarı(token) geçerli değil.',
-    'user'     => "Bu e-mail adresine karşılık gelen bir kullnıcı bulunamadı.",
+    'user'     => 'Bu e-mail adresine karşılık gelen bir kullnıcı bulunamadı.',
 ];
