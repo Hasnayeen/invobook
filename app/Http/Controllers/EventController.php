@@ -18,7 +18,7 @@ class EventController extends Controller
     {
         $events = $this->repository->getAllEvents();
         return response()->json([
-            'status'     => 'success',
+            'status' => 'success',
             'events' => $events,
         ]);
     }
