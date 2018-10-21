@@ -24,12 +24,12 @@ class EventStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'description' => 'required',
-            'time' => 'required',
-            'created_by' => 'required',
+            'name'           => 'required',
+            'description'    => 'required',
+            'time'           => 'required',
+            'created_by'     => 'required',
             'eventable_type' => 'required',
-            'eventable_id' => 'required',
+            'eventable_id'   => 'required',
         ];
     }
 }

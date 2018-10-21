@@ -17,6 +17,7 @@ class EventController extends Controller
     public function index()
     {
         $events = $this->repository->getAllEvents();
+
         return response()->json([
             'status' => 'success',
             'events' => $events,
