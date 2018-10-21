@@ -92,6 +92,31 @@ class MessageTest extends TestCase
     }
 
     /** @test */
+    public function user_can_create_message()
+    {
+        $project = factory('App\Models\Project')->create(['owner_id' => $this->user->id]);
+
+        $this->actingAs($this->user)->post('messages/', [
+            'message'          => 'New message',
+            'resource_type'    => 'project',
+            'resource_id'      => $project->id,
+        ])->assertJsonFragment([
+            'status'           => 'success',
+            'body'             => 'New message',
+            'user_id'          => $this->user->id,
+            'messageable_type' => 'project',
+            'messageable_id'   => $project->id,
+        ]);
+
+        $this->assertDatabaseHas('messages', [
+            'body'             => 'New message',
+            'user_id'          => $this->user->id,
+            'messageable_type' => 'project',
+            'messageable_id'   => $project->id,
+        ]);
+    }
+
+    /** @test */
     public function user_can_delete_message()
     {
         $project = factory('App\Models\Project')->create(['owner_id' => $this->user->id]);

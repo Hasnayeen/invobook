@@ -16,7 +16,7 @@ class CreateAttachablesTable extends Migration
         Schema::create('attachables', function (Blueprint $table) {
             $table->integer('attachment_id')->unsigned();
             $table->integer('attachable_id')->unsigned();
-            $table->integer('attachable_type')->unsigned()->comment('files, discussions, messages');
+            $table->string('attachable_type')->comment('files, discussions, messages');
             $table->foreign('attachment_id')->references('id')->on('offices')->onDelete('cascade');
             $table->timestamps();
         });
