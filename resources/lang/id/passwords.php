@@ -16,5 +16,5 @@ return [
     'reset'    => 'Kata sandi Anda telah di-reset!', // TODO: get us better translation for "reset"
     'sent'     => 'Kami telah mengirim tautan untuk me-reset kata sandi ke email Anda!',
     'token'    => 'Token untuk me-reset kata sandi tidak valid.',
-    'user'     => "Kami tidak dapat menemukan pengguna dengan email bersangkutan.",
+    'user'     => 'Kami tidak dapat menemukan pengguna dengan email bersangkutan.',
 ];
