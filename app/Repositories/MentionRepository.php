@@ -21,6 +21,8 @@ class MentionRepository
 
     /**
      * @param  mixed $data
+     * @param  mixed $mentionableType
+     * @param  mixed $mentionableId
      * @return mixed
      */
     public function create($mentionableType, $mentionableId)
