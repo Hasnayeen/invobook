@@ -5,12 +5,14 @@
   </div>
   <div class="py-6">
     <textarea class="static bg-grey-lighter textarea resize-none rounded w-full p-4 text-grey-darker"
-      id="save-comment"
+      :id="'save-comment'"
       placeholder="write your comment here"
       rows=1
       v-model="body"
+      @keyup="checkForMention($event)"
       @keydown.enter.prevent="saveComment($event)"></textarea>
-    <div class="text-xs text-grey-dark pt-2">Press enter <span class="bg-grey p-1 rounded text-white font-bold">↵</span> to save</div>
+    <user-suggestion-box :users="users" :name="name" :suggestionShown="suggestionShown" @selected="userSelected"></user-suggestion-box>
+    <div v-if="name.length < 1" class="absolute text-xs text-grey-dark pt-2">Press enter <span class="bg-grey p-1 rounded text-white font-bold">↵</span> to save</div>
   </div>
   <div>
     <div v-for="(comment, index) in comments" class="my-6">
@@ -37,8 +39,10 @@
 </template>
 
 <script>
+import userSuggestionBox from './userSuggestionBox'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 export default {
+  components: {userSuggestionBox},
   props: {
     resourceType: {
       required: true,
@@ -57,8 +61,34 @@ export default {
     body: '',
     comments: [],
     user: navbar.user,
+    users: [],
+    name: '',
+    mentionStarted: false,
+    startIndex: 0,
+    suggestionShown: false,
     faTrashAlt
   }),
+  created () {
+    axios.get('/comments', {
+      params: {
+        commentable_type: this.resourceType,
+        commentable_id: this.resource.id
+      }
+    })
+      .then((response) => {
+        this.comments = response.data.comments
+      })
+      .catch((error) => {
+        console.log(error.response.data.message)
+      })
+    axios.get('/users')
+      .then((response) => {
+        this.users = response.data.users
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  },
   methods: {
     saveComment (e) {
       if (e.shiftKey) {
@@ -88,21 +118,26 @@ export default {
         .catch((error) => {
           EventBus.$emit('notification', error.response.data.message, error.response.data.status)
         })
-    }
-  },
-  created () {
-    axios.get('/comments', {
-      params: {
-        commentable_type: this.resourceType,
-        commentable_id: this.resource.id
+    },
+    checkForMention (e) {
+      if (e.keyCode === 50) {
+        this.suggestionShown = true
+        this.mentionStarted = true
+        this.startIndex = document.getElementById('save-comment').selectionStart
+      } else if (e.keyCode === 32) {
+        this.mentionStarted = false
+        this.suggestionShown = false
+        this.name = ''
+      } else if (this.mentionStarted) {
+        this.name = e.target.value.substring(this.startIndex)
       }
-    })
-      .then((response) => {
-        this.comments = response.data.comments
-      })
-      .catch((error) => {
-        console.log(error.response.data.message)
-      })
+    },
+    userSelected (text) {
+      this.body = this.body.substring(0, this.startIndex) + text
+      this.suggestionShown = false
+      this.name = ''
+      document.getElementById('save-comment').focus()
+    }
   }
 }
 </script>
