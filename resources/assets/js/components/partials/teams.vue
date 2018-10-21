@@ -6,7 +6,7 @@
     <div class="absolute pin opacity-75 bg-grey"></div>
     <div id="create-project-form" class="fixed pin-x w-1/3 z-10 bg-grey-lighter mx-auto p-8 rounded">
       <p class="py-2">
-        <input class="w-full shadow appearance-none border rounded py-2 px-3 text-grey-darker"
+        <input ref="focusInput" class="w-full shadow appearance-none border rounded py-2 px-3 text-grey-darker"
           type="text" placeholder="Name" v-model="name">
         <span class="hidden"></span>
       </p>
@@ -29,7 +29,7 @@
       <span class="text-grey-darker pt-4">{{ 'Add a new team' | localize }}</span>
     </div>
 
-      <team v-for="(team, index) in teams" :key="index" :details="team" @deleted="deleteTeam(index)"></team>
+      <team v-for="(team, index) in teams" :key="index" :index="index" :details="team" @deleted="deleteTeam"></team>
   </div>
 </div>
 </template>
@@ -59,6 +59,9 @@ export default {
   methods: {
     openCreateTeamModal () {
       this.showCreateTeamForm = true
+      this.$nextTick(() => {
+        this.$refs.focusInput.focus()
+      })
     },
     closeCreateTeamModal () {
       this.showCreateTeamForm = false
