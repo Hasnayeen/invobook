@@ -24,6 +24,7 @@ class EventController extends Controller
         ]);
     }
 
+    //test comment
     public function store(EventStoreRequest $request)
     {
         $event = $this->repository->create($request->all());
