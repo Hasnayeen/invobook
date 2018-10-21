@@ -27,7 +27,6 @@ class EventStoreRequest extends FormRequest
             'name' => 'required',
             'description' => 'required',
             'time' => 'required',
-            'place' => 'required',
             'created_by' => 'required',
             'eventable_type' => 'required',
             'eventable_id' => 'required',
