@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'Profile'                  => 'Profil',
+    'Profile'               => 'Profil',
     'Account'               => 'Račun',
-    'Name'                    => 'Ime',
-    'Title'                      => 'Pozicija u ' . config('app.company_name'),
+    'Name'                  => 'Ime',
+    'Title'                 => 'Pozicija u ' . config('app.company_name'),
     'Short Bio'             => 'Kratka biografija',
     'Time Zone'             => 'Vremenska zona',
     'First Day of the Week' => 'Prvi dan u tjednu',
