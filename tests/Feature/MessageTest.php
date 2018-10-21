@@ -3,6 +3,9 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use App\Models\Message;
+use App\Events\MessageCreated;
+use Illuminate\Support\Facades\Event;
 
 class MessageTest extends TestCase
 {
@@ -94,6 +97,8 @@ class MessageTest extends TestCase
     /** @test */
     public function user_can_create_message()
     {
+        Event::fake();
+
         $project = factory('App\Models\Project')->create(['owner_id' => $this->user->id]);
 
         $this->actingAs($this->user)->post('messages/', [
@@ -114,6 +119,12 @@ class MessageTest extends TestCase
             'messageable_type' => 'project',
             'messageable_id'   => $project->id,
         ]);
+
+        $message = Message::where(['body' => 'New message'])->first();
+
+        Event::assertDispatched(MessageCreated::class, function ($e) use ($message) {
+            return $e->message->id === $message->id;
+        });
     }
 
     /** @test */
