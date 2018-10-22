@@ -8,4 +8,6 @@ use Spatie\Activitylog\Traits\LogsActivity;
 class File extends Model
 {
     use LogsActivity;
+
+    protected $fillable = ['name', 'path', 'fileable_type', 'fileable_id'];
 }
