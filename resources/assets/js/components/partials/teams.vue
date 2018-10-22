@@ -29,7 +29,7 @@
       <span class="text-grey-darker pt-4">{{ 'Add a new team' | localize }}</span>
     </div>
 
-      <team v-for="(team, index) in teams" :key="index" :details="team" @deleted="deleteTeam(index)"></team>
+      <team v-for="(team, index) in teams" :key="index" :index="index" :details="team" @deleted="deleteTeam"></team>
   </div>
 </div>
 </template>

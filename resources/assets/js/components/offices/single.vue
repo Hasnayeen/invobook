@@ -25,10 +25,9 @@
       <taskBoard resourceType="office" :resource="office"  :activeTab="active"></taskBoard>
       <discussionBoard resourceType="office" :resource="office" :activeTab="active"></discussionBoard>
       <messagesBoard resourceType="office" :resource="office" :activeTab="active"></messagesBoard>
+      <event-board resourceType="office" :resource="office" :activeTab="active"></event-board>
+      <file-board resourceType="office" :resource="office" :activeTab="active"></file-board>
       <!-- <taskBoard resourceType="projects" :resource="project"></taskBoard>
-      <messagesBoard resourceType="projects" :resource="project"></messagesBoard>
-      <schedule resourceType="projects" :resource="project"></schedule>
-      <files resourceType="projects" :resource="project"></files>
       <activity resourceType="projects" :resource="project"></activity> -->
     </div>
   </div>
@@ -38,8 +37,8 @@
 import taskBoard from './../partials/taskBoard.vue'
 import discussionBoard from './../partials/discussionBoard.vue'
 import messagesBoard from './../partials/messagesBoard.vue'
-import schedule from './../partials/schedule.vue'
-import files from './../partials/files.vue'
+import eventBoard from './../partials/eventBoard.vue'
+import fileBoard from './../partials/fileBoard.vue'
 import activity from './../partials/activity.vue'
 import addMemberForm from './../partials/addMemberForm.vue'
 import notificationPopup from '../partials/notificationPopup.vue'
@@ -48,7 +47,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 export default {
   components: {
-    taskBoard, discussionBoard, messagesBoard, schedule, files, activity, addMemberForm, notificationPopup, tabMenu
+    taskBoard, discussionBoard, messagesBoard, eventBoard, fileBoard, activity, addMemberForm, notificationPopup, tabMenu
   },
   props: ['office'],
   data: () => ({

@@ -33,6 +33,6 @@ class HomeController extends Controller
         $teams->load('members');
         $offices->load('members');
 
-        return view('home', compact('projects', 'teams', 'offices'));
+        return view('home', ['data' => ['projects' => $projects, 'teams' => $teams, 'offices' => $offices]]);
     }
 }
