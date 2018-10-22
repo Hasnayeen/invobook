@@ -2,7 +2,7 @@
 <div v-if="discussionDetailsShown">
   <div class="absolute container mx-auto md:w-5/6 lg:4/5 xl:w-3/4 xxl:w-2/3 bg-white rounded shadow-lg z-10 py-8 px-16 mb-16" style="top: 12vh;left: 0;right: 0;">
       <div class="flex flex-row justify-between relative">
-        <div @click="closeDiscussionDetails" class="cursor-pointer" v-click-outside="hideMenu">
+        <div @click="closeDiscussionDetails" class="cursor-pointer">
           <font-awesome-icon :icon="faArrowLeft"
             class="text-base text-grey-dark">
           </font-awesome-icon>
