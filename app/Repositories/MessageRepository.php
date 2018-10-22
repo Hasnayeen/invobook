@@ -38,8 +38,7 @@ class MessageRepository
         return $this->model->where(['messageable_type' => $type, 'messageable_id' => $id])
                            ->with('user')
                            ->orderBy('id', 'desc')
-                           ->take(15)
-                           ->get();
+                           ->paginate(15);
     }
 
     public function getAllDirectMessages($type, $senderId, $recieverId)
