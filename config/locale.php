@@ -26,6 +26,7 @@ return [
         'ru-RU' => 'Russian (Russia)',
         'sv-se' => 'Swedish (Sweden)',
         'th'    => 'Thai (Thai)',
+        'tr-TR' => 'Turkish (Turkey)',
     ],
 
     'route_to_file' => [
