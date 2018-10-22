@@ -1,6 +1,6 @@
 <template>
 <div :class="{'hidden': (activeTab != 'tasks')}" class="w-full">
-  <create-task-form :resource="resource" :resourceType="resourceType" :form-shown="createTaskFormShown" @close="closeCreateTaskForm"></create-task-form>
+  <create-task-form ref="taskform" :resource="resource" :resourceType="resourceType" :form-shown="createTaskFormShown" @close="closeCreateTaskForm"></create-task-form>
 
   <task-details v-if="task" :index="index" :task="task" :taskDetailsShown="taskDetailsShown" @delete="deleteTask" @close="closeTaskDetails"></task-details>
 
@@ -50,6 +50,9 @@ export default {
   methods: {
     showCreateTaskForm () {
       this.createTaskFormShown = true
+      this.$nextTick(() => {
+        this.$refs.taskform.$refs.focusInput.focus()
+      })
     },
     closeCreateTaskForm (newTask = null) {
       if (newTask) this.tasks.push(newTask)

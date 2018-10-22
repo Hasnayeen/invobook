@@ -17,4 +17,9 @@ class Message extends Model
     {
         return $this->morphTo();
     }
+
+    public function mentions()
+    {
+        return $this->morphMany(Mention::class, 'mentionable');
+    }
 }

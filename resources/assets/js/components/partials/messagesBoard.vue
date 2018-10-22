@@ -11,33 +11,39 @@
       </template>
     </div>
 
-      <div id="message-box" class="h-50-vh overflow-y-auto">
-        <div class="mb-6">
-          <message v-for="(message, index) in messages" :key="index" :message="message" :user="user" :index="index" @deleted="deleteMessage"></message>
-        </div>
+    <div id="message-box" class="h-50-vh overflow-y-auto">
+      <div class="mb-6">
+        <message v-for="(message, index) in messages" :key="index" :message="message" :user="user" :index="index" @deleted="deleteMessage"></message>
       </div>
+    </div>
 
-      <div class="relative bg-grey-light">
-        <div class="static text-center p-8">
-          <textarea class="static textarea resize-none rounded w-full p-4 text-grey-darker"
-            id="send-message"
-            :style="{height: messageTextareaHeight}"
-            ref="messageTextarea"
-            :placeholder="'write your message here' | localize"
-            rows=1
-            v-model="message"
-            @keydown.enter.prevent="sendMessage($event)"
-            @focus="clearTitleNotification()"></textarea>
+    <div class="relative bg-grey-light">
+      <div class="static text-center p-8">
+        <div class="relative">
+          <user-suggestion-box :users="members" :name="name" :suggestionShown="suggestionShown" @selected="userSelected"
+            class="absolute mb-2 w-full pin-b"></user-suggestion-box>
         </div>
+        <textarea class="static textarea resize-none rounded w-full p-4 text-grey-darker"
+          id="send-message"
+          :style="{height: messageTextareaHeight}"
+          ref="messageTextarea"
+          :placeholder="'write your message here' | localize"
+          rows=1
+          v-model="message"
+          @keyup="checkForMention($event)"
+          @keydown.enter.prevent="sendMessage($event)"
+          @focus="clearTitleNotification()"></textarea>
       </div>
+    </div>
   </div>
 </div>
 </template>
 
 <script>
+import userSuggestionBox from './userSuggestionBox'
 import message from './message'
 export default {
-  components: {message},
+  components: {message, userSuggestionBox},
   props: ['resource', 'resourceType', 'activeTab'],
   data: () => ({
     messages: [],
@@ -45,11 +51,29 @@ export default {
     messageTextareaHeight: 'auto',
     title: '',
     unreadMessage: 0,
+    members: [],
+    name: '',
+    mentionStarted: false,
+    startIndex: 0,
+    suggestionShown: false,
+    mentions: [],
     user: navbar.user,
     users: []
   }),
   created () {
     EventBus.$on('clear-title-notification', this.clearTitleNotification)
+    axios.get('/members', {
+      params: {
+        resource_type: this.resourceType,
+        resource_id: this.resource.id
+      }
+    })
+      .then((response) => {
+        this.members = response.data.members
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   },
   beforeDestroy () {
     EventBus.$off('clear-title-notification', this.clearTitleNotification)
@@ -90,7 +114,8 @@ export default {
         axios.post('/messages', {
           message: msg,
           resource_type: this.resourceType,
-          resource_id: this.resource.id
+          resource_id: this.resource.id,
+          mentions: this.mentions
         })
           .then((response) => {
             if (response.data.status === 'success') {
@@ -149,6 +174,26 @@ export default {
         body,
         system: true
       })
+    },
+    checkForMention (e) {
+      if (e.keyCode === 50) {
+        this.suggestionShown = true
+        this.mentionStarted = true
+        this.startIndex = document.getElementById('send-message').selectionStart
+      } else if (e.keyCode === 32) {
+        this.mentionStarted = false
+        this.suggestionShown = false
+        this.name = ''
+      } else if (this.mentionStarted) {
+        this.name = e.target.value.substring(this.startIndex)
+      }
+    },
+    userSelected (text) {
+      this.message = this.message.substring(0, this.startIndex) + text
+      this.mentions.push(text)
+      this.suggestionShown = false
+      this.name = ''
+      document.getElementById('send-message').focus()
     }
   }
 }
