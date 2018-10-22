@@ -42,7 +42,7 @@
           </label>
           <div class="flex flex-row items-center">
             <select v-model="related_to" class="w-5/6 block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" id="user">
-              <option selected disabled hidden>Select Related Task</option>
+              <option selected value=""></option>
               <template v-for="task in tasks">
                 <option :value="task.id" class="my-2 text-lg">{{ task.name }}</option>
               </template>
