@@ -94,7 +94,7 @@ export default {
             this.notes = ''
             this.assigned_to = null
             this.related_to = ''
-            EventBus.$emit('notification', response.data, response.data.status)
+            EventBus.$emit('notification', response.data.message, response.data.status)
             this.$emit('close', response.data.task)
           }
         })
@@ -120,5 +120,3 @@ export default {
   }
 }
 </script>
-
- { "status": "success", "message": "New task has been created", "task": { "name": "test434", "assigned_to": 1, "notes": "test", "due_on": "2018-10-02", "taskable_type": "project", "taskable_id": 1, "status_id": null, "updated_at": "2018-10-22 14:48:12", "created_at": "2018-10-22 14:48:12", "id": 10, "user": { "id": 1, "avatar": "image/avatar.jpg" } } }
