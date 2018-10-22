@@ -1,5 +1,5 @@
 <template>
-<div @focus="clearTitleNotification()" v-if="messageBoxShown" class="">
+<div id="direct-message-box" @focus="clearTitleNotification()" v-if="messageBoxShown" class="">
   <div class="fixed pin-t bg-white text-lg rounded mx-auto md:w-1/2 mt-16 pt-6 shadow-lg z-50 pin-x">
     <div class="bg-white text-2xl text-grey-dark text-center px-8 pb-2">
       Your Messages
@@ -8,7 +8,7 @@
       <div class="text-sm text-center text-grey-dark">Send direct meesage</div>
       <div class="flex flex-row justify-center px-4 py-2">
         <div @click="selectUserMessage(user)" v-for="user in users" v-if="user.id !== authUser.id">
-          <img class="w-10 h-10 rounded-full md:mr-2 cursor-pointer" :src="generateUrl(user.avatar)">
+          <img class="w-10 h-10 rounded-full md:mr-2 cursor-pointer" :title="user.name" :src="generateUrl(user.avatar)">
         </div>
       </div>
     </div>
@@ -135,11 +135,14 @@ export default {
       Echo.join('user.' + this.authUser.id)
         .listen('MessageCreated', event => {
           event.message.user = event.user
-          this.messages.push(event.message)
+          if (!this.messageBoxShown) {
+            EventBus.$emit('new-direct-message')
+          }
           if (document.hidden) {
             this.unreadMessage += 1
             document.title = '(' + this.unreadMessage + ') ' + this.title
           }
+          this.messages.push(event.message)
         })
     },
     clearTitleNotification () {

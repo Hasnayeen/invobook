@@ -50,6 +50,9 @@ export default {
   methods: {
     showCreateTaskForm () {
       this.createTaskFormShown = true
+      this.$nextTick(() => {
+        this.$refs.taskform.$refs.focusInput.focus()
+      })
     },
     closeCreateTaskForm (newTask = null) {
       if (newTask) this.tasks.push(newTask)

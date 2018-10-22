@@ -30,7 +30,7 @@ class Task extends Model
      */
     public function user()
     {
-        return $this->belongsTo('App\Models\User', 'assigned_to', 'id');
+        return $this->belongsTo(User::class, 'assigned_to', 'id');
     }
 
     public function taskable()
@@ -40,7 +40,7 @@ class Task extends Model
 
     public function status()
     {
-        return $this->belongsTo('App\Models\Status');
+        return $this->belongsTo(Status::class);
     }
 
     public function tags()
@@ -51,5 +51,10 @@ class Task extends Model
     public function subtasks()
     {
         return $this->hasMany(self::class, 'parent_id');
+    }
+
+    public function mentions()
+    {
+        return $this->morphMany(Mention::class, 'mentionable');
     }
 }

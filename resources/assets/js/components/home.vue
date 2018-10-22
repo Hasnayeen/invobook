@@ -31,22 +31,22 @@ export default {
     projects, teams, offices, activity
   },
   props: {
-    projects: {
+    data: {
       required: true,
-      type: Array
-    },
-    teams: {
-      required: true,
-      type: Array
-    },
-    offices: {
-      required: true,
-      type: Array
+      type: Object
     }
   },
   data: () => ({
-    active: 'projects'
+    active: 'projects',
+    projects: [],
+    teams: [],
+    offices: []
   }),
+  created () {
+    this.projects = this.data.projects
+    this.teams = this.data.teams
+    this.offices = this.data.offices
+  },
   methods: {
     activeThisTab (tab) {
       if (tab !== this.active) {

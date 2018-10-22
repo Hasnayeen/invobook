@@ -28,7 +28,7 @@
 import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
 
 export default {
-  props: ['details'],
+  props: ['details', 'index'],
   data () {
     return {
       office: this.details,
@@ -46,7 +46,7 @@ export default {
     deleteOffice (office) {
       axios.delete(`/offices/${office.id}`)
         .then((response) => {
-          this.$emit('deleted')
+          this.$emit('deleted', this.index)
 
           this.dropdownMenuShown = false
 
