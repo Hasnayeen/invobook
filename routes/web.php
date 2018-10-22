@@ -156,6 +156,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('tasks/{task}/tags/{tag}', 'TaskTagController@delete')->middleware('can:detach,App\Models\Tag,task');
 
     /**********************************
+        File
+    **********************************/
+
+    Route::post('files', 'FileController@store');
+
+    /**********************************
         Comment
     **********************************/
 

@@ -6,7 +6,7 @@
       {{user.name}}
     </div>
     <div class="">
-      <file-upload :user="user" @image-loaded="updateImage"></file-upload>
+      <avatar-upload @image-loaded="updateImage"></avatar-upload>
     </div>
   </div>
   <form class="px-8 pt-6">
@@ -88,10 +88,10 @@
 </template>
 
 <script>
-import FileUpload from './../partials/fileUpload'
+import avatarUpload from './../partials/avatarUpload'
 export default {
   name: 'Own',
-  components: {FileUpload},
+  components: {avatarUpload},
   props: ['user', 'timezones', 'locales'],
   data: () => ({
     avatar: null
