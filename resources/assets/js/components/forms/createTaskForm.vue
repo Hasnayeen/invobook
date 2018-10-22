@@ -38,9 +38,19 @@
         </div>
         <div class="p-4">
           <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name">
-              Related To
+            Related To
           </label>
-          <input  v-model="related_to" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-last-name" type="text" placeholder="Task #12">
+          <div class="flex flex-row items-center">
+            <select v-model="related_to" class="w-5/6 block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" id="user">
+              <option selected value=""></option>
+              <template v-for="task in tasks">
+                <option :value="task.id" class="my-2 text-lg">{{ task.name }}</option>
+              </template>
+            </select>
+            <font-awesome-icon :icon="faChevronDown"
+              class="w-1/6 pointer-events-none flex items-center text-grey-darker -ml-8">
+            </font-awesome-icon>
+          </div>
         </div>
       </div>
       <div class="flex flex-row justify-between py-4 px-8 bg-grey-lighter rounded">
@@ -59,7 +69,7 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 
 export default {
   components: {Datepicker},
-  props: ['resource', 'resourceType', 'formShown'],
+  props: ['resource', 'resourceType', 'formShown', 'tasks'],
   data: () => ({
     name: '',
     notes: '',

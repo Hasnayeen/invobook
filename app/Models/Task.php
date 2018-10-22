@@ -17,7 +17,7 @@ class Task extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'assigned_to', 'notes', 'due_on', 'taskable_type', 'taskable_id', 'status_id', 'parent_id',
+        'name', 'assigned_to', 'notes', 'due_on', 'taskable_type', 'taskable_id', 'status_id', 'related_to', 'parent_id',
     ];
 
     protected $casts = [

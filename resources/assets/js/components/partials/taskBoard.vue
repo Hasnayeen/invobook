@@ -1,6 +1,6 @@
 <template>
 <div :class="{'hidden': (activeTab != 'tasks')}" class="w-full">
-  <create-task-form ref="taskform" :resource="resource" :resourceType="resourceType" :form-shown="createTaskFormShown" @close="closeCreateTaskForm"></create-task-form>
+  <create-task-form ref="taskform" :resource="resource" :resourceType="resourceType" :form-shown="createTaskFormShown" :tasks="tasks" @close="closeCreateTaskForm"></create-task-form>
 
   <task-details v-if="task" :index="index" :task="task" :taskDetailsShown="taskDetailsShown" @delete="deleteTask" @close="closeTaskDetails"></task-details>
 
