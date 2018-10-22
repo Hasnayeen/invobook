@@ -21,7 +21,7 @@ class TagPolicy
         return $user->hasPermissionTo("edit {$task->taskable_type}->{$task->taskable_id}");
     }
 
-    public function detach(User $user, Task $task, Tag $tag)
+    public function detach(User $user, Task $task)
     {
         return $user->hasPermissionTo("edit {$task->taskable_type}->{$task->taskable_id}");
     }
