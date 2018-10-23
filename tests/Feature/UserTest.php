@@ -129,7 +129,7 @@ class UserTest extends TestCase
             ->assertStatus(200)
             ->assertJson([
                 'status'  => 'success',
-                'message' => 'misc.Username exists'
+                'message' => 'misc.Username exists',
             ]);
     }
 }
