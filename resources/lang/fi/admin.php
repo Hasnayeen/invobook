@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'Users'                          => 'Käyttäjät',
+    'Roles & Permissions'            => 'Roolit ja käyttöoikeudet',
+    'Activities'                     => 'Aktiviteetit',
+    'About'                          => 'Tietoa',
+    'Roles'                          => 'Roolit',
+    'Role'                           => 'Rooli',
+    'Permissions'                    => 'Käyttöoikeudet',
+    'Invite New Member'              => 'Kutsu käyttäjä',
+    'Add New Role'                   => 'Lisää rooli',
+    'Cancel'                         => 'Peruuta',
+    'Assign'                         => 'Määritä',
+    'Attach'                         => 'Liitä',
+    'Filters'                        => 'Suodattimet',
+    'Apply'                          => 'Aseta',
+    'Load More'                      => 'Lataa lisää',
+    'Check for Updates'              => 'Tarkista päivitykset',
+    'Filter by Activity'             => 'Suodata tapahtuman mukaan',
+    'Filter by User'                 => 'Suodata käyttäjän mukaan',
+    'Filter by Date'                 => 'Suodata päivän mukaan',
+    'Last Updated'                   => 'Viimeksi päivitetyt',
+    'Author'                         => 'Luoja',
+    'Submit issue & feedback at'     => 'Lähetä ongelmat & palaute',
+    'Don\'t belongs to any role yet' => 'Ei kuulu vielä yhteenkään rooliin',
+    'Don\'t have any permission yet' => 'Ei ole vielä yhtään käyttöoikeutta',
+];
