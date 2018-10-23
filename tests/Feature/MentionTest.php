@@ -7,6 +7,7 @@ use App\Models\Task;
 use App\Models\User;
 use App\Models\Comment;
 use App\Models\Message;
+use Illuminate\Support\Facades\Mail;
 use App\Notifications\YouWereMentioned;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Notification;
