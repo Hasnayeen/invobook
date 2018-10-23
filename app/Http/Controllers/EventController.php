@@ -70,13 +70,13 @@ class EventController extends Controller
         ]);
     }
 
-    public function delete(Event $event)
+    public function destroy(Event $event)
     {
         $event->delete();
 
         return response()->json([
             'status' => 'success',
-            'message' => 'The event has been deleted',
+            'message' => 'The event has been deleted'
         ]);
     }
 }
