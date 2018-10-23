@@ -43,7 +43,7 @@ class EventTest extends TestCase
             'status' => 'success',
         ]);
     }
-    
+
     /**
      * @test
      */
@@ -76,7 +76,7 @@ class EventTest extends TestCase
             'status' => 'success',
         ]);
     }
-
+    
     /**
      * @test
      */

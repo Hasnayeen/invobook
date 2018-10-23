@@ -13,7 +13,6 @@ class EventController extends Controller
         try {
             $events = $repository->getAllEvents();
 
-
             return response()->json([
                 'status' => 'success',
                 'total'  => count($events),
