@@ -2,10 +2,81 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EventValidation;
+use App\Models\Event;
+use App\Repositories\EventRepository;
+
 class EventController extends Controller
 {
-    public function index()
+    public function index(EventRepository $repository)
     {
-        return view('home');
+        try {
+            $events = $repository->getAllEvents();
+
+            return response()->json([
+                'status' => 'success',
+                'total' => count($events),
+                'events' => $events,
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Something went wrong',
+            ]);
+        }
+    }
+
+    public function store(EventValidation $request, EventRepository $repository)
+    {
+        try {
+            $event = $repository->create($request->all());
+            return response()->json([
+                'status' => 'success',
+                'message' => $event->name . ' task has been created',
+                'event' => $event,
+            ], 201);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+            ]);
+        }
+    }
+
+    public function update(EventValidation $request, EventRepository $repository, Event $event)
+    {
+        try {
+            $event = $repository->update($request->all(), $event);
+            return response()->json([
+                'status' => 'success',
+                'message' => $event->name . ' task has been updated',
+                'event' => $event,
+            ], 200);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+            ]);
+        }
+    }
+
+    public function show(Event $event)
+    {
+        $event->load('user');
+
+        return response()->json([
+            'status' => 'success',
+            'event' => $event,
+        ]);
+    }
+
+    public function delete(Event $event)
+    {
+        $event->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'The event has been deleted',
+        ]);
     }
 }
