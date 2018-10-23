@@ -11,6 +11,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class EventTest extends TestCase
 {
     use DatabaseMigrations, DatabaseTransactions, WithFaker, WithoutMiddleware;
+
     /**
      * @test
      */
@@ -32,6 +33,7 @@ class EventTest extends TestCase
             'message' => $data['name'] . ' task has been created',
         ]);
     }
+
     /**
      * @test
      */
@@ -41,6 +43,7 @@ class EventTest extends TestCase
             'status' => 'success',
         ]);
     }
+    
     /**
      * @test
      */

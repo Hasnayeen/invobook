@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Models\Event;
 use App\Repositories\EventRepository;
 use App\Http\Requests\EventValidation;
+
 class EventController extends Controller
 {
     public function index(EventRepository $repository)
     {
         try {
             $events = $repository->getAllEvents();
+
 
             return response()->json([
                 'status' => 'success',
@@ -21,7 +22,7 @@ class EventController extends Controller
         } catch (Exception $e) {
             return response()->json([
                 'status'  => 'error',
-                'message' => 'Something went wrong',
+                'message' => $e->getMessage(),
             ]);
         }
     }
@@ -30,6 +31,7 @@ class EventController extends Controller
     {
         try {
             $event = $repository->create($request->all());
+
             return response()->json([
                 'status'  => 'success',
                 'message' => $event->name . ' task has been created',

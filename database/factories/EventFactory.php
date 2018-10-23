@@ -9,8 +9,8 @@ $factory->define(App\Models\Event::class, function (Faker $faker) {
         'place'       => $faker->address,
         'time'        => $faker->DateTime(),
         'created_by'  => function () {
-             return factory('App\Models\User')->create()->id;
-         },
+            return factory('App\Models\User')->create()->id;
+        },
         'eventable_type' => 'office',
         'eventable_id'   => $faker->numberBetween($min = 1, $max = 100),
     ];
