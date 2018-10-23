@@ -18,7 +18,7 @@ class MentionTest extends TestCase
         parent::setUp();
         Mail::fake();
     }
-    
+
     /** @test */
     public function user_can_mention_other_user_when_creating_comment()
     {
