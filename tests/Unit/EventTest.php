@@ -38,7 +38,7 @@ class EventTest extends TestCase
     public function can_see_all_events()
     {
         $this->get(route('events.index'))->assertStatus(200)->assertJson([
-            'status' => 'success'
+            'status' => 'success',
         ]);
     }
     /**
@@ -59,7 +59,7 @@ class EventTest extends TestCase
         ];
 
         $this->put(route('events.update', 1), $data)->assertStatus(200)->assertJson([
-            'status' => 'success'
+            'status' => 'success',
         ]);
     }
 
@@ -70,7 +70,7 @@ class EventTest extends TestCase
     {
         $this->can_create_events();
         $this->get(route('events.show', 1))->assertStatus(200)->assertJson([
-            'status' => 'success'
+            'status' => 'success',
         ]);
     }
 
@@ -82,7 +82,7 @@ class EventTest extends TestCase
         factory('App\Models\Event')->create();
         $this->delete(route('events.destroy', 1))->assertStatus(200)->assertJson([
             'status' => 'success',
-            'message' => 'The event has been deleted'
+            'message' => 'The event has been deleted',
         ]);
     }
 }

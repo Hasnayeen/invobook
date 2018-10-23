@@ -29,7 +29,7 @@ class EventValidation extends FormRequest
             'time' => 'required|string',
             'place' => 'required|string',
             'eventable_type' => 'required|string',
-            'eventable_id' => 'required'
+            'eventable_id' => 'required',
         ];
     }
 }

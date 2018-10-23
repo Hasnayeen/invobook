@@ -76,7 +76,7 @@ class EventController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'The event has been deleted'
+            'message' => 'The event has been deleted',
         ]);
     }
 }

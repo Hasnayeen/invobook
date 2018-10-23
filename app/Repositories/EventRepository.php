@@ -39,11 +39,13 @@ class EventRepository
 
     /**
      * @param  mixed $data
+     * @param  mixed $event
      * @return mixed
      */
     public function update($data, $event)
     {
         $event->update($data);
+
         return $event;
     }
 }

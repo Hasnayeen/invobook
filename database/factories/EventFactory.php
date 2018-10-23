@@ -8,7 +8,7 @@ $factory->define(App\Models\Event::class, function (Faker $faker) {
         'description' => $faker->paragraph,
         'place' => $faker->address,
         'time' => $faker->DateTime(),
-        'created_by' => function() {
+        'created_by' => function () {
             return factory('App\Models\User')->create()->id;
         },
         'eventable_type' => 'office',
