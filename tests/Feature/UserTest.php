@@ -117,4 +117,19 @@ class UserTest extends TestCase
 
         $this->put("users/{$this->user->id}/profile", $updatedData);
     }
+
+    /** @test */
+    public function user_can_check_username_exists()
+    {
+        $this->actingAs($this->user);
+
+        $response = $this->json('GET', '/username', ['username' => $this->user->username]);
+
+        $response
+            ->assertStatus(200)
+            ->assertJson([
+                'status'  => 'success',
+                'message' => 'misc.Username exists',
+            ]);
+    }
 }

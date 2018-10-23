@@ -6,6 +6,7 @@
 - Added endpoint to list all tags
 - Added endpoint to create categories
 - Added file upload option in file section
+- Added endpoint to check if username exists
 
 ## v0.8 (2018-10-18)
 

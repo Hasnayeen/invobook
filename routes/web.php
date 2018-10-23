@@ -181,6 +181,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('users/{user}', 'UserController@show');
 
+    Route::get('username', 'UserController@checkUsername');
+
     Route::put('users/{user}/account', 'UserAccountController@update');
 
     Route::put('users/{user}/profile', 'UserProfileController@update');
