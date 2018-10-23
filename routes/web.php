@@ -125,6 +125,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('events', 'EventController@index');
 
+    Route::post('events', 'EventController@store');
+
     Route::get('events/{event}', 'EventController@index');
 
     Route::get('files', 'FileController@index');
@@ -178,6 +180,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('users', 'UserController@index');
 
     Route::get('users/{user}', 'UserController@show');
+
+    Route::get('username', 'UserController@checkUsername');
 
     Route::put('users/{user}/account', 'UserAccountController@update');
 
