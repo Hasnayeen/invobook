@@ -56,4 +56,26 @@ class UserController extends Controller
             'locales'   => config('locale.lang'),
         ]);
     }
+
+    public function checkUsername(Request $request)
+    {
+        try {
+            if (User::where('username', $request->username)->exists()) {
+                return response()->json([
+                    'status'  => 'success',
+                    'message' => trans('misc.Username exists'),
+                ]);
+            }
+
+            return response()->json([
+                'status'  => 'error',
+                'message' => trans('misc.Username doesnt exist'),
+            ], 409);
+        } catch (Exception $e) {
+            return response()->json([
+                'status'  => 'error',
+                'message' => $e->getMessage(),
+            ]);
+        }
+    }
 }
