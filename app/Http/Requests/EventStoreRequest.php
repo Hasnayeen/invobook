@@ -15,6 +15,7 @@ class EventStoreRequest extends FormRequest
     {
         return $this->user();
     }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -31,4 +32,5 @@ class EventStoreRequest extends FormRequest
             'eventable_id'   => 'required',
         ];
     }
+
 }

@@ -13,9 +13,11 @@ class EventController extends Controller
     {
         $this->repository = $repository;
     }
+
     public function index()
     {
         $events = $this->repository->getAllEvents();
+
         return response()->json([
             'status' => 'success',
             'events' => $events,
@@ -25,6 +27,7 @@ class EventController extends Controller
     public function store(EventStoreRequest $request)
     {
         $event = $this->repository->create($request->all());
+
         return $this->successResponse(
             trans('misc.New event has been created'),
             'event',

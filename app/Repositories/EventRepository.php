@@ -22,4 +22,5 @@ class EventRepository
     {
         return $this->model->create($attributes);
     }
+
 }
