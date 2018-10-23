@@ -11,5 +11,4 @@ $factory->define(\App\Models\Event::class, function (Faker $faker) {
         'eventable_type' => $faker->text,
         'eventable_id'   => 1,
     ];
-
 });

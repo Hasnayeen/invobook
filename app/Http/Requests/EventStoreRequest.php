@@ -32,5 +32,4 @@ class EventStoreRequest extends FormRequest
             'eventable_id'   => 'required',
         ];
     }
-
 }

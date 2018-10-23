@@ -36,5 +36,4 @@ class EventTest extends TestCase
         $this->expectException(AuthenticationException::class);
         $this->post('/events');
     }
-    
 }
