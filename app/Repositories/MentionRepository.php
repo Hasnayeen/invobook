@@ -2,7 +2,10 @@
 
 namespace App\Repositories;
 
+use App\Models\User;
 use App\Models\Mention;
+use App\Notifications\YouWereMentioned;
+use Illuminate\Support\Facades\Notification;
 
 class MentionRepository
 {
@@ -39,6 +42,17 @@ class MentionRepository
             ];
         }
 
-        return $this->model->insert($data);
+        $mentioned = $this->model->insert($data);
+
+        if ($mentioned) {
+            Notification::send(
+                User::whereIn('username', request('mentions'))->get(),
+                new YouWereMentioned($mentionableType, $mentionableId)
+            );
+
+            return true;
+        }
+
+        return false;
     }
 }
