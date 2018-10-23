@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Notification;
 
 class MentionTest extends TestCase
 {
+    public function setUp()
+    {
+        parent::setUp();
+        Mail::fake();
+    }
+    
     /** @test */
     public function user_can_mention_other_user_when_creating_comment()
     {
