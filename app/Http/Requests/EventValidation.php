@@ -24,12 +24,12 @@ class EventValidation extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string',
-            'description' => 'required|string',
-            'time' => 'required|string',
-            'place' => 'required|string',
+            'name'           => 'required|string',
+            'description'    => 'required|string',
+            'time'           => 'required|string',
+            'place'          => 'required|string',
             'eventable_type' => 'required|string',
-            'eventable_id' => 'required',
+            'eventable_id'   => 'required',
         ];
     }
 }

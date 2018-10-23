@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\EventValidation;
+
 use App\Models\Event;
 use App\Repositories\EventRepository;
-
+use App\Http\Requests\EventValidation;
 class EventController extends Controller
 {
     public function index(EventRepository $repository)
@@ -15,12 +15,12 @@ class EventController extends Controller
 
             return response()->json([
                 'status' => 'success',
-                'total' => count($events),
+                'total'  => count($events),
                 'events' => $events,
             ]);
         } catch (Exception $e) {
             return response()->json([
-                'status' => 'error',
+                'status'  => 'error',
                 'message' => 'Something went wrong',
             ]);
         }
@@ -31,9 +31,9 @@ class EventController extends Controller
         try {
             $event = $repository->create($request->all());
             return response()->json([
-                'status' => 'success',
+                'status'  => 'success',
                 'message' => $event->name . ' task has been created',
-                'event' => $event,
+                'event'   => $event,
             ], 201);
         } catch (Exception $e) {
             return response()->json([
@@ -48,13 +48,13 @@ class EventController extends Controller
         try {
             $event = $repository->update($request->all(), $event);
             return response()->json([
-                'status' => 'success',
+                'status'  => 'success',
                 'message' => $event->name . ' task has been updated',
-                'event' => $event,
+                'event'   => $event,
             ], 200);
         } catch (Exception $e) {
             return response()->json([
-                'status' => 'error',
+                'status'  => 'error',
                 'message' => $e->getMessage(),
             ]);
         }
@@ -66,7 +66,7 @@ class EventController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'event' => $event,
+            'event'  => $event,
         ]);
     }
 
@@ -75,7 +75,7 @@ class EventController extends Controller
         $event->delete();
 
         return response()->json([
-            'status' => 'success',
+            'status'  => 'success',
             'message' => 'The event has been deleted',
         ]);
     }
