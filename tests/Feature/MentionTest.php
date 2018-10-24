@@ -103,7 +103,7 @@ class MentionTest extends TestCase
         Notification::assertSentTo([$user, $user2], YouWereMentioned::class, function ($notification) use ($user) {
             $mailData = $notification->toMail($user)->toArray();
 
-            $this->assertEquals(auth()->user()->username . ' mentioned you in comment.', $mailData['subject']);
+            $this->assertEquals($this->user->name . ' mentioned you in comment.', $mailData['subject']);
 
             return true;
         });
@@ -136,7 +136,7 @@ class MentionTest extends TestCase
         Notification::assertSentTo([$user, $user2], YouWereMentioned::class, function ($notification) use ($user) {
             $mailData = $notification->toMail($user)->toArray();
 
-            $this->assertEquals(auth()->user()->username . ' mentioned you in task.', $mailData['subject']);
+            $this->assertEquals($this->user->name . ' mentioned you in task.', $mailData['subject']);
 
             return true;
         });
@@ -163,7 +163,7 @@ class MentionTest extends TestCase
         Notification::assertSentTo([$user, $user2], YouWereMentioned::class, function ($notification) use ($user) {
             $mailData = $notification->toMail($user)->toArray();
 
-            $this->assertEquals(auth()->user()->username . ' mentioned you in message.', $mailData['subject']);
+            $this->assertEquals($this->user->name . ' mentioned you in message.', $mailData['subject']);
 
             return true;
         });
