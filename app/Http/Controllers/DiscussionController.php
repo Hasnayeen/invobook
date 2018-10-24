@@ -40,7 +40,7 @@ class DiscussionController extends Controller
     {
         return response()->json($discussion);
     }
-  
+
     public function delete(Discussion $discussion)
     {
         $discussion->delete();
