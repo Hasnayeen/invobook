@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Contracts\HasMembers;
+use App\Events\DiscussionCreated;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
@@ -9,12 +11,18 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 /**
  * @property int id
+ * @property string name
+ * @property int posted_by
  */
 class Discussion extends Model
 {
     use LogsActivity;
 
     protected $fillable = ['name', 'content', 'raw_content', 'posted_by', 'archived', 'draft', 'discussionable_type', 'discussionable_id', 'category_id'];
+
+    protected $dispatchesEvents = [
+        'created' => DiscussionCreated::class,
+    ];
 
     protected $appends = ['date'];
 
@@ -45,6 +53,9 @@ class Discussion extends Model
         return $this->morphMany(Comment::class, 'commentable');
     }
 
+    /**
+     * @return MorphTo|HasMembers
+     */
     public function discussionable(): MorphTo
     {
         return $this->morphTo();
