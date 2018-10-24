@@ -8,6 +8,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 
 class BecameNewMember extends Notification implements ShouldQueue
 {
@@ -24,25 +25,25 @@ class BecameNewMember extends Notification implements ShouldQueue
     private $entityName;
 
     /**
+     * @var int
+     */
+    private $entityId;
+
+    /**
      * @var \App\Models\User
      */
     private $adder;
 
     /**
-     * @var \App\Models\User
-     */
-    private $added;
-
-    /**
      * @param string $entityType
      * @param string $entityName
      */
-    public function __construct(Entity $entity, User $adder, User $added)
+    public function __construct(Entity $entity, User $adder)
     {
         $this->entityType = $entity->getType();
         $this->entityName = $entity->name;
+        $this->entityId = $entity->id;
         $this->adder = $adder;
-        $this->added = $added;
     }
 
     /**
@@ -79,13 +80,29 @@ class BecameNewMember extends Notification implements ShouldQueue
      * @param  mixed $notifiable
      * @return array
      */
-    public function toArray($notifiable)
+    public function toArray()
     {
         return [
-            'type'  => $this->entityType,
-            'name'  => $this->entityName,
-            'adder' => $this->adder,
-            'added' => $this->added,
+            'subject'     => $this->adder,
+            'action'      => 'added you to',
+            'object_type' => $this->entityType,
+            'object_name' => $this->entityName,
+            'object_id'   => $this->entityId,
         ];
+    }
+
+    /**
+     * @param  mixed $notifiable
+     * @return void
+     */
+    public function toBroadcast($notifiable)
+    {
+        return new BroadcastMessage([
+            'subject'     => $this->adder,
+            'action'      => 'added you to',
+            'object_type' => $this->entityType,
+            'object_name' => $this->entityName,
+            'object_id'   => $this->entityId,
+        ]);
     }
 }

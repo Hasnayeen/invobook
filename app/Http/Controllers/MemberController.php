@@ -24,7 +24,7 @@ class MemberController extends Controller
         $entity->members()->save($user);
         $this->givePermissionTo($user, $entity->id);
 
-        $user->notify(new BecameNewMember($entity, auth()->user(), $user));
+        $user->notify(new BecameNewMember($entity, auth()->user()));
 
         return response()->json([
             'status'   => 'success',
@@ -39,7 +39,7 @@ class MemberController extends Controller
 
         $user = $entity->members()->where('user_id', request('user_id'))->first();
 
-        throw_if(! $user, new UserIsNotMember());
+        throw_if(!$user, new UserIsNotMember());
 
         $entity->members()->detach($user);
 

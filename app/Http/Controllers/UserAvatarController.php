@@ -21,7 +21,7 @@ class UserAvatarController extends Controller
             return response()->json([
                 'status'  => 'error',
                 'message' => $exception->getMessage(),
-            ], 204);
+            ]);
         }
     }
 }
