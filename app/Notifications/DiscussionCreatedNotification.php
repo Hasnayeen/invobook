@@ -4,8 +4,8 @@ namespace App\Notifications;
 
 use App\Models\Discussion;
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Notifications\Messages\MailMessage;
 
 class DiscussionCreatedNotification extends Notification
 {
@@ -38,7 +38,7 @@ class DiscussionCreatedNotification extends Notification
     /**
      * Get the mail representation of the notification.
      *
-     * @param  mixed $notifiable
+     * @param  mixed                                          $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
@@ -59,7 +59,6 @@ class DiscussionCreatedNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
         ];
     }
 }

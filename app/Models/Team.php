@@ -4,8 +4,8 @@ namespace App\Models;
 
 use App\Contracts\HasMembers;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\Activitylog\Traits\LogsActivity;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Team extends Model implements HasMembers
 {

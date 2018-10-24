@@ -2,13 +2,13 @@
 
 namespace App\Events;
 
-use App\Contracts\HasNotificationRecipients;
-use App\Models\Discussion;
 use App\Models\User;
-use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Foundation\Events\Dispatchable;
-use Illuminate\Queue\SerializesModels;
+use App\Models\Discussion;
 use Illuminate\Support\Collection;
+use Illuminate\Queue\SerializesModels;
+use App\Contracts\HasNotificationRecipients;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Broadcasting\InteractsWithSockets;
 
 class DiscussionCreated implements HasNotificationRecipients
 {
@@ -29,7 +29,7 @@ class DiscussionCreated implements HasNotificationRecipients
 
     /**
      * Returns collection of users associated with project/office/team under which
-     * the discussion is created - filters out the author of discussion
+     * the discussion is created - filters out the author of discussion.
      *
      * @return Collection
      */

@@ -2,10 +2,10 @@
 
 namespace App\Listeners;
 
-use App\Contracts\HasNotificationRecipients;
 use App\Events\DiscussionCreated;
-use App\Notifications\DiscussionCreatedNotification;
+use App\Contracts\HasNotificationRecipients;
 use Illuminate\Support\Facades\Notification;
+use App\Notifications\DiscussionCreatedNotification;
 
 class NotifyDiscussionParticipants
 {

@@ -2,16 +2,16 @@
 
 namespace Tests\Feature;
 
-use App\Contracts\HasMembers;
-use App\Events\DiscussionCreated;
-use App\Models\Discussion;
-use App\Models\Office;
-use App\Models\Project;
+use Tests\TestCase;
 use App\Models\Team;
 use App\Models\User;
-use App\Notifications\DiscussionCreatedNotification;
+use App\Models\Office;
+use App\Models\Project;
+use App\Models\Discussion;
+use App\Contracts\HasMembers;
+use App\Events\DiscussionCreated;
 use Illuminate\Support\Facades\Notification;
-use Tests\TestCase;
+use App\Notifications\DiscussionCreatedNotification;
 
 class DiscussionNotificationTest extends TestCase
 {
@@ -55,7 +55,7 @@ class DiscussionNotificationTest extends TestCase
     }
 
     /**
-     * @param string $groupType
+     * @param string     $groupType
      * @param HasMembers $group
      */
     private function arrangeAndTest(string $groupType, HasMembers $group): void
@@ -68,8 +68,8 @@ class DiscussionNotificationTest extends TestCase
 
         $discussion = factory(Discussion::class)->create([
             'discussionable_type' => $groupType,
-            'discussionable_id' => $group->getKey(),
-            'posted_by' => $this->user->getKey(),
+            'discussionable_id'   => $group->getKey(),
+            'posted_by'           => $this->user->getKey(),
         ]);
 
         DiscussionCreated::dispatch($discussion);

@@ -5,8 +5,8 @@ namespace App\Models;
 use App\Contracts\HasMembers;
 use App\Events\DiscussionCreated;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Spatie\Activitylog\Traits\LogsActivity;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 /**
  * @property int id
