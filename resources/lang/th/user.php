@@ -14,7 +14,7 @@ return [
     'Current Password'      => 'รหัสผ่านปัจจุบัน',
     'New Password'          => 'รหัสผ่านใหม่',
     'Confirm Password'      => 'ยืนยันรหัสผ่านใหม่',
-    'Update'                => 'อัปเดท',
+    'Update'                => 'อัปเดต',
     'Delete Account'        => 'ลบบัญชี',
     'Preferred Language'    => 'ภาษาที่ต้องการ',
 ];
