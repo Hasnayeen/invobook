@@ -124,7 +124,7 @@ export default {
             }
           })
           .catch((error) => {
-            console.log(error)
+            console.error(error)
           })
       }
     },
@@ -190,7 +190,9 @@ export default {
     },
     userSelected (text) {
       this.message = this.message.substring(0, this.startIndex) + text
-      this.mentions.push(text)
+      if (this.mentions.every(mention => mention !== text)) {
+        this.mentions.push(text)
+      }
       this.suggestionShown = false
       this.name = ''
       document.getElementById('send-message').focus()
