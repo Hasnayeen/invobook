@@ -24,7 +24,7 @@ class MemberController extends Controller
         $entity->members()->save($user);
         $this->givePermissionTo($user, $entity->id);
 
-        $user->notify(new BecameNewMember($entity, auth()->user(), $user));
+        $user->notify(new BecameNewMember($entity, auth()->user()));
 
         return response()->json([
             'status'   => 'success',

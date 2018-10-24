@@ -175,6 +175,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/comments/{comment}', 'CommentController@delete')->middleware('can:delete,comment');
 
     /**********************************
+        Notification
+    **********************************/
+
+    Route::get('notifications', 'NotificationController@index');
+
+    Route::put('notifications', 'NotificationController@update');
+
+    /**********************************
         User
     **********************************/
 
