@@ -1,18 +1,30 @@
 <?php
 
+/**********************************
+    Login
+**********************************/
+
 Route::get('login', 'Auth\LoginController@showLoginForm');
 
 Route::post('login', 'Auth\LoginController@login');
 
 Route::post('logout', 'Auth\LoginController@logout');
 
+/**********************************
+    Password
+**********************************/
+
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
 
 Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
 
-Route::post('password/reset', 'Auth\ForgotPasswordController@reset');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
-Route::get('password/reset/{token}', 'Auth\ForgotPasswordController@showResetForm');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm');
+
+/**********************************
+    Registration
+**********************************/
 
 Route::post('register/invite', 'UserController@sentInvitationToRegister')->middleware('auth');
 
@@ -21,7 +33,7 @@ Route::get('register/{token}', 'Auth\RegisterController@showRegistrationForm');
 Route::post('register/{token}', 'Auth\RegisterController@confirmNewRegistration');
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
+    Route::get('/', 'HomeController@index')->name('home');
 
     /**********************************
         Project
@@ -35,6 +47,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('projects/{project}', 'ProjectController@show')->middleware('can:view,project');
 
+    Route::delete('projects/{project}', 'ProjectController@delete')->middleware('can:delete,project');
+
     /**********************************
         Team
     **********************************/
@@ -47,8 +61,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('teams/{team}', 'TeamController@show')->middleware('can:view,team');
 
+    Route::delete('teams/{team}', 'TeamController@delete')->middleware('can:delete,team');
+
     /**********************************
-     Office
+        Office
      **********************************/
 
     Route::get('offices', function () {
@@ -59,6 +75,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('offices/{office}', 'OfficeController@show')->middleware('can:view,office');
 
+    Route::delete('offices/{office}', 'OfficeController@delete')->middleware('can:delete,office');
+
     /**********************************
         Member
      **********************************/
@@ -67,8 +85,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('members', 'MemberController@store');
 
+    Route::delete('members', 'MemberController@destroy');
+
     /**********************************
-        Discussions
+        Discussion
      **********************************/
 
     Route::get('discussions', 'DiscussionController@index');
@@ -78,21 +98,35 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('discussions', 'DiscussionController@index');
     Route::get('discussions/{discussion}', 'DiscussionController@show');
 
-    Route::get('categories', 'CategoryController@index');
+    Route::delete('discussions/{discussion}', 'DiscussionController@delete')->middleware('can:delete,discussion');
 
     /**********************************
-        Messages
+        Category
+    **********************************/
+
+    Route::get('categories', 'CategoryController@index');
+
+    Route::post('categories', 'CategoryController@store');
+
+    /**********************************
+        Message
      **********************************/
 
     Route::get('messages', 'MessageController@index');
 
+    Route::get('direct-messages', 'DirectMessageController@index');
+
     Route::post('messages', 'MessageController@store');
 
+    Route::delete('messages/{message}', 'MessageController@delete')->middleware('can:delete,message');
+
     /**********************************
-        Events
+        Event
      **********************************/
 
     Route::get('events', 'EventController@index');
+
+    Route::post('events', 'EventController@store');
 
     Route::get('events/{event}', 'EventController@index');
 
@@ -113,16 +147,55 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('tasks/{task}', 'TaskController@delete')->middleware('can:delete,task');
 
     /**********************************
+        Tags
+    **********************************/
+
+    Route::get('tags', 'TagController@index');
+
+    Route::post('tags', 'TagController@store')->middleware('can:create,App\Models\Tag');
+
+    Route::post('tasks/{task}/tags', 'TaskTagController@store')->middleware('can:attach,App\Models\Tag,task');
+
+    Route::delete('tasks/{task}/tags/{tag}', 'TaskTagController@delete')->middleware('can:detach,App\Models\Tag,task');
+
+    /**********************************
+        File
+    **********************************/
+
+    Route::post('files', 'FileController@store');
+
+    /**********************************
+        Comment
+    **********************************/
+
+    Route::get('/comments', 'CommentController@index');
+
+    Route::post('/comments', 'CommentController@store');
+
+    Route::delete('/comments/{comment}', 'CommentController@delete')->middleware('can:delete,comment');
+
+    /**********************************
         User
     **********************************/
 
     Route::get('users', 'UserController@index');
 
-    Route::get('users/{user}', 'UserController@profile');
+    Route::get('users/{user}', 'UserController@show');
+
+    Route::get('username', 'UserController@checkUsername');
 
     Route::put('users/{user}/account', 'UserAccountController@update');
 
+    Route::put('users/{user}/profile', 'UserProfileController@update');
+
     Route::post('users/{user}/avatar', 'UserAvatarController@store');
+
+    /**********************************
+        Status
+    **********************************/
+    Route::get('statuses', 'StatusController@index');
+
+    Route::post('statuses', 'StatusController@store');
 });
 
     /**********************************

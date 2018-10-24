@@ -11,7 +11,7 @@
 
     <div class="h-16 flex flex-row justify-center items-center px-2">
       <span @click="showAddMemberForm" class="bg-white shadow w-8 h-8 rounded-full text-teal hover:cursor-pointer text-center p-2">
-        <i class="fas fa-plus"></i>
+        <font-awesome-icon :icon="faPlus"></font-awesome-icon>
       </span>
       <a v-for="(member, index) in office.members" v-if="index < 5" :href="'/users/' + member.username" class="pl-2">
         <img :src="generateUrl(member.avatar)" class="rounded-full w-8 h-8 mr-1">
@@ -25,10 +25,9 @@
       <taskBoard resourceType="office" :resource="office"  :activeTab="active"></taskBoard>
       <discussionBoard resourceType="office" :resource="office" :activeTab="active"></discussionBoard>
       <messagesBoard resourceType="office" :resource="office" :activeTab="active"></messagesBoard>
+      <event-board resourceType="office" :resource="office" :activeTab="active"></event-board>
+      <file-board resourceType="office" :resource="office" :activeTab="active"></file-board>
       <!-- <taskBoard resourceType="projects" :resource="project"></taskBoard>
-      <messagesBoard resourceType="projects" :resource="project"></messagesBoard>
-      <schedule resourceType="projects" :resource="project"></schedule>
-      <files resourceType="projects" :resource="project"></files>
       <activity resourceType="projects" :resource="project"></activity> -->
     </div>
   </div>
@@ -38,16 +37,17 @@
 import taskBoard from './../partials/taskBoard.vue'
 import discussionBoard from './../partials/discussionBoard.vue'
 import messagesBoard from './../partials/messagesBoard.vue'
-import schedule from './../partials/schedule.vue'
-import files from './../partials/files.vue'
+import eventBoard from './../partials/eventBoard.vue'
+import fileBoard from './../partials/fileBoard.vue'
 import activity from './../partials/activity.vue'
 import addMemberForm from './../partials/addMemberForm.vue'
 import notificationPopup from '../partials/notificationPopup.vue'
 import tabMenu from './../partials/tabMenu.vue'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 export default {
   components: {
-    taskBoard, discussionBoard, messagesBoard, schedule, files, activity, addMemberForm, notificationPopup, tabMenu
+    taskBoard, discussionBoard, messagesBoard, eventBoard, fileBoard, activity, addMemberForm, notificationPopup, tabMenu
   },
   props: ['office'],
   data: () => ({
@@ -56,6 +56,7 @@ export default {
     showNotification: false,
     message: '',
     messageType: '',
+    faPlus
   }),
   methods: {
     showAddMemberForm () {
@@ -80,7 +81,7 @@ export default {
       }, 3000)
     },
     activateTab (tab) {
-      if (tab != this.active) {
+      if (tab !== this.active) {
         this.active = tab
       }
     },

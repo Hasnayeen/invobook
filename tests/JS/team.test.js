@@ -1,9 +1,26 @@
-import { mount } from 'vue-test-utils'
+import { mount, createLocalVue } from 'vue-test-utils'
 import single from 'components/teams/single.vue'
+
+jest.mock('axios')
+
+const localVue = createLocalVue()
+
+var generateUrl = {
+  methods: {
+    generateUrl: function (value) {
+      if (!value) return 'http://' + window.location.host + '/image/avatar.jpg'
+      value = value.toString()
+      return window.location.protocol + '//' + window.location.host + '/' + value
+    }
+  }
+}
+
+localVue.mixin(generateUrl)
 
 describe('single', () => {
   test('is a Vue instance', () => {
     const wrapper = mount(single, {
+      localVue,
       propsData: {
         team: {
           created_at: '2018-02-18 09:01:46',

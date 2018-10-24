@@ -21,6 +21,10 @@ class AppServiceProvider extends ServiceProvider
             'task'       => 'App\Models\Task',
             'event'      => 'App\Models\Event',
             'discussion' => 'App\Models\Discussion',
+            'user'       => 'App\Models\User',
+            'comment'    => 'App\Models\Comment',
+            'mention'    => 'App\Models\Mention',
+            'message'    => 'App\Models\Message',
         ]);
     }
 

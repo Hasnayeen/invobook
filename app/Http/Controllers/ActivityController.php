@@ -2,16 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Activity;
+use App\Repositories\ActivityRepository;
 
 class ActivityController extends Controller
 {
-    public function index()
+    public function index(ActivityRepository $repository)
     {
-        $query = Activity::with(['causer:id,name,username', 'subject:id,name']);
-        $query = request('user') ? $query->where('causer_id', request('user')) : $query;
-        $query = request('date') ? $query->whereDate('created_at', request('date')) : $query;
-        $activities = $query->get()->groupBy('date');
+        $activities = $repository->getAllActivities();
 
         return response()->json([
             'status'     => 'success',

@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use App\Contracts\HasMembers;
-use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Office extends Model implements HasMembers
+class Office extends Entity implements HasMembers
 {
     use LogsActivity;
+
+    protected $type = 'office';
 
     protected $fillable = ['name', 'description', 'owner_id'];
 
@@ -18,11 +19,6 @@ class Office extends Model implements HasMembers
      */
     public function members(): BelongsToMany
     {
-        return $this->belongsToMany('App\Models\User', 'office_user', 'office_id', 'user_id');
-    }
-
-    public function messages()
-    {
-        return $this->morphMany('App\Models\Message', 'messageable');
+        return $this->belongsToMany(\App\Models\User::class, 'office_user', 'office_id', 'user_id');
     }
 }

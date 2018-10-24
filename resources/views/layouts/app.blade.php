@@ -6,15 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="app-version" content="{{ about('current_version') }}">
-    <meta name="last-updated" content="{{ about('last_updated') }}">
+    <meta name="app-version" content="{{ config('app.version') }}">
+    <meta name="last-updated" content="{{ application_last_updated() }}">
 
     <title>{{ config('app.name', 'GOODWORK') }} | {{ $title }}</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300,400,600">
     <link href="{{ mix('css/main.min.css') }}" rel="stylesheet">
-
-    <script defer src="{{ asset('js/fontawesome-all.min.js') }}" integrity="sha384-kW+oWsYx3YpxvjtZjFXqazFpA7UP/MbiY4jvs+RWZo2+N94PFZ36T6TFkc9O3qoB" crossorigin="anonymous"></script>
 
     @yield('style')
 
@@ -38,6 +36,7 @@
         @if (!Auth::guest())
         <navbar></navbar>
         <notification-popup></notification-popup>
+        <message-box></message-box>
         @endif
 
 

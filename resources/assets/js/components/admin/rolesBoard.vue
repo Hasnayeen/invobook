@@ -16,22 +16,26 @@
       </div>
       <div class="px-4 pb-2 bg-grey-lighter text-sm flex flex-row">
         <span>
-          Permissions
+          {{ 'Permissions' | localize }}
         </span>
         <div @click="showAssignPermissionForm(role.id)">
-          <i class="ml-2 fas fa-plus-circle text-indigo cursor-pointer"></i>
+          <font-awesome-icon :icon="faPlusCircle"
+            class="ml-2 text-indigo cursor-pointer">
+          </font-awesome-icon>
         </div>
       </div>
       <div v-if="role.permissions.length > 0" class="flex flex-row flex-wrap m-2">
         <div v-for="(permission, index) in role.permissions" class="py-1 px-2 m-2 rounded-full font-medium bg-pink text-white text-sm flex flex-row items-center">
           {{ permission.name }} 
           <div @click="revokePermission(role.id, permission.id, index)">
-            <i class="ml-1 pl-1 fas fa-trash-alt cursor-pointer"></i>
+            <font-awesome-icon :icon="faTrashAlt"
+              class="ml-1 pl-1 cursor-pointer">
+            </font-awesome-icon>
           </div>
         </div>
       </div>
       <div v-else class="py-1 px-2 m-2 font-medium text-grey-darker">
-        Don't have any permission yet
+        {{ 'Don\'t have any permission yet' | localize }}
       </div>
     </div>      
   </div>
@@ -41,6 +45,11 @@
 <script>
 import createRoleForm from './../forms/createRoleForm'
 import assignPermissionForm from './../forms/assignPermissionForm'
+import {
+  faPlusCircle,
+  faTrashAlt
+} from '@fortawesome/free-solid-svg-icons'
+
 export default {
   components: {createRoleForm, assignPermissionForm},
   props: {
@@ -53,17 +62,19 @@ export default {
     roles: [],
     createRoleFormShown: false,
     assignPermissionFormShown: false,
-    roleId: 0
+    roleId: 0,
+    faPlusCircle,
+    faTrashAlt
   }),
   beforeUpdate () {
     if (this.roles.length < 1) {
       axios.get('/admin/roles')
-          .then((response) => {
-            this.roles = response.data.roles
-          })
-          .catch((error) => {
-            console.log(error)
-          })
+        .then((response) => {
+          this.roles = response.data.roles
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     }
   },
   methods: {
@@ -79,12 +90,12 @@ export default {
     },
     deleteRole (id, index) {
       axios.delete('/admin/roles/' + id)
-           .then((response) => {
-             this.roles.splice(index, 1)
-           })
-           .catch((error) => {
-             console.log(error.response.data.message)
-           })
+        .then((response) => {
+          this.roles.splice(index, 1)
+        })
+        .catch((error) => {
+          console.log(error.response.data.message)
+        })
     },
     showAssignPermissionForm (id) {
       this.roleId = id
@@ -94,19 +105,19 @@ export default {
       this.assignPermissionFormShown = false
     },
     permissionAssigned (permission) {
-      if (! this.roles.filter(role => role.id === this.roleId)[0].permissions.some(perm => perm.id === permission.id)) {
+      if (!this.roles.filter(role => role.id === this.roleId)[0].permissions.some(perm => perm.id === permission.id)) {
         this.roles.filter(role => role.id === this.roleId)[0].permissions.push(permission)
       }
       this.assignPermissionFormShown = false
     },
     revokePermission (roleId, permissionId, index) {
       axios.delete('/admin/roles/' + roleId + '/permissions', {permission_id: permissionId})
-           .then((response) => {
-             this.roles.filter(role => role.id === roleId)[0].permissions.splice(index, 1)
-           })
-           .catch((error) => {
-             console.log(error.response.data.message)
-           })
+        .then((response) => {
+          this.roles.filter(role => role.id === roleId)[0].permissions.splice(index, 1)
+        })
+        .catch((error) => {
+          console.log(error.response.data.message)
+        })
     }
   }
 }

@@ -7,11 +7,12 @@
         404
     </div>
     <div class="mb-8">WHOOPS! Page Not Found</div>
-    <a href="{{ route('home') }}" class="text-teal no-underline text-2xl">← Go To Home</a>
+    <a href="{{ url('/') }}" class="text-teal no-underline text-2xl">← Go To Home</a>
 </div>
 
 @slot('script')
-<script src="{{ mix('/js/errors/404.js') }}"></script>
+<script src="//{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>
+<script src="{{ mix('/js/errors/404.min.js') }}"></script>
 @endslot
 
 @endcomponent

@@ -1,0 +1,27 @@
+<?php
+
+return [
+    'Users'                          => 'Gebruikers',
+    'Roles & Permissions'            => 'Rollen & Rechten',
+    'Activities'                     => 'Activiteiten',
+    'About'                          => 'Over',
+    'Roles'                          => 'Rollen',
+    'Permissions'                    => 'Rechten',
+    'Invite New Member'              => 'Nodig een lid uit',
+    'Add New Role'                   => 'Maak een rol',
+    'Cancel'                         => 'Annuleren',
+    'Assign'                         => 'Toewijzen',
+    'Attach'                         => 'Toevoegen',
+    'Filters'                        => 'Filteren',
+    'Apply'                          => 'Toepassen',
+    'Load More'                      => 'Laad meer',
+    'Check for Updates'              => 'Controleer op updates',
+    'Filter by Activity'             => 'Filteren op activiteiten',
+    'Filter by User'                 => 'Filteren op gebruikers',
+    'Filter by Date'                 => 'Filteren op datums',
+    'Last Updated'                   => 'Laatst bijgewerkt',
+    'Author'                         => 'Auteur',
+    'Submit issue & feedback at'     => 'Stuur problemen en feedback naar',
+    'Don\'t belongs to any role yet' => 'Behoort nog niet tot een rol',
+    'Don\'t have any permission yet' => 'Heeft geen rechten',
+];

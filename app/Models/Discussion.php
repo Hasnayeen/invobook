@@ -7,6 +7,7 @@ use App\Events\DiscussionCreated;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 /**
  * @property int id
@@ -25,6 +26,10 @@ class Discussion extends Model
 
     protected $appends = ['date'];
 
+    protected $casts = [
+        'posted_by' => 'integer',
+    ];
+
     public function creator()
     {
         return $this->belongsTo(\App\Models\User::class, 'posted_by');
@@ -38,6 +43,14 @@ class Discussion extends Model
     public function category()
     {
         return $this->belongsTo(\App\Models\Category::class);
+    }
+
+    /**
+     * @return MorphMany
+     */
+    public function comments(): MorphMany
+    {
+        return $this->morphMany(Comment::class, 'commentable');
     }
 
     /**

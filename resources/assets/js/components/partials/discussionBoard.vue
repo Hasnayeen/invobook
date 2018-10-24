@@ -1,11 +1,14 @@
 <template>
 <div :class="{'hidden': (activeTab != 'discussions')}" class="w-full">
-  <create-discussion-form :resourceId="resource.id" :resourceType="resourceType" @close="closeCreateDiscussionForm" :form-shown="createDiscussionFormShown"></create-discussion-form>
+  <create-discussion-form ref="discussionForm" :resourceId="resource.id" :resourceType="resourceType" @close="closeCreateDiscussionForm" :form-shown="createDiscussionFormShown"></create-discussion-form>
+
+  <discussion-details :discussionDetailsShown="discussionDetailsShown" :discussion="discussion" :index="index" @close="closeDiscussionDetails" @deleted="deleteDiscussion"></discussion-details>
+
   <div class="text-center">
-    <button @click="showCreateDiscussionForm" class="no-underline p-3 my-4 bg-white text-base text-teal rounded shadow">Create New Post</button>
+    <button @click="showCreateDiscussionForm" class="no-underline p-3 my-4 bg-white text-base text-teal rounded shadow">{{ 'Create New Post' | localize }}</button>
   </div>
   <div class="flex flex-row flex-wrap justify-center items-start">
-    <div v-for="discussion in discussions" class="w-80 my-6 md:m-6 bg-white shadow-md flex flex-col items-center rounded cursor-pointer">
+    <div @click="showDiscussionDetails(index)" v-for="(discussion, index) in discussions" :key="index" class="w-80 my-6 md:m-6 bg-white shadow-md flex flex-col items-center rounded cursor-pointer">
       <div class="bg-teal flex flex-col items-center w-full text-white rounded-t">
         <div class="w-10 h-10 flex-none py-4">
           <img :src="generateUrl(discussion.creator.avatar)" class="rounded-full w-10 h-10">
@@ -25,8 +28,12 @@
 
 <script>
 import createDiscussionForm from '../forms/createDiscussionForm.vue'
+import discussionDetails from './discussionDetails'
 export default {
-  components: {createDiscussionForm},
+  components: {
+    createDiscussionForm,
+    discussionDetails
+  },
   props: {
     resource: {
       required: true,
@@ -43,14 +50,20 @@ export default {
   },
   data: () => ({
     createDiscussionFormShown: false,
-    discussions: []
+    discussions: [],
+    discussion: {},
+    discussionDetailsShown: false,
+    index: null
   }),
   methods: {
     showCreateDiscussionForm () {
       this.createDiscussionFormShown = true
+      this.$nextTick(() => {
+        this.$refs.discussionForm.$refs.inputFocus.focus();
+      })
     },
     closeCreateDiscussionForm (newDiscussion = null) {
-      (newDiscussion) ? this.discussions.push(newDiscussion) : null
+      if (newDiscussion) this.discussions.push(newDiscussion)
       this.createDiscussionFormShown = false
     },
     getAllDiscussions () {
@@ -61,13 +74,25 @@ export default {
             resource_id: this.resource.id
           }
         })
-        .then((response) => {
-          this.discussions = response.data.discussions
-        })
-        .catch((error) => {
-          console.log(error.response.data.message)
-        })
+          .then((response) => {
+            this.discussions = response.data.discussions
+          })
+          .catch((error) => {
+            console.log(error.response.data.message)
+          })
       }
+    },
+    showDiscussionDetails (index) {
+      this.index = index
+      this.discussion = this.discussions[index]
+      this.discussionDetailsShown = true
+    },
+    closeDiscussionDetails () {
+      this.discussionDetailsShown = false
+      this.discussion = {}
+    },
+    deleteDiscussion (index) {
+      this.discussions.splice(index, 1)
     }
   },
   watch: {

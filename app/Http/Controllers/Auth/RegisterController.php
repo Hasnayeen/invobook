@@ -7,6 +7,7 @@ use App\Models\Token;
 use App\Models\Office;
 use App\Mail\UserRegistered;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -102,7 +103,14 @@ class RegisterController extends Controller
         $token = Token::where('token', $token)->first();
         if ($token && ($token->email == $request->email)) {
             $this->register($request, $token);
+
+            $user = User::whereEmail($request->email)->first();
+            $role = Role::find(decrypt($token->token));
+            $user->assignRole($role);
+
             $token->delete();
+            $user = User::where('email', $token->email)->first();
+            $user->assignRole($token->role_id);
 
             return redirect('/');
         }

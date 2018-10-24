@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Exception;
+use App\Models\Message;
 use App\Events\MessageCreated;
 use App\Utilities\EntityTrait;
+use App\Repositories\MentionRepository;
 use App\Repositories\MessageRepository;
 use App\Http\Requests\StoreMessageRequest;
 
@@ -14,9 +16,8 @@ class MessageController extends Controller
 
     public function index(MessageRepository $repository)
     {
-        $messages = $repository->getAllMessages(request('resource_type'), request('resource_id'));
         try {
-            $entity = $this->getEntityModel();
+            $messages = $repository->getAllMessages(request('resource_type'), request('resource_id'));
 
             return response()->json([
                 'status'   => 'success',
@@ -31,16 +32,18 @@ class MessageController extends Controller
         }
     }
 
-    public function store(StoreMessageRequest $request, MessageRepository $repository)
+    public function store(StoreMessageRequest $request, MessageRepository $repository, MentionRepository $mentionRepository)
     {
         try {
-            $entity = $this->getEntityModel();
             $message = $repository->saveMessage([
-                'message'          => request('message'),
+                'body'             => $request->get('message'),
                 'user_id'          => auth()->user()->id,
-                'messageable_type' => request('resource_type'),
-                'messageable_id'   => request('resource_id'),
+                'messageable_type' => $request->get('resource_type'),
+                'messageable_id'   => $request->get('resource_id'),
             ]);
+            if (request('mentions')) {
+                $mentionRepository->create('message', $message->id);
+            }
             event(new MessageCreated($message));
             $message->load('user');
 
@@ -54,5 +57,15 @@ class MessageController extends Controller
                 'message' => $e->getMessage(),
             ]);
         }
+    }
+
+    public function delete(Message $message)
+    {
+        $message->delete();
+
+        return response()->json([
+            'status'  => 'success',
+            'message' => trans('misc.Message has been deleted'),
+        ]);
     }
 }

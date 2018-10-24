@@ -3,13 +3,15 @@
 namespace App\Models;
 
 use App\Contracts\HasMembers;
-use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Team extends Model implements HasMembers
+
+class Team extends Entity implements HasMembers
 {
     use LogsActivity;
+
+    protected $type = 'team';
 
     protected $fillable = ['name', 'description', 'office_id', 'owner_id'];
 
@@ -18,11 +20,6 @@ class Team extends Model implements HasMembers
      */
     public function members(): BelongsToMany
     {
-        return $this->belongsToMany('App\Models\User', 'team_user', 'team_id', 'user_id');
-    }
-
-    public function messages()
-    {
-        return $this->morphMany('App\Models\Message', 'messageable');
+        return $this->belongsToMany(\App\Models\User::class, 'team_user', 'team_id', 'user_id');
     }
 }

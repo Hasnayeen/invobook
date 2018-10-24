@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'Users'                          => 'Kullanıcılar',
+    'Roles & Permissions'            => 'Roller & Yetkiler',
+    'Activities'                     => 'Aktiviteler',
+    'About'                          => 'Hakkımızda',
+    'Roles'                          => 'Roller',
+    'Role'                           => 'Rol',
+    'Permissions'                    => 'Yetkiler',
+    'Invite New Member'              => 'Yeni Üye Davet Et',
+    'Add New Role'                   => 'Yeni Rol Ekle',
+    'Cancel'                         => 'İptal',
+    'Assign'                         => 'Ata',
+    'Attach'                         => 'Ekle',
+    'Filters'                        => 'Filtreler',
+    'Apply'                          => 'Uygula',
+    'Load More'                      => 'Daha Fazla Yükle',
+    'Check for Updates'              => 'Güncellemeleri Kontrol Et',
+    'Filter by Activity'             => 'Aktiviteye göre Filtrele',
+    'Filter by User'                 => 'Kullanıcıya göre Filtrele',
+    'Filter by Date'                 => 'Tarihe göre Filtrele',
+    'Last Updated'                   => 'Son Güncelleme',
+    'Author'                         => 'Yazar',
+    'Submit issue & feedback at'     => 'Durum Bildir ve Geri Bildirim Yap',
+    'Don\'t belongs to any role yet' => 'Daha bir rol atanmamış',
+    'Don\'t have any permission yet' => 'Daha bir yetkiye sahip değil',
+];

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Feature;
 
 use Tests\TestCase;
 use Spatie\Permission\Models\Permission;
@@ -30,6 +30,7 @@ class TaskTest extends TestCase
             'taskable_id'   => $task->taskable_id,
         ])->assertJsonFragment([
             'status'        => 'success',
+            'message'       => 'New task has been created',
             'name'          => $task->name,
             'assigned_to'   => $task->assigned_to,
             'notes'         => $task->notes,
@@ -138,5 +139,34 @@ class TaskTest extends TestCase
     {
         $user = factory(\App\Models\User::class)->create();
         $this->actingAs($user)->delete('/tasks/' . $this->task->id);
+    }
+
+    /** @test */
+    public function create_new_task_with_status()
+    {
+        $task = factory(\App\Models\Task::class)->make();
+        $status = factory(\App\Models\Status::class)->create();
+        $permission = Permission::create(['name' => 'create task.' . $task->taskable_type . '->' . $task->taskable_id]);
+        $this->user->givePermissionTo($permission);
+
+        $this->actingAs($this->user)->post('/tasks', [
+            'name'          => $task->name,
+            'assigned_to'   => $task->assigned_to,
+            'notes'         => $task->notes,
+            'due_on'        => $task->due_on,
+            'taskable_type' => $task->taskable_type,
+            'taskable_id'   => $task->taskable_id,
+            'status_id'     => $task->status_id,
+        ])->assertJsonFragment([
+            'status'        => 'success',
+            'message'       => 'New task has been created',
+            'name'          => $task->name,
+            'assigned_to'   => $task->assigned_to,
+            'notes'         => $task->notes,
+            'due_on'        => $task->due_on,
+            'taskable_type' => $task->taskable_type,
+            'taskable_id'   => $task->taskable_id,
+            'status_id'     => $task->status_id,
+        ]);
     }
 }

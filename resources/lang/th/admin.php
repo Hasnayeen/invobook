@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'Users'                          => 'ผู้ใช้งาน',
+    'Roles & Permissions'            => 'บทบาท & การอนุญาต',
+    'Activities'                     => 'กิจกรรม',
+    'About'                          => 'เกี่ยวกับ',
+    'Roles'                          => 'บทบาท',
+    'Roles'                          => 'บทบาท',
+    'Permissions'                    => 'การอนุญาต',
+    'Invite New Member'              => 'เชิญชวนสมาชิกใหม่',
+    'Add New Role'                   => 'เพิ่มบทบาทใหม่',
+    'Cancel'                         => 'ยกเลิก',
+    'Assign'                         => 'แต่งตั้ง',
+    'Attach'                         => 'แนบ',
+    'Filters'                        => 'กรอง',
+    'Apply'                          => 'นำไปใช้',
+    'Load More'                      => 'โหลดเพิ่มเติม',
+    'Check for Updates'              => 'ตรวจสอบการอัปเดต',
+    'Filter by Activity'             => 'กรองตามกิจกรรม',
+    'Filter by User'                 => 'กรองตามผู้ใช้งาน',
+    'Filter by Date'                 => 'กรองตามวันที่',
+    'Last Updated'                   => 'อัปเดตครั้งล่าสุด',
+    'Author'                         => 'ผู้แต่ง',
+    'Submit issue & feedback at'     => 'ส่งปัญหาและการตอบกลับได้ที่',
+    'Don\'t belongs to any role yet' => 'ยังไม่มีบทบาท',
+    'Don\'t have any permission yet' => 'ยังไม่มีการอนุญาต',
+];

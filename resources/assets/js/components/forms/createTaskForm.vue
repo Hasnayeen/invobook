@@ -1,15 +1,12 @@
 <template>
 <div class="">
-  <notification-popup :messageType="messageType" :message="message" @close="closeNotification" :show-notification="showNotification"></notification-popup>
-
-  <!-- Create Task Form -->
   <div :class="{'hidden': !formShown}" class="absolute container mx-auto w-5/6 md:w-3/5 lg:w-2/5 bg-white rounded shadow-lg z-10" style="top: 12vh;left: 0;right: 0;">
       <div class="p-4">
         <div class="p-4">
           <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name">
             Title <span class="text-grey capitalize">(required)</span>
           </label>
-          <input v-model="name" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-last-name" type="text" placeholder="New Task" required>
+          <input ref="focusInput" v-model="name" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-last-name" type="text" placeholder="New Task" required>
         </div>
         <div class="p-4">
           <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name">
@@ -28,7 +25,9 @@
                 <option :value="member.id" class="my-2 text-lg">{{ member.name }}</option>
               </template>
             </select>
-            <i class="w-1/6 fa fa-chevron-down pointer-events-none flex items-center text-grey-darker -ml-8"></i>
+            <font-awesome-icon :icon="faChevronDown"
+              class="w-1/6 pointer-events-none flex items-center text-grey-darker -ml-8">
+            </font-awesome-icon>
           </div>
         </div>
         <div class="p-4">
@@ -39,9 +38,19 @@
         </div>
         <div class="p-4">
           <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name">
-              Related To
+            Related To
           </label>
-          <input  v-model="related_to" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-last-name" type="text" placeholder="Task #12">
+          <div class="flex flex-row items-center">
+            <select v-model="related_to" class="w-5/6 block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" id="user">
+              <option selected value=""></option>
+              <template v-for="task in tasks">
+                <option :value="task.id" class="my-2 text-lg">{{ task.name }}</option>
+              </template>
+            </select>
+            <font-awesome-icon :icon="faChevronDown"
+              class="w-1/6 pointer-events-none flex items-center text-grey-darker -ml-8">
+            </font-awesome-icon>
+          </div>
         </div>
       </div>
       <div class="flex flex-row justify-between py-4 px-8 bg-grey-lighter rounded">
@@ -56,18 +65,17 @@
 
 <script>
 import Datepicker from 'vuejs-datepicker'
-import NotificationPopup from '../partials/notificationPopup.vue'
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
+
 export default {
-  components: {Datepicker, NotificationPopup},
-  props: ['resource', 'resourceType', 'formShown'],
+  components: {Datepicker},
+  props: ['resource', 'resourceType', 'formShown', 'tasks'],
   data: () => ({
     name: '',
     notes: '',
     assigned_to: null,
     related_to: '',
-    message: '',
-    messageType: '',
-    showNotification: false
+    faChevronDown
   }),
   methods: {
     createTask () {
@@ -81,22 +89,18 @@ export default {
         taskable_type: this.resourceType
       })
         .then((response) => {
-          if (response.data.status == 'success') {
-            this.message = 'New Task Created'
-            this.messageType = 'success'
-            this.showNotification = true
+          if (response.data.status === 'success') {
             this.name = ''
             this.notes = ''
             this.assigned_to = null
             this.related_to = ''
-            setTimeout(() => {
-              this.showNotification = false
-            }, 2000)
+            EventBus.$emit('notification', response.data.message, response.data.status)
             this.$emit('close', response.data.task)
           }
         })
         .catch((error) => {
-          console.log(error)
+          EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+          this.$emit('close')
         })
     },
     closeCreateTaskForm () {

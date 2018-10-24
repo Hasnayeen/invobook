@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DateTimeZone;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Repositories\UserRepository;
@@ -15,8 +16,8 @@ class UserController extends Controller
         $users = $userRepository->getAllUsers();
 
         return response()->json([
-            'status' => 'success',
-            'data'   => $users,
+            'status'  => 'success',
+            'users'   => $users,
         ]);
     }
 
@@ -29,13 +30,13 @@ class UserController extends Controller
 
                 return response()->json([
                     'status'  => 'success',
-                    'message' => 'Invitation sent successfully',
+                    'message' => trans('misc.Invitation sent successfully'),
                 ]);
             }
 
             return response()->json([
                 'status'  => 'error',
-                'message' => 'Email already exist',
+                'message' => trans('misc.Email already exist'),
             ], 409);
         } catch (Exception $e) {
             return response()->json([
@@ -45,10 +46,36 @@ class UserController extends Controller
         }
     }
 
-    public function profile(User $user)
+    public function show(User $user)
     {
         $user->load('projects', 'teams');
 
-        return view('users.profile', ['user' => $user]);
+        return view('users.profile', [
+            'user'      => $user,
+            'timezones' => DateTimeZone::listIdentifiers(),
+            'locales'   => config('locale.lang'),
+        ]);
+    }
+
+    public function checkUsername(Request $request)
+    {
+        try {
+            if (User::where('username', $request->username)->exists()) {
+                return response()->json([
+                    'status'  => 'success',
+                    'message' => trans('misc.Username exists'),
+                ]);
+            }
+
+            return response()->json([
+                'status'  => 'error',
+                'message' => trans('misc.Username doesnt exist'),
+            ], 409);
+        } catch (Exception $e) {
+            return response()->json([
+                'status'  => 'error',
+                'message' => $e->getMessage(),
+            ]);
+        }
     }
 }
