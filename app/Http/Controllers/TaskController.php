@@ -18,7 +18,7 @@ class TaskController extends Controller
             $task = $repository->create($request->all());
             $task->tags()->attach(request('labels'));
             if (request('mentions')) {
-                $mentionRepository->create('task', $task->id);
+                $mentionRepository->create('task', $task);
             }
             $task->load('user:id,avatar');
 
