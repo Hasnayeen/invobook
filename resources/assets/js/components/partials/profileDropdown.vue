@@ -14,12 +14,6 @@
       </span>
       {{ 'Your Profile' | localize }}
     </a>
-    <div @click="showMessageBox" class="px-4 py-2 hover:bg-teal hover:text-white no-underline text-grey-dark block font-medium">
-      <span class="w-6 inline-block">
-        <font-awesome-icon :icon="faEnvelope" class="pr-1"></font-awesome-icon>
-      </span>
-      {{ 'Your Messages' | localize }}
-    </div>
     <a class="px-4 py-2 hover:bg-teal hover:text-white text-grey-dark font-medium no-underline block" href="/admin">
       <span class="w-6 inline-block">
         <font-awesome-icon :icon="faShieldAlt" class="pr-1 font-regular"></font-awesome-icon>
@@ -96,10 +90,6 @@ export default {
         return false
       }
       this.profileDropdownShown = false
-    },
-    showMessageBox () {
-      this.profileDropdownShown = false
-      EventBus.$emit('show-message-box')
     }
   }
 }

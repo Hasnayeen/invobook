@@ -28,7 +28,7 @@ class ValidateTaskCreation extends FormRequest
             'assigned_to'   => 'nullable|exists:users,id',
             'notes'         => 'string',
             'due_on'        => 'required|date_format:Y-m-d',
-            'related_to'    => 'nullable|string',
+            'related_to'    => 'nullable|integer',
             'taskable_type' => 'required',
             'taskable_id'   => 'required',
             'status_id'     => 'nullable|exists:statuses,id',

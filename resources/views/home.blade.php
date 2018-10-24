@@ -2,7 +2,7 @@
 
 @slot('title') Home Page @endslot
 
-<home :projects="{{ $projects }}"  :teams="{{ $teams }}"  :offices="{{ $offices }}"></home>
+<home :data="{{ json_encode($data) }}"></home>
 
 @slot('script')
 <script>

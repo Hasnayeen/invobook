@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'New version available'                      => 'มีเวอร์ชั่นใหม่ :latest_version. โปรดอัพเดท',
+    'New version available'                      => 'มีเวอร์ชั่นใหม่ :latest_version. โปรดอัปเดต',
     'Current version is the latest version'      => 'เวอร์ชั่น :current_version เป็นเวอร์ชั่นล่าสุด.',
-    'Couldn\'t check for updates at this moment' => 'ไม่สามารถเช็คการอัปเดทได้ขณะนี้',
+    'Couldn\'t check for updates at this moment' => 'ไม่สามารถตรวจสอบการอัปเดตได้ขณะนี้',
     'Comment has been saved'                     => 'ความคิดเห็นได้ถูกบันทึกแล้ว',
     'Your post has been saved'                   => 'โพสต์ของคุณได้ถูกบันทึกแล้ว',
     'New discussion post has been created'       => 'โพสต์การสนทนาใหม่ได้ถูกสร้างแล้ว',

@@ -12,7 +12,7 @@ class UserAccountController extends Controller
         if ($request->get('email')) {
             $user->email = $request->get('email');
         }
-        if ($request->get('new_password')) {
+        if ((auth()->user()->username !== 'guest') && $request->get('new_password')) {
             $user->password = bcrypt($request->get('new_password'));
         }
         $user->save();

@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
+use App\Utilities\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
-use Illuminate\Notifications\Notifiable;
 use Spatie\Activitylog\Traits\CausesActivity;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
