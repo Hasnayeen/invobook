@@ -33,7 +33,7 @@ class CommentController extends Controller
         try {
             $comment = $this->repository->create($request->all());
             if (request('mentions')) {
-                $mentionRepository->create('comment', $comment->id);
+                $mentionRepository->create('comment', $comment);
             }
             $comment->load('user:id,name,avatar');
 
