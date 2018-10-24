@@ -26,7 +26,7 @@ class MentionTest extends TestCase
         $user = factory(User::class)->create();
         $user2 = factory(User::class)->create();
         $comment = factory(Comment::class)->make();
-        $response = $this->actingAs($this->user)->post('comments', [
+        $this->actingAs($this->user)->post('comments', [
             'body'             => $comment->body,
             'commentable_type' => $comment->commentable_type,
             'commentable_id'   => $comment->commentable_id,
@@ -48,7 +48,7 @@ class MentionTest extends TestCase
         $permission = Permission::create(['name' => 'create task.' . $task->taskable_type . '->' . $task->taskable_id]);
         $this->user->givePermissionTo($permission);
 
-        $response = $this->actingAs($this->user)->post('tasks', [
+        $this->actingAs($this->user)->post('tasks', [
             'name'             => $task->name,
             'assigned_to'      => $task->assigned_to,
             'notes'            => $task->notes,
@@ -70,7 +70,7 @@ class MentionTest extends TestCase
         $user2 = factory(User::class)->create();
         $message = factory(Message::class)->make();
 
-        $response = $this->actingAs($this->user)->post('messages', [
+        $this->actingAs($this->user)->post('messages', [
             'message'          => $message->body,
             'resource_type'    => $message->messageable_type,
             'resource_id'      => $message->messageable_id,

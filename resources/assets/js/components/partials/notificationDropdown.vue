@@ -72,8 +72,10 @@ export default {
         this.profileDropdownShown = false
       }
       this.notificationShown = true
-      this.unreadNotification = false
-      this.notificationRead()
+      if (this.unreadNotification) {
+        this.unreadNotification = false
+        this.notificationRead()
+      }
     },
     hideNotification (event) {
       if (event.type === 'keyup' && event.key !== 'Escape') {

@@ -42,7 +42,7 @@ class MessageController extends Controller
                 'messageable_id'   => $request->get('resource_id'),
             ]);
             if (request('mentions')) {
-                $mentionRepository->create('message', $message->id);
+                $mentionRepository->create('message', $message);
             }
             event(new MessageCreated($message));
             $message->load('user');

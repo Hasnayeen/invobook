@@ -28,7 +28,7 @@ class MentionRepository
      * @param  mixed $mentionableId
      * @return mixed
      */
-    public function create($mentionableType, $mentionableId)
+    public function create($mentionableType, $mentionable)
     {
         $data = [];
         $now = now();
@@ -36,7 +36,7 @@ class MentionRepository
             $data[] = [
                 'username'         => $username,
                 'mentionable_type' => $mentionableType,
-                'mentionable_id'   => $mentionableId,
+                'mentionable_id'   => $mentionable->id,
                 'created_at'       => $now,
                 'updated_at'       => $now,
             ];
@@ -47,7 +47,7 @@ class MentionRepository
         if ($mentioned) {
             Notification::send(
                 User::whereIn('username', request('mentions'))->get(),
-                new YouWereMentioned($mentionableType, $mentionableId)
+                new YouWereMentioned($mentionableType, $mentionable)
             );
 
             return true;

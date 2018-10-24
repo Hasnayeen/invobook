@@ -17,9 +17,9 @@ class YouWereMentioned extends Notification implements ShouldQueue
     public $mentionableType;
 
     /**
-     * @var int
+     * @var \Illuminate\Database\Eloquent\Model
      */
-    public $mentionableId;
+    public $mentionable;
 
     /**
      * @var string
@@ -29,14 +29,14 @@ class YouWereMentioned extends Notification implements ShouldQueue
     /**
      * Create a new notification instance.
      *
-     * @param string $mentionableType
-     * @param int    $mentionableId
+     * @param string                              $mentionableType
+     * @param \Illuminate\Database\Eloquent\Model $mentionable
      */
-    public function __construct($mentionableType, $mentionableId)
+    public function __construct($mentionableType, $mentionable)
     {
         $this->mentionableType = $mentionableType;
-        $this->mentionableId = $mentionableId;
-        $this->notifier = auth()->user()->username;
+        $this->mentionable = $mentionable;
+        $this->notifier = auth()->user();
     }
 
     /**
@@ -61,7 +61,7 @@ class YouWereMentioned extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject("{$this->notifier} mentioned you in {$this->mentionableType}.");
+            ->subject("{$this->notifier->name} mentioned you in {$this->mentionableType}.");
     }
 
     /**
@@ -71,13 +71,14 @@ class YouWereMentioned extends Notification implements ShouldQueue
      *
      * @return array
      */
-    public function toArray($notifiable)
+    public function toArray()
     {
         return [
-            'notifier'       => $this->notifier,
-            'username'       => $notifiable->username,
-            'type'           => $this->mentionableType,
-            'mentionable_id' => $this->mentionableId,
+            'subject'     => $this->notifier,
+            'action'      => 'mentioned you in',
+            'object_type' => $this->mentionableType,
+            'object_name' => $this->mentionable->name,
+            'object_id'   => $this->mentionable->id,
         ];
     }
 }
