@@ -31,4 +31,13 @@ class DiscussionController extends Controller
             'discussion' => $discussion,
         ], 201);
     }
+
+    /**
+     * @param Discussion $discussion
+     * @return Discussion
+     */
+    public function show(Discussion $discussion)
+    {
+        return response()->json($discussion);
+    }
 }

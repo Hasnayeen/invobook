@@ -2,16 +2,21 @@
 
 namespace App\Models;
 
+use App\Contracts\HasMembers;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class Office extends Model
+class Office extends Model implements HasMembers
 {
     use LogsActivity;
 
     protected $fillable = ['name', 'description', 'owner_id'];
 
-    public function members()
+    /**
+     * @return BelongsToMany
+     */
+    public function members(): BelongsToMany
     {
         return $this->belongsToMany('App\Models\User', 'office_user', 'office_id', 'user_id');
     }

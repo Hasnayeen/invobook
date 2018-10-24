@@ -75,7 +75,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('discussions', 'DiscussionController@store')->middleware('can:create,App\Models\Discussion');
 
-    Route::get('discussions/{discussion}', 'DiscussionController@index');
+    Route::get('discussions', 'DiscussionController@index');
+    Route::get('discussions/{discussion}', 'DiscussionController@show');
 
     Route::get('categories', 'CategoryController@index');
 

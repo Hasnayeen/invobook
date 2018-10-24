@@ -2,16 +2,21 @@
 
 namespace App\Models;
 
+use App\Contracts\HasMembers;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class Project extends Model
+class Project extends Model implements HasMembers
 {
     use LogsActivity;
 
     protected $fillable = ['name', 'description', 'office_id', 'team_id', 'owner_id'];
 
-    public function members()
+    /**
+     * @return BelongsToMany
+     */
+    public function members(): BelongsToMany
     {
         return $this->belongsToMany('App\Models\User', 'project_user', 'project_id', 'user_id');
     }
@@ -24,5 +29,10 @@ class Project extends Model
     public function tasks()
     {
         return $this->morphMany(\App\Models\Task::class, 'taskable');
+    }
+
+    public function routeNotificationFor()
+    {
+        return '';
     }
 }
