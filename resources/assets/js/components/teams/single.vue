@@ -67,7 +67,7 @@ export default {
       let messageType
       if (data.user) {
         messageType = 'success'
-        this.project.members.push(data.user)
+        this.team.members.push(data.user)
       } else {
         messageType = 'error'
       }

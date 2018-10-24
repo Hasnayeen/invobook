@@ -2,31 +2,23 @@
 <div class="px-4 self-center">
   <div id="notification" class="text-teal-light text-base no-underline cursor-pointer" @click="toggleNotification" v-click-outside="hideNotification">
     <font-awesome-icon :icon="faBell" class="font-bold text-xl"></font-awesome-icon>
-    <i v-if="unreadNotification" class="fa fa-circle text-red-light text-sm absolute pin-t mt-3 ml-3" aria-hidden="true"></i>
+    <font-awesome-icon v-if="unreadNotification" :icon="faCircle" class="text-red-light text-xs absolute pin-t mt-3 ml-3" aria-hidden="true"></font-awesome-icon>
   </div>
   <div v-if="notificationShown" class="absolute bg-white w-64 mt-5 mr-8 py-4 shadow-lg rounded z-50" style="right: 5%;">
-    <a class="flex flex-row items-center list-reset px-4 py-2 text-grey-dark no-underline block" href="#">
-      <img class="w-10 h-10 rounded-full mr-2" :src="generateUrl(user.avatar)">
+    <a v-if="notifications.length > 0" v-for="notification in notifications" class="flex flex-row items-center list-reset px-4 py-2 text-grey-dark no-underline block" href="#">
+      <img class="w-10 h-10 rounded-full mr-2" :src="generateUrl(notification.data.subject.avatar)">
       <div>
         <div class="py-1 text-sm">
-          commented on your post
+          <a :href="'/users/' + notification.data.subject.username" class="no-underline text-blue-light">{{ notification.data.subject.name }}</a>
+          {{ notification.data.action }}
+          <a :href="notification.data.object_type + '/' + notification.data.object_id" class="no-underline text-blue-light">{{ notification.data.object_name }}</a>
         </div>
         <div class="py-1 text-xs">
-          2 min ago
+          {{ notification.date }}
         </div>
       </div>
     </a>
-    <a class="flex flex-row items-center list-reset px-4 py-2 text-grey-dark no-underline block" href="#">
-      <img class="w-10 h-10 rounded-full mr-2" :src="generateUrl(user.avatar)">
-      <div>
-        <div class="py-1 text-sm">
-          commented on your post
-        </div>
-        <div class="py-1 text-xs">
-          2 min ago
-        </div>
-      </div>
-    </a>
+    <div v-if="notifications.length === 0" class="px-4 py-2 text-sm text-grey-dark block">No unread notifications. You're all caught up</div>
     <span class="block border-t"></span>
     <a class="list-reset px-4 pt-2 text-blue-light text-center no-underline block" href="/notifications">
       View All
@@ -36,7 +28,7 @@
 </template>
 
 <script>
-import { faBell } from '@fortawesome/free-solid-svg-icons'
+import { faBell, faCircle } from '@fortawesome/free-solid-svg-icons'
 
 export default {
   data: () => ({
@@ -44,9 +36,27 @@ export default {
     token: Laravel.csrfToken,
     url: navbar.navUrl,
     notificationShown: false,
+    notifications: [],
     unreadNotification: false,
-    faBell
+    faBell,
+    faCircle
   }),
+  created () {
+    axios.get('/notifications')
+      .then((response) => {
+        this.notifications = response.data.notifications
+        let hasUnread = this.notifications.findIndex(notification => notification.read_at === null)
+        if (hasUnread !== -1) {
+          this.showIndicator()
+        }
+      })
+      .catch((error) => {
+        console.log(error.response.data.message)
+      })
+  },
+  mounted () {
+    this.listen()
+  },
   methods: {
     toggleNotification (event) {
       if (this.notificationShown) {
@@ -62,12 +72,31 @@ export default {
         this.profileDropdownShown = false
       }
       this.notificationShown = true
+      this.unreadNotification = false
+      this.notificationRead()
     },
     hideNotification (event) {
       if (event.type === 'keyup' && event.key !== 'Escape') {
         return false
       }
       this.notificationShown = false
+    },
+    listen () {
+      Echo.private('App.User.' + this.user.id)
+        .notification((notification) => {
+          this.unreadNotification = true
+          this.notifications.push(notification)
+          this.showIndicator()
+        })
+    },
+    showIndicator () {
+      this.unreadNotification = true
+    },
+    notificationRead () {
+      axios.put('notifications')
+        .catch((error) => {
+          console.error(error.response.data.message)
+        })
     }
   }
 }
