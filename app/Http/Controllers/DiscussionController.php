@@ -33,7 +33,7 @@ class DiscussionController extends Controller
     }
 
     /**
-     * @param Discussion $discussion
+     * @param  Discussion $discussion
      * @return Discussion
      */
     public function show(Discussion $discussion)
