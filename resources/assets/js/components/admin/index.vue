@@ -21,6 +21,11 @@
       <font-awesome-icon :icon="faInfoCircle" class="text-xl md:text-2xl"></font-awesome-icon>
       <span class="block text-xs font-regular pt-2">{{ 'About' | localize }}</span>
     </div>
+    <div @click="activateThisTab('settings')"
+      :class="[(active === 'settings') ? 'text-teal-dark font-semibold border-teal border-b-2 pb-4 -mb-2 md:-mb-4' : 'cursor-pointer', 'text-center w-1/2']">
+      <font-awesome-icon :icon="faCog" class="text-xl md:text-2xl"></font-awesome-icon>
+      <span class="block text-xs font-regular pt-2">{{ 'Settings' | localize }}</span>
+    </div>
   </div>
 
   <div class="flex flex-row flex-wrap justify-start mt-4">
@@ -28,6 +33,7 @@
     <authBoard :users="users" :activeTab="active"></authBoard>
     <activityBoard :activeTab="active"></activityBoard>
     <aboutBoard :activeTab="active"></aboutBoard>
+    <settingsBoard :activeTab="active"></settingsBoard>
   </div>
 </div>
 </template>
@@ -37,15 +43,17 @@ import aboutBoard from './aboutBoard.vue'
 import authBoard from './authBoard.vue'
 import usersBoard from './usersBoard.vue'
 import activityBoard from './activityBoard.vue'
+import settingsBoard from './settingsBoard.vue'
 import {
   faBolt,
   faInfoCircle,
   faLockOpen,
+  faCog,
   faUsers
 } from '@fortawesome/free-solid-svg-icons'
 
 export default {
-  components: {aboutBoard, authBoard, usersBoard, activityBoard},
+  components: {aboutBoard, authBoard, usersBoard, activityBoard, settingsBoard},
   props: {
     users: {
       required: true,
@@ -57,6 +65,7 @@ export default {
     faBolt,
     faInfoCircle,
     faLockOpen,
+    faCog,
     faUsers
   }),
   methods: {
