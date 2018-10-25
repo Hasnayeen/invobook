@@ -19,7 +19,7 @@ return [
         'fa'    => 'Farsi',
         'fi'    => 'Finnish',
         'fr-FR' => 'French (France)',
-        'hi' 	=> 'Hindi (India)',
+        'hi'    => 'Hindi (India)',
         'id'    => 'Bahasa (Indonesia)',
         'it-IT' => 'Italian (Italy)',
         'nl-NL' => 'Dutch (Netherlands)',
