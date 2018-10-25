@@ -59,8 +59,8 @@ class FileTest extends TestCase
                          'path'          => 'versions.jpeg',
                          'fileable_type' => 'project',
                          'fileable_id'   => $project->id,
-                     ]
-                 ]
+                     ],
+                 ],
              ]);
     }
 }
