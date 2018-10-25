@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons/faSpinner'
 
 export default {
   props: {

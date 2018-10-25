@@ -72,10 +72,8 @@
 </template>
 
 <script>
-import {
-  faChevronDown,
-  faSpinner
-} from '@fortawesome/free-solid-svg-icons'
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons/faChevronDown'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons/faSpinner'
 
 export default {
   props: {
@@ -99,7 +97,7 @@ export default {
         this.activities = response.data.activities
       })
       .catch((error) => {
-        console.log(error.response)
+        console.log(error.response.data.message)
       })
   }
 }
