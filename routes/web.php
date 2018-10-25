@@ -131,10 +131,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('events/{event}', 'EventController@index');
 
-    Route::get('files', 'FileController@index');
-
-    Route::get('files/{file}', 'FileController@index');
-
     /**********************************
         Task
     **********************************/
@@ -162,6 +158,10 @@ Route::group(['middleware' => 'auth'], function () {
     /**********************************
         File
     **********************************/
+
+    Route::get('files', 'FileController@index');
+
+    Route::get('files/{file}', 'FileController@index');
 
     Route::post('files', 'FileController@store');
 
