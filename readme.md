@@ -8,6 +8,7 @@
 [![Scrutinizer](https://scrutinizer-ci.com/g/iluminar/goodwork/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/iluminar/goodwork)
 [![codecov](https://codecov.io/gh/iluminar/goodwork/branch/master/graph/badge.svg)](https://codecov.io/gh/iluminar/goodwork)
 [![StyleCI](https://styleci.io/repos/81873619/shield?branch=dev&style=flat)](https://styleci.io/repos/81873619)
+[![Join on slack](https://img.shields.io/badge/join%20on-slack-green.svg)](https://join.slack.com/t/iluminar/shared_invite/enQtNDY0Mzc3NDkwOTY1LTJhZTNiYmMxZmE4NGU5MTJhODI5OWMyNjc4ZmIyNDVhODRhMGUzNDU0MmM1OGRmZjBiYWM0NjcwNWRjMDJjNTA)
 
 Self hosted project management and collaboration tool inspired by basecamp
 
@@ -32,9 +33,11 @@ Self hosted project management and collaboration tool inspired by basecamp
 
 ## About Goodwork
 
-Goodwork is a simple project management and collaboration tool for all kind of teams. It is open source and MIT [See License](https://github.com/iluminar/goodwork/blob/dev/LICENSE) licensed. Goodwork is a self-hosted software so no dependency on anyone and only you keep your data.
+Goodwork is a simple project management and collaboration tool for all kind of teams. It is open source and [MIT licensed](https://github.com/iluminar/goodwork/blob/dev/LICENSE). Goodwork is a self-hosted software so no dependency on anyone and only you keep your data.
 
 Goodwork brings you all the components required for your project to run smoothly in one place so that you have single source of truth. Instead of using a collection of tools or service which makes everything messy and hard to find important details from stuff scattered all over the place, Goodwork organizes everything in a central place where everyone in the company knows what to do, knows where things stand and find stuff without having to ask around all the time.
+
+> Available in [Arabic, Bahasa, Dutch, English, Farsi, Finnish, French, Italian, Polish, Portuguese, Russian, Spanish, Swedish, Thai, Turkish] language
 
 [Overview](https://github.com/iluminar/goodwork/wiki/Overview)
 
@@ -53,9 +56,7 @@ You can check out an instance of the application that we use as a guest user usi
 [Install manually](https://github.com/iluminar/goodwork/wiki/Installation#setup-usual-way-if-youre-not-using-docker)
 
 
-## Screenshots
-
-![Login](https://i.imgur.com/hcSwUA5.png)
+## Screenshots <small>[↑Top](https://github.com/iluminar/goodwork#goodwork)</small>
 
 ![Dashboard](https://i.imgur.com/oPlF1bi.png)
 
@@ -65,30 +66,40 @@ You can check out an instance of the application that we use as a guest user usi
 
 ![Task Details](https://i.imgur.com/J6wKeNL.png)
 
+![Discussion Board](https://i.imgur.com/DgsIScx.png)
+
+![Create Discussion Form](https://i.imgur.com/gHKGAjc.png)
+
+![Discussion Details](https://i.imgur.com/NchQpJE.png)
+
+![Files Board](https://i.imgur.com/iaQDmQR.png)
+
+![Message Board](https://i.imgur.com/neakUm5.png)
+
+![Direct Message](https://i.imgur.com/C3kbApV.png)
+
 ![Profile Page](https://i.imgur.com/MOS2k8l.png)
 
 ![Account Page](https://i.imgur.com/TelYaCs.png)
 
-![Notifications](https://i.imgur.com/XGdakw9.png)
-
-![Messages](https://i.imgur.com/Qb9hkc6.png)
+![Activities](https://i.imgur.com/FfYSOq1.png)
 
 ![Roles Board](https://i.imgur.com/87gbE0v.png)
 
-## Contributing
+## Contributing <small>[↑Top](https://github.com/iluminar/goodwork#goodwork)</small>
 
 Thank you for considering contributing to the Goodwork! The contribution guide can be found in the [Contribution Guideline](https://github.com/iluminar/goodwork/wiki/Contribution-Guideline).
 
-## Security Vulnerabilities
+## Security Vulnerabilities <small>[↑Top](https://github.com/iluminar/goodwork#goodwork)</small>
 
 If you discover a security vulnerability within Goodwork, please send an e-mail to searching.nehal@gmail.com. All security vulnerabilities will be promptly addressed.
 
-## Credits
+## Credits <small>[↑Top](https://github.com/iluminar/goodwork#goodwork)</small>
 
-* Author: [Nehal Hasnayeen](https://github.com/Hasnayeen)
+* Author: [Nehal Hasnayeen](https://github.com/Hasnayeen) (https://hasnayeen.github.io)
 
 * [Other Contributors](https://github.com/iluminar/goodwork/graphs/contributors)
 
-## License
+## License <small>[↑Top](https://github.com/iluminar/goodwork#goodwork)</small>
 
 Goodwork is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
