@@ -3,7 +3,7 @@
   <div class="flex flex-row justify-between md:justify-around md:my-6 py-2 md:py-4 bg-white shadow md:rounded text-grey">
     <div @click="activateThisTab('users')"
       :class="[(active === 'users') ? 'text-teal-dark font-semibold border-teal border-b-2 pb-2 md:pb-4 -mb-2 md:-mb-4' : 'cursor-pointer', 'text-center w-1/2']">
-      <font-awesome-icon :icon="faUsers" class="text-xl md:text-2xl"></font-awesome-icon>
+      <font-awesome-icon :icon="faUser" class="text-xl md:text-2xl"></font-awesome-icon>
       <span class="block text-xs font-regular pt-2">{{ 'Users' | localize }}</span>
     </div>
     <div @click="activateThisTab('auth')"
@@ -16,15 +16,15 @@
       <font-awesome-icon :icon="faBolt" class="text-xl md:text-2xl"></font-awesome-icon>
       <span class="block text-xs font-regular pt-2">{{ 'Activities' | localize }}</span>
     </div>
-    <div @click="activateThisTab('about')"
-      :class="[(active === 'about') ? 'text-teal-dark font-semibold border-teal border-b-2 pb-4 -mb-2 md:-mb-4' : 'cursor-pointer', 'text-center w-1/2']">
-      <font-awesome-icon :icon="faInfoCircle" class="text-xl md:text-2xl"></font-awesome-icon>
-      <span class="block text-xs font-regular pt-2">{{ 'About' | localize }}</span>
-    </div>
     <div @click="activateThisTab('settings')"
       :class="[(active === 'settings') ? 'text-teal-dark font-semibold border-teal border-b-2 pb-4 -mb-2 md:-mb-4' : 'cursor-pointer', 'text-center w-1/2']">
       <font-awesome-icon :icon="faCog" class="text-xl md:text-2xl"></font-awesome-icon>
       <span class="block text-xs font-regular pt-2">{{ 'Settings' | localize }}</span>
+    </div>
+    <div @click="activateThisTab('about')"
+      :class="[(active === 'about') ? 'text-teal-dark font-semibold border-teal border-b-2 pb-4 -mb-2 md:-mb-4' : 'cursor-pointer', 'text-center w-1/2']">
+      <font-awesome-icon :icon="faInfoCircle" class="text-xl md:text-2xl"></font-awesome-icon>
+      <span class="block text-xs font-regular pt-2">{{ 'About' | localize }}</span>
     </div>
   </div>
 
@@ -44,13 +44,11 @@ import authBoard from './authBoard.vue'
 import usersBoard from './usersBoard.vue'
 import activityBoard from './activityBoard.vue'
 import settingsBoard from './settingsBoard.vue'
-import {
-  faBolt,
-  faInfoCircle,
-  faLockOpen,
-  faCog,
-  faUsers
-} from '@fortawesome/free-solid-svg-icons'
+import { faBolt } from '@fortawesome/free-solid-svg-icons/faBolt'
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons/faInfoCircle'
+import { faLockOpen } from '@fortawesome/free-solid-svg-icons/faLockOpen'
+import { faCog } from '@fortawesome/free-solid-svg-icons/faCog'
+import { faUser } from '@fortawesome/free-solid-svg-icons/faUser'
 
 export default {
   components: {aboutBoard, authBoard, usersBoard, activityBoard, settingsBoard},
@@ -66,7 +64,7 @@ export default {
     faInfoCircle,
     faLockOpen,
     faCog,
-    faUsers
+    faUser
   }),
   methods: {
     activateThisTab (tab) {
