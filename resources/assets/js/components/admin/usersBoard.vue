@@ -35,7 +35,7 @@
 
 <script>
 import inviteModal from './../partials/inviteModal.vue'
-import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
+import { faEllipsisH } from '@fortawesome/free-solid-svg-icons/faEllipsisH'
 
 export default {
   props: {

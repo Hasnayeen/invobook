@@ -27,4 +27,17 @@ class FileRepository
     {
         return $this->model->insert($data);
     }
+
+    /**
+     * @return mixed
+     */
+    public function getAllFiles()
+    {
+        return $this->model
+                    ->where([
+                        'fileable_type' => request('fileable_type'),
+                        'fileable_id'   => request('fileable_id'),
+                    ])
+                    ->get();
+    }
 }
