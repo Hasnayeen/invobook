@@ -129,4 +129,75 @@ class DiscussionTest extends TestCase
 
         $this->actingAs($this->user)->delete("/discussions/{$discussion->id}");
     }
+
+    /** @test */
+    public function authorized_user_with_permission_can_update_discussion()
+    {
+        $project = factory(\App\Models\Project::class)->create();
+        $discussion = factory(\App\Models\Discussion::class)->create([
+            'posted_by'           => $this->user->id,
+            'discussionable_type' => 'project',
+            'discussionable_id'   => $project->id,
+        ]);
+        $category = factory(\App\Models\Category::class)->create();
+
+        $permission = Permission::create(['name' => 'edit discussion.project->' . $project->id]);
+        $this->user->givePermissionTo($permission);
+
+        $this->actingAs($this->user)->patch('discussions/'.$discussion->id, [
+            'name'                => 'Updated article',
+            'category_id'         => $category->id,
+            'content'             => '<h1>Medium heading</h1><p>And some <strong>bold text</strong></p>',
+            'raw_content'         => '{"ops":[{"insert":"Medium Heading"},{"attributes":{"header":1},"insert":"\n"},{"insert":"And some "},{"attributes":{"bold":true},"insert":"bold text"},{"insert":"\n"}]}',
+            'draft'               => true,
+        ])->assertJsonFragment([
+            'status'              => 'success',
+            'message'             => 'The discussion has been updated',
+            'name'                => 'Updated article',
+            'content'             => '<h1>Medium heading</h1><p>And some <strong>bold text</strong></p>',
+            'raw_content'         => '{"ops":[{"insert":"Medium Heading"},{"attributes":{"header":1},"insert":"\n"},{"insert":"And some "},{"attributes":{"bold":true},"insert":"bold text"},{"insert":"\n"}]}',
+            'draft'               => true,
+        ]);
+
+        $this->assertDatabaseHas('discussions', [
+            'name'                => 'Updated article',
+            'category_id'         => $category->id,
+            'content'             => '<h1>Medium heading</h1><p>And some <strong>bold text</strong></p>',
+            'raw_content'         => '{"ops":[{"insert":"Medium Heading"},{"attributes":{"header":1},"insert":"\n"},{"insert":"And some "},{"attributes":{"bold":true},"insert":"bold text"},{"insert":"\n"}]}',
+            'draft'               => true,
+        ]);
+    }
+
+    /**
+     * @expectedException Illuminate\Auth\Access\AuthorizationException
+     * @test
+     */
+    public function user_without_permission_cannot_update_discussion()
+    {
+        $project = factory(\App\Models\Project::class)->create();
+        $discussion = factory(\App\Models\Discussion::class)->create([
+            'posted_by'           => $this->user->id,
+            'discussionable_type' => 'project',
+            'discussionable_id'   => $project->id,
+        ]);
+        Permission::create(['name' => 'edit discussion.project->' . $project->id]);
+
+        $this->actingAs($this->user)->patch('discussions/'.$discussion->id, []);
+    }
+
+    /**
+     * @expectedException Illuminate\Auth\Access\AuthorizationException
+     * @test
+     */
+    public function unauthorized_user_cannot_update_discussion()
+    {
+        $project = factory(\App\Models\Project::class)->create();
+        $discussion = factory(\App\Models\Discussion::class)->create([
+            'discussionable_type' => 'project',
+            'discussionable_id'   => $project->id,
+        ]);
+        Permission::create(['name' => 'edit discussion.project->' . $project->id]);
+
+        $this->actingAs($this->user)->patch('discussions/'.$discussion->id, []);
+    }
 }
