@@ -36,4 +36,16 @@ class FileController extends Controller
             ]);
         }
     }
+
+    /**
+     * @param \App\Repositories\FileRepository $fileRepository
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function index(FileRepository $fileRepository)
+    {
+        $files = $fileRepository->getAllFiles();
+
+        return $this->successResponse(null, 'files', $files);
+    }
 }
