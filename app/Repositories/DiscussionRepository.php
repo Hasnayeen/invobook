@@ -31,4 +31,11 @@ class DiscussionRepository
     {
         return $this->model->where(['discussionable_type' => $type, 'discussionable_id' => $id, 'draft' => false, 'archived' => false])->with(['creator:id,avatar,name,username', 'category:id,name'])->get(['id', 'name', 'content', 'posted_by', 'created_at', 'category_id']);
     }
+
+    public function update(Discussion $discussion, $data)
+    {
+        $discussion->update($data);
+
+        return $discussion;
+    }
 }
