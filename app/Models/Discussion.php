@@ -28,7 +28,7 @@ class Discussion extends Model
 
     protected $casts = [
         'posted_by' => 'integer',
-        'draft' => 'boolean'
+        'draft'     => 'boolean'
     ];
 
     public function creator()

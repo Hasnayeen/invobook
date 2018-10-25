@@ -137,7 +137,7 @@ class DiscussionTest extends TestCase
         $discussion = factory(\App\Models\Discussion::class)->create([
             'posted_by' => $this->user->id,
             'discussionable_type' => 'project',
-            'discussionable_id' => $project->id
+            'discussionable_id'   => $project->id
         ]);
         $category = factory(\App\Models\Category::class)->create();
 
@@ -175,10 +175,10 @@ class DiscussionTest extends TestCase
     public function user_without_permission_cannot_update_discussion()
     {
         $project = factory(\App\Models\Project::class)->create();
-        $discussion = factory(Discussion::class)->create([
+        $discussion = factory(\App\Models\Discussion::class)->create([
             'posted_by' => $this->user->id,
             'discussionable_type' => 'project',
-            'discussionable_id' => $project->id
+            'discussionable_id'   => $project->id
         ]);
         Permission::create(['name' => 'edit discussion.project->' . $project->id]);
 
@@ -192,9 +192,9 @@ class DiscussionTest extends TestCase
     public function unauthorized_user_cannot_update_discussion()
     {
         $project = factory(\App\Models\Project::class)->create();
-        $discussion = factory(Discussion::class)->create([
+        $discussion = factory(\App\Models\Discussion::class)->create([
             'discussionable_type' => 'project',
-            'discussionable_id' => $project->id
+            'discussionable_id'   => $project->id
         ]);
         Permission::create(['name' => 'edit discussion.project->' . $project->id]);
 
