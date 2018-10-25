@@ -1,9 +1,20 @@
 <template>
   <div class="container mx-auto px-4 my-6 w-full md:w-md lg:w-lg xl:w-xl xxl:w-2xl">
-    <notification-popup :messageType="messageType" :message="message" @close="closeNotification" :show-notification="showNotification"></notification-popup>
-    <div class="text-center text-grey-dark font-semibold text-xl mb-4">
+    <div class="text-grey-dark font-semibold text-2xl mb-4 flex items-center justify-center">
       {{office.name}}
-      <p class="text-base pt-2">December 5, 2017 - December 13, 2017</p>
+      <span @click="toggleDropdownMenu" v-click-outside="closeDropdownMenu" class="bg-white p-1 text-sm rounded-full shadow ml-4 cursor-pointer flex items-center">
+        <font-awesome-icon :icon="faCog"></font-awesome-icon>
+      </span>
+      <div v-if="dropdownMenuShown" class="relative">
+        <ul class="list-reset bg-white rounded shadow-lg py-2 absolute pin-r mt-4 text-base text-left font-normal whitespace-no-wrap">
+          <li class="px-4 py-2 hover:bg-grey-light cursor-pointer">
+            Show All Members
+          </li>
+          <li class="px-4 py-2 hover:bg-grey-light cursor-pointer">
+            Delete
+          </li>
+        </ul>
+      </div>
     </div>
 
     <!-- Add Member Form -->
@@ -41,22 +52,21 @@ import eventBoard from './../partials/eventBoard.vue'
 import fileBoard from './../partials/fileBoard.vue'
 import activity from './../partials/activity.vue'
 import addMemberForm from './../partials/addMemberForm.vue'
-import notificationPopup from '../partials/notificationPopup.vue'
 import tabMenu from './../partials/tabMenu.vue'
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus'
+import { faCog } from '@fortawesome/free-solid-svg-icons/faCog'
 
 export default {
   components: {
-    taskBoard, discussionBoard, messagesBoard, eventBoard, fileBoard, activity, addMemberForm, notificationPopup, tabMenu
+    taskBoard, discussionBoard, messagesBoard, eventBoard, fileBoard, activity, addMemberForm, tabMenu
   },
   props: ['office'],
   data: () => ({
     addMemberFormShown: false,
     active: 'tasks',
-    showNotification: false,
-    message: '',
-    messageType: '',
-    faPlus
+    dropdownMenuShown: false,
+    faPlus,
+    faCog
   }),
   methods: {
     showAddMemberForm () {
@@ -66,27 +76,28 @@ export default {
       this.addMemberFormShown = false
     },
     addMember (data) {
+      let messageType
       if (data.user) {
         this.message = data.message
-        this.messageType = 'success'
+        messageType = 'success'
         this.office.members.push(data.user)
       } else {
-        this.messageType = 'error'
+        messageType = 'error'
         this.message = data.message
       }
-      this.showNotification = true
       this.addMemberFormShown = false
-      setTimeout(() => {
-        this.showNotification = false
-      }, 3000)
+      EventBus.$emit('notification', data.message, messageType)
     },
     activateTab (tab) {
       if (tab !== this.active) {
         this.active = tab
       }
     },
-    closeNotification () {
-      this.showNotification = false
+    toggleDropdownMenu () {
+      this.dropdownMenuShown = !this.dropdownMenuShown
+    },
+    closeDropdownMenu () {
+      this.dropdownMenuShown = false
     }
   }
 }
