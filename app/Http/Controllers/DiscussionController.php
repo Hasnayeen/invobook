@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Discussion;
 use App\Repositories\DiscussionRepository;
+use App\Http\Requests\UpdateDiscussionRequest;
 use App\Http\Requests\ValidateDiscussionCreation;
 
 class DiscussionController extends Controller
@@ -49,5 +50,16 @@ class DiscussionController extends Controller
             'status'  => 'success',
             'message' => trans('misc.The discussion has been deleted'),
         ]);
+    }
+
+    public function update(UpdateDiscussionRequest $request, Discussion $discussion, DiscussionRepository $repository)
+    {
+        $discussion = $repository->update($discussion, $request->all());
+
+        return response()->json([
+            'status'     => 'success',
+            'message'    => trans('misc.The discussion has been updated'),
+            'discussion' => $discussion,
+        ], 201);
     }
 }
