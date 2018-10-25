@@ -45,10 +45,8 @@
 <script>
 import createRoleForm from './../forms/createRoleForm'
 import assignPermissionForm from './../forms/assignPermissionForm'
-import {
-  faPlusCircle,
-  faTrashAlt
-} from '@fortawesome/free-solid-svg-icons'
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons/faPlusCircle'
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons/faTrashAlt'
 
 export default {
   components: {createRoleForm, assignPermissionForm},
