@@ -144,6 +144,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('tasks/{task}', 'TaskController@show');
 
+    Route::post('tasks/{task}/statuses', 'TaskStatusController@index');
+
     Route::delete('tasks/{task}', 'TaskController@delete')->middleware('can:delete,task');
 
     /**********************************
