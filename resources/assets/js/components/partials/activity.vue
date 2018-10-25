@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
+import { faEllipsisH } from '@fortawesome/free-solid-svg-icons/faEllipsisH'
 
 export default {
   props: ['resource', 'resourceType'],
