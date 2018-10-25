@@ -12,6 +12,7 @@
     <title>{{ config('app.name', 'GOODWORK') }} | {{ $title }}</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300,400,600">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
     <link href="{{ mix('css/main.min.css') }}" rel="stylesheet">
 
     @yield('style')
@@ -42,7 +43,15 @@
 
         {{ $slot }}
     </div>
-
+    <footer class="text-center">
+        <h3>Community</h3>
+        <div class="social-media">
+            <a href="#"><i class="fab fa-facebook-square"></i></a>
+            <a href="#"><i class="fab fa-twitter-square"></i></a>
+            <a href="#"><i class="fab fa-meetup"></i></a>
+            <a href="#"><i class="fab fa-github-square"></i></a>
+        </div>
+    </footer>
     <script src="{{ asset('/js/manifest.js') }}"></script>
     <script src="{{ asset('/js/vendor.min.js') }}"></script>
     {{ $script }}
