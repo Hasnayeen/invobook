@@ -55,17 +55,40 @@ class UserTest extends TestCase
     }
 
     /** @test */
-    public function user_can_change_email_and_passwords()
+    public function user_can_change_email()
     {
         $this->actingAs($this->user)->put('users/' . $this->user->username . '/account', [
-            'email'                         => 'new@email.com',
-            'new_password'                  => 'new_password',
-            'new_password_confirmation'     => 'new_password',
+            'email' => 'new@email.com',
         ])->assertJson([
             'status'  => 'success',
             'message' => 'Account details are updated',
         ]);
         $this->assertDatabaseHas('users', ['email' => 'new@email.com']);
+    }
+
+    /** @test */
+    public function user_can_change_username()
+    {
+        $newUsername = 'new' . $this->user->username;
+        $this->actingAs($this->user)->put('users/' . $this->user->username . '/account', [
+            'username' => $newUsername,
+        ])->assertJson([
+            'status'  => 'success',
+            'message' => 'Account details are updated',
+        ]);
+        $this->assertDatabaseHas('users', ['username' => $newUsername]);
+    }
+
+    /** @test */
+    public function user_can_change_passwords()
+    {
+        $this->actingAs($this->user)->put('users/' . $this->user->username . '/account', [
+            'new_password'              => 'new_password',
+            'new_password_confirmation' => 'new_password',
+        ])->assertJson([
+            'status'  => 'success',
+            'message' => 'Account details are updated',
+        ]);
         password_verify('new_password', $this->user->password);
     }
 
@@ -126,10 +149,19 @@ class UserTest extends TestCase
         $response = $this->json('GET', '/username', ['username' => $this->user->username]);
 
         $response
+            ->assertStatus(409)
+            ->assertJson([
+                'status'  => 'error',
+                'message' => 'misc.Username exists',
+            ]);
+
+        $response = $this->json('GET', '/username', ['username' => $this->user->username . 'invert']);
+
+        $response
             ->assertStatus(200)
             ->assertJson([
                 'status'  => 'success',
-                'message' => 'misc.Username exists',
+                'message' => 'misc.Username does not exist',
             ]);
     }
 }

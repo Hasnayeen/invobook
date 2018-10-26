@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Http\Requests\UpdateUserAccount;
 
 class UserAccountController extends Controller
@@ -11,6 +12,9 @@ class UserAccountController extends Controller
         $user = auth()->user();
         if ($request->get('email')) {
             $user->email = $request->get('email');
+        }
+        if ($request->get('username') && !User::where('username', $request->username)->exists()) {
+            $user->username = $request->get('username');
         }
         if ((auth()->user()->username !== 'guest') && $request->get('new_password')) {
             $user->password = bcrypt($request->get('new_password'));
