@@ -35,10 +35,8 @@
 
 <script>
 import attachPermissionForm from './../forms/attachPermissionForm'
-import {
-  faPlusCircle,
-  faTrashAlt
-} from '@fortawesome/free-solid-svg-icons'
+import faPlusCircle from '@fortawesome/free-solid-svg-icons/faPlusCircle'
+import faTrashAlt from '@fortawesome/free-solid-svg-icons/faTrashAlt'
 
 export default {
   components: {attachPermissionForm},

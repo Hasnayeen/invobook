@@ -95,8 +95,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('discussions', 'DiscussionController@store')->middleware('can:create,App\Models\Discussion');
 
-    Route::get('discussions', 'DiscussionController@index');
     Route::get('discussions/{discussion}', 'DiscussionController@show');
+
+    Route::patch('discussions/{discussion}', 'DiscussionController@update')->middleware('can:update,discussion');
 
     Route::delete('discussions/{discussion}', 'DiscussionController@delete')->middleware('can:delete,discussion');
 
@@ -130,10 +131,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('events/{event}', 'EventController@index');
 
-    Route::get('files', 'FileController@index');
-
-    Route::get('files/{file}', 'FileController@index');
-
     /**********************************
         Task
     **********************************/
@@ -161,6 +158,10 @@ Route::group(['middleware' => 'auth'], function () {
     /**********************************
         File
     **********************************/
+
+    Route::get('files', 'FileController@index');
+
+    Route::get('files/{file}', 'FileController@index');
 
     Route::post('files', 'FileController@store');
 
