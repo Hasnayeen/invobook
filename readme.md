@@ -10,6 +10,8 @@
 [![StyleCI](https://styleci.io/repos/81873619/shield?branch=dev&style=flat)](https://styleci.io/repos/81873619)
 [![Join on slack](https://img.shields.io/badge/join%20on-slack-green.svg)](https://join.slack.com/t/iluminar/shared_invite/enQtNDY0Mzc3NDkwOTY1LTJhZTNiYmMxZmE4NGU5MTJhODI5OWMyNjc4ZmIyNDVhODRhMGUzNDU0MmM1OGRmZjBiYWM0NjcwNWRjMDJjNTA)
 
+<a href="https://github.com/iluminar/goodwork"><img src="logos/logo.svg" alt="Goodwork" style="max-width:100%;"></a>
+
 Self hosted project management and collaboration tool inspired by basecamp
 
 <hr>
@@ -97,6 +99,8 @@ If you discover a security vulnerability within Goodwork, please send an e-mail 
 ## Credits <small>[↑Top](https://github.com/iluminar/goodwork#goodwork)</small>
 
 * Author: [Nehal Hasnayeen](https://github.com/Hasnayeen) (https://hasnayeen.github.io)
+
+* Logotype: [Malcolm Nihlén](https://github.com/scriptcoded) ([scriptcoded](https://github.com/scriptcoded))
 
 * [Other Contributors](https://github.com/iluminar/goodwork/graphs/contributors)
 
