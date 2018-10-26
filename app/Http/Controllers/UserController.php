@@ -24,7 +24,7 @@ class UserController extends Controller
     public function sentInvitationToRegister(Request $request)
     {
         try {
-            if (! User::where('email', $request->email)->first()) {
+            if (!User::where('email', $request->email)->first()) {
                 Mail::to($request->email)
                     ->send(new SendInvitationToRegister());
 
@@ -62,15 +62,15 @@ class UserController extends Controller
         try {
             if (User::where('username', $request->username)->exists()) {
                 return response()->json([
-                    'status'  => 'success',
+                    'status'  => 'error',
                     'message' => trans('misc.Username exists'),
-                ]);
+                ], 409);
             }
 
             return response()->json([
-                'status'  => 'error',
-                'message' => trans('misc.Username doesnt exist'),
-            ], 409);
+                'status'  => 'success',
+                'message' => trans('misc.Username does not exist'),
+            ]);
         } catch (Exception $e) {
             return response()->json([
                 'status'  => 'error',
