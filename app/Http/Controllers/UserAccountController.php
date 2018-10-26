@@ -13,7 +13,7 @@ class UserAccountController extends Controller
         if ($request->get('email')) {
             $user->email = $request->get('email');
         }
-        if ($request->get('username') && !User::where('username', $request->username)->exists()) {
+        if ($request->get('username') && ! User::where('username', $request->username)->exists()) {
             $user->username = $request->get('username');
         }
         if ((auth()->user()->username !== 'guest') && $request->get('new_password')) {
