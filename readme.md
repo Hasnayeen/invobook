@@ -100,6 +100,8 @@ If you discover a security vulnerability within Goodwork, please send an e-mail 
 
 * Author: [Nehal Hasnayeen](https://github.com/Hasnayeen) (https://hasnayeen.github.io)
 
+* Logotype: [Malcolm Nihlén](https://github.com/scriptcoded) ([scriptcoded](https://github.com/scriptcoded))
+
 * [Other Contributors](https://github.com/iluminar/goodwork/graphs/contributors)
 
 ## License <small>[↑Top](https://github.com/iluminar/goodwork#goodwork)</small>
