@@ -1,4 +1,3 @@
-### Goodwork
 [![License](http://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/iluminar/goodwork/blob/dev/LICENSE)
 [![Build Status](https://travis-ci.org/iluminar/goodwork.svg?branch=dev)](https://travis-ci.org/iluminar/goodwork)
 [![Stable Version](https://poser.pugx.org/iluminar/goodwork/v/stable)](https://github.com/iluminar/goodwork)
@@ -10,7 +9,7 @@
 [![StyleCI](https://styleci.io/repos/81873619/shield?branch=dev&style=flat)](https://styleci.io/repos/81873619)
 [![Join on slack](https://img.shields.io/badge/join%20on-slack-green.svg)](https://join.slack.com/t/iluminar/shared_invite/enQtNDY0Mzc3NDkwOTY1LTJhZTNiYmMxZmE4NGU5MTJhODI5OWMyNjc4ZmIyNDVhODRhMGUzNDU0MmM1OGRmZjBiYWM0NjcwNWRjMDJjNTA)
 
-<a href="https://github.com/iluminar/goodwork"><img src="logos/logo.svg" alt="Goodwork" style="max-width:100%;"></a>
+<a href="https://github.com/iluminar/goodwork"><img src="public/logos/logo.svg" alt="Goodwork" style="max-width:100%;"></a>
 
 Self hosted project management and collaboration tool inspired by basecamp
 
