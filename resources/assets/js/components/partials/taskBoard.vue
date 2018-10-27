@@ -1,6 +1,6 @@
 <template>
 <div :class="{'hidden': (activeTab != 'tasks')}" class="w-full">
-  <create-task-form ref="taskform" :resource="resource" :resourceType="resourceType" :form-shown="createTaskFormShown" @close="closeCreateTaskForm"></create-task-form>
+  <create-task-form ref="taskform" :resource="resource" :resourceType="resourceType" :form-shown="createTaskFormShown" :tasks="tasks" @close="closeCreateTaskForm"></create-task-form>
 
   <task-details v-if="task" :index="index" :task="task" :taskDetailsShown="taskDetailsShown" @delete="deleteTask" @close="closeTaskDetails"></task-details>
 
@@ -47,6 +47,14 @@ export default {
     task: {},
     index: null
   }),
+  async created () {
+    await this.getAllTasks()
+    const id = new URL(location.href).searchParams.get('id')
+    this.task = this.tasks.find(task => task.id === parseInt(id))
+    if (id) {
+      this.taskDetailsShown = true
+    }
+  },
   methods: {
     showCreateTaskForm () {
       this.createTaskFormShown = true
@@ -58,20 +66,20 @@ export default {
       if (newTask) this.tasks.push(newTask)
       this.createTaskFormShown = false
     },
-    getAllTasks () {
-      if (this.activeTab === 'tasks' && this.tasks.length < 1) {
-        axios.get('/tasks', {
-          params: {
-            resource_type: this.resourceType,
-            resource_id: this.resource.id
-          }
-        })
-          .then((response) => {
-            this.tasks = response.data.tasks
-          })
-          .catch((error) => {
-            console.log(error.response.data.message)
-          })
+    async getAllTasks () {
+      try {
+        if (this.activeTab === 'tasks' && this.tasks.length < 1) {
+          let { data } = await axios({
+            url: '/tasks',
+            params: {
+              resource_type: this.resourceType,
+              resource_id: this.resource.id
+            }})
+          this.tasks = data.tasks
+          return this.tasks
+        }
+      } catch (error) {
+        console.error(error)
       }
     },
     showTaskDetails (index) {
@@ -105,9 +113,6 @@ export default {
   },
   watch: {
     activeTab: 'getAllTasks'
-  },
-  created () {
-    this.getAllTasks()
   }
 }
 </script>

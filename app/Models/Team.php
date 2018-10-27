@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\Contracts\HasMembers;
 use Spatie\Activitylog\Traits\LogsActivity;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Team extends Entity
+class Team extends Entity implements HasMembers
 {
     use LogsActivity;
 
@@ -12,7 +14,10 @@ class Team extends Entity
 
     protected $fillable = ['name', 'description', 'office_id', 'owner_id'];
 
-    public function members()
+    /**
+     * @return BelongsToMany
+     */
+    public function members(): BelongsToMany
     {
         return $this->belongsToMany(\App\Models\User::class, 'team_user', 'team_id', 'user_id');
     }

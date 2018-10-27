@@ -56,6 +56,9 @@ export default {
   methods: {
     openCreateProjectModal () {
       this.showCreateProjectForm = true
+      this.$nextTick(() => {
+        this.$refs.focusInput.focus()
+      })
     },
     closeCreateProjectModal () {
       this.showCreateProjectForm = false

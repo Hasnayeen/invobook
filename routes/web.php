@@ -95,7 +95,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('discussions', 'DiscussionController@store')->middleware('can:create,App\Models\Discussion');
 
-    Route::get('discussions/{discussion}', 'DiscussionController@index');
+    Route::get('discussions/{discussion}', 'DiscussionController@show');
+
+    Route::patch('discussions/{discussion}', 'DiscussionController@update')->middleware('can:update,discussion');
 
     Route::delete('discussions/{discussion}', 'DiscussionController@delete')->middleware('can:delete,discussion');
 
@@ -125,11 +127,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('events', 'EventController@index');
 
+    Route::post('events', 'EventController@store');
+
     Route::get('events/{event}', 'EventController@index');
-
-    Route::get('files', 'FileController@index');
-
-    Route::get('files/{file}', 'FileController@index');
 
     /**********************************
         Task
@@ -156,6 +156,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('tasks/{task}/tags/{tag}', 'TaskTagController@delete')->middleware('can:detach,App\Models\Tag,task');
 
     /**********************************
+        File
+    **********************************/
+
+    Route::get('files', 'FileController@index');
+
+    Route::get('files/{file}', 'FileController@index');
+
+    Route::post('files', 'FileController@store');
+
+    /**********************************
         Comment
     **********************************/
 
@@ -166,12 +176,22 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/comments/{comment}', 'CommentController@delete')->middleware('can:delete,comment');
 
     /**********************************
+        Notification
+    **********************************/
+
+    Route::get('notifications', 'NotificationController@index');
+
+    Route::put('notifications', 'NotificationController@update');
+
+    /**********************************
         User
     **********************************/
 
     Route::get('users', 'UserController@index');
 
     Route::get('users/{user}', 'UserController@show');
+
+    Route::get('username', 'UserController@checkUsername');
 
     Route::put('users/{user}/account', 'UserAccountController@update');
 

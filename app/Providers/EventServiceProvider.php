@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Events\DiscussionCreated;
 use App\Listeners\LogUserRegistration;
 use Illuminate\Auth\Events\Registered;
+use App\Listeners\NotifyDiscussionParticipants;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -16,6 +18,9 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             LogUserRegistration::class,
+        ],
+        DiscussionCreated::class => [
+            NotifyDiscussionParticipants::class,
         ],
     ];
 

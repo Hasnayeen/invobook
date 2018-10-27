@@ -1,5 +1,5 @@
 <template>
-<div @focus="clearTitleNotification()" v-if="messageBoxShown" class="">
+<div id="direct-message-box" @focus="clearTitleNotification()" v-if="messageBoxShown" class="">
   <div class="fixed pin-t bg-white text-lg rounded mx-auto md:w-1/2 mt-16 pt-6 shadow-lg z-50 pin-x">
     <div class="bg-white text-2xl text-grey-dark text-center px-8 pb-2">
       Your Messages
@@ -135,11 +135,14 @@ export default {
       Echo.join('user.' + this.authUser.id)
         .listen('MessageCreated', event => {
           event.message.user = event.user
-          this.messages.push(event.message)
+          if (!this.messageBoxShown) {
+            EventBus.$emit('new-direct-message')
+          }
           if (document.hidden) {
             this.unreadMessage += 1
             document.title = '(' + this.unreadMessage + ') ' + this.title
           }
+          this.messages.push(event.message)
         })
     },
     clearTitleNotification () {

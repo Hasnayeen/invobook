@@ -15,17 +15,20 @@ class HeadquarterOfficeSeeder extends Seeder
      */
     public function run()
     {
+        $user = User::first();
         DB::table('offices')->insert([
             'name'        => 'Headquarter',
             'description' => 'Central office',
             'created_at'  => Carbon::now(),
             'updated_at'  => Carbon::now(),
-            'owner_id'    => 1,
+            'owner_id'    => $user->id,
         ]);
         $office = Office::where('name', 'Headquarter')->first();
-        $user = User::find(1);
         $user->offices()->attach($office->id);
-        $permission = Permission::create(['name' => 'view office->' . $office->id]);
-        $user->givePermissionTo($permission);
+        $user->givePermissionTo([
+            Permission::create(['name' => 'view office->' . $office->id]),
+            Permission::create(['name' => 'create discussion.office->' . $office->id]),
+            Permission::create(['name' => 'create task.office->' . $office->id]),
+        ]);
     }
 }

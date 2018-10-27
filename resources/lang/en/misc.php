@@ -7,6 +7,7 @@ return [
     'Comment has been saved'                     => 'Comment has been saved',
     'Your post has been saved'                   => 'Your post has been saved',
     'New discussion post has been created'       => 'New discussion post has been created',
+    'The discussion has been updated'            => 'The discussion has been updated',
     'The discussion has been deleted'            => 'The discussion has been deleted',
     'User added'                                 => 'User added to the :type',
     'User removed'                               => 'User removed from the :type',

@@ -41,6 +41,7 @@ class DiscussionPolicy
      */
     public function update(User $user, Discussion $discussion)
     {
+        return $user->hasPermissionTo('edit discussion.' . $discussion->discussionable_type . '->' . $discussion->discussionable->id);
     }
 
     /**

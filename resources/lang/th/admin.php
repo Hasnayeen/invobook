@@ -16,7 +16,7 @@ return [
     'Filters'                        => 'กรอง',
     'Apply'                          => 'นำไปใช้',
     'Load More'                      => 'โหลดเพิ่มเติม',
-    'Check for Updates'              => 'ตรวจสอบการอัพเดท',
+    'Check for Updates'              => 'ตรวจสอบการอัปเดต',
     'Filter by Activity'             => 'กรองตามกิจกรรม',
     'Filter by User'                 => 'กรองตามผู้ใช้งาน',
     'Filter by Date'                 => 'กรองตามวันที่',

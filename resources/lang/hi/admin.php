@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'Users'                          => 'उपयोगकर्ता',
+    'Roles & Permissions'            => 'भूमिकाएं और अनुमतियां',
+    'Activities'                     => 'क्रियाएँ',
+    'About'                          => 'के बारे में',
+    'Roles'                          => 'भूमिकाएँ',
+    'Role'                           => 'भूमिका',
+    'Permissions'                    => 'अनुमतियां',
+    'Invite New Member'              => 'नए सदस्य को आमंत्रित करें',
+    'Add New Role'                   => 'नई भूमिका जोड़ें',
+    'Cancel'                         => 'रद्द करना',
+    'Assign'                         => 'सौंपना',
+    'Attach'                         => 'संलग्न करें',
+    'Filters'                        => 'फिल्टर',
+    'Apply'                          => 'लागू करें',
+    'Load More'                      => 'और लोड करें',
+    'Check for Updates'              => 'अद्यतन के लिए जाँच',
+    'Filter by Activity'             => 'गतिविधि द्वारा फ़िल्टर करें',
+    'Filter by User'                 => 'उपयोगकर्ता द्वारा फ़िल्टर करें',
+    'Filter by Date'                 => 'तिथि से फ़िल्टर करें',
+    'Last Updated'                   => 'आखरी अपडेट',
+    'Author'                         => 'लेखक',
+    'Submit issue & feedback at'     => 'मुद्दे और प्रतिक्रिया सबमिट करें',
+    'Don\'t belongs to any role yet' => 'अभी तक किसी भी भूमिका से संबंधित नहीं है',
+    'Don\'t have any permission yet' => 'अभी तक कोई अनुमति नहीं है',
+];
