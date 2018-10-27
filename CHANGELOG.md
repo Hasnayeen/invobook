@@ -9,6 +9,7 @@
 - Added endpoint to check if username exists
 - Added finnish translation
 - Added simplified Chinese translation
+- Add telescope installation to wiki
 
 ## v0.8 (2018-10-18)
 
