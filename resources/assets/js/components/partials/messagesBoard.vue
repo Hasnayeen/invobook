@@ -20,7 +20,15 @@
     <div class="relative bg-grey-light">
       <div class="static text-center p-8">
         <div class="relative">
-          <user-suggestion-box :users="members" :name="name" :suggestionShown="suggestionShown" @selected="userSelected"
+          <user-suggestion-box
+            :users="members"
+            :name="name"
+            :suggestionShown="suggestionShown"
+            :suggestionSelected="suggestionSelected"
+            :suggestionHighlightIndex="suggestionHighlightIndex"
+            :suggestionHighlightDirection="suggestionHighlightDirection"
+            :suggestionHighlightDirectionInverted="true"
+            @selected="userSelected"
             class="absolute mb-2 w-full pin-b"></user-suggestion-box>
         </div>
         <textarea class="static textarea resize-none rounded w-full p-4 text-grey-darker"
@@ -31,6 +39,7 @@
           rows=1
           v-model="message"
           @keyup="checkForMention($event)"
+          @keydown="mentionHighlightMove($event)"
           @keydown.enter.prevent="sendMessage($event)"
           @focus="clearTitleNotification()"></textarea>
       </div>
@@ -55,6 +64,9 @@ export default {
     name: '',
     mentionStarted: false,
     startIndex: 0,
+    suggestionHighlightDirection: 1,
+    suggestionHighlightIndex: 0,
+    suggestionSelected: false,
     suggestionShown: false,
     mentions: [],
     user: navbar.user,
@@ -108,6 +120,8 @@ export default {
     sendMessage (e) {
       if (e.shiftKey) {
         this.message = this.message + '\n'
+      } else if (this.mentionStarted) {
+        this.suggestionSelected = true
       } else {
         var msg = this.message
         this.message = ''
@@ -176,16 +190,29 @@ export default {
       })
     },
     checkForMention (e) {
-      if (e.keyCode === 50) {
+      if (e.key === "@") {
         this.suggestionShown = true
         this.mentionStarted = true
         this.startIndex = document.getElementById('send-message').selectionStart
-      } else if (e.keyCode === 32) {
+      } else if (e.keyCode === 32 || e.keyCode === 27 || (e.keyCode === 8 && document.getElementById('send-message').selectionStart < this.startIndex)) {
         this.mentionStarted = false
         this.suggestionShown = false
+        this.suggestionHighlightIndex = 0
         this.name = ''
       } else if (this.mentionStarted) {
         this.name = e.target.value.substring(this.startIndex)
+      }
+    },
+    mentionHighlightMove (e) {
+      if (this.mentionStarted && (e.keyCode === 38 || e.keyCode === 40)) {
+        if (e.keyCode === 38) {
+          this.suggestionHighlightIndex -= 1
+          this.suggestionHighlightDirection = -1
+        } else if (e.keyCode === 40) {
+          this.suggestionHighlightIndex += 1
+          this.suggestionHighlightDirection = 1
+        }
+        e.preventDefault()
       }
     },
     userSelected (text) {
@@ -193,7 +220,10 @@ export default {
       if (this.mentions.every(mention => mention !== text)) {
         this.mentions.push(text)
       }
+      this.mentionStarted = false
       this.suggestionShown = false
+      this.suggestionSelected = false
+      this.suggestionHighlightIndex = 0
       this.name = ''
       document.getElementById('send-message').focus()
     }
