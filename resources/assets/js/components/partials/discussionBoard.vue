@@ -55,6 +55,14 @@ export default {
     discussionDetailsShown: false,
     index: null
   }),
+  async created () {
+    await this.getAllDiscussions()
+    const id = new URL(location.href).searchParams.get('id')
+    this.discussion = this.discussions.find(discussion => discussion.id === parseInt(id))
+    if (id) {
+      this.discussionDetailsShown = true
+    }
+  },
   methods: {
     showCreateDiscussionForm () {
       this.createDiscussionFormShown = true
@@ -66,20 +74,20 @@ export default {
       if (newDiscussion) this.discussions.push(newDiscussion)
       this.createDiscussionFormShown = false
     },
-    getAllDiscussions () {
-      if (this.activeTab === 'discussions' && this.discussions.length < 1) {
-        axios.get('/discussions', {
-          params: {
-            resource_type: this.resourceType,
-            resource_id: this.resource.id
-          }
-        })
-          .then((response) => {
-            this.discussions = response.data.discussions
-          })
-          .catch((error) => {
-            console.log(error.response.data.message)
-          })
+    async getAllDiscussions () {
+      try {
+        if (this.activeTab === 'discussions' && this.discussions.length < 1) {
+          let { data } = await axios({
+            url: '/discussions',
+            params: {
+              resource_type: this.resourceType,
+              resource_id: this.resource.id
+            }})
+          this.discussions = data.discussions
+          return this.discussions
+        }
+      } catch (error) {
+        console.error(error.response.data.message)
       }
     },
     showDiscussionDetails (index) {
