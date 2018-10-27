@@ -68,6 +68,10 @@ export default {
     faPlus,
     faCog
   }),
+  created () {
+    let tool = new URL(location.href).searchParams.get('tool')
+    this.active = tool
+  },
   methods: {
     showAddMemberForm () {
       this.addMemberFormShown = true

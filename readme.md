@@ -9,25 +9,25 @@
 [![StyleCI](https://styleci.io/repos/81873619/shield?branch=dev&style=flat)](https://styleci.io/repos/81873619)
 [![Join on slack](https://img.shields.io/badge/join%20on-slack-green.svg)](https://join.slack.com/t/iluminar/shared_invite/enQtNDY0Mzc3NDkwOTY1LTJhZTNiYmMxZmE4NGU5MTJhODI5OWMyNjc4ZmIyNDVhODRhMGUzNDU0MmM1OGRmZjBiYWM0NjcwNWRjMDJjNTA)
 
-<a href="https://github.com/iluminar/goodwork"><img src="public/logos/logo.svg" alt="Goodwork" style="max-width:100%;"></a>
+<a id="goodwork" href="https://github.com/iluminar/goodwork"><img src="public/logos/logo.svg" alt="Goodwork" style="max-width:100%;"></a>
 
 Self hosted project management and collaboration tool inspired by basecamp
 
 <hr>
 <p align="center">
-<b><a href="#overview">Overview</a></b>
+<b><a href="#about-goodwork">Overview</a></b>
 |
 <b><a href="#demo">Demo</a></b>
 |
 <b><a href="#installation">Installation</a></b>
 |
-<b><a href="#screenshots">Screens</a></b>
+<b><a href="#screenshots-top">Screenshots</a></b>
 |
-<b><a href="#contributing">Contributing</a></b>
+<b><a href="#contributing-top">Contributing</a></b>
 |
-<b><a href="#credits">Credits</a></b>
+<b><a href="#credits-top">Credits</a></b>
 |
-<b><a href="#license">License</a></b>
+<b><a href="#license-top">License</a></b>
 </p>
 
 <hr>
@@ -56,8 +56,7 @@ You can check out an instance of the application that we use as a guest user usi
 
 [Install manually](https://github.com/iluminar/goodwork/wiki/Installation#setup-usual-way-if-youre-not-using-docker)
 
-
-## Screenshots <small>[↑Top](https://github.com/iluminar/goodwork#goodwork)</small>
+## Screenshots <small>[↑Top](#goodwork)</small>
 
 ![Dashboard](https://i.imgur.com/oPlF1bi.png)
 
@@ -87,22 +86,22 @@ You can check out an instance of the application that we use as a guest user usi
 
 ![Roles Board](https://i.imgur.com/87gbE0v.png)
 
-## Contributing <small>[↑Top](https://github.com/iluminar/goodwork#goodwork)</small>
+## Contributing <small>[↑Top](#goodwork)</small>
 
 Thank you for considering contributing to the Goodwork! The contribution guide can be found in the [Contribution Guideline](https://github.com/iluminar/goodwork/wiki/Contribution-Guideline).
 
-## Security Vulnerabilities <small>[↑Top](https://github.com/iluminar/goodwork#goodwork)</small>
+## Security Vulnerabilities <small>[↑Top](#goodwork)</small>
 
 If you discover a security vulnerability within Goodwork, please send an e-mail to searching.nehal@gmail.com. All security vulnerabilities will be promptly addressed.
 
-## Credits <small>[↑Top](https://github.com/iluminar/goodwork#goodwork)</small>
+## Credits <small>[↑Top](#goodwork)</small>
 
-* Author: [Nehal Hasnayeen](https://github.com/Hasnayeen) (https://hasnayeen.github.io)
+- Author: [Nehal Hasnayeen](https://github.com/Hasnayeen) (https://hasnayeen.github.io)
 
-* Logotype: [Malcolm Nihlén](https://github.com/scriptcoded) ([scriptcoded](https://github.com/scriptcoded))
+- Logotype: [Malcolm Nihlén](https://github.com/scriptcoded) ([scriptcoded](https://github.com/scriptcoded))
 
-* [Other Contributors](https://github.com/iluminar/goodwork/graphs/contributors)
+- [Other Contributors](https://github.com/iluminar/goodwork/graphs/contributors)
 
-## License <small>[↑Top](https://github.com/iluminar/goodwork#goodwork)</small>
+## License <small>[↑Top](#goodwork)</small>
 
 Goodwork is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
