@@ -1,12 +1,20 @@
 <template>
-<div v-if="suggestionShown && sortedUsers.length > 0" class="border-2 rounded bg-white shadow-xl py-2">
-  <ul class="list-reset text-left">
-    <li @click="selectUser(user[1].target)" v-for="user in sortedUsers" class="py-2 px-4 cursor-pointer hover:bg-grey-lighter">
-      <span class="font-semibold text-grey-darker mr-2">{{ user[0].target }}</span>
-      <span class="text-grey-dark">{{ user[1].target }}</span>
-    </li>
-  </ul>
-</div>	
+<div v-if="suggestionShown && sortedUsers.length > 0" class="autocomplete container w-full shadow-md" :class="suggestionHighlightDirectionInverted ? 'rounded-t-lg' : 'rounded-b-lg'">
+  <div class="autocomplete-results">
+    <div @click="selectUser(user[1].target)"
+      v-for="(user, index) in sortedUsers"
+      :key="index"
+      class="autocomplete-result flex items-center bg-white p-1 cursor-pointer hover:bg-grey-light"
+      :class="{ 'text-white bg-teal hover:bg-teal-dark': index === highlightIndex, 'rounded-t-lg': index === 0 && suggestionHighlightDirectionInverted, 'rounded-b-lg': index === sortedUsers.length-1 && !suggestionHighlightDirectionInverted }">
+      <div class="mx-2">
+        <img :src="'/'+getUserAvatar(user[1].target)" class="rounded-full align-middle w-8 h-8">
+      </div>
+      <div class="mr-2">
+       <span class="font-semibold">@{{ user[1].target }}</span> ({{ user[0].target }})
+      </div>
+    </div>
+  </div>
+</div>
 </template>
 
 <script>
@@ -24,22 +32,65 @@ export default {
     suggestionShown: {
       required: true,
       type: Boolean
+    },
+    suggestionSelected: {
+      required: true,
+      type: Boolean
+    },
+    suggestionHighlightIndex: {
+      required: true,
+      type: Number
+    },
+    suggestionHighlightDirection: {
+      required: true,
+      type: Number
+    },
+    suggestionHighlightDirectionInverted: {
+      type: Boolean
     }
   },
   data: () => ({
-    sortedUsers: []
+    sortedUsers: [],
+    highlightIndex: 0
   }),
   watch: {
-    name: 'search'
+    name: 'search',
+    suggestionSelected: 'selectUserEnter',
+    suggestionHighlightIndex: 'suggestionHighlightMove'
   },
   methods: {
     search () {
       this.sortedUsers = fuzzysort.go(this.name, this.users, {
-        keys: ['name', 'username']
+        keys: ['name', 'username'],
+        limit: 5
       })
+      this.highlightIndex = 0
+      if (this.suggestionHighlightDirectionInverted) {
+        this.sortedUsers.reverse()
+        this.highlightIndex = this.sortedUsers.length-1
+      }
     },
     selectUser (text) {
       this.$emit('selected', text)
+    },
+    selectUserEnter () {
+      if (this.suggestionSelected) {
+        this.selectUser(this.sortedUsers[this.highlightIndex][1].target)
+      }
+    },
+    getUserAvatar (username) {
+      return this.users.find(function(user) {
+        if (user.username === username) {
+          return user.avatar
+        }
+      }).avatar
+    },
+    suggestionHighlightMove () {
+      if (this.suggestionHighlightDirection === -1 && this.highlightIndex > 0) {
+        this.highlightIndex -= 1
+      } else if (this.suggestionHighlightDirection === 1 && this.highlightIndex < (this.sortedUsers.length-1)) {
+        this.highlightIndex += 1
+      }
     }
   }
 }
