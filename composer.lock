@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ac9bd147ac9c76d282cdbd08f3ecc881",
+    "content-hash": "19b9f7a0afe9d9ac95fb65aa989330eb",
     "packages": [
         {
             "name": "anahkiasen/underscore-php",
@@ -4137,16 +4137,16 @@
         },
         {
             "name": "laravel/telescope",
-            "version": "v0.1.2",
+            "version": "v0.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/telescope.git",
-                "reference": "253dde9a80d50e90c7f9d4d6621151acf556d1a1"
+                "reference": "f9ee91ef63d3e139e0e4941e546014955b5f81c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/telescope/zipball/253dde9a80d50e90c7f9d4d6621151acf556d1a1",
-                "reference": "253dde9a80d50e90c7f9d4d6621151acf556d1a1",
+                "url": "https://api.github.com/repos/laravel/telescope/zipball/f9ee91ef63d3e139e0e4941e546014955b5f81c9",
+                "reference": "f9ee91ef63d3e139e0e4941e546014955b5f81c9",
                 "shasum": ""
             },
             "require": {
@@ -4195,7 +4195,7 @@
                 "laravel",
                 "monitoring"
             ],
-            "time": "2018-10-24T11:28:33+00:00"
+            "time": "2018-10-25T13:28:18+00:00"
         },
         {
             "name": "mockery/mockery",

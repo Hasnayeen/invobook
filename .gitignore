@@ -14,3 +14,8 @@ npm-debug.log
 docker.env
 /storage/framework/testing
 .vscode
+composer.json
+composer.lock
+config/app.php
+config/database.php
+public/vendor/telescope/mix-manifest.json
