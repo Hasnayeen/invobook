@@ -6,7 +6,7 @@ return [
     'Activities'                     => 'Aktivitäten',
     'About'                          => 'Über',
     'Roles'                          => 'Rollen',
-    'Roles'                          => 'Rollen',
+    'Role'                           => 'Rolle',
     'Permissions'                    => 'Rechte',
     'Invite New Member'              => 'Neues Mitglied einladen',
     'Add New Role'                   => 'Neue Rolle hinzufügen',
