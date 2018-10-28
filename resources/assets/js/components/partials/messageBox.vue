@@ -150,6 +150,7 @@ export default {
             document.title = '(' + this.unreadMessage + ') ' + this.title
           }
           this.messages.push(event.message)
+          this.scrollToBottom()
         })
     },
     clearTitleNotification () {
