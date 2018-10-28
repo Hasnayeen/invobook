@@ -12,6 +12,34 @@ class TaskController extends Controller
 {
     use EntityTrait;
 
+    public function index(TaskRepository $repository)
+    {
+        try {
+            $tasks = $repository->getAllTaskWithAssignee(request('resource_type'), request('resource_id'));
+
+            return response()->json([
+                'status'   => 'success',
+                'total'    => count($tasks),
+                'tasks'    => $tasks,
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'status'   => 'error',
+                'message'  => 'Something went wrong',
+            ]);
+        }
+    }
+
+    public function show(Task $task)
+    {
+        $task->load('user');
+
+        return response()->json([
+            'status' => 'success',
+            'task'   => $task,
+        ]);
+    }
+
     public function store(ValidateTaskCreation $request, TaskRepository $repository, MentionRepository $mentionRepository)
     {
         try {
@@ -31,34 +59,6 @@ class TaskController extends Controller
             return response()->json([
                 'status'  => 'error',
                 'message' => $e->getMessage(),
-            ]);
-        }
-    }
-
-    public function show(Task $task)
-    {
-        $task->load('user');
-
-        return response()->json([
-            'status' => 'success',
-            'task'   => $task,
-        ]);
-    }
-
-    public function index(TaskRepository $repository)
-    {
-        try {
-            $tasks = $repository->getAllTaskWithAssignee(request('resource_type'), request('resource_id'));
-
-            return response()->json([
-                'status'   => 'success',
-                'total'    => count($tasks),
-                'tasks'    => $tasks,
-            ]);
-        } catch (Exception $e) {
-            return response()->json([
-                'status'   => 'error',
-                'message'  => 'Something went wrong',
             ]);
         }
     }
