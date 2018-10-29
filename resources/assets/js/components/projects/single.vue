@@ -68,8 +68,11 @@ export default {
     faCog
   }),
   created () {
+    let tabs = ['tasks', 'discussions', 'messages', 'events', 'files', 'activities']
     let tool = new URL(location.href).searchParams.get('tool')
-    this.active = tool
+    if (tool !== null && tabs.indexOf(tool) !== -1) {
+      this.active = tool
+    }
   },
   methods: {
     showAddMemberForm () {
