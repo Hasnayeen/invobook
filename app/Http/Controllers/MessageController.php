@@ -59,6 +59,40 @@ class MessageController extends Controller
         }
     }
 
+    public function update(Message $message, StoreMessageRequest $request, MessageRepository $repository, MentionRepository $mentionRepository)
+    {
+        try {
+            if ($val = $request->get('message')) {
+                $message->body = $val;
+            }
+
+            if ($val = $request->get('resource_type')) {
+                $message->messageable_type = $val;
+            }
+
+            if ($val = $request->get('resource_id')) {
+                $message->messageable_id = $val;
+            }
+
+            $message->save();
+
+            if (request('mentions')) {
+                $mentionRepository->create('message', $message);
+            }
+            $message->load('user');
+
+            return response()->json([
+                'status'  => 'success',
+                'message' => $message,
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'status'  => 'error',
+                'message' => $e->getMessage(),
+            ]);
+        }
+    }
+
     public function delete(Message $message)
     {
         $message->delete();

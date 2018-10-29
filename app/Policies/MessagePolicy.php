@@ -21,4 +21,16 @@ class MessagePolicy
     {
         return (int) $message->user_id === $user->id;
     }
+
+    /**
+     * Determine whether the user can update the message.
+     *
+     * @param  User    $user
+     * @param  Message $message
+     * @return int
+     */
+    public function edit(User $user, Message $message)
+    {
+        return (int) $message->user_id === $user->id;
+    }
 }

@@ -146,4 +146,27 @@ class MessageTest extends TestCase
 
         $this->assertDatabaseMissing('messages', ['id' => $message->id]);
     }
+
+    /** @test */
+    public function user_can_update_message()
+    {
+        $project = factory('App\Models\Project')->create(['owner_id' => $this->user->id]);
+
+        $message = factory('App\Models\Message')->create([
+            'user_id'          => $this->user->id,
+            'messageable_type' => 'project',
+            'messageable_id'   => $project->id,
+        ]);
+
+        $this->actingAs($this->user)->put('messages/' . $message->id, [
+                'message'          => 'Message has been updated',
+                'resource_type'    => 'project',
+                'resource_id'      => $project->id,
+            ]);
+
+        $this->assertDatabaseHas('messages', [
+            'id'   => $message->id,
+            'body' => 'Message has been updated',
+        ]);
+    }
 }

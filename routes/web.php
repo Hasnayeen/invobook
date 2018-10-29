@@ -121,6 +121,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::delete('messages/{message}', 'MessageController@delete')->middleware('can:delete,message');
 
+    Route::put('messages/{message}', 'MessageController@update')->middleware('can:edit,message');
+
     /**********************************
         Event
      **********************************/
