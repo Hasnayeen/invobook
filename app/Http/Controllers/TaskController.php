@@ -14,6 +14,11 @@ class TaskController extends Controller
 
     public function store(ValidateTaskCreation $request, TaskRepository $repository, MentionRepository $mentionRepository)
     {
+          return response()->json([
+                'status'  => 'success',
+                'message' => $request->all(),
+                'task'    => $request->all(),
+            ], 201);
         try {
             $task = $repository->create($request->all());
             $task->tags()->attach(request('labels'));
@@ -71,5 +76,22 @@ class TaskController extends Controller
             'status'  => 'success',
             'message' => trans('misc.The task has been deleted'),
         ]);
+    }
+
+    public function edit(ValidateTaskCreation $request, TaskRepository $repository)
+    {
+        try {
+            $task = $repository->edit($request->all());
+            return response()->json([
+                'status'  => 'success',
+                'message' => trans('misc.The task has been edited'),
+                'task'    => $task,
+            ], 201);
+        } catch (Exception $e) {
+            return response()->json([
+                'status'  => 'error',
+                'message' => $e->getMessage(),
+            ]);
+        }
     }
 }

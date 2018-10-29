@@ -35,4 +35,14 @@ class TaskRepository
             'status_id'         => $data['status_id'] ?? null,
         ]);
     }
+
+     /**
+     * @param  array            $data
+     * @return \App\Models\Task
+     */
+    public function edit(Task $task, $data)
+    {
+        $task->update($data);
+        return $task;
+    }
 }

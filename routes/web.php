@@ -139,6 +139,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('tasks', 'TaskController@store')->middleware('can:create,App\Models\Task');
 
+    Route::put('tasks/edit/{task}', 'TaskController@edit')->middleware('can:edit,App\Models\Task');
+
     Route::get('tasks/{task}', 'TaskController@show');
 
     Route::delete('tasks/{task}', 'TaskController@delete')->middleware('can:delete,task');
