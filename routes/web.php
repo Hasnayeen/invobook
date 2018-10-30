@@ -228,6 +228,8 @@ Route::group(['middleware' => ['auth', 'permission:view admin page'], 'prefix' =
 
     Route::get('activities', 'ActivityController@index');
 
+    Route::get('services', 'ServiceController@index');
+
     Route::post('services', 'ServiceController@store');
 
     Route::get('check-for-update', 'AboutController@checkForUpdate');

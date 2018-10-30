@@ -17,6 +17,7 @@ class ServiceController extends Controller
             Service::create([
                 'name'         => $data['name'],
                 'access_token' => encrypt($data['access_token']),
+                'enabled'      => true,
             ]);
 
             return response()->json([
@@ -29,5 +30,15 @@ class ServiceController extends Controller
                 'message' => $exception->getMessage(),
             ]);
         }
+    }
+
+    public function index()
+    {
+        $services = Service::select(['name', 'enabled'])->get();
+
+        return response()->json([
+            'status'   => 'success',
+            'services' => $services,
+        ]);
     }
 }

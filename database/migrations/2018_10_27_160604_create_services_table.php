@@ -16,7 +16,8 @@ class CreateServicesTable extends Migration
         Schema::create('services', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('access_token');
+            $table->text('access_token', 511);
+            $table->boolean('enabled')->default(false);
             $table->timestamps();
         });
     }
