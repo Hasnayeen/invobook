@@ -8,7 +8,7 @@
       <div v-if="dropdownMenuShown" class="relative">
         <ul class="list-reset bg-white rounded shadow-lg py-2 absolute pin-r mt-4 text-base text-left font-normal whitespace-no-wrap">
           <li class="px-4 py-2 hover:bg-grey-light cursor-pointer">
-            <a href="#" class="no-underline text-grey-dark" @click.prevent="showMembersListModal">
+            <a href="#" class="no-underline text-grey-dark" @click="showMembersListModal">
               Show All Members
             </a>
           </li>
@@ -44,7 +44,7 @@
       <activity resourceType="projects" :resource="project"></activity> -->
     </div>
 
-    <members-list-modal :members="team.members" />
+    <members-list-modal :show="membersListModalShown" :members="team.members" @close="closeMembersListModal" />
   </div>
 </template>
 
@@ -78,6 +78,7 @@ export default {
     addMemberFormShown: false,
     active: 'tasks',
     dropdownMenuShown: false,
+    membersListModalShown: false,
     faPlus,
     faCog
   }),
@@ -107,7 +108,10 @@ export default {
       this.addMemberFormShown = false
     },
     showMembersListModal () {
-      EventBus.$emit('show-members-list-modal')
+      this.membersListModalShown = true
+    },
+    closeMembersListModal () {
+      this.membersListModalShown = false
     },
     activateTab (tab) {
       if (tab !== this.active) {

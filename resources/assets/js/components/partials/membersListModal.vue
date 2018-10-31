@@ -1,5 +1,5 @@
 <template>
-<div :class="{'hidden': !showMembersList}">
+<div :class="{'hidden': !show}">
   <div @click="closeModal" class="absolute pin opacity-75 bg-grey z-10"></div>
   <div class="fixed md:w-1/3 md:mx-auto pin z-50 overflow-auto bg-grey-lighter flex" id="members-list-modal">
     <div class="relative p-8 w-full max-w-md m-auto flex-col flex">
@@ -26,29 +26,19 @@
 <script>
 export default {
   props: {
+    show: {
+      type: Boolean,
+      default: false
+    },
     members: {
       type: Array,
       required: true
     }
   },
 
-  data () {
-    return {
-      showMembersList: false
-    }
-  },
-
-  mounted () {
-    EventBus.$on('show-members-list-modal', this.openModal)
-  },
-
   methods: {
-    openModal () {
-      this.showMembersList = true
-    },
-
     closeModal () {
-      this.showMembersList = false
+      this.$emit('close')
     }
   }
 }

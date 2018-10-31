@@ -43,7 +43,7 @@
       <activity resourceType="projects" :resource="project"></activity> -->
     </div>
 
-    <members-list-modal :members="project.members" />
+    <members-list-modal :show="membersListModalShown" :members="project.members" @close="closeMembersListModal" />
   </div>
 </template>
 
@@ -77,6 +77,7 @@ export default {
     addMemberFormShown: false,
     active: 'tasks',
     dropdownMenuShown: false,
+    membersListModalShown: false,
     faPlus,
     faCog
   }),
@@ -106,7 +107,10 @@ export default {
       this.addMemberFormShown = false
     },
     showMembersListModal () {
-      EventBus.$emit('show-members-list-modal')
+      this.membersListModalShown = true
+    },
+    closeMembersListModal () {
+      this.membersListModalShown = false
     },
     activateTab (tab) {
       if (tab !== this.active) {
