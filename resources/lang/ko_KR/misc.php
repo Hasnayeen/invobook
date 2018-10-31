@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'New version available'                      => '새 버전 :latest_version 사용이 가능합니다 업데이트를 해주세요,'
+    'New version available'                      => '새 버전 :latest_version 사용이 가능합니다 업데이트를 해주세요.',
     'Current version is the latest version'      => '버전 :current_version 은 최신 버젼입니다.',
     'Couldn\'t check for updates at this moment' => '업데이트 확인에 실패하였습니다',
     'Comment has been saved'                     => '댓글이 저장되었습니다.',
