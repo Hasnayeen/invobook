@@ -8,7 +8,9 @@
       <div v-if="dropdownMenuShown" class="relative">
         <ul class="list-reset bg-white rounded shadow-lg py-2 absolute pin-r mt-4 text-base text-left font-normal whitespace-no-wrap">
           <li class="px-4 py-2 hover:bg-grey-light cursor-pointer">
-            Show All Members
+            <a href="#" class="no-underline text-grey-dark" @click.prevent="showMembersListModal">
+              Show All Members
+            </a>
           </li>
           <li class="px-4 py-2 hover:bg-grey-light cursor-pointer">
             Delete
@@ -41,6 +43,8 @@
       <!-- <taskBoard resourceType="projects" :resource="project"></taskBoard>
       <activity resourceType="projects" :resource="project"></activity> -->
     </div>
+
+    <members-list-modal :members="office.members" />
   </div>
 </template>
 
@@ -52,13 +56,22 @@ import eventBoard from './../partials/eventBoard.vue'
 import fileBoard from './../partials/fileBoard.vue'
 import activity from './../partials/activity.vue'
 import addMemberForm from './../partials/addMemberForm.vue'
+import membersListModal from './../partials/membersListModal.vue'
 import tabMenu from './../partials/tabMenu.vue'
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus'
 import { faCog } from '@fortawesome/free-solid-svg-icons/faCog'
 
 export default {
   components: {
-    taskBoard, discussionBoard, messagesBoard, eventBoard, fileBoard, activity, addMemberForm, tabMenu
+    taskBoard,
+    discussionBoard,
+    messagesBoard,
+    eventBoard,
+    fileBoard,
+    activity,
+    addMemberForm,
+    membersListModal,
+    tabMenu,
   },
   props: ['office'],
   data: () => ({
@@ -94,6 +107,9 @@ export default {
       }
       this.addMemberFormShown = false
       EventBus.$emit('notification', data.message, messageType)
+    },
+    showMembersListModal () {
+      EventBus.$emit('show-members-list-modal')
     },
     activateTab (tab) {
       if (tab !== this.active) {
