@@ -49,6 +49,7 @@ export default {
     isDisabled: true,
     message: '',
     messages: [],
+    nextPageUrl: null,
     messageBoxShown: false,
     messageTextareaHeight: 'auto',
     authUser: navbar.user,
@@ -122,7 +123,8 @@ export default {
         }
       })
         .then((response) => {
-          this.messages = response.data.messages.reverse()
+          this.messages = response.data.messages.data.reverse()
+          this.nextPageUrl = response.data.messages.next_page_url
         })
         .catch((error) => {
           console.log(error)
