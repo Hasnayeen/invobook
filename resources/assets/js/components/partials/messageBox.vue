@@ -81,6 +81,12 @@ export default {
     }
   },
   methods: {
+    scrollToBottom () {
+      this.$nextTick(() => {
+        var messagesContainer = this.$el.querySelector('#message-box')
+        messagesContainer.scrollTop = messagesContainer.lastElementChild.scrollHeight;
+      });
+    },
     showMessageBox () {
       this.messageBoxShown = true
     },
@@ -123,6 +129,7 @@ export default {
       })
         .then((response) => {
           this.messages = response.data.messages.reverse()
+            this.scrollToBottom()
         })
         .catch((error) => {
           console.log(error)
@@ -143,6 +150,7 @@ export default {
             document.title = '(' + this.unreadMessage + ') ' + this.title
           }
           this.messages.push(event.message)
+          this.scrollToBottom()
         })
     },
     clearTitleNotification () {
