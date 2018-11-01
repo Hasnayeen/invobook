@@ -39,7 +39,7 @@ class MessageRepository
                            ->with('user')
                            ->orderBy('id', 'desc')
                            ->paginate(15)
-                           ->appends(['resource_type' => $type, 'id' => $id]);
+                           ->appends(['resource_type' => $type, 'resource_id' => $id]);
     }
 
     public function getAllDirectMessages($type, $senderId, $recieverId)
