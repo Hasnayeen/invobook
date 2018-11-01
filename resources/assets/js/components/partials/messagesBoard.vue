@@ -56,6 +56,7 @@ export default {
   props: ['resource', 'resourceType', 'activeTab'],
   data: () => ({
     messages: [],
+    nextPageUrl: null,
     message: '',
     messageTextareaHeight: 'auto',
     title: '',
@@ -98,7 +99,8 @@ export default {
       }
     })
       .then((response) => {
-        this.messages = response.data.messages.reverse()
+        this.messages = response.data.messages.data.reverse()
+        this.nextPageUrl = response.data.messages.next_page_url
       })
       .catch((error) => {
         console.log(error)
