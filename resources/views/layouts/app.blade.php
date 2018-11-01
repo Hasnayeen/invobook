@@ -31,17 +31,19 @@
     @endif
 </head>
 <body class="bg-grey-lighter">
-    <div id="app">
-        <div class="h-1" style="background: linear-gradient(to right, #4DC0B5, #3490DC);"></div>
-        @if (!Auth::guest())
-        <navbar></navbar>
-        <notification-popup></notification-popup>
-        <message-box></message-box>
-        @endif
+    <main>
+        <div id="app">
+            <div class="h-1" style="background: linear-gradient(to right, #4DC0B5, #3490DC);"></div>
+            @if (!Auth::guest())
+            <navbar></navbar>
+            <notification-popup></notification-popup>
+            <message-box></message-box>
+            @endif
 
 
-        {{ $slot }}
-    </div>
+            {{ $slot }}
+        </div>
+    </main>
 
     <script src="{{ asset('/js/manifest.js') }}"></script>
     <script src="{{ asset('/js/vendor.min.js') }}"></script>
