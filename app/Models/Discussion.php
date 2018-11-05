@@ -18,7 +18,7 @@ class Discussion extends Model
 {
     use LogsActivity;
 
-    protected $fillable = ['name', 'content', 'raw_content', 'posted_by', 'archived', 'draft', 'discussionable_type', 'discussionable_id', 'category_id'];
+    protected $fillable = ['name', 'content', 'raw_content', 'posted_by', 'archived', 'draft', 'discussionable_type', 'discussionable_id', 'category_id', 'cycle_id'];
 
     protected $dispatchesEvents = [
         'created' => DiscussionCreated::class,
