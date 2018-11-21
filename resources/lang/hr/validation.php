@@ -31,7 +31,7 @@ return [
     'boolean'              => ' :attribute polje mora biti true ili false.',
     'confirmed'            => ' :attribute potvrda se ne slaže.',
     'date'                 => ' :attribute nije valjan datum.',
-    'date_format'          => 'The :attribute se ne slaže s formatom :format.',
+    'date_format'          => ' :attribute se ne slaže s formatom :format.',
     'different'            => ' :attribute i :other mora biti različit.',
     'digits'               => ' :attribute mora biti :digits znamenke.',
     'digits_between'       => ' :attribute mora biti između :min and :max znamenki.',
