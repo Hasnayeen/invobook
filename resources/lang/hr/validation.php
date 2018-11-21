@@ -26,7 +26,7 @@ return [
         'numeric' => ' :attribute mora biti između :min i :max.',
         'file'    => ' :attribute mora biti između :min and :max kilobita.',
         'string'  => ' :attribute mora biti između :min and :max znakova.',
-        'array'   => ' :attribute must have između :min and :max items.',
+        'array'   => ' :attribute mora imati između :min and :max stavki.',
     ],
     'boolean'              => ' :attribute polje mora biti true ili false.',
     'confirmed'            => ' :attribute potvrda se ne slaže.',
