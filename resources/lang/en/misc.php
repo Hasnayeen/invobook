@@ -25,6 +25,7 @@ return [
     'New status has been created'                => 'New status has been created',
     'New task has been created'                  => 'New task has been created',
     'The task has been deleted'                  => 'The task has been deleted',
+    'Task status has been updated'               => 'Task status has been updated',
     'Account details are updated'                => 'Account details are updated',
     'Invitation sent successfully'               => 'Invitation sent successfully',
     'Email already exist'                        => 'Email already exist',
