@@ -191,7 +191,7 @@ class TaskTest extends TestCase
             'name'    => 'dummy status',
             'color'   => '#000000',
         ], [
-            'name' => $this->task->refresh()->status->name,
+            'name'  => $this->task->refresh()->status->name,
             'color' => $this->task->refresh()->status->color,
         ]);
     }
