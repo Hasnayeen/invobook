@@ -6,6 +6,7 @@ use App\Models\Task;
 use App\Utilities\EntityTrait;
 use App\Repositories\TaskRepository;
 use App\Repositories\MentionRepository;
+use App\Http\Requests\UpdateTaskRequest;
 use App\Http\Requests\ValidateTaskCreation;
 
 class TaskController extends Controller
@@ -70,6 +71,16 @@ class TaskController extends Controller
         return response()->json([
             'status'  => 'success',
             'message' => trans('misc.The task has been deleted'),
+        ]);
+    }
+
+    public function update(UpdateTaskRequest $request, Task $task)
+    {
+        $task->update($request->all());
+
+        return response()->json([
+            'status'  => 'success',
+            'message' => trans('misc.Task has been updated'),
         ]);
     }
 }

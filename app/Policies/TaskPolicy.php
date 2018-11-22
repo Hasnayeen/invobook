@@ -41,6 +41,7 @@ class TaskPolicy
      */
     public function update(User $user, Task $task)
     {
+        return $user->hasPermissionTo('edit task.' . $task->taskable_type . '->' . $task->taskable->id);
     }
 
     /**
