@@ -1,4 +1,4 @@
-### Your checklist for this pull request
+### Make sure you've reviewed the checklist. (DO NOT REMOVE)
 🚨Please review the [guidelines for contributing](https://github.com/iluminar/goodwork/wiki/Contribution-Guideline) to this repository.
 
 - [ ] Make sure you are requesting to **pull a topic/feature/bugfix branch** (right side). Don't request your master!

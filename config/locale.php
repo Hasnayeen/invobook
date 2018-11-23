@@ -20,6 +20,7 @@ return [
         'fi'    => 'Finnish',
         'fr-FR' => 'French (France)',
         'hi'    => 'Hindi (India)',
+        'hr'    => 'Croatian',
         'id'    => 'Bahasa (Indonesia)',
         'it-IT' => 'Italian (Italy)',
         'nl-NL' => 'Dutch (Netherlands)',

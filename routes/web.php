@@ -206,9 +206,20 @@ Route::group(['middleware' => 'auth'], function () {
     /**********************************
         Status
     **********************************/
+
     Route::get('statuses', 'StatusController@index');
 
     Route::post('statuses', 'StatusController@store');
+
+    /**********************************
+        Github Service
+    **********************************/
+
+    Route::get('services/github/repos', 'GithubRepoController@index');
+
+    Route::get('services/github/connected-repos', 'ConnectedGithubRepoController@index');
+
+    Route::post('services/github/connected-repos', 'ConnectedGithubRepoController@store');
 });
 
     /**********************************
@@ -232,7 +243,9 @@ Route::group(['middleware' => ['auth', 'permission:view admin page'], 'prefix' =
 
     Route::get('activities', 'ActivityController@index');
 
-    Route::get('check-for-update', 'AboutController@checkForUpdate');
+    Route::get('services', 'ServiceController@index');
 
-    Route::get('update-software', 'AboutController@updateSoftware');
+    Route::post('services', 'ServiceController@store');
+
+    Route::get('check-for-update', 'AboutController@checkForUpdate');
 });
