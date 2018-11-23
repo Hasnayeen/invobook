@@ -6,7 +6,7 @@ use GuzzleHttp\Client;
 use App\Models\Service;
 
 /**
- * Expose methods to interact with Github GraphQL API
+ * Expose methods to interact with Github GraphQL API.
  */
 trait GithubTrait
 {
