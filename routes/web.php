@@ -202,9 +202,20 @@ Route::group(['middleware' => 'auth'], function () {
     /**********************************
         Status
     **********************************/
+
     Route::get('statuses', 'StatusController@index');
 
     Route::post('statuses', 'StatusController@store');
+
+    /**********************************
+        Github Service
+    **********************************/
+
+    Route::get('services/github/repos', 'GithubRepoController@index');
+
+    Route::get('services/github/connected-repos', 'ConnectedGithubRepoController@index');
+
+    Route::post('services/github/connected-repos', 'ConnectedGithubRepoController@store');
 });
 
     /**********************************

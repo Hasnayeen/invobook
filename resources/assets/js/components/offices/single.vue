@@ -20,6 +20,8 @@
     <!-- Add Member Form -->
     <addMemberForm v-if="addMemberFormShown" @close="closeAddMemberForm" resourceType="office" :resource="office" @addMember="addMember"></addMemberForm>
 
+    <show-github-repo entityType="team" :entityId="team.id" v-if="githubRepoModalShown" @close-github-repo-modal="closeGithubRepoModal"></show-github-repo>
+
     <div class="h-16 flex flex-row justify-center items-center px-2">
       <span @click="showAddMemberForm" class="bg-white shadow w-8 h-8 rounded-full text-teal hover:cursor-pointer text-center p-2">
         <font-awesome-icon :icon="faPlus"></font-awesome-icon>
@@ -52,19 +54,21 @@ import eventBoard from './../partials/eventBoard.vue'
 import fileBoard from './../partials/fileBoard.vue'
 import activity from './../partials/activity.vue'
 import addMemberForm from './../partials/addMemberForm.vue'
+import showGithubRepo from './../partials/showGithubRepo.vue'
 import tabMenu from './../partials/tabMenu.vue'
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus'
 import { faCog } from '@fortawesome/free-solid-svg-icons/faCog'
 
 export default {
   components: {
-    taskBoard, discussionBoard, messagesBoard, eventBoard, fileBoard, activity, addMemberForm, tabMenu
+    taskBoard, discussionBoard, messagesBoard, eventBoard, fileBoard, activity, addMemberForm, tabMenu, showGithubRepo
   },
   props: ['office'],
   data: () => ({
     addMemberFormShown: false,
     active: 'tasks',
     dropdownMenuShown: false,
+    githubRepoModalShown: false,
     faPlus,
     faCog
   }),
@@ -105,6 +109,12 @@ export default {
     },
     closeDropdownMenu () {
       this.dropdownMenuShown = false
+    },
+    showGithubRepoModal () {
+      this.githubRepoModalShown = true
+    },
+    closeGithubRepoModal () {
+      this.githubRepoModalShown = false
     }
   }
 }
