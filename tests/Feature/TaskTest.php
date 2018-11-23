@@ -4,9 +4,12 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Foundation\Testing\WithFaker;
 
 class TaskTest extends TestCase
 {
+    use WithFaker;
+
     public function setUp()
     {
         parent::setUp();
@@ -168,5 +171,78 @@ class TaskTest extends TestCase
             'taskable_id'   => $task->taskable_id,
             'status_id'     => $task->status_id,
         ]);
+    }
+
+    /** @test */
+    public function user_with_permission_can_update_a_task()
+    {
+        $task = factory(\App\Models\Task::class)->create();
+
+        $permission = Permission::create(['name' => 'edit task.' . $task->taskable_type . '->' . $task->taskable_id]);
+
+        $this->user->givePermissionTo($permission);
+
+        $updatedData = [
+            'name'          => $this->faker->sentence(6, true),
+            'assigned_to'   => factory(\App\Models\User::class)->create()->id,
+            'notes'         => $this->faker->sentence(20, true),
+            'due_on'        => $this->faker->dateTimeBetween('now', '+5 years')->format('Y-m-d'),
+            'related_to'    => null,
+            'taskable_type' => 'office',
+            'taskable_id'   => factory(\App\Models\Office::class)->create()->id,
+        ];
+
+        $this->actingAs($this->user)
+            ->put("/tasks/{$task->id}", $updatedData)
+            ->assertSessionHasNoErrors();
+
+        $this->assertDatabaseHas('tasks', $updatedData);
+    }
+
+    /**
+     * @test
+     * @expectedException Illuminate\Auth\Access\AuthorizationException
+     */
+    public function user_without_permission_cant_update_a_task()
+    {
+        $task = factory(\App\Models\Task::class)->create();
+
+        $permission = Permission::create(['name' => 'edit task.' . $task->taskable_type . '->' . $task->taskable_id]);
+
+        $this->actingAs($this->user)
+            ->put("/tasks/{$task->id}", [
+                'name'          => $this->faker->sentence(6, true),
+                'assigned_to'   => factory(\App\Models\User::class)->create()->id,
+                'notes'         => $this->faker->sentence(20, true),
+                'due_on'        => $this->faker->dateTimeBetween('now', '+5 years')->format('Y-m-d'),
+                'related_to'    => null,
+                'taskable_type' => 'office',
+                'taskable_id'   => factory(\App\Models\Office::class)->create()->id,
+            ]);
+    }
+
+    /**
+     * @test
+     * @expectedException Illuminate\Validation\ValidationException
+     */
+    public function request_validates_the_data_before_updating_a_task()
+    {
+        $task = factory(\App\Models\Task::class)->create();
+
+        $permission = Permission::create(['name' => 'edit task.' . $task->taskable_type . '->' . $task->taskable_id]);
+
+        $this->user->givePermissionTo($permission);
+
+        $this->actingAs($this->user)
+            ->put("/tasks/{$task->id}", [
+                'name'          => null,
+                'assigned_to'   => null,
+                'notes'         => null,
+                'due_on'        => now(),
+                'related_to'    => null,
+                'taskable_type' => null,
+                'taskable_id'   => null,
+            ])
+            ->assertSessionHasErrors();
     }
 }

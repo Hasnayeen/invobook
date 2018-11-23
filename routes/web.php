@@ -119,6 +119,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('messages', 'MessageController@store');
 
+    Route::put('messages/{message}', 'MessageController@update');
+
     Route::delete('messages/{message}', 'MessageController@delete')->middleware('can:delete,message');
 
     /**********************************
@@ -140,6 +142,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('tasks', 'TaskController@store')->middleware('can:create,App\Models\Task');
 
     Route::get('tasks/{task}', 'TaskController@show');
+
+    Route::put('tasks/{task}', 'TaskController@update')->middleware('can:update,task');
 
     Route::delete('tasks/{task}', 'TaskController@delete')->middleware('can:delete,task');
 

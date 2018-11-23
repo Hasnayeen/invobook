@@ -8,7 +8,9 @@
       <div v-if="dropdownMenuShown" class="relative">
         <ul class="list-reset bg-white rounded shadow-lg py-2 absolute pin-r mt-4 text-base text-left font-normal whitespace-no-wrap">
           <li class="px-4 py-2 hover:bg-grey-light cursor-pointer">
-            Show All Members
+            <a href="#" class="no-underline text-grey-dark" @click.prevent="showMembersListModal">
+              Show All Members
+            </a>
           </li>
           <li class="px-4 py-2 hover:bg-grey-light cursor-pointer">
             Delete
@@ -43,6 +45,8 @@
       <!-- <taskBoard resourceType="projects" :resource="project"></taskBoard>
       <activity resourceType="projects" :resource="project"></activity> -->
     </div>
+
+    <members-list-modal :show="membersListModalShown" :members="office.members" @close="closeMembersListModal" />
   </div>
 </template>
 
@@ -55,13 +59,23 @@ import fileBoard from './../partials/fileBoard.vue'
 import activity from './../partials/activity.vue'
 import addMemberForm from './../partials/addMemberForm.vue'
 import showGithubRepo from './../partials/showGithubRepo.vue'
+import membersListModal from './../partials/membersListModal.vue'
 import tabMenu from './../partials/tabMenu.vue'
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus'
 import { faCog } from '@fortawesome/free-solid-svg-icons/faCog'
 
 export default {
   components: {
-    taskBoard, discussionBoard, messagesBoard, eventBoard, fileBoard, activity, addMemberForm, tabMenu, showGithubRepo
+    taskBoard,
+    discussionBoard,
+    messagesBoard,
+    eventBoard,
+    fileBoard,
+    activity,
+    addMemberForm,
+    membersListModal,
+    tabMenu,
+    showGithubRepo
   },
   props: ['office'],
   data: () => ({
@@ -69,6 +83,7 @@ export default {
     active: 'tasks',
     dropdownMenuShown: false,
     githubRepoModalShown: false,
+    membersListModalShown: false,
     faPlus,
     faCog
   }),
@@ -98,6 +113,12 @@ export default {
       }
       this.addMemberFormShown = false
       EventBus.$emit('notification', data.message, messageType)
+    },
+    showMembersListModal () {
+      this.membersListModalShown = true
+    },
+    closeMembersListModal () {
+      this.membersListModalShown = false
     },
     activateTab (tab) {
       if (tab !== this.active) {

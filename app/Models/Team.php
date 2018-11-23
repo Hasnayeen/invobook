@@ -21,4 +21,9 @@ class Team extends Entity implements HasMembers
     {
         return $this->belongsToMany(\App\Models\User::class, 'team_user', 'team_id', 'user_id');
     }
+
+    public function cycles()
+    {
+        return $this->morphMany(Cycle::class, 'cyclable');
+    }
 }
