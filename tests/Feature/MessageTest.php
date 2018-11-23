@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use App\Models\Message;
 use App\Events\MessageCreated;
+use App\Events\MessageUpdated;
 use Illuminate\Support\Facades\Event;
 
 class MessageTest extends TestCase
@@ -145,5 +146,34 @@ class MessageTest extends TestCase
              ]);
 
         $this->assertDatabaseMissing('messages', ['id' => $message->id]);
+    }
+
+    /** @test */
+    public function user_can_update_a_message()
+    {
+        Event::fake();
+
+        $project = factory(\App\Models\Project::class)->create(['owner_id' => $this->user->id]);
+
+        $message = Message::create([
+            'body'             => 'New Message',
+            'user_id'          => $this->user->id,
+            'messageable_type' => 'project',
+            'messageable_id'   => $project->id,
+        ]);
+
+        $this->actingAs($this->user)
+            ->put("messages/{$message->id}", ['message' => 'Updated Message']);
+
+        $this->assertDatabaseHas('messages', [
+            'body'             => 'Updated Message',
+            'user_id'          => $this->user->id,
+            'messageable_type' => 'project',
+            'messageable_id'   => $project->id,
+        ]);
+
+        Event::assertDispatched(MessageUpdated::class, function ($e) use ($message) {
+            return $e->message->id === $message->id;
+        });
     }
 }

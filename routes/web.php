@@ -119,6 +119,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('messages', 'MessageController@store');
 
+    Route::put('messages/{message}', 'MessageController@update');
+
     Route::delete('messages/{message}', 'MessageController@delete')->middleware('can:delete,message');
 
     /**********************************
