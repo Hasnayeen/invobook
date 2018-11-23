@@ -21,4 +21,9 @@ class Office extends Entity implements HasMembers
     {
         return $this->belongsToMany(\App\Models\User::class, 'office_user', 'office_id', 'user_id');
     }
+
+    public function cycles()
+    {
+        return $this->morphMany(Cycle::class, 'cyclable');
+    }
 }

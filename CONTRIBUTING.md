@@ -57,7 +57,9 @@ $ git pull origin dev
 $ composer install
 $ cp .env.example .env
 $ php artisan key:generate
+$ php artisan telescope:install
 $ npm install
+$ php artisan migrate
 ```
 
 

@@ -24,6 +24,7 @@ class CreateTasksTable extends Migration
             $table->string('related_to')->nullable()->comment('ids of task that are related with this');
             $table->string('taskable_type')->comment('office, team or projects');
             $table->integer('taskable_id')->unsigned();
+            $table->integer('cycle_id')->unsigned()->nullable();
             $table->foreign('assigned_to')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
