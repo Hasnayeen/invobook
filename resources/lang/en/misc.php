@@ -24,6 +24,7 @@ return [
     'Permission has been assigned to the role'   => 'Permission has been assigned to the role',
     'New status has been created'                => 'New status has been created',
     'New task has been created'                  => 'New task has been created',
+    'Task has been updated'                      => 'Task has been updated',
     'The task has been deleted'                  => 'The task has been deleted',
     'Account details are updated'                => 'Account details are updated',
     'Invitation sent successfully'               => 'Invitation sent successfully',
