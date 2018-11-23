@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFilesTable extends Migration
+class CreateCyclesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateFilesTable extends Migration
      */
     public function up()
     {
-        Schema::create('files', function (Blueprint $table) {
+        Schema::create('cycles', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('path');
-            $table->string('fileable_type')->comment('office, team or projects');
-            $table->integer('fileable_id')->unsigned();
-            $table->integer('cycle_id')->unsigned()->nullable();
+            $table->string('cyclable_type');
+            $table->unsignedInteger('cyclable_id');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateFilesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('files');
+        Schema::dropIfExists('cycles');
     }
 }

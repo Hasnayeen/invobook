@@ -26,13 +26,14 @@ class TaskRepository
     {
         return $this->model->create([
             'name'              => $data['name'],
-            'assigned_to'       => $data['assigned_to'],
+            'assigned_to'       => $data['assigned_to'] ?? null,
             'notes'             => $data['notes'],
             'due_on'            => $data['due_on'],
             'related_to'        => $data['related_to'] ?? null,
             'taskable_type'     => $data['taskable_type'],
             'taskable_id'       => $data['taskable_id'],
             'status_id'         => $data['status_id'] ?? null,
+            'cycle_id'          => $data['cycle_id'] ?? null,
         ]);
     }
 }
