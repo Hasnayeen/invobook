@@ -26,4 +26,9 @@ class Project extends Entity implements HasMembers
     {
         return '';
     }
+
+    public function cycles()
+    {
+        return $this->morphMany(Cycle::class, 'cyclable');
+    }
 }

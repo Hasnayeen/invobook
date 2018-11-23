@@ -24,6 +24,7 @@ class DiscussionRepository
             'posted_by'           => auth()->user()->id,
             'discussionable_type' => $data['discussionable_type'],
             'discussionable_id'   => $data['discussionable_id'],
+            'cycle_id'            => $data['cycle_id'] ?? null,
         ]);
     }
 

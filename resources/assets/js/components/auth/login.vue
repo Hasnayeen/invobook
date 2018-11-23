@@ -6,18 +6,18 @@
   </div>
   <div class=""></div>
   <div class="w-full md:w-1/2 p-8">
-    <form role="form" method="POST" :action="url">
+    <form method="POST" :action="url">
       <input type="hidden" name="_token" :value="token">
       <p class="py-4">
-        <input id="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" type="text" name="email" placeholder="E-mail">
+        <input id="email" aria-label="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" type="text" name="email" placeholder="E-mail">
         <span class="text-red-light block pt-2" v-if="errors">{{ errors.email }}</span>
       </p>
       <p class="py-4">
-        <input id="password" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" type="password" name="password" placeholder="Password">
+        <input id="password" aria-label="password" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" type="password" name="password" placeholder="Password">
         <span class="text-red-light block pt-2" v-if="errors">{{ errors.password }}</span>
       </p>
       <p class="py-4 text-grey">
-        <input type="checkbox" name="remember">
+        <input type="checkbox" aria-label="remember me" name="remember">
         Remember Me
       </p>
       <p class="py-4">

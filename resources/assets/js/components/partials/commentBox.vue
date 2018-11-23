@@ -10,8 +10,16 @@
       rows=1
       v-model="body"
       @keyup="checkForMention($event)"
+      @keydown="mentionHighlightMove($event)"
       @keydown.enter.prevent="saveComment($event)"></textarea>
-    <user-suggestion-box :users="users" :name="name" :suggestionShown="suggestionShown" @selected="userSelected"></user-suggestion-box>
+    <user-suggestion-box
+      :users="users"
+      :name="name"
+      :suggestionShown="suggestionShown"
+      :suggestionSelected="suggestionSelected"
+      :suggestionHighlightIndex="suggestionHighlightIndex"
+      :suggestionHighlightDirection="suggestionHighlightDirection"
+      @selected="userSelected"></user-suggestion-box>
     <div v-if="name.length < 1" class="absolute text-xs text-grey-dark pt-2">Press enter <span class="bg-grey p-1 rounded text-white font-bold">↵</span> to save</div>
   </div>
   <div>
@@ -65,6 +73,9 @@ export default {
     name: '',
     mentionStarted: false,
     startIndex: 0,
+    suggestionHighlightDirection: 1,
+    suggestionHighlightIndex: 0,
+    suggestionSelected: false,
     suggestionShown: false,
     mentions: [],
     faTrashAlt
@@ -94,6 +105,8 @@ export default {
     saveComment (e) {
       if (e.shiftKey) {
         this.body = this.body + '\n'
+      } else if (this.mentionStarted) {
+        this.suggestionSelected = true
       } else {
         axios.post('/comments', {
           body: this.body,
@@ -122,22 +135,38 @@ export default {
         })
     },
     checkForMention (e) {
-      if (e.keyCode === 50) {
+      if (e.key === "@") {
         this.suggestionShown = true
         this.mentionStarted = true
         this.startIndex = document.getElementById('save-comment').selectionStart
-      } else if (e.keyCode === 32) {
+      } else if (e.keyCode === 32 || e.keyCode === 27 || (e.keyCode === 8 && document.getElementById('save-comment').selectionStart < this.startIndex)) {
         this.mentionStarted = false
         this.suggestionShown = false
+        this.suggestionHighlightIndex = 0
         this.name = ''
       } else if (this.mentionStarted) {
         this.name = e.target.value.substring(this.startIndex)
       }
     },
+    mentionHighlightMove (e) {
+      if (this.mentionStarted && (e.keyCode === 38 || e.keyCode === 40)) {
+        if (e.keyCode === 38) {
+          this.suggestionHighlightIndex -= 1
+          this.suggestionHighlightDirection = -1
+        } else if (e.keyCode === 40) {
+          this.suggestionHighlightIndex += 1
+          this.suggestionHighlightDirection = 1
+        }
+        e.preventDefault()
+      }
+    },
     userSelected (text) {
       this.body = this.body.substring(0, this.startIndex) + text
       this.mentions.push(text)
+      this.mentionStarted = false
       this.suggestionShown = false
+      this.suggestionSelected = false
+      this.suggestionHighlightIndex = 0
       this.name = ''
       document.getElementById('save-comment').focus()
     }
