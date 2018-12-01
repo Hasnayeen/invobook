@@ -245,4 +245,60 @@ class TaskTest extends TestCase
             ])
             ->assertSessionHasErrors();
     }
+
+    public function user_with_permission_can_update_status_of_a_task()
+    {
+        $status = factory(\App\Models\Status::class)->create();
+
+        $this->task->status()->associate($status)->save();
+
+        $this->actingAs($this->user)
+            ->put("tasks/{$this->task->id}/statuses", [
+                'name'    => 'dummy status',
+                'color'   => '#000000',
+            ])
+            ->assertSessionHasNoErrors();
+
+        $this->assertEquals([
+            'name'    => 'dummy status',
+            'color'   => '#000000',
+        ], [
+            'name'  => $this->task->refresh()->status->name,
+            'color' => $this->task->refresh()->status->color,
+        ]);
+    }
+
+    /**
+     * @test
+     * @expectedException Illuminate\Auth\Access\AuthorizationException
+     */
+    public function user_without_permission_cant_update_status_of_a_task()
+    {
+        $task = factory(\App\Models\Task::class)->create();
+        $status = factory(\App\Models\Status::class)->create();
+
+        $task->status()->associate($status)->save();
+
+        $permission = Permission::create(['name' => 'edit task.' . $task->taskable_type . '->' . $task->taskable_id]);
+
+        $this->actingAs($this->user)
+            ->put("tasks/{$task->id}/statuses", [
+                'name'    => 'dummy status',
+                'color'   => '#000000',
+            ]);
+    }
+
+    /**
+     * @test
+     * @expectedException Illuminate\Validation\ValidationException
+     */
+    public function request_validates_the_data_before_updating_status_of_a_task()
+    {
+        $this->actingAs($this->user)
+            ->put("tasks/{$this->task->id}/statuses", [
+                'name'    => null,
+                'color'   => 'non-hex-value',
+            ])
+            ->assertSessionHasErrors();
+    }
 }
