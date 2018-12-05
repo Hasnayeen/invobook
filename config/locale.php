@@ -30,6 +30,7 @@ return [
         'sv-se' => 'Swedish (Sweden)',
         'th'    => 'Thai (Thai)',
         'tr-TR' => 'Turkish (Turkey)',
+        'la'    => 'Latin',
     ],
 
     'route_to_file' => [
