@@ -32,6 +32,7 @@ return [
         'tr-TR' => 'Turkish (Turkey)',
         'la'    => 'Latin',
         'ms'    => 'Malay',
+        'jp'    => 'Japanese',
     ],
 
     'route_to_file' => [
