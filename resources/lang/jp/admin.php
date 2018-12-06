@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'Users'                          => 'ユーザー',
+    'Roles & Permissions'            => '役割とアクセス許可',
+    'Activities'                     => 'アクティビティ',
+    'About'                          => '約',
+    'Roles'                          => 'ロール',
+    'Role'                           => '役割',
+    'Permissions'                    => 'アクセス許可',
+    'Invite New Member'              => '新しい会員を招待する',
+    'Add New Role'                   => '新しい役割を追加する',
+    'Cancel'                         => 'キャンセル',
+    'Assign'                         => '割り当てます',
+    'Attach'                         => 'アタッチ',
+    'Filters'                        => 'フィルタ',
+    'Apply'                          => '適用',
+    'Load More'                      => 'もっと読み込む',
+    'Check for Updates'              => 'アップデートを確認',
+    'Filter by Activity'             => 'アクティビティによるフィルタリング',
+    'Filter by User'                 => 'ユーザーによるフィルタリング',
+    'Filter by Date'                 => '日付でフィルタリング',
+    'Last Updated'                   => '最終更新',
+    'Author'                         => '著者',
+    'Submit issue & feedback at'     => '問題とフィードバックを提出する',
+    'Don\'t belongs to any role yet' => 'どんな役割にも属していない',
+    'Don\'t have any permission yet' => 'まだ許可がありません',
+];
