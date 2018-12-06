@@ -31,6 +31,7 @@ return [
         'th'    => 'Thai (Thai)',
         'tr-TR' => 'Turkish (Turkey)',
         'la'    => 'Latin',
+        'jp'	=> 'Japanese',
     ],
 
     'route_to_file' => [
