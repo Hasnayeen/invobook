@@ -25,6 +25,8 @@ Self hosted project management and collaboration tool inspired by basecamp
 |
 <b><a href="#contributing-top">Contributing</a></b>
 |
+<b><a href="#supporting-top">Supporting</a></b>
+|
 <b><a href="#credits-top">Credits</a></b>
 |
 <b><a href="#license-top">License</a></b>
@@ -90,6 +92,13 @@ You can check out an instance of the application that we use as a guest user usi
 
 Thank you for considering contributing to the Goodwork! The contribution guide can be found in the [Contribution Guideline](https://github.com/iluminar/goodwork/wiki/Contribution-Guideline).
 
+## Supporting <small>[↑Top](#goodwork)</small>
+
+Goodwork is an MIT-licensed open source project with its ongoing development made possible thanks to the support by our amazing backers.
+
+Issues on Goodwork can be funded by anyone and the money will be distributed to contributors and maintainers. If you use Goodwork please consider becoming a backer:
+[![issuehunt-to-marktext](https://github.com/BoostIO/issuehunt-materials/blob/master/issuehunt-badge@1x.png?raw=true)](https://issuehunt.io/repos/81873619)
+
 ## Security Vulnerabilities <small>[↑Top](#goodwork)</small>
 
 If you discover a security vulnerability within Goodwork, please send an e-mail to searching.nehal@gmail.com. All security vulnerabilities will be promptly addressed.
@@ -98,7 +107,7 @@ If you discover a security vulnerability within Goodwork, please send an e-mail 
 
 - Author: [Nehal Hasnayeen](https://github.com/Hasnayeen) (https://hasnayeen.github.io)
 
-- Logotype: [Malcolm Nihlén](https://github.com/scriptcoded) ([scriptcoded](https://github.com/scriptcoded))
+- Logo Credit: [Malcolm Nihlén](https://github.com/scriptcoded) ([scriptcoded](https://github.com/scriptcoded))
 
 [![](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/images/0)](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/links/0)[![](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/images/1)](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/links/1)[![](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/images/2)](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/links/2)[![](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/images/3)](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/links/3)[![](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/images/4)](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/links/4)[![](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/images/5)](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/links/5)[![](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/images/6)](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/links/6)[![](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/images/7)](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/links/7)
 
