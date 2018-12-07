@@ -33,6 +33,7 @@ return [
         'la'    => 'Latin',
         'ms'    => 'Malay',
         'jp'    => 'Japanese',
+        'da'    => 'Danish',
     ],
 
     'route_to_file' => [
