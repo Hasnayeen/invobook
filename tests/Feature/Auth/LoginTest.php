@@ -53,7 +53,7 @@ class LoginTest extends TestCase
         $user = factory(User::class)->create();
 
         $response = $this->post($this->loginRoute(), [
-            'email' => $user->email,
+            'email'    => $user->email,
             'password' => 'secret',
         ]);
 
@@ -67,7 +67,7 @@ class LoginTest extends TestCase
         $user = factory(User::class)->create();
 
         $response = $this->post($this->loginRoute(), [
-            'email' => $user->email,
+            'email'    => $user->email,
             'password' => 'secret',
             'remember' => 'on',
         ]);
@@ -87,7 +87,7 @@ class LoginTest extends TestCase
         $user = factory(User::class)->create();
 
         $response = $this->from($this->loginRoute())->post($this->loginRoute(), [
-            'email' => $user->email,
+            'email'    => $user->email,
             'password' => 'invalid-password',
         ]);
 
@@ -102,7 +102,7 @@ class LoginTest extends TestCase
     public function user_cannot_login_with_email_that_does_not_exist()
     {
         $response = $this->from($this->loginRoute())->post($this->loginRoute(), [
-            'email' => 'nobody@example.com',
+            'email'    => 'nobody@example.com',
             'password' => 'invalid-password',
         ]);
 
@@ -142,7 +142,7 @@ class LoginTest extends TestCase
 
         foreach (range(0, 5) as $_) {
             $response = $this->from($this->loginRoute())->post($this->loginRoute(), [
-                'email' => $user->email,
+                'email'    => $user->email,
                 'password' => 'invalid-password',
             ]);
         }
