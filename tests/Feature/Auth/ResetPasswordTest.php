@@ -77,9 +77,9 @@ class ResetPasswordTest extends TestCase
         Event::fake();
 
         $response = $this->post($this->passwordResetPostRoute(), [
-            'token' => $this->getValidToken($this->user),
-            'email' => $this->user->email,
-            'password' => 'new-awesome-password',
+            'token'                 => $this->getValidToken($this->user),
+            'email'                 => $this->user->email,
+            'password'              => 'new-awesome-password',
             'password_confirmation' => 'new-awesome-password',
         ]);
 
@@ -100,9 +100,9 @@ class ResetPasswordTest extends TestCase
         ]);
 
         $response = $this->from($this->passwordResetGetRoute($this->getInvalidToken()))->post($this->passwordResetPostRoute(), [
-            'token' => $this->getInvalidToken(),
-            'email' => $user->email,
-            'password' => 'new-awesome-password',
+            'token'                 => $this->getInvalidToken(),
+            'email'                 => $user->email,
+            'password'              => 'new-awesome-password',
             'password_confirmation' => 'new-awesome-password',
         ]);
 
@@ -119,9 +119,9 @@ class ResetPasswordTest extends TestCase
             'password' => bcrypt('old-password'),
         ]);
         $response = $this->from($this->passwordResetGetRoute($token = $this->getValidToken($user)))->post($this->passwordResetPostRoute(), [
-            'token' => $token,
-            'email' => $user->email,
-            'password' => '',
+            'token'                 => $token,
+            'email'                 => $user->email,
+            'password'              => '',
             'password_confirmation' => '',
         ]);
         $response->assertRedirect($this->passwordResetGetRoute($token));
@@ -142,9 +142,9 @@ class ResetPasswordTest extends TestCase
 
         $response = $this->from($this->passwordResetGetRoute($token = $this->getValidToken($user)))
                          ->post($this->passwordResetPostRoute(), [
-            'token' => $token,
-            'email' => '',
-            'password' => 'new-awesome-password',
+            'token'                 => $token,
+            'email'                 => '',
+            'password'              => 'new-awesome-password',
             'password_confirmation' => 'new-awesome-password',
         ]);
 
