@@ -15,6 +15,9 @@
 
     <div id="message-box" class="h-50-vh overflow-y-auto">
       <div v-if="selectedUser.id">
+        <div v-if="messages.length < 1" class="text-grey-dark text-sm text-center" style="margin-top: 20vh;">
+          You've no message interaction with this user yet. Say "Hi" to {{ selectedUser.name }}
+        </div>
         <message v-for="(message, index) in messages" :key="index" :message="message" :user="authUser" :index="index" @deleted="deleteMessage"></message>
       </div>
       <div v-else class="text-grey-dark text-sm text-center" style="margin-top: 20vh;">
