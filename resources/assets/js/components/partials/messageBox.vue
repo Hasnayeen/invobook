@@ -7,8 +7,9 @@
     <div class="py-2 bg-grey-lighter">
       <div class="text-sm text-center text-grey-dark">Send direct meesage</div>
       <div class="flex flex-row justify-center px-4 py-2">
-        <div @click="selectUserMessage(user)" v-for="user in users" v-if="user.id !== authUser.id">
+        <div @click="selectUserMessage(user)" v-for="user in users" v-if="user.id !== authUser.id" class="relative">
           <img class="w-10 h-10 rounded-full md:mr-2 cursor-pointer" :title="user.name" :src="generateUrl(user.avatar)">
+          <div :class="[user.online ? 'bg-teal' : 'bg-grey']" :title="[user.online ? 'online' : 'offline']" class="absolute w-4 h-4 rounded-full border-2 border-white mr-1 pin-r pin-b"></div>
         </div>
       </div>
     </div>
@@ -88,8 +89,8 @@ export default {
     scrollToBottom () {
       this.$nextTick(() => {
         var messagesContainer = this.$el.querySelector('#message-box')
-        messagesContainer.scrollTop = messagesContainer.lastElementChild.scrollHeight;
-      });
+        messagesContainer.scrollTop = messagesContainer.lastElementChild.scrollHeight
+      })
     },
     showMessageBox () {
       this.messageBoxShown = true
@@ -144,6 +145,13 @@ export default {
       this.messages.splice(index, 1)
     },
     listen () {
+      Echo.join('global')
+        .here(users => {
+          this.users = this.users.map(user => {
+            user.online = users.includes(user.id)
+            return user
+          })
+        })
       Echo.join('user.' + this.authUser.id)
         .listen('MessageCreated', event => {
           event.message.user = event.user
