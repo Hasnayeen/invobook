@@ -30,5 +30,9 @@ class HeadquarterOfficeSeeder extends Seeder
             Permission::create(['name' => 'create discussion.office->' . $office->id]),
             Permission::create(['name' => 'create task.office->' . $office->id]),
         ]);
+        $office->huntable()->create([
+            'name'        => $office->name,
+            'description' => $office->description
+        ]);
     }
 }
