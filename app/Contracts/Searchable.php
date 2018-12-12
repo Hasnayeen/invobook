@@ -4,7 +4,7 @@ namespace App\Contracts;
 
 use App\Models\Search;
 
-trait Huntable
+trait Searchable
 {
     /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
@@ -14,7 +14,7 @@ trait Huntable
         return $this->morphMany(Search::class, 'huntable');
     }
 
-    public static function bootHuntable()
+    public static function bootSearchable()
     {
         $fields = self::fields();
 

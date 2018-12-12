@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Contracts\Huntable;
+use App\Contracts\Searchable;
 use App\Contracts\HasMembers;
 use App\Events\DiscussionCreated;
 use Illuminate\Database\Eloquent\Model;
@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
  */
 class Discussion extends Model
 {
-    use LogsActivity, Huntable;
+    use LogsActivity, Searchable;
 
     protected static function huntableFields()
     {

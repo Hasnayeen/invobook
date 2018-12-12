@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
-use App\Contracts\Huntable;
+use App\Contracts\Searchable;
 use App\Contracts\HasMembers;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Project extends Entity implements HasMembers
 {
-    use LogsActivity, Huntable;
+    use LogsActivity, Searchable;
 
     protected $type = 'project';
 
