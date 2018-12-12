@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Contracts\Huntable;
 use App\Contracts\HasMembers;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Team extends Entity implements HasMembers
 {
-    use LogsActivity;
+    use LogsActivity, Huntable;
 
     protected $type = 'team';
 
