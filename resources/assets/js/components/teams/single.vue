@@ -28,8 +28,8 @@
       <span @click="showAddMemberForm" class="bg-white shadow w-8 h-8 rounded-full text-teal hover:cursor-pointer text-center p-2">
         <font-awesome-icon :icon="faPlus"></font-awesome-icon>
       </span>
-      <a v-for="(member, index) in team.members" v-if="index < 5" :href="'/users/' + member.username" class="pl-2">
-        <img :src="generateUrl(member.avatar)" class="rounded-full w-8 h-8 mr-1">
+      <a v-for="(member, index) in team.members" :href="'/users/' + member.username" class="pl-2">
+        <profile-card :user="member" :oneAlreadyOnDisplay="profileCardOnDisplay" @on-display="showProfileCard" @on-hide="hideProfileCard"></profile-card>
       </a>
       <span v-if="team.members.length > 5" class="bg-grey-lighter border-teal border p-2 rounded-full">{{ team.members.length - 5 }}+</span>
     </div>
@@ -60,6 +60,7 @@ import activity from './../partials/activity.vue'
 import addMemberForm from './../partials/addMemberForm.vue'
 import showGithubRepo from './../partials/showGithubRepo.vue'
 import membersListModal from './../partials/membersListModal.vue'
+import profileCard from './../partials/profileCard.vue'
 import tabMenu from './../partials/tabMenu.vue'
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus'
 import { faCog } from '@fortawesome/free-solid-svg-icons/faCog'
@@ -74,6 +75,7 @@ export default {
     activity,
     addMemberForm,
     membersListModal,
+    profileCard,
     tabMenu,
     showGithubRepo
   },
@@ -84,6 +86,7 @@ export default {
     dropdownMenuShown: false,
     githubRepoModalShown: false,
     membersListModalShown: false,
+    profileCardOnDisplay: false,
     faPlus,
     faCog
   }),
@@ -134,6 +137,12 @@ export default {
     },
     closeGithubRepoModal () {
       this.githubRepoModalShown = false
+    },
+    showProfileCard () {
+      this.profileCardOnDisplay = true
+    },
+    hideProfileCard () {
+      this.profileCardOnDisplay = false
     }
   }
 }
