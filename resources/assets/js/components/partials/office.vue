@@ -15,9 +15,9 @@
 		</div>
 		<span class="text-grey text-sm w-full px-2 h-16 self-start">{{ office.description }}</span>
 		<div class="border-t w-full h-16 flex flex-row justify-start items-center px-2">
-			<a v-for="(member, index) in office.members" :key="index" v-if="index < 5" :href="'/users/' + member.username" class="px-1">
-				<img :src="generateUrl(member.avatar)" class="rounded-full w-8 h-8">
-			</a>
+      <a v-if="index < 5" v-for="(member, index) in office.members" :href="'/users/' + member.username" class="pl-2">
+        <profile-card :user="member" :oneAlreadyOnDisplay="profileCardOnDisplay" @on-display="showProfileCard" @on-hide="hideProfileCard"></profile-card>
+      </a>
 			<span v-if="office.members.length > 5" class="bg-grey-lighter border-teal border p-2 rounded-full">{{ office.members.length - 5 }}+</span>
 			<span v-if="office.members.length == 0" class="text-grey-dark text-center">No members yet</span>
 		</div>
@@ -26,13 +26,16 @@
 
 <script>
 import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
+import profileCard from './../partials/profileCard.vue'
 
 export default {
+  components: {profileCard},
   props: ['details', 'index'],
   data () {
     return {
       office: this.details,
       dropdownMenuShown: false,
+      profileCardOnDisplay: false,
       faEllipsisH
     }
   },
@@ -57,6 +60,12 @@ export default {
 
           EventBus.$emit('notification', error.response.data.message, error.response.data.status)
         })
+    },
+    showProfileCard () {
+      this.profileCardOnDisplay = true
+    },
+    hideProfileCard () {
+      this.profileCardOnDisplay = false
     }
   }
 }

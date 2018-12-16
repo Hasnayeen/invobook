@@ -1,7 +1,7 @@
 <template>
 <div class="pt-8 bg-white rounded shadow py-8">
   <div class="flex flex-col items-center">
-    <img src="/image/avatar-profile.png" :alt="'Default avatar of ' + user.name" class="w-32 h-32 rounded-full">
+    <img :src="generateUrl(user.avatar)" :alt="'Default avatar of ' + user.name" class="w-32 h-32 rounded-full">
     <div class="text-grey-darker text-2xl font-semibold py-2 px-8">
       {{user.name}}
     </div>

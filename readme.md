@@ -97,6 +97,7 @@ Thank you for considering contributing to the Goodwork! The contribution guide c
 Goodwork is an MIT-licensed open source project with its ongoing development made possible thanks to the support by our amazing backers.
 
 Issues on Goodwork can be funded by anyone and the money will be distributed to contributors and maintainers. If you use Goodwork please consider becoming a backer:
+
 [![issuehunt-to-marktext](https://github.com/BoostIO/issuehunt-materials/blob/master/issuehunt-badge@1x.png?raw=true)](https://issuehunt.io/repos/81873619)
 
 ## Security Vulnerabilities <small>[↑Top](#goodwork)</small>
