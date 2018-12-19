@@ -18,27 +18,27 @@ trait Searchable
     {
         $fields = self::fields();
 
-        static::created(function($item) use ($fields) {
+        static::created(function ($item) use ($fields) {
             $item->huntable()->create([
                 'name'        => $item[$fields[0]],
-                'description' => $item[$fields[1]]
+                'description' => $item[$fields[1]],
             ]);
         });
 
         static::updated(function ($item) use ($fields) {
             $item->huntable()->update([
                 'name'        => $item[$fields[0]],
-                'description' => $item[$fields[1]]
+                'description' => $item[$fields[1]],
             ]);
         });
 
-        static::deleting(function($item) use ($fields) {
+        static::deleting(function ($item) use ($fields) {
             $item->huntable()->delete();
         });
     }
 
     /**
-     * Get huntable fields
+     * Get huntable fields.
      *
      * @return array
      */
@@ -47,7 +47,6 @@ trait Searchable
         $class = get_called_class();
 
         if (method_exists($class, 'huntableFields')) {
-
             return $class::huntableFields();
         }
 

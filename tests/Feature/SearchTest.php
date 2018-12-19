@@ -2,10 +2,10 @@
 
 namespace Tests\Feature;
 
-use App\Models\Project;
-use App\Models\Task;
-use Spatie\Permission\Models\Permission;
 use Tests\TestCase;
+use App\Models\Task;
+use App\Models\Project;
+use Spatie\Permission\Models\Permission;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class SearchTest extends TestCase
@@ -52,7 +52,7 @@ class SearchTest extends TestCase
     {
         $task = factory(Task::class)->create([
             'name'  => 'old name',
-            'notes' => 'old'
+            'notes' => 'old',
         ]);
 
         $permission = Permission::create(['name' => 'edit task.' . $task->taskable_type . '->' . $task->taskable_id]);
@@ -74,7 +74,7 @@ class SearchTest extends TestCase
 
         $this->assertDatabaseMissing('searches', [
             'name'        => 'old name',
-            'description' => 'old'
+            'description' => 'old',
         ]);
     }
 }
