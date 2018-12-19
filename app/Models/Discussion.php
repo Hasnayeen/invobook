@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Contracts\Searchable;
 use App\Contracts\HasMembers;
 use App\Events\DiscussionCreated;
 use Illuminate\Database\Eloquent\Model;
@@ -16,7 +17,12 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
  */
 class Discussion extends Model
 {
-    use LogsActivity;
+    use LogsActivity, Searchable;
+
+    protected static function huntableFields()
+    {
+        return ['name', 'content'];
+    }
 
     protected $fillable = ['name', 'content', 'raw_content', 'posted_by', 'archived', 'draft', 'discussionable_type', 'discussionable_id', 'category_id', 'cycle_id'];
 
