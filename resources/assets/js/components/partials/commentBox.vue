@@ -32,7 +32,7 @@
           <img :src="generateUrl(comment.user.avatar)" class="rounded-full w-8 h-8">
         </div>
         <div class="flex-1 bg-grey-lighter text-grey-darker rounded ml-2 p-4 flex flex-row justify-between">
-          <div>
+          <div v-linkified:options="{ className: 'text-blue italic' }" >
             {{ comment.body }}
           </div>
           <div v-if="user.id === comment.user_id" @click="deleteComment(comment,index)" class="text-xs text-red pb-2 ml-10 cursor-pointer">
