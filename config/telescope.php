@@ -6,6 +6,8 @@ use Laravel\Telescope\Http\Middleware\Authorize;
 return [
     'path' => 'telescope',
 
+    'enabled' => env('TELESCOPE_ENABLED', false),
+
     /*
     |--------------------------------------------------------------------------
     | Telescope Storage Driver
