@@ -2,12 +2,18 @@
 
 namespace App\Models;
 
+use App\Contracts\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class Task extends Model
 {
-    use LogsActivity;
+    use LogsActivity, Searchable;
+
+    protected static function huntableFields()
+    {
+        return ['name', 'notes'];
+    }
 
     protected $with = ['subtasks'];
 

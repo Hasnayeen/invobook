@@ -35,6 +35,8 @@ Route::post('register/{token}', 'Auth\RegisterController@confirmNewRegistration'
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'HomeController@index')->name('home');
 
+    Route::get('search', 'SearchController@index');
+
     /**********************************
         Project
     **********************************/

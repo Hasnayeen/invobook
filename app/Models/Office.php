@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Contracts\Searchable;
 use App\Contracts\HasMembers;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Office extends Entity implements HasMembers
 {
-    use LogsActivity;
+    use LogsActivity, Searchable;
 
     protected $type = 'office';
 
