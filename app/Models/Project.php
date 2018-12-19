@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\Contracts\Searchable;
 use App\Contracts\HasMembers;
+use App\Contracts\Searchable;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 

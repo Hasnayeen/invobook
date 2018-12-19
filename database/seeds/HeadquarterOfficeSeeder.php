@@ -32,7 +32,7 @@ class HeadquarterOfficeSeeder extends Seeder
         ]);
         $office->huntable()->create([
             'name'        => $office->name,
-            'description' => $office->description
+            'description' => $office->description,
         ]);
     }
 }
