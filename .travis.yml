@@ -4,7 +4,7 @@ php:
   - '7.1.3'
 
 install:
-  - composer install --no-interaction --prefer-dist --no-suggest --no-dev
+  - composer install --no-interaction --prefer-dist --no-suggest
   - cp .env.travis .env
   - php artisan key:generate
   - mkdir travis-phantomjs
