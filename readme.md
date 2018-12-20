@@ -4,7 +4,6 @@
 [![Laravel Version](https://img.shields.io/badge/Laravel-5.7-brightgreen.svg?style=flat)](https://github.com/laravel/laravel)
 [![VueJS Version](https://img.shields.io/badge/vue-2.5.13-brightgreen.svg?style=flat)](https://github.com/vuejs/vue)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e52feb1563874cd19bc1ffbff32aa567)](https://www.codacy.com/app/Hasnayeen/goodwork)
-[![Scrutinizer](https://scrutinizer-ci.com/g/iluminar/goodwork/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/iluminar/goodwork)
 [![codecov](https://codecov.io/gh/iluminar/goodwork/branch/master/graph/badge.svg)](https://codecov.io/gh/iluminar/goodwork)
 [![StyleCI](https://styleci.io/repos/81873619/shield?branch=dev&style=flat)](https://styleci.io/repos/81873619)
 [![Join on slack](https://img.shields.io/badge/join%20on-slack-green.svg)](https://join.slack.com/t/iluminar/shared_invite/enQtNDY0Mzc3NDkwOTY1LTJhZTNiYmMxZmE4NGU5MTJhODI5OWMyNjc4ZmIyNDVhODRhMGUzNDU0MmM1OGRmZjBiYWM0NjcwNWRjMDJjNTA)
