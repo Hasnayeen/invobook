@@ -12,6 +12,7 @@ return [
 
     'lang' => [
         'ar'    => 'Arabic',
+        'da'    => 'Danish',
         'de'    => 'German',
         'en'    => 'English',
         'es-ES' => 'Spanish (Spain)',
@@ -23,6 +24,9 @@ return [
         'hr'    => 'Croatian',
         'id'    => 'Bahasa (Indonesia)',
         'it-IT' => 'Italian (Italy)',
+        'jp'    => 'Japanese',
+        'la'    => 'Latin',
+        'ms'    => 'Malay',
         'nl-NL' => 'Dutch (Netherlands)',
         'pl'    => 'Polish',
         'pt-BR' => 'Portuguese (Brazil)',
@@ -30,10 +34,6 @@ return [
         'sv-se' => 'Swedish (Sweden)',
         'th'    => 'Thai (Thai)',
         'tr-TR' => 'Turkish (Turkey)',
-        'la'    => 'Latin',
-        'ms'    => 'Malay',
-        'jp'    => 'Japanese',
-        'da'    => 'Danish',
     ],
 
     'route_to_file' => [
