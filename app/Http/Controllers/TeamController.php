@@ -8,6 +8,11 @@ use App\Repositories\TeamRepository;
 
 class TeamController extends Controller
 {
+    public function index()
+    {
+        abort(404);
+    }
+
     public function show(Team $team)
     {
         $team->load('members');

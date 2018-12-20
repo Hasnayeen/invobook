@@ -41,9 +41,7 @@ Route::group(['middleware' => 'auth'], function () {
         Project
     **********************************/
 
-    Route::get('projects', function () {
-        return abort(404);
-    });
+    Route::get('projects', 'ProjectController@index');
 
     Route::post('projects', 'ProjectController@store')->middleware('can:create,App\Models\Project');
 
@@ -55,9 +53,7 @@ Route::group(['middleware' => 'auth'], function () {
         Team
     **********************************/
 
-    Route::get('teams', function () {
-        return abort(404);
-    });
+    Route::get('teams', 'TeamController@index');
 
     Route::post('teams', 'TeamController@store')->middleware('can:create,App\Models\Team');
 
@@ -69,9 +65,7 @@ Route::group(['middleware' => 'auth'], function () {
         Office
      **********************************/
 
-    Route::get('offices', function () {
-        return abort(404);
-    });
+    Route::get('offices', 'OfficeController@index');
 
     Route::post('offices', 'OfficeController@store')->middleware('can:create,App\Models\Office');
 
