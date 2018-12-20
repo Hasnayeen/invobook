@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Lang;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class LocalizationMiddleware
 {
@@ -25,12 +26,15 @@ class LocalizationMiddleware
 
         if (!is_null($file)) {
             $localeData = array_merge(Lang::get('navbar', [], $locale), Lang::get($file, [], $locale));
-        } else {
+            $localeString = json_encode($localeData);
+            $content = str_replace_first('</head>', "<script>window.lang=$localeString</script>\n</head>", $response->content());
+            $response->setContent($content);
+        } elseif ($response->exception instanceof NotFoundHttpException) {
             $localeData = Lang::get('navbar', [], $locale);
+            $localeString = json_encode($localeData);
+            $content = str_replace_first('</head>', "<script>window.lang=$localeString</script>\n</head>", $response->content());
+            $response->setContent($content);
         }
-        $localeString = json_encode($localeData);
-        $content = str_replace_first('</head>', "<script>window.lang=$localeString</script>\n</head>", $response->content());
-        $response->setContent($content);
 
         return $response;
     }
