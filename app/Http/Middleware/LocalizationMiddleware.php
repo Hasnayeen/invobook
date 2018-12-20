@@ -23,7 +23,7 @@ class LocalizationMiddleware
         $uri = $request->route() ? $request->route()->uri : '';
         $file = config('locale.route_to_file.' . $uri);
 
-        if (!is_null($file)) {
+        if (! is_null($file)) {
             $localeData = array_merge(Lang::get('navbar', [], $locale), Lang::get($file, [], $locale));
         } else {
             $localeData = Lang::get('navbar', [], $locale);
