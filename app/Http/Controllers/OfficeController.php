@@ -8,6 +8,11 @@ use App\Http\Requests\StoreOfficeRequest;
 
 class OfficeController extends Controller
 {
+    public function index()
+    {
+        abort(404);
+    }
+
     public function show(Office $office)
     {
         $office->load('members');

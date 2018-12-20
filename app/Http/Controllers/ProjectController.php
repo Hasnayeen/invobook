@@ -8,6 +8,11 @@ use App\Http\Requests\StoreProjectRequest;
 
 class ProjectController extends Controller
 {
+    public function index()
+    {
+        abort(404);
+    }
+
     public function show(Project $project)
     {
         $project->load('members');
