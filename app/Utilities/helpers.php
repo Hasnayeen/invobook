@@ -83,7 +83,7 @@ if (!function_exists('create_permissions')) {
                 return $matches[1];
             }
 
-            return false;
+            return $result;
         }
     }
 }
