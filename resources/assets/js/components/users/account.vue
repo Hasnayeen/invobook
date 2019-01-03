@@ -12,6 +12,19 @@
       </div>
       <div class="border-half mt-4 mb-8">
       </div>
+      <div class="mb-4 px-8">
+        <label class="block text-grey-darker text-sm font-bold mb-2" for="username">
+          {{ 'Username' | localize }}
+          <span v-if="!usernameAvailable" class="text-red-light font-normal text-sm">(Username taken. Please try again)</span>
+        </label>
+        <div class="relative">
+          <input @keyup="checkUsernameAvailability" v-model='user.username' class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="username" type="text" placeholder="Nehal Hasnayeen">
+          <font-awesome-icon v-if="usernameAvailable" :icon="faCheck" class="absolute pin-y pin-r text-green pt-1 mt-2 mr-2"></font-awesome-icon>
+          <font-awesome-icon v-if="!usernameAvailable" :icon="faTimes" class="absolute pin-y pin-r text-red pt-1 mt-2 mr-2"></font-awesome-icon>
+        </div>
+      </div>
+      <div class="border-half mt-4 mb-8">
+      </div>
       <div class="mb-8 px-8">
         <label class="block text-grey-darker text-sm font-bold mb-2" for="username">
           {{ 'Current Password' | localize }}
@@ -56,6 +69,8 @@
 </template>
 
 <script>
+import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
+
 export default {
   props: {
     user: {
@@ -64,7 +79,6 @@ export default {
     }
   },
   data: () => ({
-    email: '',
     currentPassword: '',
     newPassword: '',
     newPasswordConfirmation: '',
@@ -73,14 +87,16 @@ export default {
       current_password: '',
       new_password: '',
       new_password_confirmation: ''
-    }
+    },
+    usernameAvailable: true,
+    faCheck,
+    faTimes
   }),
   methods: {
     update () {
       var params = {}
-      if (this.email !== '') {
-        params.email = this.email
-      }
+      params.email = this.user.email
+      params.username = this.user.username
       if (this.newPassword !== '') {
         params.current_password = this.currentPassword
         params.new_password = this.newPassword
@@ -89,9 +105,10 @@ export default {
       axios.put('/users/' + this.user.username + '/account', params)
         .then((response) => {
           EventBus.$emit('notification', response.data.message, response.data.status)
-          this.email = '',
-          this.currentPassword = '',
-          this.newPassword = '',
+          this.email = ''
+          this.username = ''
+          this.currentPassword = ''
+          this.newPassword = ''
           this.newPasswordConfirmation = ''
         })
         .catch((error) => {
@@ -108,6 +125,22 @@ export default {
               new_password_confirmation: ''
             }
           }, 2000)
+        })
+    },
+    checkUsernameAvailability () {
+      axios.get('/username', {
+        params: {
+          username: this.user.username
+        }
+      })
+        .then((response) => {
+          if (response.data.status === 'success') {
+            this.usernameAvailable = true
+          }
+        })
+        .catch((error) => {
+          this.usernameAvailable = false
+          console.error(error)
         })
     }
   }

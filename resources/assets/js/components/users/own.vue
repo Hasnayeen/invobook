@@ -11,10 +11,10 @@
   </div>
   <form class="px-8 pt-6">
     <div class="mb-6">
-      <label class="block text-grey-darker text-sm font-bold mb-2" for="username">
+      <label class="block text-grey-darker text-sm font-bold mb-2" for="name">
         {{ 'Name' | localize }}
       </label>
-      <input v-model='user.name' class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="username" type="text" placeholder="Nehal Hasnayeen">
+      <input v-model='user.name' class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="name" type="text" placeholder="Nehal Hasnayeen">
     </div>
     <div class="mb-6">
       <label class="block text-grey-darker text-sm font-bold mb-2" for="title">
@@ -89,6 +89,7 @@
 
 <script>
 import avatarUpload from './../partials/avatarUpload'
+
 export default {
   name: 'Own',
   components: {avatarUpload},

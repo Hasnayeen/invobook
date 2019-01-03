@@ -142,18 +142,9 @@ class UserTest extends TestCase
     }
 
     /** @test */
-    public function user_can_check_username_exists()
+    public function user_can_check_if_username_exists()
     {
         $this->actingAs($this->user);
-
-        $response = $this->json('GET', '/username', ['username' => $this->user->username]);
-
-        $response
-            ->assertStatus(409)
-            ->assertJson([
-                'status'  => 'error',
-                'message' => 'misc.Username exists',
-            ]);
 
         $response = $this->json('GET', '/username', ['username' => $this->user->username . 'invert']);
 
@@ -161,7 +152,18 @@ class UserTest extends TestCase
             ->assertStatus(200)
             ->assertJson([
                 'status'  => 'success',
-                'message' => 'misc.Username does not exist',
+                'message' => 'Username does not exist',
+            ]);
+
+        // User current username is considered as available so we check other username
+        $user2 = factory(User::class)->create(['username' => 'random']);
+        $response = $this->json('GET', '/username', ['username' => 'random']);
+
+        $response
+            ->assertStatus(409)
+            ->assertJson([
+                'status'  => 'error',
+                'message' => 'Username exists',
             ]);
     }
 }

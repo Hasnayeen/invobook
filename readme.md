@@ -39,7 +39,7 @@ Goodwork is a simple project management and collaboration tool for all kind of t
 
 Goodwork brings you all the components required for your project to run smoothly in one place so that you have single source of truth. Instead of using a collection of tools or service which makes everything messy and hard to find important details from stuff scattered all over the place, Goodwork organizes everything in a central place where everyone in the company knows what to do, knows where things stand and find stuff without having to ask around all the time.
 
-> Available in [Arabic, Bahasa, Dutch, English, Farsi, Finnish, French, Italian, Polish, Portuguese, Russian, Spanish, Swedish, Thai, Turkish] language
+> Available in 23 language
 
 [Overview](https://github.com/iluminar/goodwork/wiki/Overview)
 
