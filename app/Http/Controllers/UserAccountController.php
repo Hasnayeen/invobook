@@ -10,10 +10,10 @@ class UserAccountController extends Controller
     public function update(UpdateUserAccount $request)
     {
         $user = auth()->user();
-        if ($request->get('email')) {
+        if ($request->email && ! User::where('email', $request->email)->exists()) {
             $user->email = $request->get('email');
         }
-        if ($request->get('username') && ! User::where('username', $request->username)->exists()) {
+        if ($request->username && ! User::where('username', $request->username)->exists()) {
             $user->username = $request->get('username');
         }
         if ((auth()->user()->username !== 'guest') && $request->get('new_password')) {
@@ -23,7 +23,7 @@ class UserAccountController extends Controller
 
         return response()->json([
             'status'  => 'success',
-            'message' => trans('misc.Account details are updated'),
+            'message' => localize('misc.Account details are updated'),
         ]);
     }
 }

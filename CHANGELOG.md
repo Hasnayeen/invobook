@@ -10,6 +10,7 @@
 - Added endpoint to check if username exists
 - Added finnish translation
 - Added simplified Chinese translation
+- Added `localize` helper function
 
 ## v0.8 (2018-10-18)
 

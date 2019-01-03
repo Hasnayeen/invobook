@@ -30,13 +30,13 @@ class UserController extends Controller
 
                 return response()->json([
                     'status'  => 'success',
-                    'message' => trans('misc.Invitation sent successfully'),
+                    'message' => localize('misc.Invitation sent successfully'),
                 ]);
             }
 
             return response()->json([
                 'status'  => 'error',
-                'message' => trans('misc.Email already exist'),
+                'message' => localize('misc.Email already exist'),
             ], 409);
         } catch (Exception $e) {
             return response()->json([
@@ -60,16 +60,16 @@ class UserController extends Controller
     public function checkUsername(Request $request)
     {
         try {
-            if (User::where('username', $request->username)->exists()) {
+            if ($this->usernameExists($request->username)) {
                 return response()->json([
                     'status'  => 'error',
-                    'message' => trans('misc.Username exists'),
+                    'message' => localize('misc.Username exists'),
                 ], 409);
             }
 
             return response()->json([
                 'status'  => 'success',
-                'message' => trans('misc.Username does not exist'),
+                'message' => localize('misc.Username does not exist'),
             ]);
         } catch (Exception $e) {
             return response()->json([
@@ -77,5 +77,10 @@ class UserController extends Controller
                 'message' => $e->getMessage(),
             ]);
         }
+    }
+
+    private function usernameExists($username)
+    {
+        return (auth()->user()->username !== $username) && User::where('username', $username)->exists();
     }
 }
