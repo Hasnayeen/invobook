@@ -25,7 +25,7 @@ class UpdateUserAccount extends FormRequest
     public function rules()
     {
         return [
-            'email'             => 'sometimes|required|max:255|email|unique:users',
+            'email'             => 'sometimes|required|max:255|email',
             'current_password'  => 'sometimes|required',
             'new_password'      => 'required_with:current_password|min:8|confirmed',
         ];
@@ -40,7 +40,7 @@ class UpdateUserAccount extends FormRequest
     public function withValidator($validator)
     {
         $validator->after(function ($validator) {
-            if (request('current_password') && ! password_verify(request('current_password'), Auth::user()->password)) {
+            if (request('current_password') && !password_verify(request('current_password'), Auth::user()->password)) {
                 $validator->errors()->add('current_password', 'Current password didn\'t match!');
             }
         });

@@ -3,7 +3,7 @@
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
-if (! function_exists('application_last_updated')) {
+if (!function_exists('application_last_updated')) {
     /**
      * Return the date when the application was last updated.
      *
@@ -15,7 +15,7 @@ if (! function_exists('application_last_updated')) {
     }
 }
 
-if (! function_exists('create_permissions')) {
+if (!function_exists('create_permissions')) {
     /**
      * Create permissions for a single resource.
      *
@@ -48,7 +48,7 @@ if (! function_exists('create_permissions')) {
         $role->givePermissionTo($permission);
     }
 
-    if (! function_exists('get_locale')) {
+    if (!function_exists('get_locale')) {
         /**
          * Get user set locale or default locale.
          *
@@ -61,6 +61,29 @@ if (! function_exists('create_permissions')) {
             }
 
             return 'en';
+        }
+    }
+
+    if (!function_exists('localize')) {
+        /**
+         * Translate the given message.
+         *
+         * @param  string                                                         $key
+         * @param  array                                                          $replace
+         * @param  string                                                         $locale
+         * @return \Illuminate\Contracts\Translation\Translator|string|array|null
+         */
+        function localize($key = null, $replace = [], $locale = null)
+        {
+            $result = trans($key, $replace, $locale);
+
+            if ($result === $key) {
+                preg_match('/^.+\.(.+)/', $key, $matches);
+
+                return $matches[1];
+            }
+
+            return false;
         }
     }
 }
