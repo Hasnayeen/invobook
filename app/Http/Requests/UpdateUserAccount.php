@@ -40,7 +40,7 @@ class UpdateUserAccount extends FormRequest
     public function withValidator($validator)
     {
         $validator->after(function ($validator) {
-            if (request('current_password') && !password_verify(request('current_password'), Auth::user()->password)) {
+            if (request('current_password') && ! password_verify(request('current_password'), Auth::user()->password)) {
                 $validator->errors()->add('current_password', 'Current password didn\'t match!');
             }
         });
