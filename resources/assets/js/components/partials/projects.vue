@@ -2,7 +2,7 @@
 <div :class="{'hidden': (activeTab != 'projects')}">
     <!-- Create Project Form -->
     <div :class="{'hidden': !showCreateProjectForm}">
-        <div class="absolute pin opacity-75 bg-grey"></div>
+        <div class="absolute pin opacity-75 bg-grey z-10"></div>
         <div class="fixed pin-x w-1/3 z-10 bg-grey-lighter mx-auto p-8 rounded">
             <p class="py-2">
                 <input ref="focusInput" class="w-full shadow appearance-none border rounded py-2 px-3 text-grey-darker" type="text" placeholder="Name" v-model="name">
@@ -26,22 +26,19 @@
             <span class="text-grey-darker pt-4">{{ 'Add a new project' | localize }}</span>
         </div>
 
-        <project v-for="(project, index) in projects" :key="index" :index="index" :details="project" @deleted="deleteProject"></project>
+        <project v-for="(project, index) in projects" :key="project.id" :index="index" :details="project"></project>
     </div>
 </div>
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 import project from './project'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 export default {
   components: { project },
   props: {
-    projects: {
-      required: true,
-      type: Array
-    },
     activeTab: {
       required: true,
       type: String
@@ -53,7 +50,13 @@ export default {
     description: '',
     faPlus
   }),
+  computed: mapState({
+    projects: state => state.home.projects
+  }),
   methods: {
+    ...mapActions([
+      'addProject'
+    ]),
     openCreateProjectModal () {
       this.showCreateProjectForm = true
       this.$nextTick(() => {
@@ -64,24 +67,10 @@ export default {
       this.showCreateProjectForm = false
     },
     createProject () {
-      axios.post('/projects', {
-        name: this.name,
-        description: this.description
-      })
-        .then((response) => {
-          if (response.data.status === 'success') {
-            EventBus.$emit('notification', response.data.message, response.data.status)
-            response.data.project.url = 'projects/' + response.data.project.id
-            this.projects.push(response.data.project)
-            this.closeCreateProjectModal()
-          }
-        })
-        .catch((error) => {
-          EventBus.$emit('notification', error.response.data.message, error.response.data.status)
-        })
-    },
-    deleteProject (index) {
-      this.projects.splice(index, 1)
+      this.addProject({name: this.name, description: this.description})
+      this.closeCreateProjectModal()
+      this.name = ''
+      this.description = ''
     }
   }
 }

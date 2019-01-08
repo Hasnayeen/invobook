@@ -6,6 +6,9 @@
 
 @slot('script')
 <script>
+    let data = <?php echo json_encode($data); ?>
+</script>
+<script>
     window.errors = <?php echo json_encode($errors->toArray()); ?>
 </script>
 <script src="//{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>

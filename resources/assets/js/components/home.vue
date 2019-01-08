@@ -14,9 +14,9 @@
       {{ 'Offices' | localize }}
     </span>
   </div>
-  <projects :projects="projects" :active-tab="active"></projects>
-  <teams :teams="teams" :active-tab="active"></teams>
-  <offices :offices="offices" :active-tab="active"></offices>
+  <projects :active-tab="active"></projects>
+  <teams :active-tab="active"></teams>
+  <offices :active-tab="active"></offices>
 </div>
 </template>
 
@@ -30,23 +30,9 @@ export default {
   components: {
     projects, teams, offices, activity
   },
-  props: {
-    data: {
-      required: true,
-      type: Object
-    }
-  },
   data: () => ({
-    active: 'projects',
-    projects: [],
-    teams: [],
-    offices: []
+    active: 'projects'
   }),
-  created () {
-    this.projects = this.data.projects
-    this.teams = this.data.teams
-    this.offices = this.data.offices
-  },
   methods: {
     activeThisTab (tab) {
       if (tab !== this.active) {

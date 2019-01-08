@@ -70,7 +70,7 @@ export default {
     suggestionSelected: false,
     suggestionShown: false,
     mentions: [],
-    user: navbar.user,
+    user: user,
     users: []
   }),
   created () {

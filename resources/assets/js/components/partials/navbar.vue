@@ -27,9 +27,8 @@
   export default {
     components: {notificationDropdown, messageDropdown, profileDropdown, vSearch},
     data: () => ({
-      user: navbar.user,
       token: Laravel.csrfToken,
-      url: navbar.navUrl
+      url: navUrl
     })
   }
 </script>

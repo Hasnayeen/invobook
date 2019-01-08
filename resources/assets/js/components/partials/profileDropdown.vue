@@ -52,11 +52,11 @@ import {
 
 export default {
   data: () => ({
-    user: navbar.user,
+    user: user,
     token: Laravel.csrfToken,
-    url: navbar.navUrl,
+    url: navUrl,
     avatar: '',
-    profileUrl: navbar.navUrl.site + '/users/' + navbar.user.username,
+    profileUrl: navUrl.site + '/users/' + user.username,
     profileDropdownShown: false,
     faAngleDown,
     faCog,

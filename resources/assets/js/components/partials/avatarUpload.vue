@@ -13,7 +13,7 @@
 <script>
 export default {
   data: () => ({
-    user: navbar.user
+    user: user
   }),
   methods: {
     selectFile (e) {

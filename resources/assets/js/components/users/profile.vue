@@ -25,7 +25,7 @@ export default {
   props: ['user', 'timezones', 'locales'],
   data: () => ({
     activeTab: 'profile',
-    authUser: navbar.user
+    authUser: user
   }),
   methods: {
     activateTab (tab) {

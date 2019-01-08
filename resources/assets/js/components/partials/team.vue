@@ -6,7 +6,7 @@
       </font-awesome-icon>
     </span>
     <div v-if="dropdownMenuShown" class="absolute rounded shadow-lg pin-r pin-t mt-8 mr-2 p-3 text-grey-darker hover:bg-grey-light">
-      <div @click="deleteTeam(team)" class="cursor-pointer">
+      <div @click="deleteTeam()" class="cursor-pointer">
         Delete
       </div>
     </div>
@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
 import profileCard from './../partials/profileCard.vue'
 
@@ -40,23 +41,20 @@ export default {
     }
   },
   methods: {
+    ...mapActions([
+      'removeTeam'
+    ]),
     toggleMenu () {
       this.dropdownMenuShown = !this.dropdownMenuShown
     },
     hideMenu () {
       this.dropdownMenuShown = false
     },
-    deleteTeam (team) {
-      axios.delete(`/teams/${team.id}`)
-        .then((response) => {
-          this.$emit('deleted', this.index)
-          this.dropdownMenuShown = false
-          EventBus.$emit('notification', response.data.message, response.data.status)
-        })
-        .catch((error) => {
-          this.dropdownMenuShown = false
-          EventBus.$emit('notification', error.response.data.message, error.response.data.status)
-        })
+    deleteTeam () {
+      this.removeTeam({
+        id: this.team.id,
+        index: this.index
+      })
     },
     showProfileCard () {
       this.profileCardOnDisplay = true
@@ -67,4 +65,3 @@ export default {
   }
 }
 </script>
-

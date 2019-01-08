@@ -2,7 +2,7 @@
 <div :class="{'hidden': (activeTab != 'offices')}">
   <!-- Create Office Form -->
   <div :class="{'hidden': !showCreateOfficeForm}">
-    <div class="absolute pin opacity-75 bg-grey"></div>
+    <div class="absolute pin opacity-75 bg-grey z-10"></div>
     <div id="create-project-form" class="fixed pin-x w-1/3 z-10 bg-grey-lighter mx-auto p-8 rounded">
       <p class="py-2">
         <input ref="focusInput" class="w-full shadow appearance-none border rounded py-2 px-3 text-grey-darker"
@@ -28,22 +28,19 @@
       <span class="text-grey-darker pt-4">{{ 'Add a new office' | localize }}</span>
     </div>
 
-    <office v-for="(office, index) in offices" :key="index" :index="index" :details="office" @deleted="deleteOffice"></office>
+    <office v-for="(office, index) in offices" :key="office.id" :index="index" :details="office"></office>
   </div>
 </div>
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 import office from './office'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 export default {
   components: { office },
   props: {
-    offices: {
-      required: true,
-      type: Array
-    },
     activeTab: {
       required: true,
       type: String
@@ -55,23 +52,18 @@ export default {
     description: '',
     faPlus
   }),
+  computed: mapState({
+    offices: state => state.home.offices
+  }),
   methods: {
+    ...mapActions([
+      'addOffice'
+    ]),
     createNewOffice () {
-      axios.post('/offices', {
-        name: this.name,
-        description: this.description
-      })
-        .then((response) => {
-          if (response.data.status === 'success') {
-            EventBus.$emit('notification', response.data.message, response.data.status)
-            response.data.office.url = 'offices/' + response.data.office.id
-            this.offices.push(response.data.office)
-            this.showCreateOfficeForm = false
-          }
-        })
-        .catch((error) => {
-          EventBus.$emit('notification', error.response.data.message, error.response.data.status)
-        })
+      this.addOffice({name: this.name, description: this.description})
+      this.closeCreateOfficeModal()
+      this.name = ''
+      this.description = ''
     },
     closeCreateOfficeModal () {
       this.showCreateOfficeForm = false
@@ -81,9 +73,6 @@ export default {
       this.$nextTick(() => {
         this.$refs.focusInput.focus()
       })
-    },
-    deleteOffice (index) {
-      this.offices.splice(index, 1)
     }
   }
 }

@@ -3,7 +3,7 @@
 
   <!-- Create Team Form -->
   <div :class="{'hidden': !showCreateTeamForm}">
-    <div class="absolute pin opacity-75 bg-grey"></div>
+    <div class="absolute pin opacity-75 bg-grey z-10"></div>
     <div id="create-project-form" class="fixed pin-x w-1/3 z-10 bg-grey-lighter mx-auto p-8 rounded">
       <p class="py-2">
         <input ref="focusInput" class="w-full shadow appearance-none border rounded py-2 px-3 text-grey-darker"
@@ -29,22 +29,19 @@
       <span class="text-grey-darker pt-4">{{ 'Add a new team' | localize }}</span>
     </div>
 
-      <team v-for="(team, index) in teams" :key="index" :index="index" :details="team" @deleted="deleteTeam"></team>
+      <team v-for="(team, index) in teams" :key="team.id" :index="index" :details="team"></team>
   </div>
 </div>
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 import team from './team'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 export default {
   components: { team },
   props: {
-    teams: {
-      required: true,
-      type: Array
-    },
     activeTab: {
       required: true,
       type: String
@@ -56,7 +53,13 @@ export default {
     description: '',
     faPlus
   }),
+  computed: mapState({
+    teams: state => state.home.teams
+  }),
   methods: {
+    ...mapActions([
+      'addTeam'
+    ]),
     openCreateTeamModal () {
       this.showCreateTeamForm = true
       this.$nextTick(() => {
@@ -67,23 +70,10 @@ export default {
       this.showCreateTeamForm = false
     },
     createNewTeam () {
-      axios.post('/teams', {
-        name: this.name,
-        description: this.description
-      }).then((response) => {
-        if (response.data.status === 'success') {
-          EventBus.$emit('notification', response.data.message, response.data.status)
-          response.data.team.url = 'teams/' + response.data.team.id
-          this.teams.push(response.data.team)
-          this.showCreateTeamForm = false
-        }
-      }).catch((error) => {
-        console.log(error)
-        this.showCreateTeamForm = false
-      })
-    },
-    deleteTeam (index) {
-      this.teams.splice(index, 1)
+      this.addTeam({name: this.name, description: this.description})
+      this.closeCreateTeamModal()
+      this.name = ''
+      this.description = ''
     }
   }
 }

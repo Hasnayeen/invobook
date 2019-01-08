@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import ClickOutside from 'vue-click-outside'
 import linkify from 'vue-linkify'
 
-
 window.Vue = require('vue')
 
 window.axios = require('axios')

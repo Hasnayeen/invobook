@@ -28,13 +28,13 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import { faBell, faCircle } from '@fortawesome/free-solid-svg-icons'
 
 export default {
   data: () => ({
-    user: navbar.user,
     token: Laravel.csrfToken,
-    url: navbar.navUrl,
+    url: navUrl,
     notificationShown: false,
     notifications: [],
     unreadNotification: false,
@@ -57,6 +57,9 @@ export default {
   mounted () {
     this.listen()
   },
+  computed: mapState([
+    'user'
+  ]),
   methods: {
     toggleNotification (event) {
       if (this.notificationShown) {
