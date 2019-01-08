@@ -46,7 +46,9 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import message from './message'
+
 export default {
   components: {message},
   data: () => ({
@@ -56,7 +58,6 @@ export default {
     nextPageUrl: null,
     messageBoxShown: false,
     messageTextareaHeight: 'auto',
-    authUser: navbar.user,
     title: '',
     unreadMessage: 0,
     users: [],
@@ -79,6 +80,9 @@ export default {
     EventBus.$off('show-message-box', this.showMessageBox)
     document.removeEventListener('visibilitychange', this.clearTitleNotification)
   },
+  computed: mapState({
+    authUser: 'user'
+  }),
   watch: {
     message (newVal) {
       // increase the height of textarea based on text present there

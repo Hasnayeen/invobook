@@ -8,13 +8,13 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import { faEnvelope, faCircle } from '@fortawesome/free-solid-svg-icons'
 
 export default {
   data: () => ({
-    user: navbar.user,
     token: Laravel.csrfToken,
-    url: navbar.navUrl,
+    url: navUrl,
     notificationShown: false,
     unreadMessage: false,
     faEnvelope,
@@ -26,6 +26,9 @@ export default {
   beforeDestroy () {
     EventBus.$off('new-direct-message', this.showIndicator)
   },
+  computed: mapState([
+    'user'
+  ]),
   methods: {
     showMessageBox () {
       this.unreadMessage = false

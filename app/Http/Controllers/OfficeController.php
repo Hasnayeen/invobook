@@ -24,6 +24,7 @@ class OfficeController extends Controller
     {
         try {
             $office = $repository->store($request->all());
+            $office->members()->save(auth()->user());
             $office->load('members');
             create_permissions($office);
 
