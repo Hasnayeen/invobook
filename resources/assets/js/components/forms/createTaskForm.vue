@@ -34,7 +34,7 @@
         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name">
           Due On <span class="text-grey capitalize">(required)</span>
         </label>
-        <datepicker ref="dueOnDate" placeholder="Select Date" format="yyyy-MM-dd" input-class="appearance-none bg-grey-lighter text-grey-darker" wrapper-class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"></datepicker>
+        <datepicker v-model="dueOnDate" ref="dueOnDate" placeholder="Select Date" format="yyyy-MM-dd" input-class="appearance-none bg-grey-lighter text-grey-darker" wrapper-class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"></datepicker>
       </div>
       <div class="p-4">
         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name">
@@ -74,6 +74,7 @@ export default {
     name: '',
     notes: '',
     assigned_to: null,
+    dueOnDate: null,
     related_to: '',
     faChevronDown
   }),
@@ -93,6 +94,7 @@ export default {
             this.name = ''
             this.notes = ''
             this.assigned_to = null
+            this.dueOnDate = null
             this.related_to = ''
             EventBus.$emit('notification', response.data.message, response.data.status)
             this.$emit('close', response.data.task)
