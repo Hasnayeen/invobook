@@ -11,9 +11,8 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        return response()->json([
-            'status'        => 'success',
-            'notifications' => auth()->user()->unreadNotifications,
+        return view('admin.notification', [
+            'notifications' => auth()->user()->unreadNotifications
         ]);
     }
 
