@@ -6,7 +6,7 @@
         <font-awesome-icon :icon="faCog"></font-awesome-icon>
       </span>
       <div v-if="dropdownMenuShown" class="relative">
-        <ul class="list-reset bg-white rounded shadow-lg py-2 absolute pin-r mt-4 text-base text-left font-normal whitespace-no-wrap">
+        <ul class="list-reset bg-white rounded shadow-lg py-2 absolute pin-r mt-4 text-base text-left font-normal whitespace-no-wrap z-10">
           <li class="px-4 py-2 hover:bg-grey-light cursor-pointer">
             <a href="#" class="no-underline text-grey-dark" @click="showMembersListModal">
               Show All Members
@@ -17,6 +17,15 @@
           </li>
         </ul>
       </div>
+    </div>
+
+    <div class="text-grey-dark flex flex-row justify-center items-center">
+      <span class="text-lg">
+        Cycle: 
+      </span>
+      <span class="p-2 ml-2 bg-grey-lightest shadow rounded cursor-pointer text-sm text-teal-darker">
+        {{team.current_cycle.start_date}} - {{team.current_cycle.end_date}}
+      </span>
     </div>
 
     <!-- Add Member Form -->
