@@ -27,13 +27,17 @@
         Cycle: 
       </span>
       <span class="p-2 ml-2 bg-grey-lightest shadow rounded cursor-pointer text-sm text-teal-darker">
-        {{project.current_cycle.start_date}} - {{project.current_cycle.end_date}}
+        {{startDate}} - {{endDate}}
       </span>
     </div>
+
+  <!-- Modals for dropdown menu -->
+    <members-list-modal resourceType="project" :resourceId="project.id" :show="membersListModalShown" :members="project.members" @close="closeMembersListModal" ></members-list-modal>
 
     <add-member-form v-if="addMemberFormShown" @close="closeAddMemberForm" resourceType="project" :resource="project" @addMember="addMember"></add-member-form>
 
     <show-github-repo entityType="project" :entityId="project.id" v-if="githubRepoModalShown" @close-github-repo-modal="closeGithubRepoModal"></show-github-repo>
+  <!-- Modals for dropdown menu -->
 
     <div class="h-16 flex flex-row justify-center items-center px-2">
       <span @click="showAddMemberForm" class="bg-white shadow w-8 h-8 rounded-full text-teal hover:cursor-pointer text-center p-2">
@@ -55,8 +59,6 @@
       <!-- <messagesBoard resourceType="projects" :resource="project"></messagesBoard>
       <activity resourceType="projects" :resource="project"></activity> -->
     </div>
-
-    <members-list-modal :show="membersListModalShown" :members="project.members" @close="closeMembersListModal" />
   </div>
 </template>
 
@@ -105,6 +107,14 @@ export default {
     let tool = new URL(location.href).searchParams.get('tool')
     if (tool !== null && tabs.indexOf(tool) !== -1) {
       this.active = tool
+    }
+  },
+  computed: {
+    startDate: function () {
+      return window.luxon.DateTime.fromISO(this.project.current_cycle.start_date).toLocaleString(window.luxon.DateTime.DATE_MED)
+    },
+    endDate: function () {
+      return window.luxon.DateTime.fromISO(this.project.current_cycle.end_date).toLocaleString(window.luxon.DateTime.DATE_MED)
     }
   },
   methods: {

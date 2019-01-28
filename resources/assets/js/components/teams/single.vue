@@ -28,10 +28,13 @@
       </span>
     </div>
 
-    <!-- Add Member Form -->
+  <!-- Modals for dropdown menu -->
+    <members-list-modal resourceType="team" :resourceId="team.id" :show="membersListModalShown" :members="team.members" @close="closeMembersListModal" />
+
     <addMemberForm v-if="addMemberFormShown" @close="closeAddMemberForm" resourceType="team" :resource="team" @addMember="addMember"></addMemberForm>
 
     <show-github-repo entityType="team" :entityId="team.id" v-if="githubRepoModalShown" @close-github-repo-modal="closeGithubRepoModal"></show-github-repo>
+  <!-- Modals for dropdown menu -->
 
     <div class="h-16 flex flex-row justify-center items-center px-2">
       <span @click="showAddMemberForm" class="bg-white shadow w-8 h-8 rounded-full text-teal hover:cursor-pointer text-center p-2">
@@ -54,8 +57,6 @@
       <!-- <schedule resourceType="projects" :resource="project"></schedule>
       <activity resourceType="projects" :resource="project"></activity> -->
     </div>
-
-    <members-list-modal :show="membersListModalShown" :members="team.members" @close="closeMembersListModal" />
   </div>
 </template>
 
