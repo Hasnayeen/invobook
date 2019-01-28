@@ -41,17 +41,17 @@
     </div>
   </div>
 
-  <div @click="hideMessageBox" class="h-screen w-screen fixed pin bg-grey-darkest opacity-25"></div>
+  <div @click="hideMessageBox" class="h-screen w-screen fixed pin bg-grey-darkest opacity-25 z-10"></div>
 </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
 import message from './message'
 
 export default {
   components: {message},
   data: () => ({
+    authUser: user,
     isDisabled: true,
     message: '',
     messages: [],
@@ -80,9 +80,6 @@ export default {
     EventBus.$off('show-message-box', this.showMessageBox)
     document.removeEventListener('visibilitychange', this.clearTitleNotification)
   },
-  computed: mapState({
-    authUser: 'user'
-  }),
   watch: {
     message (newVal) {
       // increase the height of textarea based on text present there
@@ -118,7 +115,7 @@ export default {
         })
           .then((response) => {
             if (response.data.status === 'success') {
-              response.data.message.user = navbar.user
+              response.data.message.user = user
               this.messages.push(response.data.message)
             }
           })
