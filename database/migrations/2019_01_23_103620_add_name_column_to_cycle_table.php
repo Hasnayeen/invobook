@@ -28,7 +28,6 @@ class AddNameColumnToCycleTable extends Migration
     public function down()
     {
         Schema::table('cycles', function (Blueprint $table) {
-            //
         });
     }
 }
