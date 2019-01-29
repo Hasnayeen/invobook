@@ -15,8 +15,8 @@ class AddNameColumnToCycleTable extends Migration
     {
         Schema::table('cycles', function (Blueprint $table) {
             $table->string('name')->nullable();
-            $table->date('start_date')->default()->comment('date of start of the cycle');
-            $table->date('end_date')->default()->comment('date of end of the cycle');
+            $table->date('start_date')->default('')->comment('date of start of the cycle');
+            $table->date('end_date')->default('')->comment('date of end of the cycle');
         });
     }
 

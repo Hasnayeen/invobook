@@ -10,11 +10,19 @@ class GithubRepoController extends Controller
 
     public function index()
     {
-        $repos = $this->getUserRepos();
+        $token = $this->getAccessToken();
+        if ($token) {
+            $repos = $this->getUserRepos();
+
+            return response()->json([
+                'status' => 'success',
+                'repos'  => $repos,
+            ]);
+        }
 
         return response()->json([
-            'status' => 'success',
-            'repos'  => $repos,
-        ]);
+            'status'   => 'error',
+            'message'  => 'Github Access Token is not set',
+        ], 404);
     }
 }

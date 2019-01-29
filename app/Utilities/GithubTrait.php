@@ -12,10 +12,12 @@ trait GithubTrait
 {
     private function getAccessToken()
     {
-        return Service::where('name', 'github')->first()->access_token;
+        if ($githubService = Service::where('name', 'github')->first()) {
+            return $githubService->access_token;
+        }
     }
 
-    private function getUserRepos()
+    private function getUserRepos($token)
     {
         $client = new Client();
         $query = 'query {
@@ -30,7 +32,7 @@ trait GithubTrait
                     }
                 }';
         $res = $client->request('POST', 'https://api.github.com/graphql', [
-            'headers' => ['Authorization' => 'bearer ' . decrypt($this->getAccessToken())],
+            'headers' => ['Authorization' => 'bearer ' . decrypt($token)],
             'json'    => [
                 'query' => $query,
             ],
