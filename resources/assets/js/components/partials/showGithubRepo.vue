@@ -1,8 +1,12 @@
 <template>
 <div>
   <div class="absolute container mx-auto w-1/3 bg-white rounded shadow-lg z-10 mb-12 pb-4" style="top: 10vh;left: 0;right: 0;">
-    <div class="text-grey-dark text-center py-4 text-2xl">
-      Your Github Repositories
+    <div class="text-grey-dark text-center py-4 flex flex-row justify-around items-center">
+      <span></span>
+      <span class="text-2xl">Your Github Repositories</span>
+      <span @click="closeModal">
+        <font-awesome-icon :icon="faTimes" class="cursor-pointer text-red-dark text-base"></font-awesome-icon>
+      </span>
     </div>
     <ul class="pl-0">
       <li v-for="(repository, index) in repositories" class="list-reset flex flex-row justify-between items-center py-4 px-8 hover:bg-blue-lightest">
@@ -14,6 +18,10 @@
         </div>
       </li>
     </ul>
+    <div v-if="accessTokenNotSet" class="p-8 text-grey-darker text-center text-lg">
+      <div>Access Token is not set.</div>
+      <div>Please set your Github Access Token in intregation settings on Admin page.</div>
+    </div>
   </div>
 
   <div @click="closeModal" class="h-screen w-screen fixed pin bg-grey-darkest opacity-25"></div>
@@ -21,6 +29,8 @@
 </template>
 
 <script>
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
+
 export default {
   props: {
     entityType: {
@@ -33,15 +43,17 @@ export default {
     }
   },
   data: () => ({
-    repositories: []
+    repositories: [],
+    accessTokenNotSet: false,
+    faTimes
   }),
   created () {
     axios.get('/services/github/repos')
       .then((response) => {
         this.repositories = response.data.repos.data.viewer.repositories.nodes
       })
-      .catch((error) => {
-        console.error(error.response.data.message())
+      .catch(() => {
+        this.accessTokenNotSet = true
       })
   },
   methods: {
