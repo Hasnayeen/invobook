@@ -3,8 +3,8 @@
   <div>
     <img @mouseover="showProfileCard()" @mouseleave="hideProfileCard()" :src="generateUrl(user.avatar)" class="rounded-full w-8 h-8 mr-1">
   </div>
-  <div v-if="profileCardShown" class="absolute w-48 -ml-20 mt-2 z-10">
-    <div @mouseover="showProfileCard()" @mouseleave="hideProfileCard()" class="flex flex-col items-center justify-center bg-blue-darkest text-white rounded-lg shadow py-6 px-4">
+  <div @mouseover="showProfileCard()" @mouseleave="hideProfileCard()" v-if="profileCardShown" class="absolute w-48 -ml-20 pt-4 -mt-2 z-10">
+    <div class="flex flex-col items-center justify-center bg-blue-darkest text-white rounded-lg shadow py-6 px-4">
       <img :src="generateUrl(user.avatar)" class="rounded-full w-24 h-24">
       <div class="pb-2 pt-4 text-2xl font-semibold text-center">
         {{ user.name }}
@@ -29,43 +29,22 @@ export default {
     user: {
       required: true,
       type: Object
-    },
-    oneAlreadyOnDisplay: {
-      required: true,
-      type: Boolean
     }
   },
   data: () => ({
-    profileCardShown: false,
-    timeoutActive: null
+    profileCardShown: false
   }),
-  methods: {
-    showProfileCard () {
-      if (this.timeoutActive) {
-        clearTimeout(this.timeoutActive)
-        return true
-      }
-      if (this.oneAlreadyOnDisplay) {
-        setTimeout(() => {
-          this.profileCardShown = true
-          this.$emit('on-display')
-        }, 500)
-      } else {
-        this.profileCardShown = true
-        this.$emit('on-display')
-      }
-    },
-    hideProfileCard () {
-      this.timeoutActive = setTimeout(() => {
-        this.profileCardShown = false
-        this.$emit('on-hide')
-        this.timeoutActive = null
-      }, 500)
-    }
-  },
   computed: {
     time: function () {
       return window.luxon.DateTime.local().setZone(this.user.timezone).toLocaleString(window.luxon.DateTime.TIME_SIMPLE)
+    }
+  },
+  methods: {
+    showProfileCard () {
+      this.profileCardShown = true
+    },
+    hideProfileCard () {
+      this.profileCardShown = false
     }
   }
 }

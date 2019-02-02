@@ -12,7 +12,7 @@ class EntityTest extends TestCase
     public function entity_can_have_a_current_cycle()
     {
         $project = factory(Project::class)->create();
-        $cycle = factory(Cycle::class)->create(['cyclable_type' => 'project', 'cyclable_id' => $project->id]);
+        factory(Cycle::class)->create(['cyclable_type' => 'project', 'cyclable_id' => $project->id]);
         $this->assertInstanceOf(Cycle::class, $project->current_cycle);
     }
 
