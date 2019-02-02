@@ -44,7 +44,7 @@
         <font-awesome-icon :icon="faPlus"></font-awesome-icon>
       </span>
       <a v-for="(member, index) in project.members" :href="'/users/' + member.username" class="pl-2">
-        <profile-card :user="member" :oneAlreadyOnDisplay="profileCardOnDisplay" @on-display="showProfileCard" @on-hide="hideProfileCard"></profile-card>
+        <profile-card :user="member"></profile-card>
       </a>
     </div>
 
@@ -63,6 +63,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import taskBoard from './../partials/taskBoard.vue'
 import discussionBoard from './../partials/discussionBoard.vue'
 import messagesBoard from './../partials/messagesBoard.vue'
@@ -91,14 +92,12 @@ export default {
     tabMenu,
     showGithubRepo
   },
-  props: ['project'],
   data: () => ({
     addMemberFormShown: false,
     active: 'tasks',
     dropdownMenuShown: false,
     githubRepoModalShown: false,
     membersListModalShown: false,
-    profileCardOnDisplay: false,
     faPlus,
     faCog
   }),
@@ -111,11 +110,20 @@ export default {
   },
   computed: {
     startDate: function () {
-      return window.luxon.DateTime.fromISO(this.project.current_cycle.start_date).toLocaleString(window.luxon.DateTime.DATE_MED)
+      if (this.project.current_cycle) {
+        return window.luxon.DateTime.fromISO(this.project.current_cycle.start_date).toLocaleString(window.luxon.DateTime.DATE_MED)
+      }
+      return 'Set start date'
     },
     endDate: function () {
-      return window.luxon.DateTime.fromISO(this.project.current_cycle.end_date).toLocaleString(window.luxon.DateTime.DATE_MED)
-    }
+      if (this.project.current_cycle) {
+        return window.luxon.DateTime.fromISO(this.project.current_cycle.end_date).toLocaleString(window.luxon.DateTime.DATE_MED)
+      }
+      return 'Set end date'
+    },
+    ...mapState({
+      project: state => state.project
+    })
   },
   methods: {
     showAddMemberForm () {
@@ -157,12 +165,6 @@ export default {
     },
     closeGithubRepoModal () {
       this.githubRepoModalShown = false
-    },
-    showProfileCard () {
-      this.profileCardOnDisplay = true
-    },
-    hideProfileCard () {
-      this.profileCardOnDisplay = false
     }
   }
 }
