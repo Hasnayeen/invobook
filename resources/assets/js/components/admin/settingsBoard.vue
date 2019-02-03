@@ -5,6 +5,9 @@
       <div @click="activateThisColumn('integrations')" :class="[activeColumn === 'integrations' ? 'text-indigo border-indigo border-b-2' : 'bg-white cursor-pointer']" class="w-1/2 font-semibold p-4 rounded-tl">
         {{ 'Integrations' | localize }}
       </div>
+      <div @click="activateThisColumn('invitations')" :class="[activeColumn === 'invitations' ? 'text-indigo border-indigo border-b-2' : 'bg-white cursor-pointer']" class="w-1/2 font-semibold p-4 rounded-tl">
+        {{ 'Invitations' | localize }}
+      </div>
     </div>
     <integration-board :active-column="activeColumn"></integration-board>
   </div>

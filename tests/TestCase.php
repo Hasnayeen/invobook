@@ -36,6 +36,7 @@ abstract class TestCase extends BaseTestCase
         $this->user->assignRole($this->ownerRole);
 
         Artisan::call('db:seed', ['--class' => 'PermissionTableSeeder']);
+        Artisan::call('db:seed', ['--class' => 'ServicesTableSeeder']);
         $permissions = Permission::all();
         $permissions = $permissions->pluck('id')->toArray();
         $this->ownerRole->givePermissionTo($permissions);

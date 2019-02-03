@@ -1,6 +1,7 @@
 import './../../bootstrap'
 import componentMixin from './../commonComponent'
 import index from './../../components/admin/index.vue'
+import store from './../../store/admin'
 
 /* eslint-disable no-unused-vars */
 const app = new Vue({
@@ -8,5 +9,6 @@ const app = new Vue({
   mixins: [componentMixin],
   components: {
     index
-  }
+  },
+  store
 })

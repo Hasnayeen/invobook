@@ -39,6 +39,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import aboutBoard from './aboutBoard.vue'
 import authBoard from './authBoard.vue'
 import usersBoard from './usersBoard.vue'
@@ -52,12 +53,6 @@ import { faUser } from '@fortawesome/free-solid-svg-icons/faUser'
 
 export default {
   components: {aboutBoard, authBoard, usersBoard, activityBoard, settingsBoard},
-  props: {
-    users: {
-      required: true,
-      type: Array
-    }
-  },
   data: () => ({
     active: 'users',
     faBolt,
@@ -66,6 +61,11 @@ export default {
     faCog,
     faUser
   }),
+  computed: {
+    ...mapState({
+      users: state => state.users
+    })
+  },
   methods: {
     activateThisTab (tab) {
       if (tab !== this.active) {

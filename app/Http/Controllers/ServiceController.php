@@ -14,11 +14,11 @@ class ServiceController extends Controller
                 'name'         => 'required|string',
                 'access_token' => 'required|string',
             ]);
-            Service::create([
-                'name'         => $data['name'],
-                'access_token' => encrypt($data['access_token']),
-                'enabled'      => true,
-            ]);
+            $service = Service::where('name', $data['name'])->first();
+            $service->access_token = encrypt($data['access_token']);
+            $service->enabled = true;
+            $service->active = true;
+            $service->save();
 
             return response()->json([
                 'status'  => 'success',
@@ -34,11 +34,23 @@ class ServiceController extends Controller
 
     public function index()
     {
-        $services = Service::select(['name', 'enabled'])->get();
+        $services = Service::select(['name', 'enabled', 'active'])->get();
 
         return response()->json([
             'status'   => 'success',
             'services' => $services,
+        ]);
+    }
+
+    public function update($service, Request $request)
+    {
+        $service = Service::whereName($service)->first();
+        $service->enabled = (bool) request('status');
+        $service->save();
+
+        return response()->json([
+            'status'   => 'success',
+            'message'  => ucfirst($service->name) . ' integration has been ' . ($service->enabled ? 'enabled' : 'disabled'),
         ]);
     }
 }
