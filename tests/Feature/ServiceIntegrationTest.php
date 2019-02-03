@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Models\Project;
+use Illuminate\Support\Str;
 
 class ServiceIntegrationTest extends TestCase
 {
@@ -15,11 +16,13 @@ class ServiceIntegrationTest extends TestCase
                 'status'  => 'success',
                 'message' => 'Service added successfully',
             ]);
+
+        $this->assertDatabaseHas('services', ['name' => 'github', 'enabled' => true, 'active' => true]);
     }
 
     private function addService($name)
     {
-        $token = str_random(40);
+        $token = Str::random(40);
 
         return $this->actingAs($this->user)->post('admin/services', [
             'name'         => $name,
@@ -44,5 +47,33 @@ class ServiceIntegrationTest extends TestCase
                  'message' => 'Github repository connected successfully',
              ]);
         $this->assertDatabaseHas('github_repos', ['github_repo_id' => $githubRepoId, 'repo_name' => 'repo_name', 'entity_id' => $project->id]);
+    }
+
+    /** @test */
+    public function user_can_enable_a_service()
+    {
+        $this->addService('github');
+        $this->actingAs($this->user)
+        ->call('PUT', '/admin/services/github', [
+            'status' => true,
+        ])
+        ->assertJsonFragment([
+            'status'  => 'success',
+            'message' => 'Github integration has been enabled',
+        ]);
+    }
+
+    /** @test */
+    public function user_can_disable_a_service()
+    {
+        $this->addService('github');
+        $this->actingAs($this->user)
+        ->call('PUT', '/admin/services/github', [
+            'status' => false,
+        ])
+        ->assertJsonFragment([
+            'status'  => 'success',
+            'message' => 'Github integration has been disabled',
+        ]);
     }
 }

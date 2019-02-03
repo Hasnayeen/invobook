@@ -1,13 +1,18 @@
 <template>
 <div :class="{'hidden': (activeColumn !== 'integrations')}" class="bg-white rounded-b">
-  <div class="flex flex-col p-8">
-    <div v-for="(service, index) in services" class="border-b p-4 flex items-center justify-between">
-      <div class="text-2xl font-medium text-grey-darker capitalize">
+  <div class="flex flex-col md:p-8">
+    <div v-for="(service, index) in services" class="p-4 flex items-center justify-between" :class="[index !== 0 ? 'border-t' : '']">
+      <div class="text-lg md:text-xl font-medium text-grey-darker uppercase">
         {{ service.name }}
       </div>
-      <span class="">
-        <button @click="showGithubSetupModal" :class="{'disable': service.enabled}" class="px-4 py-3 font-semibold bg-teal text-white rounded">{{ service.enabled ? 'Disable' : 'Enable'}}</button>
-      </span>
+      <div class="flex flex-row items-center">
+        <div @click="toggleServiceStatus(service)" :class="[service.enabled ? 'bg-indigo-light justify-end' : 'bg-grey justify-start']" class="w-10 h-4 rounded-full flex flex-row items-center p-1 cursor-pointer mr-8" :title="[service.enabled ? 'Disable' : 'Enable']">
+          <div class="rounded-full w-3 h-3 bg-white"></div>
+        </div>
+        <div class="">
+          <button @click="showSetupModal" class="px-3 py-2 font-semibold text-white text-shadow bg-button-primary rounded">Set Token</button>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -22,11 +27,11 @@
         </div>
       </div>
       <div class="flex flex-row justify-between py-4 px-8 bg-grey-lighter rounded">
-        <button @click="closeGithubSetupModal" class="text-red-lighter hover:font-bold hover:text-red-light">Cancel</button>
+        <button @click="closeSetupModal" class="text-red-lighter hover:font-bold hover:text-red-light">Cancel</button>
         <button @click="saveToken" class="bg-teal-light text-white font-medium hover:bg-teal-dark py-2 px-4 rounded">Save</button>
       </div>
     </div>
-    <div @click="closeGithubSetupModal" :class="{'hidden': !modalShown}" class="h-screen w-screen fixed pin bg-grey-darkest opacity-25"></div>
+    <div @click="closeSetupModal" :class="{'hidden': !modalShown}" class="h-screen w-screen fixed pin bg-grey-darkest opacity-25"></div>
   </div>
 </div>  
 </template>
@@ -42,7 +47,8 @@ export default {
   data: () => ({
     modalShown: false,
     access_token: '',
-    services: []
+    services: [],
+    update: false
   }),
   mounted () {
     axios.get('/admin/services')
@@ -54,11 +60,27 @@ export default {
       })
   },
   methods: {
-    showGithubSetupModal () {
+    showSetupModal () {
       this.modalShown = true
     },
-    closeGithubSetupModal () {
+    closeSetupModal () {
       this.modalShown = false
+    },
+    toggleServiceStatus (service) {
+      if (service.active) {
+        axios.put('/admin/services/' + service.name, {
+          status: !service.enabled
+        })
+          .then((response) => {
+            service.enabled = !service.enabled
+            EventBus.$emit('notification', response.data.message, response.data.status)
+          })
+          .catch((error) => {
+            EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+          })
+      } else {
+        this.showSetupModal()
+      }
     },
     saveToken () {
       axios.post('admin/services', {

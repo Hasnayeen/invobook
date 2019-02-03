@@ -12,7 +12,7 @@ class GithubRepoController extends Controller
     {
         $token = $this->getAccessToken();
         if ($token) {
-            $repos = $this->getUserRepos();
+            $repos = $this->getUserRepos($token);
 
             return response()->json([
                 'status' => 'success',

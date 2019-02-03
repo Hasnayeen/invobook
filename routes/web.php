@@ -245,5 +245,7 @@ Route::group(['middleware' => ['auth', 'permission:view admin page'], 'prefix' =
 
     Route::post('services', 'ServiceController@store');
 
+    Route::put('services/{service}', 'ServiceController@update');
+
     Route::get('check-for-update', 'AboutController@checkForUpdate');
 });
