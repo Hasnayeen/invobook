@@ -42,7 +42,7 @@ class ServiceController extends Controller
         ]);
     }
 
-    public function update($service, Request $request)
+    public function update($service)
     {
         $service = Service::whereName($service)->first();
         $service->enabled = (bool) request('status');
