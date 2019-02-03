@@ -124,7 +124,7 @@ export default {
         this.message = this.message + '\n'
       } else if (this.mentionStarted) {
         this.suggestionSelected = true
-      } else {
+      } else if (this.message.length > 0) {
         var msg = this.message
         this.message = ''
         axios.post('/messages', {
@@ -135,7 +135,7 @@ export default {
         })
           .then((response) => {
             if (response.data.status === 'success') {
-              response.data.message.user = navbar.user
+              response.data.message.user = user
               this.pushMessage(response.data.message)
             }
           })

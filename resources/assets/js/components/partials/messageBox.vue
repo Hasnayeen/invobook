@@ -105,7 +105,7 @@ export default {
       }
       if (e.shiftKey) {
         this.message = this.message + '\n'
-      } else {
+      } else if (this.message.length > 0) {
         var msg = this.message
         this.message = ''
         axios.post('/messages', {
