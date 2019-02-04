@@ -68,7 +68,7 @@ export default {
   data: () => ({
     body: '',
     comments: [],
-    user: navbar.user,
+    user: user,
     users: [],
     name: '',
     mentionStarted: false,
