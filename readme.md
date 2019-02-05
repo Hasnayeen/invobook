@@ -8,7 +8,7 @@
 [![StyleCI](https://styleci.io/repos/81873619/shield?branch=dev&style=flat)](https://styleci.io/repos/81873619)
 [![Join on slack](https://img.shields.io/badge/join%20on-slack-green.svg)](https://join.slack.com/t/iluminar/shared_invite/enQtNDY0Mzc3NDkwOTY1LTJhZTNiYmMxZmE4NGU5MTJhODI5OWMyNjc4ZmIyNDVhODRhMGUzNDU0MmM1OGRmZjBiYWM0NjcwNWRjMDJjNTA)
 
-<a id="goodwork" href="https://github.com/iluminar/goodwork"><img src="public/logos/logo.svg" alt="Goodwork" style="max-width:100%;"></a>
+<img src="public/logos/logo.svg" alt="Goodwork" style="max-width:100%;">
 
 Self hosted project management and collaboration tool inspired by basecamp.
 
@@ -90,6 +90,8 @@ You can check out an instance of the application that we use as a guest user usi
 ## Contributing <small>[↑Top](#goodwork)</small>
 
 Thank you for considering contributing to the Goodwork! The contribution guide can be found in the [Contribution Guideline](https://github.com/iluminar/goodwork/wiki/Contribution-Guideline).
+
+Also you can join the slack channel via this [link](https://join.slack.com/t/iluminar/shared_invite/enQtNDY0Mzc3NDkwOTY1LTJhZTNiYmMxZmE4NGU5MTJhODI5OWMyNjc4ZmIyNDVhODRhMGUzNDU0MmM1OGRmZjBiYWM0NjcwNWRjMDJjNTA)
 
 ## Supporting <small>[↑Top](#goodwork)</small>
 
