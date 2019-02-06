@@ -27,7 +27,7 @@ class ActivityRepository
      */
     public function getAllActivities(): Collection
     {
-        $query = $this->model->with(['causer:id,name,username', 'subject:id,name']);
+        $query = $this->model->with(['causer:id,name,username', 'subject:id,name,created_at']);
         $query = request('user') ? $query->where('causer_id', request('user')) : $query;
         $query = request('date') ? $query->whereDate('created_at', request('date')) : $query;
 
