@@ -9,16 +9,25 @@
   </div>
   <div class="flex flex-row flex-wrap justify-center items-start">
     <div @click="showDiscussionDetails(index)" v-for="(discussion, index) in discussions" :key="index" class="w-80 my-6 md:m-6 bg-white shadow-md flex flex-col items-center rounded cursor-pointer">
-      <div class="bg-teal flex flex-col items-center w-full text-white rounded-t">
-        <div class="w-10 h-10 flex-none py-4">
-          <img :src="generateUrl(discussion.creator.avatar)" class="rounded-full w-10 h-10">
+      <div class="bg-teal flex flex-col items-start w-full text-white rounded-t p-6 pb-4">
+        <div class="text-white text-2xl text-center font-semibold">{{ discussion.name }}</div>
+        <div class="flex flex-row pt-4">
+          <div class="w-8 h-8 mr-2">
+            <a :href="'/users/' + discussion.creator.username">
+              <img :src="generateUrl(discussion.creator.avatar)" class="rounded-full w-8 h-8">
+            </a>
+          </div>
+          <div class="text-xs font-bold flex flex-col justify-between">
+            <div>
+              {{ discussion.category.name }}
+            </div>
+            <div>
+              {{ discussion.date }}
+            </div>
+          </div>
         </div>
-        <div class="mt-6 text-xs">
-          by <a :href="'/users/' + discussion.creator.username" class="text-sm text-white font-bold cursor-pointer no-underline">{{ discussion.creator.name }}</a> on <span class="text-sm font-bold">{{ discussion.date }}</span> in <span class="text-sm font-bold">{{ discussion.category.name }}</span>
-        </div>
-        <div class="text-white text-3xl text-center font-semibold p-4">{{ discussion.name }}</div>
       </div>
-      <div class="text-regular m-4 text-grey-darker leading-normal overflow-hidden" style="max-height: 12rem;">
+      <div class="text-regular my-4 mx-6 text-grey-darker leading-normal overflow-hidden" style="max-height: 12rem;">
         <div v-html="discussion.content"></div>
       </div>
     </div>
