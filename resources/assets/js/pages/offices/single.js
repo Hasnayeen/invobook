@@ -1,7 +1,7 @@
 import './../../bootstrap'
 import componentMixin from './../commonComponent'
 import single from './../../components/offices/single.vue'
-import store from './../../store/project'
+import store from './../../store/office'
 
 /* eslint-disable no-unused-vars */
 const app = new Vue({
