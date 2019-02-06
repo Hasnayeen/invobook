@@ -2,7 +2,7 @@
 
 @slot('title') Single Resource View @endslot
 
-<single"></single>
+<single></single>
 
 @slot('script')
 <script>

@@ -24,7 +24,7 @@
         Cycle: 
       </span>
       <span class="p-2 ml-2 bg-grey-lightest shadow rounded cursor-pointer text-sm text-teal-darker">
-        {{office.current_cycle.start_date}} - {{office.current_cycle.end_date}}
+        {{startDate}} - {{endDate}}
       </span>
     </div>
 
@@ -107,6 +107,18 @@ export default {
     }
   },
   computed: {
+    startDate: function () {
+      if (this.office.current_cycle) {
+        return window.luxon.DateTime.fromISO(this.office.current_cycle.start_date).toLocaleString(window.luxon.DateTime.DATE_MED)
+      }
+      return 'Set start date'
+    },
+    endDate: function () {
+      if (this.office.current_cycle) {
+        return window.luxon.DateTime.fromISO(this.office.current_cycle.end_date).toLocaleString(window.luxon.DateTime.DATE_MED)
+      }
+      return 'Set end date'
+    },
     ...mapState({
       office: state => state.office
     })
