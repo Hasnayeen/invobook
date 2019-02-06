@@ -11,17 +11,6 @@ class DiscussionPolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can view the app models discussion.
-     *
-     * @param  \App\Models\User       $user
-     * @param  \App\Models\Discussion $discussion
-     * @return mixed
-     */
-    public function view(User $user, Discussion $discussion)
-    {
-    }
-
-    /**
      * Determine whether the user can create app models discussions.
      *
      * @param  \App\Models\User $user
@@ -55,27 +44,5 @@ class DiscussionPolicy
     {
         return $user->id === $discussion->posted_by ||
             $user->hasPermissionTo('delete discussion.' . $discussion->discussionable_type . '->' . $discussion->discussionable->id);
-    }
-
-    /**
-     * Determine whether the user can restore the app models discussion.
-     *
-     * @param  \App\Models\User       $user
-     * @param  \App\Models\Discussion $discussion
-     * @return mixed
-     */
-    public function restore(User $user, Discussion $discussion)
-    {
-    }
-
-    /**
-     * Determine whether the user can permanently delete the app models discussion.
-     *
-     * @param  \App\Models\User       $user
-     * @param  \App\Models\Discussion $discussion
-     * @return mixed
-     */
-    public function forceDelete(User $user, Discussion $discussion)
-    {
     }
 }

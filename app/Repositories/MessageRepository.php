@@ -33,13 +33,13 @@ class MessageRepository
         ]);
     }
 
-    public function getAllMessages($type, $id)
+    public function getAllMessages($type, $entityId)
     {
-        return $this->model->where(['messageable_type' => $type, 'messageable_id' => $id])
+        return $this->model->where(['messageable_type' => $type, 'messageable_id' => $entityId])
                            ->with('user')
                            ->orderBy('id', 'desc')
                            ->paginate(15)
-                           ->appends(['resource_type' => $type, 'resource_id' => $id]);
+                           ->appends(['resource_type' => $type, 'resource_id' => $entityId]);
     }
 
     public function getAllDirectMessages($type, $senderId, $recieverId)

@@ -34,17 +34,6 @@ class TeamPolicy
     }
 
     /**
-     * Determine whether the user can update the team.
-     *
-     * @param  \App\Models\User $user
-     * @param  \App\Team        $team
-     * @return mixed
-     */
-    public function update(User $user, Team $team)
-    {
-    }
-
-    /**
      * Determine whether the user can delete the team.
      *
      * @param  \App\Models\User $user
@@ -54,27 +43,5 @@ class TeamPolicy
     public function delete(User $user, Team $team)
     {
         return $user->hasPermissionTo('delete team->' . $team->id);
-    }
-
-    /**
-     * Determine whether the user can restore the team.
-     *
-     * @param  \App\Models\User $user
-     * @param  \App\Team        $team
-     * @return mixed
-     */
-    public function restore(User $user, Team $team)
-    {
-    }
-
-    /**
-     * Determine whether the user can permanently delete the team.
-     *
-     * @param  \App\Models\User $user
-     * @param  \App\Team        $team
-     * @return mixed
-     */
-    public function forceDelete(User $user, Team $team)
-    {
     }
 }

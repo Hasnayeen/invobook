@@ -156,7 +156,7 @@ class CommentTest extends TestCase
     {
         $comment = factory(\App\Models\Comment::class)->create();
 
-        $permission = Permission::create(['name' => 'delete comment.' . $comment->commentable_type . '->' . $comment->commentable_id]);
+        Permission::create(['name' => 'delete comment.' . $comment->commentable_type . '->' . $comment->commentable_id]);
 
         $this->actingAs($this->user)->delete("/comments/{$comment->id}");
     }

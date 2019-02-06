@@ -33,7 +33,7 @@ class TagTest extends TestCase
      */
     public function user_without_permission_can_not_add_a_tag_to_a_task()
     {
-        $permission = Permission::create(['name' => 'create tag']);
+        Permission::create(['name' => 'create tag']);
 
         $this->actingAs($this->user)->post('tags', [
             'label' => 'dummy',
@@ -96,7 +96,7 @@ class TagTest extends TestCase
 
         $task->tags()->attach($tag);
 
-        $permission = Permission::create(['name' => "edit {$task->taskable_type}->{$task->taskable_id}"]);
+        Permission::create(['name' => "edit {$task->taskable_type}->{$task->taskable_id}"]);
 
         $this->actingAs($this->user)->delete("tasks/{$task->id}/tags/{$tag->id}");
     }

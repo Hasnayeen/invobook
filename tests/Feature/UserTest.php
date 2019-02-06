@@ -156,7 +156,7 @@ class UserTest extends TestCase
             ]);
 
         // User current username is considered as available so we check other username
-        $user2 = factory(User::class)->create(['username' => 'random']);
+        factory(User::class)->create(['username' => 'random']);
         $response = $this->json('GET', '/username', ['username' => 'random']);
 
         $response

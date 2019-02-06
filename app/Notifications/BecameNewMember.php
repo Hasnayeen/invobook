@@ -62,7 +62,7 @@ class BecameNewMember extends Notification implements ShouldQueue
      * @param  mixed                                          $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail()
     {
         return (new MailMessage)
             ->subject('You have been added to ' . $this->entityName)
@@ -95,7 +95,7 @@ class BecameNewMember extends Notification implements ShouldQueue
      * @param  mixed $notifiable
      * @return void
      */
-    public function toBroadcast($notifiable)
+    public function toBroadcast()
     {
         return new BroadcastMessage([
             'subject'     => $this->adder,

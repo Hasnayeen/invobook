@@ -50,8 +50,7 @@ class TaskTest extends TestCase
     public function user_without_permission_cant_create_new_task()
     {
         $task = factory(\App\Models\Task::class)->make();
-        $permission = Permission::create(['name' => 'create task.' . $task->taskable_type . '->' . $task->taskable_id]);
-        $user = factory(\App\Models\User::class)->create();
+        Permission::create(['name' => 'create task.' . $task->taskable_type . '->' . $task->taskable_id]);
 
         $this->actingAs($this->user)->post('/tasks', [
             'name'          => $task->name,
@@ -148,7 +147,7 @@ class TaskTest extends TestCase
     public function create_new_task_with_status()
     {
         $task = factory(\App\Models\Task::class)->make();
-        $status = factory(\App\Models\Status::class)->create();
+        factory(\App\Models\Status::class)->create();
         $permission = Permission::create(['name' => 'create task.' . $task->taskable_type . '->' . $task->taskable_id]);
         $this->user->givePermissionTo($permission);
 
@@ -279,7 +278,7 @@ class TaskTest extends TestCase
 
         $task->status()->associate($status)->save();
 
-        $permission = Permission::create(['name' => 'edit task.' . $task->taskable_type . '->' . $task->taskable_id]);
+        Permission::create(['name' => 'edit task.' . $task->taskable_type . '->' . $task->taskable_id]);
 
         $this->actingAs($this->user)
             ->put("tasks/{$task->id}/statuses", [

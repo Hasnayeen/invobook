@@ -21,7 +21,8 @@ class HomePageTest extends TestCase
             ->get('/')
             ->assertStatus(200)
             ->assertSee($projects[0]->name)
-            ->assertSee($teams[0]->name);
+            ->assertSee($teams[0]->name)
+            ->assertSee($offices[0]->name);
     }
 
     /** @test */

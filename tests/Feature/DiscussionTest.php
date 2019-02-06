@@ -125,7 +125,7 @@ class DiscussionTest extends TestCase
     {
         $discussion = factory(\App\Models\Discussion::class)->create();
 
-        $permission = Permission::create(['name' => 'delete discussion.' . $discussion->discussionable_type . '->' . $discussion->discussionable->id]);
+        Permission::create(['name' => 'delete discussion.' . $discussion->discussionable_type . '->' . $discussion->discussionable->id]);
 
         $this->actingAs($this->user)->delete("/discussions/{$discussion->id}");
     }

@@ -37,9 +37,9 @@ class SearchTest extends TestCase
     {
         $this->index_resource_when_it_is_created();
 
-        $id = Project::where('name', 'New Project')->first()->id;
+        $projectId = Project::where('name', 'New Project')->first()->id;
 
-        $this->actingAs($this->user)->delete("/projects/{$id}");
+        $this->actingAs($this->user)->delete("/projects/{$projectId}");
 
         $this->assertDatabaseMissing('searches', [
             'name'        => 'New Project',

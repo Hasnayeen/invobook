@@ -67,13 +67,13 @@ class ForgotPasswordTest extends TestCase
         Notification::fake();
         $user = factory(User::class)->create();
 
-        $response = $this->post($this->passwordEmailPostRoute(), [
+        $this->post($this->passwordEmailPostRoute(), [
             'email' => $user->email,
         ]);
 
         $this->assertNotNull($token = DB::table('password_resets')->first());
 
-        Notification::assertSentTo($user, ResetPassword::class, function ($notification, $channels) use ($token) {
+        Notification::assertSentTo($user, ResetPassword::class, function ($notification) use ($token) {
             return Hash::check($notification->token, $token->token) === true;
         });
     }
