@@ -15,7 +15,6 @@ class StatusTest extends TestCase
     public function test_create_new_status()
     {
         $status = factory(\App\Models\Status::class)->make();
-        $user = factory(\App\Models\User::class)->create();
 
         $this->actingAs($this->user)->post('/statuses', [
             'name'      => $status->name,

@@ -137,7 +137,7 @@ class LoginTest extends TestCase
     public function user_cannot_make_more_than_five_attempts_in_one_minute()
     {
         $user = factory(User::class)->create([
-            'password' => bcrypt($password = 'secret'),
+            'password' => bcrypt('secret'),
         ]);
 
         foreach (range(0, 5) as $_) {

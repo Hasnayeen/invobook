@@ -46,7 +46,7 @@ class YouWereMentioned extends Notification implements ShouldQueue
      *
      * @return array
      */
-    public function via($notifiable)
+    public function via()
     {
         return ['mail', 'database'];
     }
@@ -58,7 +58,7 @@ class YouWereMentioned extends Notification implements ShouldQueue
      *
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail()
     {
         return (new MailMessage)
             ->subject("{$this->notifier->name} mentioned you in {$this->mentionableType}.");
