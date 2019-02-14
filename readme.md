@@ -3,7 +3,6 @@
 [![Stable Version](https://poser.pugx.org/iluminar/goodwork/v/stable)](https://github.com/iluminar/goodwork)
 [![Laravel Version](https://img.shields.io/badge/Laravel-5.7-brightgreen.svg?style=flat)](https://github.com/laravel/laravel)
 [![VueJS Version](https://img.shields.io/badge/vue-2.5.13-brightgreen.svg?style=flat)](https://github.com/vuejs/vue)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/e52feb1563874cd19bc1ffbff32aa567)](https://www.codacy.com/app/Hasnayeen/goodwork)
 [![codecov](https://codecov.io/gh/iluminar/goodwork/branch/master/graph/badge.svg)](https://codecov.io/gh/iluminar/goodwork)
 [![StyleCI](https://styleci.io/repos/81873619/shield?branch=dev&style=flat)](https://styleci.io/repos/81873619)
 [![Join on slack](https://img.shields.io/badge/join%20on-slack-green.svg)](https://join.slack.com/t/iluminar/shared_invite/enQtNDY0Mzc3NDkwOTY1LTJhZTNiYmMxZmE4NGU5MTJhODI5OWMyNjc4ZmIyNDVhODRhMGUzNDU0MmM1OGRmZjBiYWM0NjcwNWRjMDJjNTA)
@@ -57,7 +56,7 @@ You can check out an instance of the application that we use as a guest user usi
 
 [Install manually](https://github.com/iluminar/goodwork/wiki/Installation#setup-usual-way-if-youre-not-using-docker)
 
-## Screenshots <small>[↑Top](#goodwork)</small>
+## Screenshots <small>[↑Top](#about-goodwork)</small>
 
 ![Dashboard](https://i.imgur.com/oPlF1bi.png)
 
@@ -87,13 +86,13 @@ You can check out an instance of the application that we use as a guest user usi
 
 ![Roles Board](https://i.imgur.com/87gbE0v.png)
 
-## Contributing <small>[↑Top](#goodwork)</small>
+## Contributing <small>[↑Top](#about-goodwork)</small>
 
 Thank you for considering contributing to the Goodwork! The contribution guide can be found in the [Contribution Guideline](https://github.com/iluminar/goodwork/wiki/Contribution-Guideline).
 
 Also you can join the slack channel via this [link](https://join.slack.com/t/iluminar/shared_invite/enQtNDY0Mzc3NDkwOTY1LTJhZTNiYmMxZmE4NGU5MTJhODI5OWMyNjc4ZmIyNDVhODRhMGUzNDU0MmM1OGRmZjBiYWM0NjcwNWRjMDJjNTA)
 
-## Supporting <small>[↑Top](#goodwork)</small>
+## Supporting <small>[↑Top](#about-goodwork)</small>
 
 Goodwork is an MIT-licensed open source project with its ongoing development made possible thanks to the support by our amazing backers.
 
@@ -101,11 +100,11 @@ Issues on Goodwork can be funded by anyone and the money will be distributed to 
 
 [![issuehunt-to-marktext](https://github.com/BoostIO/issuehunt-materials/raw/master/v1/issuehunt-button-v1.svg?sanitize=true)](https://issuehunt.io/repos/81873619)
 
-## Security Vulnerabilities <small>[↑Top](#goodwork)</small>
+## Security Vulnerabilities <small>[↑Top](#about-goodwork)</small>
 
 If you discover a security vulnerability within Goodwork, please send an e-mail to searching.nehal@gmail.com. All security vulnerabilities will be promptly addressed.
 
-## Credits <small>[↑Top](#goodwork)</small>
+## Credits <small>[↑Top](#about-goodwork)</small>
 
 - Author: [Nehal Hasnayeen](https://github.com/Hasnayeen) (https://hasnayeen.github.io)
 
@@ -116,6 +115,6 @@ If you discover a security vulnerability within Goodwork, please send an e-mail 
 
 [![](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/images/0)](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/links/0)[![](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/images/1)](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/links/1)[![](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/images/2)](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/links/2)[![](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/images/3)](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/links/3)[![](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/images/4)](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/links/4)[![](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/images/5)](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/links/5)[![](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/images/6)](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/links/6)[![](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/images/7)](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/links/7)
 
-## License <small>[↑Top](#goodwork)</small>
+## License <small>[↑Top](#about-goodwork)</small>
 
 Goodwork is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
