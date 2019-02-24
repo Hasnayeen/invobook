@@ -43,7 +43,7 @@
             "database/factories"
         ],        
         "files": [
-            "app/Utilities/helpers.php"
+            "app/Core/Utilities/helpers.php"
         ],
         "psr-4": {
             "App\\": "app/"
