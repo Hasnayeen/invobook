@@ -248,4 +248,15 @@ Route::group(['middleware' => ['auth', 'permission:view admin page'], 'prefix' =
     Route::put('services/{service}', 'ServiceController@update');
 
     Route::get('check-for-update', 'AboutController@checkForUpdate');
+
+    /**********************************
+        Database Backup in dropbox
+    **********************************/
+    Route::get('check-dropbox-setup', 'DatabaseBackupController@checkDropboxSetup');
+
+    Route::get('take-backup', 'DatabaseBackupController@takeBackupToDropbox');
+
+    Route::get('backup-list', 'DatabaseBackupController@backupFileLists');
+    
+    Route::post('backup-restore', 'DatabaseBackupController@backupRestore');
 });
