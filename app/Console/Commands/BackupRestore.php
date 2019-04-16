@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use DB;
-use Storage;
+use Illuminate\Database\DatabaseManager as DB;
+use Illuminate\Contracts\Filesystem\Factory as Filesystem;
 use ZipArchive;
 use Illuminate\Console\Command;
 
@@ -29,13 +29,21 @@ class BackupRestore extends Command
 
     private $time = null;
 
+    /* Dependacy variables */
+
+    protected $db;
+    protected $storage;
+
     /**
      * Create a new command instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(DB $db, Filesystem $storage)
     {
+        $this->db = $db;
+        $this->storage = $storage;
+
         parent::__construct();
     }
 
@@ -47,7 +55,7 @@ class BackupRestore extends Command
     public function handle()
     {
         $this->init();
-        if (Storage::disk($this->disk)->exists($this->filename)) {
+        if ($this->storage->disk($this->disk)->exists($this->filename)) {
             $this->loadContentToLocalStorage();
             $this->unzipBackup();
             $this->restoreBackup();
@@ -63,8 +71,8 @@ class BackupRestore extends Command
 
     private function loadContentToLocalStorage()
     {
-        $content = (Storage::disk($this->disk)->get($this->filename));
-        Storage::disk('local')->put("backup-temp/".$this->time."/backup.zip", $content);
+        $content = ($this->storage->disk($this->disk)->get($this->filename));
+        $this->storage->disk('local')->put("backup-temp/".$this->time."/backup.zip", $content);
     }
 
     private function unzipBackup()
@@ -77,7 +85,7 @@ class BackupRestore extends Command
 
     private function restoreBackup()
     {
-        DB::unprepared(Storage::disk('local')->get(storage_path($this->getPath('db-dumps/mysql-goodwork.sql'))));
+        $this->db->unprepared($this->storage->disk('local')->get(storage_path($this->getPath('db-dumps/mysql-goodwork.sql'))));
     }
 
     private function getPath($extendedPath = '')

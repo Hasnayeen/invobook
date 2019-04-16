@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use Storage;
+use Illuminate\Contracts\Filesystem\Factory as Storage;
 use League\Flysystem\Filesystem;
 use Illuminate\Support\ServiceProvider;
 use Spatie\Dropbox\Client as DropboxClient;
@@ -11,6 +11,15 @@ use Spatie\FlysystemDropbox\DropboxAdapter;
 
 class DropboxFilesystemServiceProvider extends ServiceProvider
 {
+
+    protected $storage;
+
+
+    public function __construct(Storage $storage)
+    {
+        $this->storage = $storage;
+    }
+
     /**
      * Register services.
      *
@@ -27,7 +36,7 @@ class DropboxFilesystemServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Storage::extend('dropbox', function ($app, $config) {
+        $this->storage->extend('dropbox', function ($app, $config) {
             $client = new DropboxClient($config['accessToken']);
 
             return new Filesystem(new DropboxAdapter($client));
