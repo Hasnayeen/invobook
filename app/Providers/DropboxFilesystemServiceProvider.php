@@ -2,11 +2,11 @@
 
 namespace App\Providers;
 
-use Illuminate\Contracts\Filesystem\Factory as Storage;
 use League\Flysystem\Filesystem;
 use Illuminate\Support\ServiceProvider;
 use Spatie\Dropbox\Client as DropboxClient;
 use Spatie\FlysystemDropbox\DropboxAdapter;
+use Illuminate\Contracts\Filesystem\Factory as Storage;
 
 
 class DropboxFilesystemServiceProvider extends ServiceProvider
