@@ -2,10 +2,10 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Database\DatabaseManager as DB;
-use Illuminate\Contracts\Filesystem\Factory as Filesystem;
 use ZipArchive;
 use Illuminate\Console\Command;
+use Illuminate\Database\DatabaseManager as DB;
+use Illuminate\Contracts\Filesystem\Factory as Filesystem;
 
 class BackupRestore extends Command
 {
@@ -31,7 +31,7 @@ class BackupRestore extends Command
 
     /* Dependacy variables */
 
-    protected $db;
+    protected $database;
     protected $storage;
 
     /**
@@ -39,9 +39,9 @@ class BackupRestore extends Command
      *
      * @return void
      */
-    public function __construct(DB $db, Filesystem $storage)
+    public function __construct(DB $database, Filesystem $storage)
     {
-        $this->db = $db;
+        $this->database = $database;
         $this->storage = $storage;
 
         parent::__construct();
@@ -64,7 +64,7 @@ class BackupRestore extends Command
 
     private function init()
     {
-        $this->disk = $this->option('disk') != '' ? $this->option('disk'): 'local';
+        $this->disk = $this->option('disk') != '' ? $this->option('disk') : 'local';
         $this->filename = $this->argument('filename');
         $this->time = time();
     }
@@ -72,7 +72,7 @@ class BackupRestore extends Command
     private function loadContentToLocalStorage()
     {
         $content = ($this->storage->disk($this->disk)->get($this->filename));
-        $this->storage->disk('local')->put("backup-temp/".$this->time."/backup.zip", $content);
+        $this->storage->disk('local')->put('backup-temp/'.$this->time.'/backup.zip', $content);
     }
 
     private function unzipBackup()
@@ -85,7 +85,7 @@ class BackupRestore extends Command
 
     private function restoreBackup()
     {
-        $this->db->unprepared($this->storage->disk('local')->get(storage_path($this->getPath('db-dumps/mysql-goodwork.sql'))));
+        $this->database->unprepared($this->storage->disk('local')->get(storage_path($this->getPath('db-dumps/mysql-goodwork.sql'))));
     }
 
     private function getPath($extendedPath = '')
