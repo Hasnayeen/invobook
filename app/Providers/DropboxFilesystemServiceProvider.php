@@ -8,12 +8,9 @@ use Spatie\Dropbox\Client as DropboxClient;
 use Spatie\FlysystemDropbox\DropboxAdapter;
 use Illuminate\Contracts\Filesystem\Factory as Storage;
 
-
 class DropboxFilesystemServiceProvider extends ServiceProvider
 {
-
     protected $storage;
-
 
     public function __construct(Storage $storage)
     {

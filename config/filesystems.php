@@ -66,7 +66,7 @@ return [
             'driver'      => 'dropbox',
             'accessToken' => env('DROPBOX_ACCESS_TOKEN'),
             'appSecret'   => env('DROPBOX_SECRET'),
-        ]
+        ],
 
     ],
 

@@ -6,10 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Contracts\Console\Kernel as Artisan;
 use Illuminate\Contracts\Filesystem\Factory as Filesystem;
 
-
 class DatabaseBackupController extends Controller
 {
-
     protected $artisan;
     protected $storage;
 
@@ -18,7 +16,6 @@ class DatabaseBackupController extends Controller
         $this->storage = $storage;
         $this->artisan = $artisan;
     }
-
 
     public function checkDropboxSetup()
     {
@@ -44,7 +41,7 @@ class DatabaseBackupController extends Controller
     {
         $exitCode = $this->artisan->call('backup:restore', ['filename' => $request->filename, '--disk' => 'dropbox']);
         $output = $this->artisan->output();
-        
+
         return ['message' => 'Yes command run successfully', 'exitWith' => $exitCode, 'output' => $output];
     }
 }
