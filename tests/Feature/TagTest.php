@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Core\Models\Tag;
 use Tests\TestCase;
+use App\Core\Models\Tag;
 use App\Core\Models\Task;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Auth\AuthenticationException;

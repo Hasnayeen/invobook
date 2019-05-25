@@ -5,8 +5,8 @@ namespace App\Core\Http\Controllers;
 use DateTimeZone;
 use App\Core\Models\User;
 use Illuminate\Http\Request;
-use App\Core\Repositories\UserRepository;
 use Illuminate\Support\Facades\Mail;
+use App\Core\Repositories\UserRepository;
 use App\Core\Mail\SendInvitationToRegister;
 
 class UserController extends Controller
