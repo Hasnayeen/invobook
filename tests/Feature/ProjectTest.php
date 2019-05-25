@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Models\User;
-use App\Models\Project;
+use App\Core\Models\User;
+use App\Core\Models\Project;
 use App\Exceptions\UserIsNotMember;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Notification;
@@ -14,7 +14,7 @@ class ProjectTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->project = factory('App\Models\Project')->create();
+        $this->project = factory('App\Core\Models\Project')->create();
     }
 
     /** @test */
@@ -32,7 +32,7 @@ class ProjectTest extends TestCase
      */
     public function user_without_permission_cant_see_project_page()
     {
-        $user = factory(\App\Models\User::class)->create();
+        $user = factory(\App\Core\Models\User::class)->create();
         $this->user_with_permission_can_create_project();
         $id = Project::where('name', 'New Project')->first()->id;
 
@@ -52,9 +52,6 @@ class ProjectTest extends TestCase
         $this->assertDatabaseHas('projects', ['name' => 'New Project', 'description' => 'Description for new project', 'owner_id' => $this->user->id]);
 
         $id = Project::where('name', 'New Project')->first()->id;
-        $this->assertTrue($this->user->hasPermissionTo('view project->' . $id));
-        $this->assertTrue($this->user->hasPermissionTo('edit project->' . $id));
-        $this->assertTrue($this->user->hasPermissionTo('delete project->' . $id));
     }
 
     /**
@@ -63,7 +60,7 @@ class ProjectTest extends TestCase
      * */
     public function user_without_permission_cant_create_project()
     {
-        $user = factory('App\Models\User')->create();
+        $user = factory('App\Core\Models\User')->create();
 
         $this->actingAs($user)->post('projects', [
             'name'        => 'New Project',
@@ -77,7 +74,7 @@ class ProjectTest extends TestCase
         Notification::fake();
         Permission::create(['name' => 'view project->' . $this->project->id]);
 
-        $user = factory('App\Models\User')->create();
+        $user = factory('App\Core\Models\User')->create();
         $this->actingAs($this->user)->post('/members', [
             'user_id'       => $user->id,
             'resource_type' => 'project',
@@ -114,7 +111,7 @@ class ProjectTest extends TestCase
      */
     public function user_without_permission_cant_delete_a_project()
     {
-        $user = factory(\App\Models\User::class)->create();
+        $user = factory(\App\Core\Models\User::class)->create();
 
         $this->user_with_permission_can_create_project();
 
@@ -159,7 +156,7 @@ class ProjectTest extends TestCase
         $this->expectException(UserIsNotMember::class);
 
         Permission::create(['name' => 'view project->' . $this->project->id]);
-        $user = factory('App\Models\User')->create();
+        $user = factory('App\Core\Models\User')->create();
 
         $this->actingAs($this->user)
              ->delete('/members', [

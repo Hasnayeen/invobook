@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Models\Team;
+use App\Core\Models\Team;
 use App\Exceptions\UserIsNotMember;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Notification;
@@ -13,7 +13,7 @@ class TeamTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->team = factory('App\Models\Team')->create();
+        $this->team = factory('App\Core\Models\Team')->create();
     }
 
     /** @test */
@@ -31,7 +31,7 @@ class TeamTest extends TestCase
      */
     public function user_without_permission_cant_see_team_page()
     {
-        $user = factory(\App\Models\User::class)->create();
+        $user = factory(\App\Core\Models\User::class)->create();
         $this->user_with_permission_can_create_team();
         $id = Team::where('name', 'New Team')->first()->id;
 
@@ -64,7 +64,7 @@ class TeamTest extends TestCase
      */
     public function user_without_permission_cant_create_team()
     {
-        $user = factory(\App\Models\User::class)->create();
+        $user = factory(\App\Core\Models\User::class)->create();
 
         $this->actingAs($user)->post('/teams', [
             'name'        => 'New Team',
@@ -78,7 +78,7 @@ class TeamTest extends TestCase
         Notification::fake();
         Permission::create(['name' => 'view team->' . $this->team->id]);
 
-        $user = factory('App\Models\User')->create();
+        $user = factory('App\Core\Models\User')->create();
         $this->actingAs($this->user)->post('/members', [
             'user_id'       => $user->id,
             'resource_type' => 'team',
@@ -115,7 +115,7 @@ class TeamTest extends TestCase
      */
     public function user_without_permission_cant_delete_a_team()
     {
-        $user = factory(\App\Models\User::class)->create();
+        $user = factory(\App\Core\Models\User::class)->create();
 
         $this->user_with_permission_can_create_team();
 
@@ -160,7 +160,7 @@ class TeamTest extends TestCase
         $this->expectException(UserIsNotMember::class);
 
         Permission::create(['name' => 'view team->' . $this->team->id]);
-        $user = factory('App\Models\User')->create();
+        $user = factory('App\Core\Models\User')->create();
 
         $this->actingAs($this->user)
              ->delete('/members', [

@@ -3,7 +3,7 @@
 namespace Tests\Feature\Auth;
 
 use Tests\TestCase;
-use App\Models\User;
+use App\Core\Models\User;
 use App\Exceptions\Handler;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Event;

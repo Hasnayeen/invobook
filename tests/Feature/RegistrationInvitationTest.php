@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use ErrorException;
 use Tests\TestCase;
-use App\Models\User;
+use App\Core\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Auth\AuthenticationException;
 

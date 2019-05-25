@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Models\User;
-use App\Models\Project;
+use App\Core\Models\User;
+use App\Core\Models\Project;
 use App\Notifications\BecameNewMember;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Notification;
@@ -17,18 +17,18 @@ class MemberTest extends TestCase
      * */
     public function get_all_members_of_a_group()
     {
-        $users = factory('App\Models\User', 3)->create();
-        $project = factory('App\Models\Project')->create([
+        $users = factory('App\Core\Models\User', 3)->create();
+        $project = factory('App\Core\Models\Project')->create([
             'owner_id' => $users[0]['id'],
         ]);
         $project->members()->saveMany($users);
 
-        $team = factory('App\Models\Team')->create([
+        $team = factory('App\Core\Models\Team')->create([
             'owner_id' => $users[0]['id'],
         ]);
         $team->members()->saveMany($users);
 
-        $office = factory('App\Models\Office')->create([
+        $office = factory('App\Core\Models\Office')->create([
             'owner_id' => $users[0]['id'],
         ]);
         $office->members()->saveMany($users);

@@ -19,7 +19,7 @@ class TeamPolicy
      */
     public function view(User $user, Team $team)
     {
-        return $user->hasPermissionTo('view team->' . $team->id);
+        return resolve('Authorization')->userHasPermissionTo('view', 'team', 'team', $team->id);
     }
 
     /**
@@ -30,7 +30,7 @@ class TeamPolicy
      */
     public function create(User $user)
     {
-        return $user->hasPermissionTo('create team');
+        return resolve('Authorization')->userHasPermissionTo('create', 'team');
     }
 
     /**
@@ -42,6 +42,6 @@ class TeamPolicy
      */
     public function delete(User $user, Team $team)
     {
-        return $user->hasPermissionTo('delete team->' . $team->id);
+        return resolve('Authorization')->userHasPermissionTo('delete', 'team', 'team', $team->id);
     }
 }

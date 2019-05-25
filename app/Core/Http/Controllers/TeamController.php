@@ -15,6 +15,7 @@ class TeamController extends Controller
 
     public function show(Team $team)
     {
+        $this->authorize('view', $team);
         $team->load('members');
 
         return view('teams.single', ['team' => $team]);
@@ -23,6 +24,7 @@ class TeamController extends Controller
     public function store(Request $request, TeamRepository $repository)
     {
         try {
+            $this->authorize('create', Team::class);
             $team = $repository->createNewTeam($request->all());
             $team->members()->save(auth()->user());
             $team->load('members');
@@ -41,6 +43,7 @@ class TeamController extends Controller
 
     public function delete(Team $team)
     {
+        $this->authorize('delete', $team);
         $team->delete();
 
         return response()->json([

@@ -1,9 +1,7 @@
 <?php
 
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 
-if (! function_exists('application_last_updated')) {
+if (!function_exists('application_last_updated')) {
     /**
      * Return the date when the application was last updated.
      *
@@ -15,7 +13,7 @@ if (! function_exists('application_last_updated')) {
     }
 }
 
-if (! function_exists('create_permissions')) {
+if (!function_exists('create_permissions')) {
     /**
      * Create permissions for a single resource.
      *
@@ -26,29 +24,9 @@ if (! function_exists('create_permissions')) {
     {
         $key = $resource->getRouteKeyName();
         $resourceType = strtolower(class_basename($resource));
-
-        $role = Role::where('name', 'owner')->first();
-        $permission = Permission::create(['name' => 'view ' . $resourceType . '->' . $resource->$key, 'guard_name' => 'web']);
-        $role->givePermissionTo($permission);
-        $permission = Permission::create(['name' => 'edit ' . $resourceType . '->' . $resource->$key, 'guard_name' => 'web']);
-        $role->givePermissionTo($permission);
-        $permission = Permission::create(['name' => 'delete ' . $resourceType . '->' . $resource->$key, 'guard_name' => 'web']);
-        $role->givePermissionTo($permission);
-        $permission = Permission::create(['name' => 'create task.' . $resourceType . '->' . $resource->$key, 'guard_name' => 'web']);
-        $role->givePermissionTo($permission);
-        $permission = Permission::create(['name' => 'edit task.' . $resourceType . '->' . $resource->$key, 'guard_name' => 'web']);
-        $role->givePermissionTo($permission);
-        $permission = Permission::create(['name' => 'delete task.' . $resourceType . '->' . $resource->$key, 'guard_name' => 'web']);
-        $role->givePermissionTo($permission);
-        $permission = Permission::create(['name' => 'create discussion.' . $resourceType . '->' . $resource->$key, 'guard_name' => 'web']);
-        $role->givePermissionTo($permission);
-        $permission = Permission::create(['name' => 'edit discussion.' . $resourceType . '->' . $resource->$key, 'guard_name' => 'web']);
-        $role->givePermissionTo($permission);
-        $permission = Permission::create(['name' => 'delete discussion.' . $resourceType . '->' . $resource->$key, 'guard_name' => 'web']);
-        $role->givePermissionTo($permission);
     }
 
-    if (! function_exists('get_locale')) {
+    if (!function_exists('get_locale')) {
         /**
          * Get user set locale or default locale.
          *
@@ -64,7 +42,7 @@ if (! function_exists('create_permissions')) {
         }
     }
 
-    if (! function_exists('localize')) {
+    if (!function_exists('localize')) {
         /**
          * Translate the given message.
          *
@@ -84,6 +62,19 @@ if (! function_exists('create_permissions')) {
             }
 
             return $result;
+        }
+    }
+
+    if (!function_exists('trim_last_dot')) {
+        /**
+         * Remove any trailing dot (".") character
+         *
+         * @param  string $text
+         * @return string
+         */
+        function trim_last_dot($text)
+        {
+            return substr_replace($text, '', -1);
         }
     }
 }
