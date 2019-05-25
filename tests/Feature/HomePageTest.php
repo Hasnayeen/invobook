@@ -3,10 +3,10 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Models\Team;
-use App\Models\User;
-use App\Models\Office;
-use App\Models\Project;
+use App\Core\Models\Team;
+use App\Core\Models\User;
+use App\Core\Models\Office;
+use App\Core\Models\Project;
 
 class HomePageTest extends TestCase
 {

@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Models\Office;
+use App\Core\Models\Office;
 use App\Exceptions\UserIsNotMember;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Notification;
@@ -13,7 +13,7 @@ class OfficeTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->office = factory('App\Models\Office')->create();
+        $this->office = factory('App\Core\Models\Office')->create();
     }
 
     /** @test */
@@ -31,7 +31,7 @@ class OfficeTest extends TestCase
      */
     public function user_without_permission_cant_see_office_page()
     {
-        $user = factory(\App\Models\User::class)->create();
+        $user = factory(\App\Core\Models\User::class)->create();
         $this->user_with_permission_can_create_office();
         $id = Office::where('name', 'New Office')->first()->id;
 
@@ -63,7 +63,7 @@ class OfficeTest extends TestCase
      */
     public function user_without_permission_cant_create_office()
     {
-        $user = factory(\App\Models\User::class)->create();
+        $user = factory(\App\Core\Models\User::class)->create();
 
         $this->actingAs($user)->post('/offices', [
             'name'        => 'New Office',
@@ -91,7 +91,7 @@ class OfficeTest extends TestCase
      */
     public function user_without_permission_cant_delete_a_office()
     {
-        $user = factory(\App\Models\User::class)->create();
+        $user = factory(\App\Core\Models\User::class)->create();
 
         $this->user_with_permission_can_create_office();
 
@@ -105,7 +105,7 @@ class OfficeTest extends TestCase
     {
         Notification::fake();
         Permission::create(['name' => 'view office->' . $this->office->id]);
-        $user = factory('App\Models\User')->create();
+        $user = factory('App\Core\Models\User')->create();
         $this->office->members()->save($user);
         $user->givePermissionTo(
             'view office->' . $this->office->id
@@ -140,7 +140,7 @@ class OfficeTest extends TestCase
         $this->expectException(UserIsNotMember::class);
 
         Permission::create(['name' => 'view office->' . $this->office->id]);
-        $user = factory('App\Models\User')->create();
+        $user = factory('App\Core\Models\User')->create();
 
         $this->actingAs($this->user)
              ->delete('/members', [

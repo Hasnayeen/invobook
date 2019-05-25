@@ -7,7 +7,7 @@
 [![StyleCI](https://styleci.io/repos/81873619/shield?branch=dev&style=flat)](https://styleci.io/repos/81873619)
 [![Join on slack](https://img.shields.io/badge/join%20on-slack-green.svg)](https://join.slack.com/t/iluminar/shared_invite/enQtNDY0Mzc3NDkwOTY1LTJhZTNiYmMxZmE4NGU5MTJhODI5OWMyNjc4ZmIyNDVhODRhMGUzNDU0MmM1OGRmZjBiYWM0NjcwNWRjMDJjNTA)
 
-<img src="public/logos/logo.svg" alt="Goodwork" style="max-width:100%;">
+<img src="public/logos/logo.png" alt="Goodwork" style="max-width:100%;">
 
 Self hosted project management and collaboration tool inspired by basecamp.
 
@@ -96,7 +96,11 @@ Also you can join the slack channel via this [link](https://join.slack.com/t/ilu
 
 Goodwork is an MIT-licensed open source project with its ongoing development made possible thanks to the support by our amazing backers.
 
-Issues on Goodwork can be funded by anyone and the money will be distributed to contributors and maintainers. If you use Goodwork please consider becoming a backer:
+Support the development of "Goodwork" by being a patron
+
+<a href="https://www.patreon.com/bePatron?u=8663953"><img alt="become a patron" src="https://c5.patreon.com/external/logo/become_a_patron_button.png" height="35px"></a>
+
+You can also fund specific issues on Issuehunt and the money will be distributed to contributors and maintainers.
 
 [![issuehunt-to-marktext](https://github.com/BoostIO/issuehunt-materials/raw/master/v1/issuehunt-button-v1.svg?sanitize=true)](https://issuehunt.io/repos/81873619)
 

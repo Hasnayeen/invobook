@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Models\Discussion;
+use App\Core\Models\Discussion;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Validation\ValidationException;
@@ -99,8 +99,8 @@ class CommentTest extends TestCase
     /** @test */
     public function user_can_see_all_comment()
     {
-        $discussion = factory(\App\Models\Discussion::class)->create();
-        $comments = factory(\App\Models\Comment::class, 3)->create(['commentable_type' => 'discussion', 'commentable_id' => $discussion->id]);
+        $discussion = factory(\App\Core\Models\Discussion::class)->create();
+        $comments = factory(\App\Core\Models\Comment::class, 3)->create(['commentable_type' => 'discussion', 'commentable_id' => $discussion->id]);
 
         $this->actingAs($this->user)->call('GET', self::$endpoint, ['commentable_type' => 'discussion', 'commentable_id' => $discussion->id])
              ->assertJsonFragment([
@@ -116,9 +116,9 @@ class CommentTest extends TestCase
     /** @test */
     public function user_can_delete_his_own_comment()
     {
-        $user = factory(\App\Models\User::class)->create();
+        $user = factory(\App\Core\Models\User::class)->create();
 
-        $comment = factory(\App\Models\Comment::class)->create([
+        $comment = factory(\App\Core\Models\Comment::class)->create([
             'user_id'          => $user->id,
             'body'             => 'Comment body',
             'commentable_type' => 'task',
@@ -135,7 +135,7 @@ class CommentTest extends TestCase
     /** @test */
     public function user_with_permission_can_delete_a_comment()
     {
-        $comment = factory(\App\Models\Comment::class)->create();
+        $comment = factory(\App\Core\Models\Comment::class)->create();
 
         $permission = Permission::create(['name' => 'delete comment.' . $comment->commentable_type . '->' . $comment->commentable_id]);
 
@@ -154,7 +154,7 @@ class CommentTest extends TestCase
      */
     public function user_without_permission_cant_delete_a_comment()
     {
-        $comment = factory(\App\Models\Comment::class)->create();
+        $comment = factory(\App\Core\Models\Comment::class)->create();
 
         Permission::create(['name' => 'delete comment.' . $comment->commentable_type . '->' . $comment->commentable_id]);
 

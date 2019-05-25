@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Token;
+use App\Core\Models\Token;
 use Faker\Generator as Faker;
 use Spatie\Permission\Models\Role;
 

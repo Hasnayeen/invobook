@@ -3,10 +3,10 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Models\Task;
-use App\Models\User;
-use App\Models\Comment;
-use App\Models\Message;
+use App\Core\Models\Task;
+use App\Core\Models\User;
+use App\Core\Models\Comment;
+use App\Core\Models\Message;
 use Illuminate\Support\Facades\Mail;
 use App\Notifications\YouWereMentioned;
 use Spatie\Permission\Models\Permission;

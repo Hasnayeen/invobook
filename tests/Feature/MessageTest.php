@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Models\Message;
+use App\Core\Models\Message;
 use App\Events\MessageCreated;
 use App\Events\MessageUpdated;
 use Illuminate\Support\Facades\Event;
@@ -13,17 +13,17 @@ class MessageTest extends TestCase
     /** @test */
     public function user_can_read_message_of_a_group()
     {
-        $user1 = factory('App\Models\User')->create();
-        $user2 = factory('App\Models\User')->create();
+        $user1 = factory('App\Core\Models\User')->create();
+        $user2 = factory('App\Core\Models\User')->create();
 
         // Test for projects
-        $project = factory('App\Models\Project')->create();
-        $user1Messages = factory('App\Models\Message', 2)->create([
+        $project = factory('App\Core\Models\Project')->create();
+        $user1Messages = factory('App\Core\Models\Message', 2)->create([
             'user_id'          => $user1->id,
             'messageable_type' => 'project',
             'messageable_id'   => $project->id,
         ]);
-        $user2Messages = factory('App\Models\Message', 3)->create([
+        $user2Messages = factory('App\Core\Models\Message', 3)->create([
             'user_id'          => $user2->id,
             'messageable_type' => 'project',
             'messageable_id'   => $project->id,
@@ -43,13 +43,13 @@ class MessageTest extends TestCase
         ]);
 
         // Test for teams
-        $team = factory('App\Models\Team')->create();
-        $user1Messages = factory('App\Models\Message', 2)->create([
+        $team = factory('App\Core\Models\Team')->create();
+        $user1Messages = factory('App\Core\Models\Message', 2)->create([
             'user_id'          => $user1->id,
             'messageable_type' => 'team',
             'messageable_id'   => $team->id,
         ]);
-        $user2Messages = factory('App\Models\Message', 3)->create([
+        $user2Messages = factory('App\Core\Models\Message', 3)->create([
             'user_id'          => $user2->id,
             'messageable_type' => 'team',
             'messageable_id'   => $team->id,
@@ -69,13 +69,13 @@ class MessageTest extends TestCase
         ]);
 
         // Test for offices
-        $office = factory('App\Models\Office')->create();
-        $user1Messages = factory('App\Models\Message', 2)->create([
+        $office = factory('App\Core\Models\Office')->create();
+        $user1Messages = factory('App\Core\Models\Message', 2)->create([
             'user_id'          => $user1->id,
             'messageable_type' => 'office',
             'messageable_id'   => $office->id,
         ]);
-        $user2Messages = factory('App\Models\Message', 3)->create([
+        $user2Messages = factory('App\Core\Models\Message', 3)->create([
             'user_id'          => $user2->id,
             'messageable_type' => 'office',
             'messageable_id'   => $office->id,
@@ -100,7 +100,7 @@ class MessageTest extends TestCase
     {
         Event::fake();
 
-        $project = factory('App\Models\Project')->create(['owner_id' => $this->user->id]);
+        $project = factory('App\Core\Models\Project')->create(['owner_id' => $this->user->id]);
 
         $this->actingAs($this->user)->post('messages/', [
             'message'          => 'New message',
@@ -131,9 +131,9 @@ class MessageTest extends TestCase
     /** @test */
     public function user_can_delete_message()
     {
-        $project = factory('App\Models\Project')->create(['owner_id' => $this->user->id]);
+        $project = factory('App\Core\Models\Project')->create(['owner_id' => $this->user->id]);
 
-        $message = factory('App\Models\Message')->create([
+        $message = factory('App\Core\Models\Message')->create([
             'user_id'          => $this->user->id,
             'messageable_type' => 'project',
             'messageable_id'   => $project->id,
@@ -153,7 +153,7 @@ class MessageTest extends TestCase
     {
         Event::fake();
 
-        $project = factory(\App\Models\Project::class)->create(['owner_id' => $this->user->id]);
+        $project = factory(\App\Core\Models\Project::class)->create(['owner_id' => $this->user->id]);
 
         $message = Message::create([
             'body'             => 'New Message',
