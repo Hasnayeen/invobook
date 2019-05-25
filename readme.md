@@ -98,7 +98,7 @@ Goodwork is an MIT-licensed open source project with its ongoing development mad
 
 Support the development of "Goodwork" by being a patron
 
-<a href="https://www.patreon.com/bePatron?u=8663953"><img alt="become a patron" src="https://c5.patreon.com/external/logo/become_a_patron_button.png" height="35px"></a>
+<a href="https://www.patreon.com/bePatron?u=19641984"><img alt="become a patron" src="https://c5.patreon.com/external/logo/become_a_patron_button.png" height="35px"></a>
 
 You can also fund specific issues on Issuehunt and the money will be distributed to contributors and maintainers.
 
