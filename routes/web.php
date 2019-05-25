@@ -224,7 +224,7 @@ Route::group(['middleware' => 'auth'], function () {
         Admin
     **********************************/
 
-Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function () {
+Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function () {
     Route::get('/', 'AdminController@index');
 
     Route::get('roles', 'RoleController@index');
