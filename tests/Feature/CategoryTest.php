@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Models\Category;
+use App\Core\Models\Category;
 use Illuminate\Auth\AuthenticationException;
 
 class CategoryTest extends TestCase

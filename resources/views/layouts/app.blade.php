@@ -11,7 +11,7 @@
 
     <title>{{ config('app.name', 'GOODWORK') }} | {{ $title }}</title>
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300,400,600">
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300,400,600"> -->
     <link href="{{ mix('css/main.min.css') }}" rel="stylesheet">
 
     @yield('style')

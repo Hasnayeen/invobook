@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Service;
+use App\Core\Models\Service;
 use Illuminate\Database\Seeder;
 
 class ServicesTableSeeder extends Seeder

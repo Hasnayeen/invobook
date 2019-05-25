@@ -5,6 +5,7 @@
       <span @click="toggleDropdownMenu" v-click-outside="closeDropdownMenu" class="bg-white p-1 text-sm rounded-full shadow ml-4 cursor-pointer flex items-center">
         <font-awesome-icon :icon="faCog"></font-awesome-icon>
       </span>
+      <!-- Dropdown Menu -->
       <div v-if="dropdownMenuShown" class="relative">
         <ul class="list-reset bg-white rounded shadow-lg py-2 absolute pin-r mt-4 text-base text-left font-normal whitespace-no-wrap z-10">
           <li class="px-4 py-2 hover:bg-grey-light cursor-pointer">
@@ -14,6 +15,9 @@
           </li>
           <li @click="showGithubRepoModal" class="px-4 py-2 hover:bg-grey-light cursor-pointer">
             Connect Github Repository
+          </li>
+          <li @click="showPermissionsSettings" class="px-4 py-2 hover:bg-grey-light cursor-pointer">
+            Permissions Settings
           </li>
           <li class="px-4 py-2 hover:bg-grey-light cursor-pointer">
             Delete
@@ -37,6 +41,8 @@
     <add-member-form v-if="addMemberFormShown" @close="closeAddMemberForm" resourceType="project" :resource="project" @addMember="addMember"></add-member-form>
 
     <show-github-repo entityType="project" :entityId="project.id" v-if="githubRepoModalShown" @close-github-repo-modal="closeGithubRepoModal"></show-github-repo>
+    
+    <permission-settings-modal resourceType="project" :resourceId="project.id" :show="permissionSettingsModalShown" @close="closePermissionsSettings" ></permission-settings-modal>
   <!-- Modals for dropdown menu -->
 
     <div class="h-16 flex flex-row justify-center items-center px-2">
@@ -56,8 +62,7 @@
       <messagesBoard resourceType="project" :resource="project" :activeTab="active"></messagesBoard>
       <eventBoard resourceType="projects" :resource="project" :activeTab="active"></eventBoard>
       <file-board resourceType="projects" :resource="project" :activeTab="active"></file-board>
-      <!-- <messagesBoard resourceType="projects" :resource="project"></messagesBoard>
-      <activity resourceType="projects" :resource="project"></activity> -->
+      <!-- <activity resourceType="projects" :resource="project"></activity> -->
     </div>
   </div>
 </template>
@@ -73,6 +78,7 @@ import activity from './../partials/activity.vue'
 import addMemberForm from './../partials/addMemberForm.vue'
 import showGithubRepo from './../partials/showGithubRepo.vue'
 import membersListModal from './../partials/membersListModal.vue'
+import permissionSettingsModal from './../partials/permissionSettingsModal.vue'
 import profileCard from './../partials/profileCard.vue'
 import tabMenu from './../partials/tabMenu.vue'
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus'
@@ -88,6 +94,7 @@ export default {
     activity,
     addMemberForm,
     membersListModal,
+    permissionSettingsModal,
     profileCard,
     tabMenu,
     showGithubRepo
@@ -98,6 +105,7 @@ export default {
     dropdownMenuShown: false,
     githubRepoModalShown: false,
     membersListModalShown: false,
+    permissionSettingsModalShown: false,
     faPlus,
     faCog
   }),
@@ -165,6 +173,12 @@ export default {
     },
     closeGithubRepoModal () {
       this.githubRepoModalShown = false
+    },
+    showPermissionsSettings () {
+      this.permissionSettingsModalShown = true
+    },
+    closePermissionsSettings () {
+      this.permissionSettingsModalShown = false
     }
   }
 }

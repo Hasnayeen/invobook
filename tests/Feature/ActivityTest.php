@@ -11,8 +11,7 @@ class ActivityTest extends TestCase
     /** @test */
     public function owner_can_see_all_recent_activity()
     {
-        $user = factory(\App\Models\User::class)->create();
-        $user->givePermissionTo('create project');
+        $user = factory(\App\Core\Models\User::class)->create();
 
         $this->actingAs($user)->post('projects', [
             'name'        => 'New Project',
@@ -32,7 +31,7 @@ class ActivityTest extends TestCase
     /** @test */
     public function owner_can_filter_activity_by_user()
     {
-        $user = factory(\App\Models\User::class)->create();
+        $user = factory(\App\Core\Models\User::class)->create();
         $user->givePermissionTo('create project');
 
         $this->actingAs($user)->post('projects', [
@@ -41,7 +40,7 @@ class ActivityTest extends TestCase
             'owner_id'    => $user->id,
         ]);
 
-        $user2 = factory(\App\Models\User::class)->create();
+        $user2 = factory(\App\Core\Models\User::class)->create();
         $user2->givePermissionTo('create project');
 
         $this->actingAs($user2)->post('projects', [
@@ -65,7 +64,7 @@ class ActivityTest extends TestCase
     /** @test */
     public function owner_can_filter_activity_by_date()
     {
-        $user = factory(\App\Models\User::class)->create();
+        $user = factory(\App\Core\Models\User::class)->create();
         $user->givePermissionTo('create project');
 
         $this->actingAs($user)->post('projects', [
@@ -74,7 +73,7 @@ class ActivityTest extends TestCase
             'owner_id'    => $user->id,
         ]);
 
-        $user2 = factory(\App\Models\User::class)->create();
+        $user2 = factory(\App\Core\Models\User::class)->create();
         $user2->givePermissionTo('create project');
 
         $this->actingAs($user2)->post('projects', [
@@ -102,7 +101,7 @@ class ActivityTest extends TestCase
     /** @test */
     public function owner_can_filter_activity_by_date_and_user()
     {
-        $user = factory(\App\Models\User::class)->create();
+        $user = factory(\App\Core\Models\User::class)->create();
         $user->givePermissionTo('create project');
 
         $this->actingAs($user)->post('projects', [
@@ -117,7 +116,7 @@ class ActivityTest extends TestCase
             'owner_id'    => $user->id,
         ]);
 
-        $user2 = factory(\App\Models\User::class)->create();
+        $user2 = factory(\App\Core\Models\User::class)->create();
         $user2->givePermissionTo('create project');
 
         $this->actingAs($user2)->post('projects', [
