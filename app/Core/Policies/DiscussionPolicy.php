@@ -18,7 +18,7 @@ class DiscussionPolicy
      */
     public function create(User $user)
     {
-        return $user->hasPermissionTo('create discussion.' . request()->input('discussionable_type') . '->' . request()->input('discussionable_id'));
+        return (new Authorization($user))->userHasPermissionTo('create', 'discussion', request('group_type'), request('group_id'));
     }
 
     /**
@@ -30,7 +30,7 @@ class DiscussionPolicy
      */
     public function update(User $user, Discussion $discussion)
     {
-        return $user->hasPermissionTo('edit discussion.' . $discussion->discussionable_type . '->' . $discussion->discussionable->id);
+        return (new Authorization($user))->userHasPermissionTo('update', 'discussion', $discussion->id, true, request('group_type'), request('group_id'));
     }
 
     /**
@@ -42,7 +42,6 @@ class DiscussionPolicy
      */
     public function delete(User $user, Discussion $discussion)
     {
-        return $user->id === $discussion->posted_by ||
-            $user->hasPermissionTo('delete discussion.' . $discussion->discussionable_type . '->' . $discussion->discussionable->id);
+        return (new Authorization($user))->userHasPermissionTo('delete', 'discussion', $discussion->id, true, request('group_type'), request('group_id'));
     }
 }

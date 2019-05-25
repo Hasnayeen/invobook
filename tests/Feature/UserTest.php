@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Models\User;
+use App\Core\Models\User;
 use Illuminate\Http\UploadedFile;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Storage;
@@ -16,7 +16,7 @@ class UserTest extends TestCase
     /** @test */
     public function owner_can_see_all_users_in_admin_page()
     {
-        factory('App\Models\User', 2)->create();
+        factory('App\Core\Models\User', 2)->create();
         $users = User::all(['name', 'username', 'email', 'timezone', 'avatar']);
         $this->actingAs($this->user)->get('admin')
             ->assertSee($users[0]['name'])
@@ -30,7 +30,7 @@ class UserTest extends TestCase
     /** @test */
     public function owner_can_see_all_users()
     {
-        factory('App\Models\User', 2)->create();
+        factory('App\Core\Models\User', 2)->create();
         $users = User::all(['name', 'username', 'email', 'timezone', 'avatar']);
         $this->actingAs($this->user)->get('users')
             ->assertJsonFragment([

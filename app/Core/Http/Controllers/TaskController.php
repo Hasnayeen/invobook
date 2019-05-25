@@ -16,6 +16,7 @@ class TaskController extends Controller
     public function store(ValidateTaskCreation $request, TaskRepository $repository, MentionRepository $mentionRepository)
     {
         try {
+            $this->authorize('create', Task::class);
             $task = $repository->create($request->all());
             $task->tags()->attach(request('labels'));
             if (request('mentions')) {
@@ -38,6 +39,7 @@ class TaskController extends Controller
 
     public function show(Task $task)
     {
+        $this->authorize('view', $task);
         $task->load('user');
 
         return response()->json([
@@ -66,6 +68,7 @@ class TaskController extends Controller
 
     public function delete(Task $task)
     {
+        $this->authorize('delete', $task);
         $task->delete();
 
         return response()->json([
@@ -76,6 +79,7 @@ class TaskController extends Controller
 
     public function update(UpdateTaskRequest $request, Task $task)
     {
+        $this->authorize('update', $task);
         $task->update($request->all());
 
         return response()->json([

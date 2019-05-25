@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Models\Task;
-use App\Models\Project;
+use App\Core\Models\Task;
+use App\Core\Models\Project;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -15,7 +15,7 @@ class SearchTest extends TestCase
     /** @test */
     public function it_uses_scout()
     {
-        $this->assertTrue(in_array('Laravel\Scout\Searchable', class_uses('App\Models\Search')));
+        $this->assertTrue(in_array('Laravel\Scout\Searchable', class_uses('App\Core\Models\Search')));
     }
 
     /** @test */

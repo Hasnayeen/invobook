@@ -15,6 +15,7 @@ class ProjectController extends Controller
 
     public function show(Project $project)
     {
+        $this->authorize('view', $project);
         $project->load('members');
 
         return view('projects.single', ['project' => $project]);
@@ -23,10 +24,12 @@ class ProjectController extends Controller
     public function store(StoreProjectRequest $request, ProjectRepository $repository)
     {
         try {
+            $this->authorize('create', Project::class);
             $project = $repository->storeProject($request->all());
             $project->members()->save(auth()->user());
             $project->load('members');
-            create_permissions($project);
+
+            resolve('Authorization')->setDefaultPermissions($project);
 
             return $this->successResponse(
                 trans('misc.New project has been created'),
@@ -41,6 +44,7 @@ class ProjectController extends Controller
 
     public function delete(Project $project)
     {
+        $this->authorize('delete', $project);
         $project->delete();
 
         return response()->json([

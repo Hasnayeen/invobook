@@ -43,11 +43,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('projects', 'ProjectController@index');
 
-    Route::post('projects', 'ProjectController@store')->middleware('can:create,App\Models\Project');
+    Route::post('projects', 'ProjectController@store');
 
-    Route::get('projects/{project}', 'ProjectController@show')->middleware('can:view,project');
+    Route::get('projects/{project}', 'ProjectController@show');
 
-    Route::delete('projects/{project}', 'ProjectController@delete')->middleware('can:delete,project');
+    Route::delete('projects/{project}', 'ProjectController@delete');
 
     /**********************************
         Team
@@ -55,11 +55,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('teams', 'TeamController@index');
 
-    Route::post('teams', 'TeamController@store')->middleware('can:create,App\Models\Team');
+    Route::post('teams', 'TeamController@store');
 
-    Route::get('teams/{team}', 'TeamController@show')->middleware('can:view,team');
+    Route::get('teams/{team}', 'TeamController@show');
 
-    Route::delete('teams/{team}', 'TeamController@delete')->middleware('can:delete,team');
+    Route::delete('teams/{team}', 'TeamController@delete');
 
     /**********************************
         Office
@@ -67,11 +67,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('offices', 'OfficeController@index');
 
-    Route::post('offices', 'OfficeController@store')->middleware('can:create,App\Models\Office');
+    Route::post('offices', 'OfficeController@store');
 
-    Route::get('offices/{office}', 'OfficeController@show')->middleware('can:view,office');
+    Route::get('offices/{office}', 'OfficeController@show');
 
-    Route::delete('offices/{office}', 'OfficeController@delete')->middleware('can:delete,office');
+    Route::delete('offices/{office}', 'OfficeController@delete');
 
     /**********************************
         Member
@@ -89,13 +89,13 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('discussions', 'DiscussionController@index');
 
-    Route::post('discussions', 'DiscussionController@store')->middleware('can:create,App\Models\Discussion');
+    Route::post('discussions', 'DiscussionController@store');
 
     Route::get('discussions/{discussion}', 'DiscussionController@show');
 
-    Route::patch('discussions/{discussion}', 'DiscussionController@update')->middleware('can:update,discussion');
+    Route::patch('discussions/{discussion}', 'DiscussionController@update');
 
-    Route::delete('discussions/{discussion}', 'DiscussionController@delete')->middleware('can:delete,discussion');
+    Route::delete('discussions/{discussion}', 'DiscussionController@delete');
 
     /**********************************
         Category
@@ -117,7 +117,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::put('messages/{message}', 'MessageController@update');
 
-    Route::delete('messages/{message}', 'MessageController@delete')->middleware('can:delete,message');
+    Route::delete('messages/{message}', 'MessageController@delete');
 
     /**********************************
         Event
@@ -135,15 +135,15 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('tasks', 'TaskController@index');
 
-    Route::post('tasks', 'TaskController@store')->middleware('can:create,App\Models\Task');
+    Route::post('tasks', 'TaskController@store');
 
     Route::get('tasks/{task}', 'TaskController@show');
 
-    Route::put('tasks/{task}', 'TaskController@update')->middleware('can:update,task');
+    Route::put('tasks/{task}', 'TaskController@update');
 
-    Route::delete('tasks/{task}', 'TaskController@delete')->middleware('can:delete,task');
+    Route::delete('tasks/{task}', 'TaskController@delete');
 
-    Route::put('tasks/{task}/statuses', 'TaskStatusController@update')->middleware('can:update,task');
+    Route::put('tasks/{task}/statuses', 'TaskStatusController@update');
 
     /**********************************
         Tags
@@ -151,11 +151,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('tags', 'TagController@index');
 
-    Route::post('tags', 'TagController@store')->middleware('can:create,App\Models\Tag');
+    Route::post('tags', 'TagController@store');
 
-    Route::post('tasks/{task}/tags', 'TaskTagController@store')->middleware('can:attach,App\Models\Tag,task');
+    Route::post('tasks/{task}/tags', 'TaskTagController@store');
 
-    Route::delete('tasks/{task}/tags/{tag}', 'TaskTagController@delete')->middleware('can:detach,App\Models\Tag,task');
+    Route::delete('tasks/{task}/tags/{tag}', 'TaskTagController@delete');
 
     /**********************************
         File
@@ -175,7 +175,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/comments', 'CommentController@store');
 
-    Route::delete('/comments/{comment}', 'CommentController@delete')->middleware('can:delete,comment');
+    Route::delete('/comments/{comment}', 'CommentController@delete');
 
     /**********************************
         Notification
@@ -224,20 +224,20 @@ Route::group(['middleware' => 'auth'], function () {
         Admin
     **********************************/
 
-Route::group(['middleware' => ['auth', 'permission:view admin page'], 'prefix' => 'admin'], function () {
+Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function () {
     Route::get('/', 'AdminController@index');
 
     Route::get('roles', 'RoleController@index');
 
-    Route::post('roles', 'RoleController@store')->middleware('permission:create role');
+    Route::post('roles', 'RoleController@store');
 
-    Route::delete('roles/{role}', 'RoleController@delete')->middleware('permission:delete role');
+    Route::delete('roles/{role}', 'RoleController@delete');
 
-    Route::post('roles/{role}/permissions', 'RolePermissionController@store')->middleware('permission:assign permission');
+    Route::post('roles/{role}/permissions', 'RolePermissionController@store');
 
-    Route::delete('roles/{role}/permissions', 'RolePermissionController@delete')->middleware('permission:revoke permission');
+    Route::delete('roles/{role}/permissions', 'RolePermissionController@delete');
 
-    Route::get('permissions', 'PermissionController@index')->middleware('permission:view permissions');
+    Route::get('permissions', 'PermissionController@index');
 
     Route::get('activities', 'ActivityController@index');
 

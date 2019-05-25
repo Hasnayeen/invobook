@@ -32,4 +32,14 @@ class Project extends Entity implements HasMembers
     {
         return $this->morphMany(Cycle::class, 'cyclable');
     }
+
+    public function permissions()
+    {
+        return $this->morphToMany(Permission::class, 'group', 'role_has_permission');
+    }
+
+    public function roles()
+    {
+        return $this->morphToMany(Role::class, 'group', 'role_has_permission');
+    }
 }

@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Models\Event;
+use App\Core\Models\Event;
 use Illuminate\Auth\AuthenticationException;
 
 class EventTest extends TestCase

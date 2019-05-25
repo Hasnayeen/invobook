@@ -2,6 +2,10 @@
 
 ## v0.9 (Yet to release)
 
+### Added
+
+- Added new Authorization module
+- Added new permission system
 - Added direct message to a user functionality
 - Added mentioning user functionality in comment & message
 - Added endpoint to list all tags
@@ -11,6 +15,14 @@
 - Added finnish translation
 - Added simplified Chinese translation
 - Added `localize` helper function
+
+### Changed
+
+- Everything under `App` namespace is now moved to `App\Core` namespace
+
+### Removed
+
+- Removed `spatie/laravel-permission` package
 
 ## v0.8 (2018-10-18)
 

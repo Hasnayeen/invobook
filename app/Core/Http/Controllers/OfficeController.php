@@ -15,6 +15,7 @@ class OfficeController extends Controller
 
     public function show(Office $office)
     {
+        $this->authorize('view', $office);
         $office->load('members');
 
         return view('offices.single', ['office' => $office]);
@@ -23,6 +24,7 @@ class OfficeController extends Controller
     public function store(StoreOfficeRequest $request, OfficeRepository $repository)
     {
         try {
+            $this->authorize('create', Office::class);
             $office = $repository->store($request->all());
             $office->members()->save(auth()->user());
             $office->load('members');
@@ -41,6 +43,7 @@ class OfficeController extends Controller
 
     public function delete(Office $office)
     {
+        $this->authorize('delete', $office);
         $office->delete();
 
         return response()->json([

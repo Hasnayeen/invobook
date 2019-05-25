@@ -3,9 +3,9 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Models\User;
-use App\Models\Token;
-use App\Models\Office;
+use App\Core\Models\User;
+use App\Core\Models\Token;
+use App\Core\Models\Office;
 use App\Mail\UserRegistered;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Auth\Events\Registered;
@@ -103,5 +103,11 @@ class UserRegistrationTest extends TestCase
 
         $this->post("/register/{$invalidToken}", $newUser)
             ->assertStatus('403');
+    }
+    
+    /** @test */
+    public function user_must_have_a_role()
+    {
+        # code...
     }
 }

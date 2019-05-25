@@ -181,6 +181,11 @@ return [
         App\Core\Providers\BroadcastServiceProvider::class,
         App\Core\Providers\EventServiceProvider::class,
         App\Core\Providers\RouteServiceProvider::class,
+
+        /*
+         * Modules Service Providers...
+         */
+        App\Authorization\AuthorizationServiceProvider::class,
     ],
 
     /*
