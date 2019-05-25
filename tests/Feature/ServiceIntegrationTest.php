@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Core\Models\Project;
 use Illuminate\Support\Str;
+use App\Core\Models\Project;
 
 class ServiceIntegrationTest extends TestCase
 {

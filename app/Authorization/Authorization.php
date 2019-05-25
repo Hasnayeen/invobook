@@ -42,10 +42,9 @@ class Authorization
             );
         }
 
-        return (
+        return
             $this->user->isAllowedTo($action, $resource) &&
-            $this->user->isNotForbiddenTo($action, $resource)
-        );
+            $this->user->isNotForbiddenTo($action, $resource);
     }
 
     public function setDefaultPermissions($group)
