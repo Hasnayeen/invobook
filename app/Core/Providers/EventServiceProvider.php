@@ -3,8 +3,8 @@
 namespace App\Core\Providers;
 
 use App\Core\Events\DiscussionCreated;
-use App\Core\Listeners\LogUserRegistration;
 use Illuminate\Auth\Events\Registered;
+use App\Core\Listeners\LogUserRegistration;
 use App\Core\Listeners\NotifyDiscussionParticipants;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 

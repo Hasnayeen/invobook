@@ -19,7 +19,7 @@ class TaskRepository
     }
 
     /**
-     * @param  array            $data
+     * @param  array                 $data
      * @return \App\Core\Models\Task
      */
     public function create(array $data): Task

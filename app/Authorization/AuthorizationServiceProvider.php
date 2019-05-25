@@ -3,7 +3,6 @@
 namespace App\Authorization;
 
 use Illuminate\Support\ServiceProvider;
-use App\Authorization\User;
 
 class AuthorizationServiceProvider extends ServiceProvider
 {

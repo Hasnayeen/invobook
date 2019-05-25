@@ -2,7 +2,6 @@
 
 namespace App\Core\Models;
 
-use App\Core\Models\Permission;
 use App\Core\Utilities\Notifiable;
 use Spatie\Activitylog\Traits\CausesActivity;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -76,7 +75,7 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Permission::class, 'allowed_permissions')->wherePivot('group_type', $groupType)->wherePivot('group_id', $groupId);
     }
-    
+
     public function blockedPermissions($groupType = null, $groupId = null)
     {
         return $this->belongsToMany(Permission::class, 'blocked_permissions')->wherePivot('group_type', $groupType)->wherePivot('group_id', $groupId);
@@ -85,16 +84,14 @@ class User extends Authenticatable
     public function isAllowedTo($action, $resource, $groupRelated = false, $groupType = null, $groupId = null)
     {
         if ($groupRelated) {
-            return (
+            return
                 $this->role->permissionsOnGroup($groupType, $groupId)->where(['action' => $action, 'resource' => $resource])->exists() ||
-                $this->allowedPermissions($groupType, $groupId)->where(['action' => $action, 'resource' => $resource])->exists()
-            );
+                $this->allowedPermissions($groupType, $groupId)->where(['action' => $action, 'resource' => $resource])->exists();
         }
 
-        return (
+        return
             $this->role->permissions()->where(['action' => $action, 'resource' => $resource])->exists() ||
-            $this->allowedPermissions()->where(['action' => $action, 'resource' => $resource])->exists()
-        );
+            $this->allowedPermissions()->where(['action' => $action, 'resource' => $resource])->exists();
     }
 
     public function isNotForbiddenTo($action, $resource, $groupType = null, $groupId = null)

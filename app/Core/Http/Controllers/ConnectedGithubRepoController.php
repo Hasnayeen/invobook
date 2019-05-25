@@ -2,8 +2,8 @@
 
 namespace App\Core\Http\Controllers;
 
-use App\Core\Models\GithubRepo;
 use Illuminate\Http\Request;
+use App\Core\Models\GithubRepo;
 
 class ConnectedGithubRepoController extends Controller
 {

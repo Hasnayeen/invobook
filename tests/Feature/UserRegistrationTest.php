@@ -104,10 +104,10 @@ class UserRegistrationTest extends TestCase
         $this->post("/register/{$invalidToken}", $newUser)
             ->assertStatus('403');
     }
-    
+
     /** @test */
     public function user_must_have_a_role()
     {
-        # code...
+        // code...
     }
 }

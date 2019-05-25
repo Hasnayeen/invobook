@@ -5,11 +5,11 @@ namespace App\Core\Http\Controllers\Auth;
 use App\Core\Models\User;
 use App\Core\Models\Token;
 use App\Core\Models\Office;
-use App\Core\Mail\UserRegistered;
 use Illuminate\Http\Request;
+use App\Core\Mail\UserRegistered;
 use Spatie\Permission\Models\Role;
-use App\Core\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
+use App\Core\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 

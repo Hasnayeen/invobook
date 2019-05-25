@@ -18,7 +18,7 @@ class PermissionSettingsTableSeeder extends Seeder
         $tools = ['task', 'discussion', 'event', 'message', 'file'];
 
         /**
-         * Default Permission Settings for Owner role
+         * Default Permission Settings for Owner role.
          * */
         $permissions = Permission::all();
         foreach ($permissions->toArray() as $permission) {
@@ -27,14 +27,14 @@ class PermissionSettingsTableSeeder extends Seeder
                     'role_id'       => 1,
                     'permission_id' => $permission['id'],
                     'group_related' => in_array($permission['resource'], $tools) ?? false,
-                    'created_at' => $now,
-                    'updated_at' => $now,
+                    'created_at'    => $now,
+                    'updated_at'    => $now,
                 ],
             ]);
         }
 
         /**
-         * Default Permission Settings for Admin role
+         * Default Permission Settings for Admin role.
          * */
         $permissions = Permission::where('resource', '!=', 'user')->get();
         foreach ($permissions->toArray() as $permission) {
@@ -50,7 +50,7 @@ class PermissionSettingsTableSeeder extends Seeder
         }
 
         /**
-         * Default Permission Settings for Member role
+         * Default Permission Settings for Member role.
          * */
         $permissions = Permission::where('resource', '!=', 'user')
                                  ->where('resource', '!=', 'project')
@@ -89,7 +89,7 @@ class PermissionSettingsTableSeeder extends Seeder
         }
 
         /**
-         * Default Permission Settings for Client role
+         * Default Permission Settings for Client role.
          * */
         $permissions = Permission::where('action', 'view')
                                  ->where('resource', '!=', 'team')
@@ -126,7 +126,7 @@ class PermissionSettingsTableSeeder extends Seeder
         }
 
         /**
-         * Default Permission Settings for Guest role
+         * Default Permission Settings for Guest role.
          * */
         $permissions = Permission::where('action', 'view')
                                  ->where('resource', '!=', 'team')
