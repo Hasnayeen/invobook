@@ -6,8 +6,8 @@ use App\Core\Models\User;
 use App\Core\Models\Discussion;
 use Illuminate\Support\Collection;
 use Illuminate\Queue\SerializesModels;
-use App\Core\Contracts\HasNotificationRecipients;
 use Illuminate\Foundation\Events\Dispatchable;
+use App\Core\Contracts\HasNotificationRecipients;
 use Illuminate\Broadcasting\InteractsWithSockets;
 
 class DiscussionCreated implements HasNotificationRecipients

@@ -3,8 +3,8 @@
 namespace App\Core\Listeners;
 
 use App\Core\Events\DiscussionCreated;
-use App\Core\Contracts\HasNotificationRecipients;
 use Illuminate\Support\Facades\Notification;
+use App\Core\Contracts\HasNotificationRecipients;
 use App\Core\Notifications\DiscussionCreatedNotification;
 
 class NotifyDiscussionParticipants
