@@ -45,7 +45,7 @@ class UserRegistrationTest extends TestCase
     /** @test */
     public function guest_with_valid_token_can_access_registration_form()
     {
-        $this->get("/register/" . encrypt($this->token->token))
+        $this->get('/register/' . encrypt($this->token->token))
             ->assertOk();
     }
 
@@ -75,7 +75,7 @@ class UserRegistrationTest extends TestCase
             'password_confirmation' => 'secret12',
         ];
 
-        $this->post("/register/" . encrypt($this->token->token), $newUser);
+        $this->post('/register/' . encrypt($this->token->token), $newUser);
 
         $this->assertDatabaseHas(
             'users',
@@ -104,7 +104,7 @@ class UserRegistrationTest extends TestCase
             ->assertStatus('403');
     }
 
-    /** 
+    /**
      * @test
      * @TODO
      */

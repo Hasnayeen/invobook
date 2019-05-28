@@ -4,7 +4,6 @@ namespace App\Authorization;
 
 use App\Core\Models\Role;
 use App\Core\Models\User;
-use App\Core\Models\Project;
 
 class Authorization
 {

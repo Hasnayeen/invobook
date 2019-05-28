@@ -14,6 +14,7 @@ class ActivityTest extends TestCase
         $this->user2 = factory(\App\Core\Models\User::class)->create(['role_id' => 2]);
         $this->user3 = factory(\App\Core\Models\User::class)->create(['role_id' => 2]);
     }
+
     /** @test */
     public function owner_can_see_all_recent_activity()
     {

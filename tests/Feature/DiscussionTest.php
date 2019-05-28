@@ -63,8 +63,8 @@ class DiscussionTest extends TestCase
             'content'             => '<h1>Big heading</h1><p>And some <strong>bold text</strong></p>',
             'raw_content'         => '{"ops":[{"insert":"Big Heading"},{"attributes":{"header":1},"insert":"\n"},{"insert":"And some "},{"attributes":{"bold":true},"insert":"bold text"},{"insert":"\n"}]}',
             'draft'               => false,
-            'group_type' => 'project',
-            'group_id'   => $this->project->id,
+            'group_type'          => 'project',
+            'group_id'            => $this->project->id,
         ])->assertJsonFragment([
             'status'              => 'error',
         ]);
@@ -94,13 +94,13 @@ class DiscussionTest extends TestCase
     {
         $discussion = factory(\App\Core\Models\Discussion::class)->create([
             'discussionable_type' => 'project',
-            'discussionable_id' => $this->project->id
+            'discussionable_id'   => $this->project->id,
         ]);
 
         $this->actingAs($this->user)->delete("/discussions/{$discussion->id}",
             [
                 'group_type' => $discussion->discussionable_type,
-                'group_id' => $discussion->discussionable_id
+                'group_id'   => $discussion->discussionable_id,
             ])
              ->assertJsonFragment([
                 'status'  => 'success',
@@ -136,7 +136,7 @@ class DiscussionTest extends TestCase
         $this->actingAs($user)->delete("/discussions/{$discussion->id}",
             [
                 'group_type' => $discussion->discussionable_type,
-                'group_id' => $discussion->discussionable_id
+                'group_id'   => $discussion->discussionable_id,
             ]);
     }
 

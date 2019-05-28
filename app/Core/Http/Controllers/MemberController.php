@@ -38,7 +38,7 @@ class MemberController extends Controller
 
         $user = $entity->members()->where('user_id', request('user_id'))->first();
 
-        throw_if(!$user, new UserIsNotMember());
+        throw_if(! $user, new UserIsNotMember());
 
         $entity->members()->detach($user);
 
