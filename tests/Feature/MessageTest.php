@@ -4,8 +4,8 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Core\Models\Message;
-use App\Events\MessageCreated;
-use App\Events\MessageUpdated;
+use App\Core\Events\MessageCreated;
+use App\Core\Events\MessageUpdated;
 use Illuminate\Support\Facades\Event;
 
 class MessageTest extends TestCase

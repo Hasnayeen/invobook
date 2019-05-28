@@ -4,6 +4,7 @@ namespace App\Authorization;
 
 use App\Core\Models\Role;
 use App\Core\Models\User;
+use App\Core\Models\Project;
 
 class Authorization
 {
@@ -19,7 +20,7 @@ class Authorization
         if ($groupRelated) {
             return (
                 (
-                    $this->user->isOwner($resource, $resourceId)
+                    $resourceId ? $this->user->isOwner($resource, $resourceId) : false
                 ) || (
                     $this->user->isMember($groupType, $groupId) &&
                     $this->user->isAllowedTo($action, $resource, true, $groupType, $groupId)

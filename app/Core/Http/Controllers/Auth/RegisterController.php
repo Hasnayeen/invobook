@@ -2,12 +2,12 @@
 
 namespace App\Core\Http\Controllers\Auth;
 
+use App\Core\Models\Role;
 use App\Core\Models\User;
 use App\Core\Models\Token;
 use App\Core\Models\Office;
 use Illuminate\Http\Request;
 use App\Core\Mail\UserRegistered;
-use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Mail;
 use App\Core\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -73,7 +73,6 @@ class RegisterController extends Controller
             'name'     => $data['name'],
             'username' => $data['username'],
             'email'    => $data['email'],
-            'role'     => 2,
             'active'   => 1,
             'password' => bcrypt($data['password']),
         ]);
@@ -87,7 +86,7 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm($token)
     {
-        if (Token::where('token', $token)->exists()) {
+        if (Token::where('token', decrypt($token))->exists()) {
             return view('auth.register', compact('token'));
         }
 
@@ -100,17 +99,16 @@ class RegisterController extends Controller
      */
     public function confirmNewRegistration(Request $request, $token)
     {
-        $token = Token::where('token', $token)->first();
+        $token = Token::where('token', decrypt($token))->first();
         if ($token && ($token->email == $request->email)) {
             $this->register($request, $token);
 
             $user = User::whereEmail($request->email)->first();
-            $role = Role::find(decrypt($token->token));
-            $user->assignRole($role);
+            $role = Role::find($token->role_id);
+            $user->role_id = $role->id;
+            $user->save();
 
             $token->delete();
-            $user = User::where('email', $token->email)->first();
-            $user->assignRole($token->role_id);
 
             return redirect('/');
         }

@@ -28,7 +28,6 @@ class OfficeController extends Controller
             $office = $repository->store($request->all());
             $office->members()->save(auth()->user());
             $office->load('members');
-            create_permissions($office);
 
             return $this->successResponse(
                 trans('misc.New office has been created'),

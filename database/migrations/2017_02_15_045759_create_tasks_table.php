@@ -18,6 +18,7 @@ class CreateTasksTable extends Migration
             $table->string('name');
             $table->boolean('completed')->default(false);
             $table->integer('assigned_to')->unsigned()->nullable();
+            $table->unsignedInteger('created_by');
             $table->boolean('archived')->default(false);
             $table->text('notes')->nullable();
             $table->date('due_on');
@@ -25,8 +26,10 @@ class CreateTasksTable extends Migration
             $table->string('taskable_type')->comment('office, team or projects');
             $table->integer('taskable_id')->unsigned();
             $table->integer('cycle_id')->unsigned()->nullable();
-            $table->foreign('assigned_to')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
+
+            $table->foreign('assigned_to')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

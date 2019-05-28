@@ -28,7 +28,6 @@ class TeamController extends Controller
             $team = $repository->createNewTeam($request->all());
             $team->members()->save(auth()->user());
             $team->load('members');
-            create_permissions($team);
 
             return $this->successResponse(
                 trans('misc.New team has been created'),

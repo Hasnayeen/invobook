@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use App\Core\Models\Task;
 use App\Core\Models\Project;
-use Spatie\Permission\Models\Permission;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class SearchTest extends TestCase
@@ -51,20 +50,17 @@ class SearchTest extends TestCase
     public function update_index_when_resource_is_updated()
     {
         $task = factory(Task::class)->create([
-            'name'  => 'old name',
-            'notes' => 'old',
+            'name'       => 'old name',
+            'notes'      => 'old',
+            'created_by' => $this->user->id,
         ]);
-
-        $permission = Permission::create(['name' => 'edit task.' . $task->taskable_type . '->' . $task->taskable_id]);
-
-        $this->user->givePermissionTo($permission);
 
         $this->actingAs($this->user)->put("/tasks/{$task->id}", [
             'name'          => 'Updated task',
             'notes'         => 'updated',
             'due_on'        => $task->due_on,
-            'taskable_type' => $task->taskable_type,
-            'taskable_id'   => $task->taskable_id,
+            'group_type'    => $task->taskable_type,
+            'group_id'      => $task->taskable_id,
         ]);
 
         $this->assertDatabaseHas('searches', [

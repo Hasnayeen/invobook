@@ -11,17 +11,6 @@ class DiscussionPolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can create app models discussions.
-     *
-     * @param  \App\Core\Models\User $user
-     * @return mixed
-     */
-    public function create(User $user)
-    {
-        return (new Authorization($user))->userHasPermissionTo('create', 'discussion', request('group_type'), request('group_id'));
-    }
-
-    /**
      * Determine whether the user can update the app models discussion.
      *
      * @param  \App\Core\Models\User       $user
@@ -30,7 +19,7 @@ class DiscussionPolicy
      */
     public function update(User $user, Discussion $discussion)
     {
-        return (new Authorization($user))->userHasPermissionTo('update', 'discussion', $discussion->id, true, request('group_type'), request('group_id'));
+        return resolve('Authorization')->userHasPermissionTo('update', 'discussion', $discussion->id, true, request('group_type'), request('group_id'));
     }
 
     /**
@@ -42,6 +31,6 @@ class DiscussionPolicy
      */
     public function delete(User $user, Discussion $discussion)
     {
-        return (new Authorization($user))->userHasPermissionTo('delete', 'discussion', $discussion->id, true, request('group_type'), request('group_id'));
+        return resolve('Authorization')->userHasPermissionTo('delete', 'discussion', $discussion->id, true, request('group_type'), request('group_id'));
     }
 }

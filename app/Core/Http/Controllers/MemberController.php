@@ -22,7 +22,6 @@ class MemberController extends Controller
         }
         $user = User::select(['id', 'name', 'username', 'avatar'])->find(request('user_id'));
         $entity->members()->save($user);
-        $this->givePermissionTo($user, $entity->id);
 
         $user->notify(new BecameNewMember($entity, auth()->user()));
 
@@ -39,13 +38,9 @@ class MemberController extends Controller
 
         $user = $entity->members()->where('user_id', request('user_id'))->first();
 
-        throw_if(! $user, new UserIsNotMember());
+        throw_if(!$user, new UserIsNotMember());
 
         $entity->members()->detach($user);
-
-        $user->revokePermissionTo(
-            'view ' . request('resource_type') . '->' . $entity->id
-        );
 
         $user->notify(new RevokedMembership($entity, auth()->user(), $user));
 
@@ -70,12 +65,5 @@ class MemberController extends Controller
             'items'   => count($entity->members),
             'members' => $entity->members,
         ]);
-    }
-
-    private function givePermissionTo(User $user, $entityId)
-    {
-        $user->givePermissionTo(
-            'view ' . request('resource_type') . '->' . $entityId
-        );
     }
 }

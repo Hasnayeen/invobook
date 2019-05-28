@@ -13,7 +13,7 @@ class ValidateDiscussionCreation extends FormRequest
      */
     public function authorize()
     {
-        return auth()->user()->hasPermissionTo('create discussion.' . request('discussionable_type') . '->' . request('discussionable_id'));
+        return resolve('Authorization')->userHasPermissionTo('create', 'discussion', null, true, request('group_type'), request('group_id'));
     }
 
     /**
@@ -24,13 +24,13 @@ class ValidateDiscussionCreation extends FormRequest
     public function rules()
     {
         return [
-            'name'                => 'required|string|max:255',
-            'content'             => 'required|string',
-            'raw_content'         => 'required|string',
-            'draft'               => 'required|boolean',
-            'discussionable_type' => 'required|string|in:project,team,office',
-            'discussionable_id'   => 'required|integer',
-            'category_id'         => 'required|integer|exists:categories,id',
+            'name'        => 'required|string|max:255',
+            'content'     => 'required|string',
+            'raw_content' => 'required|string',
+            'draft'       => 'required|boolean',
+            'group_type'  => 'required|string|in:project,team,office',
+            'group_id'    => 'required|integer',
+            'category_id' => 'required|integer|exists:categories,id',
         ];
     }
 }

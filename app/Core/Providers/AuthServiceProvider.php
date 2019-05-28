@@ -20,6 +20,7 @@ class AuthServiceProvider extends ServiceProvider
         \App\Core\Models\Discussion::class => \App\Core\Policies\DiscussionPolicy::class,
         \App\Core\Models\Comment::class    => \App\Core\Policies\CommentPolicy::class,
         \App\Core\Models\Message::class    => \App\Core\Policies\MessagePolicy::class,
+        \App\Core\Models\Permission::class => \App\Core\Policies\PermissionPolicy::class,
     ];
 
     /**

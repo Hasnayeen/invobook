@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use App\Core\Models\Tag;
 use App\Core\Models\Task;
-use Spatie\Permission\Models\Permission;
 use Illuminate\Auth\AuthenticationException;
 
 class TagTest extends TestCase
@@ -13,9 +12,6 @@ class TagTest extends TestCase
     /** @test */
     public function user_with_permission_can_create_tag()
     {
-        $permission = Permission::create(['name' => 'create tag']);
-        $this->user->givePermissionTo($permission);
-
         $this->actingAs($this->user)->post('tags', [
             'label' => 'dummy',
         ])->assertJsonFragment([
@@ -31,11 +27,10 @@ class TagTest extends TestCase
      * @test
      * @expectedException Illuminate\Auth\Access\AuthorizationException
      */
-    public function user_without_permission_can_not_add_a_tag_to_a_task()
+    public function user_without_permission_can_not_create_tag()
     {
-        Permission::create(['name' => 'create tag']);
-
-        $this->actingAs($this->user)->post('tags', [
+        $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
+        $this->actingAs($user)->post('tags', [
             'label' => 'dummy',
         ]);
     }
@@ -45,9 +40,6 @@ class TagTest extends TestCase
     {
         $tag = factory(Tag::class)->create();
         $task = factory(Task::class)->create();
-
-        $permission = Permission::create(['name' => "edit {$task->taskable_type}->{$task->taskable_id}"]);
-        $this->user->givePermissionTo($permission);
 
         $this->actingAs($this->user)->post("tasks/{$task->id}/tags", [
             'labels' => $tag->id,
@@ -70,9 +62,6 @@ class TagTest extends TestCase
 
         $task->tags()->attach($tag);
 
-        $permission = Permission::create(['name' => "edit {$task->taskable_type}->{$task->taskable_id}"]);
-        $this->user->givePermissionTo($permission);
-
         $this->actingAs($this->user)->delete("tasks/{$task->id}/tags/{$tag->id}")
             ->assertJsonFragment([
                 'status'  => 'success',
@@ -87,18 +76,18 @@ class TagTest extends TestCase
 
     /**
      * @test
+     * @TODO
      * @expectedException Illuminate\Auth\Access\AuthorizationException
      */
     public function user_without_permission_can_not_detach_a_tag_from_a_task()
     {
+        $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
         $tag = factory(Tag::class)->create();
         $task = factory(Task::class)->create();
 
         $task->tags()->attach($tag);
 
-        Permission::create(['name' => "edit {$task->taskable_type}->{$task->taskable_id}"]);
-
-        $this->actingAs($this->user)->delete("tasks/{$task->id}/tags/{$tag->id}");
+        $this->actingAs($user)->delete("tasks/{$task->id}/tags/{$tag->id}");
     }
 
     /** @test */

@@ -2,6 +2,7 @@
 
 namespace App\Core\Http\Controllers;
 
+use App\Core\Models\Tag;
 use App\Core\Repositories\TagRepository;
 
 class TagController extends Controller
@@ -26,6 +27,7 @@ class TagController extends Controller
 
     public function store()
     {
+        $this->authorize('create', Tag::class);
         $tag = $this->repository->create();
 
         return response()->json([

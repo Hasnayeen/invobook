@@ -3,7 +3,6 @@
 namespace App\Core\Policies;
 
 use App\Core\Models\Tag;
-use App\Core\Models\Task;
 use App\Core\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -13,16 +12,23 @@ class TagPolicy
 
     public function create(User $user)
     {
-        return $user->hasPermissionTo('create tag');
+        return resolve('Authorization')->userHasPermissionTo('create', 'tag');
     }
 
-    public function attach(User $user, Task $task)
+
+    /**
+     * @TODO
+     */
+    public function attach(User $user)
     {
-        return $user->hasPermissionTo("edit {$task->taskable_type}->{$task->taskable_id}");
+        return true;
     }
 
-    public function detach(User $user, Task $task)
+    /**
+     * @TODO
+     */
+    public function detach(User $user, Tag $tag)
     {
-        return $user->hasPermissionTo("edit {$task->taskable_type}->{$task->taskable_id}");
+        return resolve('Authorization')->userHasPermissionTo('detach', 'tag');
     }
 }

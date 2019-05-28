@@ -12,14 +12,25 @@ class TaskPolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can create posts.
+     * Determine whether the user can view task.
+     *
+     * @param  \App\Core\Models\User $user
+     * @return mixed
+     */
+    public function view(User $user, Task $task)
+    {
+        return resolve('Authorization')->userHasPermissionTo('view', 'task', $task->id, true, request('group_type'), request('group_id'));
+    }
+
+    /**
+     * Determine whether the user can create task.
      *
      * @param  \App\Core\Models\User $user
      * @return mixed
      */
     public function create(User $user)
     {
-        return (new Authorization($user))->userHasPermissionTo('create', 'task', request('group_type'), request('group_id'));
+        return resolve('Authorization')->userHasPermissionTo('create', 'task', null, true, request('group_type'), request('group_id'));
     }
 
     /**
@@ -31,7 +42,7 @@ class TaskPolicy
      */
     public function update(User $user, Task $task)
     {
-        return (new Authorization($user))->userHasPermissionTo('update', 'task', $task->id, true, request('group_type'), request('group_id'));
+        return resolve('Authorization')->userHasPermissionTo('update', 'task', $task->id, true, request('group_type'), request('group_id'));
     }
 
     /**
@@ -43,6 +54,6 @@ class TaskPolicy
      */
     public function delete(User $user, Task $task)
     {
-        return (new Authorization($user))->userHasPermissionTo('delete', 'task', $task->id, true, request('group_type'), request('group_id'));
+        return resolve('Authorization')->userHasPermissionTo('delete', 'task', $task->id, true, request('group_type'), request('group_id'));
     }
 }
