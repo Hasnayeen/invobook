@@ -58,12 +58,34 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Core\Models\Office');
     }
 
-    /**
-     * @return HasMany
-     */
-    public function comments(): HasMany
+    public function comments()
     {
-        return $this->hasMany(Comment::class, 'discussion_id');
+        return $this->hasMany(Comment::class);
+    }
+
+    public function comment()
+    {
+        return $this->comments()->get();
+    }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class, 'created_by');
+    }
+
+    public function task()
+    {
+        return $this->tasks()->get();
+    }
+
+    public function discussions()
+    {
+        return $this->hasMany(Discussion::class, 'posted_by');
+    }
+
+    public function discussion()
+    {
+        return $this->discussions()->get();
     }
 
     public function role()

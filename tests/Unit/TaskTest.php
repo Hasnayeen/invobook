@@ -12,8 +12,6 @@ class TaskTest extends TestCase
         parent::setUp();
 
         $this->task = factory(\App\Core\Models\Task::class)->create();
-
-        create_permissions($this->task->taskable);
     }
 
     /** @test */

@@ -11,6 +11,7 @@ $factory->define(App\Core\Models\User::class, function (Faker\Generator $faker) 
         'name'           => $faker->name,
         'username'       => $faker->userName,
         'email'          => $faker->unique()->safeEmail,
+        'role_id'        => $faker->numberBetween(1, 5),
         'bio'            => $faker->sentence(20, true),
         'designation'    => '',
         'avatar'         => '',

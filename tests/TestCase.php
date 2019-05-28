@@ -24,7 +24,11 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
         $this->app->instance(ExceptionHandler::class, new TestExceptionHandler(app()));
-        $this->user = factory(\App\Core\Models\User::class)->create();
+        $this->user = factory(\App\Core\Models\User::class)->create(['role_id' => 1]);
+        Artisan::call('db:seed', ['--class' => 'PermissionTableSeeder']);
+        Artisan::call('db:seed', ['--class' => 'RoleTableSeeder']);
+        Artisan::call('db:seed', ['--class' => 'PermissionSettingsTableSeeder']);
+        Artisan::call('db:seed', ['--class' => 'RoleHasPermissionTableSeeder']);
         Artisan::call('db:seed', ['--class' => 'ServicesTableSeeder']);
     }
 }

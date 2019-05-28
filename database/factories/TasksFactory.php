@@ -26,6 +26,7 @@ $factory->define(App\Core\Models\Task::class, function (Faker\Generator $faker) 
         'notes'         => $faker->sentence(20, true),
         'due_on'        => $faker->dateTimeBetween('now', '+5 years')->format('Y-m-d'),
         'related_to'    => null,
+        'created_by'    => factory(App\Core\Models\User::class)->create()->id,
         'taskable_type' => $taskable_type,
         'taskable_id'   => $taskable_id,
         'created_at'    => $now,

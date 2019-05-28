@@ -19,7 +19,7 @@ class OfficePolicy
      */
     public function view(User $user, Office $office)
     {
-        return $user->hasPermissionTo('view office->' . $office->id);
+        return resolve('Authorization')->userHasPermissionTo('view', 'office', $office->id, false, 'office', $office->id);
     }
 
     /**
@@ -30,7 +30,7 @@ class OfficePolicy
      */
     public function create(User $user)
     {
-        return $user->hasPermissionTo('create office');
+        return resolve('Authorization')->userHasPermissionTo('create', 'office');
     }
 
     /**
@@ -42,6 +42,6 @@ class OfficePolicy
      */
     public function delete(User $user, Office $office)
     {
-        return $user->hasPermissionTo('delete office->' . $office->id);
+        return resolve('Authorization')->userHasPermissionTo('delete', 'office', $office->id, false, 'office', $office->id);
     }
 }

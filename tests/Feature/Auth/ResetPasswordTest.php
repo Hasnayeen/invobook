@@ -4,7 +4,7 @@ namespace Tests\Feature\Auth;
 
 use Tests\TestCase;
 use App\Core\Models\User;
-use App\Exceptions\Handler;
+use App\Core\Exceptions\Handler;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Password;

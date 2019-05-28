@@ -44,6 +44,7 @@ class DiscussionController extends Controller
 
     public function delete(Discussion $discussion)
     {
+        $this->authorize('delete', $discussion);
         $discussion->delete();
 
         return response()->json([

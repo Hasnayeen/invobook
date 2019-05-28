@@ -7,11 +7,11 @@ use App\Core\Models\Team;
 use App\Core\Models\User;
 use App\Core\Models\Office;
 use App\Core\Models\Project;
-use App\Contracts\HasMembers;
+use App\Core\Contracts\HasMembers;
 use App\Core\Models\Discussion;
-use App\Events\DiscussionCreated;
+use App\Core\Events\DiscussionCreated;
 use Illuminate\Support\Facades\Notification;
-use App\Notifications\DiscussionCreatedNotification;
+use App\Core\Notifications\DiscussionCreatedNotification;
 
 class DiscussionNotificationTest extends TestCase
 {

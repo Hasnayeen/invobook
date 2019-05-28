@@ -92,16 +92,16 @@ class UserTest extends TestCase
         password_verify('new_password', $this->user->password);
     }
 
-    /** @test */
+    /** 
+     * @test
+     */
     public function guest_can_not_see_admin_page()
     {
-        $guest_user = factory(User::class)->create();
-        $guest_role = Role::create(['name' => 'guest']);
-        $guest_user->assignRole($guest_role);
+        $guest_user = factory(User::class)->create(['role_id' => 5]);
 
-        $this->expectException(\Spatie\Permission\Exceptions\UnauthorizedException::class);
-
-        $this->actingAs($guest_user)->get('admin');
+        $this->actingAs($guest_user)
+             ->get('admin')
+             ->assertRedirect('/');
     }
 
     /** @test */

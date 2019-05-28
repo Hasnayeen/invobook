@@ -30,8 +30,8 @@ class UpdateTaskRequest extends FormRequest
             'notes'         => 'string',
             'due_on'        => 'required|date_format:Y-m-d',
             'related_to'    => 'nullable|integer',
-            'taskable_type' => 'required',
-            'taskable_id'   => 'required',
+            'group_type'    => 'required|string|in:project,team,office',
+            'group_id'      => 'required|integer',
             'status_id'     => 'nullable|exists:statuses,id',
         ];
     }

@@ -4,8 +4,7 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Core\Models\Office;
-use App\Exceptions\UserIsNotMember;
-use Spatie\Permission\Models\Permission;
+use App\Core\Exceptions\UserIsNotMember;
 use Illuminate\Support\Facades\Notification;
 
 class OfficeTest extends TestCase
@@ -31,7 +30,7 @@ class OfficeTest extends TestCase
      */
     public function user_without_permission_cant_see_office_page()
     {
-        $user = factory(\App\Core\Models\User::class)->create();
+        $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
         $this->user_with_permission_can_create_office();
         $id = Office::where('name', 'New Office')->first()->id;
 
@@ -52,9 +51,6 @@ class OfficeTest extends TestCase
         $this->assertDatabaseHas('offices', ['name' => 'New Office', 'description' => 'Description for new office', 'owner_id' => $this->user->id]);
 
         $id = Office::where('name', 'New Office')->first()->id;
-        $this->assertTrue($this->user->hasPermissionTo('view office->' . $id));
-        $this->assertTrue($this->user->hasPermissionTo('edit office->' . $id));
-        $this->assertTrue($this->user->hasPermissionTo('delete office->' . $id));
     }
 
     /**
@@ -63,7 +59,7 @@ class OfficeTest extends TestCase
      */
     public function user_without_permission_cant_create_office()
     {
-        $user = factory(\App\Core\Models\User::class)->create();
+        $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
 
         $this->actingAs($user)->post('/offices', [
             'name'        => 'New Office',
@@ -91,7 +87,7 @@ class OfficeTest extends TestCase
      */
     public function user_without_permission_cant_delete_a_office()
     {
-        $user = factory(\App\Core\Models\User::class)->create();
+        $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
 
         $this->user_with_permission_can_create_office();
 
@@ -104,12 +100,8 @@ class OfficeTest extends TestCase
     public function remove_user_from_office()
     {
         Notification::fake();
-        Permission::create(['name' => 'view office->' . $this->office->id]);
-        $user = factory('App\Core\Models\User')->create();
+        $user = factory('App\Core\Models\User')->create(['role_id' => 3]);
         $this->office->members()->save($user);
-        $user->givePermissionTo(
-            'view office->' . $this->office->id
-        );
 
         $this->assertCount(1, $this->office->members);
 
@@ -139,7 +131,6 @@ class OfficeTest extends TestCase
     {
         $this->expectException(UserIsNotMember::class);
 
-        Permission::create(['name' => 'view office->' . $this->office->id]);
         $user = factory('App\Core\Models\User')->create();
 
         $this->actingAs($this->user)

@@ -24,14 +24,14 @@ class ValidateTaskCreation extends FormRequest
     public function rules()
     {
         return [
-            'name'          => 'required|unique:tasks|max:255',
-            'assigned_to'   => 'nullable|exists:users,id',
-            'notes'         => 'nullable|string',
-            'due_on'        => 'required|date_format:Y-m-d',
-            'related_to'    => 'nullable|integer',
-            'taskable_type' => 'required',
-            'taskable_id'   => 'required',
-            'status_id'     => 'nullable|exists:statuses,id',
+            'name'        => 'required|unique:tasks|max:255',
+            'assigned_to' => 'nullable|exists:users,id',
+            'notes'       => 'nullable|string',
+            'due_on'      => 'required|date_format:Y-m-d',
+            'related_to'  => 'nullable|integer',
+            'group_type'  => 'required|string|in:project,team,office',
+            'group_id'    => 'required|integer',
+            'status_id'   => 'nullable|exists:statuses,id',
         ];
     }
 }

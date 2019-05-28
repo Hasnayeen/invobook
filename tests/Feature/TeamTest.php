@@ -4,8 +4,7 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Core\Models\Team;
-use App\Exceptions\UserIsNotMember;
-use Spatie\Permission\Models\Permission;
+use App\Core\Exceptions\UserIsNotMember;
 use Illuminate\Support\Facades\Notification;
 
 class TeamTest extends TestCase
@@ -31,7 +30,7 @@ class TeamTest extends TestCase
      */
     public function user_without_permission_cant_see_team_page()
     {
-        $user = factory(\App\Core\Models\User::class)->create();
+        $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
         $this->user_with_permission_can_create_team();
         $id = Team::where('name', 'New Team')->first()->id;
 
@@ -51,11 +50,6 @@ class TeamTest extends TestCase
             'owner_id'    => $this->user->id,
         ]);
         $this->assertDatabaseHas('teams', ['name' => 'New Team', 'description' => 'Team of all new members', 'owner_id' => $this->user->id]);
-
-        $id = Team::where('name', 'New Team')->first()->id;
-        $this->assertTrue($this->user->hasPermissionTo('view team->' . $id));
-        $this->assertTrue($this->user->hasPermissionTo('edit team->' . $id));
-        $this->assertTrue($this->user->hasPermissionTo('delete team->' . $id));
     }
 
     /**
@@ -64,7 +58,7 @@ class TeamTest extends TestCase
      */
     public function user_without_permission_cant_create_team()
     {
-        $user = factory(\App\Core\Models\User::class)->create();
+        $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
 
         $this->actingAs($user)->post('/teams', [
             'name'        => 'New Team',
@@ -76,7 +70,6 @@ class TeamTest extends TestCase
     public function add_user_to_team()
     {
         Notification::fake();
-        Permission::create(['name' => 'view team->' . $this->team->id]);
 
         $user = factory('App\Core\Models\User')->create();
         $this->actingAs($this->user)->post('/members', [
@@ -115,7 +108,7 @@ class TeamTest extends TestCase
      */
     public function user_without_permission_cant_delete_a_team()
     {
-        $user = factory(\App\Core\Models\User::class)->create();
+        $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
 
         $this->user_with_permission_can_create_team();
 
@@ -152,14 +145,13 @@ class TeamTest extends TestCase
     }
 
     /**
-     * @expectedException App\Exceptions\UserIsNotMember
+     * @expectedException App\Core\Exceptions\UserIsNotMember
      * @test
      */
     public function cannot_remove_user_from_team_if_not_a_member()
     {
         $this->expectException(UserIsNotMember::class);
 
-        Permission::create(['name' => 'view team->' . $this->team->id]);
         $user = factory('App\Core\Models\User')->create();
 
         $this->actingAs($this->user)

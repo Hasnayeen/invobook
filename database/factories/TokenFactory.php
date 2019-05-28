@@ -1,14 +1,16 @@
 <?php
 
+use App\Core\Models\Role;
 use App\Core\Models\Token;
 use Faker\Generator as Faker;
-use Spatie\Permission\Models\Role;
+use Illuminate\Encryption\Encrypter;
 
 $factory->define(Token::class, function (Faker $faker) {
     $role = Role::first();
 
     return [
-        'token' => encrypt($role->id),
+        'token' => random_bytes(10),
         'email' => $faker->safeEmail,
+        'role_id' => $faker->numberBetween(1, 5),
     ];
 });

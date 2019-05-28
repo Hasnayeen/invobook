@@ -4,7 +4,7 @@ namespace Tests\Feature\Auth;
 
 use Tests\TestCase;
 use App\Core\Models\User;
-use App\Exceptions\Handler;
+use App\Core\Exceptions\Handler;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Foundation\Testing\RefreshDatabase;

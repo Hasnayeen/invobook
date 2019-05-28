@@ -5,8 +5,7 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use App\Core\Models\User;
 use App\Core\Models\Project;
-use App\Exceptions\UserIsNotMember;
-use Spatie\Permission\Models\Permission;
+use App\Core\Exceptions\UserIsNotMember;
 use Illuminate\Support\Facades\Notification;
 
 class ProjectTest extends TestCase
@@ -32,7 +31,7 @@ class ProjectTest extends TestCase
      */
     public function user_without_permission_cant_see_project_page()
     {
-        $user = factory(\App\Core\Models\User::class)->create();
+        $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
         $this->user_with_permission_can_create_project();
         $id = Project::where('name', 'New Project')->first()->id;
 
@@ -60,7 +59,7 @@ class ProjectTest extends TestCase
      * */
     public function user_without_permission_cant_create_project()
     {
-        $user = factory('App\Core\Models\User')->create();
+        $user = factory('App\Core\Models\User')->create(['role_id' => 5]);
 
         $this->actingAs($user)->post('projects', [
             'name'        => 'New Project',
@@ -72,7 +71,6 @@ class ProjectTest extends TestCase
     public function add_user_to_project()
     {
         Notification::fake();
-        Permission::create(['name' => 'view project->' . $this->project->id]);
 
         $user = factory('App\Core\Models\User')->create();
         $this->actingAs($this->user)->post('/members', [
@@ -106,12 +104,12 @@ class ProjectTest extends TestCase
     }
 
     /**
-     * @expectedException Illuminate\Auth\Access\AuthorizationException
      * @test
+     * @expectedException Illuminate\Auth\Access\AuthorizationException
      */
     public function user_without_permission_cant_delete_a_project()
     {
-        $user = factory(\App\Core\Models\User::class)->create();
+        $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
 
         $this->user_with_permission_can_create_project();
 
@@ -148,14 +146,13 @@ class ProjectTest extends TestCase
     }
 
     /**
-     * @expectedException App\Exceptions\UserIsNotMember
+     * @expectedException App\Core\Exceptions\UserIsNotMember
      * @test
      */
     public function cannot_remove_user_from_project_if_not_a_member()
     {
         $this->expectException(UserIsNotMember::class);
 
-        Permission::create(['name' => 'view project->' . $this->project->id]);
         $user = factory('App\Core\Models\User')->create();
 
         $this->actingAs($this->user)

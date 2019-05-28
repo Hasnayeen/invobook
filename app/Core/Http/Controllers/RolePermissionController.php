@@ -2,15 +2,17 @@
 
 namespace App\Core\Http\Controllers;
 
+use App\Core\Models\Role;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
+use App\Core\Models\Permission;
 use App\Core\Exceptions\OwnerPermissionCantBeRevoked;
 
 class RolePermissionController extends Controller
 {
-    public function store(Role $role)
+    public function store(Role $role, Permission $permission)
     {
-        $role->givePermissionTo(request('permission_id'));
+        $this->authorize('assign', $permission);
+        $role->permissions()->attach($permission->id);
 
         return response()->json([
             'status'     => 'success',
@@ -20,12 +22,13 @@ class RolePermissionController extends Controller
         ]);
     }
 
-    public function delete(Role $role)
+    public function delete(Role $role, Permission $permission)
     {
-        if ($role->name === 'owner') {
+        $this->authorize('revoke', $permission);
+        if ($role->slug === 'owner') {
             throw new OwnerPermissionCantBeRevoked;
         }
-        $role->revokePermissionTo(request('permission_id'));
+        $role->permissions()->detach($permission->id);
 
         return response()->json([
             'status'  => 'success',

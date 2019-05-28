@@ -57,6 +57,7 @@ class CommentController extends Controller
 
     public function delete(Comment $comment)
     {
+        $this->authorize('delete', $comment);
         $comment->delete();
 
         return response()->json([

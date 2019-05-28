@@ -30,7 +30,6 @@ class CommentPolicy
      */
     public function delete(User $user, Comment $comment)
     {
-        return $user->id == $comment->user_id ||
-            $user->hasPermissionTo('delete comment.' . $comment->commentable_type . '->' . $comment->commentable->id);
+        return resolve('Authorization')->userHasPermissionTo('delete', 'comment', $comment->id, true, request('group_type'), request('group_id'));
     }
 }

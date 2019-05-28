@@ -5,8 +5,7 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use App\Core\Models\User;
 use App\Core\Models\Project;
-use App\Notifications\BecameNewMember;
-use Spatie\Permission\Models\Permission;
+use App\Core\Notifications\BecameNewMember;
 use Illuminate\Support\Facades\Notification;
 
 class MemberTest extends TestCase
@@ -78,8 +77,6 @@ class MemberTest extends TestCase
 
         $user = factory(User::class)->create();
         $project = factory(Project::class)->create();
-
-        factory(Permission::class)->create(['name' => 'view project->' . $project->id]);
 
         $payload = [
             'user_id'       => $user->id,

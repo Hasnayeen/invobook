@@ -229,13 +229,9 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function 
 
     Route::get('roles', 'RoleController@index');
 
-    Route::post('roles', 'RoleController@store');
+    Route::post('roles/{role}/permissions/{permission}', 'RolePermissionController@store');
 
-    Route::delete('roles/{role}', 'RoleController@delete');
-
-    Route::post('roles/{role}/permissions', 'RolePermissionController@store');
-
-    Route::delete('roles/{role}/permissions', 'RolePermissionController@delete');
+    Route::delete('roles/{role}/permissions/{permission}', 'RolePermissionController@delete');
 
     Route::get('permissions', 'PermissionController@index');
 

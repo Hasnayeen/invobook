@@ -42,4 +42,9 @@ class Project extends Entity implements HasMembers
     {
         return $this->morphToMany(Role::class, 'group', 'role_has_permission');
     }
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'owner_id');
+    }
 }

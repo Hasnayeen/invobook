@@ -6,11 +6,11 @@ use Tests\TestCase;
 use App\Core\Models\User;
 use App\Core\Models\Token;
 use App\Core\Models\Office;
-use App\Mail\UserRegistered;
+use App\Core\Mail\UserRegistered;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Testing\WithFaker;
-use Symfony\Component\HttpKernel\Exception\HttpException;
+use Illuminate\Contracts\Encryption\DecryptException;
 
 class UserRegistrationTest extends TestCase
 {
@@ -23,7 +23,6 @@ class UserRegistrationTest extends TestCase
         parent::setUp();
 
         $this->token = factory(Token::class)->create();
-
         Mail::fake();
     }
 
@@ -46,7 +45,7 @@ class UserRegistrationTest extends TestCase
     /** @test */
     public function guest_with_valid_token_can_access_registration_form()
     {
-        $this->get("/register/{$this->token->token}")
+        $this->get("/register/" . encrypt($this->token->token))
             ->assertOk();
     }
 
@@ -55,7 +54,7 @@ class UserRegistrationTest extends TestCase
     {
         $invalidToken = $this->faker->sha256;
 
-        $this->expectException(HttpException::class);
+        $this->expectException(DecryptException::class);
 
         $this->get("/register/{$invalidToken}")
             ->assertStatus('403');
@@ -76,7 +75,7 @@ class UserRegistrationTest extends TestCase
             'password_confirmation' => 'secret12',
         ];
 
-        $this->post("/register/{$this->token->token}", $newUser);
+        $this->post("/register/" . encrypt($this->token->token), $newUser);
 
         $this->assertDatabaseHas(
             'users',
@@ -91,7 +90,7 @@ class UserRegistrationTest extends TestCase
     {
         $invalidToken = $this->faker->sha256;
 
-        $this->expectException(HttpException::class);
+        $this->expectException(DecryptException::class);
 
         $newUser = [
             'name'                  => $this->faker->name,
@@ -105,7 +104,10 @@ class UserRegistrationTest extends TestCase
             ->assertStatus('403');
     }
 
-    /** @test */
+    /** 
+     * @test
+     * @TODO
+     */
     public function user_must_have_a_role()
     {
         // code...
