@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Spatie\Permission\Models\Permission;
 use Illuminate\Foundation\Testing\WithFaker;
 
 class TaskTest extends TestCase
@@ -34,8 +33,8 @@ class TaskTest extends TestCase
             'assigned_to'   => $task->assigned_to,
             'notes'         => $task->notes,
             'due_on'        => $task->due_on,
-            'group_type' => $task->taskable_type,
-            'group_id'   => $task->taskable_id,
+            'group_type'    => $task->taskable_type,
+            'group_id'      => $task->taskable_id,
         ])->assertJsonFragment([
             'status'        => 'success',
             'message'       => 'New task has been created',
@@ -62,8 +61,8 @@ class TaskTest extends TestCase
             'assigned_to'   => $task->assigned_to,
             'notes'         => $task->notes,
             'due_on'        => $task->due_on,
-            'group_type' => $task->taskable_type,
-            'group_id'   => $task->taskable_id,
+            'group_type'    => $task->taskable_type,
+            'group_id'      => $task->taskable_id,
         ]);
     }
 
@@ -176,8 +175,8 @@ class TaskTest extends TestCase
             'assigned_to'   => $task->assigned_to,
             'notes'         => $task->notes,
             'due_on'        => $task->due_on,
-            'group_type' => 'project',
-            'group_id'   => $project->id,
+            'group_type'    => 'project',
+            'group_id'      => $project->id,
             'status_id'     => $task->status_id,
         ])->assertJsonFragment([
             'status'        => 'success',
@@ -204,8 +203,8 @@ class TaskTest extends TestCase
             'notes'         => $this->faker->sentence(20, true),
             'due_on'        => $this->faker->dateTimeBetween('now', '+5 years')->format('Y-m-d'),
             'related_to'    => null,
-            'group_type' => 'office',
-            'group_id'   => factory(\App\Core\Models\Office::class)->create()->id,
+            'group_type'    => 'office',
+            'group_id'      => factory(\App\Core\Models\Office::class)->create()->id,
         ];
 
         $this->actingAs($this->user)
@@ -235,8 +234,8 @@ class TaskTest extends TestCase
                 'notes'         => $this->faker->sentence(20, true),
                 'due_on'        => $this->faker->dateTimeBetween('now', '+5 years')->format('Y-m-d'),
                 'related_to'    => null,
-                'group_type' => 'office',
-                'group_id'   => factory(\App\Core\Models\Office::class)->create()->id,
+                'group_type'    => 'office',
+                'group_id'      => factory(\App\Core\Models\Office::class)->create()->id,
             ]);
     }
 

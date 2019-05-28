@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use App\Core\Models\User;
 use Illuminate\Http\UploadedFile;
-use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Testing\WithFaker;
 
@@ -92,7 +91,7 @@ class UserTest extends TestCase
         password_verify('new_password', $this->user->password);
     }
 
-    /** 
+    /**
      * @test
      */
     public function guest_can_not_see_admin_page()

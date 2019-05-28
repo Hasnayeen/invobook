@@ -15,7 +15,6 @@ class TagPolicy
         return resolve('Authorization')->userHasPermissionTo('create', 'tag');
     }
 
-
     /**
      * @TODO
      */

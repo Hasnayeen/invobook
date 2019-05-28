@@ -3,8 +3,6 @@
 namespace App\Core\Http\Controllers;
 
 use App\Core\Models\Role;
-use Illuminate\Http\Request;
-use App\Core\Exceptions\RoleCantBeDeleted;
 
 class RoleController extends Controller
 {
