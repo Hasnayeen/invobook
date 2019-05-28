@@ -13,7 +13,7 @@ class AddCreatedByColumnToTasksTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasColumn('tasks', 'created_by')) {
+        if (! Schema::hasColumn('tasks', 'created_by')) {
             Schema::table('tasks', function (Blueprint $table) {
                 $table->unsignedInteger('created_by');
                 $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
@@ -29,7 +29,6 @@ class AddCreatedByColumnToTasksTable extends Migration
     public function down()
     {
         Schema::table('tasks', function (Blueprint $table) {
-            //
         });
     }
 }

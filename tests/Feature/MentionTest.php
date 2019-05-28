@@ -43,7 +43,7 @@ class MentionTest extends TestCase
         $project = factory(\App\Core\Models\Project::class)->create(['owner_id' => $this->user->id]);
         $task = factory(Task::class)->make([
             'group_type' => 'project',
-            'group_id' => $project->id
+            'group_id'   => $project->id,
         ]);
         $this->actingAs($this->user);
         resolve('Authorization')->setDefaultPermissions($project);
@@ -56,8 +56,8 @@ class MentionTest extends TestCase
             'assigned_to'      => $task->assigned_to,
             'notes'            => $task->notes,
             'due_on'           => $task->due_on,
-            'group_type'    => 'project',
-            'group_id'      => $project->id,
+            'group_type'       => 'project',
+            'group_id'         => $project->id,
             'mentions'         => [
                 $this->user2->username, $this->user3->username,
             ],
