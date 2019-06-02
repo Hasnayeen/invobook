@@ -146,7 +146,7 @@ class CommentTest extends TestCase
             'commentable_type' => 'task',
             'commentable_id'   => factory(\App\Core\Models\Task::class)->create([
                 'taskable_type' => 'project',
-                'taskable_id' => $project->id
+                'taskable_id'   => $project->id,
             ]),
         ]);
 
