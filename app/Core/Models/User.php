@@ -106,6 +106,7 @@ class User extends Authenticatable
     public function isAllowedTo($action, $resource, $groupRelated = false, $groupType = null, $groupId = null)
     {
         if ($groupRelated) {
+            dd($this->role->permissionsOnGroup($groupType, $groupId)->where(['action' => $action, 'resource' => $resource])->exists());
             return
                 $this->role->permissionsOnGroup($groupType, $groupId)->where(['action' => $action, 'resource' => $resource])->exists() ||
                 $this->allowedPermissions($groupType, $groupId)->where(['action' => $action, 'resource' => $resource])->exists();
