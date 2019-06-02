@@ -150,15 +150,15 @@ class CommentTest extends TestCase
             'resource_id'   => $comment->commentable->taskable_id,
         ]);
 
-        // $this->actingAs($this->user)
-        //      ->delete(
-        //          "/comments/{$comment->id}",
-        //         ['group_type' => $comment->commentable->taskable_type, 'group_id' => $comment->commentable->taskable_id]
-        //      )
-        //      ->assertJsonFragment([
-        //         'status'  => 'success',
-        //         'message' => 'misc.Comment has been deleted',
-        //      ]);
+        $this->actingAs($this->user)
+             ->delete(
+                 "/comments/{$comment->id}",
+                ['group_type' => $comment->commentable->taskable_type, 'group_id' => $comment->commentable->taskable_id]
+             )
+             ->assertJsonFragment([
+                'status'  => 'success',
+                'message' => 'misc.Comment has been deleted',
+             ]);
     }
 
     /**
