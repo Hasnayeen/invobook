@@ -139,12 +139,18 @@ class CommentTest extends TestCase
     public function user_with_permission_can_delete_a_comment()
     {
         Notification::fake();
+        $project = factory(\App\Core\Models\Project::class)->create(['owner_id' => $this->user->id]);
+        $this->actingAs($this->user);
+        resolve('Authorization')->setDefaultPermissions($project);
         $comment = factory(\App\Core\Models\Comment::class)->create([
             'commentable_type' => 'task',
-            'commentable_id'   => factory(\App\Core\Models\Task::class),
+            'commentable_id'   => factory(\App\Core\Models\Task::class)->create([
+                'taskable_type' => 'project',
+                'taskable_id' => $project->id
+            ]),
         ]);
 
-        $this->actingAs($this->user)->post('members', [
+        $this->post('members', [
             'user_id'       => $this->user->id,
             'resource_type' => $comment->commentable->taskable_type,
             'resource_id'   => $comment->commentable->taskable_id,

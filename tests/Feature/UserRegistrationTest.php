@@ -63,10 +63,6 @@ class UserRegistrationTest extends TestCase
     /** @test */
     public function guest_with_valid_token_can_register_account()
     {
-        factory(Office::class)->create([
-            'name' => 'Headquarter',
-        ]);
-
         $newUser = [
             'name'                  => $this->faker->name,
             'username'              => $this->faker->userName,
@@ -75,7 +71,7 @@ class UserRegistrationTest extends TestCase
             'password_confirmation' => 'secret12',
         ];
 
-        $this->post('/register/' . encrypt($this->token->token), $newUser);
+        $this->register_user_request($newUser);
 
         $this->assertDatabaseHas(
             'users',
@@ -104,12 +100,28 @@ class UserRegistrationTest extends TestCase
             ->assertStatus('403');
     }
 
-    /**
-     * @test
-     * @TODO
-     */
+    /** @test */
     public function user_must_have_a_role()
     {
-        // code...
+        $newUser = [
+            'name'                  => $this->faker->name,
+            'username'              => $this->faker->userName,
+            'email'                 => $this->token->email,
+            'password'              => 'secret12',
+            'password_confirmation' => 'secret12',
+        ];
+        $this->register_user_request($newUser);
+
+        $user = User::where('username', $newUser['username'])->first();
+        $this->assertNotNull($user->role);
+    }
+
+    private function register_user_request($newUser)
+    {
+        factory(Office::class)->create([
+            'name' => 'Headquarter',
+        ]);
+
+        return $this->post('/register/' . encrypt($this->token->token), $newUser);
     }
 }
