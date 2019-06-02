@@ -10,13 +10,19 @@ class UserAccountController extends Controller
     public function update(UpdateUserAccount $request)
     {
         $user = auth()->user();
-        if ($request->email && ! User::where('email', $request->email)->exists()) {
+        if ($request->email && !User::where('email', $request->email)->exists()) {
             $user->email = $request->get('email');
         }
-        if ($request->username && ! User::where('username', $request->username)->exists()) {
+        if (auth()->user()->username === 'guest') {
+            return response()->json([
+                'status'  => 'error',
+                'message' => localize('misc.Username/Password is not updatable for this account'),
+            ]);
+        }
+        if ($request->username && !User::where('username', $request->username)->exists()) {
             $user->username = $request->get('username');
         }
-        if ((auth()->user()->username !== 'guest') && $request->get('new_password')) {
+        if ($request->get('new_password')) {
             $user->password = bcrypt($request->get('new_password'));
         }
         $user->save();

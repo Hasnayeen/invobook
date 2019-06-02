@@ -165,4 +165,18 @@ class UserTest extends TestCase
                 'message' => 'Username exists',
             ]);
     }
+
+    /** @test */
+    public function username_of_guest_user_cant_be_change()
+    {
+        $guest = factory(User::class)->create(['username' => 'guest']);
+        $this->actingAs($guest)->put("users/{$guest->id}/account", [
+            'username' => 'newUsername',
+        ])->assertJson([
+            'status'  => 'error',
+            'message' => 'Username/Password is not updatable for this account',
+        ]);
+
+        $this->assertDatabaseHas('users', ['id' => $guest->id, 'username' => 'guest']);
+    }
 }
