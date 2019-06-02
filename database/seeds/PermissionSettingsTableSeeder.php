@@ -15,7 +15,7 @@ class PermissionSettingsTableSeeder extends Seeder
     public function run()
     {
         $now = Carbon::now();
-        $tools = ['task', 'discussion', 'event', 'message', 'file'];
+        $tools = ['task', 'discussion', 'event', 'message', 'file', 'comment'];
 
         /**
          * Default Permission Settings for Owner role.
