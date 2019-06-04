@@ -12,7 +12,7 @@ class RegistrationInvitationTest extends TestCase
 {
     private static $endpoint = 'register/invite';
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         Mail::fake();

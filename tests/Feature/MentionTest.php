@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Notification;
 
 class MentionTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         Mail::fake();

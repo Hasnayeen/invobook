@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Notification;
 
 class DiscussionTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         Notification::fake();

@@ -8,7 +8,7 @@ class DiscussionTest extends TestCase
 {
     protected $discussion;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->discussion = factory(\App\Core\Models\Discussion::class)->create();
