@@ -2,19 +2,18 @@
 
 declare(strict_types=1);
 
-use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenDefineFunctions;
+use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenTraits;
+use NunoMaduro\PhpInsights\Domain\Metrics\Architecture\Classes;
 use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenFinalClasses;
 use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenNormalClasses;
 use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenPrivateMethods;
-use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenTraits;
-use NunoMaduro\PhpInsights\Domain\Metrics\Architecture\Classes;
-use SlevomatCodingStandard\Sniffs\Namespaces\AlphabeticallySortedUsesSniff;
+use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenDefineFunctions;
 use SlevomatCodingStandard\Sniffs\TypeHints\DeclareStrictTypesSniff;
-use SlevomatCodingStandard\Sniffs\TypeHints\DisallowMixedTypeHintSniff;
 use SlevomatCodingStandard\Sniffs\TypeHints\TypeHintDeclarationSniff;
+use SlevomatCodingStandard\Sniffs\TypeHints\DisallowMixedTypeHintSniff;
+use SlevomatCodingStandard\Sniffs\Namespaces\AlphabeticallySortedUsesSniff;
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Default Preset
