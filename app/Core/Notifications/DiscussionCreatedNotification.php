@@ -43,7 +43,7 @@ class DiscussionCreatedNotification extends Notification
      */
     public function toMail()
     {
-        return (new MailMessage)
+        return (new MailMessage())
             ->from(config('mail.from.address'))
             ->subject('New discussion has opened!')
             ->line('New discussion has been opened - ' . $this->discussion->name)

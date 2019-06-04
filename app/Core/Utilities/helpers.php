@@ -21,11 +21,9 @@ if (! function_exists('get_locale')) {
      */
     function get_locale(): ?string
     {
-        if ($user = auth()->user()) {
-            return $user->lang;
-        }
+        $user = auth()->user();
 
-        return 'en';
+        return $user->lang ?? 'en';
     }
 }
 

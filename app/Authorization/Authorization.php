@@ -31,9 +31,7 @@ class Authorization
 
         if ($groupType) {
             return (
-                (
-                    $this->user->isOwner($resource, $resourceId)
-                ) || (
+                $this->user->isOwner($resource, $resourceId) || (
                     $this->user->isMember($groupType, $groupId) &&
                     $this->user->isAllowedTo($action, $resource, false, $groupType, $groupId)
                 )
@@ -42,8 +40,7 @@ class Authorization
             );
         }
 
-        return
-            $this->user->isAllowedTo($action, $resource) &&
+        return $this->user->isAllowedTo($action, $resource) &&
             $this->user->isNotForbiddenTo($action, $resource);
     }
 

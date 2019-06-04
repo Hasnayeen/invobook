@@ -38,10 +38,10 @@ class UserController extends Controller
                 'status'  => 'error',
                 'message' => localize('misc.Email already exist'),
             ], 409);
-        } catch (Exception $e) {
+        } catch (Exception $exception) {
             return response()->json([
                 'status'  => 'error',
-                'message' => $e->getMessage(),
+                'message' => $exception->getMessage(),
             ]);
         }
     }
@@ -71,10 +71,10 @@ class UserController extends Controller
                 'status'  => 'success',
                 'message' => localize('misc.Username does not exist'),
             ]);
-        } catch (Exception $e) {
+        } catch (Exception $exception) {
             return response()->json([
                 'status'  => 'error',
-                'message' => $e->getMessage(),
+                'message' => $exception->getMessage(),
             ]);
         }
     }

@@ -63,7 +63,7 @@ class RevokedMembership extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
+        return (new MailMessage())
             ->subject('You have been removed from ' . $this->entityName)
             ->line(sprintf(
                 '%s removed you from the %s: %s',
