@@ -60,7 +60,7 @@ class YouWereMentioned extends Notification implements ShouldQueue
      */
     public function toMail()
     {
-        return (new MailMessage)
+        return (new MailMessage())
             ->subject("{$this->notifier->name} mentioned you in {$this->mentionableType}.");
     }
 

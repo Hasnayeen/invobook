@@ -37,9 +37,9 @@ class SendInvitationToRegister extends Mailable
         return $this->markdown('emails.invite')
                     ->subject(Auth::user()->name . ' invited you to join Goodwork')
                     ->with([
-                'token'   => $token,
-                'name'    => $request->name,
-                'company' => ($setting) ? $setting->company_name : null,
-            ]);
+                        'token'   => $token,
+                        'name'    => $request->name,
+                        'company' => ($setting) ? $setting->company_name : null,
+                    ]);
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Core\Models;
 
-use App\Core\Contracts\HasMembers;
 use App\Core\Contracts\Searchable;
 use App\Core\Events\DiscussionCreated;
 use Illuminate\Database\Eloquent\Model;

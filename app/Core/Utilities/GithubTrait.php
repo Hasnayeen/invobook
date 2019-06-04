@@ -12,9 +12,9 @@ trait GithubTrait
 {
     private function getAccessToken()
     {
-        if ($githubService = Service::where('name', 'github')->first()) {
-            return $githubService->access_token;
-        }
+        $githubService = Service::where('name', 'github')->first();
+
+        return $githubService->access_token ?? null;
     }
 
     private function getUserRepos($token)
