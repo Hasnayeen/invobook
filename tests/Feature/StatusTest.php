@@ -6,7 +6,7 @@ use Tests\TestCase;
 
 class StatusTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->status = factory(\App\Core\Models\Status::class)->create();

@@ -15,11 +15,6 @@ class CommentTest extends TestCase
      */
     private static $endpoint = '/comments';
 
-    public function setUp()
-    {
-        parent::setUp();
-    }
-
     /** @test */
     public function user_can_create_comment()
     {

@@ -9,7 +9,7 @@ class TaskTest extends TestCase
 {
     use WithFaker;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->task = factory(\App\Core\Models\Task::class)->create(['created_by' => $this->user->id]);

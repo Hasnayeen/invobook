@@ -8,7 +8,7 @@ use Spatie\Activitylog\Models\Activity;
 
 class ActivityTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->user2 = factory(\App\Core\Models\User::class)->create(['role_id' => 2]);

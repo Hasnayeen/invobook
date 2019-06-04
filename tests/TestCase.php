@@ -20,7 +20,7 @@ abstract class TestCase extends BaseTestCase
      */
     protected $user;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->app->instance(ExceptionHandler::class, new TestExceptionHandler(app()));

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Notification;
 
 class ProjectTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->project = factory('App\Core\Models\Project')->create();

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Notification;
 
 class TeamTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->team = factory('App\Core\Models\Team')->create();

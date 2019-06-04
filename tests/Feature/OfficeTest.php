@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Notification;
 
 class OfficeTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->office = factory('App\Core\Models\Office')->create();

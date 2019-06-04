@@ -8,7 +8,7 @@ use App\Core\Models\Permission;
 
 class AuthorizationTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->role = Role::where(['slug' => 'guest'])->first();
