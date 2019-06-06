@@ -1,36 +1,36 @@
 <template>
   <div class="container mx-auto px-4 my-6 w-full md:w-md lg:w-lg xl:w-xl xxl:w-2xl">
-    <div class="text-grey-dark font-semibold text-2xl mb-4 flex items-center justify-center">
+    <div class="text-gray-600 font-semibold text-2xl mb-4 flex items-center justify-center">
       {{project.name}}
       <span @click="toggleDropdownMenu" v-click-outside="closeDropdownMenu" class="bg-white p-1 text-sm rounded-full shadow ml-4 cursor-pointer flex items-center">
         <font-awesome-icon :icon="faCog"></font-awesome-icon>
       </span>
       <!-- Dropdown Menu -->
       <div v-if="dropdownMenuShown" class="relative">
-        <ul class="list-reset bg-white rounded shadow-lg py-2 absolute pin-r mt-4 text-base text-left font-normal whitespace-no-wrap z-10">
-          <li class="px-4 py-2 hover:bg-grey-light cursor-pointer">
-            <a href="#" class="no-underline text-grey-dark" @click.prevent="showMembersListModal">
+        <ul class="list-reset bg-white rounded shadow-lg py-2 absolute right-0 mt-4 text-base text-left font-normal whitespace-no-wrap z-10">
+          <li class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
+            <a href="#" class="no-underline text-gray-600" @click.prevent="showMembersListModal">
               Show All Members
             </a>
           </li>
-          <li @click="showGithubRepoModal" class="px-4 py-2 hover:bg-grey-light cursor-pointer">
+          <li @click="showGithubRepoModal" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
             Connect Github Repository
           </li>
-          <li @click="showPermissionsSettings" class="px-4 py-2 hover:bg-grey-light cursor-pointer">
+          <li @click="showPermissionsSettings" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
             Permissions Settings
           </li>
-          <li class="px-4 py-2 hover:bg-grey-light cursor-pointer">
+          <li class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
             Delete
           </li>
         </ul>
       </div>
     </div>
 
-    <div class="text-grey-dark flex flex-row justify-center items-center">
+    <div class="text-gray-600 flex flex-row justify-center items-center">
       <span class="text-lg">
         Cycle: 
       </span>
-      <span class="p-2 ml-2 bg-grey-lightest shadow rounded cursor-pointer text-sm text-teal-darker">
+      <span class="p-2 ml-2 bg-gray-100 shadow rounded cursor-pointer text-sm text-teal-800">
         {{startDate}} - {{endDate}}
       </span>
     </div>
@@ -46,7 +46,7 @@
   <!-- Modals for dropdown menu -->
 
     <div class="h-16 flex flex-row justify-center items-center px-2">
-      <span @click="showAddMemberForm" class="bg-white shadow w-8 h-8 rounded-full text-teal hover:cursor-pointer text-center p-2">
+      <span @click="showAddMemberForm" class="bg-white shadow w-8 h-8 rounded-full text-teal-500 hover:cursor-pointer text-center p-2">
         <font-awesome-icon :icon="faPlus"></font-awesome-icon>
       </span>
       <a v-for="(member, index) in project.members" :href="'/users/' + member.username" class="pl-2">

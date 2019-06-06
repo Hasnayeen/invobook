@@ -1,10 +1,10 @@
 <template>
 <div>
-  <div class="border-b pt-8 pb-2 text-grey-dark font-medium">
-    Comments <span class="rounded-full py-1 px-2 bg-teal-lighter">{{ comments.length }}</span>
+  <div class="border-b pt-8 pb-2 text-gray-600 font-medium">
+    Comments <span class="rounded-full py-1 px-2 bg-teal-200">{{ comments.length }}</span>
   </div>
   <div class="py-6">
-    <textarea class="static bg-grey-lighter textarea resize-none rounded w-full p-4 text-grey-darker"
+    <textarea class="static bg-gray-200 textarea resize-none rounded w-full p-4 text-gray-800"
       :id="'save-comment'"
       placeholder="write your comment here"
       rows=1
@@ -20,22 +20,22 @@
       :suggestionHighlightIndex="suggestionHighlightIndex"
       :suggestionHighlightDirection="suggestionHighlightDirection"
       @selected="userSelected"></user-suggestion-box>
-    <div v-if="name.length < 1" class="absolute text-xs text-grey-dark pt-2">Press enter <span class="bg-grey p-1 rounded text-white font-bold">↵</span> to save</div>
+    <div v-if="name.length < 1" class="absolute text-xs text-gray-600 pt-2">Press enter <span class="bg-gray-500 p-1 rounded text-white font-bold">↵</span> to save</div>
   </div>
   <div>
     <div v-for="(comment, index) in comments" class="my-6">
-      <div class="text-xs text-grey-dark pb-2 ml-10">
+      <div class="text-xs text-gray-600 pb-2 ml-10">
         {{ comment.user.name }} on {{ comment.date }}
       </div>
       <div class="flex flex-row items-center">
         <div class="z-10">
           <img :src="generateUrl(comment.user.avatar)" class="rounded-full w-8 h-8">
         </div>
-        <div class="flex-1 bg-grey-lighter text-grey-darker rounded ml-2 p-4 flex flex-row justify-between">
-          <div v-linkified:options="{ className: 'text-blue italic' }" >
+        <div class="flex-1 bg-gray-200 text-gray-800 rounded ml-2 p-4 flex flex-row justify-between">
+          <div v-linkified:options="{ className: 'text-blue-500 italic' }" >
             {{ comment.body }}
           </div>
-          <div v-if="user.id === comment.user_id" @click="deleteComment(comment,index)" class="text-xs text-red pb-2 ml-10 cursor-pointer">
+          <div v-if="user.id === comment.user_id" @click="deleteComment(comment,index)" class="text-xs text-red-500 pb-2 ml-10 cursor-pointer">
             <font-awesome-icon :icon="faTrashAlt">
             </font-awesome-icon>
           </div>

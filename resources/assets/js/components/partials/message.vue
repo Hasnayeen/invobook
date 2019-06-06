@@ -2,17 +2,17 @@
 <div class="flex flex-col p-4">
   <div v-if="displayDate" class="w-full flex flex-row py-4">
     <div class="border-b w-1/5 flex-grow mb-2"></div>
-    <div class="text-grey-dark text-sm text-center px-4">
+    <div class="text-gray-600 text-sm text-center px-4">
       {{ getDate(message.created_at) }}
     </div>
     <div class="border-b w-1/5 flex-grow mb-2"></div>
   </div>
   <div v-if="message.system" class="flex flex-row justify-center">
-    <div class="bg-blue-lighter text-grey-darker text-xs text-center px-4 rounded p-2">
+    <div class="bg-blue-lighter text-gray-800 text-xs text-center px-4 rounded p-2">
       {{ message.body }}
     </div>
   </div>
-  <div v-else class="flex flex-row text-grey-darker py-3"
+  <div v-else class="flex flex-row text-gray-800 py-3"
     :class="[(message.user_id === user.id) ? 'self-end flex-row-reverse' : '']">
     <div class="flex flex-col items-center relative"
       :class="[(message.user_id === user.id) ? 'flex-col-reverse justify-end' : '']">
@@ -21,19 +21,19 @@
       <div v-if="(message.user_id === user.id)" @click="toggleMessageMenu" v-click-outside="hideMessageMenu" class="cursor-pointer">
         <font-awesome-icon :icon="faEllipsisH"></font-awesome-icon>
       </div>
-      <div v-if="(message.user_id === user.id) && dropdownMenuShown" class="absolute rounded shadow-lg pin-t mt-16 mr-2 p-3 text-grey-darker hover:bg-grey-light"
-        :class="[(message.user_id === user.id) ? 'pin-r' : 'pin-l']">
+      <div v-if="(message.user_id === user.id) && dropdownMenuShown" class="absolute rounded shadow-lg top-0 mt-16 mr-2 p-3 text-gray-800 hover:bg-gray-400"
+        :class="[(message.user_id === user.id) ? 'right-0' : 'left-0']">
         <div @click="deleteMessage()" class="cursor-pointer">
           Delete
         </div>
       </div>
     </div>
     <div class="mx-2">
-      <div  class="rounded-lg p-3 w-64 leading-normal text-grey-darkest break-words"
-        :class="[(message.user_id === user.id) ? 'bg-teal-lightest rounded-tr-none' : 'bg-pink-lightest rounded-tl-none']" v-linkified:options="{ className: 'text-blue italic' }" >
+      <div  class="rounded-lg p-3 w-64 leading-normal text-gray-900 break-words"
+        :class="[(message.user_id === user.id) ? 'bg-teal-100 rounded-tr-none' : 'bg-pink-600 rounded-tl-none']" v-linkified:options="{ className: 'text-blue-500 italic' }" >
         {{ message.body }}
       </div>
-      <div class="text-grey-darkest text-xs pt-2 flex flex-row"
+      <div class="text-gray-900 text-xs pt-2 flex flex-row"
         :class="[(message.user_id === user.id) ? 'justify-end' : '']">
         <div class="pr-1">
           {{ message.user.name }}

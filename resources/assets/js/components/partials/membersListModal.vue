@@ -1,29 +1,29 @@
 <template>
 <div :class="{'hidden': !show}">
-  <div class="absolute container mx-2 md:mx-auto md:w-1/3 bg-grey-lightest rounded shadow-lg z-10" style="top: 10vh;left: 0;right: 0;">
+  <div class="absolute container mx-2 md:mx-auto md:w-1/3 bg-gray-100 rounded shadow-lg z-10" style="top: 10vh;left: 0;right: 0;">
     <div class="m-auto flex-col flex">
-        <label class="block uppercase tracking-wide bg-grey-lighter text-grey-dark text-xs font-bold text-center text-lg p-6 rounded" for="user">
+        <label class="block uppercase tracking-wide bg-gray-200 text-gray-600 text-xs font-bold text-center text-lg p-6 rounded" for="user">
           Members List
         </label>
 
       <ul v-for="(member, index) in members" :key="member.id" class="list-reset">
-        <li class="py-4 px-8 hover:bg-grey-lighter flex flex-row items-center justify-between">
-          <a :href="'/users/' + member.username"  class="no-underline text-grey-darker text-lg">
+        <li class="py-4 px-8 hover:bg-gray-200 flex flex-row items-center justify-between">
+          <a :href="'/users/' + member.username"  class="no-underline text-gray-800 text-lg">
             <img :src="generateUrl(member.avatar)" class="rounded-full w-8 h-8 mr-4 align-middle" :alt="'profile pic of ' + member.name">
             <span>{{ member.name }}</span>
           </a>
-          <button @click="removeMember(index, member.id)" class="text-red-dark" title="delete">
+          <button @click="removeMember(index, member.id)" class="text-red-200" title="delete">
             <font-awesome-icon :icon="faTrashAlt" class="ml-1 pl-1 cursor-pointer"></font-awesome-icon>
           </button>
         </li>
       </ul>
 
-      <div class="flex flex-row-reverse p-6 bg-grey-lighter rounded-b">
-        <button @click="closeModal" class="text-red-light hover:font-bold">Close</button>
+      <div class="flex flex-row-reverse p-6 bg-gray-200 rounded-b">
+        <button @click="closeModal" class="text-red-400 hover:font-bold">Close</button>
       </div>
     </div>
   </div>
-  <div @click="closeModal" class="h-screen w-screen fixed pin bg-grey-darkest opacity-25"></div>
+  <div @click="closeModal" class="h-screen w-screen fixed inset-0 bg-gray-900 opacity-25"></div>
 </div>
 </template>
 

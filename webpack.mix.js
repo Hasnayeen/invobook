@@ -10,7 +10,7 @@ class TailwindExtractor {
 }
 
 mix.postCss('resources/assets/css/main.css', 'public/css', [
-  tailwindcss('tailwind.js')
+  require('tailwindcss')
 ]).minify('public/css/main.css')
 
 mix.copy('resources/assets/css/editor.css', 'public/css/editor.css').minify('public/css/editor.css')

@@ -1,8 +1,8 @@
 <template>
 <div class="px-4 h-full border-l flex items-center">
-  <div id="notification" class="text-teal-light text-base no-underline cursor-pointer" @click="showMessageBox">
+  <div id="notification" class="text-teal-400  text-base no-underline cursor-pointer" @click="showMessageBox">
     <font-awesome-icon :icon="faEnvelope" class="font-bold text-xl"></font-awesome-icon>
-    <font-awesome-icon :icon="faCircle" v-if="unreadMessage" class="text-red-light text-sm absolute pin-t mt-3 ml-4" aria-hidden="true"></font-awesome-icon>
+    <font-awesome-icon :icon="faCircle" v-if="unreadMessage" class="text-red-400 text-sm absolute top-0 mt-3 ml-4" aria-hidden="true"></font-awesome-icon>
   </div>
 </div>
 </template>
