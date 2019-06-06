@@ -1,26 +1,26 @@
 <template>
 <div class="mb-4 text-center">
-  <button @click="openModal" class="no-underline p-2 my-4 mb-0 bg-white text-base text-teal rounded shadow">Invite New Member</button>
+  <button @click="openModal" class="no-underline p-2 my-4 mb-0 bg-white text-base text-teal-500 rounded shadow">Invite New Member</button>
   <div :class="{'hidden': !showInviteMemberForm}">
-    <div @click="closeModal" class="absolute pin opacity-75 bg-grey z-10"></div>
-    <div class="fixed pin-x md:w-1/3 z-10 bg-grey-lighter mx-2 md:mx-auto p-8 rounded">
+    <div @click="closeModal" class="absolute inset-0 opacity-75 bg-gray-500 z-10"></div>
+    <div class="fixed inset-x-0 md:w-1/3 z-10 bg-gray-200 mx-2 md:mx-auto p-8 rounded">
       <p class="py-2">
-        <input class="w-full shadow appearance-none border rounded py-2 px-3 text-grey-darker" type="text" placeholder="John Doe" v-model="name">
+        <input class="w-full shadow appearance-none border rounded py-2 px-3 text-gray-800" type="text" placeholder="John Doe" v-model="name">
       </p>
       <p class="py-2">
-        <input class="w-full shadow appearance-none border rounded py-2 px-3 text-grey-darker" type="text" placeholder="john@example.com" v-model="email">
+        <input class="w-full shadow appearance-none border rounded py-2 px-3 text-gray-800" type="text" placeholder="john@example.com" v-model="email">
       </p>
       <p class="py-2">
-        <select class="w-5/6 block shadow appearance-none w-full bg-white border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" v-model="role">
-          <option value="default" selected disabled hidden class="text-grey-darker">Select Role</option>
+        <select class="w-5/6 block shadow appearance-none w-full bg-white border border-gray-200 text-gray-800 py-3 px-4 pr-8 rounded" v-model="role">
+          <option value="default" selected disabled hidden class="text-gray-800">Select Role</option>
           <template v-for="role in roles">
             <option :value="role.id" class="my-2 text-lg">{{ role.name }}</option>
           </template>
         </select>
       </p>
-      <div class="flex flex-row justify-between pt-8 bg-grey-lighter rounded">
-        <button @click="closeModal" class="text-red-light hover:font-bold">Cancel</button>
-        <button @click="sendInvitation" class="bg-teal-light text-white font-medium hover:bg-teal-dark py-3 px-4 rounded">Send Invitation</button>
+      <div class="flex flex-row justify-between pt-8 bg-gray-200 rounded">
+        <button @click="closeModal" class="text-red-400 hover:font-bold">Cancel</button>
+        <button @click="sendInvitation" class="bg-teal-400 text-white font-medium hover:bg-teal-600 py-3 px-4 rounded">Send Invitation</button>
       </div>
     </div>
   </div>

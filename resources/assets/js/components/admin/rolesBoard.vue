@@ -4,28 +4,28 @@
   <assign-permission-form :roleId="roleId" :form-shown="assignPermissionFormShown" @close="closeAssignPermissionForm" @permission-assigned="permissionAssigned"></assign-permission-form>
 
   <div class="mx-4 text-center">
-    <button @click="showCreateRoleForm" class="no-underline p-3 m-8 -mb-4 text-white text-base bg-teal-light rounded shadow-xl">Add New Role</button>
+    <button @click="showCreateRoleForm" class="no-underline p-3 m-8 -mb-4 text-white text-base bg-teal-400 rounded shadow-xl">Add New Role</button>
   </div>
-  <div class="px-6 py-8 flex flex-row flex-wrap justify-center text-grey-darker">
+  <div class="px-6 py-8 flex flex-row flex-wrap justify-center text-gray-800">
     <div v-for="(role, index) in roles" class="bg-white shadow-xl w-80 my-4 md:m-6 rounded-lg">
-      <div class="p-4 text-xl uppercase text-indigo bg-grey-lighter rounded-t-lg flex flex-row">
+      <div class="p-4 text-xl uppercase text-indigo-500 bg-gray-200 rounded-t-lg flex flex-row">
         {{ role.name }}
           <div @click="deleteRole(role.id, index)">
             <i v-if="role.deletable" class="ml-1 pl-1 fas fa-trash-alt cursor-pointer text-base"></i>
           </div>
       </div>
-      <div class="px-4 pb-2 bg-grey-lighter text-sm flex flex-row">
+      <div class="px-4 pb-2 bg-gray-200 text-sm flex flex-row">
         <span>
           {{ 'Permissions' | localize }}
         </span>
         <div @click="showAssignPermissionForm(role.id)">
           <font-awesome-icon :icon="faPlusCircle"
-            class="ml-2 text-indigo cursor-pointer">
+            class="ml-2 text-indigo-500 cursor-pointer">
           </font-awesome-icon>
         </div>
       </div>
       <div v-if="role.permissions.length > 0" class="flex flex-row flex-wrap m-2">
-        <div v-for="(permission, index) in role.permissions" class="py-1 px-2 m-2 rounded-full font-medium bg-pink text-white text-sm flex flex-row items-center">
+        <div v-for="(permission, index) in role.permissions" class="py-1 px-2 m-2 rounded-full font-medium bg-pink-500 text-white text-sm flex flex-row items-center">
           {{ permission.name }} 
           <div @click="revokePermission(role.id, permission.id, index)">
             <font-awesome-icon :icon="faTrashAlt"
@@ -34,7 +34,7 @@
           </div>
         </div>
       </div>
-      <div v-else class="py-1 px-2 m-2 font-medium text-grey-darker">
+      <div v-else class="py-1 px-2 m-2 font-medium text-gray-800">
         {{ 'Don\'t have any permission yet' | localize }}
       </div>
     </div>      

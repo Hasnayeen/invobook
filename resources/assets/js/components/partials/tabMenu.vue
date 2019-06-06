@@ -1,17 +1,17 @@
 <template>
-<div class="flex flex-row justify-around my-6 py-4 bg-white shadow rounded text-grey">
+<div class="flex flex-row justify-around my-6 py-4 bg-white shadow rounded text-gray-500">
   <div @click="activateThisTab('tasks')"
-    :class="[(active === 'tasks') ? 'text-teal-dark font-semibold border-teal border-b-2 pb-4 -mb-4' : 'cursor-pointer', 'text-center w-1/6']">
+    :class="[(active === 'tasks') ? 'text-teal-600 font-semibold border-teal-500 border-b-2 pb-4 -mb-4' : 'cursor-pointer', 'text-center w-1/6']">
     <font-awesome-icon :icon="faTasks" class="text-2xl"></font-awesome-icon>
     <span class="hidden md:block text-xs font-regular pt-2">{{ 'Tasks' | localize }}</span>
   </div>
   <div @click="activateThisTab('discussions')"
-    :class="[(active === 'discussions') ? 'text-teal-dark font-semibold border-teal border-b-2 pb-4 -mb-4' : 'cursor-pointer', 'text-center w-1/6']">
+    :class="[(active === 'discussions') ? 'text-teal-600 font-semibold border-teal-500 border-b-2 pb-4 -mb-4' : 'cursor-pointer', 'text-center w-1/6']">
     <font-awesome-icon :icon="faClipboardList" class="text-2xl"></font-awesome-icon>
     <span class="hidden md:block text-xs font-regular pt-2">{{ 'Discussions' | localize }}</span>
   </div>
   <div @click="onMessagesTabClicked"
-    :class="[(active === 'messages') ? 'text-teal-dark font-semibold border-teal border-b-2 pb-4 -mb-4' : 'cursor-pointer', 'text-center w-1/6']">
+    :class="[(active === 'messages') ? 'text-teal-600 font-semibold border-teal-500 border-b-2 pb-4 -mb-4' : 'cursor-pointer', 'text-center w-1/6']">
     <span class="relative inline-block">
       <font-awesome-icon :icon="faComments" class="text-2xl"></font-awesome-icon>
       <font-awesome-icon :icon="faCircle"
@@ -23,17 +23,17 @@
     <span class="hidden md:block text-xs font-regular pt-2">{{ 'Messages' | localize }}</span>
   </div>
   <div @click="activateThisTab('events')"
-    :class="[(active === 'events') ? 'text-teal-dark font-semibold border-teal border-b-2 pb-4 -mb-4' : 'cursor-pointer', 'text-center w-1/6']">
+    :class="[(active === 'events') ? 'text-teal-600 font-semibold border-teal-500 border-b-2 pb-4 -mb-4' : 'cursor-pointer', 'text-center w-1/6']">
     <font-awesome-icon :icon="faCalendarAlt" class="text-2xl"></font-awesome-icon>
     <span class="hidden md:block text-xs font-regular pt-2">{{ 'Events' | localize }}</span>
   </div>
   <div @click="activateThisTab('files')"
-    :class="[(active === 'files') ? 'text-teal-dark font-semibold border-teal border-b-2 pb-4 -mb-4' : 'cursor-pointer', 'text-center w-1/6']">
+    :class="[(active === 'files') ? 'text-teal-600 font-semibold border-teal-500 border-b-2 pb-4 -mb-4' : 'cursor-pointer', 'text-center w-1/6']">
     <font-awesome-icon :icon="faFileAlt" class="text-2xl"></font-awesome-icon>
     <span class="hidden md:block text-xs font-regular pt-2">{{ 'Files' | localize }}</span>
   </div>
   <div @click="activateThisTab('activities')"
-    :class="[(active === 'activities') ? 'text-teal-dark font-semibold border-teal border-b-2 pb-4 -mb-4' : 'cursor-pointer', 'text-center w-1/6']">
+    :class="[(active === 'activities') ? 'text-teal-600 font-semibold border-teal-500 border-b-2 pb-4 -mb-4' : 'cursor-pointer', 'text-center w-1/6']">
     <font-awesome-icon :icon="faBolt" class="text-2xl"></font-awesome-icon>
     <span class="hidden md:block text-xs font-regular pt-2">{{ 'Activities' | localize }}</span>
   </div>

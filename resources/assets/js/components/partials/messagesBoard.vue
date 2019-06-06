@@ -2,7 +2,7 @@
 <div :class="{'hidden': (activeTab != 'messages')}" class="w-full">
   <div class="flex flex-col bg-white mx-auto my-8 max-w-md shadow rounded">
 
-    <div class="text-grey-dark bg-white shadow p-4 text-xl flex flex-row items-center">
+    <div class="text-gray-600 bg-white shadow p-4 text-xl flex flex-row items-center">
       <div>
         {{ 'Currently in room' | localize }}:
       </div>
@@ -17,7 +17,7 @@
       </div>
     </div>
 
-    <div class="relative bg-grey-light">
+    <div class="relative bg-gray-400">
       <div class="static text-center p-8">
         <div class="relative">
           <user-suggestion-box
@@ -29,9 +29,9 @@
             :suggestionHighlightDirection="suggestionHighlightDirection"
             :suggestionHighlightDirectionInverted="true"
             @selected="userSelected"
-            class="absolute mb-2 w-full pin-b"></user-suggestion-box>
+            class="absolute mb-2 w-full bottom-0"></user-suggestion-box>
         </div>
-        <textarea class="static textarea resize-none rounded w-full p-4 text-grey-darker"
+        <textarea class="static textarea resize-none rounded w-full p-4 text-gray-800"
           id="send-message"
           :style="{height: messageTextareaHeight}"
           ref="messageTextarea"

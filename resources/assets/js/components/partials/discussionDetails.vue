@@ -4,27 +4,27 @@
     <div class="flex flex-row justify-between relative px-8">
       <div @click="closeDiscussionDetails" class="cursor-pointer">
         <font-awesome-icon :icon="faArrowLeft"
-          class="text-base text-grey-dark">
+          class="text-base text-gray-600">
         </font-awesome-icon>
       </div>
       <div @click="toggleMenu" v-click-outside="hideMenu" class="cursor-pointer">
         <font-awesome-icon :icon="faEllipsisH"
-          class="text-base text-grey-dark">
+          class="text-base text-gray-600">
         </font-awesome-icon>
       </div>
-      <div v-if="dropdownMenuShown" class="absolute rounded shadow-lg pin-r pin-t mt-6 p-3 text-grey-darker hover:bg-grey-light">
+      <div v-if="dropdownMenuShown" class="absolute rounded shadow-lg right-0 top-0 mt-6 p-3 text-gray-800 hover:bg-gray-400">
         <div @click="deleteDiscussion" class="cursor-pointer">
           Delete
         </div>
       </div>
     </div>
 
-    <div :data-discussion-id="discussion.id" class="text-grey-darkest text-left text-3xl font-medium py-4 px-16">
+    <div :data-discussion-id="discussion.id" class="text-gray-900 text-left text-3xl font-medium py-4 px-16">
       {{ discussion.name }}
     </div>
     <div class="flex flex-row justify-start items-center pb-4 border-b px-16">
       <img :src="generateUrl(discussion.creator.avatar)" class="rounded-full w-10 h-10">
-      <div class="text-grey-darker text-sm ml-4">
+      <div class="text-gray-800 text-sm ml-4">
         <div class="pb-1">
           {{ discussion.creator.name }}
         </div>
@@ -33,12 +33,12 @@
         </div>
       </div>
     </div>
-    <div v-html="discussion.content" class="py-8 px-16 text-grey-darkest"></div>
+    <div v-html="discussion.content" class="py-8 px-16 text-gray-900"></div>
 
     <comment-box resourceType="discussion" :resource="discussion" :detailsShown="discussionDetailsShown" class="px-16"></comment-box>
   </div>
 
-  <div @click="closeDiscussionDetails" class="h-screen w-screen fixed pin bg-grey-darkest opacity-25"></div>
+  <div @click="closeDiscussionDetails" class="h-screen w-screen fixed inset-0 bg-gray-900 opacity-25"></div>
 </div>
 </template>
 

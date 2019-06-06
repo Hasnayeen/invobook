@@ -2,30 +2,30 @@
 <div :class="{'hidden': (activeColumn !== 'permissions')}" class="bg-white rounded-b">
   <attach-permission-form :permissionId="permissionId" :form-shown="attachPermissionFormShown" @close="closeAttachPermissionForm" @permission-attached="permissionAttachedToRole"></attach-permission-form>
 
-  <div class=" px-6 py-8 flex flex-row flex-wrap justify-center text-grey-darker">
+  <div class=" px-6 py-8 flex flex-row flex-wrap justify-center text-gray-800">
     <div v-for="permission in permissions" class="bg-white shadow-xl w-80 my-4 md:m-6 rounded-lg">
-      <div class="p-4 text-xl uppercase text-indigo bg-grey-lighter rounded-t-lg">
+      <div class="p-4 text-xl uppercase text-indigo-500 bg-gray-200 rounded-t-lg">
         {{ permission.name }}
       </div>
-      <div class="px-4 pb-2 bg-grey-lighter text-sm flex flex-row">
+      <div class="px-4 pb-2 bg-gray-200 text-sm flex flex-row">
         <span>
           {{ 'Roles' | localize }}
         </span>
         <div @click="showAttachPermissionForm(permission.id)">
           <font-awesome-icon :icon="faPlusCircle"
-            class="ml-2 text-indigo cursor-pointer">
+            class="ml-2 text-indigo-500 cursor-pointer">
           </font-awesome-icon>
         </div>
       </div>
       <div v-if="permission.roles.length > 0" class="flex flex-row flex-wrap m-2">
-        <div v-for="role in permission.roles" class="py-1 px-2 m-2 rounded-full font-medium bg-pink text-white text-sm flex flex-row items-center">
+        <div v-for="role in permission.roles" class="py-1 px-2 m-2 rounded-full font-medium bg-pink-500 text-white text-sm flex flex-row items-center">
           {{ role.name }}
           <font-awesome-icon :icon="faTrashAlt"
             class="ml-1 pl-1 cursor-pointer">
           </font-awesome-icon>
         </div>
       </div>
-      <div v-else class="py-1 px-2 m-2 font-medium text-grey-darker">
+      <div v-else class="py-1 px-2 m-2 font-medium text-gray-800">
         {{ 'Don\'t belongs to any role yet' | localize }}
       </div>
     </div>      

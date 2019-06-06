@@ -8,22 +8,22 @@
     <div class="">
       <ul class="flex flex-row flex-wrap justify-center list-reset">
         <li class="rounded-lg w-48 h-48 flex flex-col justify-center items-center m-4 shadow-md cursor-pointer">
-          <div class="bg-grey-lighter w-full h-32 flex justify-center items-center rounded-lg">
+          <div class="bg-gray-200 w-full h-32 flex justify-center items-center rounded-lg">
             <img src="https://cdn.dribbble.com/users/1838892/screenshots/4916282/image_manager_and_bulk_editor.gif" alt="" class="h-32 w-full rounded-t-lg">
           </div>
-          <div class="bg-white w-full h-16 text-center rounded-b-lg pt-4 px-4 text-sm text-grey-darker">Files section design.jpg</div>
+          <div class="bg-white w-full h-16 text-center rounded-b-lg pt-4 px-4 text-sm text-gray-800">Files section design.jpg</div>
         </li>
         <li class="rounded-lg w-48 h-48 flex flex-col justify-center items-center m-4 shadow-md cursor-pointer">
-          <div class="bg-grey-lighter w-full h-32 flex justify-center items-center rounded-lg">
-            <font-awesome-icon :icon="faFileAlt" class="text-teal text-5xl"></font-awesome-icon>
+          <div class="bg-gray-200 w-full h-32 flex justify-center items-center rounded-lg">
+            <font-awesome-icon :icon="faFileAlt" class="text-teal-500 text-5xl"></font-awesome-icon>
           </div>
-          <div class="bg-white w-full h-16 text-center rounded-b-lg pt-4 px-4 text-sm text-grey-darker">Files section design.sketch</div>
+          <div class="bg-white w-full h-16 text-center rounded-b-lg pt-4 px-4 text-sm text-gray-800">Files section design.sketch</div>
         </li>
         <li class="rounded-lg w-48 h-48 flex flex-col justify-center items-center m-4 shadow-md cursor-pointer">
-          <div class="bg-grey-lighter w-full h-32 flex justify-center items-center rounded-lg">
-            <font-awesome-icon :icon="faFilePdf" class="text-teal text-5xl"></font-awesome-icon>
+          <div class="bg-gray-200 w-full h-32 flex justify-center items-center rounded-lg">
+            <font-awesome-icon :icon="faFilePdf" class="text-teal-500 text-5xl"></font-awesome-icon>
           </div>
-          <div class="bg-white w-full h-16 text-center rounded-b-lg pt-4 px-4 text-sm text-grey-darker">Files section requirements.pdf</div>
+          <div class="bg-white w-full h-16 text-center rounded-b-lg pt-4 px-4 text-sm text-gray-800">Files section requirements.pdf</div>
         </li>
       </ul>
     </div>

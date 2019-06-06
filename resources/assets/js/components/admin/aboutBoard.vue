@@ -1,24 +1,24 @@
 <template>
 <div :class="{'hidden': (activeTab != 'about')}" class="w-full mb-8">
   <div :class="{'hidden': !showUpdateModal}">
-    <div @click="closeUpdateModal" class="absolute pin opacity-75 bg-grey"></div>
-    <div class="fixed pin-x w-1/3 z-10 bg-grey-lighter mx-auto p-8 rounded">
+    <div @click="closeUpdateModal" class="absolute inset-0 opacity-75 bg-gray-500"></div>
+    <div class="fixed inset-x-0 w-1/3 z-10 bg-gray-200 mx-auto p-8 rounded">
       <p class="py-2">
       {{ message }}
       </p>
-      <div class="flex flex-row justify-between pt-8 bg-grey-lighter rounded">
-        <button @click="closeUpdateModal" class="text-red-lighter hover:font-bold hover:text-red-light hover:border-red-light border-red-lighter border px-4 py-3 rounded">Ok</button>
+      <div class="flex flex-row justify-between pt-8 bg-gray-200 rounded">
+        <button @click="closeUpdateModal" class="text-red-lighter hover:font-bold hover:text-red-400 hover:border-red-400 border-red-lighter border px-4 py-3 rounded">Ok</button>
       </div>
     </div>
   </div>
 
-  <div class="container mx-4 md:mx-auto py-8 bg-white rounded shadow text-center text-grey-darker">
+  <div class="container mx-4 md:mx-auto py-8 bg-white rounded shadow text-center text-gray-800">
     <div class="pb-4 text-3xl">
       Goodwork
     </div>
     <div class="p-2">
-      Version: <span class="pl-2 text-xl text-grey-darkest">{{ version }}</span>
-      <button @click="checkForUpdates" class="no-underline p-4 m-4 mb-0 bg-white text-base text-teal rounded border border-grey-light">
+      Version: <span class="pl-2 text-xl text-gray-900">{{ version }}</span>
+      <button @click="checkForUpdates" class="no-underline p-4 m-4 mb-0 bg-white text-base text-teal-500 rounded border border-gray-400">
         {{ 'Check for Updates' | localize }}
         <div v-if="loading" class="inline">
           <font-awesome-icon :icon="faSpinner" spin></font-awesome-icon>
@@ -26,16 +26,16 @@
       </button>
     </div>
     <div class="p-2">
-      {{ 'Last Updated' | localize }}: <span class="pl-2 text-xl text-grey-darkest">{{ lastUpdated }}</span>
+      {{ 'Last Updated' | localize }}: <span class="pl-2 text-xl text-gray-900">{{ lastUpdated }}</span>
     </div>
     <div class="p-2">
-      {{ 'Author' | localize }}: <a href="https://hasnayeen.github.io/" class="pl-2 text-xl text-blue-light no-underline">Nehal Hasnayeen</a>
+      {{ 'Author' | localize }}: <a href="https://hasnayeen.github.io/" class="pl-2 text-xl text-blue-400 no-underline">Nehal Hasnayeen</a>
     </div>
     <div class="p-2">
-      {{ 'Submit issue & feedback at' | localize }}: <a href="https://github.com/iluminar/goodwork/issues" class="pl-2 text-xl text-blue-light no-underline">Goodwork Issues</a>
+      {{ 'Submit issue & feedback at' | localize }}: <a href="https://github.com/iluminar/goodwork/issues" class="pl-2 text-xl text-blue-400 no-underline">Goodwork Issues</a>
     </div>
     <div class="pt-8">
-      © {{ (new Date()).getFullYear() }} <a href="https://github.com/iluminar/" class="text-xl text-blue-light no-underline">Iluminar</a>
+      © {{ (new Date()).getFullYear() }} <a href="https://github.com/iluminar/" class="text-xl text-blue-400 no-underline">Iluminar</a>
     </div>
   </div>
 </div>  

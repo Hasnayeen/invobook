@@ -11,7 +11,7 @@
 
     <title>{{ config('app.name', 'GOODWORK') }} | {{ $title }}</title>
 
-    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300,400,600"> -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300,400,600">
     <link href="{{ mix('css/main.min.css') }}" rel="stylesheet">
 
     @yield('style')
@@ -31,7 +31,7 @@
     </script>
     @endif
 </head>
-<body class="bg-grey-lighter">
+<body class="bg-gray-200">
     <main>
         <div id="app">
             <div class="h-1" style="background: linear-gradient(to right, #4DC0B5, #3490DC);"></div>

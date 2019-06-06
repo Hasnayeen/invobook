@@ -1,11 +1,11 @@
 <template>
 <div :class="{'hidden': (activeTab != 'settings')}" class="w-full mb-8">
-  <div class="bg-white shadow rounded-t text-grey-darkest mt-4">
-    <div class="flex flex-row text-center text-grey">
-      <div @click="activateThisColumn('integrations')" :class="[activeColumn === 'integrations' ? 'text-indigo border-indigo border-b-2' : 'bg-white cursor-pointer']" class="w-1/2 font-semibold p-4 rounded-tl">
+  <div class="bg-white shadow rounded-t text-gray-900 mt-4">
+    <div class="flex flex-row text-center text-gray-500">
+      <div @click="activateThisColumn('integrations')" :class="[activeColumn === 'integrations' ? 'text-indigo-500 border-indigo-500 border-b-2' : 'bg-white cursor-pointer']" class="w-1/2 font-semibold p-4 rounded-tl">
         {{ 'Integrations' | localize }}
       </div>
-      <div @click="activateThisColumn('invitations')" :class="[activeColumn === 'invitations' ? 'text-indigo border-indigo border-b-2' : 'bg-white cursor-pointer']" class="w-1/2 font-semibold p-4 rounded-tl">
+      <div @click="activateThisColumn('invitations')" :class="[activeColumn === 'invitations' ? 'text-indigo-500 border-indigo-500 border-b-2' : 'bg-white cursor-pointer']" class="w-1/2 font-semibold p-4 rounded-tl">
         {{ 'Invitations' | localize }}
       </div>
     </div>

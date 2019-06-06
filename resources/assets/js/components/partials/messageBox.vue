@@ -1,34 +1,34 @@
 <template>
 <div id="direct-message-box" @focus="clearTitleNotification()" v-if="messageBoxShown" class="">
-  <div class="fixed pin-t bg-white text-lg rounded mx-auto md:w-1/2 mt-16 pt-6 shadow-lg z-50 pin-x">
-    <div class="bg-white text-2xl text-grey-dark text-center px-8 pb-2">
+  <div class="fixed top-0 bg-white text-lg rounded mx-auto md:w-1/2 mt-16 pt-6 shadow-lg z-50 inset-x-0">
+    <div class="bg-white text-2xl text-gray-600 text-center px-8 pb-2">
       Your Messages
     </div>
-    <div class="py-2 bg-grey-lighter">
-      <div class="text-sm text-center text-grey-dark">Send direct meesage</div>
+    <div class="py-2 bg-gray-200">
+      <div class="text-sm text-center text-gray-600">Send direct meesage</div>
       <div class="flex flex-row justify-center px-4 py-2">
         <div @click="selectUserMessage(user)" v-for="user in users" v-if="user.id !== authUser.id" class="relative">
           <img class="w-10 h-10 rounded-full md:mr-2 cursor-pointer" :title="user.name" :src="generateUrl(user.avatar)">
-          <div :class="[user.online ? 'bg-teal' : 'bg-grey']" :title="[user.online ? 'online' : 'offline']" class="absolute w-4 h-4 rounded-full border-2 border-white mr-1 pin-r pin-b"></div>
+          <div :class="[user.online ? 'bg-teal' : 'bg-gray-500']" :title="[user.online ? 'online' : 'offline']" class="absolute w-4 h-4 rounded-full border-2 border-white mr-1 right-0 bottom-0"></div>
         </div>
       </div>
     </div>
 
     <div id="message-box" class="h-50-vh overflow-y-auto">
       <div v-if="selectedUser.id">
-        <div v-if="messages.length < 1" class="text-grey-dark text-sm text-center" style="margin-top: 20vh;">
+        <div v-if="messages.length < 1" class="text-gray-600 text-sm text-center" style="margin-top: 20vh;">
           You've no message interaction with this user yet. Say "Hi" to {{ selectedUser.name }}
         </div>
         <message v-for="(message, index) in messages" :key="index" :message="message" :user="authUser" :index="index" @deleted="deleteMessage"></message>
       </div>
-      <div v-else class="text-grey-dark text-sm text-center" style="margin-top: 20vh;">
+      <div v-else class="text-gray-600 text-sm text-center" style="margin-top: 20vh;">
         Click on the profile pic above to see interaction with that user
       </div>
     </div>
 
-    <div class="relative bg-grey-light">
+    <div class="relative bg-gray-400">
       <div class="static text-center p-4">
-        <textarea class="static textarea resize-none rounded w-full p-4 text-grey-darker"
+        <textarea class="static textarea resize-none rounded w-full p-4 text-gray-800"
           id="send-message"
           :style="{height: messageTextareaHeight}"
           ref="messageTextarea"
@@ -41,7 +41,7 @@
     </div>
   </div>
 
-  <div @click="hideMessageBox" class="h-screen w-screen fixed pin bg-grey-darkest opacity-25 z-10"></div>
+  <div @click="hideMessageBox" class="h-screen w-screen fixed inset-0 bg-gray-900 opacity-25 z-10"></div>
 </div>
 </template>
 
