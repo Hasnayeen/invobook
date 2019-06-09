@@ -1,7 +1,8 @@
 <template>
-<div class="relative">
-  <div>
-    <img @mouseover="showProfileCard()" @mouseleave="hideProfileCard()" :src="generateUrl(user.avatar)" class="rounded-full w-8 h-8 mr-1">
+<div class="relative inline">
+  <div :class="[homePage ? 'w-10 h-10' : 'w-8 h-8']">
+    <img @mouseover="showProfileCard()" @mouseleave="hideProfileCard()" :src="generateUrl(user.avatar)" class="rounded-full mr-1" 
+      :class="[homePage ? 'border-white border-2 rounded-full w-10 h-10' : 'w-8 h-8']">
   </div>
   <div @mouseover="showProfileCard()" @mouseleave="hideProfileCard()" v-if="profileCardShown" class="absolute w-48 -ml-20 pt-4 -mt-2 z-10">
     <div class="flex flex-col items-center justify-center bg-blue-900 text-white rounded-lg shadow py-6 px-4">
@@ -29,7 +30,11 @@ export default {
     user: {
       required: true,
       type: Object
-    }
+    },
+    homePage: {
+      required: false,
+      type: Boolean
+    },
   },
   data: () => ({
     profileCardShown: false
