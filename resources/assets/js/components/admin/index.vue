@@ -54,7 +54,7 @@ import { faUser } from '@fortawesome/free-solid-svg-icons/faUser'
 export default {
   components: {aboutBoard, authBoard, usersBoard, activityBoard, settingsBoard},
   data: () => ({
-    active: 'auth',
+    active: 'users',
     faBolt,
     faInfoCircle,
     faLockOpen,
