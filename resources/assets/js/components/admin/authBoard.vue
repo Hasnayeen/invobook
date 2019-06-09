@@ -1,12 +1,9 @@
 <template>
 <div :class="{'hidden': (activeTab != 'auth')}" class="w-full mb-8">
-  <div class="bg-white shadow rounded-t text-gray-900 mt-4">
+  <div class="bg-white shadow rounded text-gray-900 mt-4">
     <div class="flex flex-row text-center text-gray-500">
-      <div @click="activateThisColumn('roles')" :class="[activeColumn === 'roles' ? 'text-indigo-500 border-indigo-500 border-b-2' : 'bg-white cursor-pointer']" class="w-1/2 font-semibold p-4 rounded-tl">
-        {{ 'Roles' | localize }}
-      </div>    
-      <div @click="activateThisColumn('permissions')" :class="[activeColumn === 'permissions' ? 'text-indigo-500 border-indigo-500 border-b-2' : 'bg-white cursor-pointer']" class="w-1/2 font-semibold p-4">
-        {{ 'Permissions' | localize }}
+      <div @click="activateThisColumn('roles')" :class="[activeColumn === 'roles' ? 'text-indigo-500' : 'bg-white cursor-pointer']" class="w-full font-semibold p-4 rounded-tl">
+        {{ 'Default Permission Settings' | localize }}
       </div>
     </div>
     <roles-board :activeColumn="activeColumn"></roles-board>
@@ -27,7 +24,7 @@ export default {
     }
   },
   data: () => ({
-    activeColumn: ''
+    activeColumn: 'roles'
   }),
   beforeUpdate () {
     if (this.activeColumn === '') {
