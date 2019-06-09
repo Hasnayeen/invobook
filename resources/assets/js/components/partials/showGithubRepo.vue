@@ -18,9 +18,11 @@
         </div>
       </li>
     </ul>
-    <div v-if="accessTokenNotSet" class="p-8 text-gray-800 text-center text-lg">
-      <div>Access Token is not set.</div>
-      <div>Please set your Github Access Token in intregation settings on Admin page.</div>
+    <div v-if="accessTokenNotSet" class="p-8 text-gray-800">
+      <div class="bg-red-100 border-l border-red-400 p-4 rounded">
+        <div class="text-lg text-red-800">Access Token is not set.</div>
+        <div class="text-sm">Please set your Github Access Token in intregation settings on Admin page.</div>
+      </div>
     </div>
   </div>
 

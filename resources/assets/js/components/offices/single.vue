@@ -37,10 +37,10 @@
   <!-- Modals for dropdown menu -->
 
     <div class="h-16 flex flex-row justify-center items-center px-2">
-      <span @click="showAddMemberForm" class="bg-white shadow w-8 h-8 rounded-full text-teal-500 hover:cursor-pointer text-center p-2">
+      <span @click="showAddMemberForm" class="bg-white shadow w-8 h-8 flex justify-center items-center rounded-full text-teal-500 cursor-pointer text-center p-2 mr-1">
         <font-awesome-icon :icon="faPlus"></font-awesome-icon>
       </span>
-      <a v-for="(member, index) in office.members" :href="'/users/' + member.username" class="pl-2">
+      <a v-for="(member, index) in office.members" :href="'/users/' + member.username" class="mx-1">
         <profile-card :user="member"></profile-card>
       </a>
       <span v-if="office.members.length > 5" class="bg-gray-200 border-teal-500 border p-2 rounded-full">{{ office.members.length - 5 }}+</span>
