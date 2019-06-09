@@ -6,6 +6,7 @@
 
 - Added new Authorization module
 - Added new permission system
+- Added new admin middleware
 - Added direct message to a user functionality
 - Added mentioning user functionality in comment & message
 - Added endpoint to list all tags
@@ -18,6 +19,8 @@
 
 ### Changed
 
+- Upgraded to Laravel 5.8
+- Upgraded to TailwindCSS 1.0
 - Everything under `App` namespace is now moved to `App\Core` namespace
 
 ### Removed

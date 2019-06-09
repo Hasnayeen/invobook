@@ -12,12 +12,12 @@ class RolePermissionController extends Controller
     public function store(Role $role, Permission $permission)
     {
         $this->authorize('assign', $permission);
-        $role->permissions()->attach($permission->id);
+        $role->defaultPermissions()->attach($permission->id, ['group_related' => $permission->group_related]);
 
         return response()->json([
             'status'     => 'success',
             'message'    => trans('misc.Permission has been assigned to the role'),
-            'permission' => $role->permissions()->find(request('permission_id')),
+            'permission' => $role->defaultPermissions()->find(request('permission_id')),
             'role'       => $role,
         ]);
     }
@@ -28,11 +28,29 @@ class RolePermissionController extends Controller
         if ($role->slug === 'owner') {
             throw new OwnerPermissionCantBeRevoked;
         }
-        $role->permissions()->detach($permission->id);
+        $role->defaultPermissions()->detach($permission->id);
 
         return response()->json([
             'status'  => 'success',
             'message' => trans('misc.Permission has been revoked from the role'),
+        ]);
+    }
+
+    public function index(Role $role)
+    {
+        $permissions = Permission::all()->groupBy('resource');
+        $rolePermissions = $role->defaultPermissions;
+        $permissions->each(function ($item, $key) use ($rolePermissions) {
+            $item->transform(function ($item, $key) use ($rolePermissions) {
+                $item->enabled = $rolePermissions->where('action', $item->action)->where('resource', $item->resource)->first() ? true : false;
+
+                return $item;
+            });
+        });
+
+        return response()->json([
+            'status'           => 'success',
+            'permissions'      => $permissions,
         ]);
     }
 }

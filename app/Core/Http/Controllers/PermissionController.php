@@ -8,8 +8,7 @@ class PermissionController extends Controller
 {
     public function index()
     {
-        $permissions = Permission::all();
-        $permissions->load('roles');
+        $permissions = Permission::all()->groupBy('resource');
 
         return response()->json([
             'status'       => 'success',

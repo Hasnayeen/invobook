@@ -16,7 +16,7 @@ class OwnerPermissionCantBeRevoked extends Exception
     {
         return response()->json([
             'status'   => 'error',
-            'message'  => 'Can\'t revoke permission from Owner role',
+            'message'  => 'Can\'t revoke permission from the role "Owner"',
         ], 403);
     }
 }
