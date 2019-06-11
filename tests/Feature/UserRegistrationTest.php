@@ -110,7 +110,7 @@ class UserRegistrationTest extends TestCase
         ]);
         $invite = Invite::create([
             'role_id' => 5,
-            'link' => url('register/invite-link/' . Str::random(32)),
+            'link'    => url('register/invite-link/' . Str::random(32)),
         ]);
 
         $this->post($invite->link, $newUser)
@@ -133,7 +133,7 @@ class UserRegistrationTest extends TestCase
             'name' => 'Headquarter',
         ]);
 
-        $this->post( url('register/invite-link/invalid'), $newUser)
+        $this->post(url('register/invite-link/invalid'), $newUser)
              ->assertStatus(403);
     }
 

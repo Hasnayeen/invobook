@@ -4,8 +4,8 @@ namespace App\Core\Policies;
 
 use App\Core\Models\Tag;
 use App\Core\Models\User;
-use Illuminate\Auth\Access\HandlesAuthorization;
 use App\Authorization\Authorization;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class TagPolicy
 {

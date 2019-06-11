@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use Carbon\Carbon;
 use ErrorException;
 use Tests\TestCase;
 use App\Core\Models\User;
@@ -11,7 +12,6 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Carbon\Carbon;
 
 class RegistrationInvitationTest extends TestCase
 {
@@ -115,7 +115,7 @@ class RegistrationInvitationTest extends TestCase
     {
         $invite = Invite::create([
             'role_id' => 5,
-            'link' => url('register/invite-link/' . Str::random(32)),
+            'link'    => url('register/invite-link/' . Str::random(32)),
         ]);
 
         $this->get($invite->link)
@@ -134,9 +134,9 @@ class RegistrationInvitationTest extends TestCase
     public function visitor_with_expired_link_should_get_403_error()
     {
         $invite = Invite::create([
-            'role_id' => 5,
+            'role_id'     => 5,
             'expiry_date' => Carbon::now()->subDay()->toDateString(),
-            'link' => url('register/invite-link/' . Str::random(32)),
+            'link'        => url('register/invite-link/' . Str::random(32)),
         ]);
         $this->expectException(HttpException::class);
         $this->get($invite->link);

@@ -4,8 +4,8 @@ namespace App\Core\Policies;
 
 use App\Core\Models\User;
 use App\Core\Models\Permission;
-use Illuminate\Auth\Access\HandlesAuthorization;
 use App\Authorization\Authorization;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class PermissionPolicy
 {

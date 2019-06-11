@@ -2,10 +2,10 @@
 
 namespace App\Core\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Core\Models\Invite;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
 
 class InvitationController extends Controller
 {
