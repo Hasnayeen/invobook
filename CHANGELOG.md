@@ -16,6 +16,7 @@
 - Added finnish translation
 - Added simplified Chinese translation
 - Added `localize` helper function
+- Added shareable invite link option for registration
 
 ### Changed
 
