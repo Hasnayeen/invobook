@@ -13,7 +13,7 @@ class UpdateDiscussionRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->id == $this->route('discussion')->posted_by;
+        return $this->user()->id === $this->route('discussion')->posted_by;
     }
 
     /**

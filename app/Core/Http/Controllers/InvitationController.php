@@ -5,6 +5,7 @@ namespace App\Core\Http\Controllers;
 use App\Core\Models\Invite;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class InvitationController extends Controller
 {
@@ -42,8 +43,10 @@ class InvitationController extends Controller
 
     public function showRegistrationForm($token)
     {
+        $today = Carbon::now();
         $invite = Invite::where('link', url('register/invite-link/' . $token))->first();
-        if ($invite) {
+        $notExpired = $invite && $invite->expiry_date ? $today->lessThanOrEqualTo($invite->expiry_date) : true;
+        if ($invite && $notExpired) {
             return view('auth.register', ['token' => $invite->link]);
         }
 

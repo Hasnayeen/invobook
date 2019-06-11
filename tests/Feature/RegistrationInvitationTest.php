@@ -5,9 +5,13 @@ namespace Tests\Feature;
 use ErrorException;
 use Tests\TestCase;
 use App\Core\Models\User;
+use App\Core\Models\Invite;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Carbon\Carbon;
 
 class RegistrationInvitationTest extends TestCase
 {
@@ -72,10 +76,7 @@ class RegistrationInvitationTest extends TestCase
     public function admin_can_create_shareable_invite_link()
     {
         $response = $this->actingAs($this->user)
-             ->post('register/invite-link', [
-                 'role_id'     => 3,
-                 'expiry_date' => '2019-07-20',
-             ])
+             ->create_shareable_link()
              ->assertJsonFragment([
                  'status' => 'success',
              ]);
@@ -97,12 +98,7 @@ class RegistrationInvitationTest extends TestCase
     /** @test */
     public function admin_can_get_the_shareable_invite_link_for_a_role()
     {
-        $response = $this->actingAs($this->user)
-            ->post('register/invite-link', [
-                'role_id'     => 3,
-            ]);
-
-        // dd($response->decodeResponseJson()['link']);
+        $response = $this->actingAs($this->user)->create_shareable_link();
 
         $this->actingAs($this->user)
             ->call('GET', 'register/invite-link', [
@@ -111,6 +107,46 @@ class RegistrationInvitationTest extends TestCase
             ->assertJsonFragment([
                 'status' => 'success',
                 'link'   => $response->decodeResponseJson()['link'],
+            ]);
+    }
+
+    /** @test */
+    public function visitor_with_active_link_can_visit_registration_page()
+    {
+        $invite = Invite::create([
+            'role_id' => 5,
+            'link' => url('register/invite-link/' . Str::random(32)),
+        ]);
+
+        $this->get($invite->link)
+             ->assertOk()
+             ->assertViewIs('auth.register');
+    }
+
+    /** @test */
+    public function visitor_with_wrong_link_should_get_403_error()
+    {
+        $this->expectException(HttpException::class);
+        $this->get('register/invite-link/asdsad');
+    }
+
+    /** @test */
+    public function visitor_with_expired_link_should_get_403_error()
+    {
+        $invite = Invite::create([
+            'role_id' => 5,
+            'expiry_date' => Carbon::now()->subDay()->toDateString(),
+            'link' => url('register/invite-link/' . Str::random(32)),
+        ]);
+        $this->expectException(HttpException::class);
+        $this->get($invite->link);
+    }
+
+    private function create_shareable_link()
+    {
+        return $this->post('register/invite-link', [
+                'role_id'     => 3,
+                'expiry_date' => '2019-07-20',
             ]);
     }
 }

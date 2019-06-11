@@ -17,7 +17,7 @@ class DirectMessageController extends Controller
                 'total'    => count($messages),
                 'messages' => $messages,
             ]);
-        } catch (Exception $e) {
+        } catch (Exception $exception) {
             return response()->json([
                 'status'   => 'error',
                 'message'  => 'Something went wrong',

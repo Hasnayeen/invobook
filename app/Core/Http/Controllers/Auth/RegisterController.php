@@ -101,7 +101,7 @@ class RegisterController extends Controller
     public function confirmNewRegistration(Request $request, $token)
     {
         $token = Token::where('token', decrypt($token))->first();
-        if ($token && ($token->email == $request->email)) {
+        if ($token && ($token->email === $request->email)) {
             $this->register($request, $token);
 
             $user = User::whereEmail($request->email)->first();

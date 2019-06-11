@@ -4,6 +4,7 @@ namespace App\Core\Policies;
 
 use App\Core\Models\User;
 use App\Core\Models\Office;
+use App\Authorization\Authorization;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class OfficePolicy
@@ -19,7 +20,7 @@ class OfficePolicy
      */
     public function view(User $user, Office $office)
     {
-        return resolve('Authorization')->userHasPermissionTo('view', 'office', $office->id, false, 'office', $office->id);
+        return (new Authorization($user))->userHasPermissionTo('view', 'office', $office->id, false, 'office', $office->id);
     }
 
     /**
@@ -30,7 +31,7 @@ class OfficePolicy
      */
     public function create(User $user)
     {
-        return resolve('Authorization')->userHasPermissionTo('create', 'office');
+        return (new Authorization($user))->userHasPermissionTo('create', 'office');
     }
 
     /**
@@ -42,6 +43,6 @@ class OfficePolicy
      */
     public function delete(User $user, Office $office)
     {
-        return resolve('Authorization')->userHasPermissionTo('delete', 'office', $office->id, false, 'office', $office->id);
+        return (new Authorization($user))->userHasPermissionTo('delete', 'office', $office->id, false, 'office', $office->id);
     }
 }

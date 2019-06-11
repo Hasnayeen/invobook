@@ -29,7 +29,7 @@ class ProjectController extends Controller
             $project->members()->save(auth()->user());
             $project->load('members');
 
-            resolve('Authorization')->setDefaultPermissions($project);
+            resolve('Authorization')->setupDefaultPermissions($project);
 
             return $this->successResponse(
                 trans('misc.New project has been created'),
@@ -37,8 +37,8 @@ class ProjectController extends Controller
                 $project,
                 201
             );
-        } catch (Exception $e) {
-            return $this->errorResponse($e->getMessage());
+        } catch (Exception $exception) {
+            return $this->errorResponse($exception->getMessage());
         }
     }
 

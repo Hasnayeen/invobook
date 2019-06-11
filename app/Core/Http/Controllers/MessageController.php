@@ -25,7 +25,7 @@ class MessageController extends Controller
                 'total'    => count($messages),
                 'messages' => $messages,
             ]);
-        } catch (Exception $e) {
+        } catch (Exception $exception) {
             return response()->json([
                 'status'   => 'error',
                 'message'  => 'Something went wrong',
@@ -52,10 +52,10 @@ class MessageController extends Controller
                 'status'  => 'success',
                 'message' => $message,
             ]);
-        } catch (Exception $e) {
+        } catch (Exception $exception) {
             return response()->json([
                 'status'  => 'error',
-                'message' => $e->getMessage(),
+                'message' => $exception->getMessage(),
             ]);
         }
     }
@@ -77,10 +77,10 @@ class MessageController extends Controller
                 'status'  => 'success',
                 'message' => $message,
             ]);
-        } catch (Exception $e) {
+        } catch (Exception $exception) {
             return response()->json([
                 'status'  => 'error',
-                'message' => $e->getMessage(),
+                'message' => $exception->getMessage(),
             ]);
         }
     }

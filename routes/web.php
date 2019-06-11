@@ -28,15 +28,15 @@ Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 
 Route::post('register/invite-link', 'InvitationController@store')->middleware(['auth', 'admin']);
 
-Route::get('register/invite-link', 'InvitationController@show');
+Route::get('register/invite-link', 'InvitationController@show')->middleware(['auth', 'admin']);
 
-Route::get('register/invite-link/{token}', 'InvitationController@showRegistrationForm');
+Route::get('register/invite-link/{token}', 'InvitationController@showRegistrationForm')->middleware('guest');
 
 Route::post('register/invite-link/{token}', 'Auth\RegisterController@registerViaLink');
 
 Route::post('register/invite', 'UserController@sentInvitationToRegister')->middleware(['auth', 'admin']);
 
-Route::get('register/{token}', 'Auth\RegisterController@showRegistrationForm');
+Route::get('register/{token}', 'Auth\RegisterController@showRegistrationForm')->middleware('guest');
 
 Route::post('register/{token}', 'Auth\RegisterController@confirmNewRegistration');
 
