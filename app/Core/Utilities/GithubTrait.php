@@ -33,9 +33,7 @@ trait GithubTrait
                 }';
         $res = $client->request('POST', 'https://api.github.com/graphql', [
             'headers' => ['Authorization' => 'bearer ' . decrypt($token)],
-            'json'    => [
-                'query' => $query,
-            ],
+            'json'    => ['query' => $query],
         ]);
 
         return json_decode($res->getBody()->getContents());

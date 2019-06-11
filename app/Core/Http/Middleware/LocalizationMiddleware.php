@@ -26,16 +26,19 @@ class LocalizationMiddleware
 
         if (! is_null($file)) {
             $localeData = array_merge(Lang::get('navbar', [], $locale), Lang::get($file, [], $locale));
-            $localeString = json_encode($localeData);
-            $content = str_replace_first('</head>', "<script>window.lang=$localeString</script>\n</head>", $response->content());
-            $response->setContent($content);
+            $this->prepareResponse($localeData, $response);
         } elseif ($response->exception instanceof NotFoundHttpException) {
             $localeData = Lang::get('navbar', [], $locale);
-            $localeString = json_encode($localeData);
-            $content = str_replace_first('</head>', "<script>window.lang=$localeString</script>\n</head>", $response->content());
-            $response->setContent($content);
+            $this->prepareResponse($localeData, $response);
         }
 
         return $response;
+    }
+
+    private function prepareResponse($localeData, $response)
+    {
+        $localeString = json_encode($localeData);
+        $content = str_replace_first('</head>', "<script>window.lang=$localeString</script>\n</head>", $response->content());
+        $response->setContent($content);
     }
 }

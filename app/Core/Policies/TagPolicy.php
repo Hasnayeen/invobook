@@ -21,7 +21,7 @@ class TagPolicy
      */
     public function attach(User $user)
     {
-        return true;
+        return (new Authorization($user))->userHasPermissionTo('attach', 'tag');
     }
 
     /**

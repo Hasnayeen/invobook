@@ -54,6 +54,6 @@ class TaskPolicy
      */
     public function delete(User $user, Task $task)
     {
-        return resolve('Authorization')->userHasPermissionTo('delete', 'task', $task->id, true, request('group_type'), request('group_id'));
+        return(new Authorization($user))->userHasPermissionTo('delete', 'task', $task->id, true, request('group_type'), request('group_id'));
     }
 }
