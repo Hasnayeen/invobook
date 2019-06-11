@@ -84,7 +84,7 @@ You can check out an instance of the application that we use as a guest user usi
 
 ![Activities](https://i.imgur.com/FfYSOq1.png)
 
-![Roles Board](https://i.imgur.com/87gbE0v.png)
+![Roles Board](https://i.imgur.com/TfRMzuf.png)
 
 ## Contributing <small>[↑Top](#about-goodwork)</small>
 

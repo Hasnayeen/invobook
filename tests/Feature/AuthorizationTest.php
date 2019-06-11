@@ -24,7 +24,7 @@ class AuthorizationTest extends TestCase
             'message' => 'Permission has been revoked from the role',
         ]);
 
-        $this->assertDatabaseMissing('role_has_permission', ['permission_id' => $this->permission->id, 'role_id' => $this->role->id]);
+        $this->assertDatabaseMissing('permission_settings', ['permission_id' => $this->permission->id, 'role_id' => $this->role->id]);
     }
 
     /** @test */
@@ -37,7 +37,7 @@ class AuthorizationTest extends TestCase
             'message' => 'Permission has been assigned to the role',
         ]);
 
-        $this->assertDatabaseHas('role_has_permission', ['role_id' => $this->role->id, 'permission_id' => $this->permission->id]);
+        $this->assertDatabaseHas('permission_settings', ['role_id' => $this->role->id, 'permission_id' => $this->permission->id]);
     }
 
     /** @test */

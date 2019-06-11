@@ -15,7 +15,6 @@ class PermissionSettingsTableSeeder extends Seeder
     public function run()
     {
         $now = Carbon::now();
-        $tools = ['task', 'discussion', 'event', 'message', 'file', 'comment'];
 
         /**
          * Default Permission Settings for Owner role.
@@ -26,7 +25,7 @@ class PermissionSettingsTableSeeder extends Seeder
                 [
                     'role_id'       => 1,
                     'permission_id' => $permission['id'],
-                    'group_related' => in_array($permission['resource'], $tools) ?? false,
+                    'group_related' => $permission['group_related'],
                     'created_at'    => $now,
                     'updated_at'    => $now,
                 ],
@@ -44,7 +43,7 @@ class PermissionSettingsTableSeeder extends Seeder
                 [
                     'role_id'       => 2,
                     'permission_id' => $permission['id'],
-                    'group_related' => in_array($permission['resource'], $tools) ?? false,
+                    'group_related' => $permission['group_related'],
                     'created_at'    => $now,
                     'updated_at'    => $now,
                 ],
@@ -58,13 +57,15 @@ class PermissionSettingsTableSeeder extends Seeder
                                  ->where('resource', '!=', 'project')
                                  ->where('resource', '!=', 'team')
                                  ->where('resource', '!=', 'office')
+                                 ->where('resource', '!=', 'member')
+                                 ->where('resource', '!=', 'permission')
                                  ->get();
         foreach ($permissions->toArray() as $permission) {
             PermissionSetting::insert([
                 [
                     'role_id'       => 3,
                     'permission_id' => $permission['id'],
-                    'group_related' => in_array($permission['resource'], $tools) ?? false,
+                    'group_related' => $permission['group_related'],
                     'created_at'    => $now,
                     'updated_at'    => $now,
                 ],
@@ -83,7 +84,7 @@ class PermissionSettingsTableSeeder extends Seeder
                 [
                     'role_id'       => 3,
                     'permission_id' => $permission['id'],
-                    'group_related' => in_array($permission['resource'], $tools) ?? false,
+                    'group_related' => $permission['group_related'],
                     'created_at'    => $now,
                     'updated_at'    => $now,
                 ],
@@ -102,7 +103,7 @@ class PermissionSettingsTableSeeder extends Seeder
                 [
                     'role_id'       => 4,
                     'permission_id' => $permission['id'],
-                    'group_related' => in_array($permission['resource'], $tools) ?? false,
+                    'group_related' => $permission['group_related'],
                     'created_at'    => $now,
                     'updated_at'    => $now,
                 ],
@@ -120,7 +121,7 @@ class PermissionSettingsTableSeeder extends Seeder
                 [
                     'role_id'       => 4,
                     'permission_id' => $permission['id'],
-                    'group_related' => in_array($permission['resource'], $tools) ?? false,
+                    'group_related' => $permission['group_related'],
                     'created_at'    => $now,
                     'updated_at'    => $now,
                 ],
@@ -139,7 +140,7 @@ class PermissionSettingsTableSeeder extends Seeder
                 [
                     'role_id'       => 5,
                     'permission_id' => $permission['id'],
-                    'group_related' => in_array($permission['resource'], $tools) ?? false,
+                    'group_related' => $permission['group_related'],
                     'created_at'    => $now,
                     'updated_at'    => $now,
                 ],

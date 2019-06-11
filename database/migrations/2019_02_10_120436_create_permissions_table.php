@@ -17,6 +17,7 @@ class CreatePermissionsTable extends Migration
             $table->increments('id');
             $table->string('action')->comment('name of the ability/action');
             $table->string('resource')->comment('name of the resource upon which the ability/action apply');
+            $table->boolean('group_related')->comment('whether this permission related to tools under group [project/team/office]');
             $table->timestamps();
         });
     }

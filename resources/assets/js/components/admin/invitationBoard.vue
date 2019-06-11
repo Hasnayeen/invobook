@@ -1,8 +1,8 @@
 <template>
 <div :class="{'hidden': (activeColumn !== 'invitations')}" class="bg-gray-100 rounded-b">
-  <div class="text-gray-700 text-xl font-medium px-8 pt-4">Create a shareable invite link</div>
-  <div class="text-gray-700 text-sm px-8 pb-4">User can register using this link and will be assigned the selected role</div>
-  <div class="bg-white p-8 pt-2 rounded-b">
+  <div class="text-gray-700 text-xl font-medium px-8 pt-6">Create a shareable invite link</div>
+  <div class="text-gray-700 text-sm px-8 pb-6">User can register using this link and will be assigned the selected role</div>
+  <div class="bg-white p-8 pt-4 rounded-b">
     <div class="py-4 rounded-b">
       <div class="inline text-lg text-gray-700">Select Role:</div>
       <template v-for="role in roles">

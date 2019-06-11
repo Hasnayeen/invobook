@@ -43,6 +43,12 @@ window.Vue.filter('localize', function (value) {
   return window.lang[value] ? window.lang[value] : value
 })
 
+window.Vue.filter('capitalize', function (value) {
+  if (!value) return ''
+  value = value.toString()
+  return value.charAt(0).toUpperCase() + value.slice(1)
+})
+
 window.Vue.directive('click-outside', ClickOutside)
 
 Vue.directive('linkified', linkify)

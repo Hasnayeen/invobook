@@ -15,11 +15,12 @@
 		</div>
 		<span class="text-gray-500 text-sm w-full px-2 h-16 self-start">{{ office.description }}</span>
 		<div class="border-t w-full h-16 flex flex-row justify-start items-center px-2">
-      <a v-if="index < 5" v-for="(member, index) in office.members" :href="'/users/' + member.username" class="pl-2">
-        <profile-card :user="member"></profile-card>
-      </a>
-			<span v-if="office.members.length > 5" class="bg-gray-200 border-teal-500 border p-2 rounded-full">{{ office.members.length - 5 }}+</span>
-			<span v-if="office.members.length == 0" class="text-gray-600 text-center">No members yet</span>
+      <div class="flex flex-row flex-row-reverse">
+        <a v-if="index < 6" v-for="(member, index) in office.members" :href="'/users/' + member.username" class="-ml-2">
+          <profile-card :user="member" homePage="true"></profile-card></profile-card>
+        </a>
+      </div>
+      <span v-if="office.members.length > 6" class="w-10 h-10 bg-teal-100 text-teal-500 border-white border font-semibold p-2 -ml-2 rounded-full">{{ office.members.length - 6 }}+</span>
 		</div>
 	</div>
 </template>
