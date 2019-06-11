@@ -35,11 +35,11 @@ class UserAccountController extends Controller
 
     private function emailDoesNotExist($request)
     {
-        return $request->email && !User::where('email', $request->email)->exists();
+        return $request->email && ! User::where('email', $request->email)->exists();
     }
 
     private function usernameDoesNotExist($request)
     {
-        return $request->username && !User::where('username', $request->username)->exists();
+        return $request->username && ! User::where('username', $request->username)->exists();
     }
 }
