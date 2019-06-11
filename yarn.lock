@@ -8873,10 +8873,10 @@ vue@^2.1.6, vue@^2.5.21:
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.10.tgz#a72b1a42a4d82a721ea438d1b6bf55e66195c637"
   integrity sha512-ImThpeNU9HbdZL3utgMCq0oiMzAkt1mcgy3/E6zWC/G6AaQoeuFdsl9nDhTDU3X1R6FK7nsIUuRACVcjI+A2GQ==
 
-vuejs-datepicker@^0.9.29:
-  version "0.9.29"
-  resolved "https://registry.yarnpkg.com/vuejs-datepicker/-/vuejs-datepicker-0.9.29.tgz#b17e504a9ae699f590b2fbe07237d5309012083b"
-  integrity sha512-9zHkUrDudf1Ej+Mkd/BtjE23R+SXU665REK30iOWmreDPXMJk8vqdhVRRHNyPYfCFaEUaDGOgZl0G83xTdwhFw==
+vuejs-datepicker@^1.5.4:
+  version "1.5.4"
+  resolved "https://registry.yarnpkg.com/vuejs-datepicker/-/vuejs-datepicker-1.5.4.tgz#dacdb5eb5ef44342c67cb59b93a0d5da9c1809b3"
+  integrity sha512-AVzgu3pb/fF/Sj3qu8YPnp7KhtsXkm8TSnBEcyYsWb1bMJr5FdPCxuIzISgw5kq0It7HkVJUGXQ4CiCwq9hhww==
 
 vuex@^3.0.1:
   version "3.1.1"

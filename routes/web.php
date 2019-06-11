@@ -26,7 +26,15 @@ Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
     Registration
 **********************************/
 
-Route::post('register/invite', 'UserController@sentInvitationToRegister')->middleware('auth');
+Route::post('register/invite-link', 'InvitationController@store')->middleware(['auth', 'admin']);
+
+Route::get('register/invite-link', 'InvitationController@show');
+
+Route::get('register/invite-link/{token}', 'InvitationController@showRegistrationForm');
+
+Route::post('register/invite-link/{token}', 'Auth\RegisterController@registerViaLink');
+
+Route::post('register/invite', 'UserController@sentInvitationToRegister')->middleware(['auth', 'admin']);
 
 Route::get('register/{token}', 'Auth\RegisterController@showRegistrationForm');
 

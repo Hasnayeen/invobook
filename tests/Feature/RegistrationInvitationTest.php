@@ -7,6 +7,7 @@ use Tests\TestCase;
 use App\Core\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Validation\ValidationException;
 
 class RegistrationInvitationTest extends TestCase
 {
@@ -18,9 +19,7 @@ class RegistrationInvitationTest extends TestCase
         Mail::fake();
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function authenticated_user_can_send_invitation()
     {
         $this->actingAs($this->user);
@@ -37,9 +36,7 @@ class RegistrationInvitationTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function guest_can_not_send_invitation()
     {
         $this->expectException(AuthenticationException::class);
@@ -47,9 +44,7 @@ class RegistrationInvitationTest extends TestCase
         $this->post(self::$endpoint, []);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function invitation_is_not_sent_if_email_is_in_database_already()
     {
         $this->actingAs($this->user);
@@ -64,14 +59,58 @@ class RegistrationInvitationTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function email_needs_to_be_supplied_in_request()
     {
         $this->expectException(ErrorException::class);
 
         $this->actingAs($this->user);
         $this->post(self::$endpoint, []);
+    }
+
+    /** @test */
+    public function admin_can_create_shareable_invite_link()
+    {
+        $response = $this->actingAs($this->user)
+             ->post('register/invite-link', [
+                 'role_id'     => 3,
+                 'expiry_date' => '2019-07-20',
+             ])
+             ->assertJsonFragment([
+                 'status' => 'success',
+             ]);
+
+        $this->assertDatabaseHas('invites', ['role_id' => 3, 'expiry_date' => '2019-07-20']);
+        $this->assertStringStartsWith(url('register/invite-link/'), $response->decodeResponseJson()['link']);
+    }
+
+    /** @test */
+    public function a_role_should_be_selected_to_create_invite_link()
+    {
+        $this->expectException(ValidationException::class);
+        $this->actingAs($this->user)
+             ->post('register/invite-link', [
+                 'expiry_date' => '2019-07-20',
+             ]);
+    }
+
+    /** @test */
+    public function admin_can_get_the_shareable_invite_link_for_a_role()
+    {
+        $response = $this->actingAs($this->user)
+            ->post('register/invite-link', [
+                'role_id'     => 3,
+            ]);
+
+        // dd($response->decodeResponseJson()['link']);
+
+        $this->actingAs($this->user)
+            ->call('GET', 'register/invite-link', [
+                'role_id'     => 3,
+            ])
+            ->assertJsonFragment([
+                'status' => 'success',
+                'link' => $response->decodeResponseJson()['link'],
+            ]);
     }
 }
