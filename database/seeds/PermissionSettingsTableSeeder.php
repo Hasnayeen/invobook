@@ -35,7 +35,9 @@ class PermissionSettingsTableSeeder extends Seeder
         /**
          * Default Permission Settings for Admin role.
          * */
-        $permissions = Permission::where('resource', '!=', 'user')->get();
+        $permissions = Permission::where('resource', '!=', 'user')
+                                 ->where('resource', '!=', 'permission')
+                                 ->get();
         foreach ($permissions->toArray() as $permission) {
             PermissionSetting::insert([
                 [

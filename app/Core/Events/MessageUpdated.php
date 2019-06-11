@@ -15,7 +15,7 @@ class MessageUpdated implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $message;
-    public $user;
+    protected $user;
 
     /**
      * Create a new event instance.

@@ -4,6 +4,7 @@ namespace App\Core\Policies;
 
 use App\Core\Models\Team;
 use App\Core\Models\User;
+use App\Authorization\Authorization;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class TeamPolicy
@@ -19,7 +20,7 @@ class TeamPolicy
      */
     public function view(User $user, Team $team)
     {
-        return resolve('Authorization')->userHasPermissionTo('view', 'team', $team->id, false, 'team', $team->id);
+        return (new Authorization($user))->userHasPermissionTo('view', 'team', $team->id, false, 'team', $team->id);
     }
 
     /**
@@ -30,7 +31,7 @@ class TeamPolicy
      */
     public function create(User $user)
     {
-        return resolve('Authorization')->userHasPermissionTo('create', 'team');
+        return (new Authorization($user))->userHasPermissionTo('create', 'team');
     }
 
     /**
@@ -42,6 +43,6 @@ class TeamPolicy
      */
     public function delete(User $user, Team $team)
     {
-        return resolve('Authorization')->userHasPermissionTo('delete', 'team', $team->id, false, 'team', $team->id);
+        return (new Authorization($user))->userHasPermissionTo('delete', 'team', $team->id, false, 'team', $team->id);
     }
 }

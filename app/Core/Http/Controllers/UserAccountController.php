@@ -10,7 +10,7 @@ class UserAccountController extends Controller
     public function update(UpdateUserAccount $request)
     {
         $user = auth()->user();
-        if ($request->email && ! User::where('email', $request->email)->exists()) {
+        if ($this->emailDoesNotExist($request)) {
             $user->email = $request->get('email');
         }
         if (auth()->user()->username === 'guest') {
@@ -19,7 +19,7 @@ class UserAccountController extends Controller
                 'message' => localize('misc.Username/Password is not updatable for this account'),
             ]);
         }
-        if ($request->username && ! User::where('username', $request->username)->exists()) {
+        if ($this->usernameDoesNotExist($request)) {
             $user->username = $request->get('username');
         }
         if ($request->get('new_password')) {
@@ -31,5 +31,15 @@ class UserAccountController extends Controller
             'status'  => 'success',
             'message' => localize('misc.Account details are updated'),
         ]);
+    }
+
+    private function emailDoesNotExist($request)
+    {
+        return $request->email && ! User::where('email', $request->email)->exists();
+    }
+
+    private function usernameDoesNotExist($request)
+    {
+        return $request->username && ! User::where('username', $request->username)->exists();
     }
 }

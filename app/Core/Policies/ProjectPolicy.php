@@ -4,6 +4,7 @@ namespace App\Core\Policies;
 
 use App\Core\Models\User;
 use App\Core\Models\Project;
+use App\Authorization\Authorization;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ProjectPolicy
@@ -19,7 +20,7 @@ class ProjectPolicy
      */
     public function view(User $user, Project $project)
     {
-        return resolve('Authorization')->userHasPermissionTo('view', 'project', $project->id, false, 'project', $project->id);
+        return (new Authorization($user))->userHasPermissionTo('view', 'project', $project->id, false, 'project', $project->id);
     }
 
     /**
@@ -30,7 +31,7 @@ class ProjectPolicy
      */
     public function create(User $user)
     {
-        return resolve('Authorization')->userHasPermissionTo('create', 'project');
+        return (new Authorization($user))->userHasPermissionTo('create', 'project');
     }
 
     /**
@@ -42,6 +43,6 @@ class ProjectPolicy
      */
     public function delete(User $user, Project $project)
     {
-        return resolve('Authorization')->userHasPermissionTo('delete', 'project', $project->id, false, 'project', $project->id);
+        return (new Authorization($user))->userHasPermissionTo('delete', 'project', $project->id, false, 'project', $project->id);
     }
 }

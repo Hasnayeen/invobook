@@ -1,8 +1,9 @@
 <template>
   <nav class="bg-white flex flex-row justify-between h-12 md:px-4 shadow sticky top-0">
-    <a class="text-teal-500 text-2xl font-bold md:font-normal no-underline h-12 w-32" :href="url.site">
-      <img :src="generateUrl('logos/logo.svg')" alt="" class="w-full h-full hidden md:block">
-      <img :src="generateUrl('logos/logo_square.svg')" alt="" class="w-full h-full block md:hidden pr-16">
+    <a class="flex items-center text-teal-500 text-2xl font-bold md:font-normal no-underline h-12 w-32" :href="url.site">
+      <!-- <img :src="generateUrl('logos/logo.svg')" alt="" class="w-full h-full hidden md:block"> -->
+      <img :src="generateUrl('logos/logo_square.svg')" alt="" class="w-full h-full block">
+      <span class="text-gray-700 font-bold">GOODWORK</span>
     </a>
 
     <div class="md:flex">

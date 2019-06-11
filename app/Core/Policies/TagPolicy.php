@@ -4,6 +4,7 @@ namespace App\Core\Policies;
 
 use App\Core\Models\Tag;
 use App\Core\Models\User;
+use App\Authorization\Authorization;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class TagPolicy
@@ -12,7 +13,7 @@ class TagPolicy
 
     public function create(User $user)
     {
-        return resolve('Authorization')->userHasPermissionTo('create', 'tag');
+        return (new Authorization($user))->userHasPermissionTo('create', 'tag');
     }
 
     /**
@@ -20,7 +21,7 @@ class TagPolicy
      */
     public function attach(User $user)
     {
-        return true;
+        return (new Authorization($user))->userHasPermissionTo('attach', 'tag');
     }
 
     /**
@@ -28,6 +29,6 @@ class TagPolicy
      */
     public function detach(User $user, Tag $tag)
     {
-        return resolve('Authorization')->userHasPermissionTo('detach', 'tag');
+        return (new Authorization($user))->userHasPermissionTo('detach', 'tag');
     }
 }

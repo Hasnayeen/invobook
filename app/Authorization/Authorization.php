@@ -44,7 +44,7 @@ class Authorization
             $this->user->isNotForbiddenTo($action, $resource);
     }
 
-    public function setDefaultPermissions($group)
+    public function setupDefaultPermissions($group)
     {
         $roles = Role::select(['id'])->get();
         $roles->each(function ($role, $key) use ($group) {

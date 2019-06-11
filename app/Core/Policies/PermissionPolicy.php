@@ -4,6 +4,7 @@ namespace App\Core\Policies;
 
 use App\Core\Models\User;
 use App\Core\Models\Permission;
+use App\Authorization\Authorization;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class PermissionPolicy
@@ -18,7 +19,7 @@ class PermissionPolicy
      */
     public function assign(User $user, Permission $permission)
     {
-        return resolve('Authorization')->userHasPermissionTo('assign', 'permission');
+        return (new Authorization($user))->userHasPermissionTo('assign', 'permission');
     }
 
     /**
@@ -29,6 +30,6 @@ class PermissionPolicy
      */
     public function revoke(User $user, Permission $permission)
     {
-        return resolve('Authorization')->userHasPermissionTo('revoke', 'permission');
+        return (new Authorization($user))->userHasPermissionTo('revoke', 'permission');
     }
 }

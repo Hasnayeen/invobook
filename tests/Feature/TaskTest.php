@@ -25,7 +25,7 @@ class TaskTest extends TestCase
             'taskable_id'   => $project->id,
         ]);
         $this->actingAs($this->user);
-        resolve('Authorization')->setDefaultPermissions($project);
+        resolve('Authorization')->setupDefaultPermissions($project);
         $project->members()->save($this->user);
 
         $this->actingAs($this->user)->post('/tasks', [
@@ -167,7 +167,7 @@ class TaskTest extends TestCase
         ]);
         factory(\App\Core\Models\Status::class)->create();
         $this->actingAs($this->user);
-        resolve('Authorization')->setDefaultPermissions($project);
+        resolve('Authorization')->setupDefaultPermissions($project);
         $project->members()->save($this->user);
 
         $this->actingAs($this->user)->post('/tasks', [

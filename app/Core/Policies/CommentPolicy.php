@@ -4,6 +4,7 @@ namespace App\Core\Policies;
 
 use App\Core\Models\User;
 use App\Core\Models\Comment;
+use App\Authorization\Authorization;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class CommentPolicy
@@ -30,6 +31,6 @@ class CommentPolicy
      */
     public function delete(User $user, Comment $comment)
     {
-        return resolve('Authorization')->userHasPermissionTo('delete', 'comment', $comment->id, true, request('group_type'), request('group_id'));
+        return (new Authorization($user))->userHasPermissionTo('delete', 'comment', $comment->id, true, request('group_type'), request('group_id'));
     }
 }

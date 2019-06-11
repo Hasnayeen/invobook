@@ -25,6 +25,7 @@ class SearchController extends Controller
                               return $user->hasPermissionTo("view {$result->huntable[$type.'_type']}->{$result->huntable[$type.'_id']}");
                           })
                           ->map(function ($result) {
+                              $data = [];
                               $data['name'] = $result->name;
                               $data['description'] = $result->description;
                               $data['type'] = "{$result->huntable_type}s";

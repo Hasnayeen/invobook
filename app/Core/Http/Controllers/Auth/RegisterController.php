@@ -5,6 +5,7 @@ namespace App\Core\Http\Controllers\Auth;
 use App\Core\Models\Role;
 use App\Core\Models\User;
 use App\Core\Models\Token;
+use App\Core\Models\Invite;
 use App\Core\Models\Office;
 use Illuminate\Http\Request;
 use App\Core\Mail\UserRegistered;
@@ -87,7 +88,7 @@ class RegisterController extends Controller
     public function showRegistrationForm($token)
     {
         if (Token::where('token', decrypt($token))->exists()) {
-            return view('auth.register', compact('token'));
+            return view('auth.register', ['token' => url('register/' . $token)]);
         }
 
         abort(403);
@@ -100,7 +101,7 @@ class RegisterController extends Controller
     public function confirmNewRegistration(Request $request, $token)
     {
         $token = Token::where('token', decrypt($token))->first();
-        if ($token && ($token->email == $request->email)) {
+        if ($token && ($token->email === $request->email)) {
             $this->register($request, $token);
 
             $user = User::whereEmail($request->email)->first();
@@ -109,6 +110,27 @@ class RegisterController extends Controller
             $user->save();
 
             $token->delete();
+
+            return redirect('/');
+        }
+
+        abort(403);
+    }
+
+    /**
+     * @param Request $request
+     * @param $token
+     */
+    public function registerViaLink(Request $request, $token)
+    {
+        $invite = Invite::where('link', url('register/invite-link/' . $token))->first();
+        if ($invite) {
+            $this->register($request);
+
+            $user = User::whereEmail($request->email)->first();
+            $role = Role::find($invite->role_id);
+            $user->role_id = $role->id;
+            $user->save();
 
             return redirect('/');
         }

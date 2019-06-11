@@ -4,6 +4,7 @@ namespace App\Core\Policies;
 
 use App\Core\Models\User;
 use App\Core\Models\Discussion;
+use App\Authorization\Authorization;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class DiscussionPolicy
@@ -19,7 +20,7 @@ class DiscussionPolicy
      */
     public function update(User $user, Discussion $discussion)
     {
-        return resolve('Authorization')->userHasPermissionTo('update', 'discussion', $discussion->id, true, request('group_type'), request('group_id'));
+        return (new Authorization($user))->userHasPermissionTo('update', 'discussion', $discussion->id, true, request('group_type'), request('group_id'));
     }
 
     /**
@@ -31,6 +32,6 @@ class DiscussionPolicy
      */
     public function delete(User $user, Discussion $discussion)
     {
-        return resolve('Authorization')->userHasPermissionTo('delete', 'discussion', $discussion->id, true, request('group_type'), request('group_id'));
+        return (new Authorization($user))->userHasPermissionTo('delete', 'discussion', $discussion->id, true, request('group_type'), request('group_id'));
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Core\Repositories;
 
 use App\Core\Models\Comment;
-use Illuminate\Database\Eloquent\Model;
 
 class CommentRepository
 {

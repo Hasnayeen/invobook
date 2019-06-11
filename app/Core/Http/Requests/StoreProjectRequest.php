@@ -2,7 +2,6 @@
 
 namespace App\Core\Http\Requests;
 
-use App\Core\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreProjectRequest extends FormRequest

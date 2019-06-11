@@ -14,17 +14,17 @@ class YouWereMentioned extends Notification implements ShouldQueue
     /**
      * @var string
      */
-    public $mentionableType;
+    protected $mentionableType;
 
     /**
      * @var \Illuminate\Database\Eloquent\Model
      */
-    public $mentionable;
+    protected $mentionable;
 
     /**
      * @var string
      */
-    public $notifier;
+    protected $notifier;
 
     /**
      * Create a new notification instance.
@@ -42,8 +42,7 @@ class YouWereMentioned extends Notification implements ShouldQueue
     /**
      * Get the notification's delivery channels.
      *
-     * @param mixed $notifiable
-     *
+     * @param  mixed $notifiable
      * @return array
      */
     public function via()
@@ -54,8 +53,7 @@ class YouWereMentioned extends Notification implements ShouldQueue
     /**
      * Get the mail representation of the notification.
      *
-     * @param mixed $notifiable
-     *
+     * @param  mixed                                          $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail()
@@ -67,8 +65,7 @@ class YouWereMentioned extends Notification implements ShouldQueue
     /**
      * Get the array representation of the notification.
      *
-     * @param mixed $notifiable
-     *
+     * @param  mixed $notifiable
      * @return array
      */
     public function toArray()

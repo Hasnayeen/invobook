@@ -40,7 +40,7 @@
     "vue-jest": "^2.6.0",
     "vue-linkify": "^1.0.1",
     "vue-test-utils": "^1.0.0-beta.11",
-    "vuejs-datepicker": "^0.9.29",
+    "vuejs-datepicker": "^1.5.4",
     "vuex": "^3.0.1",
     "webpack": "^4.28.0"
   },

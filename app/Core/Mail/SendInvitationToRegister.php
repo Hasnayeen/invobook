@@ -39,7 +39,7 @@ class SendInvitationToRegister extends Mailable
                     ->with([
                         'token'   => $token,
                         'name'    => $request->name,
-                        'company' => ($setting) ? $setting->company_name : null,
+                        'company' => $setting ? $setting->company_name : null,
                     ]);
     }
 }
