@@ -16,7 +16,7 @@ class InvitationController extends Controller
         ]);
         $link = url('register/invite-link/' . Str::random(32));
         $inviteLink = Invite::where('role_id', $validatedData['role_id'])->first();
-        if (!$inviteLink) {
+        if (! $inviteLink) {
             $inviteLink = new Invite();
             $inviteLink->role_id = $validatedData['role_id'];
         }
@@ -36,7 +36,7 @@ class InvitationController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'link' => $invite->link ?? null,
+            'link'   => $invite->link ?? null,
         ]);
     }
 

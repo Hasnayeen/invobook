@@ -110,7 +110,7 @@ class RegistrationInvitationTest extends TestCase
             ])
             ->assertJsonFragment([
                 'status' => 'success',
-                'link' => $response->decodeResponseJson()['link'],
+                'link'   => $response->decodeResponseJson()['link'],
             ]);
     }
 }
