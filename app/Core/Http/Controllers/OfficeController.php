@@ -35,8 +35,8 @@ class OfficeController extends Controller
                 $office,
                 201
             );
-        } catch (Exception $e) {
-            return $this->errorResponse($e->getMessage());
+        } catch (Exception $exception) {
+            return $this->errorResponse($exception->getMessage());
         }
     }
 

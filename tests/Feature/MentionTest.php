@@ -46,7 +46,7 @@ class MentionTest extends TestCase
             'group_id'   => $project->id,
         ]);
         $this->actingAs($this->user);
-        resolve('Authorization')->setDefaultPermissions($project);
+        resolve('Authorization')->setupDefaultPermissions($project);
         $project->members()->save($this->user);
         $project->members()->save($this->user2);
         $project->members()->save($this->user3);

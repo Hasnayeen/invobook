@@ -29,10 +29,10 @@ class TaskController extends Controller
                 'message' => trans('misc.New task has been created'),
                 'task'    => $task,
             ], 201);
-        } catch (Exception $e) {
+        } catch (Exception $exception) {
             return response()->json([
                 'status'  => 'error',
-                'message' => $e->getMessage(),
+                'message' => $exception->getMessage(),
             ]);
         }
     }
@@ -58,7 +58,7 @@ class TaskController extends Controller
                 'total'    => count($tasks),
                 'tasks'    => $tasks,
             ]);
-        } catch (Exception $e) {
+        } catch (Exception $exception) {
             return response()->json([
                 'status'   => 'error',
                 'message'  => 'Something went wrong',

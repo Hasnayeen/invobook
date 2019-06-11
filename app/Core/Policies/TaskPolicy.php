@@ -19,7 +19,7 @@ class TaskPolicy
      */
     public function view(User $user, Task $task)
     {
-        return resolve('Authorization')->userHasPermissionTo('view', 'task', $task->id, true, request('group_type'), request('group_id'));
+        return (new Authorization($user))->userHasPermissionTo('view', 'task', $task->id, true, request('group_type'), request('group_id'));
     }
 
     /**
@@ -30,7 +30,7 @@ class TaskPolicy
      */
     public function create(User $user)
     {
-        return resolve('Authorization')->userHasPermissionTo('create', 'task', null, true, request('group_type'), request('group_id'));
+        return (new Authorization($user))->userHasPermissionTo('create', 'task', null, true, request('group_type'), request('group_id'));
     }
 
     /**
@@ -42,7 +42,7 @@ class TaskPolicy
      */
     public function update(User $user, Task $task)
     {
-        return resolve('Authorization')->userHasPermissionTo('update', 'task', $task->id, true, request('group_type'), request('group_id'));
+        return (new Authorization($user))->userHasPermissionTo('update', 'task', $task->id, true, request('group_type'), request('group_id'));
     }
 
     /**
@@ -54,6 +54,6 @@ class TaskPolicy
      */
     public function delete(User $user, Task $task)
     {
-        return resolve('Authorization')->userHasPermissionTo('delete', 'task', $task->id, true, request('group_type'), request('group_id'));
+        return(new Authorization($user))->userHasPermissionTo('delete', 'task', $task->id, true, request('group_type'), request('group_id'));
     }
 }

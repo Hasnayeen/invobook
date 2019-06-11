@@ -17,16 +17,6 @@ class RouteServiceProvider extends ServiceProvider
     protected $namespace = 'App\Core\Http\Controllers';
 
     /**
-     * Define your route model bindings, pattern filters, etc.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        parent::boot();
-    }
-
-    /**
      * Define the routes for the application.
      *
      * @return void

@@ -21,15 +21,15 @@ class AboutController extends Controller
             }
 
             return response()->json([
-                    'status'           => 'success',
-                    'message'          => trans('misc.Current version is the latest version', ['current_version' => config('app.version')]),
-                ]);
+                'status'           => 'success',
+                'message'          => trans('misc.Current version is the latest version', ['current_version' => config('app.version')]),
+            ]);
         }
 
         return response()->json([
-                'status'  => 'error',
-                'message' => trans('misc.Couldn\'t check for updates at this moment.'),
-            ]);
+            'status'  => 'error',
+            'message' => trans('misc.Couldn\'t check for updates at this moment.'),
+        ]);
     }
 
     private function getLatestVersion($response)

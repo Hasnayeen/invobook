@@ -32,7 +32,7 @@ trait Searchable
             ]);
         });
 
-        static::deleting(function ($item) use ($fields) {
+        static::deleting(function ($item) {
             $item->huntable()->delete();
         });
     }

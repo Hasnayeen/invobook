@@ -136,7 +136,7 @@ class CommentTest extends TestCase
         Notification::fake();
         $project = factory(\App\Core\Models\Project::class)->create(['owner_id' => $this->user->id]);
         $this->actingAs($this->user);
-        resolve('Authorization')->setDefaultPermissions($project);
+        resolve('Authorization')->setupDefaultPermissions($project);
         $comment = factory(\App\Core\Models\Comment::class)->create([
             'commentable_type' => 'task',
             'commentable_id'   => factory(\App\Core\Models\Task::class)->create([

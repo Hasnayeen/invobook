@@ -5,12 +5,15 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use App\Core\Models\User;
 use App\Core\Models\Token;
+use App\Core\Models\Invite;
 use App\Core\Models\Office;
+use Illuminate\Support\Str;
 use App\Core\Mail\UserRegistered;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Contracts\Encryption\DecryptException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class UserRegistrationTest extends TestCase
 {
@@ -63,13 +66,7 @@ class UserRegistrationTest extends TestCase
     /** @test */
     public function guest_with_valid_token_can_register_account()
     {
-        $newUser = [
-            'name'                  => $this->faker->name,
-            'username'              => $this->faker->userName,
-            'email'                 => $this->token->email,
-            'password'              => 'secret12',
-            'password_confirmation' => 'secret12',
-        ];
+        $newUser = $this->get_fake_user_date();
 
         $this->register_user_request($newUser);
 
@@ -88,13 +85,7 @@ class UserRegistrationTest extends TestCase
 
         $this->expectException(DecryptException::class);
 
-        $newUser = [
-            'name'                  => $this->faker->name,
-            'username'              => $this->faker->userName,
-            'email'                 => $this->token->email,
-            'password'              => 'secret12',
-            'password_confirmation' => 'secret12',
-        ];
+        $newUser = $this->get_fake_user_date();
 
         $this->post("/register/{$invalidToken}", $newUser)
             ->assertStatus('403');
@@ -103,17 +94,47 @@ class UserRegistrationTest extends TestCase
     /** @test */
     public function user_must_have_a_role()
     {
-        $newUser = [
-            'name'                  => $this->faker->name,
-            'username'              => $this->faker->userName,
-            'email'                 => $this->token->email,
-            'password'              => 'secret12',
-            'password_confirmation' => 'secret12',
-        ];
+        $newUser = $this->get_fake_user_date();
         $this->register_user_request($newUser);
 
         $user = User::where('username', $newUser['username'])->first();
         $this->assertNotNull($user->role);
+    }
+
+    /** @test */
+    public function guest_with_valid_shareable_link_can_register_account()
+    {
+        $newUser = $this->get_fake_user_date();
+        factory(Office::class)->create([
+            'name' => 'Headquarter',
+        ]);
+        $invite = Invite::create([
+            'role_id' => 5,
+            'link'    => url('register/invite-link/' . Str::random(32)),
+        ]);
+
+        $this->post($invite->link, $newUser)
+             ->assertRedirect();
+
+        $this->assertDatabaseHas(
+            'users',
+            collect($newUser)->except('password', 'password_confirmation')->toArray()
+        );
+
+        Mail::assertQueued(UserRegistered::class);
+    }
+
+    /** @test */
+    public function guest_without_valid_shareable_link_cant_register_account()
+    {
+        $this->expectException(HttpException::class);
+        $newUser = $this->get_fake_user_date();
+        factory(Office::class)->create([
+            'name' => 'Headquarter',
+        ]);
+
+        $this->post(url('register/invite-link/invalid'), $newUser)
+             ->assertStatus(403);
     }
 
     private function register_user_request($newUser)
@@ -123,5 +144,16 @@ class UserRegistrationTest extends TestCase
         ]);
 
         return $this->post('/register/' . encrypt($this->token->token), $newUser);
+    }
+
+    private function get_fake_user_date()
+    {
+        return [
+            'name'                  => $this->faker->name,
+            'username'              => $this->faker->userName,
+            'email'                 => $this->token->email,
+            'password'              => 'secret12',
+            'password_confirmation' => 'secret12',
+        ];
     }
 }

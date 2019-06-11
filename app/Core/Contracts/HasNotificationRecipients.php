@@ -8,7 +8,7 @@ use Illuminate\Support\Collection;
 interface HasNotificationRecipients
 {
     /**
-     * @return Collection|User[]
+     * @return Collection|User
      */
     public function getRecipients(): Collection;
 }
