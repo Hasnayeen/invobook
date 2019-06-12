@@ -29,6 +29,8 @@ class OfficeController extends Controller
             $office->members()->save(auth()->user());
             $office->load('members');
 
+            resolve('Authorization')->setupDefaultPermissions($office);
+
             return $this->successResponse(
                 trans('misc.New office has been created'),
                 'office',

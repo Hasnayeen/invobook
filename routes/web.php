@@ -82,6 +82,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('offices/{office}', 'OfficeController@delete');
 
     /**********************************
+        Group
+     **********************************/
+
+    Route::get('groups/permissions', 'GroupPermissionController@index');
+
+    /**********************************
         Member
      **********************************/
 
@@ -226,6 +232,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('services/github/connected-repos', 'ConnectedGithubRepoController@index');
 
     Route::post('services/github/connected-repos', 'ConnectedGithubRepoController@store');
+
+    /**********************************
+        Role
+    **********************************/
+
+    Route::get('roles', 'RoleController@index');
 });
 
     /**********************************
@@ -234,8 +246,6 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function () {
     Route::get('/', 'AdminController@index');
-
-    Route::get('roles', 'RoleController@index');
 
     Route::get('roles/{role}/permissions', 'RolePermissionController@index');
 

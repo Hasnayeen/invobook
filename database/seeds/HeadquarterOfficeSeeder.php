@@ -23,6 +23,7 @@ class HeadquarterOfficeSeeder extends Seeder
             'owner_id'    => $user->id,
         ]);
         $office = Office::where('name', 'Headquarter')->first();
+        resolve('Authorization')->setupDefaultPermissions($office);
         $user->offices()->attach($office->id);
         $office->huntable()->create([
             'name'        => $office->name,

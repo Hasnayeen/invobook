@@ -1,12 +1,12 @@
 <template>
 <div :class="{'hidden': !show}">
-  <div class="absolute container mx-2 md:mx-auto md:w-1/2 bg-gray-100 rounded shadow-lg z-10" style="top: 10vh;left: 0;right: 0;">
+  <div class="absolute container mx-2 md:mx-auto md:max-w-4xl bg-gray-100 rounded shadow-lg z-10" style="top: 10vh;left: 0;right: 0;">
     <div class="m-auto flex-col flex">
       <header class="block uppercase tracking-wide bg-gray-200 text-gray-600 text-xs font-bold text-center text-lg p-6 rounded" for="user">
         Permission Settings
       </header>
 
-      <div class="flex flex-row text-gray-800">
+      <div class="flex flex-row text-gray-800 bg-white">
         <div class="w-1/2 px-4 py-2 flex flex-row items-center border-teal-500 border-b">
           <div class="flex flex-col">
             <div class="font-semibold pb-1">
@@ -29,9 +29,37 @@
         </div>
       </div>
 
+  <!-- Select Role -->
+  <div class="px-6 pb-8 pt-12 rounded-b">
+    <div class="inline font-medium text-gray-700">Select a Role:</div>
+    <template v-for="role in roles">
+      <div @click="selectRole(role)" class="rounded inline border p-3 mx-2 relative cursor-pointer"
+        :class="[selectedRole === role.slug ? 'bg-indigo-100 border-indigo-400 shadow-md' : 'bg-gray-100 border-gray-400']">
+        <font-awesome-icon v-if="selectedRole === role.slug" :icon="faCheckCircle" class="absolute right-0 top-0 -mr-1 -mt-1 text-lg text-indigo-500 bg-white rounded-full"></font-awesome-icon>
+        <span class="cursor-pointer">{{ role.name }}</span>
+      </div>
+    </template>
+  </div>
+
+  <div class="py-2 bg-white rounded-b">
+    <div v-for="(resource, name, index) in permissions" class="flex flex-row items-center px-12 py-4" :class="[index !== 0 ? 'border-gray-200 border-t' : '']">
+      <div class="text-gray-700 text-xl w-48">
+        {{ name | capitalize | localize }}
+      </div>
+      <div v-for="(permission, key) in resource" class="w-32 flex flex-col justify-center items-center">
+        <div class="pb-1">
+          {{ permission.action | capitalize | localize }}
+        </div>
+        <span class="w-5 h-5 rounded cursor-pointer inline flex items-center justify-center" :class="[permission.enabled ? 'bg-teal-500' : 'border-gray-400 border']">
+          <font-awesome-icon v-if="permission.enabled" :icon="faCheck" class="text-xs text-white"></font-awesome-icon>
+        </span>
+      </div>
+    </div>
+  </div>
+
       <div class="flex flex-row justify-between p-6 bg-gray-200 rounded-b">
         <button @click="closeModal" class="text-red-400 hover:font-bold mx-2">Close</button>
-        <button @click="" class="bg-teal-200 text-teal-800 p-3 rounded font-bold">Save</button>
+        <button @click="" class="bg-teal-200 text-teal-800 px-4 py-3 rounded font-bold">Save</button>
       </div>
     </div>
   </div>
@@ -40,6 +68,8 @@
 </template>
 
 <script>
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons/faCheckCircle'
+import { faCheck } from '@fortawesome/free-solid-svg-icons/faCheck'
 export default {
   props: {
     resourceType: {
@@ -57,11 +87,42 @@ export default {
   },
 
   data: () => ({
+    roles: [],
+    permissions: [],
+    selectedRole: '',
+    faCheck,
+    faCheckCircle,
   }),
-
+  created () {
+    if (this.roles.length < 1) {
+      axios.get('/roles')
+        .then((response) => {
+          this.roles = response.data.roles
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
+  },
   methods: {
     closeModal () {
       this.$emit('close')
+    },
+    selectRole (role) {
+      this.selectedRole = role.slug
+      axios.get('/groups/permissions', {
+          params: {
+            group_type: this.resourceType,
+            group_id: this.resourceId,
+            role_id: role.id
+          }
+        })
+        .then((response) => {
+          this.permissions = response.data.permissions
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     },
   }
 }

@@ -14,7 +14,7 @@
       <a class="text-pink-500 text-xl no-underline" :href="'/teams/' + team.id">{{ team.name }}</a>
     </div>
     <span class="text-gray-500 text-sm w-full px-2 h-16 self-start">{{ team.description }}</span>
-    <div class="border-t w-full h-16 flex flex-row justify-start items-center px-2">
+    <div class="border-t w-full h-16 flex flex-row justify-start items-center px-4">
       <div class="flex flex-row flex-row-reverse">
         <a v-if="index < 6" v-for="(member, index) in team.members" :href="'/users/' + member.username" class="-ml-2">
           <profile-card :user="member" homePage="true"></profile-card></profile-card>

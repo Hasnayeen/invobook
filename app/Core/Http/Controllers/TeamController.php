@@ -29,6 +29,8 @@ class TeamController extends Controller
             $team->members()->save(auth()->user());
             $team->load('members');
 
+            resolve('Authorization')->setupDefaultPermissions($team);
+
             return $this->successResponse(
                 trans('misc.New team has been created'),
                 'team',

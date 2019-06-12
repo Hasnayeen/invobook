@@ -52,7 +52,7 @@ export default {
   }),
   created () {
     if (this.roles.length < 1) {
-      axios.get('/admin/roles')
+      axios.get('/roles')
         .then((response) => {
           this.roles = response.data.roles
         })
