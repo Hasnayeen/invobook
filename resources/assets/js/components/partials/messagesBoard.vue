@@ -1,8 +1,8 @@
 <template>
 <div :class="{'hidden': (activeTab != 'messages')}" class="w-full">
-  <div class="flex flex-col bg-white mx-auto my-8 max-w-md shadow rounded">
+  <div class="flex flex-col bg-white mx-auto mt-4 mb-8 shadow rounded">
 
-    <div class="text-gray-600 bg-white shadow p-4 text-xl flex flex-row items-center">
+    <div class="text-gray-600 bg-white shadow p-4 text-xl flex flex-row items-center z-10">
       <div>
         {{ 'Currently in room' | localize }}:
       </div>
@@ -12,8 +12,8 @@
     </div>
 
     <div id="message-box" class="h-50-vh overflow-y-auto">
-      <div class="mb-6">
-        <message v-for="(message, index) in messages" :key="index" :message="message" :user="user" :index="index" @deleted="deleteMessage"></message>
+      <div class="">
+        <message v-for="(message, index) in messages" :key="index" :message="message" :user="user" :index="index" @deleted="deleteMessage" :last="messages.length === (index + 1)"></message>
       </div>
     </div>
 

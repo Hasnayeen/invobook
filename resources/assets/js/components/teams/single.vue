@@ -36,7 +36,7 @@
     <show-github-repo entityType="team" :entityId="team.id" v-if="githubRepoModalShown" @close-github-repo-modal="closeGithubRepoModal"></show-github-repo>
   <!-- Modals for dropdown menu -->
 
-    <div class="h-16 flex flex-row justify-center items-center px-2">
+    <div class="flex flex-row flex-wrap justify-center items-center px-2 pt-4">
       <span @click="showAddMemberForm" class="bg-white shadow w-8 h-8 flex justify-center items-center rounded-full text-teal-500 cursor-pointer text-center p-2 mr-1">
         <font-awesome-icon :icon="faPlus"></font-awesome-icon>
       </span>
