@@ -49,8 +49,6 @@ class ProjectTest extends TestCase
             'name'   => 'New Project',
         ]);
         $this->assertDatabaseHas('projects', ['name' => 'New Project', 'description' => 'Description for new project', 'owner_id' => $this->user->id]);
-
-        $id = Project::where('name', 'New Project')->first()->id;
     }
 
     /**

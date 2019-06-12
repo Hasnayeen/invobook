@@ -16,7 +16,7 @@
         <span class="hidden"></span>
       </p>
       <div class="flex flex-row justify-between pt-8 bg-gray-200 rounded">
-        <button @click="closeCreateTeamModal" class="text-red-lighter hover:font-bold hover:text-red-400">Cancel</button>
+        <button @click="closeCreateTeamModal" class="text-red-400 hover:font-bold">Cancel</button>
         <button @click="createNewTeam" class="bg-teal-400 text-white font-medium hover:bg-teal-600 py-3 px-4 rounded">Create</button>
       </div>
     </div>

@@ -37,7 +37,7 @@ export default {
     roles: []
   }),
   mounted () {
-    axios.get('admin/roles')
+    axios.get('/roles')
       .then((response) => {
         this.roles = response.data.roles
       })

@@ -12,6 +12,12 @@
               Show All Members
             </a>
           </li>
+          <li @click="showGithubRepoModal" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
+            Connect Github Repository
+          </li>
+          <li @click="showPermissionsSettings" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
+            Permissions Settings
+          </li>
           <li class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
             Delete
           </li>
@@ -33,7 +39,9 @@
 
     <addMemberForm v-if="addMemberFormShown" @close="closeAddMemberForm" resourceType="office" :resource="office" @addMember="addMember"></addMemberForm>
 
-    <show-github-repo entityType="team" :entityId="team.id" v-if="githubRepoModalShown" @close-github-repo-modal="closeGithubRepoModal"></show-github-repo>
+    <show-github-repo entityType="office" :entityId="office.id" v-if="githubRepoModalShown" @close-github-repo-modal="closeGithubRepoModal"></show-github-repo>
+    
+    <permission-settings-modal resourceType="office" :resourceId="office.id" :show="permissionSettingsModalShown" @close="closePermissionsSettings" ></permission-settings-modal>
   <!-- Modals for dropdown menu -->
 
     <div class="flex flex-row flex-wrap justify-center items-center px-2 pt-4">
@@ -71,6 +79,7 @@ import activity from './../partials/activity.vue'
 import addMemberForm from './../partials/addMemberForm.vue'
 import showGithubRepo from './../partials/showGithubRepo.vue'
 import membersListModal from './../partials/membersListModal.vue'
+import permissionSettingsModal from './../partials/permissionSettingsModal.vue'
 import profileCard from './../partials/profileCard.vue'
 import tabMenu from './../partials/tabMenu.vue'
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus'
@@ -86,6 +95,7 @@ export default {
     activity,
     addMemberForm,
     membersListModal,
+    permissionSettingsModal,
     profileCard,
     tabMenu,
     showGithubRepo
@@ -96,6 +106,7 @@ export default {
     dropdownMenuShown: false,
     githubRepoModalShown: false,
     membersListModalShown: false,
+    permissionSettingsModalShown: false,
     faPlus,
     faCog
   }),
@@ -165,6 +176,12 @@ export default {
     },
     closeGithubRepoModal () {
       this.githubRepoModalShown = false
+    },
+    showPermissionsSettings () {
+      this.permissionSettingsModalShown = true
+    },
+    closePermissionsSettings () {
+      this.permissionSettingsModalShown = false
     }
   }
 }

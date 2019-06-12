@@ -13,7 +13,7 @@
                 <span class="hidden"></span>
             </p>
             <div class="flex flex-row justify-between pt-8 bg-gray-200 rounded">
-                <button @click="closeCreateProjectModal" class="text-red-lighter hover:font-bold hover:text-red-400">Cancel</button>
+                <button @click="closeCreateProjectModal" class="hover:font-bold text-red-400">Cancel</button>
                 <button @click="createProject" class="bg-teal-400 text-white font-medium hover:bg-teal-600 py-3 px-4 rounded">Create</button>
             </div>
         </div>
