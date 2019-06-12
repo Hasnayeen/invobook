@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use App\Core\Models\Project;
 use App\Core\Models\Permission;
-use App\Core\Models\RoleHasPermission;
 
 class EntityPermissionTest extends TestCase
 {
@@ -23,11 +22,11 @@ class EntityPermissionTest extends TestCase
              ->call('GET', 'groups/permissions', [
                  'group_type' => 'project',
                  'group_id'   => $id,
-                 'role_id'   => 3,
+                 'role_id'    => 3,
              ])
              ->assertJsonFragment([
-                 'status' => 'success',
-                 'action' => 'create',
+                 'status'   => 'success',
+                 'action'   => 'create',
                  'resource' => 'comment',
              ])
              ->assertJsonCount(6, 'permissions')
