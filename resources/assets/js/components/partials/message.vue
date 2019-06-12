@@ -1,47 +1,43 @@
 <template>
-<div class="flex flex-col p-4">
-  <div v-if="displayDate" class="w-full flex flex-row py-4">
-    <div class="border-b w-1/5 flex-grow mb-2"></div>
-    <div class="text-gray-600 text-sm text-center px-4">
+<div class="flex flex-col">
+  <div v-if="displayDate" class="w-full flex flex-row justify-center py-2 bg-blue-100">
+    <div class="text-gray-600 text-sm font-semibold text-center px-4">
       {{ getDate(message.created_at) }}
     </div>
-    <div class="border-b w-1/5 flex-grow mb-2"></div>
   </div>
   <div v-if="message.system" class="flex flex-row justify-center">
     <div class="bg-blue-lighter text-gray-800 text-xs text-center px-4 rounded p-2">
       {{ message.body }}
     </div>
   </div>
-  <div v-else class="flex flex-row text-gray-800 py-3"
-    :class="[(message.user_id === user.id) ? 'self-end flex-row-reverse' : '']">
+  <div v-else class="flex flex-row text-gray-800 p-4 border-t"
+    :class="{'pb-12': last, 'bg-gray-100': (message.user_id === user.id)}">
     <div class="flex flex-col items-center relative"
       :class="[(message.user_id === user.id) ? 'flex-col-reverse justify-end' : '']">
       <img :src="generateUrl(message.user.avatar)" :alt="message.user.name" class="w-10 h-10 rounded-full"
         :class="[(message.user_id === user.id) ? 'order-1' : '']">
       <div v-if="(message.user_id === user.id)" @click="toggleMessageMenu" v-click-outside="hideMessageMenu" class="cursor-pointer">
-        <font-awesome-icon :icon="faEllipsisH"></font-awesome-icon>
+        <font-awesome-icon :icon="faEllipsisH" class="text-gray-500"></font-awesome-icon>
       </div>
-      <div v-if="(message.user_id === user.id) && dropdownMenuShown" class="absolute rounded shadow-lg top-0 mt-16 mr-2 p-3 text-gray-800 hover:bg-gray-400"
-        :class="[(message.user_id === user.id) ? 'right-0' : 'left-0']">
+      <div v-if="(message.user_id === user.id) && dropdownMenuShown" class="absolute rounded shadow-lg top-0 mt-16 mr-2 p-3 text-gray-800 bg-white hover:bg-indigo-200 left-0 z-10">
         <div @click="deleteMessage()" class="cursor-pointer">
           Delete
         </div>
       </div>
     </div>
-    <div class="mx-2">
-      <div  class="rounded-lg p-3 w-64 leading-normal text-gray-900 break-words"
-        :class="[(message.user_id === user.id) ? 'bg-teal-100 rounded-tr-none' : 'bg-pink-600 rounded-tl-none']" v-linkified:options="{ className: 'text-blue-500 italic' }" >
-        {{ message.body }}
-      </div>
-      <div class="text-gray-900 text-xs pt-2 flex flex-row"
-        :class="[(message.user_id === user.id) ? 'justify-end' : '']">
-        <div class="pr-1">
+    <div class="mx-4 w-3/5 md:w-5/6">
+      <div class="text-xs flex flex-row px-3">
+        <div class="pr-1 font-medium" :class="[(message.user_id === user.id) ? 'text-pink-500' : 'text-blue-500']">
           {{ message.user.name }}
         </div>
         <div>•</div>
         <div class="pl-1">
           {{ getTime(message.created_at) }}
         </div>
+      </div>
+      <div  class="rounded-lg p-3 pt-0 leading-normal text-gray-800 break-words"
+        :class="[(message.user_id === user.id) ? 'rounded-tr-none' : 'rounded-tl-none']" v-linkified:options="{ className: 'text-blue-700 font-medium italic hover:underline' }" >
+        {{ message.body }}
       </div>
     </div>
   </div>
@@ -65,7 +61,11 @@ export default {
     index: {
       required: true,
       type: Number
-    }
+    },
+    last: {
+      required: true,
+      type: Boolean
+    },
   },
   data: () => ({
     dropdownMenuShown: false,
