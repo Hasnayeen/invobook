@@ -2,7 +2,6 @@
 
 namespace App\Core\Http\Controllers;
 
-use App\Core\Models\Project;
 use App\Core\Models\Permission;
 use App\Core\Models\RoleHasPermission;
 
