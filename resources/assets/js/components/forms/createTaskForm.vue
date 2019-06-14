@@ -103,9 +103,9 @@ export default {
         notes: this.notes,
         assigned_to: this.assigned_to,
         related_to: this.related_to,
-        due_on: this.$refs.dueOnDate.formattedValue,
-        taskable_id: this.resource.id,
-        taskable_type: this.resourceType
+        due_on: window.luxon.DateTime.fromMillis(this.$refs.dueOnDate._data.pageTimestamp).toISODate(),
+        group_id: this.resource.id,
+        group_type: this.resourceType
       })
         .then((response) => {
           if (response.data.status === 'success') {
