@@ -16,14 +16,23 @@ class FileController extends Controller
                 $files[$key]['name'] = $file->getClientOriginalName();
                 $files[$key]['path'] = $file->storeAs(
                     '/',
-                    $files[$key]['name']
+                    $files[$key]['name'],
+                    ['disk' => 'public']
                 );
-                $files[$key]['fileable_type'] = request('fileable_type');
-                $files[$key]['fileable_id'] = request('fileable_id');
+                $files[$key]['fileable_type'] = request('group_type');
+                $files[$key]['fileable_id'] = request('group_id');
                 $files[$key]['created_at'] = $now;
                 $files[$key]['updated_at'] = $now;
             }
             $repository->create($files);
+
+            if ($request->get('for_editor')) {
+                return response()->json([
+                    'status'  => 'success',
+                    'message' => 'Files uploaded successfully',
+                    'url'     => url('storage/' . $files[0]['path']),
+                ]);
+            }
 
             return response()->json([
                 'status'  => 'success',
@@ -31,7 +40,7 @@ class FileController extends Controller
             ]);
         } catch (Exception $exception) {
             return response()->json([
-                'status'  => 'success',
+                'status'  => 'error',
                 'message' => $exception->getMessage(),
             ]);
         }
