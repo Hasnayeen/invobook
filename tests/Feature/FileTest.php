@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Core\Models\File;
 use App\Core\Models\Project;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -19,8 +18,8 @@ class FileTest extends TestCase
 
         $this->actingAs($this->user)->post('files', [
             'files'         => [$file],
-            'group_type' => 'project',
-            'group_id'   => $project->id,
+            'group_type'    => 'project',
+            'group_id'      => $project->id,
         ])
              ->assertJsonFragment([
                  'status'  => 'success',
@@ -39,8 +38,8 @@ class FileTest extends TestCase
 
         $this->actingAs($this->user)->post('files', [
             'files'         => [$file1, $file2],
-            'group_type' => 'project',
-            'group_id'   => $project->id,
+            'group_type'    => 'project',
+            'group_id'      => $project->id,
         ]);
 
         $this->actingAs($this->user)->call('GET', 'files', [

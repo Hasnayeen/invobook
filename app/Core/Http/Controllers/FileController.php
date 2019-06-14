@@ -30,7 +30,7 @@ class FileController extends Controller
                 return response()->json([
                     'status'  => 'success',
                     'message' => 'Files uploaded successfully',
-                    'url' => url('storage/' . $files[0]['path']),
+                    'url'     => url('storage/' . $files[0]['path']),
                 ]);
             }
 
