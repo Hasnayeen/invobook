@@ -11,10 +11,10 @@
     <div @click="showDiscussionDetails(index)" v-for="(discussion, index) in discussions" :key="index" class="w-80 my-6 md:m-6 bg-white shadow-md flex flex-col items-center rounded cursor-pointer">
       <div class="bg-teal-500 flex flex-col items-start w-full text-white rounded-t p-6 pb-4">
         <div class="text-white text-2xl text-center font-semibold">{{ discussion.name }}</div>
-        <div class="flex flex-row pt-4">
-          <div class="w-8 h-8 mr-2">
+        <div class="flex flex-row pt-2">
+          <div class="w-10 h-10 mr-2">
             <a :href="'/users/' + discussion.creator.username">
-              <img :src="generateUrl(discussion.creator.avatar)" class="rounded-full w-8 h-8">
+              <img :src="generateUrl(discussion.creator.avatar)" class="rounded-full w-10 h-10">
             </a>
           </div>
           <div class="text-xs font-bold flex flex-col justify-between">

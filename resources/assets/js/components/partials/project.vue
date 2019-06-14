@@ -17,7 +17,7 @@
   <div class="border-t w-full h-16 flex flex-row justify-start items-center px-4">
     <div class="flex flex-row flex-row-reverse">
       <a v-if="index < 6" v-for="(member, index) in project.members" :href="'/users/' + member.username" :key="member.id" class="-ml-2">
-        <profile-card :user="member" homePage="true"></profile-card></profile-card>
+        <profile-card :user="member" :homePage="homePage"></profile-card></profile-card>
       </a>
     </div>
     <span v-if="project.members.length > 6" class="w-10 h-10 bg-teal-100 text-teal-500 border-white border font-semibold p-2 -ml-2 rounded-full">{{ project.members.length - 6 }}+</span>
@@ -37,6 +37,7 @@ export default {
     return {
       project: this.details,
       dropdownMenuShown: false,
+      homePage: true,
       faEllipsisH
     }
   },

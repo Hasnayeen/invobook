@@ -35,8 +35,8 @@ class FileRepository
     {
         return $this->model
                     ->where([
-                        'fileable_type' => request('fileable_type'),
-                        'fileable_id'   => request('fileable_id'),
+                        'fileable_type' => request('group_type'),
+                        'fileable_id'   => request('group_id'),
                     ])
                     ->get();
     }
