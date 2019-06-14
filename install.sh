@@ -70,6 +70,8 @@ $COMPOSE run --rm -w /var/www php php artisan migrate --seed
 
 $COMPOSE run --rm -w /var/www php php artisan route:cache
 
+$COMPOSE run --rm -w /var/www php php artisan storage:link
+
 git checkout site.conf
 
 echo ""

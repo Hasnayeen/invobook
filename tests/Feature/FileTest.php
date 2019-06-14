@@ -18,14 +18,14 @@ class FileTest extends TestCase
 
         $this->actingAs($this->user)->post('files', [
             'files'         => [$file],
-            'fileable_type' => 'project',
-            'fileable_id'   => $project->id,
+            'group_type'    => 'project',
+            'group_id'      => $project->id,
         ])
              ->assertJsonFragment([
                  'status'  => 'success',
                  'message' => 'Files uploaded successfully',
              ]);
-        Storage::disk()->assertExists('features.pdf');
+        Storage::disk('public')->assertExists('features.pdf');
     }
 
     /** @test */
@@ -38,13 +38,13 @@ class FileTest extends TestCase
 
         $this->actingAs($this->user)->post('files', [
             'files'         => [$file1, $file2],
-            'fileable_type' => 'project',
-            'fileable_id'   => $project->id,
+            'group_type'    => 'project',
+            'group_id'      => $project->id,
         ]);
 
         $this->actingAs($this->user)->call('GET', 'files', [
-            'fileable_type' => 'project',
-            'fileable_id'   => $project->id,
+            'group_type' => 'project',
+            'group_id'   => $project->id,
         ])
              ->assertJson([
                  'files' => [
