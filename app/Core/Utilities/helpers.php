@@ -1,6 +1,5 @@
 <?php
 
-
 if (! function_exists('application_last_updated')) {
     /**
      * Return the date when the application was last updated.
