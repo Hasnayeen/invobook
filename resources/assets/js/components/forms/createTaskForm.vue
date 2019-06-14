@@ -52,9 +52,23 @@
           </font-awesome-icon>
         </div>
       </div>
+      <div class="p-4">
+        <label class="block uppercase tracking-wide text-gray-800 text-xs font-bold mb-2" for="tags">Tags</label>
+        <div class="p-2 border rounded bg-gray-100">
+          <div class="flex flex-row flex-wrap">
+            <div v-for="tag in tags" class="flex items-center mx-1 my-1 py-1 px-3 bg-indigo-200 font-semibold text-indigo-700 rounded-full">
+              <span class="text-sm">
+                {{ tag }}
+              </span>
+              <font-awesome-icon @click="deleteTag(tag)" :icon="faTimesCircle" class="text-sm text-indigo-700 ml-1 cursor-pointer"></font-awesome-icon>
+            </div>
+            <input v-model="tag" @keydown.enter="addTag" type="text" name="tags" class="text-gray-700 bg-gray-100 w-24 p-1 my-1 flex-grow">
+          </div>
+        </div>
+      </div>
     </div>
     <div class="flex flex-row justify-between py-4 px-8 bg-gray-200 rounded">
-      <button @click="closeCreateTaskForm" class="text-red-lighter hover:font-bold hover:text-red-400">Cancel</button>
+      <button @click="closeCreateTaskForm" class="text-red-300 hover:font-bold hover:text-red-400">Cancel</button>
       <button @click="createTask" class="bg-teal-400 text-white font-medium hover:bg-teal-600 py-4 px-8 rounded">Create</button>
     </div>
   </div>
@@ -66,6 +80,7 @@
 <script>
 import Datepicker from 'vuejs-datepicker'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import { faTimesCircle } from '@fortawesome/free-solid-svg-icons/faTimesCircle'
 
 export default {
   components: {Datepicker},
@@ -76,7 +91,10 @@ export default {
     assigned_to: null,
     dueOnDate: null,
     related_to: '',
-    faChevronDown
+    tag: '',
+    tags: [],
+    faChevronDown,
+    faTimesCircle,
   }),
   methods: {
     createTask () {
@@ -113,6 +131,14 @@ export default {
     },
     suggestMember (e) {
 
+    },
+    addTag () {
+      this.tags.push(this.tag)
+      this.tag = ''
+    },
+    deleteTag (tag) {
+      let index = this.tags.indexOf(tag);
+      if (index !== -1) this.tags.splice(index, 1)
     }
   },
   computed: {
