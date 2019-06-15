@@ -11,31 +11,31 @@ class DirectMessageTest extends TestCase
     {
         $user = factory(\App\Core\Models\User::class)->create();
         $messages = factory(\App\Core\Models\Message::class, 5)->create([
-            'user_id' => $this->user->id,
+            'user_id'          => $this->user->id,
             'messageable_type' => 'user',
-            'messageable_id' => $user->id,
+            'messageable_id'   => $user->id,
         ]);
         $this->actingAs($this->user)
              ->call('GET', '/direct-messages', [
                  'resource_type' => 'user',
-                 'resource_id' => $user->id,
+                 'resource_id'   => $user->id,
              ])
              ->assertJsonFragment([
                  'status' => 'success',
-                 'total' => 5,
-                 'body' => $messages[0]['body']
+                 'total'  => 5,
+                 'body'   => $messages[0]['body'],
              ])
              ->assertJsonFragment([
-                 'body' => $messages[1]['body']
+                 'body' => $messages[1]['body'],
              ])
              ->assertJsonFragment([
-                 'body' => $messages[2]['body']
+                 'body' => $messages[2]['body'],
              ])
              ->assertJsonFragment([
-                 'body' => $messages[3]['body']
+                 'body' => $messages[3]['body'],
              ])
              ->assertJsonFragment([
-                 'body' => $messages[4]['body']
+                 'body' => $messages[4]['body'],
              ]);
     }
 }

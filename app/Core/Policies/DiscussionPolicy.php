@@ -14,7 +14,7 @@ class DiscussionPolicy
     /**
      * Determine whether the user can view the discussions list.
      *
-     * @param  \App\Core\Models\User       $user
+     * @param  \App\Core\Models\User $user
      * @return mixed
      */
     public function list(User $user)
