@@ -5,10 +5,11 @@ namespace App\Core\Models;
 use App\Core\Utilities\Notifiable;
 use Spatie\Activitylog\Traits\CausesActivity;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Lab404\Impersonate\Models\Impersonate;
 
 class User extends Authenticatable
 {
-    use Notifiable, CausesActivity;
+    use Notifiable, CausesActivity, Impersonate;
 
     protected $fillable = [
         'name', 'username', 'bio', 'designation', 'avatar', 'active', 'timezone', 'week_start', 'lang', 'email', 'password',
@@ -129,5 +130,10 @@ class User extends Authenticatable
     public function isOwner($resource, $resourceId)
     {
         return $this->$resource()->where('id', $resourceId)->first();
+    }
+
+    public function canImpersonate()
+    {
+        return $this->role->slug === 'owner';
     }
 }
