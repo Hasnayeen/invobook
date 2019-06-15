@@ -20,11 +20,11 @@ class StatusTest extends TestCase
              ->get('statuses')
              ->assertJsonFragment([
                  'status'  => 'success',
-                 'name' => $status[0]['name'],
-                 'color' => $status[0]['color'],
+                 'name'    => $status[0]['name'],
+                 'color'   => $status[0]['color'],
              ])
              ->assertJsonFragment([
-                 'name' => $status[1]['name'],
+                 'name'  => $status[1]['name'],
                  'color' => $status[1]['color'],
              ]);
     }

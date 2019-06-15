@@ -3,7 +3,6 @@
 namespace App\Core\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\Auth;
 
 class RedirectIfNotAdmin
 {
