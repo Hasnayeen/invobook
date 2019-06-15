@@ -3,8 +3,6 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class RoleTest extends TestCase
 {
@@ -15,7 +13,7 @@ class RoleTest extends TestCase
              ->get('/roles')
              ->assertJsonFragment([
                  'status' => 'success',
-                 'slug' => 'owner',
+                 'slug'   => 'owner',
              ])
              ->assertJsonFragment([
                  'slug' => 'admin',

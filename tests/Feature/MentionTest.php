@@ -87,7 +87,7 @@ class MentionTest extends TestCase
     public function user_can_mention_other_user_when_upating_message()
     {
         $message = factory(Message::class)->create([
-            'user_id' => $this->user->id
+            'user_id' => $this->user->id,
         ]);
 
         $this->actingAs($this->user)->put('messages/' . $message->id, [
