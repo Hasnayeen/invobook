@@ -40,6 +40,12 @@ Route::get('register/{token}', 'Auth\RegisterController@showRegistrationForm')->
 
 Route::post('register/{token}', 'Auth\RegisterController@confirmNewRegistration');
 
+/**********************************
+    Impersonate User
+**********************************/
+
+Route::impersonate();
+
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'HomeController@index')->name('home');
 

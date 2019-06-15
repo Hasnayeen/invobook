@@ -20,16 +20,25 @@
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
         ]) !!};
+        let impersonating = false
     </script>
+
     @if (!Auth::guest())
     <script>
-        let user = {!! json_encode(Auth::user()) !!}
+        let user = authUser = {!! json_encode(Auth::user()) !!}
         let navUrl = {!! json_encode([
             'site' => url('/'),
             'logout' => url('/logout')
         ]) !!};
     </script>
     @endif
+
+    @impersonating
+    <script>
+        impersonating = true
+    </script>
+    @endImpersonating
+
 </head>
 <body class="bg-gray-200">
     <main>

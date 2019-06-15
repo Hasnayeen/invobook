@@ -27,6 +27,12 @@
       {{ 'Settings' | localize }}
     </a>
     <span class="block border-t"></span>
+    <a v-if="impersonating" class="px-4 py-2 hover:bg-teal-500 hover:text-white text-gray-600 font-medium no-underline block" href="/impersonate/leave">
+      <span class="w-6 inline-block">
+        <font-awesome-icon :icon="faUserMinus" class="pr-1 font-regular"></font-awesome-icon>
+      </span>
+      {{ 'Leave User' | localize }}
+    </a>
     <a class="px-4 py-2 hover:bg-teal-500 hover:text-white text-gray-600 font-medium no-underline block" :href="url.logout" @click="logoutUser">
       <span class="w-6 inline-block">
         <font-awesome-icon :icon="faSignOutAlt" class="pr-1 font-regular"></font-awesome-icon>
@@ -47,7 +53,8 @@ import {
   faShieldAlt,
   faSignOutAlt,
   faUser,
-  faEnvelope
+  faEnvelope,
+  faUserMinus
 } from '@fortawesome/free-solid-svg-icons'
 
 export default {
@@ -58,11 +65,13 @@ export default {
     avatar: '',
     profileUrl: navUrl.site + '/users/' + user.username,
     profileDropdownShown: false,
+    impersonating: impersonating,
     faAngleDown,
     faCog,
     faShieldAlt,
     faSignOutAlt,
     faUser,
+    faUserMinus,
     faEnvelope
   }),
   methods: {
