@@ -3,9 +3,9 @@
 namespace App\Core\Models;
 
 use App\Core\Utilities\Notifiable;
+use Lab404\Impersonate\Models\Impersonate;
 use Spatie\Activitylog\Traits\CausesActivity;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Lab404\Impersonate\Models\Impersonate;
 
 class User extends Authenticatable
 {
