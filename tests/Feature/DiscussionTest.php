@@ -71,14 +71,14 @@ class DiscussionTest extends TestCase
     }
 
     /** @test */
-    public function user_can_see_all_discussions()
+    public function user_of_a_group_can_see_all_its_discussions()
     {
         $discussions = factory(\App\Core\Models\Discussion::class, 2)->create([
             'discussionable_type' => 'project',
             'discussionable_id'   => $this->project->id,
         ]);
 
-        $this->actingAs($this->user)->call('GET', '/discussions', ['resource_type' => 'project', 'resource_id' => $this->project->id])
+        $this->actingAs($this->user)->call('GET', '/discussions', ['group_type' => 'project', 'group_id' => $this->project->id])
              ->assertJsonFragment([
                  'status'  => 'success',
                  'total'   => 2,
@@ -87,6 +87,21 @@ class DiscussionTest extends TestCase
                  'name'    => $discussions[1]->name,
                  'content' => $discussions[1]->content,
              ]);
+    }
+
+    /**
+     * @test
+     * @expectedException Illuminate\Auth\Access\AuthorizationException
+     */
+    public function user_not_member_of_group_cant_see_all_its_discussions()
+    {
+        $user = factory(\App\Core\Models\User::class)->create();
+        $discussions = factory(\App\Core\Models\Discussion::class, 2)->create([
+            'discussionable_type' => 'project',
+            'discussionable_id'   => $this->project->id,
+        ]);
+
+        $this->actingAs($user)->call('GET', '/discussions', ['group_type' => 'project', 'group_id' => $this->project->id]);
     }
 
     /** @test */
@@ -188,5 +203,41 @@ class DiscussionTest extends TestCase
         ]);
 
         $this->actingAs($user)->patch('discussions/' . $discussion->id, []);
+    }
+
+    /** @test */
+    public function user_of_a_group_can_view_discussion_detail()
+    {
+        $user = factory(\App\Core\Models\User::class)->create();
+        $discussion = factory(\App\Core\Models\Discussion::class)->create([
+            'discussionable_type' => 'project',
+            'discussionable_id'   => $this->project->id,
+        ]);
+        $this->project->members()->save($user);
+
+        $this->actingAs($user)->call('GET', '/discussions/' . $discussion->id, ['group_type' => 'project', 'group_id' => $this->project->id])
+             ->assertJsonFragment([
+                 'name'    => $discussion->name,
+                 'content' => $discussion->content,
+             ]);
+    }
+
+    /**
+     * @test
+     * @expectedException Illuminate\Auth\Access\AuthorizationException
+     */
+    public function user_not_member_of_group_cant_view_discussion_detail()
+    {
+        $user = factory(\App\Core\Models\User::class)->create();
+        $discussion = factory(\App\Core\Models\Discussion::class)->create([
+            'discussionable_type' => 'project',
+            'discussionable_id'   => $this->project->id,
+        ]);
+
+        $this->actingAs($user)->call('GET', '/discussions/' . $discussion->id, ['group_type' => 'project', 'group_id' => $this->project->id])
+             ->assertJsonFragment([
+                 'name'    => $discussion->name,
+                 'content' => $discussion->content,
+             ]);
     }
 }

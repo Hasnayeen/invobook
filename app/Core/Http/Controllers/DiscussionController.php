@@ -11,7 +11,8 @@ class DiscussionController extends Controller
 {
     public function index(DiscussionRepository $repository)
     {
-        $discussions = $repository->getAllDiscussionWithCreator(request('resource_type'), request('resource_id'));
+        $this->authorize('list', Discussion::class);
+        $discussions = $repository->getAllDiscussionWithCreator(request('group_type'), request('group_id'));
 
         return response()->json([
             'status'      => 'success',
@@ -39,6 +40,8 @@ class DiscussionController extends Controller
      */
     public function show(Discussion $discussion)
     {
+        $this->authorize('view', $discussion);
+
         return response()->json($discussion);
     }
 

@@ -20,7 +20,7 @@
         </div>
       </div>
 
-      <div :data-discussion-id="discussion.id" class="text-gray-900 text-left text-3xl font-medium py-4 px-16">
+      <div :data-discussion-id="discussion.id" class="text-gray-700 text-left text-3xl font-medium py-4 px-16">
         {{ discussion.name }}
       </div>
       <div class="flex flex-row justify-start items-center pb-4 px-16">

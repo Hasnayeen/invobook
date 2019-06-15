@@ -1,82 +1,88 @@
 <template>
 <div v-if="taskDetailsShown">
-  <div class="absolute container mx-auto md:w-3/4 lg:2/3 xl:w-1/2 xxl:w-2/5 bg-white rounded shadow-lg z-10 pt-4 pb-4 mb-16" style="top: 12vh;left: 0;right: 0;">
-    <div class="flex flex-row justify-between px-8 relative">
-      <div @click="closeTaskDetails" class="cursor-pointer">
-        <font-awesome-icon :icon="faArrowLeft" class="text-base text-gray-600"></font-awesome-icon>
-      </div>
-      <div @click="toggleMenu" v-click-outside="hideMenu" class="cursor-pointer">
-        <font-awesome-icon :icon="faEllipsisH" class="text-base text-gray-600"></font-awesome-icon>
-      </div>
-      <div v-if="dropdownMenuShown" class="absolute rounded shadow-lg right-0 top-0 mt-6 mr-4 p-3 text-gray-800">
-        <div @click="deleteTask" class="cursor-pointer">
-          Delete
+  <div class="absolute container mx-auto md:w-3/4 lg:2/3 xl:w-1/2 xxl:w-2/5 z-10 mb-16" style="top: 12vh;left: 0;right: 0;">
+    <div class="bg-gray-100 rounded shadow-lg py-4">
+      <div class="flex flex-row justify-between px-8 pb-2 relative">
+        <div @click="closeTaskDetails" class="cursor-pointer">
+          <font-awesome-icon :icon="faArrowLeft" class="text-base text-gray-600"></font-awesome-icon>
+        </div>
+        <div @click="toggleMenu" v-click-outside="hideMenu" class="cursor-pointer">
+          <font-awesome-icon :icon="faEllipsisH" class="text-base text-gray-600"></font-awesome-icon>
+        </div>
+        <div v-if="dropdownMenuShown" class="absolute rounded shadow-md right-0 top-0 mt-6 mr-4 py-1 text-indigo-800 bg-gray-200">
+          <div @click="" class="cursor-pointer hover:bg-indigo-200 px-4 py-2">
+            Edit
+          </div>
+          <div @click="deleteTask" class="cursor-pointer hover:bg-indigo-200 px-4 py-2">
+            Delete
+          </div>
         </div>
       </div>
-    </div>
-    <div class="text-2xl text-gray-800 text-center font-semibold px-8 py-4">
-      {{ task.name }}
-    </div>
-    <div class="flex flex-row flex-wrap justify-between pt-4">
-      <div>
-        <div class="text-sm text-gray-600 px-8">
-          Assignee
+      <div class="bg-white text-2xl text-gray-700 text-center font-semibold px-8 py-4">
+        {{ task.name }}
+      </div>
+      <div class="bg-white flex flex-row flex-wrap justify-between pt-4">
+        <div>
+          <div class="text-sm text-gray-600 px-8">
+            Assignee
+          </div>
+          <div class="px-8 py-2">
+            <a :href="'/users/' + task.user.username">
+              <img v-if="task.assigned_to" :src="generateUrl(task.user.avatar)" class="rounded-full w-8 h-8 mx-2 self-start">
+            </a>
+          </div>
         </div>
-        <div class="px-8 py-2">
-          <a :href="'/users/' + task.user.username">
-            <img v-if="task.assigned_to" :src="generateUrl(task.user.avatar)" class="rounded-full w-8 h-8 mx-2 self-start">
-          </a>
+        <div class="text-center">
+          <div class="text-sm text-gray-600 px-8">
+            Due Date
+          </div>
+          <div class="px-8 py-2 text-gray-900">
+            {{ task.due_on }}
+          </div>
+        </div>
+        <div class="text-center">
+          <div class="text-sm text-gray-600 px-8">
+            Status
+          </div>
+          <div class="px-8 py-2 text-green-600">
+            In Progress
+          </div>
+        </div>
+        <div class="text-center">
+          <div class="text-sm text-gray-600 px-8">
+            Related To
+          </div>
+          <div class="px-8 py-2" :class="[task.related_to ? 'text-blue-500 underline' : 'text-gray-600']">
+            {{ task.related_to ? task.related_to : 'None' }}
+          </div>
         </div>
       </div>
-      <div class="text-center">
-        <div class="text-sm text-gray-600 px-8">
-          Due Date
+      <div class="bg-white text-sm text-gray-600 px-8 pt-4">
+        Details
+      </div>
+      <div class="bg-white text-gray-900 text-lg px-8 py-2">
+        {{ task.notes }}
+      </div>
+      <div class="bg-white text-sm text-gray-600 px-8 pt-4">
+        Tags
+      </div>
+      <div class="bg-white flex flex-row justify-start px-8 py-4 pb-8">
+        <div class="bg-teal-100 px-3 py-1 rounded-full text-teal-800 font-medium text-sm mr-4">frontend</div>
+        <div class="bg-teal-100 px-3 py-1 rounded-full text-teal-800 font-medium text-sm mr-4">backend</div>
+      </div>
+      <div class="flex flex-row justify-around bg-gray-200 py-4 text-gray-600 text-center">
+        <div class="w-1/2 border-teal-500 text-teal-500 border-b-2 pb-4 -mb-4">
+          Comments
         </div>
-        <div class="px-8 py-2 text-gray-900">
-          {{ task.due_on }}
+        <div class="w-1/2">
+          Progress
         </div>
       </div>
-      <div class="text-center">
-        <div class="text-sm text-gray-600 px-8">
-          Status
-        </div>
-        <div class="px-8 py-2 text-green-600">
-          In Progress
-        </div>
-      </div>
-      <div class="text-center">
-        <div class="text-sm text-gray-600 px-8">
-          Related To
-        </div>
-        <div class="px-8 py-2" :class="[task.related_to ? 'text-blue-500 underline' : 'text-gray-600']">
-          {{ task.related_to ? task.related_to : 'None' }}
-        </div>
+      <div class="px-2 md:px-8">
+        <comment-box resourceType="task" :resource="task" :detailsShown="taskDetailsShown"></comment-box>
       </div>
     </div>
-    <div class="text-sm text-gray-600 px-8 pt-4">
-      Details
-    </div>
-    <div class="text-gray-900 text-lg px-8 py-2">
-      {{ task.notes }}
-    </div>
-    <div class="text-sm text-gray-600 px-8 pt-4">
-      Tags
-    </div>
-    <div class="flex flex-row justify-start px-8 py-4 -ml-2">
-      <div class="bg-blue-400 px-2 py-1 rounded-full text-white text-sm mx-2">frontend</div>
-      <div class="bg-blue-400 px-2 py-1 rounded-full text-white text-sm mx-2">backend</div>
-    </div>
-    <div class="flex flex-row justify-around bg-gray-200 py-4 mt-4 text-gray-600 text-center">
-      <div class="w-1/2 border-teal-500 border-b-2 pb-4 -mb-4">
-        Comments
-      </div>
-      <div class="w-1/2">
-        Progress
-      </div>
-    </div>
-    <div class="px-2 md:px-8">
-      <comment-box resourceType="task" :resource="task" :detailsShown="taskDetailsShown"></comment-box>
-    </div>
+    <div class="h-16"></div>
   </div>
   <div @click="closeTaskDetails" :class="{'hidden': !taskDetailsShown}" class="h-screen w-screen fixed inset-0 bg-gray-900 opacity-25"></div>
 </div>

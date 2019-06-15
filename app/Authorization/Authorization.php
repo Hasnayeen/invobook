@@ -44,6 +44,11 @@ class Authorization
             $this->user->isNotForbiddenTo($action, $resource);
     }
 
+    public function userIsMemberOfGroup($groupType, $groupId)
+    {
+        return $this->user->isMember($groupType, $groupId);
+    }
+
     public function setupDefaultPermissions($group)
     {
         $roles = Role::select(['id'])->get();

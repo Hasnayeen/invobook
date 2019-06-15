@@ -17,10 +17,15 @@ class RedirectIfNotAdmin
      */
     public function handle($request, Closure $next)
     {
-        if ((Auth::user()->role->slug === 'owner') || (Auth::user()->role->slug === 'admin')) {
+        if ($this->userCanViewAdminPage()) {
             return $next($request);
         }
 
         return redirect('/');
+    }
+
+    private function userCanViewAdminPage()
+    {
+        return resolve('Authorization')->userHasPermissionTo('view', 'admin');
     }
 }

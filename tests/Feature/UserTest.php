@@ -96,9 +96,9 @@ class UserTest extends TestCase
      */
     public function guest_can_not_see_admin_page()
     {
-        $guest_user = factory(User::class)->create(['role_id' => 5]);
+        $guest = factory(User::class)->create(['role_id' => 5]);
 
-        $this->actingAs($guest_user)
+        $this->actingAs($guest)
              ->get('admin')
              ->assertRedirect('/');
     }
@@ -178,5 +178,32 @@ class UserTest extends TestCase
         ]);
 
         $this->assertDatabaseHas('users', ['id' => $guest->id, 'username' => 'guest']);
+    }
+
+    /** @test */
+    public function password_of_guest_user_cant_be_change()
+    {
+        $pass = bcrypt('secret');
+        $guest = factory(User::class)->create([
+            'username' => 'guest',
+            'password' => $pass,
+        ]);
+        $this->actingAs($guest)->put("users/{$guest->id}/account", [
+            'password' => 'new_password',
+        ])->assertJson([
+            'status'  => 'error',
+            'message' => 'Username/Password is not updatable for this account',
+        ]);
+
+        $this->assertDatabaseHas('users', ['id' => $guest->id, 'password' => $pass]);
+    }
+
+    /** @test */
+    public function user_can_view_other_user_profile()
+    {
+        $user = factory(User::class)->create(['name' => 'Guest User']);
+        $response = $this->actingAs($this->user)
+             ->get('users/' . $user->username)
+             ->assertSee('Guest User');
     }
 }

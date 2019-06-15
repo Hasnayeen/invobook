@@ -15,6 +15,15 @@ class ProjectTest extends TestCase
         $this->project = factory('App\Core\Models\Project')->create();
     }
 
+    /**
+     * @test
+     * @expectedException Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     */
+    public function projects_route_should_return_404_page()
+    {
+        $this->actingAs($this->user)->get('offices/');
+    }
+
     /** @test */
     public function user_with_permission_can_see_project_page()
     {

@@ -1,10 +1,15 @@
 <template>
 <div>
-  <div class="border-b pt-8 pb-2 text-gray-600 font-medium">
-    Comments <span class="rounded-full py-1 px-2 bg-teal-200">{{ comments.length }}</span>
+  <div class="flex flex-row items-center border-b pt-8 pb-2">
+    <div class="text-gray-600 text-xl pr-2">
+      Comments 
+    </div>
+    <div class="rounded-full bg-teal-500 flex items-center justify-center w-8 h-8">
+      <span class="text-white text-sm font-semibold">{{ comments.length }}</span>
+    </div>
   </div>
   <div class="py-6">
-    <textarea class="static bg-gray-200 textarea resize-none rounded w-full p-4 text-gray-800"
+    <textarea class="static bg-white textarea resize-none rounded w-full p-4 text-gray-800"
       :id="'save-comment'"
       placeholder="write your comment here"
       rows=1
@@ -31,11 +36,11 @@
         <div class="z-10">
           <img :src="generateUrl(comment.user.avatar)" class="rounded-full w-8 h-8">
         </div>
-        <div class="flex-1 bg-gray-200 text-gray-800 rounded ml-2 p-4 flex flex-row justify-between">
-          <div v-linkified:options="{ className: 'text-blue-500 italic' }" >
+        <div class="flex-1 bg-blue-100 text-gray-700 rounded ml-2 p-4 flex flex-row justify-between items-center">
+          <div v-linkified:options="{ className: 'text-blue-500 italic' }" class="w-11/12">
             {{ comment.body }}
           </div>
-          <div v-if="user.id === comment.user_id" @click="deleteComment(comment,index)" class="text-xs text-red-500 pb-2 ml-10 cursor-pointer">
+          <div v-if="user.id === comment.user_id" @click="deleteComment(comment,index)" class="text-xs text-red-700 bg-red-200 rounded-full w-8 h-8 flex items-center justify-center cursor-pointer">
             <font-awesome-icon :icon="faTrashAlt">
             </font-awesome-icon>
           </div>

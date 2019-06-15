@@ -8,9 +8,9 @@
 
   <div class="flex flex-row flex-wrap md:-mx-1/20 lg:-mx-1/60 xl:-mx-1/40">
     <div v-for="(task, index) in tasks" @click="showTaskDetails(index)" :key="index" class="bg-white rounded shadow my-4 md:mx-1/20 lg:mx-1/60 xl:mx-1/40 flex flex-row p-4 no-underline items-center w-full md:w-2/5 lg:w-3/10 xl:w-1/5 h-24 border-l-2 border-teal-500 cursor-pointer">
-      <img v-if="task.assigned_to" :src="generateUrl(task.user.avatar)" class="rounded-full w-8 h-8 mx-2 self-start">
+      <img v-if="task.assigned_to" :src="generateUrl(task.user.avatar)" class="rounded-full w-8 h-8 mr-2 self-start">
       <i v-else class="fas fa-question-circle fa-2x mx-2 self-start text-gray-800"></i>
-      <div class="w-4/5 text-gray-800 text-left pl-2 flex flex-col justify-between h-full">
+      <div class="w-4/5 text-gray-800 text-left flex flex-col justify-between h-full">
         <p class="text-base mb-2 overflow-hidden">{{task.name}}</p>
         <p class="text-sm text-gray-600">
           Due by {{task.due_on}}
