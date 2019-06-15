@@ -36,7 +36,6 @@ class PermissionSettingsTableSeeder extends Seeder
          * Default Permission Settings for Admin role.
          * */
         $permissions = Permission::where('resource', '!=', 'user')
-                                 ->where('resource', '!=', 'permission')
                                  ->get();
         foreach ($permissions->toArray() as $permission) {
             PermissionSetting::insert([
@@ -54,6 +53,7 @@ class PermissionSettingsTableSeeder extends Seeder
          * Default Permission Settings for Member role.
          * */
         $permissions = Permission::where('resource', '!=', 'user')
+                                 ->where('resource', '!=', 'admin')
                                  ->where('resource', '!=', 'project')
                                  ->where('resource', '!=', 'team')
                                  ->where('resource', '!=', 'office')
@@ -97,6 +97,7 @@ class PermissionSettingsTableSeeder extends Seeder
         $permissions = Permission::where('action', 'view')
                                  ->where('resource', '!=', 'team')
                                  ->where('resource', '!=', 'office')
+                                 ->where('resource', '!=', 'admin')
                                  ->get();
         foreach ($permissions->toArray() as $permission) {
             PermissionSetting::insert([
@@ -134,6 +135,7 @@ class PermissionSettingsTableSeeder extends Seeder
         $permissions = Permission::where('action', 'view')
                                  ->where('resource', '!=', 'team')
                                  ->where('resource', '!=', 'office')
+                                 ->where('resource', '!=', 'admin')
                                  ->get();
         foreach ($permissions->toArray() as $permission) {
             PermissionSetting::insert([

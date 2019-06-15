@@ -17,12 +17,14 @@
 - Added simplified Chinese translation
 - Added `localize` helper function
 - Added shareable invite link option for registration
+- Added impersonate user feature for owner
 
 ### Changed
 
 - Upgraded to Laravel 5.8
 - Upgraded to TailwindCSS 1.0
 - Everything under `App` namespace is now moved to `App\Core` namespace
+- Image option in discussion post has been changed (url embed instead of base64)
 
 ### Removed
 

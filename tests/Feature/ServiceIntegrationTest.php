@@ -9,6 +9,19 @@ use App\Core\Models\Project;
 class ServiceIntegrationTest extends TestCase
 {
     /** @test */
+    public function user_can_get_all_services()
+    {
+        $this->addService('github');
+        $this->get('admin/services')
+             ->assertJsonFragment([
+                 'status'  => 'success',
+                 'name'    => 'github',
+                 'active'  => true,
+                 'enabled' => true,
+             ]);
+    }
+
+    /** @test */
     public function user_can_add_service()
     {
         $this->addService('github')

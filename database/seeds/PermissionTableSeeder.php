@@ -338,6 +338,13 @@ class PermissionTableSeeder extends Seeder
                 'created_at'    => $now,
                 'updated_at'    => $now,
             ],
+            [
+                'action'        => 'view',
+                'resource'      => 'admin',
+                'group_related' => false,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
         ]);
     }
 }

@@ -84,6 +84,25 @@ class MentionTest extends TestCase
     }
 
     /** @test */
+    public function user_can_mention_other_user_when_upating_message()
+    {
+        $message = factory(Message::class)->create([
+            'user_id' => $this->user->id
+        ]);
+
+        $this->actingAs($this->user)->put('messages/' . $message->id, [
+            'message'          => $message->body,
+            'resource_type'    => $message->messageable_type,
+            'resource_id'      => $message->messageable_id,
+            'mentions'         => [
+                $this->user2->username, $this->user3->username,
+            ],
+        ]);
+        $this->assertDatabaseHas('mentions', ['username' => $this->user2->username, 'mentionable_type' => 'message', 'mentionable_id' => 1]);
+        $this->assertDatabaseHas('mentions', ['username' => $this->user3->username, 'mentionable_type' => 'message', 'mentionable_id' => 1]);
+    }
+
+    /** @test */
     public function send_notification_to_mentioned_user_in_comment()
     {
         Notification::fake();
