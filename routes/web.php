@@ -93,6 +93,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('groups/permissions', 'GroupPermissionController@index');
 
+    Route::post('groups/permissions/{permission}/roles/{role}', 'GroupPermissionController@store');
+
+    Route::delete('groups/permissions/{permission}/roles/{role}', 'GroupPermissionController@delete');
+
     /**********************************
         Member
      **********************************/

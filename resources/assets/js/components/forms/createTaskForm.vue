@@ -34,7 +34,7 @@
         <label class="block uppercase tracking-wide text-gray-800 text-xs font-bold mb-2" for="grid-first-name">
           Due On <span class="text-gray-500 capitalize">(required)</span>
         </label>
-        <datepicker v-model="dueOnDate" ref="dueOnDate" placeholder="Select Date" format="yyyy-MM-dd" input-class="appearance-none bg-gray-200 text-gray-800" wrapper-class="appearance-none block w-full bg-gray-200 text-gray-800 border border-gray-200 rounded py-3 px-4"></datepicker>
+        <datepicker v-model="dueOnDate" ref="dueOnDate" :disabled-dates="disabledDates" placeholder="Select Date" format="yyyy-MM-dd" input-class="appearance-none bg-gray-200 text-gray-800" wrapper-class="appearance-none block w-full bg-gray-200 text-gray-800 border border-gray-200 rounded py-3 px-4"></datepicker>
       </div>
       <div class="p-4">
         <label class="block uppercase tracking-wide text-gray-800 text-xs font-bold mb-2" for="grid-first-name">
@@ -89,8 +89,11 @@ export default {
     name: '',
     notes: '',
     assigned_to: null,
-    dueOnDate: null,
     related_to: '',
+    dueOnDate: null,
+    disabledDates: {
+      to: new Date()
+    },
     tag: '',
     tags: [],
     faChevronDown,

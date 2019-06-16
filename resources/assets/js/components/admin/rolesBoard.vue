@@ -14,16 +14,16 @@
 
   <!-- Roles Permissions Table -->
   <div class="py-2 bg-white rounded-b">
-    <div v-for="(permission, name, index) in permissions" class="flex flex-row items-center px-12 py-4" :class="[index !== 0 ? 'border-gray-200 border-t' : '']">
+    <div v-for="(resource, name, index) in permissions" class="flex flex-row items-center px-12 py-4" :class="[index !== 0 ? 'border-gray-200 border-t' : '']">
       <div class="text-gray-700 text-xl w-48">
         {{ name | capitalize | localize }}
       </div>
-      <div v-for="(item, key) in permission" class="w-32 flex flex-col justify-center items-center">
+      <div v-for="(permission, key) in resource" class="w-32 flex flex-col justify-center items-center">
         <div class="pb-1">
-          {{ item.action | capitalize | localize }}
+          {{ permission.action | capitalize | localize }}
         </div>
-        <span @click="togglePermission(item, name, key, item.enabled)" class="w-5 h-5 rounded cursor-pointer inline flex items-center justify-center" :class="[item.enabled ? 'bg-teal-500' : 'border-gray-400 border']">
-          <font-awesome-icon v-if="item.enabled" :icon="faCheck" class="text-xs text-white"></font-awesome-icon>
+        <span @click="togglePermission(permission, name, key, permission.enabled)" class="w-5 h-5 rounded cursor-pointer inline flex items-center justify-center" :class="[permission.enabled ? 'bg-teal-500' : 'border-gray-400 border']">
+          <font-awesome-icon v-if="permission.enabled" :icon="faCheck" class="text-xs text-white"></font-awesome-icon>
         </span>
       </div>
     </div>

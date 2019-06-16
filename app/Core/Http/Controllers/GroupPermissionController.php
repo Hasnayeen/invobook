@@ -2,6 +2,7 @@
 
 namespace App\Core\Http\Controllers;
 
+use App\Core\Models\Role;
 use App\Core\Models\Permission;
 use App\Core\Models\RoleHasPermission;
 
@@ -25,6 +26,33 @@ class GroupPermissionController extends Controller
         return response()->json([
             'status'       => 'success',
             'permissions'  => $permissions,
+        ]);
+    }
+
+    public function store(Permission $permission, Role $role)
+    {
+        $this->authorize('assign', $permission);
+        $role->permissions()->attach($permission->id, ['group_type' => request('group_type'), 'group_id' => request('group_id')]);
+
+        return response()->json([
+            'status'     => 'success',
+            'message'    => trans('misc.Permission has been assigned to the role'),
+            'permission' => $permission,
+            'role'       => $role,
+        ]);
+    }
+
+    public function delete(Permission $permission, Role $role)
+    {
+        $this->authorize('revoke', $permission);
+        if ($role->slug === 'owner') {
+            throw new OwnerPermissionCantBeRevoked;
+        }
+        $role->permissionsOnGroup(request('group_type'), request('group_id'))->detach($permission->id);
+
+        return response()->json([
+            'status'  => 'success',
+            'message' => trans('misc.Permission has been revoked from the role'),
         ]);
     }
 }

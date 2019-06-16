@@ -24,7 +24,7 @@ class ValidateTaskCreation extends FormRequest
     public function rules()
     {
         return [
-            'name'        => 'required|unique:tasks|max:255',
+            'name'        => 'required|max:255',
             'assigned_to' => 'nullable|exists:users,id',
             'notes'       => 'nullable|string',
             'due_on'      => 'required|date_format:Y-m-d',
