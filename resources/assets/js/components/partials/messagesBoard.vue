@@ -129,8 +129,8 @@ export default {
         this.message = ''
         axios.post('/messages', {
           message: msg,
-          resource_type: this.resourceType,
-          resource_id: this.resource.id,
+          group_type: this.resourceType,
+          group_id: this.resource.id,
           mentions: this.mentions
         })
           .then((response) => {
