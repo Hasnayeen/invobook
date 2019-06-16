@@ -57,7 +57,7 @@ class GroupPermissionTest extends TestCase
                  'action'    => 'create',
                  'resource'  => 'task',
              ]);
-        
+
         $this->assertDatabaseHas('role_has_permission', ['role_id' => 5, 'permission_id' => $permission->id, 'group_type' => 'project', 'group_id' => $this->projectId]);
     }
 
