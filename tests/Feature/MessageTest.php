@@ -107,8 +107,8 @@ class MessageTest extends TestCase
 
         $this->post('messages/', [
             'message'          => 'New message',
-            'group_type'    => 'project',
-            'group_id'      => $project->id,
+            'group_type'       => 'project',
+            'group_id'         => $project->id,
         ])->assertJsonFragment([
             'status'           => 'success',
             'body'             => 'New message',
@@ -142,10 +142,10 @@ class MessageTest extends TestCase
 
         $this->actingAs($user)->post('messages/', [
             'message'          => 'New message',
-            'group_type'    => 'project',
-            'group_id'      => $project->id,
+            'group_type'       => 'project',
+            'group_id'         => $project->id,
         ])->assertJsonFragment([
-            'status' => 'error',
+            'status'  => 'error',
             'message' => 'This action is unauthorized.',
         ]);
     }
