@@ -1,9 +1,15 @@
 <template>
-<div :class="{'hidden': !show}">
+<div v-if="show">
   <div class="absolute container mx-2 md:mx-auto md:max-w-4xl bg-gray-100 rounded shadow-lg z-10" style="top: 10vh;left: 0;right: 0;">
     <div class="m-auto flex-col flex">
-      <header class="block uppercase tracking-wide bg-gray-200 text-gray-600 text-xs font-bold text-center text-lg p-6 rounded" for="user">
-        Permission Settings
+      <header class="bg-gray-200 text-gray-600 p-6 rounded flex flex-row justify-between items-center" for="user">
+        <div></div>
+        <div class="uppercase tracking-wide font-semibold text-lg">
+          Permission Settings
+        </div>
+        <div @click="closeModal" class="cursor-pointer">
+          <font-awesome-icon :icon="faTimesCircle" class="text-lg text-red-500 opacity-75"></font-awesome-icon>
+        </div>
       </header>
 
       <div class="flex flex-row text-gray-800 bg-white">
@@ -29,37 +35,33 @@
         </div>
       </div>
 
-  <!-- Select Role -->
-  <div class="px-6 pb-8 pt-12 rounded-b">
-    <div class="inline font-medium text-gray-700">Select a Role:</div>
-    <template v-for="role in roles">
-      <div @click="selectRole(role)" class="rounded inline border p-3 mx-2 relative cursor-pointer"
-        :class="[selectedRole === role.slug ? 'bg-indigo-100 border-indigo-400 shadow-md' : 'bg-gray-100 border-gray-400']">
-        <font-awesome-icon v-if="selectedRole === role.slug" :icon="faCheckCircle" class="absolute right-0 top-0 -mr-1 -mt-1 text-lg text-indigo-500 bg-white rounded-full"></font-awesome-icon>
-        <span class="cursor-pointer">{{ role.name }}</span>
+      <!-- Select Role -->
+      <div class="px-6 pb-8 pt-12 rounded-b">
+        <div class="inline font-medium text-gray-700">Select a Role:</div>
+        <template v-for="role in roles">
+          <div @click="selectRole(role)" class="rounded inline border p-3 mx-2 relative cursor-pointer"
+            :class="[selectedRole === role.slug ? 'bg-indigo-100 border-indigo-400 shadow-md' : 'bg-gray-100 border-gray-400']">
+            <font-awesome-icon v-if="selectedRole === role.slug" :icon="faCheckCircle" class="absolute right-0 top-0 -mr-1 -mt-1 text-lg text-indigo-500 bg-white rounded-full"></font-awesome-icon>
+            <span class="cursor-pointer">{{ role.name }}</span>
+          </div>
+        </template>
       </div>
-    </template>
-  </div>
 
-  <div class="py-2 bg-white rounded-b">
-    <div v-for="(resource, name, index) in permissions" class="flex flex-row items-center px-12 py-4" :class="[index !== 0 ? 'border-gray-200 border-t' : '']">
-      <div class="text-gray-700 text-xl w-48">
-        {{ name | capitalize | localize }}
-      </div>
-      <div v-for="(permission, key) in resource" class="w-32 flex flex-col justify-center items-center">
-        <div class="pb-1">
-          {{ permission.action | capitalize | localize }}
+      <div class="bg-white rounded-b">
+        <div v-for="(resource, name, index) in permissions" class="flex flex-row items-center px-12 py-4" :class="[index !== 0 ? 'border-gray-200 border-t' : '']">
+          <div class="text-gray-700 text-xl w-48">
+            {{ name | capitalize | localize }}
+          </div>
+          <div v-for="(permission, key) in resource" class="w-32 flex flex-col justify-center items-center">
+            <div class="pb-1">
+              {{ permission.action | capitalize | localize }}
+            </div>
+            <span @click="togglePermission(permission, name, key, permission.enabled)" class="w-5 h-5 rounded cursor-pointer inline flex items-center justify-center" :class="[permission.enabled ? 'bg-teal-500' : 'border-gray-400 border']">
+              <font-awesome-icon v-if="permission.enabled" :icon="faCheck" class="text-xs text-white"></font-awesome-icon>
+            </span>
+          </div>
         </div>
-        <span class="w-5 h-5 rounded cursor-pointer inline flex items-center justify-center" :class="[permission.enabled ? 'bg-teal-500' : 'border-gray-400 border']">
-          <font-awesome-icon v-if="permission.enabled" :icon="faCheck" class="text-xs text-white"></font-awesome-icon>
-        </span>
-      </div>
-    </div>
-  </div>
-
-      <div class="flex flex-row justify-between p-6 bg-gray-200 rounded-b">
-        <button @click="closeModal" class="text-red-400 hover:font-bold mx-2">Close</button>
-        <button @click="" class="bg-teal-200 text-teal-800 px-4 py-3 rounded font-bold">Save</button>
+        <div v-if="roleId" class="h-6"></div>
       </div>
     </div>
   </div>
@@ -69,6 +71,7 @@
 
 <script>
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons/faCheckCircle'
+import { faTimesCircle } from '@fortawesome/free-solid-svg-icons/faTimesCircle'
 import { faCheck } from '@fortawesome/free-solid-svg-icons/faCheck'
 export default {
   props: {
@@ -90,8 +93,10 @@ export default {
     roles: [],
     permissions: [],
     selectedRole: '',
+    roleId: 0,
     faCheck,
     faCheckCircle,
+    faTimesCircle,
   }),
   created () {
     if (this.roles.length < 1) {
@@ -110,6 +115,7 @@ export default {
     },
     selectRole (role) {
       this.selectedRole = role.slug
+      this.roleId = role.id
       axios.get('/groups/permissions', {
           params: {
             group_type: this.resourceType,
@@ -123,6 +129,33 @@ export default {
         .catch((error) => {
           console.log(error)
         })
+    },
+    togglePermission (permission, key, index, currentState) {
+      if (currentState) {
+        axios.delete('/groups/permissions/' + permission.id + '/roles/' + this.roleId, {
+          params: {
+            group_type: this.resourceType,
+            group_id: this.resourceId,
+          }
+        })
+          .then((response) => {
+            this.permissions[key][index]['enabled'] = !currentState
+          })
+          .catch((error) => {
+            EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+          })
+      } else {
+        axios.post('/groups/permissions/' + permission.id + '/roles/' + this.roleId, {
+          group_type: this.resourceType,
+          group_id: this.resourceId,
+        })
+          .then((response) => {
+            this.permissions[key][index]['enabled'] = !currentState
+          })
+          .catch((error) => {
+            EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+          })
+      }
     },
   }
 }
