@@ -89,8 +89,8 @@ export default {
           let { data } = await axios({
             url: '/discussions',
             params: {
-              resource_type: this.resourceType,
-              resource_id: this.resource.id
+              group_type: this.resourceType,
+              group_id: this.resource.id
             }})
           this.discussions = data.discussions
           return this.discussions
