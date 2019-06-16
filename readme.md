@@ -6,6 +6,7 @@
 [![codecov](https://codecov.io/gh/iluminar/goodwork/branch/master/graph/badge.svg)](https://codecov.io/gh/iluminar/goodwork)
 [![StyleCI](https://styleci.io/repos/81873619/shield?branch=dev&style=flat)](https://styleci.io/repos/81873619)
 [![Join on slack](https://img.shields.io/badge/join%20on-slack-green.svg)](https://join.slack.com/t/iluminar/shared_invite/enQtNDY0Mzc3NDkwOTY1LTJhZTNiYmMxZmE4NGU5MTJhODI5OWMyNjc4ZmIyNDVhODRhMGUzNDU0MmM1OGRmZjBiYWM0NjcwNWRjMDJjNTA)
+[![Join on goodwork](https://img.shields.io/badge/join%20on-goodwork-orange.svg)](https://goodworkfor.life/register/invite-link/ovCPAFpnwIhrvqUrlvynarP9HVRBC5mH)
 
 <img src="public/logos/logo.png" alt="Goodwork" style="max-width:100%;">
 
@@ -89,6 +90,8 @@ You can check out an instance of the application that we use as a guest user usi
 ## Contributing <small>[↑Top](#about-goodwork)</small>
 
 Thank you for considering contributing to the Goodwork! The contribution guide can be found in the [Contribution Guideline](https://github.com/iluminar/goodwork/wiki/Contribution-Guideline).
+
+You can join goodwork project via this link [link](https://goodworkfor.life/register/invite-link/ovCPAFpnwIhrvqUrlvynarP9HVRBC5mH)
 
 Also you can join the slack channel via this [link](https://join.slack.com/t/iluminar/shared_invite/enQtNDY0Mzc3NDkwOTY1LTJhZTNiYmMxZmE4NGU5MTJhODI5OWMyNjc4ZmIyNDVhODRhMGUzNDU0MmM1OGRmZjBiYWM0NjcwNWRjMDJjNTA)
 
