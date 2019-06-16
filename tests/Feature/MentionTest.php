@@ -69,12 +69,11 @@ class MentionTest extends TestCase
     /** @test */
     public function user_can_mention_other_user_when_creating_message()
     {
-        $message = factory(Message::class)->make();
-
+        $id = $this->prepareDataForMessageTest();
         $this->actingAs($this->user)->post('messages', [
-            'message'          => $message->body,
-            'resource_type'    => $message->messageable_type,
-            'resource_id'      => $message->messageable_id,
+            'message'          => 'Test Message',
+            'group_type'    => 'project',
+            'group_id'      => $id,
             'mentions'         => [
                 $this->user2->username, $this->user3->username,
             ],
@@ -147,12 +146,11 @@ class MentionTest extends TestCase
     public function send_notification_to_mentioned_user_in_message()
     {
         Notification::fake();
-        $message = factory(Message::class)->make();
-
+        $id = $this->prepareDataForMessageTest();
         $this->actingAs($this->user)->post('messages', [
-            'message'          => $message->body,
-            'resource_type'    => $message->messageable_type,
-            'resource_id'      => $message->messageable_id,
+            'message'          => 'Test Message',
+            'group_type'       => 'project',
+            'group_id'         => $id,
             'mentions'         => [
                 $this->user2->username, $this->user3->username,
             ],
@@ -165,5 +163,15 @@ class MentionTest extends TestCase
 
             return true;
         });
+    }
+
+    private function prepareDataForMessageTest()
+    {
+        $project = factory('App\Core\Models\Project')->create(['owner_id' => $this->user->id]);
+        $project->members()->attach($this->user);
+        $this->actingAs($this->user);
+        resolve('Authorization')->setupDefaultPermissions($project);
+
+        return $project->id;
     }
 }

@@ -1,6 +1,6 @@
 <template>
 <div v-if="show">
-  <div class="absolute container mx-2 md:mx-auto md:max-w-4xl bg-gray-100 rounded shadow-lg z-10" style="top: 10vh;left: 0;right: 0;">
+  <div class="absolute container mx-2 md:mx-auto md:max-w-4xl bg-gray-100 rounded shadow-lg z-30" style="top: 10vh;left: 0;right: 0;">
     <div class="m-auto flex-col flex">
       <header class="bg-gray-200 text-gray-600 p-6 rounded flex flex-row justify-between items-center" for="user">
         <div></div>
@@ -65,7 +65,7 @@
       </div>
     </div>
   </div>
-  <div @click="closeModal" class="h-screen w-screen fixed inset-0 bg-gray-900 opacity-25"></div>
+  <div @click="closeModal" class="h-screen w-screen fixed inset-0 bg-gray-900 opacity-25 z-20"></div>
 </div>
 </template>
 

@@ -13,6 +13,7 @@ class RolePermissionController extends Controller
     {
         $this->authorize('assign', $permission);
         $role->defaultPermissions()->attach($permission->id, ['group_related' => $permission->group_related]);
+        $role->permissions()->attach($permission->id);
 
         return response()->json([
             'status'     => 'success',
@@ -29,6 +30,7 @@ class RolePermissionController extends Controller
             throw new OwnerPermissionCantBeRevoked;
         }
         $role->defaultPermissions()->detach($permission->id);
+        $role->permissions()->detach($permission->id);
 
         return response()->json([
             'status'  => 'success',

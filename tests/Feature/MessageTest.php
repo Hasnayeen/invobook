@@ -96,16 +96,19 @@ class MessageTest extends TestCase
     }
 
     /** @test */
-    public function user_can_create_message()
+    public function user_with_permission_can_create_message()
     {
         Event::fake();
 
         $project = factory('App\Core\Models\Project')->create(['owner_id' => $this->user->id]);
+        $project->members()->attach($this->user);
+        $this->actingAs($this->user);
+        resolve('Authorization')->setupDefaultPermissions($project);
 
-        $this->actingAs($this->user)->post('messages/', [
+        $this->post('messages/', [
             'message'          => 'New message',
-            'resource_type'    => 'project',
-            'resource_id'      => $project->id,
+            'group_type'    => 'project',
+            'group_id'      => $project->id,
         ])->assertJsonFragment([
             'status'           => 'success',
             'body'             => 'New message',
@@ -126,6 +129,25 @@ class MessageTest extends TestCase
         Event::assertDispatched(MessageCreated::class, function ($e) use ($message) {
             return $e->message->id === $message->id;
         });
+    }
+
+    /** @test */
+    public function user_without_permission_cant_create_message()
+    {
+        $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
+        $project = factory('App\Core\Models\Project')->create(['owner_id' => $this->user->id]);
+        $project->members()->attach($this->user);
+        $this->actingAs($this->user);
+        resolve('Authorization')->setupDefaultPermissions($project);
+
+        $this->actingAs($user)->post('messages/', [
+            'message'          => 'New message',
+            'group_type'    => 'project',
+            'group_id'      => $project->id,
+        ])->assertJsonFragment([
+            'status' => 'error',
+            'message' => 'This action is unauthorized.',
+        ]);
     }
 
     /** @test */

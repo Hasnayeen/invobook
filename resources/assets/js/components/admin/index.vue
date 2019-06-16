@@ -1,5 +1,5 @@
 <template>
-<div class="container md:mx-auto md:px-4 md:my-6 w-full md:w-md lg:w-lg xl:w-xl xxl:w-2xl border-t md:border-0">
+<div class="container md:mx-auto md:my-6 w-full xxl:max-w-6xl lg:max-w-4xl md:max-w-xl border-t md:border-0">
   <div class="flex flex-row justify-between md:justify-around md:my-6 py-2 md:py-3 bg-white shadow md:rounded text-gray-500">
     <div @click="activateThisTab('users')"
       :class="[(active === 'users') ? 'text-teal-600 font-semibold border-teal-500 border-b-2 pb-2 md:pb-4 -mb-2 md:-mb-3' : 'cursor-pointer', 'text-center w-1/2']">

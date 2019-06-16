@@ -25,6 +25,7 @@ class AuthorizationTest extends TestCase
         ]);
 
         $this->assertDatabaseMissing('permission_settings', ['permission_id' => $this->permission->id, 'role_id' => $this->role->id]);
+        $this->assertDatabaseMissing('role_has_permission', ['role_id' => $this->role->id, 'permission_id' => $this->permission->id]);
     }
 
     /** @test */
@@ -38,6 +39,7 @@ class AuthorizationTest extends TestCase
         ]);
 
         $this->assertDatabaseHas('permission_settings', ['role_id' => $this->role->id, 'permission_id' => $this->permission->id]);
+        $this->assertDatabaseHas('role_has_permission', ['role_id' => $this->role->id, 'permission_id' => $this->permission->id]);
     }
 
     /** @test */
