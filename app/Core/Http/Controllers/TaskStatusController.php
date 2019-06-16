@@ -3,16 +3,15 @@
 namespace App\Core\Http\Controllers;
 
 use App\Core\Models\Task;
-use App\Core\Http\Requests\UpdateTaskStatusRequest;
+use App\Core\Models\Status;
 
 class TaskStatusController extends Controller
 {
-    public function update(UpdateTaskStatusRequest $request, Task $task)
+    public function update(Task $task, Status $status)
     {
-        $task->status()->updateOrCreate([], [
-            'name'  => $request->name,
-            'color' => $request->color,
-        ]);
+        $this->authorize('update', $task);
+        $task->status_id = $status->id;
+        $task->save();
 
         $task->load('status');
 
