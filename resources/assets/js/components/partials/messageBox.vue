@@ -9,7 +9,7 @@
       <div class="flex flex-row justify-center px-4 py-2">
         <div @click="selectUserMessage(user)" v-for="user in users" v-if="user.id !== authUser.id" class="relative">
           <img class="w-10 h-10 rounded-full md:mr-2 cursor-pointer" :title="user.name" :src="generateUrl(user.avatar)">
-          <div :class="[user.online ? 'bg-teal' : 'bg-gray-500']" :title="[user.online ? 'online' : 'offline']" class="absolute w-4 h-4 rounded-full border-2 border-white mr-1 right-0 bottom-0"></div>
+          <div :class="[user.online ? 'bg-teal-500' : 'bg-gray-500']" :title="[user.online ? 'online' : 'offline']" class="absolute w-4 h-4 rounded-full border-2 border-white mr-1 right-0 bottom-0"></div>
         </div>
       </div>
     </div>
@@ -110,8 +110,8 @@ export default {
         this.message = ''
         axios.post('/messages', {
           message: msg,
-          resource_type: 'user',
-          resource_id: this.selectedUser.id
+          group_type: 'user',
+          group_id: this.selectedUser.id
         })
           .then((response) => {
             if (response.data.status === 'success') {
