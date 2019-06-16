@@ -32,7 +32,5 @@ class MessagePolicy
     public function delete(User $user, Message $message)
     {
         return (new Authorization($user))->userHasPermissionTo('delete', 'message', $message->id, true, request('group_type'), request('group_id'));
-
-        return (int) $message->user_id === $user->id;
     }
 }

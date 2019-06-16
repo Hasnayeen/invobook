@@ -49,6 +49,23 @@ class TaskTest extends TestCase
 
     /**
      * @test
+     * @expectedException Illuminate\Validation\ValidationException
+     */
+    public function due_date_must_be_in_future()
+    {
+        $task = factory(\App\Core\Models\Task::class)->make();
+        $this->actingAs($this->user)->post('/tasks', [
+            'name'          => $task->name,
+            'assigned_to'   => $task->assigned_to,
+            'notes'         => $task->notes,
+            'due_on'        => $this->faker->dateTimeBetween('-1 years', 'now')->format('Y-m-d'),
+            'group_type'    => $task->taskable_type,
+            'group_id'      => $task->taskable_id,
+        ]);
+    }
+
+    /**
+     * @test
      * @expectedException Illuminate\Auth\Access\AuthorizationException
      * */
     public function user_without_permission_cant_create_new_task()
@@ -260,57 +277,39 @@ class TaskTest extends TestCase
             ->assertSessionHasErrors();
     }
 
+    /** @test */
     public function user_with_permission_can_update_status_of_a_task()
     {
         $status = factory(\App\Core\Models\Status::class)->create();
+        $status2 = factory(\App\Core\Models\Status::class)->create();
 
         $this->task->status()->associate($status)->save();
 
         $this->actingAs($this->user)
-            ->put("tasks/{$this->task->id}/statuses", [
-                'name'    => 'dummy status',
-                'color'   => '#000000',
-            ])
-            ->assertSessionHasNoErrors();
-
-        $this->assertEquals([
-            'name'    => 'dummy status',
-            'color'   => '#000000',
-        ], [
-            'name'  => $this->task->refresh()->status->name,
-            'color' => $this->task->refresh()->status->color,
-        ]);
+             ->put("tasks/{$this->task->id}/statuses/{$status2->id}")
+             ->assertJsonFragment([
+                 'status' => 'success',
+                 'message' => 'Task status has been updated'
+             ]);
+        $this->assertDatabaseHas('tasks', ['id' => $this->task->id, 'status_id' => $status2->id]);
     }
 
     /**
      * @test
-     * @TODO
+     * @expectedException Illuminate\Auth\Access\AuthorizationException
      */
     public function user_without_permission_cant_update_status_of_a_task()
     {
-        // $task = factory(\App\Core\Models\Task::class)->create();
-        // $status = factory(\App\Core\Models\Status::class)->create();
+        $user = factory(\App\Core\Models\User::class)->create();
+        $status = factory(\App\Core\Models\Status::class)->create();
+        $status2 = factory(\App\Core\Models\Status::class)->create();
 
-        // $task->status()->associate($status)->save();
+        $this->task->status()->associate($status)->save();
 
-        // $this->actingAs($this->user)
-        //     ->put("tasks/{$task->id}/statuses", [
-        //         'name'    => 'dummy status',
-        //         'color'   => '#000000',
-        //     ]);
-    }
-
-    /**
-     * @test
-     * @expectedException Illuminate\Validation\ValidationException
-     */
-    public function request_validates_the_data_before_updating_status_of_a_task()
-    {
-        $this->actingAs($this->user)
-            ->put("tasks/{$this->task->id}/statuses", [
-                'name'    => null,
-                'color'   => 'non-hex-value',
-            ])
-            ->assertSessionHasErrors();
+        $this->actingAs($user)
+             ->put("tasks/{$this->task->id}/statuses/{$status2->id}", [
+                 'group_type' => $this->task->taskable_type,
+                 'group_id' => $this->task->taskable_id,
+             ]);
     }
 }

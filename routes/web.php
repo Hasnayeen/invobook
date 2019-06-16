@@ -167,7 +167,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::delete('tasks/{task}', 'TaskController@delete');
 
-    Route::put('tasks/{task}/statuses', 'TaskStatusController@update');
+    Route::put('tasks/{task}/statuses/{status}', 'TaskStatusController@update');
 
     /**********************************
         Tags
