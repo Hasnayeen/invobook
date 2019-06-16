@@ -72,8 +72,8 @@ class MentionTest extends TestCase
         $id = $this->prepareDataForMessageTest();
         $this->actingAs($this->user)->post('messages', [
             'message'          => 'Test Message',
-            'group_type'    => 'project',
-            'group_id'      => $id,
+            'group_type'       => 'project',
+            'group_id'         => $id,
             'mentions'         => [
                 $this->user2->username, $this->user3->username,
             ],
