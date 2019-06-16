@@ -288,8 +288,8 @@ class TaskTest extends TestCase
         $this->actingAs($this->user)
              ->put("tasks/{$this->task->id}/statuses/{$status2->id}")
              ->assertJsonFragment([
-                 'status' => 'success',
-                 'message' => 'Task status has been updated'
+                 'status'  => 'success',
+                 'message' => 'Task status has been updated',
              ]);
         $this->assertDatabaseHas('tasks', ['id' => $this->task->id, 'status_id' => $status2->id]);
     }
@@ -309,7 +309,7 @@ class TaskTest extends TestCase
         $this->actingAs($user)
              ->put("tasks/{$this->task->id}/statuses/{$status2->id}", [
                  'group_type' => $this->task->taskable_type,
-                 'group_id' => $this->task->taskable_id,
+                 'group_id'   => $this->task->taskable_id,
              ]);
     }
 }
