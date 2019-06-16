@@ -36,11 +36,12 @@ class MessageController extends Controller
     public function store(StoreMessageRequest $request, MessageRepository $repository, MentionRepository $mentionRepository)
     {
         try {
+            $this->authorize('create', Message::class);
             $message = $repository->saveMessage([
                 'body'             => $request->get('message'),
                 'user_id'          => auth()->user()->id,
-                'messageable_type' => $request->get('resource_type'),
-                'messageable_id'   => $request->get('resource_id'),
+                'messageable_type' => $request->get('group_type'),
+                'messageable_id'   => $request->get('group_id'),
             ]);
             if (request('mentions')) {
                 $mentionRepository->create('message', $message);

@@ -25,8 +25,8 @@ class StoreMessageRequest extends FormRequest
     {
         return [
             'message'       => 'string|min:1',
-            'resource_type' => 'string|required',
-            'resource_id'   => 'integer|required',
+            'group_type' => 'string|required',
+            'group_id'   => 'integer|required',
         ];
     }
 }

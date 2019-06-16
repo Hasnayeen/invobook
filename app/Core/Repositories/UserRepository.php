@@ -15,6 +15,6 @@ class UserRepository
 
     public function getAllUsers($columns = ['id', 'name', 'username', 'avatar'])
     {
-        return $this->model->get($columns);
+        return $this->model->with('role')->get($columns);
     }
 }
