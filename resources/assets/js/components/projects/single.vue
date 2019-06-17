@@ -57,8 +57,8 @@
     <tab-menu :active="active" @activate="activateTab"></tab-menu>
 
     <div class="flex flex-row flex-wrap">
-      <taskBoard resourceType="project" :resource="project"  :activeTab="active"></taskBoard>
-      <discussionBoard resourceType="project" :resource="project" :activeTab="active"></discussionBoard>
+      <taskBoard resourceType="project" :resource="project" :activeTab="active" :activeId="activeId"></taskBoard>
+      <discussionBoard resourceType="project" :resource="project" :activeTab="active" :activeId="activeId"></discussionBoard>
       <messagesBoard resourceType="project" :resource="project" :activeTab="active"></messagesBoard>
       <eventBoard resourceType="projects" :resource="project" :activeTab="active"></eventBoard>
       <file-board resourceType="projects" :resource="project" :activeTab="active"></file-board>
@@ -102,6 +102,7 @@ export default {
   data: () => ({
     addMemberFormShown: false,
     active: 'tasks',
+    activeId: 0,
     dropdownMenuShown: false,
     githubRepoModalShown: false,
     membersListModalShown: false,
@@ -112,8 +113,12 @@ export default {
   created () {
     let tabs = ['tasks', 'discussions', 'messages', 'events', 'files', 'activities']
     let tool = new URL(location.href).searchParams.get('tool')
+    let id = new URL(location.href).searchParams.get('id')
     if (tool !== null && tabs.indexOf(tool) !== -1) {
       this.active = tool
+    }
+    if (id !== null) {
+      this.activeId = parseInt(id)
     }
   },
   computed: {

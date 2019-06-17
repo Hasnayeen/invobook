@@ -55,6 +55,10 @@ export default {
     activeTab: {
       required: true,
       type: String
+    },
+    activeId: {
+      required: false,
+      type: Number
     }
   },
   data: () => ({

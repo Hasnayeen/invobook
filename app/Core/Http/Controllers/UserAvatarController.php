@@ -14,9 +14,10 @@ class UserAvatarController extends Controller
             ]);
 
             return response()->json([
-                'status'  => 'success',
-                'message' => 'Avatar uploaded successfully',
-            ], 204);
+                'status'     => 'success',
+                'message'    => 'Avatar uploaded successfully',
+                'avatar'     => auth()->user()->avatar,
+            ], 200);
         } catch (Exception $exception) {
             return response()->json([
                 'status'  => 'error',

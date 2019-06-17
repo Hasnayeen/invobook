@@ -16,6 +16,16 @@ class DiscussionCreatedNotification extends Notification implements ShouldQueue,
     use Queueable;
 
     /**
+     * @var string
+     */
+    public $groupType;
+
+    /**
+     * @var int
+     */
+    public $groupId;
+
+    /**
      * @var Discussion
      */
     private $discussion;
@@ -32,6 +42,8 @@ class DiscussionCreatedNotification extends Notification implements ShouldQueue,
     {
         $this->discussion = $discussion;
         $this->creator = $user;
+        $this->groupType = $discussion->discussionable_type;
+        $this->groupId = $discussion->discussionable_id;
     }
 
     /**
@@ -74,6 +86,7 @@ class DiscussionCreatedNotification extends Notification implements ShouldQueue,
             'object_type' => 'discussion',
             'object_name' => $this->discussion->name,
             'object_id'   => $this->discussion->id,
+            'url'         => url($this->groupType . 's/' . $this->groupId . '?tool=discussions&id=' . $this->discussion->id)
         ];
     }
 
@@ -86,7 +99,7 @@ class DiscussionCreatedNotification extends Notification implements ShouldQueue,
         return new BroadcastMessage([
             'data' => [
                 'subject'     => $this->creator,
-                'action'      => 'removed you from',
+                'action'      => 'created new discussion',
                 'object_type' => 'discussion',
                 'object_name' => $this->discussion->name,
                 'object_id'   => $this->discussion->id,

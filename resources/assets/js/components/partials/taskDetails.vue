@@ -100,6 +100,14 @@ export default {
     commentBox
   },
   props: {
+    resourceId: {
+      required: true,
+      type: Number
+    },
+    resourceType: {
+      required: true,
+      type: String
+    },
     taskDetailsShown: {
       required: true,
       type: Boolean
@@ -129,18 +137,23 @@ export default {
       this.dropdownMenuShown = false
     },
     deleteTask () {
-      axios.delete('/tasks/' + this.task.id)
+      axios.delete('/tasks/' + this.task.id, {
+          params: {
+            group_type: this.resourceType,
+            group_id: this.resourceId,
+          }
+        })
         .then((response) => {
           this.$emit('delete', this.index)
           this.dropdownMenuShown = false
           EventBus.$emit('notification', response.data.message, response.data.status)
           this.$emit('close')
         })
-      this.dropdownMenuShown = false
         .catch((error) => {
           EventBus.$emit('notification', error.response.data.message, error.response.data.status)
           this.$emit('close')
         })
+      this.dropdownMenuShown = false
     }
   }
 }

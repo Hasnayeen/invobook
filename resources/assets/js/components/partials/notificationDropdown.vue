@@ -9,9 +9,10 @@
       <img class="w-10 h-10 rounded-full mr-2" :src="generateUrl(notification.data.subject.avatar)">
       <div>
         <div class="py-1 text-sm">
-          <a :href="'/users/' + notification.data.subject.username" class="no-underline text-blue-400">{{ notification.data.subject.name }}</a>
+          <a :href="'/users/' + notification.data.subject.username" class="no-underline hover:underline text-blue-400">{{ notification.data.subject.name }}</a>
           {{ notification.data.action }}
-          <a :href="notification.data.object_type + '/' + notification.data.object_id" class="no-underline text-blue-400">{{ notification.data.object_name }}</a>
+          <a v-if="notification.data.url" :href="notification.data.url" class="no-underline hover:underline text-blue-400">{{ notification.data.object_name }}</a>
+          <a v-else class="no-underline text-blue-400">{{ notification.data.object_name }}</a>
         </div>
         <div class="py-1 text-xs">
           {{ notification.date }}
