@@ -4,8 +4,8 @@ namespace App\Core\Exceptions;
 
 use Exception;
 use Illuminate\Auth\AuthenticationException;
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {
@@ -51,6 +51,7 @@ class Handler extends ExceptionHandler
                 'message'  => 'You do not have permission for this action',
             ], 403);
         }
+
         return parent::render($request, $exception);
     }
 
