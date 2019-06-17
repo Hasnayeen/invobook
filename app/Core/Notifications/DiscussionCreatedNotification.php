@@ -86,7 +86,7 @@ class DiscussionCreatedNotification extends Notification implements ShouldQueue,
             'object_type' => 'discussion',
             'object_name' => $this->discussion->name,
             'object_id'   => $this->discussion->id,
-            'url'         => url($this->groupType . 's/' . $this->groupId . '?tool=discussions&id=' . $this->discussion->id)
+            'url'         => url($this->groupType . 's/' . $this->groupId . '?tool=discussions&id=' . $this->discussion->id),
         ];
     }
 

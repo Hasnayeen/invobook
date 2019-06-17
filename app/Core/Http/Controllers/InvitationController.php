@@ -3,10 +3,10 @@
 namespace App\Core\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Core\Models\User;
 use App\Core\Models\Invite;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Core\Models\User;
 
 class InvitationController extends Controller
 {
@@ -19,7 +19,7 @@ class InvitationController extends Controller
         ]);
         $link = url('register/invite-link/' . Str::random(32));
         $inviteLink = Invite::where('role_id', $validatedData['role_id'])->first();
-        if (!$inviteLink) {
+        if (! $inviteLink) {
             $inviteLink = new Invite();
             $inviteLink->role_id = $validatedData['role_id'];
         }

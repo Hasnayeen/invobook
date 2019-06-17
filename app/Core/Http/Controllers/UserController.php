@@ -25,7 +25,7 @@ class UserController extends Controller
     {
         try {
             $this->authorize('invite', User::class);
-            if (!User::where('email', $request->email)->first()) {
+            if (! User::where('email', $request->email)->first()) {
                 Mail::to($request->email)
                     ->send(new SendInvitationToRegister());
 
