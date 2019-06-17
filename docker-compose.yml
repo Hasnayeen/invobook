@@ -63,6 +63,7 @@ services:
     volumes:
       - ./laravel-echo-server.json:/usr/src/app/laravel-echo-server.json
       - ./:/var/www
+      - ./echo-server.sh:/usr/src/app/echo-server.sh
       - "${SSL_CERT_DIR}:/etc/ssl/certs"
     working_dir: /usr/src/app
     command: bash -c "npm install -g laravel-echo-server && cd /usr/src/app && ./echo-server.sh"
