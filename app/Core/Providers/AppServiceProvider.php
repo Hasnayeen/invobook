@@ -35,6 +35,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->bind(\Illuminate\Notifications\Channels\DatabaseChannel::class, function ($app) {
+            return new \App\Core\Utilities\DatabaseNotificationChannel();
+        });
+
         if ($this->app->environment() === 'local') {
             $this->app->register(\Laravel\Telescope\TelescopeServiceProvider::class);
             $this->app->register(\App\Core\Providers\TelescopeServiceProvider::class);

@@ -34,6 +34,7 @@ export default {
       axios.post('/users/' + this.user.username + '/avatar', data)
         .then((response) => {
           EventBus.$emit('notification', response.data.message, response.data.status)
+          this.user.avatar = response.data.avatar
         })
         .catch((error) => {
           EventBus.$emit('notification', error.response.data.message, error.response.data.status)

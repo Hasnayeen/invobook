@@ -17,6 +17,10 @@ class CategorySeeder extends Seeder
         ]);
 
         Category::create([
+            'name'       => 'Question',
+        ]);
+
+        Category::create([
             'name'       => 'Issue',
         ]);
 

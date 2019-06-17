@@ -2,7 +2,7 @@
 <div :class="{'hidden': (activeTab != 'tasks')}" class="w-full">
   <create-task-form ref="taskform" :resource="resource" :resourceType="resourceType" :form-shown="createTaskFormShown" :tasks="tasks" @close="closeCreateTaskForm"></create-task-form>
 
-  <task-details v-if="task" :index="index" :task="task" :taskDetailsShown="taskDetailsShown" @delete="deleteTask" @close="closeTaskDetails"></task-details>
+  <task-details v-if="task" :index="index" :resourceType="resourceType" :resourceId="resource.id" :task="task" :taskDetailsShown="taskDetailsShown" @delete="deleteTask" @close="closeTaskDetails"></task-details>
 
   <button @click="showCreateTaskForm" class="no-underline p-3 my-4 bg-white text-base text-teal-500 rounded shadow">{{ 'Create Task' | localize }}</button>
 
@@ -38,6 +38,10 @@ export default {
     activeTab: {
       required: true,
       type: String
+    },
+    activeId: {
+      required: false,
+      type: Number
     }
   },
   data: () => ({

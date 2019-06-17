@@ -16,7 +16,7 @@
       <font-awesome-icon :icon="faComments" class="text-2xl"></font-awesome-icon>
       <font-awesome-icon :icon="faCircle"
         v-if="displayUnreadMessageBadge"
-        class="absolute text-xs text-teal"
+        class="absolute text-xs text-teal-500"
         style="right:-3px; top:-6px;">
       </font-awesome-icon>
     </span>

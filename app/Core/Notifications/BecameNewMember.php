@@ -89,6 +89,7 @@ class BecameNewMember extends Notification implements ShouldQueue, ShouldBroadca
             'object_type' => $this->entityType,
             'object_name' => $this->entityName,
             'object_id'   => $this->entityId,
+            'url'         => url($this->entityType . 's/' . $this->entityId)
         ];
     }
 

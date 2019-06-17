@@ -6,18 +6,20 @@ use Carbon\Carbon;
 use App\Core\Models\Invite;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Core\Models\User;
 
 class InvitationController extends Controller
 {
     public function store(Request $request)
     {
+        $this->authorize('invite', User::class);
         $validatedData = $request->validate([
             'role_id'      => 'required|integer|exists:roles,id',
             'expiry_date'  => 'nullable|date',
         ]);
         $link = url('register/invite-link/' . Str::random(32));
         $inviteLink = Invite::where('role_id', $validatedData['role_id'])->first();
-        if (! $inviteLink) {
+        if (!$inviteLink) {
             $inviteLink = new Invite();
             $inviteLink->role_id = $validatedData['role_id'];
         }
