@@ -131,7 +131,10 @@ class MessageTest extends TestCase
         });
     }
 
-    /** @test */
+    /**
+     * @test
+     * @expectedException Illuminate\Auth\Access\AuthorizationException
+     */
     public function user_without_permission_cant_create_message()
     {
         $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
@@ -144,9 +147,6 @@ class MessageTest extends TestCase
             'message'          => 'New message',
             'group_type'       => 'project',
             'group_id'         => $project->id,
-        ])->assertJsonFragment([
-            'status'  => 'error',
-            'message' => 'This action is unauthorized.',
         ]);
     }
 

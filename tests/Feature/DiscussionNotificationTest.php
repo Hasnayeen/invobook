@@ -66,6 +66,7 @@ class DiscussionNotificationTest extends TestCase
             $group->members()->attach($user);
         });
 
+        $this->actingAs($this->user);
         $discussion = factory(Discussion::class)->create([
             'discussionable_type' => $groupType,
             'discussionable_id'   => $group->getKey(),

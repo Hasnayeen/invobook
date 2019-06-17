@@ -58,9 +58,10 @@ services:
       - "6001:6001"
     volumes:
       - ./laravel-echo-server.dev.json:/usr/src/app/laravel-echo-server.json
+      - ./echo-server.sh:/usr/src/app/echo-server.sh
       - ./:/var/www
     working_dir: /usr/src/app
-    command: bash -c "npm install -g laravel-echo-server && /usr/local/lib/node_modules/laravel-echo-server/bin/server.js start"
+    command: bash -c "npm install -g laravel-echo-server && cd /usr/src/app && ./echo-server.sh"
     depends_on:
       - redis
 

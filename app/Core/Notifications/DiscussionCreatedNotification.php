@@ -2,12 +2,16 @@
 
 namespace App\Core\Notifications;
 
+use App\Core\Models\User;
 use Illuminate\Bus\Queueable;
 use App\Core\Models\Discussion;
 use Illuminate\Notifications\Notification;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 
-class DiscussionCreatedNotification extends Notification
+class DiscussionCreatedNotification extends Notification implements ShouldQueue, ShouldBroadcast
 {
     use Queueable;
 
@@ -17,11 +21,17 @@ class DiscussionCreatedNotification extends Notification
     private $discussion;
 
     /**
+     * @var User
+     */
+    private $creator;
+
+    /**
      * @param Discussion $discussion
      */
-    public function __construct(Discussion $discussion)
+    public function __construct(Discussion $discussion, User $user)
     {
         $this->discussion = $discussion;
+        $this->creator = $user;
     }
 
     /**
@@ -32,7 +42,7 @@ class DiscussionCreatedNotification extends Notification
      */
     public function via()
     {
-        return ['mail'];
+        return config('notification.channels');
     }
 
     /**
@@ -59,6 +69,29 @@ class DiscussionCreatedNotification extends Notification
     public function toArray()
     {
         return [
+            'subject'     => $this->creator,
+            'action'      => 'created new discussion',
+            'object_type' => 'discussion',
+            'object_name' => $this->discussion->name,
+            'object_id'   => $this->discussion->id,
         ];
+    }
+
+    /**
+     * @param  mixed $notifiable
+     * @return void
+     */
+    public function toBroadcast($notifiable)
+    {
+        return new BroadcastMessage([
+            'data' => [
+                'subject'     => $this->creator,
+                'action'      => 'removed you from',
+                'object_type' => 'discussion',
+                'object_name' => $this->discussion->name,
+                'object_id'   => $this->discussion->id,
+            ],
+            'date' => 'Just Now',
+        ]);
     }
 }

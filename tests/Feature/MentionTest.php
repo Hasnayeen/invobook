@@ -24,8 +24,9 @@ class MentionTest extends TestCase
     /** @test */
     public function user_can_mention_other_user_when_creating_comment()
     {
+        $this->actingAs($this->user);
         $comment = factory(Comment::class)->make();
-        $this->actingAs($this->user)->post('comments', [
+        $this->post('comments', [
             'body'             => $comment->body,
             'commentable_type' => $comment->commentable_type,
             'commentable_id'   => $comment->commentable_id,
@@ -105,10 +106,10 @@ class MentionTest extends TestCase
     public function send_notification_to_mentioned_user_in_comment()
     {
         Notification::fake();
-
+        $this->actingAs($this->user);
         $comment = factory(Comment::class)->make();
 
-        $this->actingAs($this->user)->post('comments', [
+        $this->post('comments', [
             'body'             => $comment->body,
             'commentable_type' => $comment->commentable_type,
             'commentable_id'   => $comment->commentable_id,

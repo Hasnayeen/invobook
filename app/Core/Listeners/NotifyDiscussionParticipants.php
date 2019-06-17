@@ -15,7 +15,7 @@ class NotifyDiscussionParticipants
     public function handle(DiscussionCreated $event)
     {
         if ($event instanceof HasNotificationRecipients) {
-            Notification::send($event->getRecipients(), new DiscussionCreatedNotification($event->discussion));
+            Notification::send($event->getRecipients(), new DiscussionCreatedNotification($event->discussion, $event->creator));
         }
     }
 }

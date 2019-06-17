@@ -42,7 +42,7 @@ class MemberController extends Controller
 
         $entity->members()->detach($user);
 
-        $user->notify(new RevokedMembership($entity, auth()->user(), $user));
+        $user->notify(new RevokedMembership($entity, auth()->user()));
 
         return response()->json([
             'status'   => 'success',

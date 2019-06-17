@@ -16,7 +16,7 @@ then
   echo ""
 else
   echo ""
-  echo "${res}Error: Please install docker before installing Goodwork software${reset}"
+  echo "${red}Error: Please install docker before installing Goodwork software${reset}"
   echo ""
   exit 1
 fi
