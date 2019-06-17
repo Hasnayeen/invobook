@@ -8,6 +8,7 @@ use App\Core\Models\User;
 use App\Core\Models\Comment;
 use App\Core\Models\Message;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Event;
 use App\Core\Notifications\YouWereMentioned;
 use Illuminate\Support\Facades\Notification;
 
@@ -16,6 +17,7 @@ class MentionTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
+        Event::fake();
         Mail::fake();
         $this->user2 = factory(User::class)->create(['role_id' => 2]);
         $this->user3 = factory(User::class)->create(['role_id' => 2]);
