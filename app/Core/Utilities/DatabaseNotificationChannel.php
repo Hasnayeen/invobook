@@ -4,7 +4,6 @@ namespace App\Core\Utilities;
 
 use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Channels\DatabaseChannel;
-use Illuminate\Support\Facades\Log;
 
 class DatabaseNotificationChannel extends DatabaseChannel
 {

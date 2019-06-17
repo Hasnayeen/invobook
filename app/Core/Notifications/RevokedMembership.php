@@ -89,7 +89,7 @@ class RevokedMembership extends Notification implements ShouldQueue, ShouldBroad
             'object_type' => $this->entityType,
             'object_name' => $this->entityName,
             'object_id'   => $this->entityId,
-            'url'         => null
+            'url'         => null,
         ];
     }
 
