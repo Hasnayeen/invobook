@@ -136,4 +136,9 @@ class User extends Authenticatable
     {
         return $this->role->slug === 'owner';
     }
+
+    public function receivesBroadcastNotificationsOn()
+    {
+        return 'App.User.' . $this->id;
+    }
 }

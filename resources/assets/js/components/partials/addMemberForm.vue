@@ -3,7 +3,7 @@
   <div class="absolute container mx-2 md:mx-auto md:w-1/3 bg-white rounded shadow-lg z-10" style="top: 10vh;left: 0;right: 0;">
     <div class="p-4">
       <div class="p-4">
-        <label class="block uppercase tracking-wide text-gray-800 text-xs font-bold text-center text-lg mb-4" for="user">
+        <label class="block uppercase tracking-wide text-xs font-bold text-center text-lg mb-4" for="user">
           Add Member
         </label>
         <div class="flex flex-row items-center">

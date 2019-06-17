@@ -8,9 +8,10 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Notifications\Messages\BroadcastMessage;
 
-class BecameNewMember extends Notification implements ShouldQueue
+class BecameNewMember extends Notification implements ShouldQueue, ShouldBroadcast
 {
     use Queueable;
 
@@ -53,7 +54,7 @@ class BecameNewMember extends Notification implements ShouldQueue
      */
     public function via(): array
     {
-        return ['mail', 'database'];
+        return config('notification.channels');
     }
 
     /**
@@ -95,14 +96,17 @@ class BecameNewMember extends Notification implements ShouldQueue
      * @param  mixed $notifiable
      * @return void
      */
-    public function toBroadcast()
+    public function toBroadcast($notifiable)
     {
         return new BroadcastMessage([
-            'subject'     => $this->adder,
-            'action'      => 'added you to',
-            'object_type' => $this->entityType,
-            'object_name' => $this->entityName,
-            'object_id'   => $this->entityId,
+            'data' => [
+                'subject'     => $this->adder,
+                'action'      => 'added you to',
+                'object_type' => $this->entityType,
+                'object_name' => $this->entityName,
+                'object_id'   => $this->entityId,
+            ],
+            'date' => 'Just Now',
         ]);
     }
 }

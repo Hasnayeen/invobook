@@ -65,7 +65,7 @@ services:
       - ./:/var/www
       - "${SSL_CERT_DIR}:/etc/ssl/certs"
     working_dir: /usr/src/app
-    command: bash -c "npm install -g laravel-echo-server && /usr/local/lib/node_modules/laravel-echo-server/bin/server.js start"
+    command: bash -c "npm install -g laravel-echo-server && cd /usr/src/app && ./echo-server.sh"
     depends_on:
       - redis
     restart: always

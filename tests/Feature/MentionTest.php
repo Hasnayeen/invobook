@@ -8,6 +8,7 @@ use App\Core\Models\User;
 use App\Core\Models\Comment;
 use App\Core\Models\Message;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Event;
 use App\Core\Notifications\YouWereMentioned;
 use Illuminate\Support\Facades\Notification;
 
@@ -16,6 +17,7 @@ class MentionTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
+        Event::fake();
         Mail::fake();
         $this->user2 = factory(User::class)->create(['role_id' => 2]);
         $this->user3 = factory(User::class)->create(['role_id' => 2]);
@@ -24,8 +26,9 @@ class MentionTest extends TestCase
     /** @test */
     public function user_can_mention_other_user_when_creating_comment()
     {
+        $this->actingAs($this->user);
         $comment = factory(Comment::class)->make();
-        $this->actingAs($this->user)->post('comments', [
+        $this->post('comments', [
             'body'             => $comment->body,
             'commentable_type' => $comment->commentable_type,
             'commentable_id'   => $comment->commentable_id,
@@ -105,10 +108,10 @@ class MentionTest extends TestCase
     public function send_notification_to_mentioned_user_in_comment()
     {
         Notification::fake();
-
+        $this->actingAs($this->user);
         $comment = factory(Comment::class)->make();
 
-        $this->actingAs($this->user)->post('comments', [
+        $this->post('comments', [
             'body'             => $comment->body,
             'commentable_type' => $comment->commentable_type,
             'commentable_id'   => $comment->commentable_id,
