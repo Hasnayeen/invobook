@@ -12,7 +12,7 @@
             <p class="text-sm text-gray-600 pb-8">Forgot your account’s password or having trouble logging into your account? Enter your email address and we’ll send you a recovery link.</p>
             <h3 class="text-gray-700 font-medium">Email</h3>
             @if (session('status'))
-                <div class="alert alert-success">
+                <div class="bg-teal-100 text-teal-800 border-teal-500 border-l-2 p-2 mt-2">
                     {{ session('status') }}
                 </div>
             @endif

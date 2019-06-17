@@ -11,6 +11,7 @@ class DiscussionTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
+        $this->actingAs($this->user);
         $this->discussion = factory(\App\Core\Models\Discussion::class)->create();
     }
 

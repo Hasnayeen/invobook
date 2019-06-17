@@ -95,7 +95,7 @@ export default {
       this.unreadNotification = true
     },
     notificationRead () {
-      axios.put('notifications')
+      axios.put('/notifications')
         .catch((error) => {
           console.error(error.response.data.message)
         })

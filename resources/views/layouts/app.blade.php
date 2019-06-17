@@ -40,7 +40,7 @@
     @endImpersonating
 
 </head>
-<body class="bg-gray-200">
+<body class="bg-gray-200 text-gray-700">
     <main>
         <div id="app">
             <div class="h-1" style="background: linear-gradient(to right, #4DC0B5, #3490DC);"></div>

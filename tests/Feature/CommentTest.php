@@ -18,8 +18,8 @@ class CommentTest extends TestCase
     /** @test */
     public function user_can_create_comment()
     {
-        factory(Discussion::class)->create(['id' => 1]);
         $this->actingAs($this->user);
+        factory(Discussion::class)->create(['id' => 1]);
 
         $response = $this->post(
             self::$endpoint,
@@ -94,10 +94,11 @@ class CommentTest extends TestCase
     /** @test */
     public function user_can_see_all_comment()
     {
+        $this->actingAs($this->user);
         $discussion = factory(\App\Core\Models\Discussion::class)->create();
         $comments = factory(\App\Core\Models\Comment::class, 3)->create(['commentable_type' => 'discussion', 'commentable_id' => $discussion->id]);
 
-        $this->actingAs($this->user)->call('GET', self::$endpoint, ['commentable_type' => 'discussion', 'commentable_id' => $discussion->id])
+        $this->call('GET', self::$endpoint, ['commentable_type' => 'discussion', 'commentable_id' => $discussion->id])
              ->assertJsonFragment([
                  'status'           => 'success',
                  'body'             => $comments[0]->body,
@@ -113,6 +114,7 @@ class CommentTest extends TestCase
     {
         $user = factory(\App\Core\Models\User::class)->create();
 
+        $this->actingAs($user);
         $comment = factory(\App\Core\Models\Comment::class)->create([
             'user_id'          => $user->id,
             'body'             => 'Comment body',
@@ -120,7 +122,7 @@ class CommentTest extends TestCase
             'commentable_id'   => 1,
         ]);
 
-        $this->actingAs($user)->delete("/comments/{$comment->id}")
+        $this->delete("/comments/{$comment->id}")
              ->assertJsonFragment([
                 'status'  => 'success',
                 'message' => 'misc.Comment has been deleted',
@@ -129,7 +131,6 @@ class CommentTest extends TestCase
 
     /**
      * @test
-     * @TODO
      * */
     public function user_with_permission_can_delete_a_comment()
     {
@@ -168,13 +169,13 @@ class CommentTest extends TestCase
      */
     public function user_without_permission_cant_delete_a_comment()
     {
+        $this->actingAs($this->user);
         $comment = factory(\App\Core\Models\Comment::class)->create([
             'commentable_type' => 'task',
             'commentable_id'   => factory(\App\Core\Models\Task::class),
         ]);
 
-        $this->actingAs($this->user)
-             ->delete(
+        $this->delete(
                 "/comments/{$comment->id}",
                 ['group_type' => $comment->commentable->taskable_type, 'group_id' => $comment->commentable->taskable_id]
              );

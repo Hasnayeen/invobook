@@ -3,11 +3,11 @@
   <div class="flex flex-col bg-white mx-auto mt-4 mb-8 shadow rounded">
 
     <div class="text-gray-600 bg-white shadow p-4 text-xl flex flex-row items-center z-10">
-      <div>
+      <div class="pr-2">
         {{ 'Currently in room' | localize }}:
       </div>
       <template v-for="user in users">
-        <img :src="generateUrl(user.avatar)" alt="" class="w-8 h-8 rounded-full mr-2 ml-4">
+        <img :src="generateUrl(user.avatar)" alt="" class="w-8 h-8 rounded-full mr-2">
       </template>
     </div>
 
@@ -140,7 +140,7 @@ export default {
             }
           })
           .catch((error) => {
-            console.error(error)
+            EventBus.$emit('notification', error.response.data.message, error.response.data.status)
           })
       }
     },

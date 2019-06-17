@@ -20,11 +20,17 @@ class DiscussionCreated implements HasNotificationRecipients
     public $discussion;
 
     /**
+     * @var User
+     */
+    public $creator;
+
+    /**
      * @param Discussion $discussion
      */
     public function __construct(Discussion $discussion)
     {
         $this->discussion = $discussion;
+        $this->creator = auth()->user();
     }
 
     /**
