@@ -15,9 +15,15 @@
       <div class="">
         <message v-for="(message, index) in messages" :key="index" :message="message" :user="user" :index="index" @deleted="deleteMessage" :last="messages.length === (index + 1)"></message>
       </div>
+      <div v-if="messages.length === 0" class="flex flex-col justify-center items-center">
+        <div class="text-gray-600 text-lg text-center py-8">
+          Start communicating with your team member
+        </div>
+        <img src="/image/work_chat.svg" alt="direct message" class="w-96">
+      </div>
     </div>
 
-    <div class="relative bg-gray-400">
+    <div class="relative bg-gray-200">
       <div class="static text-center p-8">
         <div class="relative">
           <user-suggestion-box
