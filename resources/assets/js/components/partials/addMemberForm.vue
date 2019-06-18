@@ -62,8 +62,8 @@ export default {
       this.loading = true
       axios.post('/members', {
         user_id: this.newMember,
-        resource_type: this.resourceType,
-        resource_id: this.resource.id
+        group_type: this.resourceType,
+        group_id: this.resource.id
       })
         .then((response) => {
           if (response.data.status === 'success') {

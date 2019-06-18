@@ -10,13 +10,13 @@ trait EntityTrait
 {
     private function getEntityModel()
     {
-        switch (request('resource_type')) {
+        switch (request('group_type')) {
             case 'team':
-                return Team::find(request('resource_id'));
+                return Team::find(request('group_id'));
             case 'office':
-                return Office::find(request('resource_id'));
+                return Office::find(request('group_id'));
             default:
-                return Project::find(request('resource_id'));
+                return Project::find(request('group_id'));
         }
     }
 }

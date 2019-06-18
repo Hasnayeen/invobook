@@ -103,9 +103,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('members', 'MemberController@index');
 
-    Route::post('members', 'MemberController@store')->middleware('admin');
+    Route::post('members', 'MemberController@store');
 
-    Route::delete('members', 'MemberController@destroy')->middleware('admin');
+    Route::delete('members', 'MemberController@destroy');
 
     /**********************************
         Discussion

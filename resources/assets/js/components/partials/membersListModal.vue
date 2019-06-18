@@ -61,7 +61,7 @@ export default {
     removeMember (index, memberId) {
       axios.delete('/members/', {
         params: {
-          user_id: memberId, resource_type: this.resourceType, resource_id: this.resourceId
+          user_id: memberId, group_type: this.resourceType, group_id: this.resourceId
         }
       })
         .then((response) => {
