@@ -5,9 +5,9 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use App\Core\Models\User;
 use App\Core\Models\Project;
+use Illuminate\Support\Facades\Mail;
 use App\Core\Notifications\BecameNewMember;
 use Illuminate\Support\Facades\Notification;
-use Illuminate\Support\Facades\Mail;
 
 class MemberTest extends TestCase
 {
@@ -16,6 +16,7 @@ class MemberTest extends TestCase
         parent::setUp();
         Mail::fake();
     }
+
     /**
      * Get all members of project/team/office.
      * @test
