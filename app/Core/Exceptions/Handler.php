@@ -46,10 +46,13 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         if ($exception instanceof AuthorizationException) {
-            return response()->json([
-                'status'   => 'error',
-                'message'  => 'You do not have permission for this action',
-            ], 403);
+            if ($request->ajax()) {
+                return response()->json([
+                    'status'   => 'error',
+                    'message'  => 'You do not have permission for this action',
+                ], 403);
+            }
+            abort(403);
         }
 
         return parent::render($request, $exception);

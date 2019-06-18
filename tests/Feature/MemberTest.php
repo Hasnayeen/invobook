@@ -7,9 +7,15 @@ use App\Core\Models\User;
 use App\Core\Models\Project;
 use App\Core\Notifications\BecameNewMember;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Mail;
 
 class MemberTest extends TestCase
 {
+    public function setUp(): void
+    {
+        parent::setUp();
+        Mail::fake();
+    }
     /**
      * Get all members of project/team/office.
      * @test
