@@ -74,8 +74,8 @@ class TeamTest extends TestCase
         $user = factory('App\Core\Models\User')->create();
         $this->actingAs($this->user)->post('/members', [
             'user_id'       => $user->id,
-            'resource_type' => 'team',
-            'resource_id'   => $this->team->id,
+            'group_type'    => 'team',
+            'group_id'      => $this->team->id,
         ])->assertJson([
             'status'  => 'success',
             'message' => 'User added to the team',
@@ -128,8 +128,8 @@ class TeamTest extends TestCase
 
         $this->actingAs($this->user)->delete('/members', [
             'user_id'       => $user->id,
-            'resource_type' => 'team',
-            'resource_id'   => $this->team->id,
+            'group_type'    => 'team',
+            'group_id'      => $this->team->id,
         ])->assertJson([
             'status'  => 'success',
             'message' => 'User removed from the team',
@@ -157,8 +157,8 @@ class TeamTest extends TestCase
         $this->actingAs($this->user)
              ->delete('/members', [
                  'user_id'       => $user->id,
-                 'resource_type' => 'team',
-                 'resource_id'   => $this->team->id,
+                 'group_type'    => 'team',
+                 'group_id'      => $this->team->id,
              ]);
     }
 }

@@ -116,8 +116,8 @@ class OfficeTest extends TestCase
 
         $this->actingAs($this->user)->delete('/members', [
             'user_id'       => $user->id,
-            'resource_type' => 'office',
-            'resource_id'   => $this->office->id,
+            'group_type'    => 'office',
+            'group_id'      => $this->office->id,
         ])->assertJson([
             'status'  => 'success',
             'message' => 'User removed from the office',
@@ -145,8 +145,8 @@ class OfficeTest extends TestCase
         $this->actingAs($this->user)
              ->delete('/members', [
                  'user_id'       => $user->id,
-                 'resource_type' => 'office',
-                 'resource_id'   => $this->office->id,
+                 'group_type'    => 'office',
+                 'group_id'      => $this->office->id,
              ]);
     }
 }

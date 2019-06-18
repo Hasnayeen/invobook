@@ -148,8 +148,8 @@ class CommentTest extends TestCase
 
         $this->post('members', [
             'user_id'       => $this->user->id,
-            'resource_type' => $comment->commentable->taskable_type,
-            'resource_id'   => $comment->commentable->taskable_id,
+            'group_type' => $comment->commentable->taskable_type,
+            'group_id'   => $comment->commentable->taskable_id,
         ]);
 
         $this->actingAs($this->user)
