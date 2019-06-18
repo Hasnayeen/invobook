@@ -12,7 +12,7 @@ class User extends Authenticatable
     use Notifiable, CausesActivity, Impersonate;
 
     protected $fillable = [
-        'name', 'username', 'bio', 'designation', 'avatar', 'active', 'timezone', 'week_start', 'lang', 'email', 'password',
+        'name', 'username', 'bio', 'designation', 'location', 'avatar', 'active', 'timezone', 'week_start', 'lang', 'email', 'password',
     ];
 
     protected $hidden = [
