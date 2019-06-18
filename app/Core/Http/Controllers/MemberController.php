@@ -15,6 +15,7 @@ class MemberController extends Controller
 
     public function store()
     {
+        $this->authorize('add', User::class);
         // Get model of team/project/office depending on request
         $entity = $this->getEntityModel();
         if ($this->userIsAlreadyMember($entity, request('user_id'))) {
@@ -27,13 +28,14 @@ class MemberController extends Controller
 
         return response()->json([
             'status'   => 'success',
-            'message'  => trans('misc.User added', ['type' => request('resource_type')]),
+            'message'  => trans('misc.User added', ['type' => request('group_type')]),
             'user'     => $user,
         ]);
     }
 
     public function destroy()
     {
+        $this->authorize('remove', User::class);
         $entity = $this->getEntityModel();
 
         $user = $entity->members()->where('user_id', request('user_id'))->first();
@@ -46,7 +48,7 @@ class MemberController extends Controller
 
         return response()->json([
             'status'   => 'success',
-            'message'  => trans('misc.User removed', ['type' => request('resource_type')]),
+            'message'  => trans('misc.User removed', ['type' => request('group_type')]),
             'user'     => $user,
         ]);
     }

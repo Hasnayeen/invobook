@@ -33,8 +33,8 @@ class MemberTest extends TestCase
         $office->members()->saveMany($users);
 
         $this->actingAs($users[0])->call('GET', 'members', [
-            'resource_type' => 'project',
-            'resource_id'   => $project->id,
+            'group_type' => 'project',
+            'group_id'   => $project->id,
         ])->assertJsonFragment([
             'status'   => 'success',
             'items'    => 3,
@@ -44,8 +44,8 @@ class MemberTest extends TestCase
         ]);
 
         $this->actingAs($users[0])->call('GET', 'members', [
-            'resource_type' => 'team',
-            'resource_id'   => $team->id,
+            'group_type' => 'team',
+            'group_id'   => $team->id,
         ])->assertJsonFragment([
             'status'   => 'success',
             'items'    => 3,
@@ -55,8 +55,8 @@ class MemberTest extends TestCase
         ]);
 
         $this->actingAs($users[0])->call('GET', 'members', [
-            'resource_type' => 'office',
-            'resource_id'   => $office->id,
+            'group_type' => 'office',
+            'group_id'   => $office->id,
         ])->assertJsonFragment([
             'status'   => 'success',
             'items'    => 3,
@@ -66,9 +66,7 @@ class MemberTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function adding_member_to_a_group_sends_him_notification()
     {
         Notification::fake();
@@ -80,8 +78,8 @@ class MemberTest extends TestCase
 
         $payload = [
             'user_id'       => $user->id,
-            'resource_type' => 'project',
-            'resource_id'   => $project->getKey(),
+            'group_type'    => 'project',
+            'group_id'      => $project->getKey(),
         ];
 
         $response = $this->post('members', $payload);
@@ -115,5 +113,79 @@ class MemberTest extends TestCase
 
             return true;
         });
+    }
+
+    /** @test */
+    public function user_with_permission_can_add_member_to_group()
+    {
+        $project = factory(\App\Core\Models\Project::class)->create(['owner_id' => $this->user->id]);
+        $user = factory(\App\Core\Models\User::class)->create();
+
+        $this->actingAs($this->user)
+             ->post('members', [
+                 'user_id'    => $user->id,
+                 'group_type' => 'project',
+                 'group_id'   => $project->id,
+             ])
+             ->assertJsonFragment([
+                 'status'  => 'success',
+                 'message' => 'User added to the project',
+             ]);
+    }
+
+    /**
+     * @test
+     * @expectedException Illuminate\Auth\Access\AuthorizationException
+     * */
+    public function user_without_permission_cant_add_member_to_group()
+    {
+        $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
+        $project = factory(\App\Core\Models\Project::class)->create();
+        $user2 = factory(\App\Core\Models\User::class)->create();
+
+        $res = $this->actingAs($user)
+             ->post('members', [
+                 'user_id'    => $user2->id,
+                 'group_type' => 'project',
+                 'group_id'   => $project->id,
+             ]);
+    }
+
+    /** @test */
+    public function user_with_permission_can_remove_member_to_group()
+    {
+        $project = factory(\App\Core\Models\Project::class)->create(['owner_id' => $this->user->id]);
+        $user = factory(\App\Core\Models\User::class)->create();
+        $project->members()->save($user);
+
+        $this->actingAs($this->user)
+             ->delete('members', [
+                 'user_id'    => $user->id,
+                 'group_type' => 'project',
+                 'group_id'   => $project->id,
+             ])
+             ->assertJsonFragment([
+                 'status'  => 'success',
+                 'message' => 'User removed from the project',
+             ]);
+    }
+
+    /**
+     * @test
+     * @expectedException Illuminate\Auth\Access\AuthorizationException
+     * */
+    public function user_without_permission_cant_remove_member_to_group()
+    {
+        $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
+        $project = factory(\App\Core\Models\Project::class)->create();
+        $user2 = factory(\App\Core\Models\User::class)->create();
+        $project->members()->save($user2);
+
+        $res = $this->actingAs($user)
+             ->delete('members', [
+                 'user_id'    => $user2->id,
+                 'group_type' => 'project',
+                 'group_id'   => $project->id,
+             ]);
     }
 }
