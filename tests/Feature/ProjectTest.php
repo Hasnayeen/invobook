@@ -81,8 +81,8 @@ class ProjectTest extends TestCase
         $user = factory('App\Core\Models\User')->create();
         $this->actingAs($this->user)->post('/members', [
             'user_id'       => $user->id,
-            'resource_type' => 'project',
-            'resource_id'   => $this->project->id,
+            'group_type'    => 'project',
+            'group_id'      => $this->project->id,
         ])->assertJson([
             'status'  => 'success',
             'message' => 'User added to the project',
@@ -135,8 +135,8 @@ class ProjectTest extends TestCase
 
         $this->actingAs($this->user)->delete('/members', [
             'user_id'       => $user->id,
-            'resource_type' => 'project',
-            'resource_id'   => $this->project->id,
+            'group_type'    => 'project',
+            'group_id'      => $this->project->id,
         ])->assertJson([
             'status'  => 'success',
             'message' => 'User removed from the project',
@@ -164,8 +164,8 @@ class ProjectTest extends TestCase
         $this->actingAs($this->user)
              ->delete('/members', [
                  'user_id'       => $user->id,
-                 'resource_type' => 'project',
-                 'resource_id'   => $this->project->id,
+                 'group_type'    => 'project',
+                 'group_id'      => $this->project->id,
              ])->dump();
     }
 }
