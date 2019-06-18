@@ -69,7 +69,7 @@ class DiscussionCreatedNotification extends Notification implements ShouldQueue,
             ->from(config('mail.from.address'))
             ->subject('New discussion has opened!')
             ->line('New discussion has been opened - ' . $this->discussion->name)
-            ->action('Check it out!', url('discussions/' . $this->discussion->getKey()));
+            ->action('Check it out!', url($this->groupType . 's/' . $this->groupId . '?tool=discussions&id=' . $this->discussion->id));
     }
 
     /**
