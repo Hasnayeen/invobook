@@ -144,6 +144,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('messages/{message}', 'MessageController@delete');
 
     /**********************************
+        Direct Message
+     **********************************/
+
+    Route::get('direct-messages', 'DirectMessageController@index');
+
+    Route::post('direct-messages', 'DirectMessageController@store');
+
+    /**********************************
         Event
      **********************************/
 

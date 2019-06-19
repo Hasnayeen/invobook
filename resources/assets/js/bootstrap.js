@@ -23,7 +23,8 @@ window.axios.defaults.headers.common = {
 if (typeof io !== 'undefined') {
   window.Echo = new Echo({
     broadcaster: 'socket.io',
-    host: window.location.hostname + ':6001'
+    host: window.location.hostname + ':6001',
+    namespace: 'App.Core.Events'
   })
 }
 
