@@ -4,10 +4,8 @@ namespace Tests\Feature;
 
 use Carbon\Carbon;
 use Tests\TestCase;
-use Spatie\Activitylog\Models\Activity;
-use App\Core\Models\Task;
 use App\Core\Models\Notification;
-use function Opis\Closure\unserialize;
+use Spatie\Activitylog\Models\Activity;
 
 class ActivityTest extends TestCase
 {
@@ -26,7 +24,7 @@ class ActivityTest extends TestCase
         $response = $this->actingAs($this->user)
              ->call('GET', 'activities', [
                  'group_type' => 'project',
-                 'group_id' => 1
+                 'group_id'   => 1,
              ])
              ->assertJsonFragment([
                 'status'       => 'success',

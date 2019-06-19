@@ -14,7 +14,7 @@ class DiscussionObserver
     /**
      * Handle the discussion "created" event.
      *
-     * @param  \App\Discussion  $discussion
+     * @param  \App\Discussion $discussion
      * @return void
      */
     public function created(Discussion $discussion)
@@ -25,44 +25,40 @@ class DiscussionObserver
     /**
      * Handle the discussion "updated" event.
      *
-     * @param  \App\Discussion  $discussion
+     * @param  \App\Discussion $discussion
      * @return void
      */
     public function updated(Discussion $discussion)
     {
-        //
     }
 
     /**
      * Handle the discussion "deleted" event.
      *
-     * @param  \App\Discussion  $discussion
+     * @param  \App\Discussion $discussion
      * @return void
      */
     public function deleted(Discussion $discussion)
     {
-        //
     }
 
     /**
      * Handle the discussion "restored" event.
      *
-     * @param  \App\Discussion  $discussion
+     * @param  \App\Discussion $discussion
      * @return void
      */
     public function restored(Discussion $discussion)
     {
-        //
     }
 
     /**
      * Handle the discussion "force deleted" event.
      *
-     * @param  \App\Discussion  $discussion
+     * @param  \App\Discussion $discussion
      * @return void
      */
     public function forceDeleted(Discussion $discussion)
     {
-        //
     }
 }

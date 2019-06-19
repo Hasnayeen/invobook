@@ -10,7 +10,6 @@ use App\Core\Models\Office;
 use Illuminate\Support\Str;
 use App\Core\Mail\UserRegistered;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Symfony\Component\HttpKernel\Exception\HttpException;

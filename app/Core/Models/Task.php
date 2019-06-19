@@ -31,7 +31,7 @@ class Task extends Model
 
     /**
      * Return the user this task belongs to.
-     * 
+     *
      * @return mixed
      */
     public function user()
@@ -41,7 +41,7 @@ class Task extends Model
 
     /**
      * Return the user who created this task.
-     * 
+     *
      * @return mixed
      */
     public function creator()

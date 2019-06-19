@@ -5,11 +5,9 @@ namespace App\Core\Providers;
 use App\Core\Models\Task;
 use App\Core\Models\Discussion;
 use App\Core\Observers\TaskObserver;
-use App\Core\Observers\DiscussionObserver;
-use App\Core\Events\DiscussionCreated;
 use Illuminate\Auth\Events\Registered;
+use App\Core\Observers\DiscussionObserver;
 use App\Core\Listeners\LogUserRegistration;
-use App\Core\Listeners\NotifyDiscussionParticipants;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
