@@ -1,7 +1,7 @@
 <?php
 
-use Faker\Generator as Faker;
 use Carbon\Carbon;
+use Faker\Generator as Faker;
 
 $factory->define(App\Core\Models\Notification::class, function (Faker $faker) {
     return [

@@ -9,7 +9,6 @@ use App\Core\Models\Office;
 use App\Core\Models\Project;
 use App\Core\Models\Discussion;
 use App\Core\Contracts\HasMembers;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
 use App\Core\Notifications\DiscussionCreatedNotification;
 
