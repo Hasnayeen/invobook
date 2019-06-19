@@ -3,7 +3,6 @@
 namespace App\Core\Models;
 
 use App\Core\Contracts\Searchable;
-use App\Core\Events\DiscussionCreated;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;

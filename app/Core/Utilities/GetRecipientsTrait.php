@@ -10,8 +10,8 @@ trait GetRecipientsTrait
     /**
      * Returns collection of users associated with provided group (project/team/office).
      *
-     * @param mixed   $group
-     * @param integer $ownerId
+     * @param mixed $group
+     * @param int   $ownerId
      *
      * @return Collection
      */
