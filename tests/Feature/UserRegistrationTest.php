@@ -30,22 +30,6 @@ class UserRegistrationTest extends TestCase
     }
 
     /** @test */
-    public function activity_log_is_stored_on_registered_event()
-    {
-        $user = factory(User::class)->create([
-            'name' => 'John Doe',
-        ]);
-
-        event(new Registered($user));
-
-        $this->assertDatabaseHas('activity_log', [
-            'causer_id'   => $user->getKey(),
-            'causer_type' => 'user',
-            'description' => 'User John Doe has registered',
-        ]);
-    }
-
-    /** @test */
     public function guest_with_valid_token_can_access_registration_form()
     {
         $this->get('/register/' . encrypt($this->token->token))

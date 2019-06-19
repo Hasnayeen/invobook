@@ -4,12 +4,11 @@ namespace App\Core\Models;
 
 use App\Core\Contracts\HasMembers;
 use App\Core\Contracts\Searchable;
-use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Team extends Entity implements HasMembers
 {
-    use LogsActivity, Searchable;
+    use Searchable;
 
     protected $type = 'team';
 

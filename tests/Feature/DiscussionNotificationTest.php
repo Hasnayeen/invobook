@@ -9,7 +9,7 @@ use App\Core\Models\Office;
 use App\Core\Models\Project;
 use App\Core\Models\Discussion;
 use App\Core\Contracts\HasMembers;
-use App\Core\Events\DiscussionCreated;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
 use App\Core\Notifications\DiscussionCreatedNotification;
 
@@ -72,8 +72,6 @@ class DiscussionNotificationTest extends TestCase
             'discussionable_id'   => $group->getKey(),
             'posted_by'           => $this->user->getKey(),
         ]);
-
-        DiscussionCreated::dispatch($discussion);
 
         // All members of group are notified
         Notification::assertSentTo(

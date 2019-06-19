@@ -2,8 +2,8 @@
 
 namespace App\Core\Notifications;
 
+use App\Core\Models\Task;
 use Illuminate\Bus\Queueable;
-use App\Core\Models\Discussion;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -11,7 +11,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Notifications\Messages\BroadcastMessage;
 
-class DiscussionCreatedNotification extends Notification implements ShouldQueue, ShouldBroadcast
+class TaskCreated extends Notification implements ShouldQueue, ShouldBroadcast
 {
     use Queueable;
 
@@ -26,9 +26,9 @@ class DiscussionCreatedNotification extends Notification implements ShouldQueue,
     public $groupId;
 
     /**
-     * @var Discussion
+     * @var Task
      */
-    private $discussion;
+    private $task;
 
     /**
      * @var User
@@ -36,14 +36,16 @@ class DiscussionCreatedNotification extends Notification implements ShouldQueue,
     private $creator;
 
     /**
-     * @param Discussion $discussion
+     * Create a new notification instance.
+     *
+     * @return void
      */
-    public function __construct(Discussion $discussion, User $user)
+    public function __construct(Task $task, User $user)
     {
-        $this->discussion = $discussion;
+        $this->task = $task;
         $this->creator = $user;
-        $this->groupType = $discussion->discussionable_type;
-        $this->groupId = $discussion->discussionable_id;
+        $this->groupType = $task->taskable_type;
+        $this->groupId = $task->taskable_id;
     }
 
     /**
@@ -52,7 +54,7 @@ class DiscussionCreatedNotification extends Notification implements ShouldQueue,
      * @param  mixed $notifiable
      * @return array
      */
-    public function via()
+    public function via($notifiable)
     {
         return config('notification.channels');
     }
@@ -63,13 +65,13 @@ class DiscussionCreatedNotification extends Notification implements ShouldQueue,
      * @param  mixed                                          $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail()
+    public function toMail($notifiable)
     {
-        return (new MailMessage())
-            ->from(config('mail.from.address'))
-            ->subject('New discussion has opened!')
-            ->line('New discussion has been opened - ' . $this->discussion->name)
-            ->action('Check it out!', url($this->groupType . 's/' . $this->groupId . '?tool=discussions&id=' . $this->discussion->id));
+        return (new MailMessage)
+                    ->from(config('mail.from.address'))
+                    ->subject('New Task has been created!')
+                    ->line('New task has been created - ' . $this->task->name)
+                    ->action('Check it out!', url($this->groupType . 's/' . $this->groupId . '?tool=tasks&id=' . $this->task->id));
     }
 
     /**
@@ -78,15 +80,15 @@ class DiscussionCreatedNotification extends Notification implements ShouldQueue,
      * @param  mixed $notifiable
      * @return array
      */
-    public function toArray()
+    public function toArray($notifiable)
     {
         return [
             'subject'     => $this->creator->only(['id', 'name', 'username', 'avatar']),
-            'action'      => 'created new discussion',
-            'object_type' => 'discussion',
-            'object_name' => $this->discussion->name,
-            'object_id'   => $this->discussion->id,
-            'url'         => url($this->groupType . 's/' . $this->groupId . '?tool=discussions&id=' . $this->discussion->id),
+            'action'      => 'created new task',
+            'object_type' => 'task',
+            'object_name' => $this->task->name,
+            'object_id'   => $this->task->id,
+            'url'         => url($this->groupType . 's/' . $this->groupId . '?tool=tasks&id=' . $this->task->id),
         ];
     }
 
@@ -99,10 +101,10 @@ class DiscussionCreatedNotification extends Notification implements ShouldQueue,
         return new BroadcastMessage([
             'data' => [
                 'subject'     => $this->creator,
-                'action'      => 'created new discussion',
-                'object_type' => 'discussion',
-                'object_name' => $this->discussion->name,
-                'object_id'   => $this->discussion->id,
+                'action'      => 'created new task',
+                'object_type' => 'task',
+                'object_name' => $this->task->name,
+                'object_id'   => $this->task->id,
             ],
             'date' => 'Just Now',
         ]);

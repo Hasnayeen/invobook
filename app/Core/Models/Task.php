@@ -4,11 +4,10 @@ namespace App\Core\Models;
 
 use App\Core\Contracts\Searchable;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Activitylog\Traits\LogsActivity;
 
 class Task extends Model
 {
-    use LogsActivity, Searchable;
+    use Searchable;
 
     protected static function huntableFields()
     {
@@ -32,11 +31,22 @@ class Task extends Model
 
     /**
      * Return the user this task belongs to.
+     * 
      * @return mixed
      */
     public function user()
     {
         return $this->belongsTo(User::class, 'assigned_to', 'id');
+    }
+
+    /**
+     * Return the user who created this task.
+     * 
+     * @return mixed
+     */
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by', 'id');
     }
 
     public function taskable()

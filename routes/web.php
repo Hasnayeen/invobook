@@ -248,6 +248,8 @@ Route::group(['middleware' => 'auth'], function () {
     **********************************/
 
     Route::get('roles', 'RoleController@index');
+
+    Route::get('activities', 'ActivityController@index');
 });
 
     /**********************************

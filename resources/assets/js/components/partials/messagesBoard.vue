@@ -83,8 +83,8 @@ export default {
     EventBus.$on('clear-title-notification', this.clearTitleNotification)
     axios.get('/members', {
       params: {
-        resource_type: this.resourceType,
-        resource_id: this.resource.id
+        group_type: this.resourceType,
+        group_id: this.resource.id
       }
     })
       .then((response) => {

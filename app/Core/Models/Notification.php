@@ -12,10 +12,15 @@ class Notification extends DatabaseNotification
         'notifiable_id' => 'integer',
     ];
 
-    protected $appends = ['date'];
+    protected $appends = ['date', 'time'];
 
     public function getDateAttribute()
     {
         return $this->created_at->diffForHumans();
+    }
+
+    public function getTimeAttribute()
+    {
+        return $this->created_at->format('h:i A');
     }
 }

@@ -57,12 +57,12 @@
     <tab-menu :active="active" @activate="activateTab"></tab-menu>
 
     <div class="flex flex-row flex-wrap">
-      <taskBoard resourceType="project" :resource="project" :activeTab="active" :activeId="activeId"></taskBoard>
-      <discussionBoard resourceType="project" :resource="project" :activeTab="active" :activeId="activeId"></discussionBoard>
-      <messagesBoard resourceType="project" :resource="project" :activeTab="active"></messagesBoard>
-      <eventBoard resourceType="projects" :resource="project" :activeTab="active"></eventBoard>
-      <file-board resourceType="projects" :resource="project" :activeTab="active"></file-board>
-      <!-- <activity resourceType="projects" :resource="project"></activity> -->
+      <task-board resourceType="project" :resource="project" :activeTab="active" :activeId="activeId"></task-board>
+      <discussion-board resourceType="project" :resource="project" :activeTab="active" :activeId="activeId"></discussion-board>
+      <messages-board resourceType="project" :resource="project" :activeTab="active"></messages-board>
+      <event-board resourceType="project" :resource="project" :activeTab="active"></event-board>
+      <file-board resourceType="project" :resource="project" :activeTab="active"></file-board>
+      <activity-board resourceType="project" :resourceId="project.id" :activeTab="active"></activity-board>
     </div>
   </div>
 </template>
@@ -74,7 +74,7 @@ import discussionBoard from './../partials/discussionBoard.vue'
 import messagesBoard from './../partials/messagesBoard.vue'
 import eventBoard from './../partials/eventBoard.vue'
 import fileBoard from './../partials/fileBoard.vue'
-import activity from './../partials/activity.vue'
+import activityBoard from './../partials/activityBoard.vue'
 import addMemberForm from './../partials/addMemberForm.vue'
 import showGithubRepo from './../partials/showGithubRepo.vue'
 import membersListModal from './../partials/membersListModal.vue'
@@ -91,7 +91,7 @@ export default {
     messagesBoard,
     eventBoard,
     fileBoard,
-    activity,
+    activityBoard,
     addMemberForm,
     membersListModal,
     permissionSettingsModal,

@@ -106,7 +106,7 @@ export default {
         notes: this.notes,
         assigned_to: this.assigned_to,
         related_to: this.related_to,
-        due_on: window.luxon.DateTime.fromMillis(this.$refs.dueOnDate._data.pageTimestamp).toISODate(),
+        due_on: window.luxon.DateTime.fromISO(this.dueOnDate.toISOString()).toISODate(),
         group_id: this.resource.id,
         group_type: this.resourceType
       })

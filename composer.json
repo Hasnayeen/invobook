@@ -23,7 +23,6 @@
         "laravel/tinker": "~1.0",
         "pda/pheanstalk": "^3.1",
         "predis/predis": "^1.1",
-        "spatie/laravel-activitylog": "^3.6",
         "spatie/laravel-medialibrary": "^7.5",
         "symfony/thanks": "^1.0",
         "teamtnt/laravel-scout-tntsearch-driver": "^6.1"
