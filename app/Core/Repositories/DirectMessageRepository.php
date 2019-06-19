@@ -29,8 +29,8 @@ class DirectMessageRepository
             'body'           => $data['body'],
             'sender_id'      => auth()->user()->id,
             'receiver_id'    => $data['receiver_id'],
-            'attachment_id' => $data['attachment_id'] ?? null,
-            'read_at'       => null,
+            'attachment_id'  => $data['attachment_id'] ?? null,
+            'read_at'        => null,
         ]);
     }
 

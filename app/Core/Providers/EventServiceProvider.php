@@ -4,13 +4,13 @@ namespace App\Core\Providers;
 
 use App\Core\Models\Task;
 use App\Core\Models\Discussion;
+use App\Core\Models\DirectMessage;
 use App\Core\Observers\TaskObserver;
 use Illuminate\Auth\Events\Registered;
+use App\Observers\DirectMessageObserver;
 use App\Core\Observers\DiscussionObserver;
 use App\Core\Listeners\LogUserRegistration;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use App\Core\Models\DirectMessage;
-use App\Observers\DirectMessageObserver;
 
 class EventServiceProvider extends ServiceProvider
 {
