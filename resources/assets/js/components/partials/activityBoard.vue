@@ -1,5 +1,5 @@
 <template>
-  <div :class="{'hidden': (activeTab != 'activity')}" class="w-full mx-2 md:mx-auto">
+  <div :class="{'hidden': (activeTab != 'activities')}" class="w-full mx-2 md:mx-auto">
     <div class="text-gray-800 text-lg mb-4">{{ 'Filters' |localize }}</div>
     <div class="flex flex-row flex-wrap text-gray-900 -ml-4 mb-8">
       <div class="mx-4 py-4 flex flex-row items-center relative">
@@ -53,7 +53,7 @@
             <div class="text-sm px-4 md:mr-4">{{ activity.time }}</div>
             <div class="flex-grow bg-white border px-4 md:px-8 py-4 rounded">
               <a :href="'/users/' + activity.data.subject.username" class="text-blue-500 font-medium cursor-pointer no-underline">{{ activity.data.subject.name }}</a>
-              {{ activity.data.action }} {{ activity.data.object_type }}
+              {{ activity.data.action }}
               <a v-if="activity.data.object_id" :href="activity.data.url" class="text-blue-500 font-medium cursor-pointer no-underline">{{ activity.data.object_name }}</a>
             </div>
           </div>
@@ -80,6 +80,14 @@ export default {
     activeTab: {
       required: true,
       type: String
+    },
+    resourceType: {
+      required: true,
+      type: String
+    },
+    resourceId: {
+      required: true,
+      type: Number
     }
   },
   data: () => ({
@@ -92,7 +100,12 @@ export default {
     faSpinner
   }),
   created () {
-    axios.get('admin/activities')
+    axios.get('/activities', {
+      params: {
+        group_type: this.resourceType,
+        group_id: this.resourceId,
+      }
+    })
       .then((response) => {
         this.activities = response.data.activities
       })

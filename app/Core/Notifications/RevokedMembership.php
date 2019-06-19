@@ -84,7 +84,7 @@ class RevokedMembership extends Notification implements ShouldQueue, ShouldBroad
     public function toArray($notifiable)
     {
         return [
-            'subject'     => $this->remover,
+            'subject'     => $this->remover->only(['id', 'name', 'username', 'avatar']),
             'action'      => 'removed you from',
             'object_type' => $this->entityType,
             'object_name' => $this->entityName,

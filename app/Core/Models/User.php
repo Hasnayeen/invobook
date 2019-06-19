@@ -4,12 +4,11 @@ namespace App\Core\Models;
 
 use App\Core\Utilities\Notifiable;
 use Lab404\Impersonate\Models\Impersonate;
-use Spatie\Activitylog\Traits\CausesActivity;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable, CausesActivity, Impersonate;
+    use Notifiable, Impersonate;
 
     protected $fillable = [
         'name', 'username', 'bio', 'designation', 'location', 'avatar', 'active', 'timezone', 'week_start', 'lang', 'email', 'password',

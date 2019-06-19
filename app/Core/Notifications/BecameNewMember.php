@@ -84,8 +84,8 @@ class BecameNewMember extends Notification implements ShouldQueue, ShouldBroadca
     public function toArray()
     {
         return [
-            'subject'     => $this->adder,
-            'action'      => 'added you to',
+            'subject'     => $this->adder->only(['id', 'name', 'username', 'avatar']),
+            'action'      => 'added you to ' . $this->entityType,
             'object_type' => $this->entityType,
             'object_name' => $this->entityName,
             'object_id'   => $this->entityId,

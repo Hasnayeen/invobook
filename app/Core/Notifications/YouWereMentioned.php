@@ -71,7 +71,7 @@ class YouWereMentioned extends Notification implements ShouldQueue
     public function toArray()
     {
         return [
-            'subject'     => $this->notifier,
+            'subject'     => $this->notifier->only(['id', 'name', 'username', 'avatar']),
             'action'      => 'mentioned you in',
             'object_type' => $this->mentionableType,
             'object_name' => $this->mentionable->name,

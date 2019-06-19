@@ -2,6 +2,10 @@
 
 namespace App\Core\Providers;
 
+use App\Core\Models\Task;
+use App\Core\Models\Discussion;
+use App\Core\Observers\TaskObserver;
+use App\Core\Observers\DiscussionObserver;
 use App\Core\Events\DiscussionCreated;
 use Illuminate\Auth\Events\Registered;
 use App\Core\Listeners\LogUserRegistration;
@@ -19,8 +23,16 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             LogUserRegistration::class,
         ],
-        DiscussionCreated::class => [
-            NotifyDiscussionParticipants::class,
-        ],
     ];
+
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        Task::observe(TaskObserver::class);
+        Discussion::observe(DiscussionObserver::class);
+    }
 }

@@ -2,13 +2,14 @@
 
 namespace App\Core\Http\Controllers;
 
-use App\Core\Repositories\ActivityRepository;
+use App\Activity;
 
 class ActivityController extends Controller
 {
-    public function index(ActivityRepository $repository)
+    public function index()
     {
-        $activities = $repository->getAllActivities();
+        $activity = new Activity();
+        $activities = $activity->getActivitiesForGroup(request('group_type'), request('group_id'));
 
         return response()->json([
             'status'     => 'success',

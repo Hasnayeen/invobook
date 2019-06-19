@@ -62,8 +62,7 @@
       <messagesBoard resourceType="office" :resource="office" :activeTab="active"></messagesBoard>
       <event-board resourceType="office" :resource="office" :activeTab="active"></event-board>
       <file-board resourceType="office" :resource="office" :activeTab="active"></file-board>
-      <!-- <taskBoard resourceType="projects" :resource="project"></taskBoard>
-      <activity resourceType="projects" :resource="project"></activity> -->
+      <activity-board resourceType="office" :resourceId="office.id" :activeTab="active"></activity-board>
     </div>
   </div>
 </template>
@@ -75,7 +74,7 @@ import discussionBoard from './../partials/discussionBoard.vue'
 import messagesBoard from './../partials/messagesBoard.vue'
 import eventBoard from './../partials/eventBoard.vue'
 import fileBoard from './../partials/fileBoard.vue'
-import activity from './../partials/activity.vue'
+import activityBoard from './../partials/activityBoard.vue'
 import addMemberForm from './../partials/addMemberForm.vue'
 import showGithubRepo from './../partials/showGithubRepo.vue'
 import membersListModal from './../partials/membersListModal.vue'
@@ -92,7 +91,7 @@ export default {
     messagesBoard,
     eventBoard,
     fileBoard,
-    activity,
+    activityBoard,
     addMemberForm,
     membersListModal,
     permissionSettingsModal,
