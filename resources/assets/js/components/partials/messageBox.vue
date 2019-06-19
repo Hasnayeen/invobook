@@ -129,10 +129,9 @@ export default {
       } else if (this.message.length > 0) {
         var msg = this.message
         this.message = ''
-        axios.post('/messages', {
-          message: msg,
-          group_type: 'user',
-          group_id: this.selectedUser.id
+        axios.post('/direct-messages', {
+          body: msg,
+          receiver_id: this.selectedUser.id
         })
           .then((response) => {
             if (response.data.status === 'success') {
@@ -151,8 +150,7 @@ export default {
       this.isDisabled = false
       axios.get('/direct-messages', {
         params: {
-          resource_type: 'user',
-          resource_id: user.id
+          receiver_id: user.id
         }
       })
         .then((response) => {
@@ -177,8 +175,8 @@ export default {
             return user
           })
         })
-      Echo.join('user.' + this.authUser.id)
-        .listen('MessageCreated', event => {
+      Echo.private('User.' + this.authUser.id)
+        .listen('DirectMessageCreated', event => {
           event.message.user = event.user
           if (!this.messageBoxShown) {
             EventBus.$emit('new-direct-message')
