@@ -3,10 +3,10 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use App\Core\Models\File;
 use App\Core\Models\Project;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use App\Core\Models\File;
 
 class FileTest extends TestCase
 {
@@ -29,8 +29,8 @@ class FileTest extends TestCase
         Storage::disk('public')->assertExists('features.pdf');
     }
 
-    /** 
-     * @test 
+    /**
+     * @test
      * @expectedException \App\Core\Exceptions\InvalidFileFormat
      */
     public function user_can_upload_only_allowed_format_files()
@@ -67,7 +67,7 @@ class FileTest extends TestCase
 
         $hash = md5_file($file);
         $count = File::where([
-            'hash' => $hash,
+            'hash'          => $hash,
             'fileable_type' => 'project',
             'fileable_id'   => $project->id,
         ])->get()->count();

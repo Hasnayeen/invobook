@@ -3,8 +3,8 @@
 namespace App\Core\Http\Controllers;
 
 use App\Core\Repositories\FileRepository;
-use App\Core\Http\Requests\ValidateFileCreation;
 use App\Core\Exceptions\InvalidFileFormat;
+use App\Core\Http\Requests\ValidateFileCreation;
 
 class FileController extends Controller
 {

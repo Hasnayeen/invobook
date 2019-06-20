@@ -13,7 +13,7 @@ class AddHashColumnToFilesTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasColumn('files', 'hash')) {
+        if (! Schema::hasColumn('files', 'hash')) {
             Schema::table('files', function (Blueprint $table) {
                 $table->string('hash');
             });
@@ -28,7 +28,6 @@ class AddHashColumnToFilesTable extends Migration
     public function down()
     {
         Schema::table('files', function (Blueprint $table) {
-            //
         });
     }
 }
