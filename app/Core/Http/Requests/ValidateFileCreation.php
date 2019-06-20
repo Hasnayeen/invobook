@@ -25,7 +25,7 @@ class ValidateFileCreation extends FormRequest
     public function rules()
     {
         return [
-            'files.*' => 'required|file|mimes:png,jpeg,svg,pdf',
+            'files.*' => 'required|file',
         ];
     }
 }
