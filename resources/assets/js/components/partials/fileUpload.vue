@@ -34,8 +34,8 @@ export default {
         let file = this.files[i]
         formData.append('files[' + i + ']', file)
       }
-      formData.append('fileable_type', this.resourceType)
-      formData.append('fileable_id', this.resourceId)
+      formData.append('group_type', this.resourceType)
+      formData.append('group_id', this.resourceId)
       this.submitFiles(formData)
     },
     submitFiles (formData) {
@@ -47,6 +47,7 @@ export default {
           }
         })
         .then((response) => {
+          this.$emit('on-success', true)
           EventBus.$emit('notification', response.data.message, response.data.status)
         })
         .catch((error) => {

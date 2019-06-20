@@ -3,6 +3,7 @@
 namespace App\Core\Http\Controllers;
 
 use App\Core\Repositories\FileRepository;
+use App\Core\Exceptions\InvalidFileFormat;
 use App\Core\Http\Requests\ValidateFileCreation;
 
 class FileController extends Controller
@@ -11,18 +12,15 @@ class FileController extends Controller
     {
         try {
             $files = [];
-            $now = now();
             foreach ($request->file('files') as $key => $file) {
-                $files[$key]['name'] = $file->getClientOriginalName();
-                $files[$key]['path'] = $file->storeAs(
-                    '/',
-                    $files[$key]['name'],
-                    ['disk' => 'public']
-                );
-                $files[$key]['fileable_type'] = request('group_type');
-                $files[$key]['fileable_id'] = request('group_id');
-                $files[$key]['created_at'] = $now;
-                $files[$key]['updated_at'] = $now;
+                $this->fileIsOfValidType($file->getMimeType());
+                $hash = md5_file($file->path());
+                if ($repository->fileDoesNotExistsOnGroup($hash)) {
+                    $files[$key] = $this->prepareData($file);
+                    $files[$key]['hash'] = $hash;
+                } else {
+                    unset($files[$key]);
+                }
             }
             $repository->create($files);
 
@@ -56,5 +54,30 @@ class FileController extends Controller
         $files = $fileRepository->getAllFiles();
 
         return $this->successResponse(null, 'files', $files);
+    }
+
+    private function prepareData($file)
+    {
+        $now = now();
+        $data['name'] = $file->getClientOriginalName();
+        $data['path'] = $file->storeAs(
+            '/',
+            $data['name'],
+            ['disk' => 'public']
+        );
+        $data['fileable_type'] = request('group_type');
+        $data['fileable_id'] = request('group_id');
+        $data['created_at'] = $now;
+        $data['updated_at'] = $now;
+
+        return $data;
+    }
+
+    private function fileIsOfValidType($type)
+    {
+        $allowedType = ['image/jpeg', 'image/png', 'image/svg', 'gif', 'image/svg+xml', 'application/pdf'];
+        if (! in_array($type, $allowedType)) {
+            throw new InvalidFileFormat();
+        }
     }
 }

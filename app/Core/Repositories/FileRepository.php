@@ -40,4 +40,9 @@ class FileRepository
                     ])
                     ->get();
     }
+
+    public function fileDoesNotExistsOnGroup($hash)
+    {
+        return $this->model->where('hash', $hash)->doesntExist();
+    }
 }

@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use App\Core\Models\File;
 use App\Core\Models\Project;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -26,6 +27,51 @@ class FileTest extends TestCase
                  'message' => 'Files uploaded successfully',
              ]);
         Storage::disk('public')->assertExists('features.pdf');
+    }
+
+    /**
+     * @test
+     * @expectedException \App\Core\Exceptions\InvalidFileFormat
+     */
+    public function user_can_upload_only_allowed_format_files()
+    {
+        Storage::fake('');
+        $project = factory(Project::class)->create();
+        $file = UploadedFile::fake()->create('features.doc');
+
+        $this->actingAs($this->user)->post('files', [
+            'files'         => [$file],
+            'group_type'    => 'project',
+            'group_id'      => $project->id,
+        ]);
+        Storage::disk('public')->assertMissing('features.doc');
+    }
+
+    /** @test */
+    public function same_file_is_not_saved_twice_on_a_group()
+    {
+        Storage::fake('');
+        $project = factory(Project::class)->create();
+        $file = UploadedFile::fake()->create('features.pdf');
+
+        $this->actingAs($this->user)->post('files', [
+            'files'         => [$file],
+            'group_type'    => 'project',
+            'group_id'      => $project->id,
+        ]);
+        $this->post('files', [
+            'files'         => [$file],
+            'group_type'    => 'project',
+            'group_id'      => $project->id,
+        ]);
+
+        $hash = md5_file($file);
+        $count = File::where([
+            'hash'          => $hash,
+            'fileable_type' => 'project',
+            'fileable_id'   => $project->id,
+        ])->get()->count();
+        $this->assertEquals(1, $count);
     }
 
     /** @test */
