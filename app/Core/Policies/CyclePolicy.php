@@ -2,8 +2,8 @@
 
 namespace App\Core\Policies;
 
-use App\Core\Models\Cycle;
 use App\Core\Models\User;
+use App\Core\Models\Cycle;
 use App\Authorization\Authorization;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -37,7 +37,7 @@ class CyclePolicy
      * Determine whether the user can update the cycle.
      *
      * @param  \App\Core\Models\User $user
-     * @param  \App\Core\Cycle        $cycle
+     * @param  \App\Core\Cycle       $cycle
      * @return mixed
      */
     public function update(User $user, Cycle $cycle)
@@ -49,7 +49,7 @@ class CyclePolicy
      * Determine whether the user can delete the cycle.
      *
      * @param  \App\Core\Models\User $user
-     * @param  \App\Core\Cycle        $cycle
+     * @param  \App\Core\Cycle       $cycle
      * @return mixed
      */
     public function delete(User $user, Cycle $cycle)

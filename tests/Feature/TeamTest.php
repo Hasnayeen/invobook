@@ -21,10 +21,10 @@ class TeamTest extends TestCase
     {
         $this->user_with_permission_can_create_team();
         $id = Team::where('name', 'New Team')->first()->id;
-        
+
         $this->actingAs($this->user)->get('teams/' . $id)->assertSee('New Team');
     }
-    
+
     /** @test */
     public function user_without_permission_cant_see_team_page()
     {
