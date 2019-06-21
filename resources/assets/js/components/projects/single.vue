@@ -30,10 +30,22 @@
       <span class="text-lg">
         Cycle: 
       </span>
-      <span class="p-2 ml-2 bg-gray-100 shadow rounded cursor-pointer text-sm text-teal-800">
-        {{startDate}} - {{endDate}}
+      <div v-if="this.selectedCycle" @click="showCyclesModal" class="p-2 ml-2 bg-gray-100 shadow rounded cursor-pointer text-sm text-teal-800 inline">
+        <span v-if="this.selectedCycle.name">
+          {{ this.selectedCycle.name }}
+        </span>
+        <span v-else>
+          {{this.selectedCycle.start_date}} - {{this.selectedCycle.end_date}}
+        </span>
+      </div>
+      <span v-else @click="showCyclesModal" class="p-2 ml-2 bg-gray-100 shadow rounded cursor-pointer text-sm text-teal-800">
+        Click to set a Cycle
       </span>
     </div>
+  
+  <!-- Modals for cycles -->
+  <cycles-modal resourceType="project" :resourceId="project.id" :currentCycleId="currentCycleId" :modalShown="cyclesModalShown" @select-cycle="selectCurrentCycle" @close="closeCyclesModal"></cycles-modal>
+  <!-- Modals for cycles -->
 
   <!-- Modals for dropdown menu -->
     <members-list-modal resourceType="project" :resourceId="project.id" :show="membersListModalShown" :members="project.members" @close="closeMembersListModal" ></members-list-modal>
@@ -79,6 +91,7 @@ import addMemberForm from './../partials/addMemberForm.vue'
 import showGithubRepo from './../partials/showGithubRepo.vue'
 import membersListModal from './../partials/membersListModal.vue'
 import permissionSettingsModal from './../partials/permissionSettingsModal.vue'
+import cyclesModal from './../partials/cyclesModal.vue'
 import profileCard from './../partials/profileCard.vue'
 import tabMenu from './../partials/tabMenu.vue'
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus'
@@ -95,6 +108,7 @@ export default {
     addMemberForm,
     membersListModal,
     permissionSettingsModal,
+    cyclesModal,
     profileCard,
     tabMenu,
     showGithubRepo
@@ -107,6 +121,9 @@ export default {
     githubRepoModalShown: false,
     membersListModalShown: false,
     permissionSettingsModalShown: false,
+    cyclesModalShown: false,
+    selectedCycle: null,
+    currentCycleId: null,
     faPlus,
     faCog
   }),
@@ -120,20 +137,10 @@ export default {
     if (id !== null) {
       this.activeId = parseInt(id)
     }
+    this.selectedCycle = project.current_cycle
+    this.currentCycleId = this.selectedCycle ? this.selectedCycle.id : null
   },
   computed: {
-    startDate: function () {
-      if (this.project.current_cycle) {
-        return window.luxon.DateTime.fromISO(this.project.current_cycle.start_date).toLocaleString(window.luxon.DateTime.DATE_MED)
-      }
-      return 'Set start date'
-    },
-    endDate: function () {
-      if (this.project.current_cycle) {
-        return window.luxon.DateTime.fromISO(this.project.current_cycle.end_date).toLocaleString(window.luxon.DateTime.DATE_MED)
-      }
-      return 'Set end date'
-    },
     ...mapState({
       project: state => state.project
     })
@@ -184,6 +191,15 @@ export default {
     },
     closePermissionsSettings () {
       this.permissionSettingsModalShown = false
+    },
+    showCyclesModal () {
+      this.cyclesModalShown = true
+    },
+    closeCyclesModal () {
+      this.cyclesModalShown = false
+    },
+    selectCurrentCycle (cycle) {
+      this.selectedCycle = cycle
     }
   }
 }

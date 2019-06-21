@@ -3,7 +3,9 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class DiscussionTest extends TestCase
 {
@@ -49,11 +51,10 @@ class DiscussionTest extends TestCase
         ]);
     }
 
-    /**
-     * @expectedException Illuminate\Auth\Access\AuthorizationException
-     * @test */
+    /** @test */
     public function user_without_permission_cant_create_new_discussion()
     {
+        $this->expectException(AuthorizationException::class);
         $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
         $category = factory(\App\Core\Models\Category::class)->create();
 
@@ -89,12 +90,10 @@ class DiscussionTest extends TestCase
              ]);
     }
 
-    /**
-     * @test
-     * @expectedException Illuminate\Auth\Access\AuthorizationException
-     */
+    /** @test */
     public function user_not_member_of_group_cant_see_all_its_discussions()
     {
+        $this->expectException(AuthorizationException::class);
         $user = factory(\App\Core\Models\User::class)->create();
         $discussions = factory(\App\Core\Models\Discussion::class, 2)->create([
             'discussionable_type' => 'project',
@@ -139,12 +138,10 @@ class DiscussionTest extends TestCase
              ]);
     }
 
-    /**
-     * @expectedException Illuminate\Auth\Access\AuthorizationException
-     * @test
-     */
+    /** @test */
     public function user_without_permission_cant_delete_a_discussion()
     {
+        $this->expectException(AuthorizationException::class);
         $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
         $discussion = factory(\App\Core\Models\Discussion::class)->create();
 
@@ -189,12 +186,10 @@ class DiscussionTest extends TestCase
         ]);
     }
 
-    /**
-     * @expectedException Illuminate\Auth\Access\AuthorizationException
-     * @test
-     */
+    /** @test */
     public function user_without_permission_cannot_update_discussion()
     {
+        $this->expectException(AuthorizationException::class);
         $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
         $discussion = factory(\App\Core\Models\Discussion::class)->create([
             'posted_by'           => $this->user->id,
@@ -222,12 +217,10 @@ class DiscussionTest extends TestCase
              ]);
     }
 
-    /**
-     * @test
-     * @expectedException Illuminate\Auth\Access\AuthorizationException
-     */
+    /** @test */
     public function user_not_member_of_group_cant_view_discussion_detail()
     {
+        $this->expectException(AuthorizationException::class);
         $user = factory(\App\Core\Models\User::class)->create();
         $discussion = factory(\App\Core\Models\Discussion::class)->create([
             'discussionable_type' => 'project',

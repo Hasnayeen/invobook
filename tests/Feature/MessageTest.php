@@ -7,6 +7,7 @@ use App\Core\Models\Message;
 use App\Core\Events\MessageCreated;
 use App\Core\Events\MessageUpdated;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class MessageTest extends TestCase
 {
@@ -131,12 +132,10 @@ class MessageTest extends TestCase
         });
     }
 
-    /**
-     * @test
-     * @expectedException Illuminate\Auth\Access\AuthorizationException
-     */
+    /** @test */
     public function user_without_permission_cant_create_message()
     {
+        $this->expectException(AuthorizationException::class);
         $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
         $project = factory('App\Core\Models\Project')->create(['owner_id' => $this->user->id]);
         $project->members()->attach($this->user);

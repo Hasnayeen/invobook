@@ -4,6 +4,8 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class TaskTest extends TestCase
 {
@@ -47,12 +49,10 @@ class TaskTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @expectedException Illuminate\Validation\ValidationException
-     */
+    /** @test */
     public function due_date_must_be_in_future()
     {
+        $this->expectException(ValidationException::class);
         $task = factory(\App\Core\Models\Task::class)->make();
         $this->actingAs($this->user)->post('/tasks', [
             'name'          => $task->name,
@@ -64,12 +64,10 @@ class TaskTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @expectedException Illuminate\Auth\Access\AuthorizationException
-     * */
+    /** @test */
     public function user_without_permission_cant_create_new_task()
     {
+        $this->expectException(AuthorizationException::class);
         $user = factory(\App\Core\Models\User::class)->create();
         $task = factory(\App\Core\Models\Task::class)->make();
 
@@ -160,12 +158,10 @@ class TaskTest extends TestCase
              ]);
     }
 
-    /**
-     * @test
-     * @expectedException Illuminate\Auth\Access\AuthorizationException
-     * */
+    /** @test */
     public function user_without_permission_cant_delete_a_task()
     {
+        $this->expectException(AuthorizationException::class);
         $user = factory(\App\Core\Models\User::class)->create();
         $this->actingAs($user)->delete('/tasks/' . $this->task->id, [
             'group_type' => $this->task->taskable_type,
@@ -236,12 +232,10 @@ class TaskTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @expectedException Illuminate\Auth\Access\AuthorizationException
-     */
+    /** @test */
     public function user_without_permission_cant_update_a_task()
     {
+        $this->expectException(AuthorizationException::class);
         $task = factory(\App\Core\Models\Task::class)->create();
 
         $this->actingAs($this->user)
@@ -256,12 +250,10 @@ class TaskTest extends TestCase
             ]);
     }
 
-    /**
-     * @test
-     * @expectedException Illuminate\Validation\ValidationException
-     */
+    /** @test */
     public function request_validates_the_data_before_updating_a_task()
     {
+        $this->expectException(ValidationException::class);
         $task = factory(\App\Core\Models\Task::class)->create();
 
         $this->actingAs($this->user)
@@ -294,12 +286,10 @@ class TaskTest extends TestCase
         $this->assertDatabaseHas('tasks', ['id' => $this->task->id, 'status_id' => $status2->id]);
     }
 
-    /**
-     * @test
-     * @expectedException Illuminate\Auth\Access\AuthorizationException
-     */
+    /** @test */
     public function user_without_permission_cant_update_status_of_a_task()
     {
+        $this->expectException(AuthorizationException::class);
         $user = factory(\App\Core\Models\User::class)->create();
         $status = factory(\App\Core\Models\Status::class)->create();
         $status2 = factory(\App\Core\Models\Status::class)->create();

@@ -8,6 +8,7 @@ use App\Core\Models\Project;
 use Illuminate\Support\Facades\Mail;
 use App\Core\Notifications\BecameNewMember;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class MemberTest extends TestCase
 {
@@ -140,12 +141,10 @@ class MemberTest extends TestCase
              ]);
     }
 
-    /**
-     * @test
-     * @expectedException Illuminate\Auth\Access\AuthorizationException
-     * */
+    /** @test */
     public function user_without_permission_cant_add_member_to_group()
     {
+        $this->expectException(AuthorizationException::class);
         $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
         $project = factory(\App\Core\Models\Project::class)->create();
         $user2 = factory(\App\Core\Models\User::class)->create();
@@ -177,12 +176,10 @@ class MemberTest extends TestCase
              ]);
     }
 
-    /**
-     * @test
-     * @expectedException Illuminate\Auth\Access\AuthorizationException
-     * */
+    /** @test */
     public function user_without_permission_cant_remove_member_to_group()
     {
+        $this->expectException(AuthorizationException::class);
         $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
         $project = factory(\App\Core\Models\Project::class)->create();
         $user2 = factory(\App\Core\Models\User::class)->create();

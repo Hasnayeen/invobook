@@ -130,6 +130,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('categories', 'CategoryController@store');
 
     /**********************************
+        Cycle
+    **********************************/
+
+    Route::get('cycles', 'CycleController@index');
+
+    Route::post('cycles', 'CycleController@store');
+
+    /**********************************
         Message
      **********************************/
 

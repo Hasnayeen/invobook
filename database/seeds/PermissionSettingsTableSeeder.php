@@ -57,6 +57,7 @@ class PermissionSettingsTableSeeder extends Seeder
                                  ->where('resource', '!=', 'project')
                                  ->where('resource', '!=', 'team')
                                  ->where('resource', '!=', 'office')
+                                 ->where('resource', '!=', 'cycle')
                                  ->where('resource', '!=', 'member')
                                  ->where('resource', '!=', 'permission')
                                  ->get();
