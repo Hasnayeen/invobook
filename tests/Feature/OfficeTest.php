@@ -6,6 +6,8 @@ use Tests\TestCase;
 use App\Core\Models\Office;
 use App\Core\Exceptions\UserIsNotMember;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Auth\Access\AuthorizationException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class OfficeTest extends TestCase
 {
@@ -15,12 +17,10 @@ class OfficeTest extends TestCase
         $this->office = factory('App\Core\Models\Office')->create();
     }
 
-    /**
-     * @test
-     * @expectedException Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     */
+    /** @test */
     public function offices_route_should_return_404_page()
     {
+        $this->expectException(NotFoundHttpException::class);
         $this->actingAs($this->user)->get('offices/');
     }
 
@@ -33,12 +33,10 @@ class OfficeTest extends TestCase
         $this->actingAs($this->user)->get('offices/' . $id)->assertSee('New Office');
     }
 
-    /**
-     * @expectedException Illuminate\Auth\Access\AuthorizationException
-     * @test
-     */
+    /** @test */
     public function user_without_permission_cant_see_office_page()
     {
+        $this->expectException(AuthorizationException::class);
         $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
         $this->user_with_permission_can_create_office();
         $id = Office::where('name', 'New Office')->first()->id;
@@ -62,12 +60,10 @@ class OfficeTest extends TestCase
         $id = Office::where('name', 'New Office')->first()->id;
     }
 
-    /**
-     * @expectedException Illuminate\Auth\Access\AuthorizationException
-     * @test
-     */
+    /** @test */
     public function user_without_permission_cant_create_office()
     {
+        $this->expectException(AuthorizationException::class);
         $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
 
         $this->actingAs($user)->post('/offices', [
@@ -90,12 +86,10 @@ class OfficeTest extends TestCase
              ]);
     }
 
-    /**
-     * @expectedException Illuminate\Auth\Access\AuthorizationException
-     * @test
-     */
+    /** @test */
     public function user_without_permission_cant_delete_a_office()
     {
+        $this->expectException(AuthorizationException::class);
         $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
 
         $this->user_with_permission_can_create_office();
@@ -132,10 +126,7 @@ class OfficeTest extends TestCase
         $this->assertEmpty($this->office->fresh()->members);
     }
 
-    /**
-     * @expectedException App\Exceptions\UserIsNotMember
-     * @test
-     */
+    /** @test */
     public function cannot_remove_user_from_office_if_not_a_member()
     {
         $this->expectException(UserIsNotMember::class);

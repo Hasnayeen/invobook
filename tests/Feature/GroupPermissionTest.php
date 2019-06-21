@@ -22,8 +22,6 @@ class GroupPermissionTest extends TestCase
     /** @test */
     public function user_can_see_all_permission_settings_for_role_in_this_group()
     {
-        $permissions = Permission::where('group_related', true)->get()->groupBy('resource');
-
         $this->actingAs($this->user)
              ->call('GET', 'groups/permissions', [
                  'group_type' => 'project',
@@ -35,7 +33,7 @@ class GroupPermissionTest extends TestCase
                  'action'   => 'create',
                  'resource' => 'comment',
              ])
-             ->assertJsonCount(6, 'permissions')
+             ->assertJsonCount(7, 'permissions')
              ->assertJsonCount(4, 'permissions.comment')
              ->assertJsonCount(3, 'permissions.file');
     }

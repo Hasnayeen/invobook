@@ -6,6 +6,8 @@ use Tests\TestCase;
 use App\Core\Models\Project;
 use App\Core\Exceptions\UserIsNotMember;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Auth\Access\AuthorizationException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ProjectTest extends TestCase
 {
@@ -15,12 +17,10 @@ class ProjectTest extends TestCase
         $this->project = factory('App\Core\Models\Project')->create();
     }
 
-    /**
-     * @test
-     * @expectedException Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     */
+    /** @test */
     public function projects_route_should_return_404_page()
     {
+        $this->expectException(NotFoundHttpException::class);
         $this->actingAs($this->user)->get('offices/');
     }
 
@@ -33,12 +33,10 @@ class ProjectTest extends TestCase
         $this->actingAs($this->user)->get('projects/' . $id)->assertSee('New Project');
     }
 
-    /**
-     * @expectedException Illuminate\Auth\Access\AuthorizationException
-     * @test
-     */
+    /** @test */
     public function user_without_permission_cant_see_project_page()
     {
+        $this->expectException(AuthorizationException::class);
         $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
         $this->user_with_permission_can_create_project();
         $id = Project::where('name', 'New Project')->first()->id;
@@ -59,12 +57,10 @@ class ProjectTest extends TestCase
         $this->assertDatabaseHas('projects', ['name' => 'New Project', 'description' => 'Description for new project', 'owner_id' => $this->user->id]);
     }
 
-    /**
-     * @test
-     * @expectedException Illuminate\Auth\Access\AuthorizationException
-     * */
+    /** @test */
     public function user_without_permission_cant_create_project()
     {
+        $this->expectException(AuthorizationException::class);
         $user = factory('App\Core\Models\User')->create(['role_id' => 5]);
 
         $this->actingAs($user)->post('projects', [
@@ -109,12 +105,10 @@ class ProjectTest extends TestCase
              ]);
     }
 
-    /**
-     * @test
-     * @expectedException Illuminate\Auth\Access\AuthorizationException
-     */
+    /** @test */
     public function user_without_permission_cant_delete_a_project()
     {
+        $this->expectException(AuthorizationException::class);
         $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
 
         $this->user_with_permission_can_create_project();
@@ -151,10 +145,7 @@ class ProjectTest extends TestCase
         $this->assertEmpty($this->project->fresh()->members);
     }
 
-    /**
-     * @expectedException App\Core\Exceptions\UserIsNotMember
-     * @test
-     */
+    /** @test */
     public function cannot_remove_user_from_project_if_not_a_member()
     {
         $this->expectException(UserIsNotMember::class);
