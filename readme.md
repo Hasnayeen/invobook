@@ -109,7 +109,7 @@ You can also fund specific issues on Issuehunt and the money will be distributed
 
 ## Security Vulnerabilities <small>[↑Top](#about-goodwork)</small>
 
-If you discover a security vulnerability within Goodwork, please send an e-mail to searching.nehal@gmail.com. All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability within Goodwork, please send an e-mail to searching.nehal@gmail.com instead of creating new issue. All security vulnerabilities will be promptly addressed.
 
 ## Credits <small>[↑Top](#about-goodwork)</small>
 

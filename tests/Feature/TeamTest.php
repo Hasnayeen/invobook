@@ -6,6 +6,7 @@ use Tests\TestCase;
 use App\Core\Models\Team;
 use App\Core\Exceptions\UserIsNotMember;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class TeamTest extends TestCase
 {
@@ -24,12 +25,10 @@ class TeamTest extends TestCase
         $this->actingAs($this->user)->get('teams/' . $id)->assertSee('New Team');
     }
 
-    /**
-     * @expectedException Illuminate\Auth\Access\AuthorizationException
-     * @test
-     */
+    /** @test */
     public function user_without_permission_cant_see_team_page()
     {
+        $this->expectException(AuthorizationException::class);
         $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
         $this->user_with_permission_can_create_team();
         $id = Team::where('name', 'New Team')->first()->id;
@@ -52,12 +51,10 @@ class TeamTest extends TestCase
         $this->assertDatabaseHas('teams', ['name' => 'New Team', 'description' => 'Team of all new members', 'owner_id' => $this->user->id]);
     }
 
-    /**
-     * @expectedException Illuminate\Auth\Access\AuthorizationException
-     * @test
-     */
+    /** @test */
     public function user_without_permission_cant_create_team()
     {
+        $this->expectException(AuthorizationException::class);
         $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
 
         $this->actingAs($user)->post('/teams', [
@@ -102,12 +99,10 @@ class TeamTest extends TestCase
              ]);
     }
 
-    /**
-     * @expectedException Illuminate\Auth\Access\AuthorizationException
-     * @test
-     */
+    /** @test */
     public function user_without_permission_cant_delete_a_team()
     {
+        $this->expectException(AuthorizationException::class);
         $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
 
         $this->user_with_permission_can_create_team();
@@ -144,10 +139,7 @@ class TeamTest extends TestCase
         $this->assertEmpty($this->team->fresh()->members);
     }
 
-    /**
-     * @expectedException App\Core\Exceptions\UserIsNotMember
-     * @test
-     */
+    /** @test */
     public function cannot_remove_user_from_team_if_not_a_member()
     {
         $this->expectException(UserIsNotMember::class);

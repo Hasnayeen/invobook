@@ -7,6 +7,7 @@ use App\Core\Models\Discussion;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class CommentTest extends TestCase
 {
@@ -163,12 +164,10 @@ class CommentTest extends TestCase
              ]);
     }
 
-    /**
-     * @expectedException Illuminate\Auth\Access\AuthorizationException
-     * @test
-     */
+    /** @test */
     public function user_without_permission_cant_delete_a_comment()
     {
+        $this->expectException(AuthorizationException::class);
         $this->actingAs($this->user);
         $comment = factory(\App\Core\Models\Comment::class)->create([
             'commentable_type' => 'task',

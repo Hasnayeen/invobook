@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use App\Core\Models\Role;
 use App\Core\Models\Permission;
+use App\Core\Exceptions\OwnerPermissionCantBeRevoked;
 
 class AuthorizationTest extends TestCase
 {
@@ -55,12 +56,10 @@ class AuthorizationTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @expectedException App\Core\Exceptions\OwnerPermissionCantBeRevoked
-     * */
+    /** @test */
     public function owner_permission_cannot_be_revoked()
     {
+        $this->expectException(OwnerPermissionCantBeRevoked::class);
         $ownerRole = Role::where(['slug' => 'owner'])->first();
         $this->actingAs($this->user)->delete('admin/roles/' . $ownerRole->id . '/permissions/' . $this->permission->id)
             ->assertForbidden();

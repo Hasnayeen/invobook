@@ -16,3 +16,4 @@ docker.env
 .vscode
 /storage/*.index
 .DS_Store
+.phpunit.result.cache

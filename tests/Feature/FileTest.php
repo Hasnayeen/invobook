@@ -7,6 +7,7 @@ use App\Core\Models\File;
 use App\Core\Models\Project;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use App\Core\Exceptions\InvalidFileFormat;
 
 class FileTest extends TestCase
 {
@@ -29,12 +30,10 @@ class FileTest extends TestCase
         Storage::disk('public')->assertExists('features.pdf');
     }
 
-    /**
-     * @test
-     * @expectedException \App\Core\Exceptions\InvalidFileFormat
-     */
+    /** @test */
     public function user_can_upload_only_allowed_format_files()
     {
+        $this->expectException(InvalidFileFormat::class);
         Storage::fake('');
         $project = factory(Project::class)->create();
         $file = UploadedFile::fake()->create('features.doc');
