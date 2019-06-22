@@ -3,13 +3,10 @@
 namespace App\Core\Models;
 
 use App\Core\Contracts\HasMembers;
-use App\Core\Contracts\Searchable;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Team extends Entity implements HasMembers
 {
-    use Searchable;
-
     protected $type = 'team';
 
     protected $fillable = ['name', 'description', 'office_id', 'owner_id'];

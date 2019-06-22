@@ -17,7 +17,7 @@ class TaskStatusController extends Controller
 
         return response()->json([
             'status'  => 'success',
-            'message' => trans('misc.Task status has been updated'),
+            'message' => localize('misc.Task status has been updated'),
             'task'    => $task,
         ], 201);
     }

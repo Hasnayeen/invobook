@@ -32,7 +32,7 @@ class OfficeController extends Controller
             resolve('Authorization')->setupDefaultPermissions($office);
 
             return $this->successResponse(
-                trans('misc.New office has been created'),
+                'misc.New office has been created',
                 'office',
                 $office,
                 201
@@ -49,7 +49,7 @@ class OfficeController extends Controller
 
         return response()->json([
             'status'  => 'success',
-            'message' => trans('misc.The office has been deleted'),
+            'message' => localize('misc.The office has been deleted'),
         ]);
     }
 }

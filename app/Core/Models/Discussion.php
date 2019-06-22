@@ -2,7 +2,6 @@
 
 namespace App\Core\Models;
 
-use App\Core\Contracts\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
@@ -14,13 +13,6 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
  */
 class Discussion extends Model
 {
-    use Searchable;
-
-    protected static function huntableFields()
-    {
-        return ['name', 'content'];
-    }
-
     protected $fillable = ['name', 'content', 'raw_content', 'posted_by', 'archived', 'draft', 'discussionable_type', 'discussionable_id', 'category_id', 'cycle_id'];
 
     protected $appends = ['date'];

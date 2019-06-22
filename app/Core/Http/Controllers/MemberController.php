@@ -28,7 +28,7 @@ class MemberController extends Controller
 
         return response()->json([
             'status'   => 'success',
-            'message'  => trans('misc.User added', ['type' => request('group_type')]),
+            'message'  => localize('misc.User added', ['type' => request('group_type')]),
             'user'     => $user,
         ]);
     }
@@ -48,7 +48,7 @@ class MemberController extends Controller
 
         return response()->json([
             'status'   => 'success',
-            'message'  => trans('misc.User removed', ['type' => request('group_type')]),
+            'message'  => localize('misc.User removed', ['type' => request('group_type')]),
             'user'     => $user,
         ]);
     }

@@ -32,7 +32,7 @@ class CycleController extends Controller
         ]);
 
         return $this->successResponse(
-            trans('misc.New cycle has been created'),
+            'misc.New cycle has been created',
             'cycle',
             $cycle,
             201

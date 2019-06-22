@@ -3,13 +3,10 @@
 namespace App\Core\Models;
 
 use App\Core\Contracts\HasMembers;
-use App\Core\Contracts\Searchable;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Project extends Entity implements HasMembers
 {
-    use Searchable;
-
     protected $type = 'project';
 
     protected $fillable = ['name', 'description', 'office_id', 'team_id', 'owner_id'];

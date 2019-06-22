@@ -32,7 +32,7 @@ class ProjectController extends Controller
             resolve('Authorization')->setupDefaultPermissions($project);
 
             return $this->successResponse(
-                trans('misc.New project has been created'),
+                'misc.New project has been created',
                 'project',
                 $project,
                 201
@@ -49,7 +49,7 @@ class ProjectController extends Controller
 
         return response()->json([
             'status'  => 'success',
-            'message' => trans('misc.The project has been deleted'),
+            'message' => localize('misc.The project has been deleted'),
         ]);
     }
 }

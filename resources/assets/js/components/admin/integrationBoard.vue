@@ -1,16 +1,24 @@
 <template>
-<div :class="{'hidden': (activeColumn !== 'integrations')}" class="bg-white rounded-b">
-  <div class="flex flex-col md:p-8">
-    <div v-for="(service, index) in services" class="p-4 flex items-center justify-between" :class="[index !== 0 ? 'border-t' : '']">
-      <div class="text-lg md:text-xl font-medium text-gray-800 uppercase">
-        {{ service.name }}
-      </div>
-      <div class="flex flex-row items-center">
-        <div @click="toggleServiceStatus(service)" :class="[service.enabled ? 'bg-indigo-400 justify-end' : 'bg-gray-500 justify-start']" class="w-10 h-4 rounded-full flex flex-row items-center p-1 cursor-pointer mr-8" :title="[service.enabled ? 'Disable' : 'Enable']">
-          <div class="rounded-full w-3 h-3 bg-white"></div>
+<div v-if="activeColumn === 'integrations'" class="bg-gray-100 rounded-b">
+  <div class="flex flex-row md:p-8">
+    <div v-for="(service, index) in services" class="p-4 bg-white shadow rounded flex flex-col" :class="[index !== 0 ? 'border-t' : '']">
+      <div class="flex justify-between items-center">
+        <div class="text-lg md:text-xl font-medium text-gray-700 uppercase">
+          {{ service.name }}
         </div>
+        <div class="flex items-center">
+          <div class="text-sm pr-2" :class="[service.enabled ? 'text-green-500' : 'text-gray-700']">
+            {{ service.enabled ? 'Enabled' : 'Disabled' }}
+          </div>
+          <div @click="toggleServiceStatus(service)" :class="[service.enabled ? 'bg-indigo-400 justify-end' : 'bg-gray-500 justify-start']" class="w-10 h-4 rounded-full flex flex-row items-center p-1 cursor-pointer" :title="[service.enabled ? 'Disable' : 'Enable']">
+            <div class="rounded-full w-3 h-3 bg-white"></div>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-row items-center pt-4">
+        <a href="https://github.blog/2013-05-16-personal-api-tokens/" class="underline text-blue-500 text-sm pr-4">How to get a personal access token</a>
         <div class="">
-          <button @click="showSetupModal" class="px-3 py-2 font-semibold text-white text-shadow bg-button-primary rounded">Set Token</button>
+          <button @click="showSetupModal" class="px-4 py-2 font-semibold bg-teal-500 text-white rounded">Set Token</button>
         </div>
       </div>
     </div>

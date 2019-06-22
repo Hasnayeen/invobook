@@ -3,13 +3,10 @@
 namespace App\Core\Models;
 
 use App\Core\Contracts\HasMembers;
-use App\Core\Contracts\Searchable;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Office extends Entity implements HasMembers
 {
-    use Searchable;
-
     protected $type = 'office';
 
     protected $fillable = ['name', 'description', 'owner_id'];

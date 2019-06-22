@@ -1,7 +1,11 @@
 <template>
-  <div :class="{'hidden': (activeTab != 'activities')}" class="w-full mx-2 md:mx-auto">
-    <div class="text-gray-800 text-lg mb-4">{{ 'Filters' |localize }}</div>
-    <div class="flex flex-row flex-wrap text-gray-900 -ml-4 mb-8">
+  <div v-if="activeTab === 'activities'" class="w-full mx-2 md:mx-auto">
+    <div v-if="activities.length === 0" class="flex flex-col items-center pt-8">
+      <div class="pb-8">A timeline of acitivities will show up when people starts working</div>
+      <img src="/image/activity.svg" alt="activities" class="w-96">
+    </div>
+
+    <div v-if="activities.length !== 0" class="flex flex-row flex-wrap text-gray-900 -ml-4 mb-8">
       <div class="mx-4 py-4 flex flex-row items-center relative">
         <select v-model="activity" class="w-full block appearance-none bg-white border border-gray-500 rounded text-gray-800 py-3 px-4 pr-8">
           <option value="activity" disabled hidden>{{ 'Filter by Activity' | localize }}</option>
@@ -63,11 +67,6 @@
       <div class="h-16 border-l border-gray-200 -mt-8 ml-2 md:ml-6"></div>
     </div>
 
-    <div class="flex flex-row justify-center mt-16 mb-8">
-      <div class="p-3 bg-white rounded shadow text-teal-500 cursor-pointer">
-        {{ 'Load More' | localize }}
-      </div>
-    </div>
   </div>
 </template>
 
@@ -100,18 +99,30 @@ export default {
     faSpinner
   }),
   created () {
-    axios.get('/activities', {
-      params: {
-        group_type: this.resourceType,
-        group_id: this.resourceId,
+    this.getAllActivities()
+  },
+  watch: {
+    activeTab: function () {
+      this.getAllActivities()
+    }
+  },
+  methods: {
+    getAllActivities () {
+      if (this.activeTab === 'activities' && this.activities.length < 1) {
+        axios.get('/activities', {
+          params: {
+            group_type: this.resourceType,
+            group_id: this.resourceId,
+          }
+        })
+          .then((response) => {
+            this.activities = response.data.activities
+          })
+          .catch((error) => {
+            console.log(error.response.data.message)
+          })
       }
-    })
-      .then((response) => {
-        this.activities = response.data.activities
-      })
-      .catch((error) => {
-        console.log(error.response.data.message)
-      })
+    }
   }
 }
 </script>

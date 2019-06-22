@@ -1,5 +1,5 @@
 <template>
-<div :class="{'hidden': (activeTab != 'messages')}" class="w-full">
+<div v-if="activeTab === 'messages'" class="w-full">
   <div class="flex flex-col bg-white mx-auto mt-4 mb-8 shadow rounded">
 
     <div class="text-gray-600 bg-white shadow p-4 text-xl flex flex-row items-center z-10">
@@ -98,33 +98,47 @@ export default {
     EventBus.$off('clear-title-notification', this.clearTitleNotification)
   },
   mounted () {
-    axios.get('/messages', {
-      params: {
-        resource_type: this.resourceType,
-        resource_id: this.resource.id
-      }
-    })
-      .then((response) => {
-        this.messages = response.data.messages.data.reverse()
-        this.nextPageUrl = response.data.messages.next_page_url
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+    this.getMessages()
     this.title = document.title
     this.listen()
-    document.getElementById('message-box').scrollTop = document.getElementById('message-box').scrollHeight
+    let messageBoxElement = document.getElementById('message-box')
+    if (messageBoxElement) {
+      messageBoxElement.scrollTop = messageBoxElement.scrollHeight
+    }
   },
   updated () {
-    document.getElementById('message-box').scrollTop = document.getElementById('message-box').scrollHeight
+    let messageBoxElement = document.getElementById('message-box')
+    if (messageBoxElement) {
+      messageBoxElement.scrollTop = messageBoxElement.scrollHeight
+    }
   },
   watch: {
     message (newVal) {
       // increase the height of textarea based on text present there
       this.messageTextareaHeight = newVal ? `${this.$refs.messageTextarea.scrollHeight}px` : 'auto'
+    },
+    activeTab: function () {
+      this.getMessages()
     }
   },
   methods: {
+    getMessages () {
+      if (this.activeTab === 'messages' && this.messages.length < 1) {
+        axios.get('/messages', {
+          params: {
+            resource_type: this.resourceType,
+            resource_id: this.resource.id
+          }
+        })
+        .then((response) => {
+          this.messages = response.data.messages.data.reverse()
+          this.nextPageUrl = response.data.messages.next_page_url
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+      }
+    },
     sendMessage (e) {
       if (e.shiftKey) {
         this.message = this.message + '\n'

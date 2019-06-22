@@ -4,11 +4,11 @@ module.exports = {
   separator: ':',
   theme: {
     screens: {
-        'sm': '576px',
-        'md': '768px',
-        'lg': '992px',
-        'xl': '1200px',
-        'xxl': '1440px'
+        'sm': '576px', // 36rem
+        'md': '768px', // 48rem
+        'lg': '992px', // 62rem
+        'xl': '1200px', // 75rem
+        'xxl': '1440px' // 90rem
     },
     colors: {
       transparent: 'transparent',
@@ -147,7 +147,9 @@ module.exports = {
       '48': '12rem',
       '56': '14rem',
       '64': '16rem',
+      '72': '18rem',
       '80': '20rem',
+      '88': '22rem',
       '96': '24rem',
     },
     backgroundColor: theme => theme('colors'),

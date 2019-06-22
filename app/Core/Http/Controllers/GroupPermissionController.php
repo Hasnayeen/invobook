@@ -36,7 +36,7 @@ class GroupPermissionController extends Controller
 
         return response()->json([
             'status'     => 'success',
-            'message'    => trans('misc.Permission has been assigned to the role'),
+            'message'    => localize('misc.Permission has been assigned to the role'),
             'permission' => $permission,
             'role'       => $role,
         ]);
@@ -52,7 +52,7 @@ class GroupPermissionController extends Controller
 
         return response()->json([
             'status'  => 'success',
-            'message' => trans('misc.Permission has been revoked from the role'),
+            'message' => localize('misc.Permission has been revoked from the role'),
         ]);
     }
 }

@@ -26,7 +26,7 @@ class TaskController extends Controller
 
             return response()->json([
                 'status'  => 'success',
-                'message' => trans('misc.New task has been created'),
+                'message' => localize('misc.New task has been created'),
                 'task'    => $task,
             ], 201);
         } catch (Exception $exception) {
@@ -73,7 +73,7 @@ class TaskController extends Controller
 
         return response()->json([
             'status'  => 'success',
-            'message' => trans('misc.The task has been deleted'),
+            'message' => localize('misc.The task has been deleted'),
         ]);
     }
 
@@ -84,7 +84,7 @@ class TaskController extends Controller
 
         return response()->json([
             'status'  => 'success',
-            'message' => trans('misc.Task has been updated'),
+            'message' => localize('misc.Task has been updated'),
         ]);
     }
 }
