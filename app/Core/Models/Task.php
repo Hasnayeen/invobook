@@ -3,7 +3,6 @@
 namespace App\Core\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Carbon\Carbon;
 
 class Task extends Model
 {
