@@ -2,18 +2,11 @@
 
 namespace App\Core\Models;
 
-use App\Core\Contracts\Searchable;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Task extends Model
 {
-    use Searchable;
-
-    protected static function huntableFields()
-    {
-        return ['name', 'notes'];
-    }
-
     protected $with = ['subtasks'];
 
     /**

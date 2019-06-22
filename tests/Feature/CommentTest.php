@@ -126,7 +126,7 @@ class CommentTest extends TestCase
         $this->delete("/comments/{$comment->id}")
              ->assertJsonFragment([
                 'status'  => 'success',
-                'message' => 'misc.Comment has been deleted',
+                'message' => 'Comment has been deleted',
              ]);
     }
 
@@ -160,7 +160,7 @@ class CommentTest extends TestCase
              )
              ->assertJsonFragment([
                 'status'  => 'success',
-                'message' => 'misc.Comment has been deleted',
+                'message' => 'Comment has been deleted',
              ]);
     }
 

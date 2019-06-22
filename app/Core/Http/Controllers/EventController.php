@@ -29,7 +29,7 @@ class EventController extends Controller
         $event = $this->repository->create($request->all());
 
         return $this->successResponse(
-            trans('misc.New event has been created'),
+            'misc.New event has been created',
             'event',
             $event,
             201

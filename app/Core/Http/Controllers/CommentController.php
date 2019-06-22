@@ -38,7 +38,7 @@ class CommentController extends Controller
             $comment->load('user:id,name,avatar');
 
             return $this->successResponse(
-                trans('misc.Comment has been saved'),
+                'misc.Comment has been saved',
                 'comment',
                 $comment,
                 201
@@ -62,7 +62,7 @@ class CommentController extends Controller
 
         return response()->json([
             'status'  => 'success',
-            'message' => trans('misc.Comment has been deleted'),
+            'message' => localize('misc.Comment has been deleted'),
         ]);
     }
 }

@@ -32,7 +32,7 @@ class TeamController extends Controller
             resolve('Authorization')->setupDefaultPermissions($team);
 
             return $this->successResponse(
-                trans('misc.New team has been created'),
+                'misc.New team has been created',
                 'team',
                 $team,
                 201
@@ -49,7 +49,7 @@ class TeamController extends Controller
 
         return response()->json([
             'status'  => 'success',
-            'message' => trans('misc.The team has been deleted'),
+            'message' => localize('misc.The team has been deleted'),
         ]);
     }
 }

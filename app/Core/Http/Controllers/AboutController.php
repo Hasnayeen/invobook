@@ -16,19 +16,19 @@ class AboutController extends Controller
             if ($latestVersion > config('app.version')) {
                 return response()->json([
                     'status'           => 'success',
-                    'message'          => trans('misc.New version available', ['latest_version' => $latestVersion]),
+                    'message'          => localize('misc.New version available', ['latest_version' => $latestVersion]),
                 ]);
             }
 
             return response()->json([
                 'status'           => 'success',
-                'message'          => trans('misc.Current version is the latest version', ['current_version' => config('app.version')]),
+                'message'          => localize('misc.Current version is the latest version', ['current_version' => config('app.version')]),
             ]);
         }
 
         return response()->json([
             'status'  => 'error',
-            'message' => trans('misc.Couldn\'t check for updates at this moment.'),
+            'message' => localize('misc.Couldn\'t check for updates at this moment.'),
         ]);
     }
 

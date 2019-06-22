@@ -12,7 +12,7 @@ class UserProfileController extends Controller
 
         return response()->json([
             'status'  => 'success',
-            'message' => trans('misc.Account profile are updated'),
+            'message' => localize('misc.Account profile are updated'),
         ]);
     }
 }

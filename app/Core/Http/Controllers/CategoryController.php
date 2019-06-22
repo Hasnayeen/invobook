@@ -29,7 +29,7 @@ class CategoryController extends Controller
         $category = $this->repository->create($request->all());
 
         return $this->successResponse(
-            trans('misc.New category has been created'),
+            'misc.New category has been created',
             'category',
             $category,
             201

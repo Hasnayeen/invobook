@@ -1,5 +1,5 @@
 <template>
-<div :class="{'hidden': !show}">
+<div v-if="show">
   <div class="absolute container mx-2 md:mx-auto md:w-1/3 bg-gray-100 rounded shadow-lg z-10" style="top: 10vh;left: 0;right: 0;">
     <div class="m-auto flex-col flex">
         <label class="block uppercase tracking-wide bg-gray-200 text-gray-600 text-xs font-bold text-center text-lg p-6 rounded" for="user">
@@ -7,13 +7,15 @@
         </label>
 
       <ul v-for="(member, index) in members" :key="member.id" class="list-reset">
-        <li class="py-4 px-8 hover:bg-gray-200 flex flex-row items-center justify-between">
-          <a :href="'/users/' + member.username"  class="no-underline text-gray-800 text-lg">
-            <img :src="generateUrl(member.avatar)" class="rounded-full w-8 h-8 mr-4 align-middle" :alt="'profile pic of ' + member.name">
-            <span>{{ member.name }}</span>
-          </a>
-          <button @click="removeMember(index, member.id)" class="text-red-200" title="delete">
-            <font-awesome-icon :icon="faTrashAlt" class="ml-1 pl-1 cursor-pointer"></font-awesome-icon>
+        <li class="p-4 py-6 hover:bg-blue-100 flex flex-row items-center justify-between">
+          <div class="flex flex-row items-center">
+            <a :href="'/users/' + member.username"  class="no-underline text-gray-800 text-lg">
+              <img :src="generateUrl(member.avatar)" class="rounded-full w-8 h-8 mr-4 align-middle" :alt="'profile pic of ' + member.name">
+            </a>
+            <span class="text-xl">{{ member.name }}</span>
+          </div>
+          <button @click="removeMember(index, member.id)" class="w-8 h-8 bg-red-200 text-red-700 rounded-full flex justify-center items-center" title="delete">
+            <font-awesome-icon :icon="faTrashAlt" class="cursor-pointer text-sm"></font-awesome-icon>
           </button>
         </li>
       </ul>

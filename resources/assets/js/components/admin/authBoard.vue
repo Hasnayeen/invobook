@@ -7,16 +7,14 @@
       </div>
     </div>
     <roles-board :activeColumn="activeColumn"></roles-board>
-    <permissions-board :activeColumn="activeColumn"></permissions-board>
   </div>
 </div>
 </template>
 
 <script>
 import rolesBoard from './rolesBoard'
-import permissionsBoard from './permissionsBoard'
 export default {
-  components: {rolesBoard, permissionsBoard},
+  components: {rolesBoard},
   props: {
     activeTab: {
       required: true,

@@ -15,7 +15,7 @@ class Controller extends BaseController
     {
         return response()->json([
             'status'  => 'success',
-            'message' => $message,
+            'message' => localize($message),
             $dataType => $data,
         ], $code);
     }
@@ -24,7 +24,7 @@ class Controller extends BaseController
     {
         return response()->json([
             'status'  => 'error',
-            'message' => $message,
+            'message' => localize($message),
             $dataType => $data,
         ], $code);
     }

@@ -1,23 +1,34 @@
 <template>
-<div :class="{'hidden': (activeTab != 'tasks')}" class="w-full">
+<div v-if="activeTab === 'tasks'" class="w-full">
   <create-task-form ref="taskform" :resource="resource" :resourceType="resourceType" :form-shown="createTaskFormShown" :tasks="tasks" @close="closeCreateTaskForm"></create-task-form>
 
   <task-details v-if="task" :index="index" :resourceType="resourceType" :resourceId="resource.id" :task="task" :taskDetailsShown="taskDetailsShown" @delete="deleteTask" @close="closeTaskDetails"></task-details>
 
-  <button @click="showCreateTaskForm" class="no-underline p-3 my-4 bg-white text-base text-teal-500 rounded shadow">{{ 'Create Task' | localize }}</button>
+  <div class="text-center">
+    <button @click="showCreateTaskForm" class="no-underline p-3 my-4 bg-white text-center text-base text-teal-500 rounded shadow">{{ 'Create Task' | localize }}</button>
+  </div>
 
-  <div class="flex flex-row flex-wrap md:-mx-1/20 lg:-mx-1/60 xl:-mx-1/40">
-    <div v-for="(task, index) in tasks" @click="showTaskDetails(index)" :key="index" class="bg-white rounded shadow my-4 md:mx-1/20 lg:mx-1/60 xl:mx-1/40 flex flex-row p-4 no-underline items-center w-full md:w-2/5 lg:w-3/10 xl:w-1/5 h-24 border-l-2 border-teal-500 cursor-pointer">
-      <img v-if="task.assigned_to" :src="generateUrl(task.user.avatar)" class="rounded-full w-8 h-8 mr-2 self-start">
-      <i v-else class="fas fa-question-circle fa-2x mx-2 self-start text-gray-800"></i>
-      <div class="w-4/5 text-gray-800 text-left flex flex-col justify-between h-full">
-        <p class="text-base mb-2 overflow-hidden">{{task.name}}</p>
-        <p class="text-sm text-gray-600">
-          Due by {{task.due_on}}
+  <div class="flex flex-row flex-wrap items-start lg:-mx-2 xl:mx-0">
+    <div v-for="(task, index) in tasks" @click="showTaskDetails(index)" :key="index" class="bg-white rounded shadow my-4 md:mx-6 lg:mx-2 xl:mx-4 p-4 w-full md:w-72 xl:w-64  cursor-pointer">
+      <div class="flex justify-between items-center">
+        <p class="text-xs text-gray-600 flex flex-col">
+          <span class="w-10 border-t-2 border-teal-400"></span>
+          <span class="text-xs">Due by</span>
+          <span class="text-sm text-gray-700">{{dueOn(task.due_on)}}</span>
         </p>
+        <img v-if="task.assigned_to" :src="generateUrl(task.user.avatar)" class="rounded-full w-8 h-8">
+        <i v-else class="fas fa-question-circle fa-2x mx-2 self-start text-gray-800"></i>
+      </div>
+      <div class="text-gray-700 text-left pt-2">
+        <p class="font-medium text-lg overflow-hidden">{{task.name}}</p>
       </div>
     </div>
   </div>
+  <div v-if="tasks.length === 0" class="flex flex-col items-center pt-8">
+    <div class="pb-4">Don't you have Task to do? Go ahead, create one</div>
+    <img src="/image/tasks.svg" alt="task list" class="w-96">
+  </div>
+
 </div>
 </template>
 
@@ -60,6 +71,9 @@ export default {
     }
   },
   methods: {
+    dueOn: function (value) {
+      return luxon.DateTime.fromSQL(value).toFormat('d LLL')
+    },
     showCreateTaskForm () {
       this.createTaskFormShown = true
       this.$nextTick(() => {
