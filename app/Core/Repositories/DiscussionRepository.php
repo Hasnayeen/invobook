@@ -28,9 +28,9 @@ class DiscussionRepository
         ]);
     }
 
-    public function getAllDiscussionWithCreator($type, $entityId)
+    public function getAllDiscussionWithCreator($type, $entityId, $cycleId = null)
     {
-        return $this->model->where(['discussionable_type' => $type, 'discussionable_id' => $entityId, 'draft' => false, 'archived' => false])->with(['creator:id,avatar,name,username', 'category:id,name'])->get(['id', 'name', 'content', 'posted_by', 'created_at', 'category_id']);
+        return $this->model->where(['discussionable_type' => $type, 'discussionable_id' => $entityId, 'draft' => false, 'archived' => false, 'cycle_id' => $cycleId])->with(['creator:id,avatar,name,username', 'category:id,name'])->get(['id', 'name', 'content', 'posted_by', 'created_at', 'category_id']);
     }
 
     public function update(Discussion $discussion, $data)

@@ -9,7 +9,7 @@
       </div>
       <div v-for="(cycle, index) in cycles" :key="cycle.id">
         <div v-if="index !== 0" class="border-b border-gray-200 mx-8"></div>
-        <a @click="selectCycle(cycle)" class="flex flex-col items-center px-8 py-4 cursor-pointer" :class="{'bg-blue-100': selectedCycle === cycle.id}">
+        <a @click="chooseCycle(cycle)" class="flex flex-col items-center px-8 py-4 cursor-pointer" :class="{'bg-blue-100': selectedCycleId === cycle.id}">
           <div class="text-xl text-blue-600 font-medium">
             {{ cycle.name }}
             <span v-if="currentCycleId === cycle.id" class="absolute px-2 ml-1 bg-teal-500 text-white text-xs font-semibold rounded-full">current</span>
@@ -40,6 +40,7 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 import createCycleForm from "./../forms/createCycleForm"
 export default {
   components: {createCycleForm},
@@ -62,33 +63,30 @@ export default {
     }
   },
   data: () => ({
-    cycles: [],
-    selectedCycle: 0,
     createFormShown: false
   }),
-  mounted () {
-    this.selectedCycle = this.currentCycleId ? this.currentCycleId : 0
-  },
   watch: {
     modalShown: function () {
       this.getAllCycles()
     }
   },
+  computed: {
+    ...mapState({
+      cycles: state => state.cycles,
+      selectedCycleId: state => state.selectedCycleId,
+    })
+  },
   methods: {
+    ...mapActions([
+      'getCycles',
+      'selectCycle'
+    ]),
     getAllCycles () {
       if (this.modalShown && this.cycles.length === 0 ) {
-        axios.get('/cycles', {
-            params: {
-              group_type: this.resourceType,
-              group_id: this.resourceId,
-            }
-          })
-          .then((response) => {
-            this.cycles = response.data.cycles
-          })
-          .catch((error) => {
-            console.log(error)
-          })
+        this.getCycles({
+          group_type: this.resourceType,
+          group_id: this.resourceId,
+        })
       }
     },
     closeModal () {
@@ -103,9 +101,8 @@ export default {
       }
       this.createFormShown = false
     },
-    selectCycle (cycle) {
-      this.selectedCycle = cycle.id
-      this.$emit('select-cycle', cycle)
+    chooseCycle (cycle) {
+      this.selectCycle(cycle)
     }
   }
 }

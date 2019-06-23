@@ -40,6 +40,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import createDiscussionForm from '../forms/createDiscussionForm.vue'
 import discussionDetails from './discussionDetails'
 export default {
@@ -73,12 +74,25 @@ export default {
     index: null
   }),
   async created () {
-    await this.getAllDiscussions()
+    await this.getAllDiscussions(true)
     const id = new URL(location.href).searchParams.get('id')
     this.discussion = this.discussions.find(discussion => discussion.id === parseInt(id))
     if (id) {
       this.discussionDetailsShown = true
     }
+  },
+  watch: {
+    activeTab: function () {
+      this.getAllDiscussions(false)
+    },
+    selectedCycleId: function () {
+      this.getAllDiscussions(true)
+    }
+  },
+  computed: {
+    ...mapState({
+      selectedCycleId: state => state.selectedCycle ? state.selectedCycle.id : 0
+    })
   },
   methods: {
     showCreateDiscussionForm () {
@@ -88,17 +102,20 @@ export default {
       })
     },
     closeCreateDiscussionForm (newDiscussion = null) {
-      if (newDiscussion) this.discussions.push(newDiscussion)
+      if (newDiscussion && this.selectedCycleId === newDiscussion.cycle_id) {
+        this.discussions.push(newDiscussion)
+      }
       this.createDiscussionFormShown = false
     },
-    async getAllDiscussions () {
+    async getAllDiscussions (update = false) {
       try {
-        if (this.activeTab === 'discussions' && this.discussions.length < 1) {
+        if (this.activeTab === 'discussions' && (this.discussions.length < 1 || update)) {
           let { data } = await axios({
             url: '/discussions',
             params: {
               group_type: this.resourceType,
-              group_id: this.resource.id
+              group_id: this.resource.id,
+              cycle_id: this.selectedCycleId
             }})
           this.discussions = data.discussions
           return this.discussions
@@ -120,8 +137,5 @@ export default {
       this.discussions.splice(index, 1)
     }
   },
-  watch: {
-    activeTab: 'getAllDiscussions'
-  }
 }
 </script>

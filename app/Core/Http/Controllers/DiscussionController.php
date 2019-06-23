@@ -12,7 +12,7 @@ class DiscussionController extends Controller
     public function index(DiscussionRepository $repository)
     {
         $this->authorize('list', Discussion::class);
-        $discussions = $repository->getAllDiscussionWithCreator(request('group_type'), request('group_id'));
+        $discussions = $repository->getAllDiscussionWithCreator(request('group_type'), request('group_id'), request('cycle_id'));
 
         return response()->json([
             'status'      => 'success',

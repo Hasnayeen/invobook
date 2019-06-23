@@ -42,7 +42,7 @@
     </div>
   
   <!-- Modals for cycles -->
-  <cycles-modal resourceType="project" :resourceId="project.id" :currentCycleId="currentCycleId" :modalShown="cyclesModalShown" @select-cycle="selectCurrentCycle" @close="closeCyclesModal"></cycles-modal>
+  <cycles-modal resourceType="project" :resourceId="project.id" :modalShown="cyclesModalShown" @close="closeCyclesModal"></cycles-modal>
   <!-- Modals for cycles -->
 
   <!-- Modals for dropdown menu -->
@@ -78,7 +78,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import taskBoard from './../partials/taskBoard.vue'
 import discussionBoard from './../partials/discussionBoard.vue'
 import messagesBoard from './../partials/messagesBoard.vue'
@@ -113,14 +113,13 @@ export default {
   },
   data: () => ({
     addMemberFormShown: false,
-    active: 'tasks',
+    active: '',
     activeId: 0,
     dropdownMenuShown: false,
     githubRepoModalShown: false,
     membersListModalShown: false,
     permissionSettingsModalShown: false,
     cyclesModalShown: false,
-    selectedCycle: null,
     currentCycleId: null,
     faPlus,
     faCog
@@ -131,19 +130,31 @@ export default {
     let id = new URL(location.href).searchParams.get('id')
     if (tool !== null && tabs.indexOf(tool) !== -1) {
       this.active = tool
+    } else {
+      this.active = 'tasks'
     }
     if (id !== null) {
       this.activeId = parseInt(id)
     }
-    this.selectedCycle = project.current_cycle
     this.currentCycleId = this.selectedCycle ? this.selectedCycle.id : null
+    this.getAllCycles()
   },
   computed: {
     ...mapState({
-      project: state => state.project
+      project: state => state.project,
+      selectedCycle: state => state.selectedCycle
     })
   },
   methods: {
+    ...mapActions([
+      'getCycles'
+    ]),
+    getAllCycles () {
+      this.getCycles({
+        group_type: 'project',
+        group_id: this.project.id,
+      })
+    },
     showAddMemberForm () {
       this.addMemberFormShown = true
     },
@@ -196,9 +207,6 @@ export default {
     closeCyclesModal () {
       this.cyclesModalShown = false
     },
-    selectCurrentCycle (cycle) {
-      this.selectedCycle = cycle
-    }
   }
 }
 </script>

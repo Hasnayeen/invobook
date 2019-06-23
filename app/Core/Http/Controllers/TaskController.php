@@ -51,7 +51,7 @@ class TaskController extends Controller
     public function index(TaskRepository $repository)
     {
         try {
-            $tasks = $repository->getAllTaskWithAssignee(request('resource_type'), request('resource_id'));
+            $tasks = $repository->getAllTaskWithAssignee(request('resource_type'), request('resource_id'), request('cycle_id'));
 
             return response()->json([
                 'status'   => 'success',
