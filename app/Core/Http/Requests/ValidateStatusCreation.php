@@ -14,7 +14,7 @@ class ValidateStatusCreation extends FormRequest
     public function rules()
     {
         return [
-            'name'          => 'required|unique:statuses|max:255',
+            'name'          => 'required|max:25',
             'color'         => 'required|regex:/^#([0-9a-f]{3}){1,2}$/i',
         ];
     }

@@ -29,6 +29,7 @@ $factory->define(App\Core\Models\Task::class, function (Faker\Generator $faker) 
         'created_by'    => factory(App\Core\Models\User::class)->create()->id,
         'taskable_type' => $taskable_type,
         'taskable_id'   => $taskable_id,
+        'status_id'     => factory(App\Core\Models\Status::class)->create()->id,
         'created_at'    => $now,
         'updated_at'    => $now,
     ];

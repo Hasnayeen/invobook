@@ -1,6 +1,6 @@
 <template>
 <div v-if="taskDetailsShown">
-  <div class="absolute container mx-auto md:w-3/4 lg:2/3 xl:w-1/2 xxl:w-2/5 z-10 mb-16" style="top: 12vh;left: 0;right: 0;">
+  <div class="absolute container mx-auto md:max-w-2xl lg:max-w-3xl xl:max-w-4xl z-40 mb-16" style="top: 12vh;left: 0;right: 0;">
     <div class="bg-gray-100 rounded shadow-lg py-4">
       <div class="flex flex-row justify-between px-8 pb-2 relative">
         <div @click="closeTaskDetails" class="cursor-pointer">
@@ -40,21 +40,26 @@
             {{ task.due_on }}
           </div>
         </div>
-        <div class="text-center">
+        <div class="text-center relative">
           <div class="text-sm text-gray-600 px-8">
             Status
           </div>
-          <div class="px-8 py-2 text-green-600">
-            In Progress
+          <div @click="showStatusMenu" :style="'background-color: ' + task.status.color" class="px-4 py-1 mt-1 text-white font-semibold rounded-full cursor-pointer">
+            {{ task.status.name }}
+          </div>
+          <div v-if="statusMenuShown" class="absolute rounded shadow-md mt-2 py-1 text-left text-indigo-800 bg-gray-100">
+            <div v-for="status in statuses"  :style="'color: ' + status.color" @click="changeStatus(status.id)" class="cursor-pointer hover:bg-white font-semibold px-4 py-2">
+              {{ status.name }}
+            </div>
           </div>
         </div>
         <div class="text-center">
           <div class="text-sm text-gray-600 px-8">
             Related To
           </div>
-          <div class="px-8 py-2" :class="[task.related_to ? 'text-blue-500 underline' : 'text-gray-600']">
+          <a :href="'/' + resourceType + 's/' + resourceId + '?tool=tasks&id=' + task.related_to" class="px-8 py-2" :class="[task.related_to ? 'text-blue-500 underline' : 'text-gray-600']">
             {{ task.related_to ? task.related_to : 'None' }}
-          </div>
+          </a>
         </div>
       </div>
       <div class="bg-white text-sm text-gray-600 px-8 pt-4">
@@ -118,10 +123,15 @@ export default {
     },
     index: {
       required: true
+    },
+    statuses: {
+      required: true,
+      type: Array
     }
   },
   data: () => ({
     dropdownMenuShown: false,
+    statusMenuShown: false,
     faArrowLeft,
     faEllipsisH
   }),
@@ -154,6 +164,26 @@ export default {
           this.$emit('close')
         })
       this.dropdownMenuShown = false
+    },
+    showStatusMenu () {
+      this.statusMenuShown = true
+    },
+    closeStatusMenu () {
+      this.statusMenuShown = false
+    },
+    changeStatus (id) {
+      axios.put('/tasks/' + this.task.id + '/statuses/' + id, {
+          group_type: this.resourceType,
+          group_id: this.resourceId,
+        })
+        .then((response) => {
+          this.$emit('status-change', {index: this.index, task: response.data.task})
+          EventBus.$emit('notification', response.data.message, response.data.status)
+        })
+        .catch((error) => {
+          EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+        })
+        this.statusMenuShown = false
     }
   }
 }

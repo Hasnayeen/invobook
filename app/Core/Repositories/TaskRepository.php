@@ -15,7 +15,7 @@ class TaskRepository
 
     public function getAllTaskWithAssignee($type, $entityId)
     {
-        return $this->model->where(['taskable_type' => $type, 'taskable_id' => $entityId])->with('user:id,avatar')->get(['id', 'name', 'notes', 'assigned_to', 'due_on', 'related_to', 'completed', 'parent_id']);
+        return $this->model->where(['taskable_type' => $type, 'taskable_id' => $entityId])->with('user:id,avatar')->with('status:id,name,color')->get(['id', 'name', 'notes', 'assigned_to', 'due_on', 'related_to', 'completed', 'parent_id', 'status_id']);
     }
 
     /**
@@ -33,7 +33,7 @@ class TaskRepository
             'related_to'        => $data['related_to'] ?? null,
             'taskable_type'     => $data['group_type'],
             'taskable_id'       => $data['group_id'],
-            'status_id'         => $data['status_id'] ?? null,
+            'status_id'         => $data['status_id'] ?? 1,
             'cycle_id'          => $data['cycle_id'] ?? null,
         ]);
     }
