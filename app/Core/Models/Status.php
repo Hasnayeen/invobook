@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Status extends Model
 {
+    protected $table = 'statuses';
+
     /**
      * The attributes that are mass assignable.
      *

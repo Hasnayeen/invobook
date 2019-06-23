@@ -15,7 +15,7 @@ class StatusRepository
 
     public function getAllStatus()
     {
-        return $this->model->get(['name', 'color']);
+        return $this->model->get(['id', 'name', 'color']);
     }
 
     public function storeStatus($data)

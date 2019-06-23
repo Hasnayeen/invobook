@@ -2,17 +2,17 @@
 <div v-if="activeTab === 'tasks'" class="w-full">
   <create-task-form ref="taskform" :resource="resource" :resourceType="resourceType" :form-shown="createTaskFormShown" :tasks="tasks" @close="closeCreateTaskForm"></create-task-form>
 
-  <task-details v-if="task" :index="index" :resourceType="resourceType" :resourceId="resource.id" :task="task" :taskDetailsShown="taskDetailsShown" @delete="deleteTask" @close="closeTaskDetails"></task-details>
+  <task-details v-if="task" :index="index" :resourceType="resourceType" :resourceId="resource.id" :task="task" :taskDetailsShown="taskDetailsShown" :statuses="statuses" @status-change="updateStatus" @delete="deleteTask" @close="closeTaskDetails"></task-details>
 
   <div class="text-center">
     <button @click="showCreateTaskForm" class="no-underline p-3 my-4 bg-white text-center text-base text-teal-500 rounded shadow">{{ 'Create Task' | localize }}</button>
   </div>
 
   <div class="flex flex-row flex-wrap items-start lg:-mx-2 xl:mx-0">
-    <div v-for="(task, index) in tasks" @click="showTaskDetails(index)" :key="index" class="bg-white rounded shadow my-4 md:mx-6 lg:mx-2 xl:mx-4 p-4 w-full md:w-72 xl:w-64  cursor-pointer">
+    <div v-for="(task, index) in tasks" @click="showTaskDetails(index)" :key="task.id" class="bg-white rounded shadow my-4 md:mx-6 lg:mx-2 xl:mx-4 p-4 w-full md:w-72 xl:w-64  cursor-pointer">
       <div class="flex justify-between items-center">
         <p class="text-xs text-gray-600 flex flex-col">
-          <span class="w-10 border-t-2 border-teal-400"></span>
+          <span class="w-10 border-t-4" :style="'border-color:' + task.status.color"></span>
           <span class="text-xs">Due by</span>
           <span class="text-sm text-gray-700">{{dueOn(task.due_on)}}</span>
         </p>
@@ -60,12 +60,18 @@ export default {
     taskDetailsShown: false,
     tasks: [],
     task: {},
+    statuses: [],
     index: null
   }),
   async created () {
-    await this.getAllTasks()
-    const id = new URL(location.href).searchParams.get('id')
+    this.tasks = await this.getAllTasks()
+    this.statuses = await this.getAllStatuses()
+    var id = new URL(location.href).searchParams.get('id')
     this.task = this.tasks.find(task => task.id === parseInt(id))
+    this.tasks.some((item, i) => {
+        this.index = i
+        return item.id == id
+    })
     if (id) {
       this.taskDetailsShown = true
     }
@@ -93,14 +99,27 @@ export default {
               resource_type: this.resourceType,
               resource_id: this.resource.id
             }})
-          this.tasks = data.tasks
-          return this.tasks
+          return data.tasks
+        }
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    async getAllStatuses () {
+      try {
+        if (this.statuses.length < 1) {
+          let { data } = await axios({
+            url: '/statuses',
+          })
+          return data.statuses
         }
       } catch (error) {
         console.error(error)
       }
     },
     showTaskDetails (index) {
+      console.log(index);
+      
       this.index = index
       this.task = this.tasks[index]
       if (typeof this.task.user.username === 'undefined') {
@@ -127,6 +146,10 @@ export default {
     },
     deleteTask (index) {
       this.tasks.splice(index, 1)
+    },
+    updateStatus (newValue) {
+      this.$set(this.tasks, newValue.index, newValue.task)
+      this.task = newValue.task
     }
   },
   watch: {
