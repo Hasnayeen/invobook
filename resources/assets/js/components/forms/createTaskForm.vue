@@ -38,11 +38,27 @@
       </div>
       <div class="p-4">
         <label class="block uppercase tracking-wide text-gray-800 text-xs font-bold mb-2" for="grid-first-name">
+          Cycle
+        </label>
+        <div class="flex flex-row items-center">
+          <select v-model="cycleId" class="w-5/6 block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-800 py-3 px-4 pr-8 rounded" id="user">
+            <option selected disabled hidden value="">Select a Cycle</option>
+            <template v-for="cycle in cycles">
+              <option :value="cycle.id" class="my-2 text-lg">{{ cycle.name }}</option>
+            </template>
+          </select>
+          <font-awesome-icon :icon="faChevronDown"
+            class="w-1/6 pointer-events-none flex items-center text-gray-800 -ml-8">
+          </font-awesome-icon>
+        </div>
+      </div>
+      <div class="p-4">
+        <label class="block uppercase tracking-wide text-gray-800 text-xs font-bold mb-2" for="grid-first-name">
           Related To
         </label>
         <div class="flex flex-row items-center">
           <select v-model="related_to" class="w-5/6 block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-800 py-3 px-4 pr-8 rounded" id="user">
-            <option selected value=""></option>
+            <option selected disabled hidden value="">Select a Task</option>
             <template v-for="task in tasks">
               <option :value="task.id" class="my-2 text-lg">{{ task.name }}</option>
             </template>
@@ -79,6 +95,7 @@
 
 <script>
 import Datepicker from 'vuejs-datepicker'
+import { mapState, mapActions } from 'vuex'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons/faTimesCircle'
 
@@ -91,6 +108,7 @@ export default {
     assigned_to: null,
     related_to: '',
     dueOnDate: null,
+    cycleId: '',
     disabledDates: {
       to: new Date()
     },
@@ -99,6 +117,14 @@ export default {
     faChevronDown,
     faTimesCircle,
   }),
+  computed: {
+    taskCompleted () {
+      return this.tasks.filter(task => task.completed).length
+    },
+    ...mapState({
+      cycles: state => state.cycles
+    })
+  },
   methods: {
     createTask () {
       axios.post('/tasks', {
@@ -106,6 +132,7 @@ export default {
         notes: this.notes,
         assigned_to: this.assigned_to,
         related_to: this.related_to,
+        cycle_id: this.cycleId,
         due_on: window.luxon.DateTime.fromISO(this.dueOnDate.toISOString()).toISODate(),
         group_id: this.resource.id,
         group_type: this.resourceType
@@ -144,10 +171,5 @@ export default {
       if (index !== -1) this.tags.splice(index, 1)
     }
   },
-  computed: {
-    taskCompleted () {
-      return this.tasks.filter(task => task.completed).length
-    }
-  }
 }
 </script>

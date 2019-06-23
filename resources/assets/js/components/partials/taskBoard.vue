@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import createTaskForm from './../forms/createTaskForm.vue'
 import taskDetails from './../partials/taskDetails.vue'
 export default {
@@ -53,7 +54,7 @@ export default {
     activeId: {
       required: false,
       type: Number
-    }
+    },
   },
   data: () => ({
     createTaskFormShown: false,
@@ -64,17 +65,32 @@ export default {
     index: null
   }),
   async created () {
-    this.tasks = await this.getAllTasks()
+    this.tasks = await this.getAllTasks(true)
     this.statuses = await this.getAllStatuses()
     var id = new URL(location.href).searchParams.get('id')
-    this.task = this.tasks.find(task => task.id === parseInt(id))
-    this.tasks.some((item, i) => {
-        this.index = i
-        return item.id == id
-    })
+    if (this.tasks) {
+      this.task = this.tasks.find(task => task.id === parseInt(id))
+      this.tasks.some((item, i) => {
+          this.index = i
+          return item.id == id
+      })
+    }
     if (id) {
       this.taskDetailsShown = true
     }
+  },
+  watch: {
+    activeTab: function () {
+      this.getAllTasks(false)
+    },
+    selectedCycleId: function () {
+      this.getAllTasks(true)
+    }
+  },
+  computed: {
+    ...mapState({
+      selectedCycleId: state => state.selectedCycle ? state.selectedCycle.id : 0
+    })
   },
   methods: {
     dueOn: function (value) {
@@ -87,20 +103,25 @@ export default {
       })
     },
     closeCreateTaskForm (newTask = null) {
-      if (newTask) this.tasks.push(newTask)
+      if (newTask && this.selectedCycleId === newTask.cycle_id) {
+        this.tasks.push(newTask)
+      }
       this.createTaskFormShown = false
     },
-    async getAllTasks () {
+    async getAllTasks (update = false) {
       try {
-        if (this.activeTab === 'tasks' && this.tasks.length < 1) {
+        if (this.activeTab === 'tasks' && (this.tasks.length < 1 || update)) {
           let { data } = await axios({
             url: '/tasks',
             params: {
               resource_type: this.resourceType,
-              resource_id: this.resource.id
+              resource_id: this.resource.id,
+              cycle_id: this.selectedCycleId
             }})
+          this.tasks = data.tasks
           return data.tasks
         }
+        return []
       } catch (error) {
         console.error(error)
       }
@@ -118,8 +139,6 @@ export default {
       }
     },
     showTaskDetails (index) {
-      console.log(index);
-      
       this.index = index
       this.task = this.tasks[index]
       if (typeof this.task.user.username === 'undefined') {
@@ -152,8 +171,5 @@ export default {
       this.task = newValue.task
     }
   },
-  watch: {
-    activeTab: 'getAllTasks'
-  }
 }
 </script>

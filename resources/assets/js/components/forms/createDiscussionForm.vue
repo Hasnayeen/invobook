@@ -13,10 +13,30 @@
           <label class="block uppercase tracking-wide text-gray-800 text-xs font-bold mb-2" for="grid-first-name">
             Category <span class="text-gray-500 capitalize">(required)</span>
           </label>
-          <select class="appearance-none block w-full bg-white text-gray-800 border border-gray-200 rounded py-3 px-4" v-model="categoryId">
-            <option value="" disabled>Choose one</option>
-            <option :value="category.id" v-for="category in categories">{{ category.name }}</option>
-          </select>
+          <div class="flex flex-row items-center">
+            <select class="appearance-none block w-full bg-white text-gray-800 border border-gray-200 rounded py-3 px-4" v-model="categoryId">
+              <option value="" disabled>Choose one</option>
+              <option :value="category.id" v-for="category in categories">{{ category.name }}</option>
+            </select>
+            <font-awesome-icon :icon="faChevronDown"
+              class="w-1/6 pointer-events-none flex items-center text-gray-700 -ml-8">
+            </font-awesome-icon>
+          </div>
+        </div>
+        <div class="px-8 pb-4 bg-gray-200">
+          <label class="block uppercase tracking-wide text-gray-800 text-xs font-bold mb-2" for="grid-first-name">
+            Cycle
+          </label>
+          <div class="flex flex-row items-center">
+            <select class="appearance-none block w-full bg-white text-gray-800 border border-gray-200 rounded py-3 px-4" v-model="cycleId">
+              <option value="" select hidden disabled>Choose one</option>
+              <option :value="cycle.id" v-for="cycle in cycles">{{ cycle.name }}</option>
+            </select>
+            <font-awesome-icon :icon="faChevronDown"
+              class="w-1/6 pointer-events-none flex items-center text-gray-700 -ml-8">
+            </font-awesome-icon>
+          </div>
+
         </div>
         <div class="px-8 pb-8 bg-gray-200">
           <label class="block uppercase tracking-wide text-gray-800 text-xs font-bold mb-2" for="grid-first-name">
@@ -43,7 +63,9 @@
 
 <script>
 import Quill from 'quill'
+import { mapState, mapActions } from 'vuex'
 import imageUpload from 'quill-plugin-image-upload'
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 
 export default {
   props: {
@@ -63,8 +85,10 @@ export default {
   data: () => ({
     quill: null,
     name: '',
+    cycleId: '',
     categoryId: '',
-    categories: []
+    categories: [],
+    faChevronDown
   }),
   mounted () {
     Quill.register('modules/imageUpload', imageUpload)
@@ -108,6 +132,11 @@ export default {
       theme: 'snow'
     })
   },
+  computed: {
+    ...mapState({
+      cycles: state => state.cycles
+    })
+  },
   methods: {
     savePost (draft = true) {
       axios.post('/discussions', {
@@ -116,6 +145,7 @@ export default {
         content: this.quill.root.innerHTML,
         raw_content: JSON.stringify(this.quill.getContents()),
         draft: draft,
+        cycle_id: this.cycleId,
         group_type: this.resourceType,
         group_id: this.resourceId
       })

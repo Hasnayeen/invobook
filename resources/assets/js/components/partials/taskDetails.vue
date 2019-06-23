@@ -44,7 +44,7 @@
           <div class="text-sm text-gray-600 px-8">
             Status
           </div>
-          <div @click="showStatusMenu" :style="'background-color: ' + task.status.color" class="px-4 py-1 mt-1 text-white font-semibold rounded-full cursor-pointer">
+          <div @click="toggleStatusMenu" v-click-outside="toggleStatusMenu" :style="'background-color: ' + task.status.color" class="px-4 py-1 mt-1 text-white font-semibold rounded-full cursor-pointer">
             {{ task.status.name }}
           </div>
           <div v-if="statusMenuShown" class="absolute rounded shadow-md mt-2 py-1 text-left text-indigo-800 bg-gray-100">
@@ -165,8 +165,8 @@ export default {
         })
       this.dropdownMenuShown = false
     },
-    showStatusMenu () {
-      this.statusMenuShown = true
+    toggleStatusMenu () {
+      this.statusMenuShown = !this.statusMenuShown
     },
     closeStatusMenu () {
       this.statusMenuShown = false
@@ -177,13 +177,14 @@ export default {
           group_id: this.resourceId,
         })
         .then((response) => {
+          this.statusMenuShown = false
           this.$emit('status-change', {index: this.index, task: response.data.task})
           EventBus.$emit('notification', response.data.message, response.data.status)
         })
         .catch((error) => {
+          this.statusMenuShown = false
           EventBus.$emit('notification', error.response.data.message, error.response.data.status)
         })
-        this.statusMenuShown = false
     }
   }
 }
