@@ -10,11 +10,11 @@ class StatusController extends Controller
 {
     public function index(StatusRepository $statusRepository)
     {
-        $status = $statusRepository->getAllStatus();
+        $statuses = $statusRepository->getAllStatus();
 
         return response()->json([
-            'status' => 'success',
-            'data'   => $status,
+            'status'   => 'success',
+            'statuses' => $statuses,
         ]);
     }
 
