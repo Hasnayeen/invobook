@@ -3,9 +3,10 @@
 namespace App\Core\Models;
 
 use App\Core\Contracts\HasMembers;
+use App\Core\Models\OfficeSetting;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Office extends Entity implements HasMembers
+class Office extends Group implements HasMembers
 {
     protected $type = 'office';
 
@@ -37,5 +38,10 @@ class Office extends Entity implements HasMembers
     public function owner()
     {
         return $this->belongsTo(User::class, 'owner_id');
+    }
+
+    public function settings()
+    {
+        return $this->hasOne(OfficeSetting::class, 'office_id');
     }
 }

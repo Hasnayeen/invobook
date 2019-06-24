@@ -16,7 +16,7 @@ class OfficeController extends Controller
     public function show(Office $office)
     {
         $this->authorize('view', $office);
-        $office->load('members');
+        $office->load('members', 'settings');
 
         return view('offices.single', ['office' => $office]);
     }

@@ -3,7 +3,7 @@
 namespace App\Core\Notifications;
 
 use App\Core\Models\User;
-use App\Core\Models\Entity;
+use App\Core\Models\Group;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -18,17 +18,17 @@ class BecameNewMember extends Notification implements ShouldQueue, ShouldBroadca
     /**
      * @var string
      */
-    private $entityType;
+    private $groupType;
 
     /**
      * @var string
      */
-    private $entityName;
+    private $groupName;
 
     /**
      * @var int
      */
-    private $entityId;
+    private $groupId;
 
     /**
      * @var \App\Core\Models\User
@@ -36,14 +36,16 @@ class BecameNewMember extends Notification implements ShouldQueue, ShouldBroadca
     private $adder;
 
     /**
-     * @param string $entityType
-     * @param string $entityName
+     * @param  Group $group
+     * @param  User $adder
+     *
+     * @return void
      */
-    public function __construct(Entity $entity, User $adder)
+    public function __construct(Group $group, User $adder)
     {
-        $this->entityType = $entity->getType();
-        $this->entityName = $entity->name;
-        $this->entityId = $entity->id;
+        $this->groupType = $group->getType();
+        $this->groupName = $group->name;
+        $this->groupId = $group->id;
         $this->adder = $adder;
     }
 
@@ -66,12 +68,12 @@ class BecameNewMember extends Notification implements ShouldQueue, ShouldBroadca
     public function toMail()
     {
         return (new MailMessage())
-            ->subject('You have been added to ' . $this->entityName)
+            ->subject('You have been added to ' . $this->groupName)
             ->line(sprintf(
                 '%s added you to the %s: %s',
                 $this->adder->name,
-                $this->entityType,
-                $this->entityName
+                $this->groupType,
+                $this->groupName
             ));
     }
 
@@ -85,11 +87,11 @@ class BecameNewMember extends Notification implements ShouldQueue, ShouldBroadca
     {
         return [
             'subject'     => $this->adder->only(['id', 'name', 'username', 'avatar']),
-            'action'      => 'added you to ' . $this->entityType,
-            'object_type' => $this->entityType,
-            'object_name' => $this->entityName,
-            'object_id'   => $this->entityId,
-            'url'         => url($this->entityType . 's/' . $this->entityId),
+            'action'      => 'added you to ' . $this->groupType,
+            'object_type' => $this->groupType,
+            'object_name' => $this->groupName,
+            'object_id'   => $this->groupId,
+            'url'         => url($this->groupType . 's/' . $this->groupId),
         ];
     }
 
@@ -103,9 +105,9 @@ class BecameNewMember extends Notification implements ShouldQueue, ShouldBroadca
             'data' => [
                 'subject'     => $this->adder,
                 'action'      => 'added you to',
-                'object_type' => $this->entityType,
-                'object_name' => $this->entityName,
-                'object_id'   => $this->entityId,
+                'object_type' => $this->groupType,
+                'object_name' => $this->groupName,
+                'object_id'   => $this->groupId,
             ],
             'date' => 'Just Now',
         ]);

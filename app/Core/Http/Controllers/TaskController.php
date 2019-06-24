@@ -3,7 +3,7 @@
 namespace App\Core\Http\Controllers;
 
 use App\Core\Models\Task;
-use App\Core\Utilities\EntityTrait;
+use App\Core\Utilities\GroupTrait;
 use App\Core\Repositories\TaskRepository;
 use App\Core\Repositories\MentionRepository;
 use App\Core\Http\Requests\UpdateTaskRequest;
@@ -11,7 +11,7 @@ use App\Core\Http\Requests\ValidateTaskCreation;
 
 class TaskController extends Controller
 {
-    use EntityTrait;
+    use GroupTrait;
 
     public function store(ValidateTaskCreation $request, TaskRepository $repository, MentionRepository $mentionRepository)
     {

@@ -4,16 +4,16 @@ namespace App\Core\Http\Controllers;
 
 use Exception;
 use App\Core\Models\Message;
+use App\Core\Utilities\GroupTrait;
 use App\Core\Events\MessageCreated;
 use App\Core\Events\MessageUpdated;
-use App\Core\Utilities\EntityTrait;
 use App\Core\Repositories\MentionRepository;
 use App\Core\Repositories\MessageRepository;
 use App\Core\Http\Requests\StoreMessageRequest;
 
 class MessageController extends Controller
 {
-    use EntityTrait;
+    use GroupTrait;
 
     public function index(MessageRepository $repository)
     {

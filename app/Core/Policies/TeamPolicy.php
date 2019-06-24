@@ -45,4 +45,16 @@ class TeamPolicy
     {
         return (new Authorization($user))->userHasPermissionTo('delete', 'team', $team->id, false, 'team', $team->id);
     }
+
+    /**
+     * Determine whether the user can change the team settings.
+     *
+     * @param  \App\Core\Models\User $user
+     * @param  \App\Core\Team     $team
+     * @return mixed
+     */
+    public function settings(User $user, Team $team)
+    {
+        return $user->isMember(request('group_type'), request('group_id')) && ($user->role->slug === 'owner' || $user->role->slug === 'admin');
+    }
 }

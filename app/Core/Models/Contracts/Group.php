@@ -2,7 +2,7 @@
 
 namespace App\Core\Models\Contracts;
 
-interface Entity
+interface Group
 {
     public function getType();
 

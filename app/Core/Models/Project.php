@@ -5,7 +5,7 @@ namespace App\Core\Models;
 use App\Core\Contracts\HasMembers;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Project extends Entity implements HasMembers
+class Project extends Group implements HasMembers
 {
     protected $type = 'project';
 
@@ -42,5 +42,10 @@ class Project extends Entity implements HasMembers
     public function owner()
     {
         return $this->belongsTo(User::class, 'owner_id');
+    }
+
+    public function settings()
+    {
+        return $this->hasOne(ProjectSetting::class, 'project_id');
     }
 }

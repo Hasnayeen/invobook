@@ -89,6 +89,10 @@ Route::group(['middleware' => 'auth'], function () {
         Group
      **********************************/
 
+    Route::get('groups/settings', 'GroupSettingsController@index');
+
+    Route::put('groups/settings', 'GroupSettingsController@update');
+
     Route::get('groups/permissions', 'GroupPermissionController@index');
 
     Route::post('groups/permissions/{permission}/roles/{role}', 'GroupPermissionController@store');
