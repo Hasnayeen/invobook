@@ -34,7 +34,7 @@ class GroupSettingsController extends Controller
         return response()->json([
             'status'   => 'success',
             'message'  => localize('misc.Settings have been updated'),
-            'settings' => $settings
+            'settings' => $settings,
         ]);
     }
 }
