@@ -50,7 +50,7 @@ class TeamPolicy
      * Determine whether the user can change the team settings.
      *
      * @param  \App\Core\Models\User $user
-     * @param  \App\Core\Team     $team
+     * @param  \App\Core\Team        $team
      * @return mixed
      */
     public function settings(User $user, Team $team)

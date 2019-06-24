@@ -2,7 +2,6 @@
 
 namespace App\Core\Models;
 
-use App\Core\Models\TeamSetting;
 use App\Core\Contracts\HasMembers;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
