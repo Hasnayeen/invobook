@@ -3,10 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Core\Models\Project;
-use App\Core\Models\ProjectSetting;
 
 class GroupSettingsTest extends TestCase
 {
@@ -17,15 +14,15 @@ class GroupSettingsTest extends TestCase
         $this->actingAs($this->user)
              ->call('GET', 'groups/settings', [
                  'group_type' => 'project',
-                 'group_id' => $project->id,
+                 'group_id'   => $project->id,
              ])
              ->assertJsonFragment([
-                 'status' => 'success',
-                 'task_enabled' => "1",
-                 'discussion_enabled' => "1",
-                 'message_enabled' => "1",
-                 'event_enabled' => "1",
-                 'file_enabled' => "1",
+                 'status'             => 'success',
+                 'task_enabled'       => '1',
+                 'discussion_enabled' => '1',
+                 'message_enabled'    => '1',
+                 'event_enabled'      => '1',
+                 'file_enabled'       => '1',
              ]);
     }
 

@@ -36,8 +36,8 @@ class RevokedMembership extends Notification implements ShouldQueue, ShouldBroad
     private $remover;
 
     /**
-     * @param  Group $group
-     * @param  User $remover
+     * @param Group $group
+     * @param User  $remover
      *
      * @return void
      */
