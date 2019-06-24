@@ -16,7 +16,7 @@ class TeamController extends Controller
     public function show(Team $team)
     {
         $this->authorize('view', $team);
-        $team->load('members');
+        $team->load('members', 'settings');
 
         return view('teams.single', ['team' => $team]);
     }

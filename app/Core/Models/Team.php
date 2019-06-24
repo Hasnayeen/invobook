@@ -2,10 +2,11 @@
 
 namespace App\Core\Models;
 
+use App\Core\Models\TeamSetting;
 use App\Core\Contracts\HasMembers;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Team extends Entity implements HasMembers
+class Team extends Group implements HasMembers
 {
     protected $type = 'team';
 
@@ -37,5 +38,10 @@ class Team extends Entity implements HasMembers
     public function owner()
     {
         return $this->belongsTo(User::class, 'owner_id');
+    }
+
+    public function settings()
+    {
+        return $this->hasOne(TeamSetting::class, 'team_id');
     }
 }

@@ -15,7 +15,7 @@ class OfficePolicy
      * Determine whether the user can view the office.
      *
      * @param  \App\Core\Models\User $user
-     * @param  \App\Core\Office      $office
+     * @param  \App\Core\Models\Office      $office
      * @return mixed
      */
     public function view(User $user, Office $office)
@@ -38,11 +38,23 @@ class OfficePolicy
      * Determine whether the user can delete the office.
      *
      * @param  \App\Core\Models\User $user
-     * @param  \App\Core\Office      $office
+     * @param  \App\Core\Models\Office      $office
      * @return mixed
      */
     public function delete(User $user, Office $office)
     {
         return (new Authorization($user))->userHasPermissionTo('delete', 'office', $office->id, false, 'office', $office->id);
+    }
+
+    /**
+     * Determine whether the user can change the office settings.
+     *
+     * @param  \App\Core\Models\User $user
+     * @param  \App\Core\Models\Office     $office
+     * @return mixed
+     */
+    public function settings(User $user, Office $office)
+    {
+        return $user->isMember(request('group_type'), request('group_id')) && ($user->role->slug === 'owner' || $user->role->slug === 'admin');
     }
 }

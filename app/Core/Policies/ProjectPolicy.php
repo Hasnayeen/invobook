@@ -45,4 +45,16 @@ class ProjectPolicy
     {
         return (new Authorization($user))->userHasPermissionTo('delete', 'project', $project->id, false, 'project', $project->id);
     }
+
+    /**
+     * Determine whether the user can change the project settings.
+     *
+     * @param  \App\Core\Models\User $user
+     * @param  \App\Core\Project     $project
+     * @return mixed
+     */
+    public function settings(User $user, Project $project)
+    {
+        return $user->isMember(request('group_type'), request('group_id')) && ($user->role->slug === 'owner' || $user->role->slug === 'admin');
+    }
 }

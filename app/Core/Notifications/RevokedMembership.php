@@ -3,7 +3,7 @@
 namespace App\Core\Notifications;
 
 use App\Core\Models\User;
-use App\Core\Models\Entity;
+use App\Core\Models\Group;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -18,17 +18,17 @@ class RevokedMembership extends Notification implements ShouldQueue, ShouldBroad
     /**
      * @var string
      */
-    private $entityType;
+    private $groupType;
 
     /**
      * @var string
      */
-    private $entityName;
+    private $groupName;
 
     /**
      * @var int
      */
-    private $entityId;
+    private $groupId;
 
     /**
      * @var \App\Core\Models\User
@@ -36,14 +36,16 @@ class RevokedMembership extends Notification implements ShouldQueue, ShouldBroad
     private $remover;
 
     /**
-     * @param string $entityType
-     * @param string $entityName
+     * @param  Group $group
+     * @param  User $remover
+     *
+     * @return void
      */
-    public function __construct(Entity $entity, User $remover)
+    public function __construct(Group $group, User $remover)
     {
-        $this->entityType = $entity->getType();
-        $this->entityName = $entity->name;
-        $this->entityId = $entity->id;
+        $this->groupType = $group->getType();
+        $this->groupName = $group->name;
+        $this->groupId = $group->id;
         $this->remover = $remover;
     }
 
@@ -66,12 +68,12 @@ class RevokedMembership extends Notification implements ShouldQueue, ShouldBroad
     public function toMail($notifiable)
     {
         return (new MailMessage())
-            ->subject('You have been removed from ' . $this->entityName)
+            ->subject('You have been removed from ' . $this->groupName)
             ->line(sprintf(
                 '%s removed you from the %s: %s',
                 $this->remover->name,
-                $this->entityType,
-                $this->entityName
+                $this->groupType,
+                $this->groupName
             ));
     }
 
@@ -86,9 +88,9 @@ class RevokedMembership extends Notification implements ShouldQueue, ShouldBroad
         return [
             'subject'     => $this->remover->only(['id', 'name', 'username', 'avatar']),
             'action'      => 'removed you from',
-            'object_type' => $this->entityType,
-            'object_name' => $this->entityName,
-            'object_id'   => $this->entityId,
+            'object_type' => $this->groupType,
+            'object_name' => $this->groupName,
+            'object_id'   => $this->groupId,
             'url'         => null,
         ];
     }
@@ -103,9 +105,9 @@ class RevokedMembership extends Notification implements ShouldQueue, ShouldBroad
             'data' => [
                 'subject'     => $this->remover,
                 'action'      => 'removed you from',
-                'object_type' => $this->entityType,
-                'object_name' => $this->entityName,
-                'object_id'   => $this->entityId,
+                'object_type' => $this->groupType,
+                'object_name' => $this->groupName,
+                'object_id'   => $this->groupId,
             ],
             'date' => 'Just Now',
         ]);

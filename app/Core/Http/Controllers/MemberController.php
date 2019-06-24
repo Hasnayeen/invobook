@@ -3,7 +3,7 @@
 namespace App\Core\Http\Controllers;
 
 use App\Core\Models\User;
-use App\Core\Utilities\EntityTrait;
+use App\Core\Utilities\GroupTrait;
 use App\Core\Exceptions\UserIsNotMember;
 use App\Core\Notifications\BecameNewMember;
 use App\Core\Exceptions\UserIsAlreadyMember;
@@ -11,20 +11,20 @@ use App\Core\Notifications\RevokedMembership;
 
 class MemberController extends Controller
 {
-    use EntityTrait;
+    use GroupTrait;
 
     public function store()
     {
         $this->authorize('add', User::class);
         // Get model of team/project/office depending on request
-        $entity = $this->getEntityModel();
-        if ($this->userIsAlreadyMember($entity, request('user_id'))) {
+        $group = $this->getGroupModel();
+        if ($this->userIsAlreadyMember($group, request('user_id'))) {
             throw new UserIsAlreadyMember;
         }
         $user = User::select(['id', 'name', 'username', 'avatar'])->find(request('user_id'));
-        $entity->members()->save($user);
+        $group->members()->save($user);
 
-        $user->notify(new BecameNewMember($entity, auth()->user()));
+        $user->notify(new BecameNewMember($group, auth()->user()));
 
         return response()->json([
             'status'   => 'success',
@@ -36,15 +36,15 @@ class MemberController extends Controller
     public function destroy()
     {
         $this->authorize('remove', User::class);
-        $entity = $this->getEntityModel();
+        $group = $this->getGroupModel();
 
-        $user = $entity->members()->where('user_id', request('user_id'))->first();
+        $user = $group->members()->where('user_id', request('user_id'))->first();
 
         throw_if(! $user, new UserIsNotMember());
 
-        $entity->members()->detach($user);
+        $group->members()->detach($user);
 
-        $user->notify(new RevokedMembership($entity, auth()->user()));
+        $user->notify(new RevokedMembership($group, auth()->user()));
 
         return response()->json([
             'status'   => 'success',
@@ -53,19 +53,19 @@ class MemberController extends Controller
         ]);
     }
 
-    private function userIsAlreadyMember($entity, $userId)
+    private function userIsAlreadyMember($group, $userId)
     {
-        return $entity->members()->where('user_id', $userId)->exists();
+        return $group->members()->where('user_id', $userId)->exists();
     }
 
     public function index()
     {
-        $entity = $this->getEntityModel();
+        $group = $this->getGroupModel();
 
         return response()->json([
             'status'  => 'success',
-            'items'   => count($entity->members),
-            'members' => $entity->members,
+            'items'   => count($group->members),
+            'members' => $group->members,
         ]);
     }
 }

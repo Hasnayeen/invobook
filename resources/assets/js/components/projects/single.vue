@@ -17,6 +17,9 @@
           <li @click="showPermissionsSettings" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
             Permissions Settings
           </li>
+          <li @click="showSettings" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
+            Settings
+          </li>
           <li class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
             Delete
           </li>
@@ -53,6 +56,8 @@
     <show-github-repo entityType="project" :entityId="project.id" v-if="githubRepoModalShown" @close-github-repo-modal="closeGithubRepoModal"></show-github-repo>
     
     <permission-settings-modal resourceType="project" :resourceId="project.id" :show="permissionSettingsModalShown" @close="closePermissionsSettings" ></permission-settings-modal>
+
+    <settings-modal resourceType="project" :resourceId="project.id" :show="settingsModalShown" :settings="settings" @update-settings="updateSettings" @close="closeSettings" ></settings-modal>
   <!-- Modals for dropdown menu -->
 
     <div class="flex flex-row flex-wrap justify-center items-center px-2 pt-4">
@@ -64,14 +69,14 @@
       </a>
     </div>
 
-    <tab-menu :active="active" @activate="activateTab"></tab-menu>
+    <tab-menu :settings="settings" :active="active" @activate="activateTab"></tab-menu>
 
     <div class="flex flex-row flex-wrap">
-      <task-board resourceType="project" :resource="project" :activeTab="active" :activeId="activeId"></task-board>
-      <discussion-board resourceType="project" :resource="project" :activeTab="active" :activeId="activeId"></discussion-board>
-      <messages-board resourceType="project" :resource="project" :activeTab="active"></messages-board>
-      <event-board resourceType="project" :resource="project" :activeTab="active"></event-board>
-      <file-board resourceType="project" :resource="project" :activeTab="active"></file-board>
+      <task-board v-if="settings.task_enabled" resourceType="project" :resource="project" :activeTab="active" :activeId="activeId"></task-board>
+      <discussion-board v-if="settings.discussion_enabled" resourceType="project" :resource="project" :activeTab="active" :activeId="activeId"></discussion-board>
+      <messages-board v-if="settings.message_enabled" resourceType="project" :resource="project" :activeTab="active"></messages-board>
+      <event-board v-if="settings.event_enabled" resourceType="project" :resource="project" :activeTab="active"></event-board>
+      <file-board v-if="settings.file_enabled" resourceType="project" :resource="project" :activeTab="active"></file-board>
       <activity-board resourceType="project" :resourceId="project.id" :activeTab="active"></activity-board>
     </div>
   </div>
@@ -89,6 +94,7 @@ import addMemberForm from './../partials/addMemberForm.vue'
 import showGithubRepo from './../partials/showGithubRepo.vue'
 import membersListModal from './../partials/membersListModal.vue'
 import permissionSettingsModal from './../partials/permissionSettingsModal.vue'
+import settingsModal from './../partials/settingsModal.vue'
 import cyclesModal from './../partials/cyclesModal.vue'
 import profileCard from './../partials/profileCard.vue'
 import tabMenu from './../partials/tabMenu.vue'
@@ -106,6 +112,7 @@ export default {
     addMemberForm,
     membersListModal,
     permissionSettingsModal,
+    settingsModal,
     cyclesModal,
     profileCard,
     tabMenu,
@@ -119,6 +126,8 @@ export default {
     githubRepoModalShown: false,
     membersListModalShown: false,
     permissionSettingsModalShown: false,
+    settingsModalShown: false,
+    settings: project.settings,
     cyclesModalShown: false,
     currentCycleId: null,
     faPlus,
@@ -128,11 +137,7 @@ export default {
     let tabs = ['tasks', 'discussions', 'messages', 'events', 'files', 'activities']
     let tool = new URL(location.href).searchParams.get('tool')
     let id = new URL(location.href).searchParams.get('id')
-    if (tool !== null && tabs.indexOf(tool) !== -1) {
-      this.active = tool
-    } else {
-      this.active = 'tasks'
-    }
+    this.getActiveTool(tool, tabs)
     if (id !== null) {
       this.activeId = parseInt(id)
     }
@@ -149,6 +154,23 @@ export default {
     ...mapActions([
       'getCycles'
     ]),
+    getActiveTool (tool, tabs = null) {
+      if (tool !== null && tabs.indexOf(tool) !== -1) {
+        this.active = tool
+      } else {
+        if (this.settings.task_enabled) {
+          this.active = 'tasks'
+        } else if (this.settings.discussion_enabled) {
+          this.active = 'discussions'
+        } else if (this.settings.message_enabled) {
+          this.active = 'messages'
+        } else if (this.settings.event_enabled) {
+          this.active = 'events'
+        } else if (this.settings.file_enabled) {
+          this.active = 'files'
+        }
+      }
+    },
     getAllCycles () {
       this.getCycles({
         group_type: 'project',
@@ -200,6 +222,16 @@ export default {
     },
     closePermissionsSettings () {
       this.permissionSettingsModalShown = false
+    },
+    showSettings () {
+      this.settingsModalShown = true
+    },
+    closeSettings () {
+      this.settingsModalShown = false
+    },
+    updateSettings (settings) {
+      this.settings = settings
+      this.getActiveTool(null)
     },
     showCyclesModal () {
       this.cyclesModalShown = true
