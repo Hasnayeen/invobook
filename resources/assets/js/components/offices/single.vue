@@ -43,7 +43,7 @@
     </div>
 
   <!-- Modals for cycles -->
-  <cycles-modal resourceType="office" :resourceId="office.id" :currentCycleId="currentCycleId" :modalShown="cyclesModalShown" @select-cycle="selectCurrentCycle" @close="closeCyclesModal"></cycles-modal>
+  <cycles-modal resourceType="office" :resourceId="office.id" :currentCycleId="currentCycleId" :modalShown="cyclesModalShown" @close="closeCyclesModal"></cycles-modal>
   <!-- Modals for cycles -->
 
   <!-- Modals for dropdown menu -->
@@ -80,7 +80,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import taskBoard from './../partials/taskBoard.vue'
 import discussionBoard from './../partials/discussionBoard.vue'
 import messagesBoard from './../partials/messagesBoard.vue'
@@ -121,7 +121,6 @@ export default {
     membersListModalShown: false,
     permissionSettingsModalShown: false,
     cyclesModalShown: false,
-    selectedCycle: null,
     currentCycleId: null,
     faPlus,
     faCog
@@ -136,15 +135,25 @@ export default {
     if (id !== null) {
       this.activeId = parseInt(id)
     }
-    this.selectedCycle = office.current_cycle
     this.currentCycleId = this.selectedCycle ? this.selectedCycle.id : null
+    this.getAllCycles()
   },
   computed: {
     ...mapState({
-      office: state => state.office
+      office: state => state.office,
+      selectedCycle: state => state.cycle.selectedCycle
     })
   },
   methods: {
+    ...mapActions([
+      'getCycles'
+    ]),
+    getAllCycles () {
+      this.getCycles({
+        group_type: 'office',
+        group_id: this.office.id,
+      })
+    },
     showAddMemberForm () {
       this.addMemberFormShown = true
     },
@@ -199,9 +208,6 @@ export default {
     closeCyclesModal () {
       this.cyclesModalShown = false
     },
-    selectCurrentCycle (cycle) {
-      this.selectedCycle = cycle
-    }
   }
 }
 </script>

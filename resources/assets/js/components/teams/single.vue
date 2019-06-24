@@ -44,7 +44,7 @@
     </div>
 
   <!-- Modals for cycles -->
-  <cycles-modal resourceType="team" :resourceId="team.id" :currentCycleId="currentCycleId" :modalShown="cyclesModalShown" @select-cycle="selectCurrentCycle" @close="closeCyclesModal"></cycles-modal>
+  <cycles-modal resourceType="team" :resourceId="team.id" :currentCycleId="currentCycleId" :modalShown="cyclesModalShown" @close="closeCyclesModal"></cycles-modal>
   <!-- Modals for cycles -->
 
   <!-- Modals for dropdown menu -->
@@ -81,7 +81,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import taskBoard from './../partials/taskBoard.vue'
 import discussionBoard from './../partials/discussionBoard.vue'
 import messagesBoard from './../partials/messagesBoard.vue'
@@ -122,7 +122,6 @@ export default {
     membersListModalShown: false,
     permissionSettingsModalShown: false,
     cyclesModalShown: false,
-    selectedCycle: null,
     currentCycleId: null,
     faPlus,
     faCog
@@ -137,15 +136,25 @@ export default {
     if (id !== null) {
       this.activeId = parseInt(id)
     }
-    this.selectedCycle = team.current_cycle
     this.currentCycleId = this.selectedCycle ? this.selectedCycle.id : null
+    this.getAllCycles()
   },
   computed: {
     ...mapState({
-      team: state => state.team
+      team: state => state.team,
+      selectedCycle: state => state.cycle.selectedCycle
     })
   },
   methods: {
+    ...mapActions([
+      'getCycles'
+    ]),
+    getAllCycles () {
+      this.getCycles({
+        group_type: 'team',
+        group_id: this.team.id,
+      })
+    },
     showAddMemberForm () {
       this.addMemberFormShown = true
     },
@@ -198,9 +207,6 @@ export default {
     closeCyclesModal () {
       this.cyclesModalShown = false
     },
-    selectCurrentCycle (cycle) {
-      this.selectedCycle = cycle
-    }
   }
 }
 </script>

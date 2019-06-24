@@ -72,8 +72,8 @@ export default {
   },
   computed: {
     ...mapState({
-      cycles: state => state.cycles,
-      selectedCycleId: state => state.selectedCycleId,
+      cycles: state => state.cycle.cycles,
+      selectedCycleId: state => state.cycle.selectedCycleId,
     })
   },
   methods: {

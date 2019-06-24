@@ -134,7 +134,7 @@ export default {
   },
   computed: {
     ...mapState({
-      cycles: state => state.cycles
+      cycles: state => state.cycle.cycles
     })
   },
   methods: {

@@ -122,7 +122,7 @@ export default {
       return this.tasks.filter(task => task.completed).length
     },
     ...mapState({
-      cycles: state => state.cycles
+      cycles: state => state.cycle.cycles
     })
   },
   methods: {
