@@ -89,7 +89,7 @@ export default {
   },
   computed: {
     ...mapState({
-      selectedCycleId: state => state.selectedCycle ? state.selectedCycle.id : 0
+      selectedCycleId: state => state.cycle.selectedCycle ? state.cycle.selectedCycle.id : 0
     })
   },
   methods: {

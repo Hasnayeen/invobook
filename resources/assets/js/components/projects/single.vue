@@ -142,7 +142,7 @@ export default {
   computed: {
     ...mapState({
       project: state => state.project,
-      selectedCycle: state => state.selectedCycle
+      selectedCycle: state => state.cycle.selectedCycle
     })
   },
   methods: {
