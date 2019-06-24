@@ -4,7 +4,7 @@ namespace App\Core\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Group extends Model
+class Entity extends Model
 {
     protected $appends = ['current_cycle'];
 

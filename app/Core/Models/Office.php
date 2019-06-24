@@ -3,7 +3,6 @@
 namespace App\Core\Models;
 
 use App\Core\Contracts\HasMembers;
-use App\Core\Models\OfficeSetting;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Office extends Group implements HasMembers

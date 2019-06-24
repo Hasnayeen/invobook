@@ -36,8 +36,8 @@ class BecameNewMember extends Notification implements ShouldQueue, ShouldBroadca
     private $adder;
 
     /**
-     * @param  Group $group
-     * @param  User $adder
+     * @param Group $group
+     * @param User  $adder
      *
      * @return void
      */
