@@ -48,7 +48,7 @@ class Task extends Model
      */
     public function related()
     {
-        return $this->belongsTo(Task::class, 'related_to', 'id');
+        return $this->belongsTo(self::class, 'related_to', 'id');
     }
 
     public function taskable()
