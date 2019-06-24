@@ -44,7 +44,7 @@
           <div class="text-sm text-gray-600 px-8">
             Status
           </div>
-          <div @click="toggleStatusMenu" v-click-outside="toggleStatusMenu" :style="'background-color: ' + task.status.color" class="px-4 py-1 mt-1 text-white font-semibold rounded-full cursor-pointer">
+          <div @click="toggleStatusMenu" v-click-outside="closeStatusMenu" :style="'background-color: ' + task.status.color" class="px-4 py-1 mt-1 text-white font-semibold rounded-full cursor-pointer">
             {{ task.status.name }}
           </div>
           <div v-if="statusMenuShown" class="absolute rounded shadow-md mt-2 py-1 text-left text-indigo-800 bg-gray-100">
@@ -57,8 +57,8 @@
           <div class="text-sm text-gray-600 px-8">
             Related To
           </div>
-          <a :href="'/' + resourceType + 's/' + resourceId + '?tool=tasks&id=' + task.related_to" class="px-8 py-2" :class="[task.related_to ? 'text-blue-500 underline' : 'text-gray-600']">
-            {{ task.related_to ? task.related_to : 'None' }}
+          <a :href="'/' + resourceType + 's/' + resourceId + '?tool=tasks&id=' + task.related_to" class="px-8 py-2 flex items-center justify-center" :class="[task.related_to ? 'text-blue-500 underline' : 'text-gray-600']">
+            {{ task.related_to ? task.related.name : 'None' }}
           </a>
         </div>
       </div>

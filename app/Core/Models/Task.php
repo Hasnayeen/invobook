@@ -41,6 +41,16 @@ class Task extends Model
         return $this->belongsTo(User::class, 'created_by', 'id');
     }
 
+    /**
+     * Return the task related to this task.
+     *
+     * @return mixed
+     */
+    public function related()
+    {
+        return $this->belongsTo(Task::class, 'related_to', 'id');
+    }
+
     public function taskable()
     {
         return $this->morphTo();
