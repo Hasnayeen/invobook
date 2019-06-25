@@ -17,7 +17,7 @@ class TaskRepository
     {
         $query = $cycleId ? $this->model->where('cycle_id', $cycleId) : $this->model->whereNull('cycle_id');
 
-        return $query->where(['taskable_type' => $type, 'taskable_id' => $entityId])->with('user:id,avatar')->with('creator:id,avatar')->with('related:id,name')->with('status:id,name,color')->get(['id', 'name', 'notes', 'assigned_to', 'due_on', 'related_to', 'completed', 'parent_id', 'status_id', 'created_by', 'created_at']);
+        return $query->where(['taskable_type' => $type, 'taskable_id' => $entityId])->with('user:id,avatar,username')->with('creator:id,avatar')->with('related:id,name')->with('status:id,name,color')->get(['id', 'name', 'notes', 'assigned_to', 'due_on', 'related_to', 'completed', 'parent_id', 'status_id', 'created_by', 'created_at']);
     }
 
     /**

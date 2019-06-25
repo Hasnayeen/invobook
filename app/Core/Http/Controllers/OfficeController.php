@@ -16,7 +16,7 @@ class OfficeController extends Controller
     public function show(Office $office)
     {
         $this->authorize('view', $office);
-        $office->load('members', 'settings');
+        $office->load('members:user_id,username,avatar,name', 'settings');
 
         return view('offices.single', ['office' => $office]);
     }
@@ -27,7 +27,7 @@ class OfficeController extends Controller
             $this->authorize('create', Office::class);
             $office = $repository->store($request->all());
             $office->members()->save(auth()->user());
-            $office->load('members');
+            $office->load('members:user_id,username,avatar,name');
 
             resolve('Authorization')->setupDefaultPermissions($office);
 

@@ -16,7 +16,7 @@ class TeamController extends Controller
     public function show(Team $team)
     {
         $this->authorize('view', $team);
-        $team->load('members', 'settings');
+        $team->load('members:user_id,username,avatar,name', 'settings');
 
         return view('teams.single', ['team' => $team]);
     }
@@ -27,7 +27,7 @@ class TeamController extends Controller
             $this->authorize('create', Team::class);
             $team = $repository->createNewTeam($request->all());
             $team->members()->save(auth()->user());
-            $team->load('members');
+            $team->load('members:user_id,username,avatar,name');
 
             resolve('Authorization')->setupDefaultPermissions($team);
 

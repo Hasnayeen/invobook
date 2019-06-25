@@ -141,23 +141,7 @@ export default {
     showTaskDetails (index) {
       this.index = index
       this.task = this.tasks[index]
-      if (typeof this.task.user.username === 'undefined') {
-        axios.get('/users')
-          .then((response) => {
-            for (let i = 0; i < response.data.users.length; i++) {
-              if (response.data.users[i].id === this.task.user.id) {
-                this.task.user.username = response.data.users[i].username
-                this.task.user.name = response.data.users[i].name
-              }
-            }
-            this.taskDetailsShown = true
-          })
-          .catch((error) => {
-            console.log(error.response.data.message)
-          })
-      } else {
-        this.taskDetailsShown = true
-      }
+      this.taskDetailsShown = true
     },
     closeTaskDetails () {
       this.taskDetailsShown = false

@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Group extends Model
 {
-    protected $appends = ['current_cycle'];
-
     public function getType()
     {
         return $this->type;

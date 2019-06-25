@@ -26,9 +26,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $projects = $this->projectRepository->getLatestProjects(10);
-        $teams = $this->teamRepository->getLatestTeams(10);
-        $offices = $this->officeRepository->getLatestOffices(10);
+        $projects = auth()->user()->projects;
+        $teams = auth()->user()->teams;
+        $offices = auth()->user()->offices;
+
         $projects->load('members');
         $teams->load('members');
         $offices->load('members');

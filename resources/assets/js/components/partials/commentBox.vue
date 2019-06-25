@@ -52,6 +52,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import userSuggestionBox from './userSuggestionBox'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 export default {
@@ -74,7 +75,6 @@ export default {
     body: '',
     comments: [],
     user: user,
-    users: [],
     name: '',
     mentionStarted: false,
     startIndex: 0,
@@ -98,13 +98,11 @@ export default {
       .catch((error) => {
         console.log(error.response.data.message)
       })
-    axios.get('/users')
-      .then((response) => {
-        this.users = response.data.users
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+  },
+  computed: {
+    ...mapState({
+      users: state => state.members
+    })
   },
   methods: {
     saveComment (e) {
