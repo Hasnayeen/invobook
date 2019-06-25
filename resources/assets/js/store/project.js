@@ -10,6 +10,7 @@ export default new Vuex.Store({
 
   state: {
     loading: false,
+    members: project.members,
     project
   },
 })

@@ -1,16 +1,17 @@
 <template>
 <div v-if="suggestionShown && sortedUsers.length > 0" class="autocomplete container w-full shadow-md" :class="suggestionHighlightDirectionInverted ? 'rounded-t-lg' : 'rounded-b-lg'">
   <div class="autocomplete-results">
-    <div @click="selectUser(user[1].target)"
+    <div @click="selectUser(user.username)"
       v-for="(user, index) in sortedUsers"
       :key="index"
       class="autocomplete-result flex items-center bg-white p-1 cursor-pointer hover:bg-gray-400"
       :class="{ 'text-white bg-teal-500 hover:bg-teal-600': index === highlightIndex, 'rounded-t-lg': index === 0 && suggestionHighlightDirectionInverted, 'rounded-b-lg': index === sortedUsers.length-1 && !suggestionHighlightDirectionInverted }">
       <div class="mx-2">
-        <img :src="'/'+getUserAvatar(user[1].target)" class="rounded-full align-middle w-8 h-8">
+        <img :src="'/'+getUserAvatar(user.username)" class="rounded-full align-middle w-8 h-8">
       </div>
       <div class="mr-2">
-       <span class="font-semibold">@{{ user[1].target }}</span> ({{ user[0].target }})
+       <span class="font-semibold">@{{ user.username }}</span>
+       <span> ({{ user.name}})</span>
       </div>
     </div>
   </div>
@@ -60,10 +61,15 @@ export default {
   },
   methods: {
     search () {
-      this.sortedUsers = fuzzysort.go(this.name, this.users, {
-        keys: ['name', 'username'],
-        limit: 5
-      })
+      let nameSortedUsers = fuzzysort.go(this.name, this.users, {
+        key: 'name',
+        limit: 5,
+      }).map(x => x.obj)
+      let usernameSortedUsers = fuzzysort.go(this.name, this.users, {
+        key: 'username',
+        limit: 5,
+      }).map(x => x.obj)
+      this.sortedUsers = [...new Set([...nameSortedUsers, ...usernameSortedUsers])]
       this.highlightIndex = 0
       if (this.suggestionHighlightDirectionInverted) {
         this.sortedUsers.reverse()

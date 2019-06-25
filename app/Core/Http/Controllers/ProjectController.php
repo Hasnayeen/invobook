@@ -16,7 +16,7 @@ class ProjectController extends Controller
     public function show(Project $project)
     {
         $this->authorize('view', $project);
-        $project->load('members', 'settings');
+        $project->load('members:user_id,username,avatar,name', 'settings');
 
         return view('projects.single', ['project' => $project]);
     }
@@ -27,7 +27,7 @@ class ProjectController extends Controller
             $this->authorize('create', Project::class);
             $project = $repository->storeProject($request->all());
             $project->members()->save(auth()->user());
-            $project->load('members');
+            $project->load('members:user_id,username,avatar,name');
 
             resolve('Authorization')->setupDefaultPermissions($project);
 

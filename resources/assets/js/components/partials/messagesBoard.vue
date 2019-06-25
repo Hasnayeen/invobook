@@ -55,6 +55,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import userSuggestionBox from './userSuggestionBox'
 import message from './message'
 export default {
@@ -67,7 +68,6 @@ export default {
     messageTextareaHeight: 'auto',
     title: '',
     unreadMessage: 0,
-    members: [],
     name: '',
     mentionStarted: false,
     startIndex: 0,
@@ -81,18 +81,6 @@ export default {
   }),
   created () {
     EventBus.$on('clear-title-notification', this.clearTitleNotification)
-    axios.get('/members', {
-      params: {
-        group_type: this.resourceType,
-        group_id: this.resource.id
-      }
-    })
-      .then((response) => {
-        this.members = response.data.members
-      })
-      .catch((error) => {
-        console.log(error)
-      })
   },
   beforeDestroy () {
     EventBus.$off('clear-title-notification', this.clearTitleNotification)
@@ -111,6 +99,11 @@ export default {
     if (messageBoxElement) {
       messageBoxElement.scrollTop = messageBoxElement.scrollHeight
     }
+  },
+  computed: {
+    ...mapState({
+      members: state => state.members
+    })
   },
   watch: {
     message (newVal) {
