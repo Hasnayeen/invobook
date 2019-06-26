@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Activity;
 
 use App\Core\Models\Notification;
 

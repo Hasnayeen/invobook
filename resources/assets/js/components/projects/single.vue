@@ -1,13 +1,18 @@
 <template>
   <div class="container mx-auto my-6 px-4 md:px-0 w-full md:max-w-2xl lg:max-w-4xl xl:max-w-6xl">
     <div class="text-gray-600 font-semibold text-2xl mb-4 flex items-center justify-center">
-      {{project.name}}
-      <span @click="toggleDropdownMenu" v-click-outside="closeDropdownMenu" class="bg-white p-1 text-sm rounded-full shadow ml-4 cursor-pointer flex items-center">
-        <font-awesome-icon :icon="faCog"></font-awesome-icon>
-      </span>
+      <div class="flex justify-center items-center">
+        {{project.name}}
+        <span @click="toggleDropdownMenu" v-click-outside="closeDropdownMenu" class="bg-white p-1 text-sm rounded-full shadow ml-4 cursor-pointer flex items-center">
+          <font-awesome-icon :icon="faCog"></font-awesome-icon>
+        </span>
+      </div>
       <!-- Dropdown Menu -->
-      <div v-if="dropdownMenuShown" class="relative">
-        <ul class="list-reset bg-white rounded shadow-lg py-2 absolute right-0 mt-4 text-base text-left font-normal whitespace-no-wrap z-10">
+      <div v-if="dropdownMenuShown" class="absolute w-64">
+        <ul class="list-reset bg-white rounded shadow-lg py-2 absolute inset-x-0 mt-6 text-base text-left font-normal whitespace-no-wrap z-10">
+          <li @click="showRoadmapModal" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
+            Roadmap
+          </li>
           <li @click="showMembersListModal" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
             Show All Members
           </li>
@@ -49,6 +54,8 @@
   <!-- Modals for cycles -->
 
   <!-- Modals for dropdown menu -->
+    <roadmap-modal resourceType="project" :resourceId="project.id" :modalShown="roadmapModalShown" :currentCycleId="currentCycleId" @close="closeRoadmapModal"></roadmap-modal>
+
     <members-list-modal resourceType="project" :resourceId="project.id" :show="membersListModalShown" :members="project.members" @close="closeMembersListModal" ></members-list-modal>
 
     <add-member-form v-if="addMemberFormShown" @close="closeAddMemberForm" resourceType="project" :resource="project" @addMember="addMember"></add-member-form>
@@ -96,6 +103,7 @@ import membersListModal from './../partials/membersListModal.vue'
 import permissionSettingsModal from './../partials/permissionSettingsModal.vue'
 import settingsModal from './../partials/settingsModal.vue'
 import cyclesModal from './../partials/cyclesModal.vue'
+import roadmapModal from './../partials/roadmapModal.vue'
 import profileCard from './../partials/profileCard.vue'
 import tabMenu from './../partials/tabMenu.vue'
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus'
@@ -114,6 +122,7 @@ export default {
     permissionSettingsModal,
     settingsModal,
     cyclesModal,
+    roadmapModal,
     profileCard,
     tabMenu,
     showGithubRepo
@@ -128,6 +137,7 @@ export default {
     permissionSettingsModalShown: false,
     settingsModalShown: false,
     settings: project.settings,
+    roadmapModalShown: false,
     cyclesModalShown: false,
     currentCycleId: null,
     faPlus,
@@ -238,6 +248,12 @@ export default {
     },
     closeCyclesModal () {
       this.cyclesModalShown = false
+    },
+    showRoadmapModal () {
+      this.roadmapModalShown = true
+    },
+    closeRoadmapModal () {
+      this.roadmapModalShown = false
     },
   }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Core\Http\Controllers;
 
-use App\Activity;
+use App\Activity\Activity;
 
 class ActivityController extends Controller
 {
