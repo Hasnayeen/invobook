@@ -26,7 +26,6 @@ class AddImplementedColumnToDiscussionsTable extends Migration
     public function down()
     {
         Schema::table('discussion', function (Blueprint $table) {
-            //
         });
     }
 }
