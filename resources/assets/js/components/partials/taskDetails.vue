@@ -21,15 +21,16 @@
       <div class="bg-white text-2xl text-gray-700 text-center font-semibold px-8 py-4">
         {{ task.name }}
       </div>
-      <div class="bg-white flex flex-row flex-wrap justify-between pt-4">
+      <div class="bg-white flex flex-row flex-wrap lg:flex-no-wrap justify-between pt-4">
         <div>
           <div class="text-sm text-gray-600 px-8">
             Assignee
           </div>
-          <div class="px-8 py-2">
-            <a :href="'/users/' + task.user.username">
+          <div class="px-8">
+            <a v-if="task.assigned_to" :href="'/users/' + task.user.username" class="py-2">
               <img v-if="task.assigned_to" :src="generateUrl(task.user.avatar)" class="rounded-full w-8 h-8 mx-2 self-start">
             </a>
+            <div v-else class="border-2 rounded-full text-xs w-8 h-8 flex items-center justify-center">N/A</div>
           </div>
         </div>
         <div class="text-center">
@@ -57,9 +58,10 @@
           <div class="text-sm text-gray-600 px-8">
             Related To
           </div>
-          <a :href="'/' + resourceType + 's/' + resourceId + '?tool=tasks&id=' + task.related_to" class="px-8 py-2 flex items-center justify-center" :class="[task.related_to ? 'text-blue-500 underline' : 'text-gray-600']">
-            {{ task.related_to ? task.related.name : 'None' }}
+          <a v-if="task.related_to" :href="'/' + resourceType + 's/' + resourceId + '?tool=tasks&id=' + task.related_to" class="px-8 py-2 flex items-center justify-center" :class="[task.related_to ? 'text-blue-500 underline' : 'text-gray-600']" :title="task.related.name">
+            {{ task.related.name | clip }}
           </a>
+          <span v-else>None</span>
         </div>
       </div>
       <div class="bg-white text-sm text-gray-600 px-8 pt-4">

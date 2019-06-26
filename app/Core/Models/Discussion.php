@@ -29,7 +29,7 @@ class Discussion extends Model
 
     public function getDateAttribute()
     {
-        return $this->created_at->format('M j');
+        return $this->created_at ? $this->created_at->format('M j') : null;
     }
 
     public function category()
