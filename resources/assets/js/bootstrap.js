@@ -50,6 +50,12 @@ window.Vue.filter('capitalize', function (value) {
   return value.charAt(0).toUpperCase() + value.slice(1)
 })
 
+window.Vue.filter('clip', function (value) {
+  if (!value) return ''
+  value = value.toString()
+  return value.substr(0, 20) + '...'
+})
+
 window.Vue.directive('click-outside', ClickOutside)
 
 Vue.directive('linkified', linkify)

@@ -140,6 +140,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('cycles', 'CycleController@store');
 
     /**********************************
+        Roadmap
+    **********************************/
+
+    Route::get('cycles/{cycle}/roadmap', 'RoadmapController@show');
+
+    /**********************************
         Message
      **********************************/
 

@@ -47,9 +47,9 @@
       <template v-for="(value, key) in activities">
         <div class="bg-white border p-3 text-gray-600 inline-flex rounded">{{ key }}</div>
         <template v-for="activity in value">
-          <div class="h-16 border-l ml-2 md:ml-6 -my-4"></div>
+          <div class="h-16 border-l border-gray-400 ml-2 md:ml-6 -my-4"></div>
           <div class="flex flex-row items-center">
-            <div class="border-l flex flex-row items-center ml-2 md:ml-6 self-stretch">
+            <div class="border-l border-gray-400 flex flex-row items-center ml-2 md:ml-6 self-stretch">
               <div class="rounded-full bg-gray-200 border border-pink-500 p-1 -ml-2 md:mr-4">
                 <div class="rounded-full bg-pink-500 p-1"></div>
               </div>
