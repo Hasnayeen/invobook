@@ -11,13 +11,16 @@
           :style="{backgroundImage: 'url(' + generateUrl(user.avatar) + ')'}">
         </div>
         <div class="absolute flex justify-between items-center -mt-10 px-6 w-full">
-          <a v-if="authUserId !== user.id" :href="'/impersonate/take/' + user.id" class="text-indigo-700 bg-indigo-200 flex items-center justify-center w-8 h-8 mx-2 rounded-full cursor-pointer">
+          <a v-if="authUserId !== user.id" :href="'/impersonate/take/' + user.id" class="text-indigo-700 bg-indigo-200 flex items-center justify-center w-8 h-8 mx-2 rounded-full cursor-pointer" title="Impersonate User">
             <font-awesome-icon :icon="faUserSecret" class="cursor-pointer"></font-awesome-icon>
           </a>
           <a v-else class="w-8 h-8 mx-2">
           </a>
-          <img class="w-20 h-20 rounded-full shadow-outline" :src="generateUrl(user.avatar)"/>
-          <a href="#" class="text-indigo-700 bg-indigo-200 flex items-center justify-center w-8 h-8 mx-2 rounded-full cursor-pointer">
+          <a :href="'/users/' + user.username">
+            <div class="w-20 h-20 bg-cover bg-center rounded-full shadow-outline"
+              :style="{backgroundImage: 'url(' + generateUrl(user.avatar) + ')'}"></div>
+          </a>
+          <a href="#" class="text-indigo-700 bg-indigo-200 flex items-center justify-center w-8 h-8 mx-2 rounded-full cursor-pointer"  title="Deactivate User">
             <font-awesome-icon :icon="faUserSlash" class="cursor-pointer"></font-awesome-icon>
           </a>
         </div>
@@ -31,8 +34,8 @@
               @{{ user.username }}
             </a>
           </div>
-          <div class="text-sm break-words pb-2">
-            {{ user.email }}
+          <div class="text-sm break-words pb-2" :title="user.email">
+            {{ user.email | clip }}
           </div>
           <span class="text-sm text-white font-medium bg-indigo-500 px-3 py-1 rounded-full">
             {{ user.role.name }}

@@ -45,10 +45,10 @@
           <div class="text-sm text-gray-600 px-8">
             Status
           </div>
-          <div @click="toggleStatusMenu" v-click-outside="closeStatusMenu" :style="'background-color: ' + task.status.color" class="px-4 py-1 mt-1 text-white font-semibold rounded-full cursor-pointer">
+          <div @click="toggleStatusMenu" v-click-outside="closeStatusMenu" :style="'background-color: ' + task.status.color" class="px-4 py-1 mt-1 text-gray-900 font-semibold rounded-full cursor-pointer">
             {{ task.status.name }}
           </div>
-          <div v-if="statusMenuShown" class="absolute rounded shadow-md mt-2 py-1 text-left text-indigo-800 bg-gray-100">
+          <div v-if="statusMenuShown" class="absolute rounded shadow-md mt-2 py-1 text-left text-indigo-800 bg-gray-900">
             <div v-for="status in statuses"  :style="'color: ' + status.color" @click="changeStatus(status.id)" class="cursor-pointer hover:bg-white font-semibold px-4 py-2">
               {{ status.name }}
             </div>
