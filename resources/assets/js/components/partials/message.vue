@@ -11,15 +11,15 @@
     </div>
   </div>
   <div v-else class="flex flex-row text-gray-800 p-4 border-t"
-    :class="{'pb-12': last, 'bg-gray-100': (message.user_id === user.id)}">
+    :class="{'pb-12': last, 'bg-gray-100': (message.user.id === user.id)}">
     <div class="flex flex-col items-center relative"
-      :class="[(message.user_id === user.id) ? 'flex-col-reverse justify-end' : '']">
+      :class="[(message.user.id === user.id) ? 'flex-col-reverse justify-end' : '']">
       <img :src="generateUrl(message.user.avatar)" :alt="message.user.name" class="w-10 h-10 rounded-full"
-        :class="[(message.user_id === user.id) ? 'order-1' : '']">
-      <div v-if="(message.user_id === user.id)" @click="toggleMessageMenu" v-click-outside="hideMessageMenu" class="cursor-pointer">
+        :class="[(message.user.id === user.id) ? 'order-1' : '']">
+      <div v-if="(message.user.id === user.id)" @click="toggleMessageMenu" v-click-outside="hideMessageMenu" class="cursor-pointer">
         <font-awesome-icon :icon="faEllipsisH" class="text-gray-500"></font-awesome-icon>
       </div>
-      <div v-if="(message.user_id === user.id) && dropdownMenuShown" class="absolute rounded shadow-lg top-0 mt-16 mr-2 p-3 text-gray-800 bg-white hover:bg-indigo-200 left-0 z-10">
+      <div v-if="(message.user.id === user.id) && dropdownMenuShown" class="absolute rounded shadow-lg top-0 mt-16 mr-2 p-3 text-gray-800 bg-white hover:bg-indigo-200 left-0 z-10">
         <div @click="deleteMessage()" class="cursor-pointer">
           Delete
         </div>
@@ -27,7 +27,7 @@
     </div>
     <div class="mx-4 w-3/5 md:w-5/6">
       <div class="text-xs flex flex-row px-3">
-        <div class="pr-1 font-medium" :class="[(message.user_id === user.id) ? 'text-pink-500' : 'text-blue-500']">
+        <div class="pr-1 font-medium" :class="[(message.user.id === user.id) ? 'text-pink-500' : 'text-blue-500']">
           {{ message.user.name }}
         </div>
         <div>•</div>

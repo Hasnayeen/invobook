@@ -14,23 +14,23 @@ class StatusesTableSeeder extends Seeder
     {
         Status::create([
             'name'  => 'To Do',
-            'color' => '#2b6cb0',
+            'color' => '#90cdf4',
         ]);
         Status::create([
             'name'  => 'In Progress',
-            'color' => '#6b46c1',
+            'color' => '#d6bcfa',
         ]);
         Status::create([
             'name'  => 'In Review',
-            'color' => '#b83280',
+            'color' => '#fbd38d',
         ]);
         Status::create([
             'name'  => 'Completed',
-            'color' => '#2c7a7b',
+            'color' => '#9ae6b4',
         ]);
         Status::create([
             'name'  => 'Canceled',
-            'color' => '#c53030',
+            'color' => '#feb2b2',
         ]);
     }
 }
