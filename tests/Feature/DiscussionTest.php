@@ -110,11 +110,13 @@ class DiscussionTest extends TestCase
             'discussionable_id'   => $this->project->id,
         ]);
 
-        $this->actingAs($this->user)->delete("/discussions/{$discussion->id}",
+        $this->actingAs($this->user)->delete(
+            "/discussions/{$discussion->id}",
             [
                 'group_type' => $discussion->discussionable_type,
                 'group_id'   => $discussion->discussionable_id,
-            ])
+            ]
+        )
              ->assertJsonFragment([
                 'status'  => 'success',
                 'message' => 'The discussion has been deleted',
@@ -144,11 +146,13 @@ class DiscussionTest extends TestCase
         $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
         $discussion = factory(\App\Core\Models\Discussion::class)->create();
 
-        $this->actingAs($user)->delete("/discussions/{$discussion->id}",
+        $this->actingAs($user)->delete(
+            "/discussions/{$discussion->id}",
             [
                 'group_type' => $discussion->discussionable_type,
                 'group_id'   => $discussion->discussionable_id,
-            ]);
+            ]
+        );
     }
 
     /** @test */
@@ -196,7 +200,15 @@ class DiscussionTest extends TestCase
             'discussionable_id'   => $this->project->id,
         ]);
 
-        $this->actingAs($user)->patch('discussions/' . $discussion->id, []);
+        $this->actingAs($user)->patch('discussions/' . $discussion->id, [
+            'name'                => 'Updated article',
+            'category_id'         => 1,
+            'content'             => '<h1>Medium heading</h1><p>And some <strong>bold text</strong></p>',
+            'raw_content'         => '{"ops":[{"insert":"Medium Heading"},{"attributes":{"header":1},"insert":"\n"},{"insert":"And some "},{"attributes":{"bold":true},"insert":"bold text"},{"insert":"\n"}]}',
+            'draft'               => true,
+            'group_type'          => 'project',
+            'group_id'            => $this->project->id,
+        ]);
     }
 
     /** @test */

@@ -9,7 +9,7 @@
         <div @click="toggleMenu" v-click-outside="hideMenu" class="cursor-pointer">
           <font-awesome-icon :icon="faEllipsisH" class="text-base text-gray-600"></font-awesome-icon>
         </div>
-        <div v-if="dropdownMenuShown" class="absolute rounded shadow-md right-0 top-0 mt-6 mr-4 py-1 text-indigo-800 bg-gray-200">
+        <div v-if="dropdownMenuShown" class="absolute rounded shadow-md right-0 top-0 mt-6 mr-4 py-1 text-indigo-800 bg-white">
           <div @click="" class="cursor-pointer hover:bg-indigo-200 px-4 py-2">
             Edit
           </div>
@@ -18,7 +18,7 @@
           </div>
         </div>
       </div>
-      <div class="bg-white text-2xl text-gray-700 text-center font-semibold px-8 py-4">
+      <div class="text-2xl text-gray-700 text-center font-semibold px-8 py-4">
         {{ task.name }}
       </div>
       <div class="bg-white flex flex-row flex-wrap lg:flex-no-wrap justify-between pt-4">
