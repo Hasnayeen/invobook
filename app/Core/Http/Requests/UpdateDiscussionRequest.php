@@ -13,7 +13,7 @@ class UpdateDiscussionRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->id === $this->route('discussion')->posted_by;
+        return true;
     }
 
     /**
@@ -27,7 +27,6 @@ class UpdateDiscussionRequest extends FormRequest
             'name'                => 'required|string|max:255',
             'content'             => 'required|string',
             'raw_content'         => 'required|string',
-            'draft'               => 'required|boolean',
             'category_id'         => 'required|integer|exists:categories,id',
         ];
     }

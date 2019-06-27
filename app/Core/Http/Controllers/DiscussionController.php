@@ -58,7 +58,9 @@ class DiscussionController extends Controller
 
     public function update(UpdateDiscussionRequest $request, Discussion $discussion, DiscussionRepository $repository)
     {
+        $this->authorize('update', $discussion);
         $discussion = $repository->update($discussion, $request->all());
+        $discussion->load(['creator:id,avatar,name,username', 'category:id,name']);
 
         return response()->json([
             'status'     => 'success',
