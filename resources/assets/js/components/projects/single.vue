@@ -50,7 +50,7 @@
     </div>
   
   <!-- Modals for cycles -->
-  <cycles-modal resourceType="project" :resourceId="project.id" :modalShown="cyclesModalShown" @close="closeCyclesModal"></cycles-modal>
+  <cycles-modal resourceType="project" :resourceId="project.id" :modalShown="cyclesModalShown" :currentCycleId="currentCycleId" @close="closeCyclesModal"></cycles-modal>
   <!-- Modals for cycles -->
 
   <!-- Modals for dropdown menu -->
