@@ -9,7 +9,8 @@
 
 <script>
 import { mapState } from 'vuex'
-import { faEnvelope, faCircle } from '@fortawesome/free-solid-svg-icons'
+import { faCircle } from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope } from '@fortawesome/free-regular-svg-icons'
 
 export default {
   data: () => ({

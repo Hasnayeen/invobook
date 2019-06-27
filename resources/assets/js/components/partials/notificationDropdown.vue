@@ -29,7 +29,8 @@
 </template>
 
 <script>
-import { faBell, faCircle } from '@fortawesome/free-solid-svg-icons'
+import { faCircle } from '@fortawesome/free-solid-svg-icons'
+import { faBell } from '@fortawesome/free-regular-svg-icons'
 
 export default {
   data: () => ({

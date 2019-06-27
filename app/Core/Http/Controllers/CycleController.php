@@ -23,6 +23,13 @@ class CycleController extends Controller
     public function store(ValidateCycleCreation $request)
     {
         $this->authorize('create', Cycle::class);
+        if ($this->requestedCycleOverlapWithOtherCycle($request)) {
+            return response()->json([
+                'status'  => 'error',
+                'message' => 'This cycle overlap another cycle, try again',
+            ], 409);
+        }
+
         $cycle = Cycle::create([
             'name'           => $request->name ?? null,
             'start_date'     => $request->start_date,
@@ -37,5 +44,30 @@ class CycleController extends Controller
             $cycle,
             201
         );
+    }
+
+    private function requestedCycleOverlapWithOtherCycle($request)
+    {
+        return Cycle::where('cyclable_type', $request->group_type)
+                    ->where('cyclable_id', $request->group_id)
+                    ->where(function ($query) use ($request) {
+                        $query->where(function ($query) use ($request) {
+                            $query->where('start_date', '<=', $request->start_date)
+                                ->where('end_date', '>=', $request->start_date);
+                        })
+                        ->orWhere(function ($query) use ($request) {
+                            $query->where('start_date', '<=', $request->end_date)
+                                ->where('end_date', '>=', $request->end_date);
+                        })
+                        ->orWhere(function ($query) use ($request) {
+                            $query->where('start_date', '>=', $request->start_date)
+                                ->where('end_date', '<=', $request->end_date);
+                        })
+                        ->orWhere(function ($query) use ($request) {
+                            $query->where('start_date', '<=', $request->start_date)
+                                ->where('end_date', '>=', $request->end_date);
+                        });
+                    })
+                    ->exists();
     }
 }

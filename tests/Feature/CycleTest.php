@@ -36,6 +36,65 @@ class CycleTest extends TestCase
             'cyclable_id'   => $project->id,
         ]);
     }
+    /** @test */
+    public function cycle_in_same_group_cant_overlap_another_cycle()
+    {
+        $project = factory(\App\Core\Models\Project::class)->create(['owner_id' => $this->user->id]);
+        $this->actingAs($this->user);
+        resolve('Authorization')->setupDefaultPermissions($project);
+        $project->members()->save($this->user);
+
+        factory(\App\Core\Models\Cycle::class)->create([
+            'cyclable_type' => 'project',
+            'cyclable_id' => $project->id,
+            'start_date' => '2019-06-10',
+            'end_date' => '2019-06-25',
+        ]);
+
+        $this->post('/cycles', [
+            'start_date' => '2019-06-13',
+            'end_date'   => '2019-06-21',
+            'group_type' => 'project',
+            'group_id'   => $project->id,
+        ])
+        ->assertJsonFragment([
+            'status' => 'error',
+            'message' => 'This cycle overlap another cycle, try again'
+        ]);
+
+        $this->post('/cycles', [
+            'start_date' => '2019-06-01',
+            'end_date'   => '2019-06-21',
+            'group_type' => 'project',
+            'group_id'   => $project->id,
+        ])
+        ->assertJsonFragment([
+            'status' => 'error',
+            'message' => 'This cycle overlap another cycle, try again'
+        ]);
+
+        $this->post('/cycles', [
+            'start_date' => '2019-06-21',
+            'end_date'   => '2019-06-29',
+            'group_type' => 'project',
+            'group_id'   => $project->id,
+        ])
+        ->assertJsonFragment([
+            'status' => 'error',
+            'message' => 'This cycle overlap another cycle, try again'
+        ]);
+
+        $this->post('/cycles', [
+            'start_date' => '2019-06-01',
+            'end_date'   => '2019-06-29',
+            'group_type' => 'project',
+            'group_id'   => $project->id,
+        ])
+        ->assertJsonFragment([
+            'status' => 'error',
+            'message' => 'This cycle overlap another cycle, try again'
+        ]);
+    }
 
     /** @test */
     public function user_can_get_all_cycles()
