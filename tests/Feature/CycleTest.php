@@ -36,6 +36,7 @@ class CycleTest extends TestCase
             'cyclable_id'   => $project->id,
         ]);
     }
+
     /** @test */
     public function cycle_in_same_group_cant_overlap_another_cycle()
     {
@@ -46,9 +47,9 @@ class CycleTest extends TestCase
 
         factory(\App\Core\Models\Cycle::class)->create([
             'cyclable_type' => 'project',
-            'cyclable_id' => $project->id,
-            'start_date' => '2019-06-10',
-            'end_date' => '2019-06-25',
+            'cyclable_id'   => $project->id,
+            'start_date'    => '2019-06-10',
+            'end_date'      => '2019-06-25',
         ]);
 
         $this->post('/cycles', [
@@ -58,8 +59,8 @@ class CycleTest extends TestCase
             'group_id'   => $project->id,
         ])
         ->assertJsonFragment([
-            'status' => 'error',
-            'message' => 'This cycle overlap another cycle, try again'
+            'status'  => 'error',
+            'message' => 'This cycle overlap another cycle, try again',
         ]);
 
         $this->post('/cycles', [
@@ -69,8 +70,8 @@ class CycleTest extends TestCase
             'group_id'   => $project->id,
         ])
         ->assertJsonFragment([
-            'status' => 'error',
-            'message' => 'This cycle overlap another cycle, try again'
+            'status'  => 'error',
+            'message' => 'This cycle overlap another cycle, try again',
         ]);
 
         $this->post('/cycles', [
@@ -80,8 +81,8 @@ class CycleTest extends TestCase
             'group_id'   => $project->id,
         ])
         ->assertJsonFragment([
-            'status' => 'error',
-            'message' => 'This cycle overlap another cycle, try again'
+            'status'  => 'error',
+            'message' => 'This cycle overlap another cycle, try again',
         ]);
 
         $this->post('/cycles', [
@@ -91,8 +92,8 @@ class CycleTest extends TestCase
             'group_id'   => $project->id,
         ])
         ->assertJsonFragment([
-            'status' => 'error',
-            'message' => 'This cycle overlap another cycle, try again'
+            'status'  => 'error',
+            'message' => 'This cycle overlap another cycle, try again',
         ]);
     }
 
