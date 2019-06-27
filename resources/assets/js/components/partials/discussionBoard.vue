@@ -1,6 +1,6 @@
 <template>
 <div v-if="activeTab === 'discussions'" class="w-full">
-  <create-discussion-form ref="discussionForm" :resourceId="resource.id" :resourceType="resourceType" @close="closeCreateDiscussionForm" :form-shown="createDiscussionFormShown"></create-discussion-form>
+  <create-discussion-form ref="discussionForm" :resourceId="resource.id" :resourceType="resourceType" :discussion="discussion" @close="closeCreateDiscussionForm" :form-shown="createDiscussionFormShown"></create-discussion-form>
 
   <discussion-details v-if="discussion" :discussionDetailsShown="discussionDetailsShown" :discussion="discussion" :index="index" @close="closeDiscussionDetails" @deleted="deleteDiscussion"></discussion-details>
 
@@ -8,7 +8,7 @@
     <button @click="showCreateDiscussionForm" class="no-underline p-3 my-4 bg-white text-base text-teal-500 rounded shadow">{{ 'Create New Post' | localize }}</button>
   </div>
   <div class="flex flex-row flex-wrap items-start lg:-mx-2 xl:-mx-3">
-    <div @click="showDiscussionDetails(index)" v-for="(discussion, index) in discussions" :key="index" class="w-full md:w-72 xl:w-88 my-6 md:m-6 lg:mx-2 xl:mx-5 bg-white shadow-md flex flex-col items-center rounded cursor-pointer">
+    <div @click="showDiscussionDetails(index)" v-for="(discussion, index) in discussions" :key="index" class="w-full md:w-72 xl:w-88 my-6 md:m-6 lg:mx-2 xl:mx-5 bg-white shadow-md flex flex-col rounded cursor-pointer">
       <div class="bg-teal-500 flex flex-col items-start w-full text-white rounded-t p-6 pb-4">
         <div class="text-white text-xl font-semibold">{{ discussion.name }}</div>
         <div class="flex flex-row pt-2">
@@ -101,11 +101,14 @@ export default {
         this.$refs.discussionForm.$refs.inputFocus.focus();
       })
     },
-    closeCreateDiscussionForm (newDiscussion = null) {
+    closeCreateDiscussionForm (newDiscussion = null, updatedDiscussion = null) {
       if (newDiscussion && this.selectedCycleId === newDiscussion.cycle_id) {
         this.discussions.push(newDiscussion)
+      } else if (updatedDiscussion && this.selectedCycleId === updatedDiscussion.cycle_id) {
+        this.discussions.splice(this.index, 1, updatedDiscussion)
       }
       this.createDiscussionFormShown = false
+      this.discussion = null
     },
     async getAllDiscussions (update = false) {
       try {
@@ -129,9 +132,13 @@ export default {
       this.discussion = this.discussions[index]
       this.discussionDetailsShown = true
     },
-    closeDiscussionDetails () {
+    closeDiscussionDetails (editDiscussion = false) {
       this.discussionDetailsShown = false
-      this.discussion = {}
+      if (editDiscussion) {
+        this.createDiscussionFormShown = true
+      } else {
+        this.discussion = {}
+      }
     },
     deleteDiscussion (index) {
       this.discussions.splice(index, 1)

@@ -48,9 +48,12 @@
       </div>
       <div class="flex flex-row justify-between px-8 py-4 bg-white rounded-b">
         <button @click="closeEditor" class="no-underline px-3 py-2 my-4 bg-white text-base text-red-400 rounded border-red-400 border">Cancel</button>
-        <div>
+        <div v-if="!this.discussion">
           <button @click="savePost(true)" class="no-underline px-3 py-2 mr-4 my-4 text-teal-400  text-base bg-white font-medium rounded border-teal-400  border">Save as a Draft</button>
           <button @click="savePost(false)" class="no-underline px-3 py-2 my-4 bg-teal-400 text-base text-white font-medium rounded">Publish</button>
+        </div>
+        <div v-if="this.discussion">
+          <button @click="updatePost()" class="no-underline px-3 py-2 my-4 bg-teal-400 text-base text-white font-medium rounded">Save</button>
         </div>
       </div>
     </div>
@@ -80,6 +83,10 @@ export default {
     resourceType: {
       required: true,
       type: String
+    },
+    discussion: {
+      required: false,
+      type: Object
     }
   },
   data: () => ({
@@ -132,6 +139,16 @@ export default {
       theme: 'snow'
     })
   },
+  watch: {
+    formShown: function (value, oldValue) {
+      if (value) {
+        this.getCategories()
+        if (this.discussion) {
+          this.hydrateEditor()
+        }
+      }
+    }
+  },
   computed: {
     ...mapState({
       cycles: state => state.cycle.cycles
@@ -162,6 +179,10 @@ export default {
         })
     },
     closeEditor () {
+      this.name = ''
+      this.cycleId = ''
+      this.categoryId = ''
+      this.quill.setContents([])
       this.$emit('close')
     },
     getCategories () {
@@ -173,10 +194,35 @@ export default {
           .catch((error) => {})
       }
     },
+    hydrateEditor () {
+      this.name = this.discussion.name
+      this.cycleId = this.discussion.cycle_id
+      this.categoryId = this.discussion.category_id
+      this.quill.updateContents(JSON.parse(this.discussion.raw_content))
+    },
+    updatePost () {
+      axios.patch('/discussions/' + this.discussion.id, {
+        name: this.name,
+        category_id: this.categoryId,
+        content: this.quill.root.innerHTML,
+        raw_content: JSON.stringify(this.quill.getContents()),
+        cycle_id: this.cycleId,
+        group_type: this.resourceType,
+        group_id: this.resourceId
+      })
+        .then((response) => {
+          this.name = ''
+          this.categoryId = ''
+          this.quill.setContents([])
+          EventBus.$emit('notification', response.data.message, response.data.status)
+          this.$emit('close', null, response.data.discussion)
+        })
+        .catch((error) => {
+          EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+          this.$emit('close')
+        })
+    }
   },
-  watch: {
-    formShown: 'getCategories'
-  }
 }
 </script>
 

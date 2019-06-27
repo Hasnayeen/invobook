@@ -13,8 +13,11 @@
             class="text-base text-gray-600">
           </font-awesome-icon>
         </div>
-        <div v-if="dropdownMenuShown" class="absolute rounded shadow-lg right-0 top-0 mt-6 p-3 text-gray-800 hover:bg-gray-400">
-          <div @click="deleteDiscussion" class="cursor-pointer">
+        <div v-if="dropdownMenuShown" class="absolute rounded shadow-md right-0 top-0 mt-6 mr-4 py-1 text-indigo-800 bg-white">
+          <div @click="editDiscussion" class="cursor-pointer hover:bg-indigo-200 px-4 py-2">
+            Edit
+          </div>
+          <div @click="deleteDiscussion" class="cursor-pointer hover:bg-indigo-200 px-4 py-2">
             Delete
           </div>
         </div>
@@ -41,7 +44,7 @@
     <div class="h-16"></div>
   </div>
 
-  <div @click="closeDiscussionDetails" class="h-screen w-screen fixed inset-0 bg-gray-900 opacity-25"></div>
+  <div @click="closeDiscussionDetails(false)" class="h-screen w-screen fixed inset-0 bg-gray-900 opacity-25"></div>
 </div>
 </template>
 
@@ -77,9 +80,9 @@ export default {
     }
   },
   methods: {
-    closeDiscussionDetails () {
+    closeDiscussionDetails (editDiscussion = false) {
       this.dropdownMenuShown = false
-      this.$emit('close')
+      this.$emit('close', editDiscussion)
     },
     toggleMenu () {
       this.dropdownMenuShown = !this.dropdownMenuShown
@@ -101,6 +104,9 @@ export default {
 
           EventBus.$emit('notification', error.response.data.message, error.response.data.status)
         })
+    },
+    editDiscussion () {
+      this.closeDiscussionDetails(true)
     }
   }
 }
