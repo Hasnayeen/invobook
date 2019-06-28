@@ -151,7 +151,7 @@ export default {
       if (editTask) {
         this.createTaskFormShown = true
       } else {
-        this.task = {}
+        this.task = null
       }
     },
     deleteTask (index) {
