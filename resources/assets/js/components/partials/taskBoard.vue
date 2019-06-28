@@ -1,6 +1,6 @@
 <template>
 <div v-if="activeTab === 'tasks'" class="w-full">
-  <create-task-form ref="taskform" :resource="resource" :resourceType="resourceType" :form-shown="createTaskFormShown" :tasks="tasks" @close="closeCreateTaskForm"></create-task-form>
+  <create-task-form ref="taskform" :resource="resource" :resourceType="resourceType" :form-shown="createTaskFormShown" :tasks="tasks" :task="task" @close="closeCreateTaskForm"></create-task-form>
 
   <task-details v-if="task" :index="index" :resourceType="resourceType" :resourceId="resource.id" :task="task" :taskDetailsShown="taskDetailsShown" :statuses="statuses" @status-change="updateStatus" @delete="deleteTask" @close="closeTaskDetails"></task-details>
 
@@ -102,11 +102,14 @@ export default {
         this.$refs.taskform.$refs.focusInput.focus()
       })
     },
-    closeCreateTaskForm (newTask = null) {
+    closeCreateTaskForm (newTask = null, editedTask = null) {
       if (newTask && (this.selectedCycleId === 0 || this.selectedCycleId === newTask.cycle_id)) {
         this.tasks.push(newTask)
+      } else if (editedTask && (this.selectedCycleId === 0 || this.selectedCycleId === editedTask.cycle_id)) {
+        this.tasks.splice(this.index, 1, editedTask)
       }
       this.createTaskFormShown = false
+      this.task = null
     },
     async getAllTasks (update = false) {
       try {
@@ -143,9 +146,13 @@ export default {
       this.task = this.tasks[index]
       this.taskDetailsShown = true
     },
-    closeTaskDetails () {
+    closeTaskDetails (editTask = false) {
       this.taskDetailsShown = false
-      this.task = {}
+      if (editTask) {
+        this.createTaskFormShown = true
+      } else {
+        this.task = {}
+      }
     },
     deleteTask (index) {
       this.tasks.splice(index, 1)

@@ -81,10 +81,12 @@ class TaskController extends Controller
     {
         $this->authorize('update', $task);
         $task->update($request->all());
+        $task->load('user:id,avatar', 'status');
 
         return response()->json([
             'status'  => 'success',
             'message' => localize('misc.Task has been updated'),
+            'task'    => $task,
         ]);
     }
 }

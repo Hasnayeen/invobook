@@ -89,6 +89,7 @@ export default {
       type: Object
     }
   },
+
   data: () => ({
     quill: null,
     name: '',
@@ -97,6 +98,7 @@ export default {
     categories: [],
     faChevronDown
   }),
+
   mounted () {
     Quill.register('modules/imageUpload', imageUpload)
     this.quill = new Quill('#editor', {
@@ -139,6 +141,7 @@ export default {
       theme: 'snow'
     })
   },
+
   watch: {
     formShown: function (value, oldValue) {
       if (value) {
@@ -149,6 +152,7 @@ export default {
       }
     }
   },
+
   computed: {
     ...mapState({
       cycles: state => state.cycle.cycles
