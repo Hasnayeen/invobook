@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons/faCheckCircle'
 import { faCheck } from '@fortawesome/free-solid-svg-icons/faCheck'
 
@@ -42,6 +43,7 @@ export default {
       type: String
     }
   },
+
   data: () => ({
     roles: [],
     permissions: [],
@@ -50,6 +52,7 @@ export default {
     faCheckCircle,
     faCheck,
   }),
+
   created () {
     if (this.roles.length < 1) {
       axios.get('/roles')
@@ -70,7 +73,11 @@ export default {
         })
     }
   },
+
   methods: {
+    ...mapActions([
+      'showNotification',
+    ]),
     newRoleCreated (role) {
       this.roles.push(role)
       this.createRoleFormShown = false
@@ -93,7 +100,7 @@ export default {
             this.permissions[key][index]['enabled'] = !currentState
           })
           .catch((error) => {
-            EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+            this.showNotification({type: error.response.data.type, message: error.response.data.message})
           })
       } else {
         axios.post('/admin/roles/' + this.roleId + '/permissions/' + permission.id)
@@ -101,7 +108,7 @@ export default {
             this.permissions[key][index]['enabled'] = !currentState
           })
           .catch((error) => {
-            EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+            this.showNotification({type: error.response.data.status, message: error.response.data.message})
           })
       }
     },

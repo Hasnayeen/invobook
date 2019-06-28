@@ -55,12 +55,14 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import userSuggestionBox from './userSuggestionBox'
 import message from './message'
+
 export default {
   components: {message, userSuggestionBox},
   props: ['resource', 'resourceType', 'activeTab'],
+
   data: () => ({
     messages: [],
     nextPageUrl: null,
@@ -79,12 +81,15 @@ export default {
     user: user,
     users: []
   }),
+
   created () {
     EventBus.$on('clear-title-notification', this.clearTitleNotification)
   },
+
   beforeDestroy () {
     EventBus.$off('clear-title-notification', this.clearTitleNotification)
   },
+
   mounted () {
     this.getMessages()
     this.title = document.title
@@ -94,17 +99,20 @@ export default {
       messageBoxElement.scrollTop = messageBoxElement.scrollHeight
     }
   },
+
   updated () {
     let messageBoxElement = document.getElementById('message-box')
     if (messageBoxElement) {
       messageBoxElement.scrollTop = messageBoxElement.scrollHeight
     }
   },
-  computed: {
+
+computed: {
     ...mapState({
       members: state => state.members
     })
   },
+
   watch: {
     message (newVal) {
       // increase the height of textarea based on text present there
@@ -114,7 +122,11 @@ export default {
       this.getMessages()
     }
   },
+
   methods: {
+    ...mapActions([
+      'showNotification',
+    ]),
     getMessages () {
       if (this.activeTab === 'messages' && this.messages.length < 1) {
         axios.get('/messages', {
@@ -153,7 +165,7 @@ export default {
             }
           })
           .catch((error) => {
-            EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+            this.showNotification({type: error.response.data.type, message: error.response.data.message})
           })
       }
     },

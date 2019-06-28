@@ -44,7 +44,7 @@
           <select v-model="cycleId" class="w-5/6 block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-800 py-3 px-4 pr-8 rounded" id="user">
             <option selected disabled hidden value="">Select a Cycle</option>
             <template v-for="cycle in cycles">
-              <option :value="cycle.id" class="my-2 text-lg">{{ cycle.name }}</option>
+              <option :value="cycle.id" class="my-2 text-lg">{{ cycle.name ? cycle.name : cycle.start_date + ' - ' + cycle.end_date }}</option>
             </template>
           </select>
           <font-awesome-icon :icon="faChevronDown"
@@ -102,6 +102,7 @@ import { faTimesCircle } from '@fortawesome/free-solid-svg-icons/faTimesCircle'
 export default {
   components: {Datepicker},
   props: ['resource', 'resourceType', 'formShown', 'tasks'],
+
   data: () => ({
     name: '',
     notes: '',
@@ -117,6 +118,7 @@ export default {
     faChevronDown,
     faTimesCircle,
   }),
+
   computed: {
     taskCompleted () {
       return this.tasks.filter(task => task.completed).length
@@ -125,7 +127,11 @@ export default {
       cycles: state => state.cycle.cycles
     })
   },
+
   methods: {
+    ...mapActions([
+      'showNotification',
+    ]),
     createTask () {
       axios.post('/tasks', {
         name: this.name,
@@ -144,12 +150,12 @@ export default {
             this.assigned_to = null
             this.dueOnDate = null
             this.related_to = ''
-            EventBus.$emit('notification', response.data.message, response.data.status)
+            this.showNotification({type: response.data.type, message: response.data.message})
             this.$emit('close', response.data.task)
           }
         })
         .catch((error) => {
-          EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+          this.showNotification({type: error.response.data.type, message: error.response.data.message})
           this.$emit('close')
         })
     },

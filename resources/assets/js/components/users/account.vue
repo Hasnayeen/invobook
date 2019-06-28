@@ -69,6 +69,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 
 export default {
@@ -78,6 +79,7 @@ export default {
       type: Object
     }
   },
+
   data: () => ({
     currentPassword: '',
     newPassword: '',
@@ -92,7 +94,11 @@ export default {
     faCheck,
     faTimes
   }),
+
   methods: {
+    ...mapActions([
+      'showNotification',
+    ]),
     update () {
       var params = {}
       params.email = this.user.email
@@ -104,7 +110,7 @@ export default {
       }
       axios.put('/users/' + this.user.username + '/account', params)
         .then((response) => {
-          EventBus.$emit('notification', response.data.message, response.data.status)
+          this.showNotification({type: response.data.type, message: response.data.message})
           this.email = ''
           this.username = ''
           this.currentPassword = ''

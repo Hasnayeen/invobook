@@ -52,9 +52,10 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import userSuggestionBox from './userSuggestionBox'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+
 export default {
   components: {userSuggestionBox},
   props: {
@@ -71,6 +72,7 @@ export default {
       type: Boolean
     }
   },
+
   data: () => ({
     body: '',
     comments: [],
@@ -85,6 +87,7 @@ export default {
     mentions: [],
     faTrashAlt
   }),
+
   created () {
     axios.get('/comments', {
       params: {
@@ -104,7 +107,11 @@ export default {
       users: state => state.members
     })
   },
+
   methods: {
+    ...mapActions([
+      'showNotification',
+    ]),
     saveComment (e) {
       if (e.shiftKey) {
         this.body = this.body + '\n'
@@ -120,10 +127,10 @@ export default {
           .then((response) => {
             this.body = ''
             this.comments.push(response.data.comment)
-            EventBus.$emit('notification', response.data.message, response.data.status)
+            this.showNotification({type: response.data.status, message: response.data.message})
           })
           .catch((error) => {
-            EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+            this.showNotification({type: error.response.data.status, message: error.response.data.message})
           })
       }
     },
@@ -131,10 +138,10 @@ export default {
       axios.delete('/comments/' + comment.id)
         .then((response) => {
           this.comments.splice(index, 1)
-          EventBus.$emit('notification', response.data.message, response.data.status)
+          this.showNotification({type: response.data.status, message: response.data.message})
         })
         .catch((error) => {
-          EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+          this.showNotification({type: error.response.data.status, message: error.response.data.message})
         })
     },
     checkForMention (e) {

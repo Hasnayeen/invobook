@@ -1,5 +1,5 @@
 <template>
-<div v-if="modalShown">
+<div>
   <div class="absolute container mx-auto md:max-w-2xl lg:max-w-4xl xl:max-w-6xl z-40" style="top: 12vh;left: 0;right: 0;">
     <div class="bg-white rounded shadow-lg">
       <div class="bg-gray-100 p-4 text-gray-700 text-center text-lg font-semibold rounded-t shadow">Roadmap</div>
@@ -54,13 +54,11 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons/faCheckCircle'
+
 export default {
   props: {
-    modalShown: {
-      required: true,
-      type: Boolean
-    },
     resourceType: {
       required: true,
       type: String
@@ -74,18 +72,18 @@ export default {
       type: Number
     }
   },
+
   data: () => ({
     roadmap: null,
     faCheckCircle
   }),
-  watch: {
-    modalShown: function () {
-      this.getRoadmap()
-    }
-  },
+
   methods: {
+    ...mapActions([
+      'closeComponent'
+    ]),
     getRoadmap () {
-      if (this.modalShown && this.roadmap === null ) {
+      if (this.roadmap === null ) {
         axios.get('/cycles/' + this.currentCycleId + '/roadmap', {
             params: {
               group_type: this.resourceType,
@@ -101,7 +99,7 @@ export default {
       }
     },
     closeModal () {
-      this.$emit('close')
+      this.closeComponent()
     },
   }
 }

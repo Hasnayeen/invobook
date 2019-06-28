@@ -1,5 +1,5 @@
 <template>
-<div v-if="show">
+<div>
   <div class="absolute container mx-2 md:mx-auto md:max-w-4xl bg-gray-100 rounded shadow-lg z-30" style="top: 10vh;left: 0;right: 0;">
     <div class="m-auto flex-col flex">
       <header class="bg-gray-200 text-gray-600 p-6 rounded flex flex-row justify-between items-center" for="user">
@@ -42,7 +42,9 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons/faTimesCircle'
+
 export default {
   props: {
     resourceId: {
@@ -53,21 +55,22 @@ export default {
       required: true,
       type: String
     },
-    show: {
-      required: true,
-      type: Boolean
-    },
     settings: {
       required: true,
       type: Object
     }
   },
+
   data: () => ({
     faTimesCircle
   }),
+
   methods: {
+    ...mapActions([
+      'closeComponent'
+    ]),
     closeModal () {
-      this.$emit('close')
+      this.closeComponent()
     },
     toggleToolStatus (tool, status) {
       axios.put('/groups/settings', {

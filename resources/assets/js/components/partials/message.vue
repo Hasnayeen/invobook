@@ -45,6 +45,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
 
 let day = null
@@ -71,23 +72,28 @@ export default {
     dropdownMenuShown: false,
     faEllipsisH
   }),
+
   computed: {
     displayDate () {
       return !this.message.system &&
         this.showDate(this.message.created_at)
     }
   },
+
   methods: {
+    ...mapActions([
+      'showNotification',
+    ]),
     deleteMessage () {
       axios.delete(`/messages/${this.message.id}`)
         .then((response) => {
           this.$emit('deleted', this.index)
           this.dropdownMenuShown = false
-          EventBus.$emit('notification', response.data.message, response.data.status)
+          this.showNotification({type: response.data.type, message: response.data.message})
         })
         .catch((error) => {
           this.dropdownMenuShown = false
-          EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+          this.showNotification({type: error.response.data.type, message: error.response.data.message})
         })
     },
     toggleMessageMenu () {

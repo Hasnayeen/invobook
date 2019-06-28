@@ -28,6 +28,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   data: () => ({
     showInviteMemberForm: false,
@@ -36,6 +38,7 @@ export default {
     role: 'default',
     roles: []
   }),
+
   mounted () {
     axios.get('/roles')
       .then((response) => {
@@ -45,7 +48,11 @@ export default {
         console.log(error.response.data.message)
       })
   },
+
   methods: {
+    ...mapActions([
+      'showNotification',
+    ]),
     openModal () {
       this.showInviteMemberForm = true
     },
@@ -60,14 +67,14 @@ export default {
       })
         .then((response) => {
           if (response.data.status === 'success') {
-            EventBus.$emit('notification', response.data.message, response.data.status)
+            this.showNotification({type: response.data.type, message: response.data.message})
             this.name = ''
             this.email = ''
             this.showInviteMemberForm = false
           }
         })
         .catch((error) => {
-          EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+          this.showNotification({type: error.response.data.type, message: error.response.data.message})
           this.name = ''
           this.email = ''
           this.showInviteMemberForm = false

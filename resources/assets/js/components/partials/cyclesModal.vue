@@ -1,5 +1,5 @@
 <template>
-<div v-if="modalShown">
+<div>
   <!-- Cycles List -->
   <div v-if="!createFormShown" class="absolute container mx-auto w-5/6 md:w-3/5 lg:w-2/5 bg-white rounded shadow-lg z-40" style="top: 12vh;left: 0;right: 0;">
     <div class="py-4">
@@ -42,13 +42,10 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import createCycleForm from "./../forms/createCycleForm"
+
 export default {
   components: {createCycleForm},
   props: {
-    modalShown: {
-      required: true,
-      type: Boolean
-    },
     resourceType: {
       required: true,
       type: String
@@ -62,27 +59,26 @@ export default {
       type: Number
     }
   },
+
   data: () => ({
     createFormShown: false
   }),
-  watch: {
-    modalShown: function () {
-      this.getAllCycles()
-    }
-  },
+
   computed: {
     ...mapState({
       cycles: state => state.cycle.cycles,
       selectedCycleId: state => state.cycle.selectedCycleId,
     })
   },
+
   methods: {
     ...mapActions([
       'getCycles',
-      'selectCycle'
+      'selectCycle',
+      'closeComponent'
     ]),
     getAllCycles () {
-      if (this.modalShown && this.cycles.length === 0 ) {
+      if (this.cycles.length === 0 ) {
         this.getCycles({
           group_type: this.resourceType,
           group_id: this.resourceId,
@@ -90,7 +86,7 @@ export default {
       }
     },
     closeModal () {
-      this.$emit('close')
+      this.closeComponent()
     },
     showCreateForm () {
       this.createFormShown = true

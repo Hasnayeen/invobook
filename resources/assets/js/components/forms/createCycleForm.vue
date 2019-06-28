@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import Datepicker from 'vuejs-datepicker'
 
 export default {
@@ -50,17 +51,23 @@ export default {
       type: String
     }
   },
+
   data: () => ({
     name: '',
     startDate: null,
     endDate: null,
   }),
+
   computed: {
     disabledDates () {
       return {to: this.startDate}
     }
   },
+
   methods: {
+    ...mapActions([
+      'showNotification',
+    ]),
     createCycle () {
       axios.post('/cycles', {
         name: this.name,
@@ -74,12 +81,12 @@ export default {
             this.name = ''
             this.startDate = null
             this.endDate = null
-            EventBus.$emit('notification', response.data.message, response.data.status)
+            this.showNotification({type: response.data.status, message: response.data.message})
             this.$emit('close-form', response.data.cycle)
           }
         })
         .catch((error) => {
-          EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+          this.showNotification({type: error.response.data.status, message: error.response.data.message})
           this.$emit('close-form')
         })
     },

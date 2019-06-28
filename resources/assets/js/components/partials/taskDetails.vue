@@ -96,6 +96,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import commentBox from './commentBox.vue'
 import {
   faArrowLeft,
@@ -131,13 +132,18 @@ export default {
       type: Array
     }
   },
+
   data: () => ({
     dropdownMenuShown: false,
     statusMenuShown: false,
     faArrowLeft,
     faEllipsisH
   }),
+
   methods: {
+    ...mapActions([
+      'showNotification',
+    ]),
     closeTaskDetails () {
       this.dropdownMenuShown = false
       this.$emit('close')
@@ -158,11 +164,11 @@ export default {
         .then((response) => {
           this.$emit('delete', this.index)
           this.dropdownMenuShown = false
-          EventBus.$emit('notification', response.data.message, response.data.status)
+          this.showNotification({type: response.data.type, message: response.data.message})
           this.$emit('close')
         })
         .catch((error) => {
-          EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+            this.showNotification({type: error.response.data.type, message: error.response.data.message})
           this.$emit('close')
         })
       this.dropdownMenuShown = false
@@ -181,11 +187,11 @@ export default {
         .then((response) => {
           this.statusMenuShown = false
           this.$emit('status-change', {index: this.index, task: response.data.task})
-          EventBus.$emit('notification', response.data.message, response.data.status)
+          this.showNotification({type: response.data.type, message: response.data.message})
         })
         .catch((error) => {
           this.statusMenuShown = false
-          EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+          this.showNotification({type: error.response.data.type, message: error.response.data.message})
         })
     }
   }

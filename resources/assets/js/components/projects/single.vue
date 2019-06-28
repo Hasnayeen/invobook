@@ -10,19 +10,19 @@
       <!-- Dropdown Menu -->
       <div v-if="dropdownMenuShown" class="absolute w-64">
         <ul class="list-reset bg-white rounded shadow-lg py-2 absolute inset-x-0 mt-6 text-base text-left font-normal whitespace-no-wrap z-10">
-          <li @click="showRoadmapModal" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
+          <li @click="showModal('roadmapModal')" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
             Roadmap
           </li>
-          <li @click="showMembersListModal" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
+          <li @click="showModal('memberListModal')" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
             Show All Members
           </li>
-          <li @click="showGithubRepoModal" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
+          <li @click="showModal('githubRepoModal')" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
             Connect Github Repository
           </li>
-          <li @click="showPermissionsSettings" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
+          <li @click="showModal('permissionSettingsModal')" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
             Permissions Settings
           </li>
-          <li @click="showSettings" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
+          <li @click="showModal('settingsModal')" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
             Settings
           </li>
           <li class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
@@ -36,7 +36,7 @@
       <span class="text-lg">
         Cycle: 
       </span>
-      <div v-if="this.selectedCycle" @click="showCyclesModal" class="p-2 ml-2 bg-gray-100 shadow rounded cursor-pointer text-sm text-teal-800 inline">
+      <div v-if="this.selectedCycle" @click="showModal('cycleModal')" class="p-2 ml-2 bg-gray-100 shadow rounded cursor-pointer text-sm text-teal-800 inline">
         <span v-if="this.selectedCycle.name">
           {{ this.selectedCycle.name }}
         </span>
@@ -44,31 +44,31 @@
           {{this.selectedCycle.start_date}} - {{this.selectedCycle.end_date}}
         </span>
       </div>
-      <span v-else @click="showCyclesModal" class="p-2 ml-2 bg-gray-100 shadow rounded cursor-pointer text-sm text-teal-800">
+      <span v-else @click="showModal('cycleModal')" class="p-2 ml-2 bg-gray-100 shadow rounded cursor-pointer text-sm text-teal-800">
         Click to set a Cycle
       </span>
     </div>
   
   <!-- Modals for cycles -->
-  <cycles-modal resourceType="project" :resourceId="project.id" :modalShown="cyclesModalShown" :currentCycleId="currentCycleId" @close="closeCyclesModal"></cycles-modal>
+  <cycles-modal v-if="currentComponent === 'cycleModal'" resourceType="project" :resourceId="project.id" :currentCycleId="currentCycleId"></cycles-modal>
   <!-- Modals for cycles -->
 
   <!-- Modals for dropdown menu -->
-    <roadmap-modal resourceType="project" :resourceId="project.id" :modalShown="roadmapModalShown" :currentCycleId="currentCycleId" @close="closeRoadmapModal"></roadmap-modal>
+    <roadmap-modal v-if="currentComponent === 'roadmapModal'" resourceType="project" :resourceId="project.id" :currentCycleId="currentCycleId"></roadmap-modal>
 
-    <members-list-modal resourceType="project" :resourceId="project.id" :show="membersListModalShown" :members="project.members" @close="closeMembersListModal" ></members-list-modal>
+    <members-list-modal v-if="currentComponent === 'memberListModal'" resourceType="project" :resourceId="project.id" :members="project.members" ></members-list-modal>
 
-    <add-member-form v-if="addMemberFormShown" @close="closeAddMemberForm" resourceType="project" :resource="project" @addMember="addMember"></add-member-form>
+    <add-member-form v-if="currentComponent === 'addMemberForm'" resourceType="project" :resource="project" @addMember="addMember"></add-member-form>
 
-    <show-github-repo entityType="project" :entityId="project.id" v-if="githubRepoModalShown" @close-github-repo-modal="closeGithubRepoModal"></show-github-repo>
+    <show-github-repo v-if="currentComponent === 'githubRepoModal'" entityType="project" :entityId="project.id"></show-github-repo>
     
-    <permission-settings-modal resourceType="project" :resourceId="project.id" :show="permissionSettingsModalShown" @close="closePermissionsSettings" ></permission-settings-modal>
+    <permission-settings-modal v-if="currentComponent === 'permissionSettingsModal'" resourceType="project" :resourceId="project.id" ></permission-settings-modal>
 
-    <settings-modal resourceType="project" :resourceId="project.id" :show="settingsModalShown" :settings="settings" @update-settings="updateSettings" @close="closeSettings" ></settings-modal>
+    <settings-modal v-if="currentComponent === 'settingsModal'" resourceType="project" :resourceId="project.id" :settings="settings" @update-settings="updateSettings" ></settings-modal>
   <!-- Modals for dropdown menu -->
 
     <div class="flex flex-row flex-wrap justify-center items-center px-2 pt-4">
-      <span @click="showAddMemberForm" class="bg-white shadow w-8 h-8 flex justify-center items-center rounded-full text-teal-500 cursor-pointer text-center p-2 mr-1">
+      <span @click="showModal('addMemberForm')" class="bg-white shadow w-8 h-8 flex justify-center items-center rounded-full text-teal-500 cursor-pointer text-center p-2 mr-1">
         <font-awesome-icon :icon="faPlus"></font-awesome-icon>
       </span>
       <a v-for="(member, index) in project.members" :href="'/users/' + member.username" class="mx-1">
@@ -127,22 +127,17 @@ export default {
     tabMenu,
     showGithubRepo
   },
+
   data: () => ({
-    addMemberFormShown: false,
     active: '',
     activeId: 0,
     dropdownMenuShown: false,
-    githubRepoModalShown: false,
-    membersListModalShown: false,
-    permissionSettingsModalShown: false,
-    settingsModalShown: false,
     settings: project.settings,
-    roadmapModalShown: false,
-    cyclesModalShown: false,
     currentCycleId: null,
     faPlus,
     faCog
   }),
+
   created () {
     let tabs = ['tasks', 'discussions', 'messages', 'events', 'files', 'activities']
     let tool = new URL(location.href).searchParams.get('tool')
@@ -154,16 +149,28 @@ export default {
     this.currentCycleId = this.selectedCycle ? this.selectedCycle.id : null
     this.getAllCycles()
   },
+
   computed: {
     ...mapState({
       project: state => state.project,
-      selectedCycle: state => state.cycle.selectedCycle
+      selectedCycle: state => state.cycle.selectedCycle,
+      currentComponent: state => state.dropdown.currentComponent
     })
   },
+
   methods: {
     ...mapActions([
-      'getCycles'
+      'getCycles',
+      'setCurrentComponent',
+      'closeComponent',
+      'showNotification',
     ]),
+    showModal (modalName) {
+      this.setCurrentComponent(modalName)
+    },
+    closeModal () {
+      this.closeComponent()
+    },
     getActiveTool (tool, tabs = null) {
       if (tool !== null && tabs.indexOf(tool) !== -1) {
         this.active = tool
@@ -187,12 +194,6 @@ export default {
         group_id: this.project.id,
       })
     },
-    showAddMemberForm () {
-      this.addMemberFormShown = true
-    },
-    closeAddMemberForm () {
-      this.addMemberFormShown = false
-    },
     addMember (data) {
       var messageType
       if (data.user) {
@@ -201,14 +202,8 @@ export default {
       } else {
         messageType = 'error'
       }
-      EventBus.$emit('notification', data.message, messageType)
-      this.addMemberFormShown = false
-    },
-    showMembersListModal () {
-      this.membersListModalShown = true
-    },
-    closeMembersListModal () {
-      this.membersListModalShown = false
+      this.showNotification({type: data.message, message: messageType})
+      this.closeComponent()
     },
     activateTab (tab) {
       if (tab !== this.active) {
@@ -221,40 +216,11 @@ export default {
     closeDropdownMenu () {
       this.dropdownMenuShown = false
     },
-    showGithubRepoModal () {
-      this.githubRepoModalShown = true
-    },
-    closeGithubRepoModal () {
-      this.githubRepoModalShown = false
-    },
-    showPermissionsSettings () {
-      this.permissionSettingsModalShown = true
-    },
-    closePermissionsSettings () {
-      this.permissionSettingsModalShown = false
-    },
-    showSettings () {
-      this.settingsModalShown = true
-    },
-    closeSettings () {
-      this.settingsModalShown = false
-    },
     updateSettings (settings) {
       this.settings = settings
       this.getActiveTool(null)
     },
-    showCyclesModal () {
-      this.cyclesModalShown = true
-    },
-    closeCyclesModal () {
-      this.cyclesModalShown = false
-    },
-    showRoadmapModal () {
-      this.roadmapModalShown = true
-    },
-    closeRoadmapModal () {
-      this.roadmapModalShown = false
-    },
   }
 }
 </script>
+ 
