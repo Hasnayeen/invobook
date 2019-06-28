@@ -146,6 +146,7 @@ export default {
     formShown: function (value, oldValue) {
       if (value) {
         this.getCategories()
+        this.cycleId = this.selectedCycleId
         if (this.discussion) {
           this.hydrateEditor()
         }
@@ -155,7 +156,8 @@ export default {
 
   computed: {
     ...mapState({
-      cycles: state => state.cycle.cycles
+      cycles: state => state.cycle.cycles,
+      selectedCycleId: state => state.cycle.selectedCycleId
     })
   },
 

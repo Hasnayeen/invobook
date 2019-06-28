@@ -131,7 +131,7 @@ export default {
     assignedTo: null,
     relatedTo: '',
     dueOnDate: null,
-    cycleId: '',
+    cycleId: null,
     disabledDates: {
       to: new Date()
     },
@@ -144,6 +144,7 @@ export default {
   watch: {
     formShown: function (value, oldValue) {
       if (value) {
+        this.cycleId = this.selectedCycleId
         if (this.task) {
           this.hydrateForm()
         }
@@ -193,6 +194,7 @@ export default {
         })
     },
     closeCreateTaskForm () {
+      this.dehydrateForm()
       this.$emit('close')
     },
     closeNotification () {
@@ -210,15 +212,9 @@ export default {
         group_type: this.resourceType
       })
         .then((response) => {
-          if (response.data.status === 'success') {
-            this.name = ''
-            this.notes = ''
-            this.assignedTo = null
-            this.dueOnDate = null
-            this.relatedTo = ''
-            this.showNotification({type: response.data.status, message: response.data.message})            
-            this.$emit('close', null, response.data.task)
-          }
+          this.dehydrateForm()
+          this.showNotification({type: response.data.status, message: response.data.message})            
+          this.$emit('close', null, response.data.task)
         })
         .catch((error) => {
           this.showNotification({type: error.response.data.status, message: error.response.data.message})
@@ -240,6 +236,13 @@ export default {
       this.relatedTo = this.task.related_to
       this.cycleId = this.selectedCycleId
       this.dueOnDate = new Date(this.task.due_on)
+    },
+    dehydrateForm () {
+      this.name = ''
+      this.notes = ''
+      this.assignedTo = ''
+      this.dueOnDate = null
+      this.relatedTo = ''
     }
   },
 }

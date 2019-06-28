@@ -59,7 +59,7 @@
             Related To
           </div>
           <a v-if="task.related_to" :href="'/' + resourceType + 's/' + resourceId + '?tool=tasks&id=' + task.related_to" class="px-8 py-2 flex items-center justify-center" :class="[task.related_to ? 'text-blue-500 underline' : 'text-gray-600']" :title="task.related.name">
-            {{ task.related.name | clip }}
+            {{ task.related ? task.related.name : 'None' | clip }}
           </a>
           <span v-else>None</span>
         </div>
