@@ -49,6 +49,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import commentBox from './commentBox.vue'
 import {
   faArrowLeft,
@@ -72,6 +73,7 @@ export default {
       required: true
     }
   },
+
   data () {
     return {
       dropdownMenuShown: false,
@@ -79,7 +81,11 @@ export default {
       faEllipsisH
     }
   },
+
   methods: {
+    ...mapActions([
+      'showNotification',
+    ]),
     closeDiscussionDetails (editDiscussion = false) {
       this.dropdownMenuShown = false
       this.$emit('close', editDiscussion)
@@ -94,15 +100,12 @@ export default {
       axios.delete(`/discussions/${this.discussion.id}`)
         .then((response) => {
           this.$emit('deleted', this.index)
-
           this.closeDiscussionDetails()
-
-          EventBus.$emit('notification', response.data.message, response.data.status)
+          this.showNotification({type: response.data.type, message: response.data.message})
         })
         .catch((error) => {
           this.closeDiscussionDetails()
-
-          EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+          this.showNotification({type: error.response.data.type, message: error.response.data.message})
         })
     },
     editDiscussion () {

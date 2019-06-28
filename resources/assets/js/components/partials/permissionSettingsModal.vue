@@ -1,5 +1,5 @@
 <template>
-<div v-if="show">
+<div>
   <div class="absolute container mx-2 md:mx-auto md:max-w-4xl bg-gray-100 rounded shadow-lg z-30" style="top: 10vh;left: 0;right: 0;">
     <div class="m-auto flex-col flex">
       <header class="bg-gray-200 text-gray-600 p-6 rounded flex flex-row justify-between items-center" for="user">
@@ -70,9 +70,9 @@
 </template>
 
 <script>
-import { faCheckCircle } from '@fortawesome/free-solid-svg-icons/faCheckCircle'
-import { faTimesCircle } from '@fortawesome/free-solid-svg-icons/faTimesCircle'
-import { faCheck } from '@fortawesome/free-solid-svg-icons/faCheck'
+import { mapActions } from 'vuex'
+import { faCheckCircle, faCheck, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
+
 export default {
   props: {
     resourceType: {
@@ -83,10 +83,6 @@ export default {
       type: Number,
       required: true
     },
-    show: {
-      type: Boolean,
-      default: false
-    }
   },
 
   data: () => ({
@@ -98,6 +94,7 @@ export default {
     faCheckCircle,
     faTimesCircle,
   }),
+
   created () {
     if (this.roles.length < 1) {
       axios.get('/roles')
@@ -109,9 +106,14 @@ export default {
         })
     }
   },
+
   methods: {
+    ...mapActions([
+      'closeComponent',
+      'showNotification'
+    ]),
     closeModal () {
-      this.$emit('close')
+      this.closeComponent()
     },
     selectRole (role) {
       this.selectedRole = role.slug
@@ -142,7 +144,7 @@ export default {
             this.permissions[key][index]['enabled'] = !currentState
           })
           .catch((error) => {
-            EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+            this.showNotification({type: error.response.data.status, message: error.response.data.message})
           })
       } else {
         axios.post('/groups/permissions/' + permission.id + '/roles/' + this.roleId, {
@@ -153,7 +155,7 @@ export default {
             this.permissions[key][index]['enabled'] = !currentState
           })
           .catch((error) => {
-            EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+            this.showNotification({type: error.response.data.status, message: error.response.data.message})
           })
       }
     },

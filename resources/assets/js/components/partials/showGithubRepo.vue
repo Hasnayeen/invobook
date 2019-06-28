@@ -31,6 +31,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 export default {
@@ -44,11 +45,13 @@ export default {
       type: Number
     }
   },
+
   data: () => ({
     repositories: [],
     accessTokenNotSet: false,
     faTimes
   }),
+
   created () {
     axios.get('/services/github/repos')
       .then((response) => {
@@ -58,9 +61,14 @@ export default {
         this.accessTokenNotSet = true
       })
   },
+
   methods: {
+    ...mapActions([
+      'closeComponent',
+      'showNotification'
+    ]),
     closeModal () {
-      this.$emit('close-github-repo-modal')
+      this.closeComponent()
     },
     connectGithubRepo (id, name) {
       axios.post('/services/github/connected-repos', {
@@ -70,10 +78,10 @@ export default {
         entity_id: this.entityId
       })
         .then((response) => {
-          EventBus.$emit('notification', response.data.message, response.data.status)
+          this.showNotification({type: response.data.status, message: response.data.message})
         })
         .catch((error) => {
-          EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+          this.showNotification({type: error.response.data.status, message: error.response.data.message})
         })
     }
   }

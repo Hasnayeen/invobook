@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import Datepicker from 'vuejs-datepicker'
 import { faCopy } from '@fortawesome/free-solid-svg-icons/faCopy'
 
@@ -44,6 +45,7 @@ export default {
       type: String
     }
   },
+
   data: () => ({
     roles: [],
     shareableLink: '',
@@ -55,7 +57,8 @@ export default {
     },
     faCopy,
   }),
-  created () {
+
+ created () {
     if (this.roles.length < 1) {
       axios.get('/roles')
         .then((response) => {
@@ -66,7 +69,11 @@ export default {
         })
     }
   },
+
   methods: {
+    ...mapActions([
+      'showNotification',
+    ]),
     selectRole (role) {
       this.selectedRole = role.slug
       this.roleId = role.id
@@ -79,7 +86,7 @@ export default {
           this.shareableLink = response.data.link
         })
         .catch((error) => {
-          EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+          this.showNotification({type: error.response.data.status, message: error.response.data.message})
         })
     },
     copyToClipboard () {
@@ -87,11 +94,11 @@ export default {
       copyText.focus()
       copyText.select()
       document.execCommand("copy")
-      EventBus.$emit('notification', 'Link copied to clipboard', 'success')
+      this.showNotification({type: 'Link copied to clipboard', message: 'success'})
     },
     generateLink () {
       if (this.roleId === 0) {
-        EventBus.$emit('notification', 'A role must be selected', 'error')
+        this.showNotification({type: 'A role must be selected', message: 'error'})
         return false
       }
       axios.post('/register/invite-link', {
@@ -102,7 +109,7 @@ export default {
           this.shareableLink = response.data.link
         })
         .catch((error) => {
-          EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+          this.showNotification({type: error.response.data.status, message: error.response.data.message})
         })
     }
   }

@@ -1,13 +1,13 @@
 <template>
-<div v-if="show">
+<div>
   <div class="absolute container mx-2 md:mx-auto md:w-1/3 bg-gray-100 rounded shadow-lg z-10" style="top: 10vh;left: 0;right: 0;">
     <div class="m-auto flex-col flex">
-        <label class="block uppercase tracking-wide bg-gray-200 text-gray-600 text-xs font-bold text-center text-lg p-6 rounded" for="user">
+        <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold text-center text-lg p-4 rounded" for="user">
           Members List
         </label>
 
       <ul v-for="(member, index) in members" :key="member.id" class="list-reset">
-        <li class="p-4 py-6 hover:bg-blue-100 flex flex-row items-center justify-between">
+        <li class="p-4 py-6 hover:bg-blue-100 bg-white flex flex-row items-center justify-between">
           <div class="flex flex-row items-center">
             <a :href="'/users/' + member.username"  class="no-underline text-gray-800 text-lg">
               <img :src="generateUrl(member.avatar)" class="rounded-full w-8 h-8 mr-4 align-middle" :alt="'profile pic of ' + member.name">
@@ -20,7 +20,7 @@
         </li>
       </ul>
 
-      <div class="flex flex-row-reverse p-6 bg-gray-200 rounded-b">
+      <div class="flex flex-row-reverse p-4 rounded-b">
         <button @click="closeModal" class="text-red-400 hover:font-bold">Close</button>
       </div>
     </div>
@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons/faTrashAlt'
 
 export default {
@@ -42,10 +43,6 @@ export default {
       type: Number,
       required: true
     },
-    show: {
-      type: Boolean,
-      default: false
-    },
     members: {
       type: Array,
       required: true
@@ -57,8 +54,12 @@ export default {
   }),
 
   methods: {
+    ...mapActions([
+      'closeComponent',
+      'showNotification'
+    ]),
     closeModal () {
-      this.$emit('close')
+      this.closeComponent()
     },
     removeMember (index, memberId) {
       axios.delete('/members/', {
@@ -69,10 +70,10 @@ export default {
         .then((response) => {
           this.members.splice(index, 1)
           this.closeModal()
-          EventBus.$emit('notification', response.data.message, response.data.status)
+          this.showNotification({type: response.data.status, message: response.data.message})
         })
         .catch((error) => {
-          EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+          this.showNotification({type: error.response.data.status, message: error.response.data.message})
         })
     }
   }

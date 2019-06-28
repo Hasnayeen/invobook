@@ -45,6 +45,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   props: {
     activeColumn: {
@@ -52,12 +54,14 @@ export default {
       type: String
     }
   },
+
   data: () => ({
     modalShown: false,
     access_token: '',
     services: [],
     update: false
   }),
+
   mounted () {
     axios.get('/admin/services')
       .then((response) => {
@@ -67,7 +71,11 @@ export default {
         console.error(error.response.data.message)
       })
   },
+
   methods: {
+    ...mapActions([
+      'showNotification',
+    ]),
     showSetupModal () {
       this.modalShown = true
     },
@@ -81,10 +89,10 @@ export default {
         })
           .then((response) => {
             service.enabled = !service.enabled
-            EventBus.$emit('notification', response.data.message, response.data.status)
+            this.showNotification({type: response.data.status, message: response.data.message})
           })
           .catch((error) => {
-            EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+            this.showNotification({type: error.response.data.status, message: error.response.data.message})
           })
       } else {
         this.showSetupModal()
@@ -97,11 +105,11 @@ export default {
       })
         .then((response) => {
           this.modalShown = false
-          EventBus.$emit('notification', response.data.message, response.data.status)
+          this.showNotification({type: response.data.status, message: response.data.message})
         })
         .catch((error) => {
-          EventBus.$emit('notification', error.response.data.message, error.response.data.status)
-        })
+          this.showNotification({type: error.response.data.status, message: error.response.data.message})
+       })
     }
   }
 }

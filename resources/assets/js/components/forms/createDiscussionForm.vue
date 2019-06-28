@@ -30,7 +30,7 @@
           <div class="flex flex-row items-center">
             <select class="appearance-none block w-full bg-white text-gray-800 border border-gray-200 rounded py-3 px-4" v-model="cycleId">
               <option value="" select hidden disabled>Choose one</option>
-              <option :value="cycle.id" v-for="cycle in cycles">{{ cycle.name }}</option>
+              <option :value="cycle.id" v-for="cycle in cycles">{{ cycle.name ? cycle.name : cycle.start_date + ' - ' + cycle.end_date }}</option>
             </select>
             <font-awesome-icon :icon="faChevronDown"
               class="w-1/6 pointer-events-none flex items-center text-gray-700 -ml-8">
@@ -126,11 +126,11 @@ export default {
                   }
                 })
                 .then((response) => {
-                  EventBus.$emit('notification', response.data.message, response.data.status)
+                  this.showNotification({type: response.data.type, message: response.data.message})
                   resolve(response.data.url)
                 })
                 .catch((error) => {
-                  EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+                  this.showNotification({type: error.response.data.type, message: error.response.data.message})
                 })
             });
           }
@@ -154,7 +154,11 @@ export default {
       cycles: state => state.cycle.cycles
     })
   },
+
   methods: {
+    ...mapActions([
+      'showNotification',
+    ]),
     savePost (draft = true) {
       axios.post('/discussions', {
         name: this.name,
@@ -170,11 +174,11 @@ export default {
           this.name = ''
           this.categoryId = ''
           this.quill.setContents([])
-          EventBus.$emit('notification', response.data.message, response.data.status)
+          this.showNotification({type: response.data.type, message: response.data.message})
           this.$emit('close', response.data.discussion)
         })
         .catch((error) => {
-          EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+          this.showNotification({type: error.response.data.type, message: error.response.data.message})
           this.$emit('close')
         })
     },
@@ -214,11 +218,11 @@ export default {
           this.name = ''
           this.categoryId = ''
           this.quill.setContents([])
-          EventBus.$emit('notification', response.data.message, response.data.status)
+          this.showNotification({type: response.data.type, message: response.data.message})
           this.$emit('close', null, response.data.discussion)
         })
         .catch((error) => {
-          EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+          this.showNotification({type: error.response.data.type, message: error.response.data.message})
           this.$emit('close')
         })
     }

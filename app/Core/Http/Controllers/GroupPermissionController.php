@@ -5,6 +5,7 @@ namespace App\Core\Http\Controllers;
 use App\Core\Models\Role;
 use App\Core\Models\Permission;
 use App\Core\Models\RoleHasPermission;
+use App\Core\Exceptions\OwnerPermissionCantBeRevoked;
 
 class GroupPermissionController extends Controller
 {

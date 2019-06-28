@@ -8,18 +8,16 @@
       <!-- Dropdown Menu -->
       <div v-if="dropdownMenuShown" class="relative">
         <ul class="list-reset bg-white rounded shadow-lg py-2 absolute right-0 mt-4 text-base text-left font-normal whitespace-no-wrap z-10">
-          <li class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
-            <a href="#" class="no-underline text-gray-600" @click="showMembersListModal">
+          <li @click="showModal('memberListModal')" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
               Show All Members
-            </a>
           </li>
-          <li @click="showGithubRepoModal" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
+          <li @click="showModal('githubRepoModal')" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
             Connect Github Repository
           </li>
-          <li @click="showPermissionsSettings" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
+          <li @click="showModal('permissionSettingsModal')" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
             Permissions Settings
           </li>
-          <li @click="showSettings" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
+          <li @click="showModal('settingsModal')" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
             Settings
           </li>
           <li class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
@@ -41,29 +39,29 @@
           {{this.selectedCycle.start_date}} - {{this.selectedCycle.end_date}}
         </span>
       </div>
-      <span v-else @click="showCyclesModal" class="p-2 ml-2 bg-gray-100 shadow rounded cursor-pointer text-sm text-teal-800">
+      <span v-else @click="showModal('cycleModal')" class="p-2 ml-2 bg-gray-100 shadow rounded cursor-pointer text-sm text-teal-800">
         Click to set a Cycle
       </span>
     </div>
 
   <!-- Modals for cycles -->
-  <cycles-modal resourceType="team" :resourceId="team.id" :currentCycleId="currentCycleId" :modalShown="cyclesModalShown" @close="closeCyclesModal"></cycles-modal>
+  <cycles-modal v-if="currentComponent === 'cycleModal'" resourceType="team" :resourceId="team.id" :currentCycleId="currentCycleId"></cycles-modal>
   <!-- Modals for cycles -->
 
   <!-- Modals for dropdown menu -->
-    <members-list-modal resourceType="team" :resourceId="team.id" :show="membersListModalShown" :members="team.members" @close="closeMembersListModal" />
+    <members-list-modal v-if="currentComponent === 'memberListModal'" resourceType="team" :resourceId="team.id" :members="team.members" />
 
-    <addMemberForm v-if="addMemberFormShown" @close="closeAddMemberForm" resourceType="team" :resource="team" @addMember="addMember"></addMemberForm>
+    <addMemberForm v-if="currentComponent === 'addMemberForm'" resourceType="team" :resource="team" @addMember="addMember"></addMemberForm>
 
-    <show-github-repo entityType="team" :entityId="team.id" v-if="githubRepoModalShown" @close-github-repo-modal="closeGithubRepoModal"></show-github-repo>
+    <show-github-repo v-if="currentComponent === 'githubRepoModal'" entityType="team" :entityId="team.id"></show-github-repo>
     
-    <permission-settings-modal resourceType="team" :resourceId="team.id" :show="permissionSettingsModalShown" @close="closePermissionsSettings" ></permission-settings-modal>
+    <permission-settings-modal v-if="currentComponent === 'permissionSettingsModal'" resourceType="team" :resourceId="team.id"></permission-settings-modal>
 
-    <settings-modal resourceType="team" :resourceId="team.id" :show="settingsModalShown" :settings="settings" @update-settings="updateSettings" @close="closeSettings" ></settings-modal>
+    <settings-modal v-if="currentComponent === 'settingsModal'" resourceType="team" :resourceId="team.id" :settings="settings" @update-settings="updateSettings" ></settings-modal>
   <!-- Modals for dropdown menu -->
 
     <div class="flex flex-row flex-wrap justify-center items-center px-2 pt-4">
-      <span @click="showAddMemberForm" class="bg-white shadow w-8 h-8 flex justify-center items-center rounded-full text-teal-500 cursor-pointer text-center p-2 mr-1">
+      <span @click="showModal('addMemberForm')" class="bg-white shadow w-8 h-8 flex justify-center items-center rounded-full text-teal-500 cursor-pointer text-center p-2 mr-1">
         <font-awesome-icon :icon="faPlus"></font-awesome-icon>
       </span>
       <a v-for="(member, index) in team.members" :href="'/users/' + member.username" class="mx-1">
@@ -122,16 +120,10 @@ export default {
     showGithubRepo
   },
   data: () => ({
-    addMemberFormShown: false,
     active: '',
     activeId: 0,
     dropdownMenuShown: false,
-    githubRepoModalShown: false,
-    membersListModalShown: false,
-    permissionSettingsModalShown: false,
-    settingsModalShown: false,
     settings: team.settings,
-    cyclesModalShown: false,
     currentCycleId: null,
     faPlus,
     faCog
@@ -150,13 +142,23 @@ export default {
   computed: {
     ...mapState({
       team: state => state.team,
-      selectedCycle: state => state.cycle.selectedCycle
+      selectedCycle: state => state.cycle.selectedCycle,
+      currentComponent: state => state.dropdown.currentComponent
     })
   },
   methods: {
     ...mapActions([
-      'getCycles'
+      'getCycles',
+      'setCurrentComponent',
+      'closeComponent',
+      'showNotification',
     ]),
+    showModal (modalName) {
+      this.setCurrentComponent(modalName)
+    },
+    closeModal () {
+      this.closeComponent()
+    },
     getActiveTool (tool, tabs = null) {
       if (tool !== null && tabs.indexOf(tool) !== -1) {
         this.active = tool
@@ -194,8 +196,8 @@ export default {
       } else {
         messageType = 'error'
       }
-      EventBus.$emit('notification', data.message, messageType)
-      this.addMemberFormShown = false
+      this.showNotification({type: data.message, message: messageType})
+      this.closeComponent()
     },
     showMembersListModal () {
       this.membersListModalShown = true
