@@ -110,7 +110,7 @@ export default {
       }
       axios.put('/users/' + this.user.username + '/account', params)
         .then((response) => {
-          this.showNotification({type: response.data.type, message: response.data.message})
+          this.showNotification({type: response.data.status, message: response.data.message})
           this.email = ''
           this.username = ''
           this.currentPassword = ''

@@ -103,7 +103,7 @@ export default {
       })
     },
     closeCreateTaskForm (newTask = null) {
-      if (newTask && this.selectedCycleId === newTask.cycle_id) {
+      if (newTask && (this.selectedCycleId === 0 || this.selectedCycleId === newTask.cycle_id)) {
         this.tasks.push(newTask)
       }
       this.createTaskFormShown = false
@@ -116,7 +116,7 @@ export default {
             params: {
               resource_type: this.resourceType,
               resource_id: this.resource.id,
-              cycle_id: this.selectedCycleId
+              cycle_id: this.selectedCycleId !== 0 ? this.selectedCycleId : null
             }})
           this.tasks = data.tasks
           return data.tasks

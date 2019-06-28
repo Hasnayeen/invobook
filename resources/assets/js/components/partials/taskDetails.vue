@@ -164,11 +164,11 @@ export default {
         .then((response) => {
           this.$emit('delete', this.index)
           this.dropdownMenuShown = false
-          this.showNotification({type: response.data.type, message: response.data.message})
+          this.showNotification({type: response.data.status, message: response.data.message})
           this.$emit('close')
         })
         .catch((error) => {
-            this.showNotification({type: error.response.data.type, message: error.response.data.message})
+            this.showNotification({type: error.response.data.status, message: error.response.data.message})
           this.$emit('close')
         })
       this.dropdownMenuShown = false
@@ -187,11 +187,11 @@ export default {
         .then((response) => {
           this.statusMenuShown = false
           this.$emit('status-change', {index: this.index, task: response.data.task})
-          this.showNotification({type: response.data.type, message: response.data.message})
+          this.showNotification({type: response.data.status, message: response.data.message})
         })
         .catch((error) => {
           this.statusMenuShown = false
-          this.showNotification({type: error.response.data.type, message: error.response.data.message})
+          this.showNotification({type: error.response.data.status, message: error.response.data.message})
         })
     }
   }

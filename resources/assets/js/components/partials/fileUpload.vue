@@ -54,10 +54,10 @@ export default {
         })
         .then((response) => {
           this.$emit('on-success', true)
-          this.showNotification({type: response.data.type, message: response.data.message})
+          this.showNotification({type: response.data.status, message: response.data.message})
         })
         .catch((error) => {
-          this.showNotification({type: error.response.data.type, message: error.response.data.message})
+          this.showNotification({type: error.response.data.status, message: error.response.data.message})
         })
     }
   }

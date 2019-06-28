@@ -126,11 +126,11 @@ export default {
                   }
                 })
                 .then((response) => {
-                  this.showNotification({type: response.data.type, message: response.data.message})
+                  this.showNotification({type: response.data.status, message: response.data.message})
                   resolve(response.data.url)
                 })
                 .catch((error) => {
-                  this.showNotification({type: error.response.data.type, message: error.response.data.message})
+                  this.showNotification({type: error.response.data.status, message: error.response.data.message})
                 })
             });
           }
@@ -174,11 +174,11 @@ export default {
           this.name = ''
           this.categoryId = ''
           this.quill.setContents([])
-          this.showNotification({type: response.data.type, message: response.data.message})
+          this.showNotification({type: response.data.status, message: response.data.message})
           this.$emit('close', response.data.discussion)
         })
         .catch((error) => {
-          this.showNotification({type: error.response.data.type, message: error.response.data.message})
+          this.showNotification({type: error.response.data.status, message: error.response.data.message})
           this.$emit('close')
         })
     },
@@ -218,11 +218,11 @@ export default {
           this.name = ''
           this.categoryId = ''
           this.quill.setContents([])
-          this.showNotification({type: response.data.type, message: response.data.message})
+          this.showNotification({type: response.data.status, message: response.data.message})
           this.$emit('close', null, response.data.discussion)
         })
         .catch((error) => {
-          this.showNotification({type: error.response.data.type, message: error.response.data.message})
+          this.showNotification({type: error.response.data.status, message: error.response.data.message})
           this.$emit('close')
         })
     }

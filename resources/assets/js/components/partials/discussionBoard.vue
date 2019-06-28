@@ -102,9 +102,9 @@ export default {
       })
     },
     closeCreateDiscussionForm (newDiscussion = null, updatedDiscussion = null) {
-      if (newDiscussion && this.selectedCycleId === newDiscussion.cycle_id) {
+      if (newDiscussion && (this.selectedCycleId === 0 || this.selectedCycleId === newDiscussion.cycle_id)) {
         this.discussions.push(newDiscussion)
-      } else if (updatedDiscussion && this.selectedCycleId === updatedDiscussion.cycle_id) {
+      } else if (updatedDiscussion && (this.selectedCycleId === 0 || this.selectedCycleId === updatedDiscussion.cycle_id)) {
         this.discussions.splice(this.index, 1, updatedDiscussion)
       }
       this.createDiscussionFormShown = false
@@ -118,7 +118,7 @@ export default {
             params: {
               group_type: this.resourceType,
               group_id: this.resource.id,
-              cycle_id: this.selectedCycleId
+              cycle_id: this.selectedCycleId !== 0 ? this.selectedCycleId : null
             }})
           this.discussions = data.discussions
           return this.discussions
