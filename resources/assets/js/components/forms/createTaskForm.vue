@@ -19,7 +19,7 @@
           Assigned To <span class="text-gray-500 capitalize">(required)</span>
         </label>
         <div class="flex flex-row items-center">
-          <select v-model="assigned_to" class="w-5/6 block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-800 py-3 px-4 pr-8 rounded" id="user">
+          <select v-model="assignedTo" class="w-5/6 block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-800 py-3 px-4 pr-8 rounded" id="user">
             <option selected disabled hidden>Select User to Add</option>
             <template v-for="member in resource.members">
               <option :value="member.id" class="my-2 text-lg">{{ member.name }}</option>
@@ -57,10 +57,10 @@
           Related To
         </label>
         <div class="flex flex-row items-center">
-          <select v-model="related_to" class="w-5/6 block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-800 py-3 px-4 pr-8 rounded" id="user">
+          <select v-model="relatedTo" class="w-5/6 block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-800 py-3 px-4 pr-8 rounded" id="user">
             <option selected disabled hidden value="">Select a Task</option>
-            <template v-for="task in tasks">
-              <option :value="task.id" class="my-2 text-lg">{{ task.name }}</option>
+            <template v-for="otherTask in tasks">
+              <option v-if="!task || (task && otherTask.id !== task.id)" :value="otherTask.id" class="my-2 text-lg">{{ otherTask.name }}</option>
             </template>
           </select>
           <font-awesome-icon :icon="faChevronDown"
@@ -85,7 +85,8 @@
     </div>
     <div class="flex flex-row justify-between py-4 px-8 bg-gray-200 rounded">
       <button @click="closeCreateTaskForm" class="text-red-300 hover:font-bold hover:text-red-400">Cancel</button>
-      <button @click="createTask" class="bg-teal-400 text-white font-medium hover:bg-teal-600 py-4 px-8 rounded">Create</button>
+      <button v-if="task" @click="updateTask" class="bg-teal-400 text-white font-medium hover:bg-teal-600 py-4 px-8 rounded">Save</button>
+      <button v-else @click="createTask" class="bg-teal-400 text-white font-medium hover:bg-teal-600 py-4 px-8 rounded">Create</button>
     </div>
   </div>
 
@@ -101,13 +102,34 @@ import { faTimesCircle } from '@fortawesome/free-solid-svg-icons/faTimesCircle'
 
 export default {
   components: {Datepicker},
-  props: ['resource', 'resourceType', 'formShown', 'tasks'],
+  props: {
+    formShown: {
+      required: true,
+      type: Boolean
+    },
+    resource: {
+      required: true,
+      type: Object
+    },
+    resourceType: {
+      required: true,
+      type: String
+    },
+    tasks: {
+      required: false,
+      type: Array
+    },
+    task: {
+      required: false,
+      type: Object
+    }
+  },
 
   data: () => ({
     name: '',
     notes: '',
-    assigned_to: null,
-    related_to: '',
+    assignedTo: null,
+    relatedTo: '',
     dueOnDate: null,
     cycleId: '',
     disabledDates: {
@@ -119,12 +141,23 @@ export default {
     faTimesCircle,
   }),
 
+  watch: {
+    formShown: function (value, oldValue) {
+      if (value) {
+        if (this.task) {
+          this.hydrateForm()
+        }
+      }
+    }
+  },
+
   computed: {
     taskCompleted () {
       return this.tasks.filter(task => task.completed).length
     },
     ...mapState({
-      cycles: state => state.cycle.cycles
+      cycles: state => state.cycle.cycles,
+      selectedCycleId: state => state.cycle.selectedCycleId
     })
   },
 
@@ -136,8 +169,8 @@ export default {
       axios.post('/tasks', {
         name: this.name,
         notes: this.notes,
-        assigned_to: this.assigned_to,
-        related_to: this.related_to,
+        assigned_to: this.assignedTo,
+        related_to: this.relatedTo,
         cycle_id: this.cycleId,
         due_on: window.luxon.DateTime.fromISO(this.dueOnDate.toISOString()).toISODate(),
         group_id: this.resource.id,
@@ -147,9 +180,9 @@ export default {
           if (response.data.status === 'success') {
             this.name = ''
             this.notes = ''
-            this.assigned_to = null
+            this.assignedTo = null
             this.dueOnDate = null
-            this.related_to = ''
+            this.relatedTo = ''
             this.showNotification({type: response.data.status, message: response.data.message})            
             this.$emit('close', response.data.task)
           }
@@ -165,8 +198,32 @@ export default {
     closeNotification () {
       this.showNotification = false
     },
-    suggestMember (e) {
-
+    updateTask () {
+      axios.put('/tasks/' + this.task.id, {
+        name: this.name,
+        notes: this.notes,
+        assigned_to: this.assignedTo,
+        related_to: this.relatedTo,
+        cycle_id: this.cycleId,
+        due_on: window.luxon.DateTime.fromISO(this.dueOnDate.toISOString()).toISODate(),
+        group_id: this.resource.id,
+        group_type: this.resourceType
+      })
+        .then((response) => {
+          if (response.data.status === 'success') {
+            this.name = ''
+            this.notes = ''
+            this.assignedTo = null
+            this.dueOnDate = null
+            this.relatedTo = ''
+            this.showNotification({type: response.data.status, message: response.data.message})            
+            this.$emit('close', null, response.data.task)
+          }
+        })
+        .catch((error) => {
+          this.showNotification({type: error.response.data.status, message: error.response.data.message})
+          this.$emit('close')
+        })
     },
     addTag () {
       this.tags.push(this.tag)
@@ -175,6 +232,14 @@ export default {
     deleteTag (tag) {
       let index = this.tags.indexOf(tag);
       if (index !== -1) this.tags.splice(index, 1)
+    },
+    hydrateForm () {
+      this.name = this.task.name
+      this.notes = this.task.notes
+      this.assignedTo = this.task.assigned_to
+      this.relatedTo = this.task.related_to
+      this.cycleId = this.selectedCycleId
+      this.dueOnDate = new Date(this.task.due_on)
     }
   },
 }

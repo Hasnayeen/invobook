@@ -10,7 +10,7 @@
           <font-awesome-icon :icon="faEllipsisH" class="text-base text-gray-600"></font-awesome-icon>
         </div>
         <div v-if="dropdownMenuShown" class="absolute rounded shadow-md right-0 top-0 mt-6 mr-4 py-1 text-indigo-800 bg-white">
-          <div @click="" class="cursor-pointer hover:bg-indigo-200 px-4 py-2">
+          <div @click="editTask" class="cursor-pointer hover:bg-indigo-200 px-4 py-2">
             Edit
           </div>
           <div @click="deleteTask" class="cursor-pointer hover:bg-indigo-200 px-4 py-2">
@@ -91,7 +91,7 @@
     </div>
     <div class="h-16"></div>
   </div>
-  <div @click="closeTaskDetails" :class="{'hidden': !taskDetailsShown}" class="h-screen w-screen fixed inset-0 bg-gray-900 opacity-25"></div>
+  <div @click="closeTaskDetails(false)" :class="{'hidden': !taskDetailsShown}" class="h-screen w-screen fixed inset-0 bg-gray-900 opacity-25"></div>
 </div>
 </template>
 
@@ -144,9 +144,9 @@ export default {
     ...mapActions([
       'showNotification',
     ]),
-    closeTaskDetails () {
+    closeTaskDetails (editTask = false) {
       this.dropdownMenuShown = false
-      this.$emit('close')
+      this.$emit('close', editTask)
     },
     toggleMenu () {
       this.dropdownMenuShown = !this.dropdownMenuShown
@@ -193,6 +193,9 @@ export default {
           this.statusMenuShown = false
           this.showNotification({type: error.response.data.status, message: error.response.data.message})
         })
+    },
+    editTask () {
+      this.closeTaskDetails(true)
     }
   }
 }
