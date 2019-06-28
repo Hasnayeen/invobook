@@ -37,7 +37,11 @@
           </div>
         </div>
       </div>
-      <div v-html="discussion.content" class="py-8 px-16 bg-white text-gray-900"></div>
+      <div class="ql-snow">
+        <div class="ql-editor -mx-3">
+          <div v-html="discussion.content" class="py-8 px-16 bg-white text-gray-900"></div>
+        </div>
+      </div>
 
       <comment-box resourceType="discussion" :resource="discussion" :detailsShown="discussionDetailsShown" class="px-16"></comment-box>
     </div>
@@ -114,3 +118,6 @@ export default {
   }
 }
 </script>
+
+<style src="./../../../css/editor.css">
+</style>

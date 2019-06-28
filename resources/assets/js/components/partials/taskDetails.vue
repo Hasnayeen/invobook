@@ -58,8 +58,8 @@
           <div class="text-sm text-gray-600 px-8">
             Related To
           </div>
-          <a v-if="task.related_to" :href="'/' + resourceType + 's/' + resourceId + '?tool=tasks&id=' + task.related_to" class="px-8 py-2 flex items-center justify-center" :class="[task.related_to ? 'text-blue-500 underline' : 'text-gray-600']" :title="task.related.name">
-            {{ task.related ? task.related.name : 'None' | clip }}
+          <a v-if="task.related_to && task.related" :href="'/' + resourceType + 's/' + resourceId + '?tool=tasks&id=' + task.related_to" class="px-8 py-2 flex items-center justify-center" :class="[task.related_to ? 'text-blue-500 underline' : 'text-gray-600']" :title="task.related.name">
+            {{ task.related.name | clip }}
           </a>
           <span v-else>None</span>
         </div>
