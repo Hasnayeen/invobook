@@ -101,11 +101,11 @@ export default {
         .then((response) => {
           this.$emit('deleted', this.index)
           this.closeDiscussionDetails()
-          this.showNotification({type: response.data.type, message: response.data.message})
+          this.showNotification({type: response.data.status, message: response.data.message})
         })
         .catch((error) => {
           this.closeDiscussionDetails()
-          this.showNotification({type: error.response.data.type, message: error.response.data.message})
+          this.showNotification({type: error.response.data.status, message: error.response.data.message})
         })
     },
     editDiscussion () {

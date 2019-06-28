@@ -165,7 +165,7 @@ computed: {
             }
           })
           .catch((error) => {
-            this.showNotification({type: error.response.data.type, message: error.response.data.message})
+            this.showNotification({type: error.response.data.status, message: error.response.data.message})
           })
       }
     },

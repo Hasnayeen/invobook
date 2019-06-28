@@ -150,12 +150,12 @@ export default {
             this.assigned_to = null
             this.dueOnDate = null
             this.related_to = ''
-            this.showNotification({type: response.data.type, message: response.data.message})
+            this.showNotification({type: response.data.status, message: response.data.message})            
             this.$emit('close', response.data.task)
           }
         })
         .catch((error) => {
-          this.showNotification({type: error.response.data.type, message: error.response.data.message})
+          this.showNotification({type: error.response.data.status, message: error.response.data.message})
           this.$emit('close')
         })
     },
