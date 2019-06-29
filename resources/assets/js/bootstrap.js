@@ -1,7 +1,11 @@
 import Echo from 'laravel-echo'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import ClickOutside from 'vue-click-outside'
-import linkify from 'vue-linkify'
+import * as linkify from 'linkifyjs'
+import linkifyElement from 'linkifyjs/element'
+import mention from 'linkifyjs/plugins/mention'
+
+mention(linkify)
 
 window.Vue = require('vue')
 
@@ -13,12 +17,6 @@ window.axios.defaults.headers.common = {
   'X-CSRF-TOKEN': window.Laravel.csrfToken,
   'X-Requested-With': 'XMLHttpRequest'
 }
-
-/**
- * Echo exposes an expressive API for subscribing to channels and listening
- * for events that are broadcast by Laravel. Echo and event broadcasting
- * allows your team to easily build robust real-time web applications.
- */
 
 if (typeof io !== 'undefined') {
   window.Echo = new Echo({
@@ -56,9 +54,21 @@ window.Vue.filter('clip', function (value) {
   return value.substr(0, 20) + '...'
 })
 
-window.Vue.directive('click-outside', ClickOutside)
+window.Vue.directive('linkify', {
+  inserted: function (el) {
+    linkifyElement(el, {
+      className: 'text-blue-500',
+      formatHref: function (href, type) {
+        if (type === 'mention') {
+          return window.location.origin + '/users' + href
+        }
+        return href
+      }
+    })
+  }
+})
 
-Vue.directive('linkified', linkify)
+window.Vue.directive('click-outside', ClickOutside)
 
 window.Vue.component('font-awesome-icon', FontAwesomeIcon)
 
