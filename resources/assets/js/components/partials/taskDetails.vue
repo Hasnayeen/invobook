@@ -38,7 +38,7 @@
             Due Date
           </div>
           <div class="px-8 py-2 text-gray-900">
-            {{ task.due_on }}
+            {{ dueOn(task.due_on) }}
           </div>
         </div>
         <div class="text-center relative">
@@ -144,6 +144,9 @@ export default {
     ...mapActions([
       'showNotification',
     ]),
+    dueOn: function (value) {
+      return luxon.DateTime.fromSQL(value).toFormat('d LLL')
+    },
     closeTaskDetails (editTask = false) {
       this.dropdownMenuShown = false
       this.$emit('close', editTask)

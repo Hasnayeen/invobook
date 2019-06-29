@@ -17,6 +17,7 @@ class OfficeController extends Controller
     {
         $this->authorize('view', $office);
         $office->load('members:user_id,username,avatar,name', 'settings');
+        auth()->user()->setAppends(['unread_direct_messages']);
 
         return view('offices.single', ['office' => $office]);
     }

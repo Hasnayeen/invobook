@@ -11,6 +11,7 @@ class AdminController extends Controller
         $users = $userRepository->getAllUsers([
             'id', 'name', 'username', 'email', 'timezone', 'avatar', 'role_id',
         ]);
+        auth()->user()->setAppends(['unread_direct_messages']);
 
         return view('admin.index', ['users' => $users]);
     }

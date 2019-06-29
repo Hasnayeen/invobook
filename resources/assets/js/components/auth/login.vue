@@ -21,7 +21,7 @@
         Remember Me
       </p>
       <p class="py-4">
-        <button type="submit" class="btn">LOGIN</button>
+        <button type="submit" class="bg-teal-500 hover:bg-teal-600 text-white text-xl font-medium py-2 px-4 rounded">LOGIN</button>
       </p>
       <a href="password/reset" class="no-underline text-teal-500 text-sm">Forgot Your Password?</a>
     </form>

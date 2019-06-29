@@ -17,6 +17,7 @@ class ProjectController extends Controller
     {
         $this->authorize('view', $project);
         $project->load('members:user_id,username,avatar,name', 'settings');
+        auth()->user()->setAppends(['unread_direct_messages']);
 
         return view('projects.single', ['project' => $project]);
     }
