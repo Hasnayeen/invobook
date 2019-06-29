@@ -164,9 +164,9 @@ Route::group(['middleware' => 'auth'], function () {
      **********************************/
 
     Route::get('direct-messages', 'DirectMessageController@index');
-    
+
     Route::post('direct-messages', 'DirectMessageController@store');
-    
+
     Route::get('unread-direct-messages/users', 'UserUnreadDirectMessageController@index');
 
     Route::put('unread-direct-messages/{user}', 'UserUnreadDirectMessageController@update');
