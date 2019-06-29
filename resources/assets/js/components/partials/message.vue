@@ -36,7 +36,7 @@
         </div>
       </div>
       <div  class="rounded-lg p-3 pt-0 leading-normal text-gray-800 break-words"
-        :class="[(message.user_id === user.id) ? 'rounded-tr-none' : 'rounded-tl-none']" v-linkified:options="{ className: 'text-blue-700 font-medium italic hover:underline' }" >
+        :class="[(message.user_id === user.id) ? 'rounded-tr-none' : 'rounded-tl-none']" v-linkify >
         {{ message.body }}
       </div>
     </div>
