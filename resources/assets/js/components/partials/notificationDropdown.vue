@@ -2,7 +2,7 @@
 <div class="px-4 self-center">
   <div id="notification" class="text-teal-400  text-base no-underline cursor-pointer" @click="toggleNotification">
     <font-awesome-icon :icon="faBell" class="font-bold text-xl"></font-awesome-icon>
-    <font-awesome-icon v-if="unreadNotification" :icon="faCircle" class="text-red-400 text-xs absolute top-0 mt-3 -ml-2" aria-hidden="true"></font-awesome-icon>
+    <font-awesome-icon v-if="unreadNotification" :icon="faCircle" class="text-red-500 text-xs absolute top-0 mt-2 -ml-1" aria-hidden="true"></font-awesome-icon>
   </div>
   <div v-if="notificationShown" class="absolute bg-white w-64 mt-5 mr-8 py-4 shadow-lg rounded z-50" style="right: 5%;">
     <a v-if="notifications.length > 0" v-for="notification in notifications" class="flex flex-row items-center list-reset px-4 py-2 text-gray-600 no-underline block" href="#">
