@@ -9,7 +9,7 @@
       </div>
       <!-- Dropdown Menu -->
       <div v-if="dropdownMenuShown" class="absolute w-64">
-        <ul class="list-reset bg-white rounded shadow-lg py-2 absolute inset-x-0 mt-6 text-base text-left font-normal whitespace-no-wrap z-10">
+        <ul class="list-reset bg-white rounded shadow-lg py-2 absolute inset-x-0 mt-6 text-base text-left font-normal whitespace-no-wrap z-30">
           <li @click="showModal('roadmapModal')" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
             Roadmap
           </li>

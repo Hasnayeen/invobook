@@ -31,7 +31,7 @@
           <span class="text-red-400 block pt-2" v-if="errors">{{ errors.password_confirmation }}</span>
         </p>
         <p class="py-4">
-          <button type="submit" class="btn">Register</button>
+          <button type="submit" class="bg-teal-500 hover:bg-teal-600 text-white text-xl font-medium py-2 px-4 rounded">Register</button>
         </p>
       </div>
     </form>

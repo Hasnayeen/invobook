@@ -211,6 +211,24 @@ export default {
           event.message.user = event.user
           if (!this.messageBoxShown) {
             EventBus.$emit('new-direct-message')
+            this.users = this.users.map(user => {
+              if (user.id === event.user.id) {
+                user.unread_messages_for_auth_user_count += 1
+              }
+              return user
+            })
+          } else if (this.selectedUser.id === event.user.id) {
+            axios.put('/unread-direct-messages/' + event.user.id)
+              .catch((error) => {
+                console.log(error)
+              })
+          } else if (this.selectedUser.id !== event.user.id) {
+            this.users = this.users.map(user => {
+              if (user.id === event.user.id) {
+                user.unread_messages_for_auth_user_count += 1
+              }
+              return user
+            })
           }
           if (document.hidden) {
             this.unreadMessage += 1

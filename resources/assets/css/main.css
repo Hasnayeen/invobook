@@ -22,18 +22,6 @@ html {
  * @import "components/forms";
  */
 
-.btn {
-    @apply bg-teal-500 text-white text-xl font-medium py-2 px-4 rounded;
-}
-
-.btn:hover {
-    @apply bg-teal-600;
-}
-
-.checkbox {
-    @apply border-gray-500 border p-2 rounded;
-}
-
 @tailwind utilities;
 
 /**
@@ -53,10 +41,6 @@ html {
 
  .resize-none {
      resize: none;
- }
-
- .order-1 {
-     order: 1;
  }
 
  .h-50-vh {

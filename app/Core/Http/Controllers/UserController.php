@@ -50,6 +50,7 @@ class UserController extends Controller
     public function show(User $user)
     {
         $user->load('projects', 'teams');
+        auth()->user()->setAppends(['unread_direct_messages']);
 
         return view('users.profile', [
             'user'      => $user,
