@@ -6,12 +6,12 @@
     </div>
     <div class="flex flex-row">
       <div class="bg-blue-200">
-        <div class="overflow-auto overflow-y-scroll h-70-vh">
-          <div @click="selectUserMessage(user)"
-            v-for="user in users"
+        <div class="overflow-auto overflow-y-scroll overflow-x-hidden h-70-vh">
+          <div @click="selectUserMessage(user, index)"
+            v-for="(user, index) in users"
             v-if="user.id !== authUser.id"
             class="relative p-4"
-            :class="{'bg-white': user.id === selectedUser.id}">
+            :class="{'bg-white': user.id === selectedUser.id, 'jelly bg-white': user.unread_messages_for_auth_user_count > 0}">
             <img class="w-12 h-12 rounded-full cursor-pointer" :title="user.name" :src="generateUrl(user.avatar)">
             <div :class="[user.online ? 'bg-teal-500' : 'bg-gray-500']" :title="[user.online ? 'online' : 'offline']" class="absolute w-4 h-4 rounded-full border-2 border-white mb-4 mr-4 right-0 bottom-0"></div>
           </div>
@@ -81,7 +81,7 @@ export default {
   }),
   created () {
     EventBus.$on('show-message-box', this.showMessageBox)
-    axios.get('/users')
+    axios.get('/unread-direct-messages/users')
       .then((response) => {
         this.users = response.data.users
       })
@@ -92,26 +92,32 @@ export default {
     this.listen()
     document.addEventListener('visibilitychange', this.clearTitleNotification)
   },
+
   updated () {
     if (this.messageBoxShown) {
       this.scrollToBottom()
     }
   },
+
   beforeDestroy () {
     EventBus.$off('show-message-box', this.showMessageBox)
     document.removeEventListener('visibilitychange', this.clearTitleNotification)
   },
+
   watch: {
     message (newVal) {
       // increase the height of textarea based on text present there
       this.messageTextareaHeight = newVal ? `${this.$refs.messageTextarea.scrollHeight}px` : 'auto'
     }
   },
+
   methods: {
     scrollToBottom () {
       this.$nextTick(() => {
-        var messagesContainer = this.$el.querySelector('#message-box')
-        messagesContainer.scrollTop = messagesContainer.lastElementChild.scrollHeight
+        if (document.getElementById("message-box")) {
+          var messagesContainer = this.$el.querySelector('#message-box')
+          messagesContainer.scrollTop = messagesContainer.lastElementChild.scrollHeight
+        }
       })
     },
     showMessageBox () {
@@ -144,7 +150,7 @@ export default {
           })
       }
     },
-    selectUserMessage (user) {
+    selectUserMessage (user, index) {
       this.loading = true
       this.selectedUser = user
       this.isDisabled = false
@@ -163,6 +169,15 @@ export default {
           this.loading = false
           console.log(error)
         })
+      axios.put('/unread-direct-messages/' + user.id)
+        .then((response) => {
+          this.users[index].unread_messages_for_auth_user_count = 0
+          this.loading = false
+        })
+        .catch((error) => {
+          this.loading = false
+          console.log(error)
+        })
     },
     deleteMessage (index) {
       this.messages.splice(index, 1)
@@ -174,6 +189,22 @@ export default {
             user.online = users.includes(user.id)
             return user
           })
+        })
+        .joining((userId) => {
+          this.users = this.users.map(user => {
+            if (userId === user.id) {
+              user.online = true
+            }
+            return user
+          })          
+        })
+        .leaving((userId) => {
+          this.users = this.users.map(user => {
+            if (userId === user.id) {
+              user.online = false
+            }
+            return user
+          })          
         })
       Echo.private('User.' + this.authUser.id)
         .listen('DirectMessageCreated', event => {
@@ -198,3 +229,28 @@ export default {
   }
 }
 </script>
+
+<style>
+.jelly {
+  animation: jelly 2s infinite;
+}
+
+@keyframes jelly {
+  0%,
+  20% {
+    transform: scale(0.9, 1.1);
+  }
+  40% {
+    transform: scale(1.1, 0.9);
+  }
+  60% {
+    transform: scale(0.95, 1.05);
+  }
+  80% {
+    transform: scale(1, 1);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+</style>

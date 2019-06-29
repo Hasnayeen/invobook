@@ -4,6 +4,8 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use Illuminate\Support\Facades\Event;
+use App\Core\Models\User;
+use App\Core\Models\DirectMessage;
 
 class DirectMessageTest extends TestCase
 {
@@ -11,8 +13,8 @@ class DirectMessageTest extends TestCase
     public function user_can_read_direct_message_sent_by_other_user()
     {
         Event::fake();
-        $user = factory(\App\Core\Models\User::class)->create();
-        $messages = factory(\App\Core\Models\DirectMessage::class, 5)->create([
+        $user = factory(User::class)->create();
+        $messages = factory(DirectMessage::class, 5)->create([
             'sender_id'   => $this->user->id,
             'receiver_id' => $user->id,
         ]);
@@ -37,5 +39,34 @@ class DirectMessageTest extends TestCase
              ->assertJsonFragment([
                  'body' => $messages[4]['body'],
              ]);
+    }
+
+    /** @test */
+    public function user_can_get_users_with_unread_message()
+    {
+        $john = factory(User::class)->create();
+        factory(DirectMessage::class)->create(['sender_id' => $john->id, 'receiver_id' => $this->user->id, 'read_at' => null]);
+        $this->actingAs($this->user)
+             ->get('unread-direct-messages/users')
+             ->assertJsonFragment([
+                 'status'                              => 'success',
+                 'id'                                  => $john->id,
+                 'name'                                => $john->name,
+                 'unread_messages_for_auth_user_count' => '1',
+             ]);
+    }
+
+    /** @test */
+    public function when_user_read_unread_message_update_record()
+    {
+        $john = factory(User::class)->create();
+        factory(DirectMessage::class)->create(['sender_id' => $john->id, 'receiver_id' => $this->user->id, 'read_at' => null]);
+        $this->actingAs($this->user)
+             ->put('unread-direct-messages/' . $john->id)
+             ->assertJsonFragment([
+                 'status' => 'success',
+             ]);
+
+        $this->assertDatabaseMissing('direct_messages', ['receiver_id' => auth()->user()->id, 'sender_id' => $john->id, 'read_at' => null]);
     }
 }

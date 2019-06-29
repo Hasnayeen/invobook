@@ -2,7 +2,6 @@
 
 namespace App\Core\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Core\Repositories\DirectMessageRepository;
 use App\Core\Http\Requests\StoreDirectMessageRequest;
 
