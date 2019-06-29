@@ -3,9 +3,9 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Illuminate\Support\Facades\Event;
 use App\Core\Models\User;
 use App\Core\Models\DirectMessage;
+use Illuminate\Support\Facades\Event;
 
 class DirectMessageTest extends TestCase
 {
