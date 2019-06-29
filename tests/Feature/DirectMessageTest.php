@@ -44,6 +44,7 @@ class DirectMessageTest extends TestCase
     /** @test */
     public function user_can_get_users_with_unread_message()
     {
+        Event::fake();
         $john = factory(User::class)->create();
         factory(DirectMessage::class)->create(['sender_id' => $john->id, 'receiver_id' => $this->user->id, 'read_at' => null]);
         $this->actingAs($this->user)
@@ -59,6 +60,7 @@ class DirectMessageTest extends TestCase
     /** @test */
     public function when_user_read_unread_message_update_record()
     {
+        Event::fake();
         $john = factory(User::class)->create();
         factory(DirectMessage::class)->create(['sender_id' => $john->id, 'receiver_id' => $this->user->id, 'read_at' => null]);
         $this->actingAs($this->user)
