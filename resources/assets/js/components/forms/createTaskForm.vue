@@ -1,93 +1,106 @@
 <template>
 <div v-if="formShown">
-  <div class="absolute container mx-auto w-5/6 md:w-3/5 lg:w-2/5 bg-white rounded shadow-lg z-10" style="top: 12vh;left: 0;right: 0;">
-    <div class="p-4">
+  <div class="absolute container mx-auto w-5/6 md:w-3/5 lg:w-2/5 z-20" style="top: 12vh;left: 0;right: 0;">
+    <div class="bg-white rounded shadow-lg">
       <div class="p-4">
-        <label class="block uppercase tracking-wide text-gray-800 text-xs font-bold mb-2" for="grid-first-name">
-          Title <span class="text-gray-500 capitalize">(required)</span>
-        </label>
-        <input ref="focusInput" v-model="name" class="appearance-none block w-full bg-gray-200 text-gray-800 border border-gray-200 rounded py-3 px-4" type="text" placeholder="New Task" required>
-      </div>
-      <div class="p-4">
-        <label class="block uppercase tracking-wide text-gray-800 text-xs font-bold mb-2" for="grid-first-name">
-          Notes
-        </label>
-        <textarea v-model="notes" class="appearance-none block w-full bg-gray-200 text-gray-800 border border-gray-200 rounded py-3 px-4 resize-none" placeholder="Description" name="notes" rows="2"></textarea>
-      </div>
-      <div class="p-4">
-        <label class="block uppercase tracking-wide text-gray-800 text-xs font-bold mb-2" for="grid-first-name">
-          Assigned To <span class="text-gray-500 capitalize">(required)</span>
-        </label>
-        <div class="flex flex-row items-center">
-          <select v-model="assignedTo" class="w-5/6 block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-800 py-3 px-4 pr-8 rounded" id="user">
-            <option selected disabled hidden>Select User to Add</option>
-            <template v-for="member in resource.members">
-              <option :value="member.id" class="my-2 text-lg">{{ member.name }}</option>
-            </template>
-          </select>
-          <font-awesome-icon :icon="faChevronDown"
-            class="w-1/6 pointer-events-none flex items-center text-gray-800 -ml-8">
-          </font-awesome-icon>
+        <div class="p-4">
+          <label class="block uppercase tracking-wide text-gray-800 text-xs font-bold mb-2" for="grid-first-name">
+            Title <span class="text-gray-500 capitalize">(required)</span>
+          </label>
+          <input ref="focusInput" v-model="name" class="appearance-none block w-full bg-gray-200 text-gray-800 border border-gray-200 rounded py-3 px-4" type="text" placeholder="New Task" required>
         </div>
-      </div>
-      <div class="p-4">
-        <label class="block uppercase tracking-wide text-gray-800 text-xs font-bold mb-2" for="grid-first-name">
-          Due On <span class="text-gray-500 capitalize">(required)</span>
-        </label>
-        <datepicker v-model="dueOnDate" ref="dueOnDate" :disabled-dates="disabledDates" placeholder="Select Date" format="yyyy-MM-dd" input-class="appearance-none bg-gray-200 text-gray-800 w-full" wrapper-class="appearance-none block w-full bg-gray-200 text-gray-800 border border-gray-200 rounded py-3 px-4"></datepicker>
-      </div>
-      <div class="p-4">
-        <label class="block uppercase tracking-wide text-gray-800 text-xs font-bold mb-2" for="grid-first-name">
-          Cycle
-        </label>
-        <div class="flex flex-row items-center">
-          <select v-model="cycleId" class="w-5/6 block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-800 py-3 px-4 pr-8 rounded" id="user">
-            <option selected disabled hidden value="">Select a Cycle</option>
-            <template v-for="cycle in cycles">
-              <option :value="cycle.id" class="my-2 text-lg">{{ cycle.name ? cycle.name : cycle.start_date + ' - ' + cycle.end_date }}</option>
-            </template>
-          </select>
-          <font-awesome-icon :icon="faChevronDown"
-            class="w-1/6 pointer-events-none flex items-center text-gray-800 -ml-8">
-          </font-awesome-icon>
+        <div class="p-4">
+          <label class="block uppercase tracking-wide text-gray-800 text-xs font-bold mb-2" for="grid-first-name">
+            Notes
+          </label>
+          <textarea v-model="notes" class="appearance-none block w-full bg-gray-200 text-gray-800 border border-gray-200 rounded py-3 px-4 resize-none" placeholder="Description" name="notes" rows="2"></textarea>
         </div>
-      </div>
-      <div class="p-4">
-        <label class="block uppercase tracking-wide text-gray-800 text-xs font-bold mb-2" for="grid-first-name">
-          Related To
-        </label>
-        <div class="flex flex-row items-center">
-          <select v-model="relatedTo" class="w-5/6 block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-800 py-3 px-4 pr-8 rounded" id="user">
-            <option selected disabled hidden value="">Select a Task</option>
-            <template v-for="otherTask in tasks">
-              <option v-if="!task || (task && otherTask.id !== task.id)" :value="otherTask.id" class="my-2 text-lg">{{ otherTask.name }}</option>
-            </template>
-          </select>
-          <font-awesome-icon :icon="faChevronDown"
-            class="w-1/6 pointer-events-none flex items-center text-gray-800 -ml-8">
-          </font-awesome-icon>
+        <div class="p-4">
+          <label class="block uppercase tracking-wide text-gray-800 text-xs font-bold mb-2" for="grid-first-name">
+            Assigned To <span class="text-gray-500 capitalize">(required)</span>
+          </label>
+          <div class="flex flex-row items-center">
+            <select v-model="assignedTo" class="w-5/6 block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-800 py-3 px-4 pr-8 rounded" id="user">
+              <option selected disabled hidden>Select User to Add</option>
+              <template v-for="member in resource.members">
+                <option :value="member.id" class="my-2 text-lg">{{ member.name }}</option>
+              </template>
+            </select>
+            <font-awesome-icon :icon="faChevronDown"
+              class="w-1/6 pointer-events-none flex items-center text-gray-800 -ml-8">
+            </font-awesome-icon>
+          </div>
         </div>
-      </div>
-      <div class="p-4">
-        <label class="block uppercase tracking-wide text-gray-800 text-xs font-bold mb-2" for="tags">Tags</label>
-        <div class="p-2 border rounded bg-gray-100">
-          <div class="flex flex-row flex-wrap">
-            <div v-for="tag in tags" class="flex items-center mx-1 my-1 py-1 px-3 bg-indigo-200 font-semibold text-indigo-700 rounded-full">
-              <span class="text-sm">
-                {{ tag }}
-              </span>
-              <font-awesome-icon @click="deleteTag(tag)" :icon="faTimesCircle" class="text-sm text-indigo-700 ml-1 cursor-pointer"></font-awesome-icon>
+        <div class="p-4">
+          <label class="block uppercase tracking-wide text-gray-800 text-xs font-bold mb-2" for="grid-first-name">
+            Due On <span class="text-gray-500 capitalize">(required)</span>
+          </label>
+          <datepicker v-model="dueOnDate" ref="dueOnDate" :disabled-dates="disabledDates" placeholder="Select Date" format="yyyy-MM-dd" input-class="appearance-none bg-gray-200 text-gray-800 w-full" wrapper-class="appearance-none block w-full bg-gray-200 text-gray-800 border border-gray-200 rounded py-3 px-4"></datepicker>
+        </div>
+        <div class="p-4">
+          <label class="block uppercase tracking-wide text-gray-800 text-xs font-bold mb-2" for="grid-first-name">
+            Cycle
+          </label>
+          <div class="flex flex-row items-center">
+            <select v-model="cycleId" class="w-5/6 block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-800 py-3 px-4 pr-8 rounded" id="user">
+              <option selected disabled hidden value="">Select a Cycle</option>
+              <template v-for="cycle in cycles">
+                <option :value="cycle.id" class="my-2 text-lg">{{ cycle.name ? cycle.name : cycle.start_date + ' - ' + cycle.end_date }}</option>
+              </template>
+            </select>
+            <font-awesome-icon :icon="faChevronDown"
+              class="w-1/6 pointer-events-none flex items-center text-gray-800 -ml-8">
+            </font-awesome-icon>
+          </div>
+        </div>
+        <div class="p-4">
+          <label class="block uppercase tracking-wide text-gray-800 text-xs font-bold mb-2" for="grid-first-name">
+            Related To
+          </label>
+          <div class="flex flex-row items-center">
+            <select v-model="relatedTo" class="w-5/6 block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-800 py-3 px-4 pr-8 rounded" id="user">
+              <option selected disabled hidden value="">Select a Task</option>
+              <template v-for="otherTask in tasks">
+                <option v-if="!task || (task && otherTask.id !== task.id)" :value="otherTask.id" class="my-2 text-lg">{{ otherTask.name }}</option>
+              </template>
+            </select>
+            <font-awesome-icon :icon="faChevronDown"
+              class="w-1/6 pointer-events-none flex items-center text-gray-800 -ml-8">
+            </font-awesome-icon>
+          </div>
+        </div>
+        <div class="p-4" v-click-outside="dontShowTags">
+          <label class="block uppercase tracking-wide text-gray-800 text-xs font-bold mb-2" for="tags">Tags</label>
+          <div class="p-2 border rounded bg-gray-100">
+            <div class="flex flex-row flex-wrap">
+              <div v-for="tag in tags" class="flex items-center mx-1 my-1 py-1 px-3 bg-indigo-200 font-semibold text-indigo-700 rounded-full">
+                <span class="text-sm">
+                  {{ tag.label }}
+                </span>
+                <font-awesome-icon @click="deleteTag(tag)" :icon="faTimesCircle" class="text-sm text-indigo-700 ml-1 cursor-pointer"></font-awesome-icon>
+              </div>
+              <input
+                v-model="tag"
+                @focus="showTags"
+                type="text"
+                name="tags"
+                class="text-gray-700 bg-gray-100 w-24 p-1 my-1 flex-grow">
             </div>
-            <input v-model="tag" @keydown.enter="addTag" type="text" name="tags" class="text-gray-700 bg-gray-100 w-24 p-1 my-1 flex-grow">
+          </div>
+          <div v-if="tagSuggestionShown && availableTags.length !== 0" class="shadow-md border py-1 rounded-b">
+            <div @click="addTag(tag)" v-for="tag in availableTags" class="px-4 py-2 cursor-pointer -mt-1 hover:bg-teal-400 hover:text-white">
+              {{ tag.label }}
+            </div>
           </div>
         </div>
       </div>
+      <div class="flex flex-row justify-between py-4 px-8 bg-gray-200 rounded">
+        <button @click="closeCreateTaskForm" class="text-red-300 hover:font-bold hover:text-red-400">Cancel</button>
+        <button v-if="task" @click="updateTask" class="bg-teal-400 text-white font-medium hover:bg-teal-600 py-4 px-8 rounded">Save</button>
+        <button v-else @click="createTask" class="bg-teal-400 text-white font-medium hover:bg-teal-600 py-4 px-8 rounded">Create</button>
+      </div>
     </div>
-    <div class="flex flex-row justify-between py-4 px-8 bg-gray-200 rounded">
-      <button @click="closeCreateTaskForm" class="text-red-300 hover:font-bold hover:text-red-400">Cancel</button>
-      <button v-if="task" @click="updateTask" class="bg-teal-400 text-white font-medium hover:bg-teal-600 py-4 px-8 rounded">Save</button>
-      <button v-else @click="createTask" class="bg-teal-400 text-white font-medium hover:bg-teal-600 py-4 px-8 rounded">Create</button>
-    </div>
+    <div class="h-16"></div>
   </div>
 
   <div @click="closeCreateTaskForm" :class="{'hidden': !formShown}" class="h-screen w-screen fixed inset-0 bg-gray-900 opacity-25"></div>
@@ -137,6 +150,9 @@ export default {
     },
     tag: '',
     tags: [],
+    labels: [],
+    availableTags: [],
+    tagSuggestionShown: false,
     faChevronDown,
     faTimesCircle,
   }),
@@ -148,6 +164,7 @@ export default {
         if (this.task) {
           this.hydrateForm()
         }
+        this.getTags()
       }
     }
   },
@@ -174,6 +191,7 @@ export default {
         related_to: this.relatedTo,
         cycle_id: this.cycleId,
         due_on: window.luxon.DateTime.fromISO(this.dueOnDate.toISOString()).toISODate(),
+        labels: this.labels,
         group_id: this.resource.id,
         group_type: this.resourceType
       })
@@ -195,6 +213,7 @@ export default {
     },
     closeCreateTaskForm () {
       this.dehydrateForm()
+      this.tagSuggestionShown = false
       this.$emit('close')
     },
     closeNotification () {
@@ -208,6 +227,7 @@ export default {
         related_to: this.relatedTo,
         cycle_id: this.cycleId,
         due_on: window.luxon.DateTime.fromISO(this.dueOnDate.toISOString()).toISODate(),
+        labels: this.labels,
         group_id: this.resource.id,
         group_type: this.resourceType
       })
@@ -221,13 +241,37 @@ export default {
           this.$emit('close')
         })
     },
-    addTag () {
-      this.tags.push(this.tag)
+    showTags () {
+      this.tagSuggestionShown = true
+    },
+    dontShowTags () {
+      this.tagSuggestionShown = false
+    },
+    getTags () {
+      if (this.availableTags.length === 0) {
+        axios.get('/tags')
+          .then((response) => {
+            this.availableTags = response.data.tags
+          })
+          .catch((error) => {
+            console.error(error.response.data.message)
+          })
+      }
+    },
+    addTag (tag) {
+      this.tags.push(tag)
+      this.labels.push(tag.id)
+      this.availableTags = this.availableTags.filter(x => x.id !== tag.id)
       this.tag = ''
     },
     deleteTag (tag) {
-      let index = this.tags.indexOf(tag);
-      if (index !== -1) this.tags.splice(index, 1)
+      let index = this.tags.indexOf(tag)
+      if (index !== -1) { 
+        this.tags.splice(index, 1)
+        index = this.labels.indexOf(tag.id)
+        this.labels.splice(index, 1)
+        this.availableTags.push(tag)
+      }
     },
     hydrateForm () {
       this.name = this.task.name
