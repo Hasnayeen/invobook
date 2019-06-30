@@ -23,7 +23,7 @@ class Group extends Model
 
     public function getCurrentCycleAttribute()
     {
-        $currentDate = now();
+        $currentDate = today();
 
         return $this->cycles()->where('start_date', '<=', $currentDate)->where('end_date', '>=', $currentDate)->first();
     }

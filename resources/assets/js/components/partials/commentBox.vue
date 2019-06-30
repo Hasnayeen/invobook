@@ -28,7 +28,7 @@
     <div v-if="name.length < 1" class="absolute text-xs text-gray-600 pt-2">Press enter <span class="bg-gray-500 p-1 rounded text-white font-bold">↵</span> to save</div>
   </div>
   <div>
-    <div v-for="(comment, index) in comments" class="my-6">
+    <div v-for="(comment, index) in comments" :key="comment.id" class="my-6">
       <div class="text-xs text-gray-600 pb-2 ml-10">
         {{ comment.user.name }} on {{ comment.date }}
       </div>
