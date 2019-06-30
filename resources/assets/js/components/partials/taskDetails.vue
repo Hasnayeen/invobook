@@ -73,9 +73,9 @@
       <div class="bg-white text-sm text-gray-600 px-8 pt-4">
         Tags
       </div>
-      <div class="bg-white flex flex-row justify-start px-8 py-4 pb-8">
-        <div class="bg-teal-100 px-3 py-1 rounded-full text-teal-800 font-medium text-sm mr-4">frontend</div>
-        <div class="bg-teal-100 px-3 py-1 rounded-full text-teal-800 font-medium text-sm mr-4">backend</div>
+      <div class="bg-white flex flex-row flex-wrap justify-start px-8 py-2 pb-8">
+        <div v-if="task.tags.length === 0" class="text-gray-700">No Tags</div>
+        <div v-else v-for="tag in task.tags" class="bg-teal-200 px-3 py-1 rounded-full text-teal-800 font-medium text-sm mr-4">{{ tag.label }}</div>
       </div>
       <div class="flex flex-row justify-around bg-gray-200 py-4 text-gray-600 text-center">
         <div class="w-1/2 border-teal-500 text-teal-500 border-b-2 pb-4 -mb-4">

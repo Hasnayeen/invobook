@@ -4,20 +4,28 @@
 
 ### Added
 
-- Added new Authorization module
-- Added new permission system
-- Added new admin middleware
-- Added direct message to a user functionality
-- Added mentioning user functionality in comment & message
-- Added endpoint to list all tags
-- Added endpoint to create categories
-- Added file upload option in file section
-- Added endpoint to check if username exists
-- Added finnish translation
-- Added simplified Chinese translation
+- New Authorization module
+- New permission system
+- File upload option in file section
+- Direct messaging to user functionality
+- Mentioning user functionality in comment & message
+- New cycle (release based) functionality
+- Roadmap feature
+- Show who's online currently in dm box
+- Show activity in project/team/office page
+- New admin middleware
+- Tool enable/disable option in project/team/office
+- Endpoint to list all tags
+- Endpoint to create categories
+- Endpoint to check if username exists
 - Added `localize` helper function
-- Added shareable invite link option for registration
-- Added impersonate user feature for owner
+- Shareable invite link option for registration
+- Impersonate user feature for owner
+- Owner/admin can remove user from project/team/office
+- Update discussion posts
+- Indicator for new notification and direct message
+- Finnish translation
+- Simplified Chinese translation
 
 ### Changed
 
@@ -29,6 +37,8 @@
 ### Removed
 
 - Removed `spatie/laravel-permission` package
+- Removed `spatie/laravel-activitylog` package
+- Removed `vue-linkify` npm package
 
 ## v0.8 (2018-10-18)
 
