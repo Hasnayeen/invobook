@@ -21,7 +21,7 @@
         "laravel/framework": "5.8.*",
         "laravel/scout": "^6.1",
         "laravel/tinker": "~1.0",
-        "pda/pheanstalk": "^3.1",
+        "pda/pheanstalk": "^4.0",
         "predis/predis": "^1.1",
         "teamtnt/laravel-scout-tntsearch-driver": "^6.1"
     },
@@ -29,9 +29,9 @@
         "codedungeon/phpunit-result-printer": "^0.26.2",
         "filp/whoops": "^2.0",
         "fzaninotto/faker": "^1.4",
-        "laravel/telescope": "^1.0",
+        "laravel/telescope": "^2.0",
         "mockery/mockery": "^1.0",
-        "nunomaduro/collision": "^2.0",
+        "nunomaduro/collision": "^3.0",
         "nunomaduro/phpinsights": "^1.5",
         "phpunit/phpunit": "^8.0",
         "wnx/laravel-stats": "^1.9"
