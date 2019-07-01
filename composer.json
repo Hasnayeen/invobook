@@ -21,7 +21,7 @@
         "laravel/framework": "5.8.*",
         "laravel/scout": "^6.1",
         "laravel/tinker": "~1.0",
-        "pda/pheanstalk": "^3.1",
+        "pda/pheanstalk": "^4.0",
         "predis/predis": "^1.1",
         "teamtnt/laravel-scout-tntsearch-driver": "^6.1"
     },
