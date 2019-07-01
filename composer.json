@@ -29,7 +29,7 @@
         "codedungeon/phpunit-result-printer": "^0.26.2",
         "filp/whoops": "^2.0",
         "fzaninotto/faker": "^1.4",
-        "laravel/telescope": "^1.0",
+        "laravel/telescope": "^2.0",
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^2.0",
         "nunomaduro/phpinsights": "^1.5",
