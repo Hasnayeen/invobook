@@ -17,7 +17,7 @@
         "vue-template-compiler": "^2.5.21"
     },
     "devDependencies": {
-        "@fortawesome/fontawesome-svg-core": "^1.2.10",
+        "@fortawesome/fontawesome-svg-core": "^1.2.19",
         "@fortawesome/free-regular-svg-icons": "^5.9.0",
         "@fortawesome/free-solid-svg-icons": "^5.9.0",
         "@fortawesome/vue-fontawesome": "^0.1.3",
