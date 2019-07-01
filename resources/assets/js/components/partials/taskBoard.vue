@@ -11,13 +11,13 @@
   <div class="flex flex-row flex-wrap items-start lg:-mx-2 xl:mx-0">
     <div v-for="(task, index) in tasks" @click="showTaskDetails(index)" :key="task.id" class="bg-white rounded shadow my-4 md:mx-6 lg:mx-2 xl:mx-4 p-4 w-full md:w-72 xl:w-64  cursor-pointer">
       <div class="flex justify-between items-center">
-        <p class="text-xs text-gray-600 flex flex-col">
+        <p class="text-xs text-gray-700 flex flex-col">
           <span class="w-10 border-t-4" :style="'border-color:' + task.status.color"></span>
           <span class="text-xs">Due by</span>
-          <span class="text-sm text-gray-700">{{dueOn(task.due_on)}}</span>
+          <span class="text-sm text-indigo-700 font-medium">{{dueOn(task.due_on)}}</span>
         </p>
-        <img v-if="task.assigned_to" :src="generateUrl(task.user.avatar)" class="rounded-full w-8 h-8">
-        <i v-else class="fas fa-question-circle fa-2x mx-2 self-start text-gray-800"></i>
+        <img v-if="task.assigned_to" :src="generateUrl(task.user.avatar)" class="rounded-full w-8 h-8" :title="task.user.name">
+        <font-awesome-icon v-else :icon="faQuestionCircle" class="text-gray-500 fa-2x" title="Not Assigned"></font-awesome-icon>
       </div>
       <div class="text-gray-700 text-left pt-2">
         <p class="font-medium text-lg overflow-hidden">{{task.name}}</p>
@@ -36,6 +36,8 @@
 import { mapState } from 'vuex'
 import createTaskForm from './../forms/createTaskForm.vue'
 import taskDetails from './../partials/taskDetails.vue'
+import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons/faQuestionCircle'
+
 export default {
   components: {createTaskForm, taskDetails},
   props: {
@@ -56,14 +58,17 @@ export default {
       type: Number
     },
   },
+
   data: () => ({
     createTaskFormShown: false,
     taskDetailsShown: false,
     tasks: [],
     task: {},
     statuses: [],
-    index: null
+    index: null,
+    faQuestionCircle
   }),
+
   async created () {
     this.tasks = await this.getAllTasks(true)
     this.statuses = await this.getAllStatuses()
@@ -79,6 +84,7 @@ export default {
       this.taskDetailsShown = true
     }
   },
+
   watch: {
     activeTab: function () {
       this.getAllTasks(false)
@@ -87,11 +93,13 @@ export default {
       this.getAllTasks(true)
     }
   },
+
   computed: {
     ...mapState({
       selectedCycleId: state => state.cycle.selectedCycle ? state.cycle.selectedCycle.id : 0
     })
   },
+
   methods: {
     dueOn: function (value) {
       return luxon.DateTime.fromSQL(value).toFormat('d LLL')
