@@ -78,6 +78,10 @@ export default {
     faCheckCircle
   }),
 
+  created () {
+    this.getRoadmap()
+  },
+
   methods: {
     ...mapActions([
       'closeComponent'
