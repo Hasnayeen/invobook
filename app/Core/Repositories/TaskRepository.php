@@ -18,7 +18,7 @@ class TaskRepository
         $query = $cycleId ? $this->model->where('cycle_id', $cycleId) : $this->model->whereNull('cycle_id');
 
         return $query->where(['taskable_type' => $type, 'taskable_id' => $entityId])
-                     ->with('user:id,avatar,username')
+                     ->with('user:id,avatar,username,name')
                      ->with('creator:id,avatar')
                      ->with('related:id,name')
                      ->with('status:id,name,color')

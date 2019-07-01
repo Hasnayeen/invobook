@@ -23,7 +23,7 @@
             <select v-model="assignedTo" class="w-5/6 block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-800 py-3 px-4 pr-8 rounded" id="user">
               <option selected disabled hidden>Select User to Add</option>
               <template v-for="member in resource.members">
-                <option :value="member.id" class="my-2 text-lg">{{ member.name }}</option>
+                <option :value="member.user_id" class="my-2 text-lg">{{ member.name }}</option>
               </template>
             </select>
             <font-awesome-icon :icon="faChevronDown"
@@ -110,7 +110,7 @@
 <script>
 import Datepicker from 'vuejs-datepicker'
 import { mapState, mapActions } from 'vuex'
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons/faChevronDown'
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons/faTimesCircle'
 
 export default {

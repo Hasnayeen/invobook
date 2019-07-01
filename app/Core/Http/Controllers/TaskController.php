@@ -81,7 +81,7 @@ class TaskController extends Controller
     {
         $this->authorize('update', $task);
         $task->update($request->all());
-        $task->load('user:id,avatar', 'status');
+        $task->load('user:id,avatar', 'status', 'tags');
 
         return response()->json([
             'status'  => 'success',

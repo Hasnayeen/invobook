@@ -7,7 +7,7 @@
         {{ 'Currently in room' | localize }}:
       </div>
       <template v-for="user in users">
-        <img :src="generateUrl(user.avatar)" alt="" class="w-8 h-8 rounded-full mr-2">
+        <img :src="generateUrl(user.avatar)" alt="" class="w-8 h-8 rounded-full mr-2" :title="user.name">
       </template>
     </div>
 
