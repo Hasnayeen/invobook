@@ -23,7 +23,7 @@
               <font-awesome-icon :icon="faCaretDown" class=""></font-awesome-icon>
             </div>
           </div>
-          <div class="mx-2 w-64">
+          <div class="mx-2 w-64 bg-white">
             <div v-if="tagSuggestionShown && availableTags.length !== 0" class="shadow-md border py-1 rounded-b">
               <div @click="addTag(tag)" v-for="tag in availableTags" class="px-4 py-2 cursor-pointer -mt-1 hover:bg-teal-400 hover:text-white">
                 {{ tag.label }}

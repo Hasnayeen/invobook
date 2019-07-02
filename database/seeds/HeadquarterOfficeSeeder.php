@@ -4,6 +4,7 @@ use Carbon\Carbon;
 use App\Core\Models\User;
 use App\Core\Models\Office;
 use Illuminate\Database\Seeder;
+use App\Authorization\Authorization;
 
 class HeadquarterOfficeSeeder extends Seeder
 {
@@ -23,7 +24,7 @@ class HeadquarterOfficeSeeder extends Seeder
             'owner_id'    => $user->id,
         ]);
         $office = Office::where('name', 'Headquarter')->first();
-        resolve('Authorization')->setupDefaultPermissions($office);
+        (new Authorization($user))->setupDefaultPermissions($office);
         $user->offices()->attach($office->id);
     }
 }
