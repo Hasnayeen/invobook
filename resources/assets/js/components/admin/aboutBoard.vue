@@ -7,7 +7,7 @@
       {{ message }}
       </p>
       <div class="flex flex-row justify-between pt-8 bg-gray-200 rounded">
-        <button @click="closeUpdateModal" class="text-red-lighter hover:font-bold hover:text-red-400 hover:border-red-400 border-red-lighter border px-4 py-3 rounded">Ok</button>
+        <button @click="closeUpdateModal" class="text-red-200 hover:font-bold hover:text-red-400 hover:border-red-400 border-red-200 border px-4 py-3 rounded">Ok</button>
       </div>
     </div>
   </div>

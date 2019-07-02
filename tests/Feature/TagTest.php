@@ -7,6 +7,7 @@ use App\Core\Models\Tag;
 use App\Core\Models\Task;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Auth\Access\AuthorizationException;
+use App\Core\Models\Project;
 
 class TagTest extends TestCase
 {
@@ -37,11 +38,18 @@ class TagTest extends TestCase
     /** @test */
     public function user_can_add_a_existing_tag_to_a_task()
     {
+        $project = factory(Project::class)->create(['owner_id' => $this->user->id]);
+        $task = factory(Task::class)->create(['taskable_type' => 'project', 'taskable_id' => $project->id]);
         $tag = factory(Tag::class)->create();
-        $task = factory(Task::class)->create();
 
-        $this->actingAs($this->user)->post("tasks/{$task->id}/tags", [
+        $this->actingAs($this->user);
+        resolve('Authorization')->setupDefaultPermissions($project);
+        $project->members()->save($this->user);
+
+        $this->post("tasks/{$task->id}/tags", [
             'labels' => $tag->id,
+            'group_type' => $task->taskable_type,
+            'group_id' => $task->taskable_id
         ])->assertJsonFragment([
             'status'  => 'success',
             'message' => 'Tag has been added to the task',
@@ -56,12 +64,20 @@ class TagTest extends TestCase
     /** @test */
     public function user_with_permission_can_detach_a_tag_from_a_task()
     {
+        $project = factory(Project::class)->create(['owner_id' => $this->user->id]);
+        $task = factory(Task::class)->create(['taskable_type' => 'project', 'taskable_id' => $project->id]);
         $tag = factory(Tag::class)->create();
-        $task = factory(Task::class)->create();
+
+        $this->actingAs($this->user);
+        resolve('Authorization')->setupDefaultPermissions($project);
+        $project->members()->save($this->user);
 
         $task->tags()->attach($tag);
 
-        $this->actingAs($this->user)->delete("tasks/{$task->id}/tags/{$tag->id}")
+        $this->delete("tasks/{$task->id}/tags/{$tag->id}", [
+            'group_type' => $task->taskable_type,
+            'group_id' => $task->taskable_id
+        ])
             ->assertJsonFragment([
                 'status'  => 'success',
                 'message' => 'Tag has been deleted from the task',
@@ -83,7 +99,10 @@ class TagTest extends TestCase
 
         $task->tags()->attach($tag);
 
-        $this->actingAs($user)->delete("tasks/{$task->id}/tags/{$tag->id}");
+        $this->actingAs($user)->delete("tasks/{$task->id}/tags/{$tag->id}", [
+            'group_type' => $task->taskable_type,
+            'group_id' => $task->taskable_id
+        ]);
     }
 
     /** @test */

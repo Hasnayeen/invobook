@@ -1,8 +1,8 @@
 <template>
 <div>
-  <div class="absolute container mx-2 md:mx-auto md:max-w-4xl bg-gray-100 rounded shadow-lg z-30" style="top: 10vh;left: 0;right: 0;">
+  <div class="absolute container mx-2 md:mx-auto md:max-w-4xl bg-white rounded shadow-lg z-30" style="top: 10vh;left: 0;right: 0;">
     <div class="m-auto flex-col flex">
-      <header class="bg-gray-200 text-gray-600 p-6 rounded flex flex-row justify-between items-center" for="user">
+      <header class="text-gray-600 p-6 rounded flex flex-row justify-between items-center" for="user">
         <div></div>
         <div class="uppercase tracking-wide font-semibold text-lg">
           Settings
@@ -12,29 +12,56 @@
         </div>
       </header>
 
-      <div v-if="settings" class="flex p-8">
-        <div @click="toggleToolStatus('task_enabled', settings.task_enabled)" class="rounded border px-4 py-2 mx-2 relative cursor-pointer"
-          :class="[settings.task_enabled ? 'bg-indigo-100 border-indigo-400 shadow-md' : 'bg-gray-100 border-gray-400']">
-          <span class="cursor-pointer">Task</span>
-        </div>
-        <div @click="toggleToolStatus('discussion_enabled', settings.discussion_enabled)" class="rounded border px-4 py-2 mx-2 relative cursor-pointer"
-          :class="[settings.discussion_enabled ? 'bg-indigo-100 border-indigo-400 shadow-md' : 'bg-gray-100 border-gray-400']">
-          <span class="cursor-pointer">Discussion</span>
-        </div>
-        <div @click="toggleToolStatus('message_enabled', settings.message_enabled)" class="rounded border px-4 py-2 mx-2 relative cursor-pointer"
-          :class="[settings.message_enabled ? 'bg-indigo-100 border-indigo-400 shadow-md' : 'bg-gray-100 border-gray-400']">
-          <span class="cursor-pointer">Message</span>
-        </div>
-        <div @click="toggleToolStatus('event_enabled', settings.event_enabled)" class="rounded border px-4 py-2 mx-2 relative cursor-pointer"
-          :class="[settings.event_enabled ? 'bg-indigo-100 border-indigo-400 shadow-md' : 'bg-gray-100 border-gray-400']">
-          <span class="cursor-pointer">Event</span>
-        </div>
-        <div @click="toggleToolStatus('file_enabled', settings.file_enabled)" class="rounded border px-4 py-2 mx-2 relative cursor-pointer"
-          :class="[settings.file_enabled ? 'bg-indigo-100 border-indigo-400 shadow-md' : 'bg-gray-100 border-gray-400']">
-          <span class="cursor-pointer">File</span>
+      <div>
+        <div class="flex flex-row text-center text-gray-500">
+          <div @click="activateThisColumn('tools')" :class="[activeColumn === 'tools' ? 'text-indigo-500 border-indigo-500 border-b-2' : 'cursor-pointer']" class="w-1/2 bg-white font-semibold p-4 rounded-tl">
+            {{ 'Tools' | localize }}
+          </div>
+          <div @click="activateThisColumn('tags')" :class="[activeColumn === 'tags' ? 'text-indigo-500 border-indigo-500 border-b-2' : 'cursor-pointer']" class="w-1/2 bg-white font-semibold p-4 rounded-tl">
+            {{ 'Tags' | localize }}
+          </div>
+          <div @click="activateThisColumn('status')" :class="[activeColumn === 'status' ? 'text-indigo-500 border-indigo-500 border-b-2' : 'cursor-pointer']" class="w-1/2 bg-white font-semibold p-4 rounded-tl">
+            {{ 'Status' | localize }}
+          </div>
         </div>
       </div>
 
+      <!-- Tools Settings -->
+      <div v-if="activeColumn === 'tools'" class="bg-gray-100 rounded-b p-8">
+        <div class="pb-6 px-2 flex items-center">
+          <div class="w-6 h-6 rounded-full bg-indigo-400 flex items-center justify-center">
+            <font-awesome-icon :icon="faTools" class="text-white fa-xs"></font-awesome-icon>
+          </div>
+          <div class="pl-2 text-lg text-gray-600">
+            Enable/Disable tools on this {{ resourceType }}
+          </div>
+        </div>
+        <div class="flex">
+          <div @click="toggleToolStatus('task_enabled', settings.task_enabled)" class="rounded border px-4 py-2 mx-2 relative cursor-pointer"
+            :class="[settings.task_enabled ? 'bg-indigo-100 border-indigo-400 shadow-md' : 'bg-gray-100 border-gray-400']">
+            <span class="cursor-pointer">Task</span>
+          </div>
+          <div @click="toggleToolStatus('discussion_enabled', settings.discussion_enabled)" class="rounded border px-4 py-2 mx-2 relative cursor-pointer"
+            :class="[settings.discussion_enabled ? 'bg-indigo-100 border-indigo-400 shadow-md' : 'bg-gray-100 border-gray-400']">
+            <span class="cursor-pointer">Discussion</span>
+          </div>
+          <div @click="toggleToolStatus('message_enabled', settings.message_enabled)" class="rounded border px-4 py-2 mx-2 relative cursor-pointer"
+            :class="[settings.message_enabled ? 'bg-indigo-100 border-indigo-400 shadow-md' : 'bg-gray-100 border-gray-400']">
+            <span class="cursor-pointer">Message</span>
+          </div>
+          <div @click="toggleToolStatus('event_enabled', settings.event_enabled)" class="rounded border px-4 py-2 mx-2 relative cursor-pointer"
+            :class="[settings.event_enabled ? 'bg-indigo-100 border-indigo-400 shadow-md' : 'bg-gray-100 border-gray-400']">
+            <span class="cursor-pointer">Event</span>
+          </div>
+          <div @click="toggleToolStatus('file_enabled', settings.file_enabled)" class="rounded border px-4 py-2 mx-2 relative cursor-pointer"
+            :class="[settings.file_enabled ? 'bg-indigo-100 border-indigo-400 shadow-md' : 'bg-gray-100 border-gray-400']">
+            <span class="cursor-pointer">File</span>
+          </div>
+        </div>
+      </div>
+      <!-- Tools Settings -->
+
+      <tags-settings :shown="activeColumn === 'tags'" :resourceId="resourceId" :resourceType="resourceType"></tags-settings>
     </div>
   </div>
   <div @click="closeModal" class="h-screen w-screen fixed inset-0 bg-gray-900 opacity-25 z-20"></div>
@@ -43,9 +70,15 @@
 
 <script>
 import { mapActions } from 'vuex'
-import { faTimesCircle } from '@fortawesome/free-solid-svg-icons/faTimesCircle'
+import tagsSettings from './tagsSettings'
+import {
+  faTimesCircle,
+  faTools,
+  faSearch,
+} from '@fortawesome/free-solid-svg-icons'
 
 export default {
+  components: {tagsSettings},
   props: {
     resourceId: {
       required: true,
@@ -62,7 +95,10 @@ export default {
   },
 
   data: () => ({
-    faTimesCircle
+    activeColumn: 'tools',
+    faTimesCircle,
+    faTools,
+    faSearch,
   }),
 
   methods: {
@@ -84,7 +120,10 @@ export default {
       .catch((error) => {
         console.error(error)
       })
-    }
+    },
+    activateThisColumn (column) {
+      this.activeColumn = column
+    },
   }
 }
 </script>
