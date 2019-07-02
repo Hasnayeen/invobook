@@ -17,11 +17,11 @@ class GroupTagTest extends TestCase
         $this->actingAs($this->user)
              ->post('groups/tags/' . $tag->id, [
                  'group_type' => 'project',
-                 'group_id'   => $project->id
+                 'group_id'   => $project->id,
              ])
              ->assertJsonFragment([
                  'status' => 'success',
-                 'label'  => $tag->label
+                 'label'  => $tag->label,
              ]);
 
         $this->assertDatabaseHas('group_tag', ['tag_id' => $tag->id, 'taggable_type' => 'project', 'taggable_id' => $project->id]);
@@ -37,14 +37,14 @@ class GroupTagTest extends TestCase
         $this->actingAs($this->user)
              ->call('GET', 'groups/tags', [
                  'group_type' => 'project',
-                 'group_id'   => $project->id
+                 'group_id'   => $project->id,
              ])
              ->assertJsonFragment([
                  'status' => 'success',
-                 'label'  => $tags[0]->label
+                 'label'  => $tags[0]->label,
              ])
              ->assertJsonFragment([
-                 'label'  => $tags[1]->label
+                 'label'  => $tags[1]->label,
              ]);
     }
 
@@ -58,11 +58,11 @@ class GroupTagTest extends TestCase
         $this->actingAs($this->user)
              ->delete('groups/tags/' . $tag->id, [
                  'group_type' => 'project',
-                 'group_id'   => $project->id
+                 'group_id'   => $project->id,
              ])
              ->assertJsonFragment([
                  'status'  => 'success',
-                 'message' => 'Tag has been removed from the project'
+                 'message' => 'Tag has been removed from the project',
              ]);
     }
 }
