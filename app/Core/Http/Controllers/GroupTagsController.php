@@ -17,7 +17,7 @@ class GroupTagsController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'tag'    => $tag
+            'tag'    => $tag,
         ]);
     }
 
