@@ -5,9 +5,9 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use App\Core\Models\Tag;
 use App\Core\Models\Task;
+use App\Core\Models\Project;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Auth\Access\AuthorizationException;
-use App\Core\Models\Project;
 
 class TagTest extends TestCase
 {
@@ -47,9 +47,9 @@ class TagTest extends TestCase
         $project->members()->save($this->user);
 
         $this->post("tasks/{$task->id}/tags", [
-            'labels' => $tag->id,
+            'labels'     => $tag->id,
             'group_type' => $task->taskable_type,
-            'group_id' => $task->taskable_id
+            'group_id'   => $task->taskable_id,
         ])->assertJsonFragment([
             'status'  => 'success',
             'message' => 'Tag has been added to the task',
@@ -76,7 +76,7 @@ class TagTest extends TestCase
 
         $this->delete("tasks/{$task->id}/tags/{$tag->id}", [
             'group_type' => $task->taskable_type,
-            'group_id' => $task->taskable_id
+            'group_id'   => $task->taskable_id,
         ])
             ->assertJsonFragment([
                 'status'  => 'success',
@@ -101,7 +101,7 @@ class TagTest extends TestCase
 
         $this->actingAs($user)->delete("tasks/{$task->id}/tags/{$tag->id}", [
             'group_type' => $task->taskable_type,
-            'group_id' => $task->taskable_id
+            'group_id'   => $task->taskable_id,
         ]);
     }
 
