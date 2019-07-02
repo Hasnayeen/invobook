@@ -10,7 +10,7 @@ class TaskTagController extends Controller
 {
     public function store(Task $task)
     {
-        $this->authorize('attach', Tag::class);
+        $this->authorize('create', Task::class);
         $task->tags()->attach(request('labels'));
 
         return response()->json([
@@ -21,7 +21,7 @@ class TaskTagController extends Controller
 
     public function delete(Task $task, Tag $tag)
     {
-        $this->authorize('detach', $tag);
+        $this->authorize('delete', $task);
         $task->tags()->detach($tag);
 
         return response()->json([

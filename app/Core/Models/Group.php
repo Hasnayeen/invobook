@@ -21,6 +21,11 @@ class Group extends Model
         return $this->morphMany(\App\Core\Models\Task::class, 'taskable');
     }
 
+    public function tags()
+    {
+        return $this->morphToMany(\App\Core\Models\Tag::class, 'taggable', 'group_tag');
+    }
+
     public function getCurrentCycleAttribute()
     {
         $currentDate = today();

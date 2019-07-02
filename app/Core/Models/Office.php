@@ -41,6 +41,6 @@ class Office extends Group implements HasMembers
 
     public function settings()
     {
-        return $this->hasOne(OfficeSetting::class, 'office_id');
+        return $this->hasOne(OfficeSetting::class, 'office_id')->withDefault();
     }
 }

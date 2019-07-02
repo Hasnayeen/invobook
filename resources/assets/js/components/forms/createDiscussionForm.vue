@@ -70,6 +70,8 @@ import { mapState, mapActions } from 'vuex'
 import imageUpload from 'quill-plugin-image-upload'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 
+Quill.register('modules/imageUpload', imageUpload)
+
 export default {
   props: {
     formShown: {
@@ -100,46 +102,47 @@ export default {
   }),
 
   mounted () {
-    Quill.register('modules/imageUpload', imageUpload)
-    this.quill = new Quill('#editor', {
-      modules: {
-        toolbar: [
-          [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-          ['bold', 'italic', 'underline', 'strike'],
-          [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-          ['blockquote', 'code-block'],
-          ['image', 'link']
-        ],
-        imageUpload: {
-          upload: file => {
-            let formData = new FormData()
-            formData.append('files[0]', file)
-            formData.append('group_type', this.resourceType)
-            formData.append('group_id', this.resourceId)
-            formData.append('for_editor', true)
-            
-            // return a Promise that resolves in a link to the uploaded image
-            return new Promise((resolve, reject) => {
-              axios.post('/files',
-                formData,
-                {
-                  headers: {
-                    'Content-Type': 'multipart/form-data'
-                  }
-                })
-                .then((response) => {
-                  this.showNotification({type: response.data.status, message: response.data.message})
-                  resolve(response.data.url)
-                })
-                .catch((error) => {
-                  this.showNotification({type: error.response.data.status, message: error.response.data.message})
-                })
-            });
-          }
+    if (this.quill === null) {
+      this.quill = new Quill('#editor', {
+        modules: {
+          toolbar: [
+            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+            ['bold', 'italic', 'underline', 'strike'],
+            [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+            ['blockquote', 'code-block'],
+            ['image', 'link']
+          ],
+          imageUpload: {
+            upload: file => {
+              let formData = new FormData()
+              formData.append('files[0]', file)
+              formData.append('group_type', this.resourceType)
+              formData.append('group_id', this.resourceId)
+              formData.append('for_editor', true)
+              
+              // return a Promise that resolves in a link to the uploaded image
+              return new Promise((resolve, reject) => {
+                axios.post('/files',
+                  formData,
+                  {
+                    headers: {
+                      'Content-Type': 'multipart/form-data'
+                    }
+                  })
+                  .then((response) => {
+                    this.showNotification({type: response.data.status, message: response.data.message})
+                    resolve(response.data.url)
+                  })
+                  .catch((error) => {
+                    this.showNotification({type: error.response.data.status, message: error.response.data.message})
+                  })
+              });
+            }
+          },
         },
-      },
-      theme: 'snow'
-    })
+        theme: 'snow'
+      })
+    }
   },
 
   watch: {

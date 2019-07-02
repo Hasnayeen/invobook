@@ -46,6 +46,6 @@ class Project extends Group implements HasMembers
 
     public function settings()
     {
-        return $this->hasOne(ProjectSetting::class, 'project_id');
+        return $this->hasOne(ProjectSetting::class, 'project_id')->withDefault();
     }
 }

@@ -41,6 +41,6 @@ class Team extends Group implements HasMembers
 
     public function settings()
     {
-        return $this->hasOne(TeamSetting::class, 'team_id');
+        return $this->hasOne(TeamSetting::class, 'team_id')->withDefault();
     }
 }

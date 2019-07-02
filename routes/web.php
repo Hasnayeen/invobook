@@ -99,6 +99,12 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::delete('groups/permissions/{permission}/roles/{role}', 'GroupPermissionController@delete');
 
+    Route::get('groups/tags', 'GroupTagsController@index');
+
+    Route::post('groups/tags/{tag}', 'GroupTagsController@store');
+
+    Route::delete('groups/tags/{tag}', 'GroupTagsController@delete');
+
     /**********************************
         Member
      **********************************/
