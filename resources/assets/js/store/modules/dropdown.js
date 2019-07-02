@@ -1,6 +1,6 @@
 export default {
     state: {
-        currentComponent: 'settingsModal',
+        currentComponent: '',
     },
 
     mutations: {
