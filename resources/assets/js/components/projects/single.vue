@@ -10,7 +10,7 @@
       <!-- Dropdown Menu -->
       <div v-if="dropdownMenuShown" class="absolute w-64">
         <ul class="list-reset bg-white rounded shadow-lg py-2 absolute inset-x-0 mt-6 text-base text-left font-normal whitespace-no-wrap z-30">
-          <li @click="showModal('roadmapModal')" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
+          <li v-if="settings.roadmap_enabled" @click="showModal('roadmapModal')" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
             Roadmap
           </li>
           <li @click="showModal('memberListModal')" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
@@ -202,7 +202,7 @@ export default {
       } else {
         messageType = 'error'
       }
-      this.showNotification({type: data.message, message: messageType})
+      this.showNotification({type: messageType, message: data.message})
       this.closeComponent()
     },
     activateTab (tab) {

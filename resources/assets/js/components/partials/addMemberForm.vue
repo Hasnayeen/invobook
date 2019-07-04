@@ -85,16 +85,12 @@ export default {
         .then((response) => {
           if (response.data.status === 'success') {
             this.loading = false
-            this.showNotification({type: response.data.status, message: response.data.message})
             this.$emit('addMember', response.data)
-            this.$emit('close')
           }
         })
         .catch((error) => {
           this.loading = false
-          this.showNotification({type: error.response.data.status, message: error.response.data.message})
           this.$emit('addMember', error.response.data)
-          this.$emit('close')
         })
     },
     closeAddMemberForm () {
