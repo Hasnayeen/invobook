@@ -14,13 +14,13 @@ class AddRoadmapEnabledColumn extends Migration
     public function up()
     {
         Schema::table('project_settings', function (Blueprint $table) {
-            $table->boolean('roadmap_enabled')->comment('whether roadmap option is enabled or not');
+            $table->boolean('roadmap_enabled')->default(false)->comment('whether roadmap option is enabled or not');
         });
         Schema::table('team_settings', function (Blueprint $table) {
-            $table->boolean('roadmap_enabled')->comment('whether roadmap option is enabled or not');
+            $table->boolean('roadmap_enabled')->default(false)->comment('whether roadmap option is enabled or not');
         });
         Schema::table('office_settings', function (Blueprint $table) {
-            $table->boolean('roadmap_enabled')->comment('whether roadmap option is enabled or not');
+            $table->boolean('roadmap_enabled')->default(false)->comment('whether roadmap option is enabled or not');
         });
     }
 
