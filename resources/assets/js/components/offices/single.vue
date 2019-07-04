@@ -7,6 +7,9 @@
       </span>
       <div v-if="dropdownMenuShown" class="relative">
         <ul class="list-reset bg-white rounded shadow-lg py-2 absolute right-0 mt-4 text-base text-left font-normal whitespace-no-wrap z-30">
+          <li v-if="settings.roadmap_enabled" @click="showModal('roadmapModal')" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
+            Roadmap
+          </li>
           <li @click="showModal('memberListModal')" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
             Show All Members
           </li>
@@ -48,6 +51,8 @@
   <!-- Modals for cycles -->
 
   <!-- Modals for dropdown menu -->
+    <roadmap-modal v-if="currentComponent === 'roadmapModal'" resourceType="office" :resourceId="office.id" :currentCycleId="currentCycleId"></roadmap-modal>
+
     <members-list-modal v-if="currentComponent === 'memberListModal'" resourceType="office" :resourceId="office.id" :members="office.members" />
 
     <addMemberForm v-if="currentComponent === 'addMemberForm'"resourceType="office" :resource="office" @addMember="addMember"></addMemberForm>
@@ -96,6 +101,7 @@ import membersListModal from './../partials/membersListModal.vue'
 import permissionSettingsModal from './../partials/permissionSettingsModal.vue'
 import settingsModal from './../partials/settingsModal.vue'
 import cyclesModal from './../partials/cyclesModal.vue'
+import roadmapModal from './../partials/roadmapModal.vue'
 import profileCard from './../partials/profileCard.vue'
 import tabMenu from './../partials/tabMenu.vue'
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus'
@@ -114,6 +120,7 @@ export default {
     permissionSettingsModal,
     settingsModal,
     cyclesModal,
+    roadmapModal,
     profileCard,
     tabMenu,
     showGithubRepo
@@ -192,7 +199,7 @@ export default {
         this.message = data.message
       }
       this.addMemberFormShown = false
-      this.showNotification({type: data.message, message: messageType})
+      this.showNotification({type: messageType, message: data.message})
       this.closeComponent()
     },
     activateTab (tab) {

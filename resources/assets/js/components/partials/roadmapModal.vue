@@ -20,7 +20,7 @@
           <div class="flex px-4 py-2 self-stretch">
             <div class="border-l border-gray-400"></div>
             <div class="ml-8 bg-indigo-100 rounded w-full">
-              <div class="text-xl font-semibold p-4 rounded-t bg-indigo-500 text-white">Jun Release v0.9</div>
+              <div class="text-xl font-semibold p-4 rounded-t bg-indigo-500 text-white">{{ cycle.name }}</div>
               <div class="p-4">
 
                 <div v-for="feature in cycle.items" class="flex py-2">
@@ -84,9 +84,15 @@ export default {
 
   methods: {
     ...mapActions([
-      'closeComponent'
+      'closeComponent',
+      'showNotification',
     ]),
     getRoadmap () {
+      if (!this.currentCycleId) {
+        this.showNotification({type: 'error', message: 'No cycle is selected. Please select a cycle.'})
+        this.closeComponent()
+        return false
+      }
       if (this.roadmap === null ) {
         axios.get('/cycles/' + this.currentCycleId + '/roadmap', {
             params: {

@@ -28,38 +28,60 @@
 
       <!-- Tools Settings -->
       <div v-if="activeColumn === 'tools'" class="bg-gray-100 rounded-b p-8">
-        <div class="pb-6 px-2 flex items-center">
-          <div class="w-6 h-6 rounded-full bg-indigo-400 flex items-center justify-center">
-            <font-awesome-icon :icon="faTools" class="text-white fa-xs"></font-awesome-icon>
+        <!-- Board settings -->
+        <div class="pb-8">
+          <div class="pb-4 px-2 flex items-center">
+            <div class="w-6 h-6 rounded-full bg-indigo-400 flex items-center justify-center">
+              <font-awesome-icon :icon="faTools" class="text-white fa-xs"></font-awesome-icon>
+            </div>
+            <div class="pl-2 text-lg text-gray-600">
+              Enable/Disable Tools on this {{ resourceType }}
+            </div>
           </div>
-          <div class="pl-2 text-lg text-gray-600">
-            Enable/Disable tools on this {{ resourceType }}
+          <div class="flex">
+            <div @click="toggleToolStatus('task_enabled', settings.task_enabled)" class="rounded border px-4 py-2 mx-2 relative cursor-pointer"
+              :class="[settings.task_enabled ? 'bg-indigo-100 border-indigo-400 shadow-md' : 'bg-gray-100 border-gray-400']">
+              <span class="cursor-pointer">Task</span>
+            </div>
+            <div @click="toggleToolStatus('discussion_enabled', settings.discussion_enabled)" class="rounded border px-4 py-2 mx-2 relative cursor-pointer"
+              :class="[settings.discussion_enabled ? 'bg-indigo-100 border-indigo-400 shadow-md' : 'bg-gray-100 border-gray-400']">
+              <span class="cursor-pointer">Discussion</span>
+            </div>
+            <div @click="toggleToolStatus('message_enabled', settings.message_enabled)" class="rounded border px-4 py-2 mx-2 relative cursor-pointer"
+              :class="[settings.message_enabled ? 'bg-indigo-100 border-indigo-400 shadow-md' : 'bg-gray-100 border-gray-400']">
+              <span class="cursor-pointer">Message</span>
+            </div>
+            <div @click="toggleToolStatus('event_enabled', settings.event_enabled)" class="rounded border px-4 py-2 mx-2 relative cursor-pointer"
+              :class="[settings.event_enabled ? 'bg-indigo-100 border-indigo-400 shadow-md' : 'bg-gray-100 border-gray-400']">
+              <span class="cursor-pointer">Event</span>
+            </div>
+            <div @click="toggleToolStatus('file_enabled', settings.file_enabled)" class="rounded border px-4 py-2 mx-2 relative cursor-pointer"
+              :class="[settings.file_enabled ? 'bg-indigo-100 border-indigo-400 shadow-md' : 'bg-gray-100 border-gray-400']">
+              <span class="cursor-pointer">File</span>
+            </div>
           </div>
         </div>
-        <div class="flex">
-          <div @click="toggleToolStatus('task_enabled', settings.task_enabled)" class="rounded border px-4 py-2 mx-2 relative cursor-pointer"
-            :class="[settings.task_enabled ? 'bg-indigo-100 border-indigo-400 shadow-md' : 'bg-gray-100 border-gray-400']">
-            <span class="cursor-pointer">Task</span>
+        <!-- Board settings -->
+
+        <!-- Roadmap settings -->
+        <div>
+          <div class="pb-4 px-2 flex items-center">
+            <div class="w-6 h-6 rounded-full bg-indigo-400 flex items-center justify-center">
+              <font-awesome-icon :icon="faTools" class="text-white fa-xs"></font-awesome-icon>
+            </div>
+            <div class="pl-2 text-lg text-gray-600">
+              Enable/Disable Roadmap option on this {{ resourceType }}
+            </div>
           </div>
-          <div @click="toggleToolStatus('discussion_enabled', settings.discussion_enabled)" class="rounded border px-4 py-2 mx-2 relative cursor-pointer"
-            :class="[settings.discussion_enabled ? 'bg-indigo-100 border-indigo-400 shadow-md' : 'bg-gray-100 border-gray-400']">
-            <span class="cursor-pointer">Discussion</span>
-          </div>
-          <div @click="toggleToolStatus('message_enabled', settings.message_enabled)" class="rounded border px-4 py-2 mx-2 relative cursor-pointer"
-            :class="[settings.message_enabled ? 'bg-indigo-100 border-indigo-400 shadow-md' : 'bg-gray-100 border-gray-400']">
-            <span class="cursor-pointer">Message</span>
-          </div>
-          <div @click="toggleToolStatus('event_enabled', settings.event_enabled)" class="rounded border px-4 py-2 mx-2 relative cursor-pointer"
-            :class="[settings.event_enabled ? 'bg-indigo-100 border-indigo-400 shadow-md' : 'bg-gray-100 border-gray-400']">
-            <span class="cursor-pointer">Event</span>
-          </div>
-          <div @click="toggleToolStatus('file_enabled', settings.file_enabled)" class="rounded border px-4 py-2 mx-2 relative cursor-pointer"
-            :class="[settings.file_enabled ? 'bg-indigo-100 border-indigo-400 shadow-md' : 'bg-gray-100 border-gray-400']">
-            <span class="cursor-pointer">File</span>
+          <div class="flex">
+            <div @click="toggleToolStatus('roadmap_enabled', settings.roadmap_enabled)" class="rounded border px-4 py-2 mx-2 relative cursor-pointer"
+              :class="[settings.roadmap_enabled ? 'bg-indigo-100 border-indigo-400 shadow-md' : 'bg-gray-100 border-gray-400']">
+              <span class="cursor-pointer">Roadmap</span>
+            </div>
           </div>
         </div>
+        <!-- Roadmap Settings -->
       </div>
-      <!-- Tools Settings -->
 
       <tags-settings :shown="activeColumn === 'tags'" :resourceId="resourceId" :resourceType="resourceType"></tags-settings>
     </div>

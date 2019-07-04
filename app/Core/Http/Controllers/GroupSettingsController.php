@@ -24,12 +24,9 @@ class GroupSettingsController extends Controller
         $group = $this->getGroupModel();
         $this->authorize('settings', $group);
         $settings = $group->settings;
-        $settings->task_enabled = request('task_enabled') ?? $settings->task_enabled;
-        $settings->discussion_enabled = request('discussion_enabled') ?? $settings->discussion_enabled;
-        $settings->message_enabled = request('message_enabled') ?? $settings->message_enabled;
-        $settings->event_enabled = request('event_enabled') ?? $settings->event_enabled;
-        $settings->file_enabled = request('file_enabled') ?? $settings->file_enabled;
-        $settings->save();
+        $data = request()->all();
+        unset($data['group_type'], $data['group_id']);
+        $settings->update($data);
 
         return response()->json([
             'status'   => 'success',

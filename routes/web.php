@@ -86,7 +86,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('offices/{office}', 'OfficeController@delete');
 
     /**********************************
-        Group
+        Group (Project/Team/Office)
      **********************************/
 
     Route::get('groups/settings', 'GroupSettingsController@index');
