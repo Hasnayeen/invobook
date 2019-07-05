@@ -34,4 +34,14 @@ class ConnectedGithubRepoController extends Controller
             ]);
         }
     }
+
+    public function index()
+    {
+        $repos = GithubRepo::all();
+
+        return response()->json([
+            'status'  => 'success',
+            'repos'   => $repos,
+        ]);
+    }
 }

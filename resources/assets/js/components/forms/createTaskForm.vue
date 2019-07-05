@@ -1,6 +1,6 @@
 <template>
 <div v-if="formShown">
-  <div class="absolute container mx-auto w-5/6 md:w-3/5 lg:w-2/5 z-20" style="top: 12vh;left: 0;right: 0;">
+  <div class="absolute container mx-auto w-5/6 md:w-3/5 lg:max-w-5xl z-20" style="top: 12vh;left: 0;right: 0;">
     <div class="bg-white rounded shadow-lg">
       <div class="p-4">
         <div class="p-4">
