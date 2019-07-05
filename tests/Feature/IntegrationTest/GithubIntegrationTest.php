@@ -24,10 +24,10 @@ class GithubIntegrationTest extends TestCase
         $this->actingAs($this->user)
              ->get('services/github/connected-repos')
              ->assertJsonFragment([
-                 'status'      => 'success',
+                 'status'           => 'success',
                  'repo_name'        => 'goodwork',
-                 'entity_type' => 'project',
-                 'entity_id'   => (string) $project->id,
+                 'entity_type'      => 'project',
+                 'entity_id'        => (string) $project->id,
              ]);
     }
 
