@@ -13,9 +13,6 @@
           <li @click="showModal('memberListModal')" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
             Show All Members
           </li>
-          <li @click="showModal('githubRepoModal')" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
-            Connect Github Repository
-          </li>
           <li @click="showModal('permissionSettingsModal')" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
             Permissions Settings
           </li>
@@ -56,8 +53,6 @@
     <members-list-modal v-if="currentComponent === 'memberListModal'" resourceType="office" :resourceId="office.id" :members="office.members" />
 
     <addMemberForm v-if="currentComponent === 'addMemberForm'"resourceType="office" :resource="office" @addMember="addMember"></addMemberForm>
-
-    <show-github-repo v-if="currentComponent === 'githubRepoModal'" entityType="office" :entityId="office.id"></show-github-repo>
     
     <permission-settings-modal v-if="currentComponent === 'permissionSettingsModal'" resourceType="office" :resourceId="office.id"></permission-settings-modal>
 
@@ -96,7 +91,6 @@ import eventBoard from './../partials/eventBoard.vue'
 import fileBoard from './../partials/fileBoard.vue'
 import activityBoard from './../partials/activityBoard.vue'
 import addMemberForm from './../partials/addMemberForm.vue'
-import showGithubRepo from './../partials/showGithubRepo.vue'
 import membersListModal from './../partials/membersListModal.vue'
 import permissionSettingsModal from './../partials/permissionSettingsModal.vue'
 import settingsModal from './../partials/settingsModal.vue'
@@ -123,7 +117,6 @@ export default {
     roadmapModal,
     profileCard,
     tabMenu,
-    showGithubRepo
   },
   data: () => ({
     active: '',
