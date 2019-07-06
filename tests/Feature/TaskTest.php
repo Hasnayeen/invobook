@@ -102,7 +102,9 @@ class TaskTest extends TestCase
     /** @test */
     public function user_can_see_tasks_of_a_group()
     {
-        $project = factory('App\Core\Models\Project')->create();
+        $project = factory(\App\Core\Models\Project::class)->create(['owner_id' => $this->user]);
+        $this->actingAs($this->user);
+        resolve('Authorization')->setupDefaultPermissions($project);
         $tasks = factory('App\Core\Models\Task', 3)->create([
             'taskable_type' => 'project',
             'taskable_id'   => $project->id,
@@ -116,7 +118,9 @@ class TaskTest extends TestCase
             'name'             => $tasks[2]['name'],
         ]);
 
-        $team = factory('App\Core\Models\Team')->create();
+        $team = factory(\App\Core\Models\Team::class)->create(['owner_id' => $this->user]);
+        $this->actingAs($this->user);
+        resolve('Authorization')->setupDefaultPermissions($team);
         $tasks = factory('App\Core\Models\Task', 3)->create([
             'taskable_type' => 'team',
             'taskable_id'   => $team->id,
@@ -130,7 +134,9 @@ class TaskTest extends TestCase
             'name'             => $tasks[2]['name'],
         ]);
 
-        $office = factory('App\Core\Models\Office')->create();
+        $office = factory(\App\Core\Models\Office::class)->create(['owner_id' => $this->user]);
+        $this->actingAs($this->user);
+        resolve('Authorization')->setupDefaultPermissions($office);
         $tasks = factory('App\Core\Models\Task', 3)->create([
             'taskable_type' => 'office',
             'taskable_id'   => $office->id,

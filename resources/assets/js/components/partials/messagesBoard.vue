@@ -23,7 +23,7 @@
       </div>
     </div>
 
-    <div class="relative bg-gray-200">
+    <div v-if="authenticated" class="relative bg-gray-200">
       <div class="static text-center p-8">
         <div class="relative">
           <user-suggestion-box
@@ -78,8 +78,9 @@ export default {
     suggestionSelected: false,
     suggestionShown: false,
     mentions: [],
-    user: user,
-    users: []
+    users: [],
+    user,
+    authenticated
   }),
 
   created () {
@@ -131,8 +132,8 @@ computed: {
       if (this.activeTab === 'messages' && this.messages.length < 1) {
         axios.get('/messages', {
           params: {
-            resource_type: this.resourceType,
-            resource_id: this.resource.id
+            group_type: this.resourceType,
+            group_id: this.resource.id
           }
         })
         .then((response) => {

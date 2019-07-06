@@ -8,9 +8,12 @@ use Illuminate\Http\JsonResponse;
 use App\Core\Repositories\CommentRepository;
 use App\Core\Repositories\MentionRepository;
 use App\Core\Http\Requests\ValidateCommentCreation;
+use App\Core\Utilities\GroupTrait;
 
 class CommentController extends Controller
 {
+    use GroupTrait;
+
     /**
      * @var CommentRepository
      */
@@ -50,6 +53,12 @@ class CommentController extends Controller
 
     public function index()
     {
+        $group = $this->getGroupModel();
+        if ($group->notOpenForPublic()) {
+            abort(401);
+        } elseif (auth()->user()) {
+            $this->authorize('view', $group);
+        }
         $comments = $this->repository->getAllCommentsWithUser();
 
         return $this->successResponse(null, 'comments', $comments);

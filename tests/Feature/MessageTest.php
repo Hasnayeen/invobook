@@ -14,13 +14,14 @@ class MessageTest extends TestCase
     /** @test */
     public function user_can_read_message_of_a_group()
     {
-        $user1 = factory('App\Core\Models\User')->create();
         $user2 = factory('App\Core\Models\User')->create();
 
         // Test for projects
-        $project = factory('App\Core\Models\Project')->create();
+        $project = factory(\App\Core\Models\Project::class)->create(['owner_id' => $this->user]);
+        $this->actingAs($this->user);
+        resolve('Authorization')->setupDefaultPermissions($project);
         $user1Messages = factory('App\Core\Models\Message', 2)->create([
-            'user_id'          => $user1->id,
+            'user_id'          => $this->user->id,
             'messageable_type' => 'project',
             'messageable_id'   => $project->id,
         ]);
@@ -30,13 +31,13 @@ class MessageTest extends TestCase
             'messageable_id'   => $project->id,
         ]);
 
-        $this->actingAs($user1)->call('GET', '/messages', [
-            'resource_type' => 'project',
-            'resource_id'   => $project->id,
+        $this->actingAs($this->user)->call('GET', '/messages', [
+            'group_type' => 'project',
+            'group_id'   => $project->id,
         ])->assertJsonFragment([
             'status'           => 'success',
             'total'            => 5,
-            'user_id'          => (string) $user1['id'],
+            'user_id'          => (string) $this->user['id'],
             'user_id'          => (string) $user2['id'],
             'messageable_type' => 'project',
             'messageable_id'   => (string) $project->id,
@@ -44,9 +45,11 @@ class MessageTest extends TestCase
         ]);
 
         // Test for teams
-        $team = factory('App\Core\Models\Team')->create();
+        $team = factory('App\Core\Models\Team')->create(['owner_id' => $this->user]);
+        $this->actingAs($this->user);
+        resolve('Authorization')->setupDefaultPermissions($team);
         $user1Messages = factory('App\Core\Models\Message', 2)->create([
-            'user_id'          => $user1->id,
+            'user_id'          => $this->user->id,
             'messageable_type' => 'team',
             'messageable_id'   => $team->id,
         ]);
@@ -56,13 +59,13 @@ class MessageTest extends TestCase
             'messageable_id'   => $team->id,
         ]);
 
-        $this->actingAs($user1)->call('GET', '/messages', [
-            'resource_type' => 'team',
-            'resource_id'   => $team->id,
+        $this->actingAs($this->user)->call('GET', '/messages', [
+            'group_type' => 'team',
+            'group_id'   => $team->id,
         ])->assertJsonFragment([
             'status'           => 'success',
             'total'            => 5,
-            'user_id'          => (string) $user1['id'],
+            'user_id'          => (string) $this->user['id'],
             'user_id'          => (string) $user2['id'],
             'messageable_type' => 'team',
             'messageable_id'   => (string) $team->id,
@@ -70,9 +73,11 @@ class MessageTest extends TestCase
         ]);
 
         // Test for offices
-        $office = factory('App\Core\Models\Office')->create();
+        $office = factory('App\Core\Models\Office')->create(['owner_id' => $this->user]);
+        $this->actingAs($this->user);
+        resolve('Authorization')->setupDefaultPermissions($office);
         $user1Messages = factory('App\Core\Models\Message', 2)->create([
-            'user_id'          => $user1->id,
+            'user_id'          => $this->user->id,
             'messageable_type' => 'office',
             'messageable_id'   => $office->id,
         ]);
@@ -82,13 +87,13 @@ class MessageTest extends TestCase
             'messageable_id'   => $office->id,
         ]);
 
-        $this->actingAs($user1)->call('GET', '/messages', [
-            'resource_type' => 'office',
-            'resource_id'   => $office->id,
+        $this->actingAs($this->user)->call('GET', '/messages', [
+            'group_type' => 'office',
+            'group_id'   => $office->id,
         ])->assertJsonFragment([
             'status'           => 'success',
             'total'            => 5,
-            'user_id'          => (string) $user1['id'],
+            'user_id'          => (string) $this->user['id'],
             'user_id'          => (string) $user2['id'],
             'messageable_type' => 'office',
             'messageable_id'   => (string) $office->id,

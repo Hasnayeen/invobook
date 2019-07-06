@@ -92,7 +92,9 @@ export default {
     axios.get('/comments', {
       params: {
         commentable_type: this.resourceType,
-        commentable_id: this.resource.id
+        commentable_id: this.resource.id,
+        group_type: this.groupType,
+        group_id: this.groupId
       }
     })
       .then((response) => {
@@ -104,7 +106,9 @@ export default {
   },
   computed: {
     ...mapState({
-      users: state => state.members
+      users: state => state.members,
+      groupType: state => state.groupType,
+      groupId: state => state.groupId
     })
   },
 

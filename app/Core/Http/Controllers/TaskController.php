@@ -51,6 +51,12 @@ class TaskController extends Controller
     public function index(TaskRepository $repository)
     {
         try {
+            $group = $this->getGroupModel();
+            if ($group->notOpenForPublic()) {
+                abort(401);
+            } elseif (auth()->user()) {
+                $this->authorize('view', $group);
+            }
             $tasks = $repository->getAllTaskWithAssignee(request('resource_type'), request('resource_id'), request('cycle_id'));
 
             return response()->json([

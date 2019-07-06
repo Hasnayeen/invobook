@@ -1,5 +1,5 @@
 <template>
-  <div v-if="activeTab === 'activities'" class="w-full mx-2 md:mx-auto">
+  <div v-if="authenticated && activeTab === 'activities'" class="w-full mx-2 md:mx-auto">
     <div v-if="activities.length === 0" class="flex flex-col items-center pt-8">
       <div class="pb-8">A timeline of acitivities will show up when people starts working</div>
       <img src="/image/activity.svg" alt="activities" class="w-96">
@@ -95,6 +95,7 @@ export default {
     date: 'date',
     loading: false,
     activities: [],
+    authenticated,
     faChevronDown,
     faSpinner
   }),
@@ -119,7 +120,7 @@ export default {
             this.activities = response.data.activities
           })
           .catch((error) => {
-            console.log(error.response.data.message)
+            console.log(error)
           })
       }
     }

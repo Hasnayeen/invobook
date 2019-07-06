@@ -15,9 +15,13 @@ class TeamController extends Controller
 
     public function show(Team $team)
     {
-        $this->authorize('view', $team);
+        if ($team->notOpenForPublic()) {
+            return redirect('login');
+        } elseif (auth()->user()) {
+            $this->authorize('view', $team);
+            auth()->user()->setAppends(['unread_direct_messages']);
+        }
         $team->load('members:user_id,username,avatar,name', 'settings');
-        auth()->user()->setAppends(['unread_direct_messages']);
 
         return view('teams.single', ['team' => $team]);
     }

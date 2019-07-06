@@ -5,9 +5,12 @@ namespace App\Core\Http\Controllers;
 use App\Core\Repositories\FileRepository;
 use App\Core\Exceptions\InvalidFileFormat;
 use App\Core\Http\Requests\ValidateFileCreation;
+use App\Core\Utilities\GroupTrait;
 
 class FileController extends Controller
 {
+    use GroupTrait;
+
     public function store(ValidateFileCreation $request, FileRepository $repository)
     {
         try {
@@ -51,6 +54,12 @@ class FileController extends Controller
      */
     public function index(FileRepository $fileRepository)
     {
+        $group = $this->getGroupModel();
+        if ($group->notOpenForPublic()) {
+            abort(401);
+        } elseif (auth()->user()) {
+            $this->authorize('view', $group);
+        }
         $files = $fileRepository->getAllFiles();
 
         return $this->successResponse(null, 'files', $files);

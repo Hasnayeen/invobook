@@ -1,7 +1,7 @@
 <template>
 <div v-if="activeTab === 'files'" class="w-full">
   <div>
-    <div class="flex justify-center pb-4">
+    <div v-if="authenticated" class="flex justify-center pb-4">
       <file-upload :resourceType="resourceType" :resourceId="resource.id" @on-success="getAllFiles"></file-upload>
     </div>
 
@@ -50,6 +50,7 @@ export default {
   },
   data: () => ({
     files: [],
+    authenticated,
     faEllipsisH,
     faFileAlt,
     faFileImage,
