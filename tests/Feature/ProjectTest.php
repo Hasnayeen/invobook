@@ -166,8 +166,8 @@ class ProjectTest extends TestCase
         $this->actingAs($this->user)
              ->post('public-projects/' . $this->project->id)
              ->assertJsonFragment([
-                 'status' => 'success',
-                 'message' => localize('project.Project has been made public')
+                 'status'  => 'success',
+                 'message' => localize('project.Project has been made public'),
              ]);
         $this->assertDatabaseHas('projects', ['id' => $this->project->id, 'public' => true]);
     }
@@ -180,8 +180,8 @@ class ProjectTest extends TestCase
 
         $this->delete('public-projects/' . $this->project->id)
              ->assertJsonFragment([
-                 'status' => 'success',
-                 'message' => localize('project.Project has been made private')
+                 'status'  => 'success',
+                 'message' => localize('project.Project has been made private'),
              ]);
         $this->assertDatabaseHas('projects', ['id' => $this->project->id, 'public' => false]);
     }

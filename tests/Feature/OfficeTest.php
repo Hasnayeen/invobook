@@ -147,8 +147,8 @@ class OfficeTest extends TestCase
         $this->actingAs($this->user)
              ->post('public-offices/' . $this->office->id)
              ->assertJsonFragment([
-                 'status' => 'success',
-                 'message' => localize('office.Office has been made public')
+                 'status'  => 'success',
+                 'message' => localize('office.Office has been made public'),
              ]);
         $this->assertDatabaseHas('offices', ['id' => $this->office->id, 'public' => true]);
     }
@@ -161,8 +161,8 @@ class OfficeTest extends TestCase
 
         $this->delete('public-offices/' . $this->office->id)
              ->assertJsonFragment([
-                 'status' => 'success',
-                 'message' => localize('office.Office has been made private')
+                 'status'  => 'success',
+                 'message' => localize('office.Office has been made private'),
              ]);
         $this->assertDatabaseHas('offices', ['id' => $this->office->id, 'public' => false]);
     }
