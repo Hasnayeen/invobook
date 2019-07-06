@@ -3,10 +3,10 @@
 namespace App\Core\Http\Controllers;
 
 use App\Core\Models\Discussion;
+use App\Core\Utilities\GroupTrait;
 use App\Core\Repositories\DiscussionRepository;
 use App\Core\Http\Requests\UpdateDiscussionRequest;
 use App\Core\Http\Requests\ValidateDiscussionCreation;
-use App\Core\Utilities\GroupTrait;
 
 class DiscussionController extends Controller
 {

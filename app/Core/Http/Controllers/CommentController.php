@@ -5,10 +5,10 @@ namespace App\Core\Http\Controllers;
 use App\Core\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use App\Core\Utilities\GroupTrait;
 use App\Core\Repositories\CommentRepository;
 use App\Core\Repositories\MentionRepository;
 use App\Core\Http\Requests\ValidateCommentCreation;
-use App\Core\Utilities\GroupTrait;
 
 class CommentController extends Controller
 {
