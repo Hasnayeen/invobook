@@ -77,7 +77,9 @@ class FileTest extends TestCase
     public function user_can_view_files()
     {
         Storage::fake('');
-        $project = factory(Project::class)->create();
+        $project = factory(Project::class)->create(['owner_id' => $this->user]);
+        $this->actingAs($this->user);
+        resolve('Authorization')->setupDefaultPermissions($project);
         $file1 = UploadedFile::fake()->create('features.pdf');
         $file2 = UploadedFile::fake()->create('versions.jpeg');
 

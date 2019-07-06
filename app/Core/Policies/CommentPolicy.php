@@ -19,7 +19,7 @@ class CommentPolicy
      */
     public function create(User $user)
     {
-        return $user->hasPermissionTo('create comment.' . request()->input('commentable_type') . '->' . request()->input('commentable_id'));
+        return (new Authorization($user))->userHasPermissionTo('create', 'comment', null, true, request('group_type'), request('group_id'));
     }
 
     /**

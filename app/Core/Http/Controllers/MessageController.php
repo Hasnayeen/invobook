@@ -18,7 +18,13 @@ class MessageController extends Controller
     public function index(MessageRepository $repository)
     {
         try {
-            $messages = $repository->getAllMessages(request('resource_type'), request('resource_id'));
+            $group = $this->getGroupModel();
+            if ($group->notOpenForPublic()) {
+                abort(401);
+            } elseif (auth()->user()) {
+                $this->authorize('view', $group);
+            }
+            $messages = $repository->getAllMessages(request('group_type'), request('group_id'));
 
             return response()->json([
                 'status'   => 'success',
@@ -26,10 +32,7 @@ class MessageController extends Controller
                 'messages' => $messages,
             ]);
         } catch (Exception $exception) {
-            return response()->json([
-                'status'   => 'error',
-                'message'  => 'Something went wrong',
-            ]);
+            throw $exception;
         }
     }
 

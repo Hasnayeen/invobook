@@ -21,11 +21,14 @@
             'csrfToken' => csrf_token(),
         ]) !!};
         let impersonating = false
+        let user = {}
+        let authenticated = false
     </script>
 
     @if (!Auth::guest())
     <script>
-        let user = authUser = {!! json_encode(Auth::user()) !!}
+        authenticated = true
+        user = authUser = {!! json_encode(Auth::user()) !!}
         let navUrl = {!! json_encode([
             'site' => url('/'),
             'logout' => url('/logout')

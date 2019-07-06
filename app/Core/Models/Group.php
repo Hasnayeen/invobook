@@ -32,4 +32,9 @@ class Group extends Model
 
         return $this->cycles()->where('start_date', '<=', $currentDate)->where('end_date', '>=', $currentDate)->first();
     }
+
+    public function notOpenForPublic()
+    {
+        return auth()->guest() && !$this->public;
+    }
 }

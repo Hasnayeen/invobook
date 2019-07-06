@@ -32,7 +32,7 @@
     <font-awesome-icon :icon="faFileAlt" class="text-2xl"></font-awesome-icon>
     <span class="hidden md:block text-xs font-regular">{{ 'Files' | localize }}</span>
   </div>
-  <div @click="activateThisTab('activities')"
+  <div v-if="authenticated" @click="activateThisTab('activities')"
     :class="[(active === 'activities') ? 'text-teal-600 font-semibold border-teal-500 border-b-2 pb-2 -mb-2' : 'cursor-pointer', 'text-center w-1/6 flex-grow']">
     <font-awesome-icon :icon="faBolt" class="text-2xl"></font-awesome-icon>
     <span class="hidden md:block text-xs font-regular">{{ 'Activities' | localize }}</span>
@@ -63,6 +63,7 @@ export default {
     }
   },
   data: () => ({
+    authenticated,
     faBolt,
     faCalendarAlt,
     faCircle,

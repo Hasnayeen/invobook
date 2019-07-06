@@ -46,49 +46,56 @@ Route::post('register/{token}', 'Auth\RegisterController@confirmNewRegistration'
 
 Route::impersonate();
 
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home')->middleware('auth');
 
     /**********************************
         Project
     **********************************/
 
+Route::get('projects/{project}', 'ProjectController@show');
+
+Route::group(['middleware' => 'auth'], function () {
     Route::get('projects', 'ProjectController@index');
 
     Route::post('projects', 'ProjectController@store');
 
-    Route::get('projects/{project}', 'ProjectController@show');
-
     Route::delete('projects/{project}', 'ProjectController@delete');
+});
+
 
     /**********************************
         Team
     **********************************/
 
+Route::get('teams/{team}', 'TeamController@show');
+
+Route::group(['middleware' => 'auth'], function () {
     Route::get('teams', 'TeamController@index');
 
     Route::post('teams', 'TeamController@store');
 
-    Route::get('teams/{team}', 'TeamController@show');
-
     Route::delete('teams/{team}', 'TeamController@delete');
+});
 
     /**********************************
         Office
      **********************************/
 
+Route::get('offices/{office}', 'OfficeController@show');
+
+Route::group(['middleware' => 'auth'], function () {
     Route::get('offices', 'OfficeController@index');
 
     Route::post('offices', 'OfficeController@store');
 
-    Route::get('offices/{office}', 'OfficeController@show');
-
     Route::delete('offices/{office}', 'OfficeController@delete');
+});
 
     /**********************************
         Group (Project/Team/Office)
      **********************************/
 
+Route::group(['middleware' => 'auth'], function () {
     Route::get('groups/settings', 'GroupSettingsController@index');
 
     Route::put('groups/settings', 'GroupSettingsController@update');
@@ -104,23 +111,27 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('groups/tags/{tag}', 'GroupTagsController@store');
 
     Route::delete('groups/tags/{tag}', 'GroupTagsController@delete');
+});
 
     /**********************************
         Member
      **********************************/
 
+Route::group(['middleware' => 'auth'], function () {
     Route::get('members', 'MemberController@index');
 
     Route::post('members', 'MemberController@store');
 
     Route::delete('members', 'MemberController@destroy');
+});
 
     /**********************************
         Discussion
      **********************************/
 
-    Route::get('discussions', 'DiscussionController@index');
+Route::get('discussions', 'DiscussionController@index');
 
+Route::group(['middleware' => 'auth'], function () {
     Route::post('discussions', 'DiscussionController@store');
 
     Route::get('discussions/{discussion}', 'DiscussionController@show');
@@ -128,7 +139,79 @@ Route::group(['middleware' => 'auth'], function () {
     Route::patch('discussions/{discussion}', 'DiscussionController@update');
 
     Route::delete('discussions/{discussion}', 'DiscussionController@delete');
+});
 
+    /**********************************
+        Event
+     **********************************/
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('events', 'EventController@index');
+
+    Route::post('events', 'EventController@store');
+
+    Route::get('events/{event}', 'EventController@index');
+});
+
+    /**********************************
+        Task
+    **********************************/
+    
+Route::get('tasks', 'TaskController@index');
+    
+Route::group(['middleware' => 'auth'], function () {
+    Route::post('tasks', 'TaskController@store');
+
+    Route::get('tasks/{task}', 'TaskController@show');
+
+    Route::put('tasks/{task}', 'TaskController@update');
+
+    Route::delete('tasks/{task}', 'TaskController@delete');
+
+    Route::put('tasks/{task}/statuses/{status}', 'TaskStatusController@update');
+});
+
+    /**********************************
+        File
+    **********************************/
+
+Route::get('files', 'FileController@index');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('files/{file}', 'FileController@index');
+
+    Route::post('files', 'FileController@store');
+});
+
+    /**********************************
+        Message
+     **********************************/
+
+Route::get('messages', 'MessageController@index');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('direct-messages', 'DirectMessageController@index');
+
+    Route::post('messages', 'MessageController@store');
+
+    Route::put('messages/{message}', 'MessageController@update');
+
+    Route::delete('messages/{message}', 'MessageController@delete');
+});
+
+    /**********************************
+        Comment
+    **********************************/
+
+Route::get('/comments', 'CommentController@index');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::post('/comments', 'CommentController@store');
+
+    Route::delete('/comments/{comment}', 'CommentController@delete');
+});
+
+Route::group(['middleware' => 'auth'], function () {
     /**********************************
         Category
     **********************************/
@@ -152,20 +235,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('cycles/{cycle}/roadmap', 'RoadmapController@show');
 
     /**********************************
-        Message
-     **********************************/
-
-    Route::get('messages', 'MessageController@index');
-
-    Route::get('direct-messages', 'DirectMessageController@index');
-
-    Route::post('messages', 'MessageController@store');
-
-    Route::put('messages/{message}', 'MessageController@update');
-
-    Route::delete('messages/{message}', 'MessageController@delete');
-
-    /**********************************
         Direct Message
      **********************************/
 
@@ -178,32 +247,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('unread-direct-messages/{user}', 'UserUnreadDirectMessageController@update');
 
     /**********************************
-        Event
-     **********************************/
-
-    Route::get('events', 'EventController@index');
-
-    Route::post('events', 'EventController@store');
-
-    Route::get('events/{event}', 'EventController@index');
-
-    /**********************************
-        Task
-    **********************************/
-
-    Route::get('tasks', 'TaskController@index');
-
-    Route::post('tasks', 'TaskController@store');
-
-    Route::get('tasks/{task}', 'TaskController@show');
-
-    Route::put('tasks/{task}', 'TaskController@update');
-
-    Route::delete('tasks/{task}', 'TaskController@delete');
-
-    Route::put('tasks/{task}/statuses/{status}', 'TaskStatusController@update');
-
-    /**********************************
         Tags
     **********************************/
 
@@ -214,26 +257,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('tasks/{task}/tags', 'TaskTagController@store');
 
     Route::delete('tasks/{task}/tags/{tag}', 'TaskTagController@delete');
-
-    /**********************************
-        File
-    **********************************/
-
-    Route::get('files', 'FileController@index');
-
-    Route::get('files/{file}', 'FileController@index');
-
-    Route::post('files', 'FileController@store');
-
-    /**********************************
-        Comment
-    **********************************/
-
-    Route::get('/comments', 'CommentController@index');
-
-    Route::post('/comments', 'CommentController@store');
-
-    Route::delete('/comments/{comment}', 'CommentController@delete');
 
     /**********************************
         Notification

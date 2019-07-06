@@ -15,6 +15,8 @@ export default new Vuex.Store({
   state: {
     loading: false,
     members: team.members,
+    groupType: 'team',
+    groupId: team.id,
     team
   },
 })

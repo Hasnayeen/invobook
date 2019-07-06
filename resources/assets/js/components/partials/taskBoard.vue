@@ -4,7 +4,7 @@
 
   <task-details v-if="task" :index="index" :resourceType="resourceType" :resourceId="resource.id" :task="task" :taskDetailsShown="taskDetailsShown" :statuses="statuses" @status-change="updateStatus" @delete="deleteTask" @close="closeTaskDetails"></task-details>
 
-  <div class="text-center">
+  <div v-if="authenticated" class="text-center">
     <button @click="showCreateTaskForm" class="no-underline p-3 my-4 bg-white text-center text-base text-teal-500 rounded shadow">{{ 'Create Task' | localize }}</button>
   </div>
 
@@ -66,6 +66,7 @@ export default {
     task: {},
     statuses: [],
     index: null,
+    authenticated,
     faQuestionCircle
   }),
 

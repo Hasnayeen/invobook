@@ -4,7 +4,7 @@
 
   <discussion-details v-if="discussion" :discussionDetailsShown="discussionDetailsShown" :discussion="discussion" :index="index" @close="closeDiscussionDetails" @deleted="deleteDiscussion"></discussion-details>
 
-  <div class="text-center">
+  <div v-if="authenticated" class="text-center">
     <button @click="showCreateDiscussionForm" class="no-underline p-3 my-4 bg-white text-base text-teal-500 rounded shadow">{{ 'Create New Post' | localize }}</button>
   </div>
   <div class="flex flex-row flex-wrap items-start lg:-mx-2 xl:-mx-3">
@@ -71,7 +71,8 @@ export default {
     discussions: [],
     discussion: {},
     discussionDetailsShown: false,
-    index: null
+    index: null,
+    authenticated
   }),
   async created () {
     await this.getAllDiscussions(true)

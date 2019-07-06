@@ -15,9 +15,13 @@ class OfficeController extends Controller
 
     public function show(Office $office)
     {
-        $this->authorize('view', $office);
+        if ($office->notOpenForPublic()) {
+            return redirect('login');
+        } elseif (auth()->user()) {
+            $this->authorize('view', $office);
+            auth()->user()->setAppends(['unread_direct_messages']);
+        }
         $office->load('members:user_id,username,avatar,name', 'settings');
-        auth()->user()->setAppends(['unread_direct_messages']);
 
         return view('offices.single', ['office' => $office]);
     }

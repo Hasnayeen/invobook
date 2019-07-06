@@ -15,9 +15,13 @@ class ProjectController extends Controller
 
     public function show(Project $project)
     {
-        $this->authorize('view', $project);
+        if ($project->notOpenForPublic()) {
+            return redirect('login');
+        } elseif (auth()->user()) {
+            $this->authorize('view', $project);
+            auth()->user()->setAppends(['unread_direct_messages']);
+        }
         $project->load('members:user_id,username,avatar,name', 'settings');
-        auth()->user()->setAppends(['unread_direct_messages']);
 
         return view('projects.single', ['project' => $project]);
     }

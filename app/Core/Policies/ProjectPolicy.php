@@ -20,7 +20,7 @@ class ProjectPolicy
      */
     public function view(User $user, Project $project)
     {
-        return (new Authorization($user))->userHasPermissionTo('view', 'project', $project->id, false, 'project', $project->id);
+        return $project->public || (new Authorization($user))->userHasPermissionTo('view', 'project', $project->id, false, 'project', $project->id);
     }
 
     /**

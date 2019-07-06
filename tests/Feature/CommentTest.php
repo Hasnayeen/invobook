@@ -96,10 +96,13 @@ class CommentTest extends TestCase
     public function user_can_see_all_comment()
     {
         $this->actingAs($this->user);
-        $discussion = factory(\App\Core\Models\Discussion::class)->create();
+        $project = factory(\App\Core\Models\Project::class)->create(['owner_id' => $this->user->id]);
+        $this->actingAs($this->user);
+        resolve('Authorization')->setupDefaultPermissions($project);
+        $discussion = factory(\App\Core\Models\Discussion::class)->create(['discussionable_type' => 'project', 'discussionable_id' => $project->id]);
         $comments = factory(\App\Core\Models\Comment::class, 3)->create(['commentable_type' => 'discussion', 'commentable_id' => $discussion->id]);
 
-        $this->call('GET', self::$endpoint, ['commentable_type' => 'discussion', 'commentable_id' => $discussion->id])
+        $this->call('GET', self::$endpoint, ['commentable_type' => 'discussion', 'commentable_id' => $discussion->id, 'group_type' => $discussion->discussionable_type, 'group_id' => $discussion->discussionable_id])
              ->assertJsonFragment([
                  'status'           => 'success',
                  'body'             => $comments[0]->body,
