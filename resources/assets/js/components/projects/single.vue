@@ -10,6 +10,9 @@
       <!-- Dropdown Menu -->
       <div v-if="dropdownMenuShown" class="absolute w-64">
         <ul class="list-reset bg-white rounded shadow-lg py-2 absolute inset-x-0 mt-6 text-base text-left font-normal whitespace-no-wrap z-30">
+          <li @click="toggleVisibility" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
+            {{ project.public ? 'Make Private' : 'Make Public'}}
+          </li>
           <li v-if="settings.roadmap_enabled" @click="showModal('roadmapModal')" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
             Roadmap
           </li>
@@ -213,6 +216,27 @@ export default {
       this.settings = settings
       this.getActiveTool(null)
     },
+    toggleVisibility () {
+      if (this.project.public) {
+        axios.delete('/public-projects/' + this.project.id)
+          .then((response) => {
+            this.project.public = false
+            this.showNotification({type: response.data.status, message: response.data.message})
+          })
+          .catch((error) => {
+            this.showNotification({type: error.response.data.status, message: error.response.data.message})
+          })
+      } else {
+        axios.post('/public-projects/' + this.project.id)
+          .then((response) => {
+            this.project.public = true
+            this.showNotification({type: response.data.status, message: response.data.message})
+          })
+          .catch((error) => {
+            this.showNotification({type: error.response.data.status, message: error.response.data.message})
+          })
+      }
+    }
   }
 }
 </script>

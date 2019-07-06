@@ -60,6 +60,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('projects', 'ProjectController@store');
 
     Route::delete('projects/{project}', 'ProjectController@delete');
+
+    Route::post('public-projects/{project}', 'PublicProjectController@store');
+
+    Route::delete('public-projects/{project}', 'PublicProjectController@delete');
 });
 
     /**********************************
@@ -74,6 +78,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('teams', 'TeamController@store');
 
     Route::delete('teams/{team}', 'TeamController@delete');
+
+    Route::post('public-teams/{team}', 'PublicTeamController@store');
+
+    Route::delete('public-teams/{team}', 'PublicTeamController@delete');
 });
 
     /**********************************
@@ -88,6 +96,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('offices', 'OfficeController@store');
 
     Route::delete('offices/{office}', 'OfficeController@delete');
+
+    Route::post('public-offices/{office}', 'PublicOfficeController@store');
+
+    Route::delete('public-offices/{office}', 'PublicOfficeController@delete');
 });
 
     /**********************************
@@ -210,6 +222,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/comments/{comment}', 'CommentController@delete');
 });
 
+/**********************************
+    Cycle
+**********************************/
+
+Route::get('cycles', 'CycleController@index');
+
+Route::post('cycles', 'CycleController@store')->middleware('auth');
+
 Route::group(['middleware' => 'auth'], function () {
     /**********************************
         Category
@@ -218,14 +238,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('categories', 'CategoryController@index');
 
     Route::post('categories', 'CategoryController@store');
-
-    /**********************************
-        Cycle
-    **********************************/
-
-    Route::get('cycles', 'CycleController@index');
-
-    Route::post('cycles', 'CycleController@store');
 
     /**********************************
         Roadmap

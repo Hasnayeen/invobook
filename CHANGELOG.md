@@ -1,6 +1,14 @@
 # Release Notes
 
-## v0.9 (Yet to release)
+## v0.10 (Yet to release)
+
+### Added
+
+- Tag can be created from group page and add/remove them to the group
+- Roadmap tool can be enabled/disabled
+- Group can be made publicly viewable (without account)
+
+## v0.9 (2019-06-30)
 
 ### Added
 

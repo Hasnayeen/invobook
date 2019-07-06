@@ -9,7 +9,7 @@ class Team extends Group implements HasMembers
 {
     protected $type = 'team';
 
-    protected $fillable = ['name', 'description', 'office_id', 'owner_id'];
+    protected $fillable = ['name', 'description', 'office_id', 'owner_id', 'public'];
 
     /**
      * @return BelongsToMany
@@ -42,5 +42,15 @@ class Team extends Group implements HasMembers
     public function settings()
     {
         return $this->hasOne(TeamSetting::class, 'team_id')->withDefault();
+    }
+
+    public function makePublic()
+    {
+        $this->update(['public' => true]);
+    }
+
+    public function makePrivate()
+    {
+        $this->update(['public' => false]);
     }
 }

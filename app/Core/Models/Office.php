@@ -9,7 +9,7 @@ class Office extends Group implements HasMembers
 {
     protected $type = 'office';
 
-    protected $fillable = ['name', 'description', 'owner_id'];
+    protected $fillable = ['name', 'description', 'owner_id', 'public'];
 
     /**
      * @return BelongsToMany
@@ -42,5 +42,15 @@ class Office extends Group implements HasMembers
     public function settings()
     {
         return $this->hasOne(OfficeSetting::class, 'office_id')->withDefault();
+    }
+
+    public function makePublic()
+    {
+        $this->update(['public' => true]);
+    }
+
+    public function makePrivate()
+    {
+        $this->update(['public' => false]);
     }
 }
