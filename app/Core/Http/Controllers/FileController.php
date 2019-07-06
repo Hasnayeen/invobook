@@ -2,10 +2,10 @@
 
 namespace App\Core\Http\Controllers;
 
+use App\Core\Utilities\GroupTrait;
 use App\Core\Repositories\FileRepository;
 use App\Core\Exceptions\InvalidFileFormat;
 use App\Core\Http\Requests\ValidateFileCreation;
-use App\Core\Utilities\GroupTrait;
 
 class FileController extends Controller
 {

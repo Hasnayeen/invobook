@@ -62,7 +62,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('projects/{project}', 'ProjectController@delete');
 });
 
-
     /**********************************
         Team
     **********************************/
@@ -156,9 +155,9 @@ Route::group(['middleware' => 'auth'], function () {
     /**********************************
         Task
     **********************************/
-    
+
 Route::get('tasks', 'TaskController@index');
-    
+
 Route::group(['middleware' => 'auth'], function () {
     Route::post('tasks', 'TaskController@store');
 
