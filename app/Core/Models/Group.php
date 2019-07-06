@@ -35,6 +35,6 @@ class Group extends Model
 
     public function notOpenForPublic()
     {
-        return auth()->guest() && !$this->public;
+        return auth()->guest() && ! $this->public;
     }
 }
