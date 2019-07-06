@@ -160,8 +160,8 @@ class TeamTest extends TestCase
         $this->actingAs($this->user)
              ->post('public-teams/' . $this->team->id)
              ->assertJsonFragment([
-                 'status' => 'success',
-                 'message' => localize('team.Team has been made public')
+                 'status'  => 'success',
+                 'message' => localize('team.Team has been made public'),
              ]);
         $this->assertDatabaseHas('teams', ['id' => $this->team->id, 'public' => true]);
     }
@@ -174,8 +174,8 @@ class TeamTest extends TestCase
 
         $this->delete('public-teams/' . $this->team->id)
              ->assertJsonFragment([
-                 'status' => 'success',
-                 'message' => localize('team.Team has been made private')
+                 'status'  => 'success',
+                 'message' => localize('team.Team has been made private'),
              ]);
         $this->assertDatabaseHas('teams', ['id' => $this->team->id, 'public' => false]);
     }
