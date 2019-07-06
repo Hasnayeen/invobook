@@ -140,4 +140,30 @@ class OfficeTest extends TestCase
                  'group_id'      => $this->office->id,
              ]);
     }
+
+    /** @test */
+    public function admin_can_make_office_public()
+    {
+        $this->actingAs($this->user)
+             ->post('public-offices/' . $this->office->id)
+             ->assertJsonFragment([
+                 'status' => 'success',
+                 'message' => localize('office.Office has been made public')
+             ]);
+        $this->assertDatabaseHas('offices', ['id' => $this->office->id, 'public' => true]);
+    }
+
+    /** @test */
+    public function admin_can_make_office_private()
+    {
+        $this->actingAs($this->user)
+             ->post('public-offices/' . $this->office->id);
+
+        $this->delete('public-offices/' . $this->office->id)
+             ->assertJsonFragment([
+                 'status' => 'success',
+                 'message' => localize('office.Office has been made private')
+             ]);
+        $this->assertDatabaseHas('offices', ['id' => $this->office->id, 'public' => false]);
+    }
 }

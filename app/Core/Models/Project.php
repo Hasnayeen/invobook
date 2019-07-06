@@ -9,7 +9,7 @@ class Project extends Group implements HasMembers
 {
     protected $type = 'project';
 
-    protected $fillable = ['name', 'description', 'office_id', 'team_id', 'owner_id'];
+    protected $fillable = ['name', 'description', 'office_id', 'team_id', 'owner_id', 'public'];
 
     /**
      * @return BelongsToMany
@@ -47,5 +47,15 @@ class Project extends Group implements HasMembers
     public function settings()
     {
         return $this->hasOne(ProjectSetting::class, 'project_id')->withDefault();
+    }
+
+    public function makePublic()
+    {
+        $this->update(['public' => true]);
+    }
+
+    public function makePrivate()
+    {
+        $this->update(['public' => false]);
     }
 }

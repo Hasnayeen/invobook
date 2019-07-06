@@ -7,6 +7,9 @@
       </span>
       <div v-if="dropdownMenuShown" class="relative">
         <ul class="list-reset bg-white rounded shadow-lg py-2 absolute right-0 mt-4 text-base text-left font-normal whitespace-no-wrap z-30">
+          <li @click="toggleVisibility" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
+            {{ office.public ? 'Make Private' : 'Make Public'}}
+          </li>
           <li v-if="settings.roadmap_enabled" @click="showModal('roadmapModal')" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
             Roadmap
           </li>
@@ -210,6 +213,27 @@ export default {
       this.settings = settings
       this.getActiveTool(null)
     },
+    toggleVisibility () {
+      if (this.office.public) {
+        axios.delete('/public-offices/' + this.office.id)
+          .then((response) => {
+            this.office.public = false
+            this.showNotification({type: response.data.status, message: response.data.message})
+          })
+          .catch((error) => {
+            this.showNotification({type: error.response.data.status, message: error.response.data.message})
+          })
+      } else {
+        axios.post('/public-offices/' + this.office.id)
+          .then((response) => {
+            this.office.public = true
+            this.showNotification({type: response.data.status, message: response.data.message})
+          })
+          .catch((error) => {
+            this.showNotification({type: error.response.data.status, message: error.response.data.message})
+          })
+      }
+    }
   }
 }
 </script>

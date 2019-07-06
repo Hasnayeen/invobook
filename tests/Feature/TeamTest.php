@@ -153,4 +153,30 @@ class TeamTest extends TestCase
                  'group_id'      => $this->team->id,
              ]);
     }
+
+    /** @test */
+    public function admin_can_make_team_public()
+    {
+        $this->actingAs($this->user)
+             ->post('public-teams/' . $this->team->id)
+             ->assertJsonFragment([
+                 'status' => 'success',
+                 'message' => localize('team.Team has been made public')
+             ]);
+        $this->assertDatabaseHas('teams', ['id' => $this->team->id, 'public' => true]);
+    }
+
+    /** @test */
+    public function admin_can_make_team_private()
+    {
+        $this->actingAs($this->user)
+             ->post('public-teams/' . $this->team->id);
+
+        $this->delete('public-teams/' . $this->team->id)
+             ->assertJsonFragment([
+                 'status' => 'success',
+                 'message' => localize('team.Team has been made private')
+             ]);
+        $this->assertDatabaseHas('teams', ['id' => $this->team->id, 'public' => false]);
+    }
 }

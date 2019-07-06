@@ -140,7 +140,7 @@ export default {
     },
     async getAllStatuses () {
       try {
-        if (this.statuses.length < 1) {
+        if (this.authenticated && this.statuses.length < 1) {
           let { data } = await axios({
             url: '/statuses',
           })
