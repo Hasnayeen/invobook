@@ -22,14 +22,11 @@
     </div>
   </div>
 
+  <div v-if="user.role.slug === 'owner' || user.role.slug === 'admin'" class="text-center">
+    <button @click="openCreateTeamModal" class="no-underline p-3 mb-4 bg-white text-center text-base text-teal-700 rounded shadow">{{ 'Add a new team' | localize }}</button>
+  </div>
   <div class="flex flex-row flex-wrap justify-center">
-    <div class="bg-white shadow-md w-64 h-64 flex flex-col justify-center items-center text-center rounded m-4 cursor-pointer"
-      @click="openCreateTeamModal">
-      <font-awesome-icon :icon="faPlus" class="text-gray-600 text-4xl"></font-awesome-icon>
-      <span class="text-gray-800 pt-4">{{ 'Add a new team' | localize }}</span>
-    </div>
-
-      <team v-for="(team, index) in teams" :key="team.id" :index="index" :details="team"></team>
+    <team v-for="(team, index) in teams" :key="team.id" :index="index" :details="team"></team>
   </div>
 </div>
 </template>
@@ -51,6 +48,7 @@ export default {
     showCreateTeamForm: false,
     name: '',
     description: '',
+    user,
     faPlus
   }),
   computed: mapState({

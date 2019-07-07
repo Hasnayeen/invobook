@@ -20,12 +20,10 @@
     </div>
 
     <!-- Projects -->
+    <div v-if="user.role.slug === 'owner' || user.role.slug === 'admin'" class="text-center">
+      <button @click="openCreateProjectModal" class="no-underline p-3 mb-4 bg-white text-center text-base text-teal-700 rounded shadow">{{ 'Add a new project' | localize }}</button>
+    </div>
     <div class="flex flex-row flex-wrap justify-center">
-        <div class="bg-white shadow-md w-64 h-64 flex flex-col justify-center items-center text-center rounded m-4 cursor-pointer" @click="openCreateProjectModal">
-            <font-awesome-icon :icon="faPlus" class="text-gray-600 text-4xl"></font-awesome-icon>
-            <span class="text-gray-800 pt-4">{{ 'Add a new project' | localize }}</span>
-        </div>
-
         <project v-for="(project, index) in projects" :key="project.id" :index="index" :details="project"></project>
     </div>
 </div>
@@ -48,6 +46,7 @@ export default {
     showCreateProjectForm: false,
     name: '',
     description: '',
+    user,
     faPlus
   }),
   computed: mapState({
