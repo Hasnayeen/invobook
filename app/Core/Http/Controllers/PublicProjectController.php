@@ -29,7 +29,7 @@ class PublicProjectController extends Controller
 
             return response()->json([
                 'status'  => 'success',
-                'message' => localize('project.Project has been made private')
+                'message' => localize('project.Project has been made private'),
             ]);
         } catch (Exception $exception) {
             throw $exception;

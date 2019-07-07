@@ -29,7 +29,7 @@ class PublicOfficeController extends Controller
 
             return response()->json([
                 'status'  => 'success',
-                'message' => localize('office.Office has been made private')
+                'message' => localize('office.Office has been made private'),
             ]);
         } catch (Exception $exception) {
             throw $exception;

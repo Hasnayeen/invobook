@@ -29,7 +29,7 @@ class PublicTeamController extends Controller
 
             return response()->json([
                 'status'  => 'success',
-                'message' => localize('team.Team has been made private')
+                'message' => localize('team.Team has been made private'),
             ]);
         } catch (Exception $exception) {
             throw $exception;
