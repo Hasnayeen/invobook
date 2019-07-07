@@ -2,6 +2,8 @@
 
 namespace App\Core\Http\Controllers;
 
+use App\Core\Repositories\TaskRepository;
+
 class HomeController extends Controller
 {
     /**
@@ -9,8 +11,9 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(TaskRepository $repository)
     {
+        $currentWork = $repository->userCurrentlyWorkingOn(auth()->user()->id);
         $projects = auth()->user()->projects;
         $teams = auth()->user()->teams;
         $offices = auth()->user()->offices;
@@ -20,6 +23,6 @@ class HomeController extends Controller
         $offices->load('members');
         auth()->user()->setAppends(['unread_direct_messages']);
 
-        return view('home', ['data' => ['projects' => $projects, 'teams' => $teams, 'offices' => $offices]]);
+        return view('home', ['data' => ['currentWork' => $currentWork, 'projects' => $projects, 'teams' => $teams, 'offices' => $offices]]);
     }
 }
