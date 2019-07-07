@@ -1,16 +1,16 @@
 <template>
 <div class="container mx-auto w-3/4 2xl:w-3/5 mt-8">
-  <div class="flex flex-row justify-around mb-8 pb-3 border-b-2 text-gray-500">
+  <div class="flex flex-row justify-around mb-8 pb-3 border-b-2 text-gray-700">
     <span @click="activeThisTab('projects')"
-      :class="{'text-gray-800 font-semibold border-teal-500 border-b-4 pb-3 -mb-4':(active === 'projects'), 'cursor-pointer': (active != 'projects')}">
+      :class="{'text-teal-800 font-semibold border-teal-500 border-b-4 pb-3 -mb-4':(active === 'projects'), 'cursor-pointer': (active != 'projects')}">
       {{ 'Projects' | localize }}
     </span>
     <span @click="activeThisTab('teams')"
-      :class="{'text-gray-800 font-semibold border-teal-500 border-b-4 pb-3 -mb-4':(active === 'teams'), 'cursor-pointer': (active != 'teams')}">
+      :class="{'text-teal-800 font-semibold border-teal-500 border-b-4 pb-3 -mb-4':(active === 'teams'), 'cursor-pointer': (active != 'teams')}">
       {{ 'Teams' | localize }}
     </span>
     <span @click="activeThisTab('offices')"
-      :class="{'text-gray-800 font-semibold border-teal-500 border-b-4 pb-3 -mb-4':(active === 'offices'), 'cursor-pointer': (active != 'offices')}">
+      :class="{'text-teal-800 font-semibold border-teal-500 border-b-4 pb-3 -mb-4':(active === 'offices'), 'cursor-pointer': (active != 'offices')}">
       {{ 'Offices' | localize }}
     </span>
   </div>
