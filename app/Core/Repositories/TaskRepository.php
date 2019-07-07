@@ -45,4 +45,15 @@ class TaskRepository
             'cycle_id'          => $data['cycle_id'] ?? null,
         ]);
     }
+
+    public function userCurrentlyWorkingOn(int $userId)
+    {
+        return $this->model->where('assigned_to', $userId)
+                           ->whereHas('status', function ($query) {
+                               $query->where('name', 'In Progress');
+                           })
+                           ->with('taskable:id,name')
+                           ->orderBy('due_on')
+                           ->get();
+    }
 }
