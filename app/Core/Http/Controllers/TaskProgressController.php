@@ -2,8 +2,8 @@
 
 namespace App\Core\Http\Controllers;
 
-use App\Core\Models\Task;
 use App\Core\Models\Step;
+use App\Core\Models\Task;
 
 class TaskProgressController extends Controller
 {
@@ -14,7 +14,7 @@ class TaskProgressController extends Controller
             'task'        => $task,
             'description' => request('description'),
             'unknown'     => request('unknown') ?? false,
-            'done'        => false
+            'done'        => false,
         ]);
 
         return response()->json([
