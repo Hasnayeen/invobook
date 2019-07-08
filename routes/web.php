@@ -181,6 +181,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::put('tasks/{task}/statuses/{status}', 'TaskStatusController@update');
 
+    Route::get('tasks/{task}/steps/', 'TaskProgressController@index');
+
     Route::post('tasks/{task}/steps/', 'TaskProgressController@store');
 });
 

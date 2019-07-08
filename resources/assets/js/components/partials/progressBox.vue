@@ -21,6 +21,26 @@
         <button @click="saveStep" class="px-4 py-2 text-white text-center text-base font-semibold bg-teal-600 rounded">{{ 'Save' | localize }}</button>
       </div>
     </div>
+    <div>
+      <div v-for="step in steps" class="bg-white rounded shadow px-4 py-2 my-4">
+        <div class="text-xs text-indigo-700">
+          <span class="text-gray-700">Last updated:</span> {{ step.updated_at }}
+        </div>
+        <div class="text-2xl">
+          {{ step.description }}
+        </div>
+        <div class="flex">
+          <div class="py-2 pr-4 text-gray-700">
+            <input type="checkbox" :id="'step-done-' + step.id" class="checkbox" :checked="step.done">
+            <label :for="'step-done-' + step.id">Done</label>
+          </div>
+          <div class="py-2 text-gray-700">
+            <input type="checkbox" :id="'step-unknown-' + step.id" class="checkbox" :checked="step.unknown">
+            <label :for="'step-unknown-' + step.id">Unknown</label>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -47,15 +67,28 @@ export default {
   data: () => ({
     formShown: false,
     description: '',
+    steps: [],
     unknown: false,
     faTimesCircle
   }),
+
+  watch: {
+    show: function (value) {
+      if (value) {
+        this.getSteps()
+      }
+    }
+  },
 
   computed: {
     ...mapState({
       groupType: state => state.groupType,
       groupId: state => state.groupId,
     })
+  },
+
+  created () {
+    this.getSteps()
   },
 
   methods: {
@@ -75,11 +108,28 @@ export default {
         .then((response) => {
           this.description = ''
           this.formShown = false
+          this.steps.push(response.data.step)
           this.showNotification({type: response.data.status, message: response.data.message})
         })
         .catch((error) => {
           this.showNotification({type: error.response.data.status, message: error.response.data.message})
         })
+    },
+    getSteps () {
+      if (this.steps.length === 0) {
+        axios.get('/tasks/' + this.resourceId + '/steps', {
+          params: {
+            group_type: this.groupType,
+            group_id: this.groupId
+          }
+        })
+          .then((response) => {
+            this.steps = response.data.steps
+          })
+          .catch((error) => {
+            console.log(error.response.data.message)
+          })
+      }
     }
   }
 }

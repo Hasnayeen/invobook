@@ -53,6 +53,7 @@ class TaskRepository
                                $query->where('name', 'In Progress');
                            })
                            ->with('taskable:id,name')
+                           ->with('steps')
                            ->orderBy('due_on')
                            ->get();
     }
