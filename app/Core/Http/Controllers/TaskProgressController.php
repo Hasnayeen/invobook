@@ -23,4 +23,14 @@ class TaskProgressController extends Controller
             'step'    => $step,
         ], 201);
     }
+
+    public function index(Task $task)
+    {
+        $this->authorize('view', $task);
+
+        return response()->json([
+            'status'  => 'success',
+            'steps'   => $task->steps,
+        ]);
+    }
 }

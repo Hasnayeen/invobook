@@ -13,7 +13,7 @@ class TaskStatusController extends Controller
         $task->status_id = $status->id;
         $task->save();
 
-        $task->load('user', 'status');
+        $task->load('user', 'status', 'tags');
 
         return response()->json([
             'status'  => 'success',

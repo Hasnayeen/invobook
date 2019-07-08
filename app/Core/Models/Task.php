@@ -75,4 +75,9 @@ class Task extends Model
     {
         return $this->morphMany(Mention::class, 'mentionable');
     }
+
+    public function steps()
+    {
+        return $this->hasMany(Step::class)->orderBy('updated_at', 'desc');
+    }
 }
