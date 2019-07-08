@@ -6,7 +6,7 @@
     "/css/main.css": "/css/main.css?id=95149984fff806e76d0d",
     "/js/auth/register.js": "/js/auth/register.js?id=4cd607e31ec98b4ea167",
     "/js/errors/404.js": "/js/errors/404.js?id=69d0d268f46dcf719ec0",
-    "/js/home.js": "/js/home.js?id=ffaffb522ffff37dca8b",
+    "/js/home.js": "/js/home.js?id=63f21406b880db8d5ded",
     "/js/offices/single.js": "/js/offices/single.js?id=55b3c92dcfc2bc82d27f",
     "/js/projects/single.js": "/js/projects/single.js?id=37407ebbc587f2375ba2",
     "/js/teams/single.js": "/js/teams/single.js?id=27826b8934384809ca18",
@@ -22,6 +22,6 @@
     "/js/offices/single.min.js": "/js/offices/single.min.js?id=55b3c92dcfc2bc82d27f",
     "/js/users/profile.min.js": "/js/users/profile.min.js?id=b72e07728c9b732a101f",
     "/js/admin/index.min.js": "/js/admin/index.min.js?id=a54d3ee3296d9739adb7",
-    "/js/home.min.js": "/js/home.min.js?id=ffaffb522ffff37dca8b",
+    "/js/home.min.js": "/js/home.min.js?id=63f21406b880db8d5ded",
     "/js/vendor.min.js": "/js/vendor.min.js?id=35d68e33880fb857066a"
 }
