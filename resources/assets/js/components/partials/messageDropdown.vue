@@ -1,6 +1,6 @@
 <template>
 <div class="px-4 h-full border-l flex items-center">
-  <div id="notification" class="text-teal-400  text-base no-underline cursor-pointer" @click="showMessageBox">
+  <div class="text-teal-400  text-base no-underline cursor-pointer" @click="showMessageBox">
     <font-awesome-icon :icon="faEnvelope" class="font-bold text-xl"></font-awesome-icon>
     <font-awesome-icon v-if="unreadMessage" :icon="faCircle" class="text-red-500 text-xs absolute top-0 mt-2 -ml-1" aria-hidden="true"></font-awesome-icon>
   </div>

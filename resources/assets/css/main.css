@@ -50,3 +50,17 @@ html {
  .h-70-vh {
      height: 50vh;
  }
+
+ .checkbox {
+     @apply hidden;
+ }
+
+ .checkbox + label::before {
+     @apply inline-block w-5 h-5 mr-1 -mb-1 border-blue-300 border-2 rounded;
+     content: '';
+ }
+
+ .checkbox:checked + label::before {
+     @apply bg-indigo-500;
+     content: '';
+ }
