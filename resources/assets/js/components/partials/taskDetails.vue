@@ -78,15 +78,16 @@
         <div v-else v-for="tag in task.tags" class="bg-teal-200 px-3 py-1 rounded-full text-teal-800 font-medium text-sm mr-4">{{ tag.label }}</div>
       </div>
       <div class="flex flex-row justify-around bg-gray-200 py-4 text-gray-600 text-center">
-        <div class="w-1/2 border-teal-500 text-teal-500 border-b-2 pb-4 -mb-4">
+        <div @click="showColumn('comments')" :class="[activeColumn === 'comments' ? 'border-teal-500 text-teal-500 border-b-2 pb-4 -mb-4' : 'cursor-pointer']" class="w-1/2">
           Comments
         </div>
-        <div class="w-1/2">
+        <div @click="showColumn('progress')" :class="[activeColumn === 'progress' ? 'border-teal-500 text-teal-500 border-b-2 pb-4 -mb-4': 'cursor-pointer']" class="w-1/2">
           Progress
         </div>
       </div>
       <div class="px-2 md:px-8">
-        <comment-box resourceType="task" :resource="task" :detailsShown="taskDetailsShown"></comment-box>
+        <comment-box :show="activeColumn === 'comments'" resourceType="task" :resourceId="task.id"></comment-box>
+        <progress-box :show="activeColumn === 'progress'" resourceType="task" :resourceId="task.id"></progress-box>
       </div>
     </div>
     <div class="h-16"></div>
@@ -98,6 +99,7 @@
 <script>
 import { mapActions } from 'vuex'
 import commentBox from './commentBox.vue'
+import progressBox from './progressBox.vue'
 import {
   faArrowLeft,
   faEllipsisH
@@ -105,7 +107,7 @@ import {
 
 export default {
   components: {
-    commentBox
+    commentBox, progressBox
   },
   props: {
     resourceId: {
@@ -136,6 +138,7 @@ export default {
   data: () => ({
     dropdownMenuShown: false,
     statusMenuShown: false,
+    activeColumn: 'comments',
     faArrowLeft,
     faEllipsisH
   }),
@@ -199,6 +202,9 @@ export default {
     },
     editTask () {
       this.closeTaskDetails(true)
+    },
+    showColumn (column) {
+      this.activeColumn = column
     }
   }
 }

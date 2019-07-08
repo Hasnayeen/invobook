@@ -1,5 +1,5 @@
 <template>
-<div>
+<div v-if="show">
   <div class="flex flex-row items-center border-b pt-8 pb-2">
     <div class="text-gray-600 text-xl pr-2">
       Comments 
@@ -63,11 +63,11 @@ export default {
       required: true,
       type: String
     },
-    resource: {
+    resourceId: {
       required: true,
-      type: Object
+      type: Number
     },
-    detailsShown: {
+    show: {
       required: true,
       type: Boolean
     }
@@ -88,28 +88,24 @@ export default {
     faTrashAlt
   }),
 
-  created () {
-    axios.get('/comments', {
-      params: {
-        commentable_type: this.resourceType,
-        commentable_id: this.resource.id,
-        group_type: this.groupType,
-        group_id: this.groupId
+  watch: {
+    show: function (value) {
+      if (value) {
+        this.getComments()
       }
-    })
-      .then((response) => {
-        this.comments = response.data.comments
-      })
-      .catch((error) => {
-        console.log(error.response.data.message)
-      })
+    }
   },
+
   computed: {
     ...mapState({
       users: state => state.members,
       groupType: state => state.groupType,
       groupId: state => state.groupId
     })
+  },
+
+  created () {
+    this.getComments()
   },
 
   methods: {
@@ -125,7 +121,7 @@ export default {
         axios.post('/comments', {
           body: this.body,
           commentable_type: this.resourceType,
-          commentable_id: this.resource.id,
+          commentable_id: this.resourceId,
           mentions: this.mentions
         })
           .then((response) => {
@@ -183,7 +179,25 @@ export default {
       this.suggestionHighlightIndex = 0
       this.name = ''
       document.getElementById('save-comment').focus()
-    }
+    },
+    getComments () {
+      if (this.comments.length === 0) {
+        axios.get('/comments', {
+          params: {
+            commentable_type: this.resourceType,
+            commentable_id: this.resourceId,
+            group_type: this.groupType,
+            group_id: this.groupId
+          }
+        })
+          .then((response) => {
+            this.comments = response.data.comments
+          })
+          .catch((error) => {
+            console.log(error.response.data.message)
+          })
+      }
+    },
   }
 }
 </script>

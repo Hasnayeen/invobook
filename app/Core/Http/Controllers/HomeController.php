@@ -14,13 +14,10 @@ class HomeController extends Controller
     public function index(TaskRepository $repository)
     {
         $currentWork = $repository->userCurrentlyWorkingOn(auth()->user()->id);
-        $projects = auth()->user()->projects;
-        $teams = auth()->user()->teams;
-        $offices = auth()->user()->offices;
+        $projects = auth()->user()->projects->load('members');
+        $teams = auth()->user()->teams->load('members');
+        $offices = auth()->user()->offices->load('members');
 
-        $projects->load('members');
-        $teams->load('members');
-        $offices->load('members');
         auth()->user()->setAppends(['unread_direct_messages']);
 
         return view('home', ['data' => ['currentWork' => $currentWork, 'projects' => $projects, 'teams' => $teams, 'offices' => $offices]]);

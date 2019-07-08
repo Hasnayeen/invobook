@@ -180,6 +180,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('tasks/{task}', 'TaskController@delete');
 
     Route::put('tasks/{task}/statuses/{status}', 'TaskStatusController@update');
+
+    Route::post('tasks/{task}/steps/', 'TaskProgressController@store');
 });
 
     /**********************************
