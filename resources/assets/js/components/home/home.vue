@@ -4,7 +4,8 @@
       <div class="text-xl">
         What's on your plate today ⬇️
       </div>
-      <a :href="'/' + currentWork[0].taskable_type + 's/' + currentWork[0].taskable_id + '?tool=tasks&id=' + currentWork[0].id" class="block mt-4 p-4 rounded-lg bg-gray-100 border-2 border-indigo-300 cursor-pointer">
+      <div v-if="currentWork.length === 0" class="mt-4">There is currently no work "In Progress" assigned to you</div>
+      <a v-if="currentWork.length !== 0" :href="'/' + currentWork[0].taskable_type + 's/' + currentWork[0].taskable_id + '?tool=tasks&id=' + currentWork[0].id" class="block mt-4 p-4 rounded-lg bg-gray-100 border-2 border-indigo-300 cursor-pointer">
         <div class="flex items-center">
           <div class="pr-2 text-sm">Due on: </div>
           <div class="text-sm rounded-full px-3 py-1 bg-teal-200 text-teal-700 font-semibold inline">
@@ -22,7 +23,7 @@
             Progress
           </div>
           <!-- Progress list -->
-          <div v-if="currentWork && currentWork[0].steps.length === 0" class="pt-2">
+          <div v-if="currentWork.length !== 0 && currentWork[0].steps.length === 0" class="pt-2">
             No progress update yet
           </div>
           <div v-for="step in currentWork[0].steps" class="bg-white rounded shadow px-4 py-2 my-4">
@@ -45,7 +46,7 @@
           </div>
         </div>
       </a>
-      <div class="pt-8 flex items-center pb-4">
+      <div v-if="currentWork.length !== 0" class="pt-8 flex items-center pb-4">
         <div class="text-base mr-2">
           Other tasks in progress
         </div>
