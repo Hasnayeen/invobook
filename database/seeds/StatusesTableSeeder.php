@@ -29,7 +29,7 @@ class StatusesTableSeeder extends Seeder
             'color' => '#9ae6b4',
         ]);
         Status::create([
-            'name'  => 'Canceled',
+            'name'  => 'Discarded',
             'color' => '#feb2b2',
         ]);
     }

@@ -21,7 +21,7 @@ class ProjectController extends Controller
             $this->authorize('view', $project);
             auth()->user()->setAppends(['unread_direct_messages']);
         }
-        $project->load('members:user_id,username,avatar,name', 'settings');
+        $project->load('members:user_id,username,avatar,name', 'settings', 'tags:tag_id,label');
 
         return view('projects.single', ['project' => $project]);
     }
