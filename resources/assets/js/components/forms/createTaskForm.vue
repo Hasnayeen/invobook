@@ -1,6 +1,6 @@
 <template>
 <div v-if="formShown">
-  <div class="absolute container mx-auto w-5/6 md:w-3/5 lg:max-w-5xl z-20" style="top: 12vh;left: 0;right: 0;">
+  <div class="absolute container mx-auto w-5/6 md:w-3/5 lg:max-w-5xl z-30" style="top: 12vh;left: 0;right: 0;">
     <div class="bg-white rounded shadow-lg">
       <div class="p-4">
         <div class="p-4">
@@ -103,7 +103,7 @@
     <div class="h-16"></div>
   </div>
 
-  <div @click="closeCreateTaskForm" :class="{'hidden': !formShown}" class="h-screen w-screen fixed inset-0 bg-gray-900 opacity-25"></div>
+  <div @click="closeCreateTaskForm" :class="{'hidden': !formShown}" class="h-screen w-screen fixed inset-0 bg-gray-900 opacity-25 z-20"></div>
 </div>
 </template>
 
@@ -151,7 +151,6 @@ export default {
     tag: '',
     tags: [],
     labels: [],
-    availableTags: [],
     tagSuggestionShown: false,
     faChevronDown,
     faTimesCircle,
@@ -164,7 +163,6 @@ export default {
         if (this.task) {
           this.hydrateForm()
         }
-        this.getTags()
       }
     }
   },
@@ -175,7 +173,8 @@ export default {
     },
     ...mapState({
       cycles: state => state.cycle.cycles,
-      selectedCycleId: state => state.cycle.selectedCycleId
+      selectedCycleId: state => state.cycle.selectedCycleId,
+      availableTags: state => state.tags
     })
   },
 
@@ -247,21 +246,10 @@ export default {
     dontShowTags () {
       this.tagSuggestionShown = false
     },
-    getTags () {
-      if (this.availableTags.length === 0) {
-        axios.get('/tags')
-          .then((response) => {
-            this.availableTags = response.data.tags
-          })
-          .catch((error) => {
-            console.error(error.response.data.message)
-          })
-      }
-    },
     addTag (tag) {
       this.tags.push(tag)
-      this.labels.push(tag.id)
-      this.availableTags = this.availableTags.filter(x => x.id !== tag.id)
+      this.labels.push(tag.tag_id)
+      this.availableTags = this.availableTags.filter(x => x.id !== tag.tag_id)
       this.tag = ''
     },
     deleteTag (tag) {

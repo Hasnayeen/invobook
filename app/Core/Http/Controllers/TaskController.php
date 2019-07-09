@@ -57,7 +57,7 @@ class TaskController extends Controller
             } elseif (auth()->user()) {
                 $this->authorize('view', $group);
             }
-            $tasks = $repository->getAllTaskWithAssignee(request('resource_type'), request('resource_id'), request('cycle_id'));
+            $tasks = $repository->getAllTaskWithAssignee(request('resource_type'), request('resource_id'));
 
             return response()->json([
                 'status'   => 'success',
@@ -87,6 +87,7 @@ class TaskController extends Controller
     {
         $this->authorize('update', $task);
         $task->update($request->all());
+        $task->tags()->attach(request('labels'));
         $task->load('user:id,avatar', 'status', 'tags');
 
         return response()->json([

@@ -13,9 +13,15 @@ class TaskRepository
         $this->model = $task;
     }
 
-    public function getAllTaskWithAssignee($type, $entityId, $cycleId = null)
+    public function getAllTaskWithAssignee($type, $entityId)
     {
-        $query = $cycleId ? $this->model->where('cycle_id', $cycleId) : $this->model->whereNull('cycle_id');
+        $query = request('cycle_id') ? $this->model->where('cycle_id', request('cycle_id')) : $this->model->whereNull('cycle_id');
+        $query = request('status_id') ? $query->where('status_id', request('status_id')) : $query;
+        $query = request('assigned_to') ? $query->where('assigned_to', request('assigned_to')) : $query;
+        $query = request('due_on') ? $query->where('due_on', request('due_on')) : $query;
+        $query = request('tag_id') ? $query->whereHas('tags', function ($query) {
+            $query->where('id', request('tag_id'));
+        })->with('tags') : $query;
 
         return $query->where(['taskable_type' => $type, 'taskable_id' => $entityId])
                      ->with('user:id,avatar,username,name')
