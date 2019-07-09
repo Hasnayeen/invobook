@@ -78,6 +78,7 @@ export default {
     suggestionSelected: false,
     suggestionShown: false,
     mentions: [],
+    typingNotificationSent: false,
     users: [],
     user,
     authenticated
@@ -199,6 +200,25 @@ computed: {
             document.title = '(' + this.unreadMessage + ') ' + this.title
           }
         })
+        .listenForWhisper('typing', (e) => {
+          this.pushSystemMessage(`${e.name} is typing`)
+          setTimeout(() => {
+            this.messages.pop()
+          }, 4000)
+        })
+    },
+    typing () {
+      if (! this.typingNotificationSent) {
+        Echo.join(this.resourceType + '.' + this.resource.id)
+          .whisper('typing', {
+            name: this.user.name
+          })
+        this.typingNotificationSent = true
+        setTimeout(this.setTypingNotification, 4000)
+      }
+    },
+    setTypingNotification () {
+      this.typingNotificationSent = false
     },
     clearTitleNotification () {
       document.title = this.title
@@ -218,6 +238,9 @@ computed: {
       })
     },
     checkForMention (e) {
+      if (this.message.length > 2) {
+        this.typing()
+      }
       if (e.key === "@") {
         this.suggestionShown = true
         this.mentionStarted = true
