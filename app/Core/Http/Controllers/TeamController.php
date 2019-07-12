@@ -21,7 +21,7 @@ class TeamController extends Controller
             $this->authorize('view', $team);
             auth()->user()->setAppends(['unread_direct_messages']);
         }
-        $team->load('members:user_id,username,avatar,name', 'settings');
+        $team->load('members:user_id,username,avatar,name', 'settings', 'tags:tag_id,label');
 
         return view('teams.single', ['team' => $team]);
     }

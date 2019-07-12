@@ -80,7 +80,6 @@
                 <font-awesome-icon @click="deleteTag(tag)" :icon="faTimesCircle" class="text-sm text-indigo-700 ml-1 cursor-pointer"></font-awesome-icon>
               </div>
               <input
-                v-model="tag"
                 @focus="showTags"
                 type="text"
                 name="tags"
@@ -148,8 +147,8 @@ export default {
     disabledDates: {
       to: new Date()
     },
-    tag: '',
     tags: [],
+    availableTags: [],
     labels: [],
     tagSuggestionShown: false,
     faChevronDown,
@@ -158,6 +157,7 @@ export default {
 
   watch: {
     formShown: function (value, oldValue) {
+      this.availableTags = this.resource.tags
       if (value) {
         this.cycleId = this.selectedCycleId
         if (this.task) {
@@ -174,7 +174,6 @@ export default {
     ...mapState({
       cycles: state => state.cycle.cycles,
       selectedCycleId: state => state.cycle.selectedCycleId,
-      availableTags: state => state.tags
     })
   },
 
@@ -249,8 +248,7 @@ export default {
     addTag (tag) {
       this.tags.push(tag)
       this.labels.push(tag.tag_id)
-      this.availableTags = this.availableTags.filter(x => x.id !== tag.tag_id)
-      this.tag = ''
+      this.availableTags = this.availableTags.filter(x => x.tag_id !== tag.tag_id)
     },
     deleteTag (tag) {
       let index = this.tags.indexOf(tag)

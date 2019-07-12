@@ -22,7 +22,7 @@ class TaskController extends Controller
             if (request('mentions')) {
                 $mentionRepository->create('task', $task);
             }
-            $task->load('user:id,avatar', 'status');
+            $task->load('user:id,avatar', 'status', 'tags:tag_id,label');
 
             return response()->json([
                 'status'  => 'success',

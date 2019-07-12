@@ -147,7 +147,7 @@ export default {
 
   async created () {
     this.statuses = await this.getAllStatuses()
-    this.statusFilter = this.statuses.find(x => x.name === "In Progress").id
+    this.statusFilter = this.statuses.find(x => x.name === "To Do").id
     this.tasks = await this.getAllTasks(true)
     var id = new URL(location.href).searchParams.get('id')
     if (this.tasks) {
@@ -234,7 +234,7 @@ export default {
     },
     async getAllStatuses () {
       try {
-        if (this.authenticated && this.statuses.length < 1) {
+        if (this.statuses.length < 1) {
           let { data } = await axios({
             url: '/statuses',
           })
