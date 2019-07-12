@@ -92,7 +92,7 @@
     </div>
     <div class="h-16"></div>
   </div>
-  <div @click="closeTaskDetails(false)" :class="{'hidden': !taskDetailsShown}" class="h-screen w-screen fixed inset-0 bg-gray-900 opacity-25"></div>
+  <div @click="closeTaskDetails(false)" :class="{'hidden': !taskDetailsShown}" class="h-screen w-screen fixed inset-0 bg-gray-900 opacity-25 z-10"></div>
 </div>
 </template>
 

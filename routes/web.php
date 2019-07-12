@@ -234,6 +234,14 @@ Route::get('cycles', 'CycleController@index');
 
 Route::post('cycles', 'CycleController@store')->middleware('auth');
 
+/**********************************
+    Status
+**********************************/
+
+Route::get('statuses', 'StatusController@index');
+
+Route::post('statuses', 'StatusController@store')->middleware('auth');
+
 Route::group(['middleware' => 'auth'], function () {
     /**********************************
         Category
@@ -296,14 +304,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('users/{user}/profile', 'UserProfileController@update');
 
     Route::post('users/{user}/avatar', 'UserAvatarController@store');
-
-    /**********************************
-        Status
-    **********************************/
-
-    Route::get('statuses', 'StatusController@index');
-
-    Route::post('statuses', 'StatusController@store');
 
     /**********************************
         Github Service

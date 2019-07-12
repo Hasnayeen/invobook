@@ -3,12 +3,12 @@
     <div class="text-gray-600 font-semibold text-2xl mb-4 flex items-center justify-center">
       <div class="flex justify-center items-center">
         {{project.name}}
-        <span @click="toggleDropdownMenu" v-click-outside="closeDropdownMenu" class="bg-white p-1 text-sm rounded-full shadow ml-4 cursor-pointer flex items-center">
+        <span v-if="authenticated" @click="toggleDropdownMenu" v-click-outside="closeDropdownMenu" class="bg-white p-1 text-sm rounded-full shadow ml-4 cursor-pointer flex items-center">
           <font-awesome-icon :icon="faCog"></font-awesome-icon>
         </span>
       </div>
       <!-- Dropdown Menu -->
-      <div v-if="dropdownMenuShown" class="absolute w-64">
+      <div v-if="authenticated && dropdownMenuShown" class="absolute w-64">
         <ul class="list-reset bg-white rounded shadow-lg py-2 absolute inset-x-0 mt-6 text-base text-left font-normal whitespace-no-wrap z-30">
           <li @click="toggleVisibility" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
             {{ project.public ? 'Make Private' : 'Make Public'}}
@@ -130,6 +130,7 @@ export default {
     dropdownMenuShown: false,
     settings: project.settings,
     currentCycleId: null,
+    authenticated,
     faPlus,
     faCog
   }),

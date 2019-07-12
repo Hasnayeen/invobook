@@ -2,10 +2,10 @@
   <div class="container mx-auto my-6 px-4 md:px-0 w-full md:max-w-2xl lg:max-w-4xl xl:max-w-6xl">
     <div class="text-gray-600 font-semibold text-2xl mb-4 flex items-center justify-center">
       {{office.name}}
-      <span @click="toggleDropdownMenu" v-click-outside="closeDropdownMenu" class="bg-white p-1 text-sm rounded-full shadow ml-4 cursor-pointer flex items-center">
+      <span v-if="authenticated" @click="toggleDropdownMenu" v-click-outside="closeDropdownMenu" class="bg-white p-1 text-sm rounded-full shadow ml-4 cursor-pointer flex items-center">
         <font-awesome-icon :icon="faCog"></font-awesome-icon>
       </span>
-      <div v-if="dropdownMenuShown" class="relative">
+      <div v-if="authenticated && dropdownMenuShown" class="relative">
         <ul class="list-reset bg-white rounded shadow-lg py-2 absolute right-0 mt-4 text-base text-left font-normal whitespace-no-wrap z-30">
           <li @click="toggleVisibility" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
             {{ office.public ? 'Make Private' : 'Make Public'}}
@@ -127,6 +127,7 @@ export default {
     dropdownMenuShown: false,
     settings: office.settings,
     currentCycleId: null,
+    authenticated,
     faPlus,
     faCog
   }),
