@@ -14,7 +14,7 @@
             </a>
             <span class="text-xl">{{ member.name }}</span>
           </div>
-          <button @click="removeMember(index, member.id)" class="w-8 h-8 bg-red-200 text-red-700 rounded-full flex justify-center items-center" title="delete">
+          <button @click="removeMember(index, member.user_id)" class="w-8 h-8 bg-red-200 text-red-700 rounded-full flex justify-center items-center" title="delete">
             <font-awesome-icon :icon="faTrashAlt" class="cursor-pointer text-sm"></font-awesome-icon>
           </button>
         </li>
