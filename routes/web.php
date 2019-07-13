@@ -322,6 +322,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('roles', 'RoleController@index');
 
     Route::get('activities', 'ActivityController@index');
+
+    /**********************************
+        Settings
+    **********************************/
+
+    Route::get('settings', function () {
+        return view('users.settings');
+    });
 });
 
     /**********************************

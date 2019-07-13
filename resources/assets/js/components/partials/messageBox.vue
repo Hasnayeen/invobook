@@ -6,14 +6,14 @@
     </div>
     <div class="flex flex-row">
       <div class="bg-blue-200">
-        <div class="overflow-auto overflow-y-scroll overflow-x-hidden h-70-vh">
+        <div class="overflow-auto overflow-y-scroll overflow-x-hidden h-70-vh w-16 lg:w-20 xxl:w-24">
           <div @click="selectUserMessage(user, index)"
             v-for="(user, index) in users"
             v-if="user.id !== authUser.id"
-            class="relative p-4"
+            class="relative p-2 lg:p-4"
             :class="{'bg-white': user.id === selectedUser.id, 'jelly bg-white': user.unread_messages_for_auth_user_count > 0}">
-            <img class="w-12 h-12 rounded-full cursor-pointer" :title="user.name" :src="generateUrl(user.avatar)">
-            <div :class="[user.online ? 'bg-teal-500' : 'bg-gray-500']" :title="[user.online ? 'online' : 'offline']" class="absolute w-4 h-4 rounded-full border-2 border-white mb-4 mr-4 right-0 bottom-0"></div>
+            <img class="w-10 lg:w-12 h-10 lg:h-12 rounded-full cursor-pointer" :title="user.name" :src="generateUrl(user.avatar)">
+            <div :class="[user.online ? 'bg-teal-500' : 'bg-gray-500']" :title="[user.online ? 'online' : 'offline']" class="absolute w-4 h-4 rounded-full border-2 border-white mb-2 mr-2 lg:mb-4 lg:mr-4 right-0 bottom-0"></div>
           </div>
         </div>
       </div>

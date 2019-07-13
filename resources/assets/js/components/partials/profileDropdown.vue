@@ -20,7 +20,7 @@
       </span>
       {{ 'Admin' | localize }}
     </a>
-    <a class="px-4 py-2 hover:bg-teal-500 hover:text-white text-gray-600 font-medium no-underline block" href="#">
+    <a v-if="authenticated" class="px-4 py-2 hover:bg-teal-500 hover:text-white text-gray-600 font-medium no-underline block" href="/settings">
       <span class="w-6 inline-block">
         <font-awesome-icon :icon="faCog" class="pr-1 font-regular"></font-awesome-icon>
       </span>
@@ -66,6 +66,7 @@ export default {
     profileUrl: navUrl.site + '/users/' + user.username,
     profileDropdownShown: false,
     impersonating: impersonating,
+    authenticated,
     faAngleDown,
     faCog,
     faShieldAlt,

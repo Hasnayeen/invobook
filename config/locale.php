@@ -36,6 +36,15 @@ return [
         'tr-TR' => 'Turkish (Turkey)',
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Route to File mapping
+    |--------------------------------------------------------------------------
+    |
+    | This settings determine which language file to load for a route.
+    | Route name as key and file name as value.
+    |
+    */
     'route_to_file' => [
         '/'                  => 'home',
         'projects/{project}' => 'project',
@@ -43,5 +52,6 @@ return [
         'offices/{office}'   => 'project',
         'admin'              => 'admin',
         'users/{user}'       => 'user',
+        'settings'           => 'user',
     ],
 ];
