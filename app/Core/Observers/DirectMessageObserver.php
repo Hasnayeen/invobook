@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Observers;
+namespace App\Core\Observers;
 
 use App\Core\Models\DirectMessage;
 use App\Core\Events\DirectMessageCreated;

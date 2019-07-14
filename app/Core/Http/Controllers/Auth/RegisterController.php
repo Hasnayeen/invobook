@@ -12,7 +12,9 @@ use App\Core\Mail\UserRegistered;
 use Illuminate\Support\Facades\Mail;
 use App\Core\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Core\Notifications\UserRegistered as UserRegisteredNotification;
 
 class RegisterController extends Controller
 {
@@ -151,5 +153,15 @@ class RegisterController extends Controller
         $user->offices()->attach($office->id);
         Mail::to($user->email)
             ->send(new UserRegistered($user));
+        Notification::send($this->getRecipients(), new UserRegisteredNotification($user));
+    }
+
+    private function getRecipients()
+    {
+        return User::whereHas('role', function ($query) {
+                         $query->where('slug', 'owner')
+                             ->orWhere('slug', 'admin');
+                     })
+                   ->get();
     }
 }

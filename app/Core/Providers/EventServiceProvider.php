@@ -7,11 +7,9 @@ use App\Core\Models\Project;
 use App\Core\Models\Discussion;
 use App\Core\Models\DirectMessage;
 use App\Core\Observers\TaskObserver;
-use Illuminate\Auth\Events\Registered;
 use App\Core\Observers\ProjectObserver;
-use App\Observers\DirectMessageObserver;
 use App\Core\Observers\DiscussionObserver;
-use App\Core\Listeners\LogUserRegistration;
+use App\Core\Observers\DirectMessageObserver;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -21,11 +19,7 @@ class EventServiceProvider extends ServiceProvider
      *
      * @var array
      */
-    protected $listen = [
-        Registered::class => [
-            LogUserRegistration::class,
-        ],
-    ];
+    protected $listen = [];
 
     /**
      * Bootstrap any application services.

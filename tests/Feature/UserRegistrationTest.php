@@ -10,9 +10,11 @@ use App\Core\Models\Office;
 use Illuminate\Support\Str;
 use App\Core\Mail\UserRegistered;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use App\Core\Notifications\UserRegistered as UserRegisteredNotification;
 
 class UserRegistrationTest extends TestCase
 {
@@ -26,6 +28,7 @@ class UserRegistrationTest extends TestCase
 
         $this->token = factory(Token::class)->create();
         Mail::fake();
+        Notification::fake();
     }
 
     /** @test */
@@ -49,7 +52,7 @@ class UserRegistrationTest extends TestCase
     /** @test */
     public function guest_with_valid_token_can_register_account()
     {
-        $newUser = $this->get_fake_user_date();
+        $newUser = $this->get_fake_user_data();
 
         $this->register_user_request($newUser);
 
@@ -59,6 +62,10 @@ class UserRegistrationTest extends TestCase
         );
 
         Mail::assertQueued(UserRegistered::class);
+        Notification::assertSentTo(
+            $this->user,
+            UserRegisteredNotification::class
+        );
     }
 
     /** @test */
@@ -68,7 +75,7 @@ class UserRegistrationTest extends TestCase
 
         $this->expectException(DecryptException::class);
 
-        $newUser = $this->get_fake_user_date();
+        $newUser = $this->get_fake_user_data();
 
         $this->post("/register/{$invalidToken}", $newUser)
             ->assertStatus('403');
@@ -77,7 +84,7 @@ class UserRegistrationTest extends TestCase
     /** @test */
     public function user_must_have_a_role()
     {
-        $newUser = $this->get_fake_user_date();
+        $newUser = $this->get_fake_user_data();
         $this->register_user_request($newUser);
 
         $user = User::where('username', $newUser['username'])->first();
@@ -87,7 +94,7 @@ class UserRegistrationTest extends TestCase
     /** @test */
     public function guest_with_valid_shareable_link_can_register_account()
     {
-        $newUser = $this->get_fake_user_date();
+        $newUser = $this->get_fake_user_data();
         factory(Office::class)->create([
             'name' => 'Headquarter',
         ]);
@@ -105,13 +112,17 @@ class UserRegistrationTest extends TestCase
         );
 
         Mail::assertQueued(UserRegistered::class);
+        Notification::assertSentTo(
+            $this->user,
+            UserRegisteredNotification::class
+        );
     }
 
     /** @test */
     public function guest_without_valid_shareable_link_cant_register_account()
     {
         $this->expectException(HttpException::class);
-        $newUser = $this->get_fake_user_date();
+        $newUser = $this->get_fake_user_data();
         factory(Office::class)->create([
             'name' => 'Headquarter',
         ]);
@@ -129,7 +140,7 @@ class UserRegistrationTest extends TestCase
         return $this->post('/register/' . encrypt($this->token->token), $newUser);
     }
 
-    private function get_fake_user_date()
+    private function get_fake_user_data()
     {
         return [
             'name'                  => $this->faker->name,
