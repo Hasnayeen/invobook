@@ -159,9 +159,9 @@ class RegisterController extends Controller
     private function getRecipients()
     {
         return User::whereHas('role', function ($query) {
-                         $query->where('slug', 'owner')
+            $query->where('slug', 'owner')
                              ->orWhere('slug', 'admin');
-                     })
+        })
                    ->get();
     }
 }
