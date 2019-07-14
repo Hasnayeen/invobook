@@ -47,7 +47,7 @@ class YouWereMentioned extends Notification implements ShouldQueue
      */
     public function via()
     {
-        return ['mail', 'database'];
+        return config('notification.channels');
     }
 
     /**
