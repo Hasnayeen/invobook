@@ -103,7 +103,7 @@ export default {
       }
       axios.post('/register/invite-link', {
           role_id: this.roleId,
-          expiry_date: this.expiryDate
+          expiry_date: luxon.DateTime.fromJSDate(this.expiryDate).toFormat('y-L-d')
         })
         .then((response) => {
           this.shareableLink = response.data.link
