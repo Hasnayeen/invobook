@@ -10,15 +10,17 @@
     <form method="POST" :action="url">
       <input type="hidden" name="_token" :value="token">
       <p class="py-4">
-        <input id="email" aria-label="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800" type="text" name="email" placeholder="E-mail" :value="oldEmail">
+        <input id="email" aria-label="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800" type="text" name="email" placeholder="E-mail" :value="oldEmail" autofocus>
         <span class="text-red-400 block pt-2" v-if="errors.email">{{ errors.email[0] }}</span>
       </p>
       <p class="py-4">
         <input id="password" aria-label="password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800" type="password" name="password" placeholder="Password">
       </p>
       <p class="py-4 text-gray-500">
-        <input type="checkbox" aria-label="remember me" name="remember">
-        Remember Me
+        <label>
+          <input type="checkbox" aria-label="remember me" name="remember">
+          Remember Me
+        </label>
       </p>
       <p class="py-4">
         <button type="submit" class="bg-teal-500 hover:bg-teal-600 text-white text-xl font-medium py-2 px-4 rounded">LOGIN</button>
