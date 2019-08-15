@@ -37,7 +37,7 @@
         "vue-click-outside": "^1.0.7",
         "vuejs-datepicker": "^1.6.2",
         "vuex": "^3.0.1",
-        "webpack": "^4.39.1"
+        "webpack": "^4.39.2"
     },
     "jest": {
         "moduleFileExtensions": [
