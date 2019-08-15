@@ -28,7 +28,7 @@
         "laravel-echo": "^1.5.4",
         "laravel-mix": "^4.1.2",
         "linkifyjs": "^2.1.8",
-        "luxon": "^1.17.1",
+        "luxon": "^1.17.2",
         "purgecss-webpack-plugin": "^1.4.0",
         "quill": "^1.3.6",
         "quill-plugin-image-upload": "^0.0.6",
