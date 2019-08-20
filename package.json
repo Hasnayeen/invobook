@@ -13,7 +13,7 @@
         "watch:test": "jest --watch --bail"
     },
     "dependencies": {
-        "laravel-echo-server": "^1.5.0",
+        "laravel-echo-server": "^1.5.7",
         "vue-template-compiler": "^2.5.21"
     },
     "devDependencies": {
