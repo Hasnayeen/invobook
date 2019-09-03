@@ -34,7 +34,7 @@
         "nunomaduro/collision": "^3.0",
         "nunomaduro/phpinsights": "^1.5",
         "phpunit/phpunit": "^8.0",
-        "wnx/laravel-stats": "^1.9"
+        "wnx/laravel-stats": "^2.0"
     },
     "autoload": {
         "classmap": [
