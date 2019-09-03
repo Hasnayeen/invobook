@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "253f1c6f6c7fd8c3ce365e34e9c9350d",
+    "content-hash": "655204c9dc5c61ffccaa905cb9284764",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -4600,8 +4600,8 @@
             "authors": [
                 {
                     "name": "Hassan Khan",
-                    "role": "Developer",
-                    "homepage": "http://hassankhan.me/"
+                    "homepage": "http://hassankhan.me/",
+                    "role": "Developer"
                 }
             ],
             "description": "Lightweight configuration file loader that supports PHP, INI, XML, JSON, and YAML files",
@@ -4846,9 +4846,9 @@
             "authors": [
                 {
                     "name": "Phil Bennett",
-                    "role": "Developer",
                     "email": "philipobenito@gmail.com",
-                    "homepage": "http://www.philipobenito.com"
+                    "homepage": "http://www.philipobenito.com",
+                    "role": "Developer"
                 }
             ],
             "description": "A fast and intuitive dependency injection container.",
@@ -5549,18 +5549,18 @@
             "authors": [
                 {
                     "name": "Arne Blankerts",
-                    "role": "Developer",
-                    "email": "arne@blankerts.de"
+                    "email": "arne@blankerts.de",
+                    "role": "Developer"
                 },
                 {
                     "name": "Sebastian Heuer",
-                    "role": "Developer",
-                    "email": "sebastian@phpeople.de"
+                    "email": "sebastian@phpeople.de",
+                    "role": "Developer"
                 },
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "Developer",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "Developer"
                 }
             ],
             "description": "Library for handling version information and constraints",
@@ -5810,8 +5810,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "A tool for quickly measuring the size of a PHP project.",
@@ -5978,8 +5978,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "Library that provides collection, processing, and rendering functionality for PHP code coverage information.",
@@ -6029,8 +6029,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "FilterIterator implementation that filters files based on a list of suffixes.",
@@ -6071,8 +6071,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "Simple template engine.",
@@ -6120,8 +6120,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "Utility class for timing",
@@ -6250,8 +6250,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "The PHP Unit Testing framework.",
@@ -6625,8 +6625,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "FinderFacade is a convenience wrapper for Symfony's Finder component.",
@@ -6912,8 +6912,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "Collection of value objects that represent the types of the PHP type system",
@@ -6955,8 +6955,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "Library that helps with managing the version number of Git-hosted PHP projects",
@@ -8211,31 +8211,31 @@
         },
         {
             "name": "wnx/laravel-stats",
-            "version": "v1.9.2",
+            "version": "v2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stefanzweifel/laravel-stats.git",
-                "reference": "e7bb5b6a376e840167ec26d10754c4c1e0fdf12a"
+                "reference": "1b3c60bfbf81233973cbc2a63be4e6f83b2d6205"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stefanzweifel/laravel-stats/zipball/e7bb5b6a376e840167ec26d10754c4c1e0fdf12a",
-                "reference": "e7bb5b6a376e840167ec26d10754c4c1e0fdf12a",
+                "url": "https://api.github.com/repos/stefanzweifel/laravel-stats/zipball/1b3c60bfbf81233973cbc2a63be4e6f83b2d6205",
+                "reference": "1b3c60bfbf81233973cbc2a63be4e6f83b2d6205",
                 "shasum": ""
             },
             "require": {
-                "illuminate/console": "~5.5.0|~5.6.0|~5.7.0|~5.8.0",
-                "illuminate/support": "~5.5.0|~5.6.0|~5.7.0|~5.8.0",
-                "php": ">=7.0.0",
+                "illuminate/console": "~5.8.0|^6.0",
+                "illuminate/support": "~5.8.0|^6.0",
+                "php": ">=7.2.0",
                 "phploc/phploc": "~4.0|~5.0",
                 "symfony/finder": "~3.3|~4.0"
             },
             "require-dev": {
                 "laravel/browser-kit-testing": "~2.0|~3.0|~4.0|~5.0",
-                "laravel/dusk": "~2.0|~3.0|~4.0",
+                "laravel/dusk": "~3.0|~4.0|~5.0",
                 "mockery/mockery": "^1.1",
-                "orchestra/testbench": "^3.5|^3.6|^3.7",
-                "phpunit/phpunit": "6.*|7.*"
+                "orchestra/testbench": "^3.8",
+                "phpunit/phpunit": "6.*|7.*|8.*"
             },
             "type": "library",
             "extra": {
@@ -8257,9 +8257,9 @@
             "authors": [
                 {
                     "name": "Stefan Zweifel",
-                    "role": "Developer",
                     "email": "hello@stefanzweifel.io",
-                    "homepage": "https://stefanzweifel.io"
+                    "homepage": "https://stefanzweifel.io",
+                    "role": "Developer"
                 }
             ],
             "description": "Get insights about your Laravel Project",
@@ -8270,7 +8270,7 @@
                 "stats",
                 "wnx"
             ],
-            "time": "2019-03-20T19:38:00+00:00"
+            "time": "2019-09-01T14:18:49+00:00"
         }
     ],
     "aliases": [],
