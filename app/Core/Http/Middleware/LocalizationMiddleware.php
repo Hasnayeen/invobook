@@ -3,6 +3,7 @@
 namespace App\Core\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Lang;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -38,7 +39,7 @@ class LocalizationMiddleware
     private function prepareResponse($localeData, $response)
     {
         $localeString = json_encode($localeData);
-        $content = str_replace_first('</head>', "<script>window.lang=$localeString</script>\n</head>", $response->content());
+        $content = Str::replaceFirst('</head>', "<script>window.lang=$localeString</script>\n</head>", $response->content());
         $response->setContent($content);
     }
 }

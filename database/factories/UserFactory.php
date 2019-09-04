@@ -2,6 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 $factory->define(App\Core\Models\User::class, function (Faker\Generator $faker) {
     static $password;
@@ -21,6 +22,6 @@ $factory->define(App\Core\Models\User::class, function (Faker\Generator $faker) 
         'password'       => $password ?: $password = bcrypt('secret'),
         'created_at'     => $now,
         'updated_at'     => $now,
-        'remember_token' => str_random(10),
+        'remember_token' => Str::random(10),
     ];
 });
