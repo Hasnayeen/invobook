@@ -175,7 +175,7 @@ export default {
         content: this.quill.root.innerHTML,
         raw_content: JSON.stringify(this.quill.getContents()),
         draft: draft,
-        cycle_id: this.cycleId,
+        cycle_id: this.cycleId !== 0 ? this.cycleId : null,
         group_type: this.resourceType,
         group_id: this.resourceId
       })
@@ -219,7 +219,7 @@ export default {
         category_id: this.categoryId,
         content: this.quill.root.innerHTML,
         raw_content: JSON.stringify(this.quill.getContents()),
-        cycle_id: this.cycleId,
+        cycle_id: this.cycleId !== 0 ? this.cycleId : null,
         group_type: this.resourceType,
         group_id: this.resourceId
       })
