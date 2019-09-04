@@ -160,8 +160,8 @@ class RegisterController extends Controller
     {
         return User::whereHas('role', function ($query) {
             $query->where('slug', 'owner')
-                             ->orWhere('slug', 'admin');
+                  ->orWhere('slug', 'admin');
         })
-                   ->get();
+        ->get();
     }
 }
