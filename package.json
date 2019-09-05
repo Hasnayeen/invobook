@@ -39,6 +39,9 @@
         "vuex": "^3.0.1",
         "webpack": "^4.39.3"
     },
+    "resolutions": {
+        "set-value": "^2.0.1"
+    },
     "jest": {
         "moduleFileExtensions": [
             "js",
