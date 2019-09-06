@@ -26,7 +26,7 @@
         "fuzzysort": "^1.1.4",
         "glob-all": "^3.1.0",
         "laravel-echo": "^1.5.4",
-        "laravel-mix": "^4.1.2",
+        "laravel-mix": "^4.1.4",
         "linkifyjs": "^2.1.8",
         "luxon": "^1.17.2",
         "purgecss-webpack-plugin": "^1.4.0",

@@ -1694,6 +1694,11 @@ code-point-at@^1.0.0:
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
   integrity sha1-DQcLTQQ6W+ozovGkDi7bPZpMz3c=
 
+collect.js@^4.12.8:
+  version "4.16.6"
+  resolved "https://registry.yarnpkg.com/collect.js/-/collect.js-4.16.6.tgz#666f19964fbfe599297ba5aceffdfea9ae22e920"
+  integrity sha512-Y0mR+JAWmUmA7HOByjdtc4dnQF/PRl4ap3jpG7RpC5vJjMmjDxBC8SFtp0s0vcRKoY+9WhJG0HUk1H2ze0Ao7A==
+
 collection-visit@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/collection-visit/-/collection-visit-1.0.0.tgz#4bc0373c164bc3291b4d368c829cf1a80a59dca0"
@@ -4176,10 +4181,10 @@ laravel-echo@^1.5.4:
   resolved "https://registry.yarnpkg.com/laravel-echo/-/laravel-echo-1.5.4.tgz#4630671162d98442955bba8504846766dddece73"
   integrity sha512-FTfgLQopGTPxIthYqFLbaZQ14kDuRH0AJa7N7HJNmWM5zJ4/qtZcP6zsfvATGazF+5Sr0M7IWgtF+OaNIUHqcw==
 
-laravel-mix@^4.1.2:
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/laravel-mix/-/laravel-mix-4.1.2.tgz#eaf9999f030d2d45614a83457e0ee3b6f243b56d"
-  integrity sha512-nA+JME+59hWI5u+r3VfPfmpUj8CxlNmNsvslBOUtUwRc1K2Wq55uAPUtTLgAp7n5JngF3O7qFN3LcTCVO/SpZQ==
+laravel-mix@^4.1.4:
+  version "4.1.4"
+  resolved "https://registry.yarnpkg.com/laravel-mix/-/laravel-mix-4.1.4.tgz#3260b89a2a85ff5e21c7f9db860a5086cbf75dca"
+  integrity sha512-fpFNpPyYAdeZ5mozlKbHpw+tCiRFUCCdSsK/D2+yYhlyIEbzPcAe4ar5cjeT33TnDNiKXSS42cB58yUSW5Y5tg==
   dependencies:
     "@babel/core" "^7.2.0"
     "@babel/plugin-proposal-object-rest-spread" "^7.2.0"
@@ -4192,6 +4197,7 @@ laravel-mix@^4.1.2:
     babel-merge "^2.0.1"
     chokidar "^2.0.3"
     clean-css "^4.1.3"
+    collect.js "^4.12.8"
     concatenate "0.0.2"
     css-loader "^1.0.1"
     dotenv "^6.2.0"
@@ -4204,7 +4210,7 @@ laravel-mix@^4.1.2:
     html-loader "^0.5.5"
     imagemin "^6.0.0"
     img-loader "^3.0.0"
-    lodash "^4.17.5"
+    lodash "^4.17.15"
     md5 "^2.2.1"
     optimize-css-assets-webpack-plugin "^5.0.1"
     postcss-loader "^3.0.0"
@@ -4375,10 +4381,10 @@ lodash.values@^4.3.0:
   resolved "https://registry.yarnpkg.com/lodash.values/-/lodash.values-4.3.0.tgz#a3a6c2b0ebecc5c2cba1c17e6e620fe81b53d347"
   integrity sha1-o6bCsOvsxcLLocF+bmIP6BtT00c=
 
-lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.5, lodash@^4.3.0:
-  version "4.17.14"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.14.tgz#9ce487ae66c96254fe20b599f21b6816028078ba"
-  integrity sha512-mmKYbW3GLuJeX+iGP+Y7Gp1AiGHGbXHCOh/jZmrawMmsE7MS4znI3RL2FsjbqOyMayHInjOeykW7PEajUk1/xw==
+lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.15, lodash@^4.17.5, lodash@^4.3.0:
+  version "4.17.15"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
+  integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
 
 loglevel@^1.6.1:
   version "1.6.1"
