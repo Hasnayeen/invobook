@@ -4134,16 +4134,16 @@
         },
         {
             "name": "facade/flare-client-php",
-            "version": "1.0.1",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/facade/flare-client-php.git",
-                "reference": "6c3509372c20255ac19b3b5583216daea0c2f992"
+                "reference": "a276603dbb7b9b35636d573d5709df5816dd4d2b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facade/flare-client-php/zipball/6c3509372c20255ac19b3b5583216daea0c2f992",
-                "reference": "6c3509372c20255ac19b3b5583216daea0c2f992",
+                "url": "https://api.github.com/repos/facade/flare-client-php/zipball/a276603dbb7b9b35636d573d5709df5816dd4d2b",
+                "reference": "a276603dbb7b9b35636d573d5709df5816dd4d2b",
                 "shasum": ""
             },
             "require": {
@@ -4184,20 +4184,20 @@
                 "flare",
                 "reporting"
             ],
-            "time": "2019-09-02T18:43:12+00:00"
+            "time": "2019-09-05T20:24:51+00:00"
         },
         {
             "name": "facade/ignition",
-            "version": "1.4.11",
+            "version": "1.4.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/facade/ignition.git",
-                "reference": "5082ea8e531894dca7ffcee25206d93cd25aca42"
+                "reference": "1f92a209c1a5a60f43c5bbff196177810e817095"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facade/ignition/zipball/5082ea8e531894dca7ffcee25206d93cd25aca42",
-                "reference": "5082ea8e531894dca7ffcee25206d93cd25aca42",
+                "url": "https://api.github.com/repos/facade/ignition/zipball/1f92a209c1a5a60f43c5bbff196177810e817095",
+                "reference": "1f92a209c1a5a60f43c5bbff196177810e817095",
                 "shasum": ""
             },
             "require": {
@@ -4244,7 +4244,7 @@
             "license": [
                 "MIT"
             ],
-            "description": "A beautiful error page for Laravel apps",
+            "description": "A beautiful error page for Laravel applications.",
             "homepage": "https://github.com/facade/ignition",
             "keywords": [
                 "error",
@@ -4252,7 +4252,7 @@
                 "laravel",
                 "page"
             ],
-            "time": "2019-09-04T19:13:40+00:00"
+            "time": "2019-09-05T21:48:35+00:00"
         },
         {
             "name": "facade/ignition-contracts",
