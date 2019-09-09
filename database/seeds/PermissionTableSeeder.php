@@ -1,7 +1,8 @@
 <?php
 
+use Carbon\Carbon;
+use App\Core\Models\Permission;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Permission;
 
 class PermissionTableSeeder extends Seeder
 {
@@ -12,26 +13,366 @@ class PermissionTableSeeder extends Seeder
      */
     public function run()
     {
-        app()['cache']->forget('spatie.permission.cache');
+        $now = Carbon::now();
 
-        Permission::create(['name' => 'create project']);
-        Permission::create(['name' => 'view projects']);
-        Permission::create(['name' => 'edit project']);
-        Permission::create(['name' => 'delete project']);
-        Permission::create(['name' => 'create team']);
-        Permission::create(['name' => 'view teams']);
-        Permission::create(['name' => 'edit team']);
-        Permission::create(['name' => 'delete team']);
-        Permission::create(['name' => 'create office']);
-        Permission::create(['name' => 'view offices']);
-        Permission::create(['name' => 'edit office']);
-        Permission::create(['name' => 'delete office']);
-        Permission::create(['name' => 'invite users']);
-        Permission::create(['name' => 'create role']);
-        Permission::create(['name' => 'delete role']);
-        Permission::create(['name' => 'view permissions']);
-        Permission::create(['name' => 'assign permission']);
-        Permission::create(['name' => 'revoke permission']);
-        Permission::create(['name' => 'view admin page']);
+        Permission::insert([
+            [
+                'action'        => 'view',
+                'resource'      => 'project',
+                'group_related' => false,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'create',
+                'resource'      => 'project',
+                'group_related' => false,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'update',
+                'resource'      => 'project',
+                'group_related' => false,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'delete',
+                'resource'      => 'project',
+                'group_related' => false,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'view',
+                'resource'      => 'team',
+                'group_related' => false,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'create',
+                'resource'      => 'team',
+                'group_related' => false,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'update',
+                'resource'      => 'team',
+                'group_related' => false,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'delete',
+                'resource'      => 'team',
+                'group_related' => false,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'view',
+                'resource'      => 'office',
+                'group_related' => false,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'create',
+                'resource'      => 'office',
+                'group_related' => false,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'update',
+                'resource'      => 'office',
+                'group_related' => false,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'delete',
+                'resource'      => 'office',
+                'group_related' => false,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'view',
+                'resource'      => 'task',
+                'group_related' => true,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'create',
+                'resource'      => 'task',
+                'group_related' => true,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'update',
+                'resource'      => 'task',
+                'group_related' => true,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'delete',
+                'resource'      => 'task',
+                'group_related' => true,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'view',
+                'resource'      => 'discussion',
+                'group_related' => true,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'create',
+                'resource'      => 'discussion',
+                'group_related' => true,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'update',
+                'resource'      => 'discussion',
+                'group_related' => true,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'delete',
+                'resource'      => 'discussion',
+                'group_related' => true,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'view',
+                'resource'      => 'message',
+                'group_related' => true,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'create',
+                'resource'      => 'message',
+                'group_related' => true,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'update',
+                'resource'      => 'message',
+                'group_related' => true,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'delete',
+                'resource'      => 'message',
+                'group_related' => true,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'view',
+                'resource'      => 'event',
+                'group_related' => true,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'create',
+                'resource'      => 'event',
+                'group_related' => true,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'update',
+                'resource'      => 'event',
+                'group_related' => true,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'delete',
+                'resource'      => 'event',
+                'group_related' => true,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'view',
+                'resource'      => 'file',
+                'group_related' => true,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'upload',
+                'resource'      => 'file',
+                'group_related' => true,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'delete',
+                'resource'      => 'file',
+                'group_related' => true,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'view',
+                'resource'      => 'comment',
+                'group_related' => true,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'create',
+                'resource'      => 'comment',
+                'group_related' => true,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'update',
+                'resource'      => 'comment',
+                'group_related' => true,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'delete',
+                'resource'      => 'comment',
+                'group_related' => true,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'view',
+                'resource'      => 'cycle',
+                'group_related' => true,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'create',
+                'resource'      => 'cycle',
+                'group_related' => true,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'update',
+                'resource'      => 'cycle',
+                'group_related' => true,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'delete',
+                'resource'      => 'cycle',
+                'group_related' => true,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'view',
+                'resource'      => 'tag',
+                'group_related' => false,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'create',
+                'resource'      => 'tag',
+                'group_related' => false,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'update',
+                'resource'      => 'tag',
+                'group_related' => false,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'delete',
+                'resource'      => 'tag',
+                'group_related' => false,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'attach',
+                'resource'      => 'tag',
+                'group_related' => false,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'detach',
+                'resource'      => 'tag',
+                'group_related' => false,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'add',
+                'resource'      => 'member',
+                'group_related' => false,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'remove',
+                'resource'      => 'member',
+                'group_related' => false,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'assign',
+                'resource'      => 'permission',
+                'group_related' => false,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'revoke',
+                'resource'      => 'permission',
+                'group_related' => false,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'invite',
+                'resource'      => 'user',
+                'group_related' => false,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+            [
+                'action'        => 'view',
+                'resource'      => 'admin',
+                'group_related' => false,
+                'created_at'    => $now,
+                'updated_at'    => $now,
+            ],
+        ]);
     }
 }

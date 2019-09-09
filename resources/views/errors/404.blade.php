@@ -2,12 +2,12 @@
 
 @slot('title') 404 - Page Not Found @endslot
 
-<div class="text-4xl text-grey-darker container mx-auto mt-16 text-center font-bold">
-    <div class="text-teal" style="font-size: 16rem">
+<div class="text-4xl text-gray-700 container mx-auto mt-16 text-center font-bold">
+    <div class="text-teal-500" style="font-size: 16rem">
         404
     </div>
     <div class="mb-8">WHOOPS! Page Not Found</div>
-    <a href="{{ url('/') }}" class="text-teal no-underline text-2xl">← Go To Home</a>
+    <a href="{{ url('/') }}" class="text-teal-500 no-underline text-2xl">← Go To Home</a>
 </div>
 
 @slot('script')

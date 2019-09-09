@@ -20,83 +20,229 @@ Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm'
 
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
-Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 
 /**********************************
     Registration
 **********************************/
 
-Route::post('register/invite', 'UserController@sentInvitationToRegister')->middleware('auth');
+Route::post('register/invite-link', 'InvitationController@store')->middleware(['auth', 'admin']);
 
-Route::get('register/{token}', 'Auth\RegisterController@showRegistrationForm');
+Route::get('register/invite-link', 'InvitationController@show')->middleware(['auth', 'admin']);
+
+Route::get('register/invite-link/{token}', 'InvitationController@showRegistrationForm')->middleware('guest');
+
+Route::post('register/invite-link/{token}', 'Auth\RegisterController@registerViaLink');
+
+Route::post('register/invite', 'UserController@sentInvitationToRegister')->middleware(['auth', 'admin']);
+
+Route::get('register/{token}', 'Auth\RegisterController@showRegistrationForm')->middleware('guest');
 
 Route::post('register/{token}', 'Auth\RegisterController@confirmNewRegistration');
 
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('/', 'HomeController@index')->name('home');
+/**********************************
+    Impersonate User
+**********************************/
 
-    Route::get('search', 'SearchController@index');
+Route::impersonate();
+
+Route::get('/', 'HomeController@index')->name('home')->middleware('auth');
 
     /**********************************
         Project
     **********************************/
 
+Route::get('projects/{project}', 'ProjectController@show');
+
+Route::group(['middleware' => 'auth'], function () {
     Route::get('projects', 'ProjectController@index');
 
-    Route::post('projects', 'ProjectController@store')->middleware('can:create,App\Models\Project');
+    Route::post('projects', 'ProjectController@store');
 
-    Route::get('projects/{project}', 'ProjectController@show')->middleware('can:view,project');
+    Route::delete('projects/{project}', 'ProjectController@delete');
 
-    Route::delete('projects/{project}', 'ProjectController@delete')->middleware('can:delete,project');
+    Route::post('public-projects/{project}', 'PublicProjectController@store');
+
+    Route::delete('public-projects/{project}', 'PublicProjectController@delete');
+});
 
     /**********************************
         Team
     **********************************/
 
+Route::get('teams/{team}', 'TeamController@show');
+
+Route::group(['middleware' => 'auth'], function () {
     Route::get('teams', 'TeamController@index');
 
-    Route::post('teams', 'TeamController@store')->middleware('can:create,App\Models\Team');
+    Route::post('teams', 'TeamController@store');
 
-    Route::get('teams/{team}', 'TeamController@show')->middleware('can:view,team');
+    Route::delete('teams/{team}', 'TeamController@delete');
 
-    Route::delete('teams/{team}', 'TeamController@delete')->middleware('can:delete,team');
+    Route::post('public-teams/{team}', 'PublicTeamController@store');
+
+    Route::delete('public-teams/{team}', 'PublicTeamController@delete');
+});
 
     /**********************************
         Office
      **********************************/
 
+Route::get('offices/{office}', 'OfficeController@show');
+
+Route::group(['middleware' => 'auth'], function () {
     Route::get('offices', 'OfficeController@index');
 
-    Route::post('offices', 'OfficeController@store')->middleware('can:create,App\Models\Office');
+    Route::post('offices', 'OfficeController@store');
 
-    Route::get('offices/{office}', 'OfficeController@show')->middleware('can:view,office');
+    Route::delete('offices/{office}', 'OfficeController@delete');
 
-    Route::delete('offices/{office}', 'OfficeController@delete')->middleware('can:delete,office');
+    Route::post('public-offices/{office}', 'PublicOfficeController@store');
+
+    Route::delete('public-offices/{office}', 'PublicOfficeController@delete');
+});
+
+    /**********************************
+        Group (Project/Team/Office)
+     **********************************/
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('groups/settings', 'GroupSettingsController@index');
+
+    Route::put('groups/settings', 'GroupSettingsController@update');
+
+    Route::get('groups/permissions', 'GroupPermissionController@index');
+
+    Route::post('groups/permissions/{permission}/roles/{role}', 'GroupPermissionController@store');
+
+    Route::delete('groups/permissions/{permission}/roles/{role}', 'GroupPermissionController@delete');
+
+    Route::get('groups/tags', 'GroupTagsController@index');
+
+    Route::post('groups/tags/{tag}', 'GroupTagsController@store');
+
+    Route::delete('groups/tags/{tag}', 'GroupTagsController@delete');
+});
 
     /**********************************
         Member
      **********************************/
 
+Route::group(['middleware' => 'auth'], function () {
     Route::get('members', 'MemberController@index');
 
     Route::post('members', 'MemberController@store');
 
     Route::delete('members', 'MemberController@destroy');
+});
 
     /**********************************
         Discussion
      **********************************/
 
-    Route::get('discussions', 'DiscussionController@index');
+Route::get('discussions', 'DiscussionController@index');
 
-    Route::post('discussions', 'DiscussionController@store')->middleware('can:create,App\Models\Discussion');
+Route::group(['middleware' => 'auth'], function () {
+    Route::post('discussions', 'DiscussionController@store');
 
     Route::get('discussions/{discussion}', 'DiscussionController@show');
 
-    Route::patch('discussions/{discussion}', 'DiscussionController@update')->middleware('can:update,discussion');
+    Route::patch('discussions/{discussion}', 'DiscussionController@update');
 
-    Route::delete('discussions/{discussion}', 'DiscussionController@delete')->middleware('can:delete,discussion');
+    Route::delete('discussions/{discussion}', 'DiscussionController@delete');
+});
 
+    /**********************************
+        Event
+     **********************************/
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('events', 'EventController@index');
+
+    Route::post('events', 'EventController@store');
+
+    Route::get('events/{event}', 'EventController@index');
+});
+
+    /**********************************
+        Task
+    **********************************/
+
+Route::get('tasks', 'TaskController@index');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::post('tasks', 'TaskController@store');
+
+    Route::get('tasks/{task}', 'TaskController@show');
+
+    Route::put('tasks/{task}', 'TaskController@update');
+
+    Route::delete('tasks/{task}', 'TaskController@delete');
+
+    Route::put('tasks/{task}/statuses/{status}', 'TaskStatusController@update');
+
+    Route::get('tasks/{task}/steps/', 'TaskProgressController@index');
+
+    Route::post('tasks/{task}/steps/', 'TaskProgressController@store');
+});
+
+    /**********************************
+        File
+    **********************************/
+
+Route::get('files', 'FileController@index');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('files/{file}', 'FileController@index');
+
+    Route::post('files', 'FileController@store');
+});
+
+    /**********************************
+        Message
+     **********************************/
+
+Route::get('messages', 'MessageController@index');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('direct-messages', 'DirectMessageController@index');
+
+    Route::post('messages', 'MessageController@store');
+
+    Route::put('messages/{message}', 'MessageController@update');
+
+    Route::delete('messages/{message}', 'MessageController@delete');
+});
+
+    /**********************************
+        Comment
+    **********************************/
+
+Route::get('/comments', 'CommentController@index');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::post('/comments', 'CommentController@store');
+
+    Route::delete('/comments/{comment}', 'CommentController@delete');
+});
+
+/**********************************
+    Cycle
+**********************************/
+
+Route::get('cycles', 'CycleController@index');
+
+Route::post('cycles', 'CycleController@store')->middleware('auth');
+
+/**********************************
+    Status
+**********************************/
+
+Route::get('statuses', 'StatusController@index');
+
+Route::post('statuses', 'StatusController@store')->middleware('auth');
+
+Route::group(['middleware' => 'auth'], function () {
     /**********************************
         Category
     **********************************/
@@ -106,44 +252,22 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('categories', 'CategoryController@store');
 
     /**********************************
-        Message
-     **********************************/
+        Roadmap
+    **********************************/
 
-    Route::get('messages', 'MessageController@index');
+    Route::get('cycles/{cycle}/roadmap', 'RoadmapController@show');
+
+    /**********************************
+        Direct Message
+     **********************************/
 
     Route::get('direct-messages', 'DirectMessageController@index');
 
-    Route::post('messages', 'MessageController@store');
+    Route::post('direct-messages', 'DirectMessageController@store');
 
-    Route::put('messages/{message}', 'MessageController@update');
+    Route::get('unread-direct-messages/users', 'UserUnreadDirectMessageController@index');
 
-    Route::delete('messages/{message}', 'MessageController@delete')->middleware('can:delete,message');
-
-    /**********************************
-        Event
-     **********************************/
-
-    Route::get('events', 'EventController@index');
-
-    Route::post('events', 'EventController@store');
-
-    Route::get('events/{event}', 'EventController@index');
-
-    /**********************************
-        Task
-    **********************************/
-
-    Route::get('tasks', 'TaskController@index');
-
-    Route::post('tasks', 'TaskController@store')->middleware('can:create,App\Models\Task');
-
-    Route::get('tasks/{task}', 'TaskController@show');
-
-    Route::put('tasks/{task}', 'TaskController@update')->middleware('can:update,task');
-
-    Route::delete('tasks/{task}', 'TaskController@delete')->middleware('can:delete,task');
-
-    Route::put('tasks/{task}/statuses', 'TaskStatusController@update')->middleware('can:update,task');
+    Route::put('unread-direct-messages/{user}', 'UserUnreadDirectMessageController@update');
 
     /**********************************
         Tags
@@ -151,31 +275,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('tags', 'TagController@index');
 
-    Route::post('tags', 'TagController@store')->middleware('can:create,App\Models\Tag');
+    Route::post('tags', 'TagController@store');
 
-    Route::post('tasks/{task}/tags', 'TaskTagController@store')->middleware('can:attach,App\Models\Tag,task');
+    Route::post('tasks/{task}/tags', 'TaskTagController@store');
 
-    Route::delete('tasks/{task}/tags/{tag}', 'TaskTagController@delete')->middleware('can:detach,App\Models\Tag,task');
-
-    /**********************************
-        File
-    **********************************/
-
-    Route::get('files', 'FileController@index');
-
-    Route::get('files/{file}', 'FileController@index');
-
-    Route::post('files', 'FileController@store');
-
-    /**********************************
-        Comment
-    **********************************/
-
-    Route::get('/comments', 'CommentController@index');
-
-    Route::post('/comments', 'CommentController@store');
-
-    Route::delete('/comments/{comment}', 'CommentController@delete')->middleware('can:delete,comment');
+    Route::delete('tasks/{task}/tags/{tag}', 'TaskTagController@delete');
 
     /**********************************
         Notification
@@ -202,14 +306,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('users/{user}/avatar', 'UserAvatarController@store');
 
     /**********************************
-        Status
-    **********************************/
-
-    Route::get('statuses', 'StatusController@index');
-
-    Route::post('statuses', 'StatusController@store');
-
-    /**********************************
         Github Service
     **********************************/
 
@@ -218,26 +314,38 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('services/github/connected-repos', 'ConnectedGithubRepoController@index');
 
     Route::post('services/github/connected-repos', 'ConnectedGithubRepoController@store');
+
+    /**********************************
+        Role
+    **********************************/
+
+    Route::get('roles', 'RoleController@index');
+
+    Route::get('activities', 'ActivityController@index');
+
+    /**********************************
+        Settings
+    **********************************/
+
+    Route::get('settings', function () {
+        return view('users.settings');
+    });
 });
 
     /**********************************
         Admin
     **********************************/
 
-Route::group(['middleware' => ['auth', 'permission:view admin page'], 'prefix' => 'admin'], function () {
+Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function () {
     Route::get('/', 'AdminController@index');
 
-    Route::get('roles', 'RoleController@index');
+    Route::get('roles/{role}/permissions', 'RolePermissionController@index');
 
-    Route::post('roles', 'RoleController@store')->middleware('permission:create role');
+    Route::post('roles/{role}/permissions/{permission}', 'RolePermissionController@store');
 
-    Route::delete('roles/{role}', 'RoleController@delete')->middleware('permission:delete role');
+    Route::delete('roles/{role}/permissions/{permission}', 'RolePermissionController@delete');
 
-    Route::post('roles/{role}/permissions', 'RolePermissionController@store')->middleware('permission:assign permission');
-
-    Route::delete('roles/{role}/permissions', 'RolePermissionController@delete')->middleware('permission:revoke permission');
-
-    Route::get('permissions', 'PermissionController@index')->middleware('permission:view permissions');
+    Route::get('permissions', 'PermissionController@index');
 
     Route::get('activities', 'ActivityController@index');
 

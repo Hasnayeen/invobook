@@ -1,7 +1,11 @@
 language: php
 
 php:
+<<<<<<< HEAD
   - '7.2.19'
+=======
+  - '7.2'
+>>>>>>> dev
 
 install:
   - composer install --no-interaction --prefer-dist --no-suggest

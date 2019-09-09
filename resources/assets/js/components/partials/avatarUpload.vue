@@ -3,7 +3,7 @@
   <form method="post" enctype="multipart/form-data">
     <input type="file" name="avatar" id="avatar" accept="image/*" @change="selectFile" class="hidden">
     <button onclick="document.getElementById('avatar').click(); return false;" 
-      class="bg-transparent text-grey-darker hover:text-teal py-2 px-4 border border-grey-light hover:border-teal rounded">
+      class="bg-transparent text-gray-800 hover:text-teal-500 py-2 px-4 border border-gray-400 hover:border-teal-500 rounded">
       {{ 'Change Your Avatar' | localize }}
     </button>
   </form>
@@ -11,11 +11,17 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   data: () => ({
     user: user
   }),
+
   methods: {
+    ...mapActions([
+      'showNotification',
+    ]),
     selectFile (e) {
       if (!e.target.files.length) return
       let file = e.target.files[0]
@@ -33,10 +39,11 @@ export default {
       data.append('avatar', file)
       axios.post('/users/' + this.user.username + '/avatar', data)
         .then((response) => {
-          EventBus.$emit('notification', response.data.message, response.data.status)
+          this.showNotification({type: response.data.status, message: response.data.message})
+          this.user.avatar = response.data.avatar
         })
         .catch((error) => {
-          EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+          this.showNotification({type: error.response.data.status, message: error.response.data.message})
         })
     }
   }

@@ -3,8 +3,8 @@
 namespace Tests\Feature\Auth;
 
 use Tests\TestCase;
-use App\Models\User;
-use App\Exceptions\Handler;
+use App\Core\Models\User;
+use App\Core\Exceptions\Handler;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification;
@@ -16,7 +16,7 @@ class ForgotPasswordTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

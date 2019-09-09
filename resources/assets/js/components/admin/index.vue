@@ -1,25 +1,25 @@
 <template>
-<div class="container md:mx-auto md:px-4 md:my-6 w-full md:w-md lg:w-lg xl:w-xl xxl:w-2xl border-t md:border-0">
-  <div class="flex flex-row justify-between md:justify-around md:my-6 py-2 md:py-4 bg-white shadow md:rounded text-grey">
+<div class="container md:mx-auto md:my-6 w-full xxl:max-w-6xl lg:max-w-4xl md:max-w-xl border-t md:border-0">
+  <div class="flex flex-row justify-between md:justify-around md:my-6 py-2 md:py-3 bg-white shadow md:rounded text-gray-500">
     <div @click="activateThisTab('users')"
-      :class="[(active === 'users') ? 'text-teal-dark font-semibold border-teal border-b-2 pb-2 md:pb-4 -mb-2 md:-mb-4' : 'cursor-pointer', 'text-center w-1/2']">
+      :class="[(active === 'users') ? 'text-teal-600 font-semibold border-teal-500 border-b-2 pb-2 md:pb-4 -mb-2 md:-mb-3' : 'cursor-pointer', 'text-center w-1/2']">
       <font-awesome-icon :icon="faUser" class="text-xl md:text-2xl"></font-awesome-icon>
-      <span class="block text-xs font-regular pt-2">{{ 'Users' | localize }}</span>
+      <span class="block text-xs font-regular">{{ 'Users' | localize }}</span>
     </div>
     <div @click="activateThisTab('auth')"
-      :class="[(active === 'auth') ? 'text-teal-dark font-semibold border-teal border-b-2 pb-2 md:pb-4 -mb-2 md:-mb-4' : 'cursor-pointer', 'text-center w-1/2']">
+      :class="[(active === 'auth') ? 'text-teal-600 font-semibold border-teal-500 border-b-2 pb-2 md:pb-4 -mb-2 md:-mb-3' : 'cursor-pointer', 'text-center w-1/2']">
       <font-awesome-icon :icon="faLockOpen" class="text-xl md:text-2xl"></font-awesome-icon>
-      <span class="block text-xs font-regular pt-2">{{ 'Roles & Permissions' | localize }}</span>
+      <span class="block text-xs font-regular">{{ 'Roles & Permissions' | localize }}</span>
     </div>
     <div @click="activateThisTab('activity')"
-      :class="[(active === 'activity') ? 'text-teal-dark font-semibold border-teal border-b-2 pb-2 md:pb-4 -mb-2 md:-mb-4' : 'cursor-pointer', 'text-center w-1/2']">
+      :class="[(active === 'activity') ? 'text-teal-600 font-semibold border-teal-500 border-b-2 pb-2 md:pb-4 -mb-2 md:-mb-3' : 'cursor-pointer', 'text-center w-1/2']">
       <font-awesome-icon :icon="faBolt" class="text-xl md:text-2xl"></font-awesome-icon>
-      <span class="block text-xs font-regular pt-2">{{ 'Activities' | localize }}</span>
+      <span class="block text-xs font-regular">{{ 'Activities' | localize }}</span>
     </div>
     <div @click="activateThisTab('settings')"
-      :class="[(active === 'settings') ? 'text-teal-dark font-semibold border-teal border-b-2 pb-4 -mb-2 md:-mb-4' : 'cursor-pointer', 'text-center w-1/2']">
+      :class="[(active === 'settings') ? 'text-teal-600 font-semibold border-teal-500 border-b-2 pb-4 -mb-2 md:-mb-3' : 'cursor-pointer', 'text-center w-1/2']">
       <font-awesome-icon :icon="faCog" class="text-xl md:text-2xl"></font-awesome-icon>
-      <span class="block text-xs font-regular pt-2">{{ 'Settings' | localize }}</span>
+      <span class="block text-xs font-regular">{{ 'Settings' | localize }}</span>
     </div>
     <div @click="activateThisTab('database')"
       :class="[(active === 'database') ? 'text-teal-dark font-semibold border-teal border-b-2 pb-4 -mb-2 md:-mb-4' : 'cursor-pointer', 'text-center w-1/2']">
@@ -27,9 +27,9 @@
       <span class="block text-xs font-regular pt-2">{{ 'Database' | localize }}</span>
     </div>
     <div @click="activateThisTab('about')"
-      :class="[(active === 'about') ? 'text-teal-dark font-semibold border-teal border-b-2 pb-4 -mb-2 md:-mb-4' : 'cursor-pointer', 'text-center w-1/2']">
+      :class="[(active === 'about') ? 'text-teal-600 font-semibold border-teal-500 border-b-2 pb-4 -mb-2 md:-mb-3' : 'cursor-pointer', 'text-center w-1/2']">
       <font-awesome-icon :icon="faInfoCircle" class="text-xl md:text-2xl"></font-awesome-icon>
-      <span class="block text-xs font-regular pt-2">{{ 'About' | localize }}</span>
+      <span class="block text-xs font-regular">{{ 'About' | localize }}</span>
     </div>
   </div>
 

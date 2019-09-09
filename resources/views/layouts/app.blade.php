@@ -11,7 +11,7 @@
 
     <title>{{ config('app.name', 'GOODWORK') }} | {{ $title }}</title>
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300,400,600">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap" rel="stylesheet"> 
     <link href="{{ mix('css/main.min.css') }}" rel="stylesheet">
 
     @yield('style')
@@ -20,18 +20,30 @@
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
         ]) !!};
+        let impersonating = false
+        let user = {}
+        let authenticated = false
     </script>
+
     @if (!Auth::guest())
     <script>
-        let user = {!! json_encode(Auth::user()) !!}
+        authenticated = true
+        user = authUser = {!! json_encode(Auth::user()->load('role')) !!}
         let navUrl = {!! json_encode([
             'site' => url('/'),
             'logout' => url('/logout')
         ]) !!};
     </script>
     @endif
+
+    @impersonating
+    <script>
+        impersonating = true
+    </script>
+    @endImpersonating
+
 </head>
-<body class="bg-grey-lighter">
+<body class="bg-gray-200 text-gray-700">
     <main>
         <div id="app">
             <div class="h-1" style="background: linear-gradient(to right, #4DC0B5, #3490DC);"></div>

@@ -1,14 +1,18 @@
 <?php
 
+use Carbon\Carbon;
 use Faker\Generator as Faker;
 
-$factory->define(App\Models\Notification::class, function (Faker $faker) {
+$factory->define(App\Core\Models\Notification::class, function (Faker $faker) {
     return [
         'id'                => $faker->unique()->word(10),
         'type'              => $faker->word(10),
         'notifiable_type'   => 'user',
-        'notifiable_id'     => factory(\App\Models\User::class)->create()->id,
+        'notifiable_id'     => factory(\App\Core\Models\User::class)->create()->id,
         'read_at'           => null,
-        'data'              => '{"type":"project","name":"Goodwork","adder":{"id":2,"name":"Guest","username":"guest","bio":null,"designation":null,"avatar":"storage\/avatars\/guest.png","email":"guest@example.com","active":1,"timezone":null,"created_at":"2018-10-11 08:51:42","updated_at":"2018-10-11 10:59:42"},"added":{"id":1,"name":"Admin","username":"admin","bio":null,"designation":null,"avatar":"storage\/avatars\/admin.png","email":"admin@example.com","active":1,"timezone":null,"created_at":"2018-10-11 08:51:41","updated_at":"2018-10-11 10:57:07"}}',
+        'group_type'        => 'project',
+        'group_id'          => 1,
+        'data'              => '{"subject":{"id":1,"name":"Admin","username":"admin","avatar":"storage\/avatars\/admin.png"},"action":"created new task","object_type":"task","object_name":"New task","object_id":18,"url":"http:\/\/localhost\/teams\/3?tool=tasks&id=18"}',
+        'created_at'        => Carbon::now()->subDay(),
     ];
 });

@@ -3,14 +3,18 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Models\User;
-use App\Models\Token;
-use App\Models\Office;
-use App\Mail\UserRegistered;
+use App\Core\Models\User;
+use App\Core\Models\Token;
+use App\Core\Models\Invite;
+use App\Core\Models\Office;
+use Illuminate\Support\Str;
+use App\Core\Mail\UserRegistered;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Notification;
+use Illuminate\Contracts\Encryption\DecryptException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use App\Core\Notifications\UserRegistered as UserRegisteredNotification;
 
 class UserRegistrationTest extends TestCase
 {
@@ -18,35 +22,19 @@ class UserRegistrationTest extends TestCase
 
     protected $token;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
         $this->token = factory(Token::class)->create();
-
         Mail::fake();
-    }
-
-    /** @test */
-    public function activity_log_is_stored_on_registered_event()
-    {
-        $user = factory(User::class)->create([
-            'name' => 'John Doe',
-        ]);
-
-        event(new Registered($user));
-
-        $this->assertDatabaseHas('activity_log', [
-            'causer_id'   => $user->getKey(),
-            'causer_type' => 'user',
-            'description' => 'User John Doe has registered',
-        ]);
+        Notification::fake();
     }
 
     /** @test */
     public function guest_with_valid_token_can_access_registration_form()
     {
-        $this->get("/register/{$this->token->token}")
+        $this->get('/register/' . encrypt($this->token->token))
             ->assertOk();
     }
 
@@ -55,7 +43,7 @@ class UserRegistrationTest extends TestCase
     {
         $invalidToken = $this->faker->sha256;
 
-        $this->expectException(HttpException::class);
+        $this->expectException(DecryptException::class);
 
         $this->get("/register/{$invalidToken}")
             ->assertStatus('403');
@@ -64,19 +52,9 @@ class UserRegistrationTest extends TestCase
     /** @test */
     public function guest_with_valid_token_can_register_account()
     {
-        factory(Office::class)->create([
-            'name' => 'Headquarter',
-        ]);
+        $newUser = $this->get_fake_user_data();
 
-        $newUser = [
-            'name'                  => $this->faker->name,
-            'username'              => $this->faker->userName,
-            'email'                 => $this->token->email,
-            'password'              => 'secret12',
-            'password_confirmation' => 'secret12',
-        ];
-
-        $this->post("/register/{$this->token->token}", $newUser);
+        $this->register_user_request($newUser);
 
         $this->assertDatabaseHas(
             'users',
@@ -84,6 +62,10 @@ class UserRegistrationTest extends TestCase
         );
 
         Mail::assertQueued(UserRegistered::class);
+        Notification::assertSentTo(
+            $this->user,
+            UserRegisteredNotification::class
+        );
     }
 
     /** @test */
@@ -91,17 +73,81 @@ class UserRegistrationTest extends TestCase
     {
         $invalidToken = $this->faker->sha256;
 
-        $this->expectException(HttpException::class);
+        $this->expectException(DecryptException::class);
 
-        $newUser = [
+        $newUser = $this->get_fake_user_data();
+
+        $this->post("/register/{$invalidToken}", $newUser)
+            ->assertStatus('403');
+    }
+
+    /** @test */
+    public function user_must_have_a_role()
+    {
+        $newUser = $this->get_fake_user_data();
+        $this->register_user_request($newUser);
+
+        $user = User::where('username', $newUser['username'])->first();
+        $this->assertNotNull($user->role);
+    }
+
+    /** @test */
+    public function guest_with_valid_shareable_link_can_register_account()
+    {
+        $newUser = $this->get_fake_user_data();
+        factory(Office::class)->create([
+            'name' => 'Headquarter',
+        ]);
+        $invite = Invite::create([
+            'role_id' => 5,
+            'link'    => url('register/invite-link/' . Str::random(32)),
+        ]);
+
+        $this->post($invite->link, $newUser)
+             ->assertRedirect();
+
+        $this->assertDatabaseHas(
+            'users',
+            collect($newUser)->except('password', 'password_confirmation')->toArray()
+        );
+
+        Mail::assertQueued(UserRegistered::class);
+        Notification::assertSentTo(
+            $this->user,
+            UserRegisteredNotification::class
+        );
+    }
+
+    /** @test */
+    public function guest_without_valid_shareable_link_cant_register_account()
+    {
+        $this->expectException(HttpException::class);
+        $newUser = $this->get_fake_user_data();
+        factory(Office::class)->create([
+            'name' => 'Headquarter',
+        ]);
+
+        $this->post(url('register/invite-link/invalid'), $newUser)
+             ->assertStatus(403);
+    }
+
+    private function register_user_request($newUser)
+    {
+        factory(Office::class)->create([
+            'name' => 'Headquarter',
+        ]);
+
+        return $this->post('/register/' . encrypt($this->token->token), $newUser);
+    }
+
+    private function get_fake_user_data()
+    {
+        return [
             'name'                  => $this->faker->name,
             'username'              => $this->faker->userName,
             'email'                 => $this->token->email,
             'password'              => 'secret12',
             'password_confirmation' => 'secret12',
         ];
-
-        $this->post("/register/{$invalidToken}", $newUser)
-            ->assertStatus('403');
     }
 }

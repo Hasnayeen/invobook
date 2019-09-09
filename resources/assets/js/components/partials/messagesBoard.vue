@@ -1,23 +1,29 @@
 <template>
-<div :class="{'hidden': (activeTab != 'messages')}" class="w-full">
-  <div class="flex flex-col bg-white mx-auto my-8 max-w-md shadow rounded">
+<div v-if="activeTab === 'messages'" class="w-full">
+  <div class="flex flex-col bg-white mx-auto mt-4 mb-8 shadow rounded">
 
-    <div class="text-grey-dark bg-white shadow p-4 text-xl flex flex-row items-center">
-      <div>
+    <div class="text-gray-600 bg-white shadow p-4 text-xl flex flex-row items-center z-10">
+      <div class="pr-2">
         {{ 'Currently in room' | localize }}:
       </div>
       <template v-for="user in users">
-        <img :src="generateUrl(user.avatar)" alt="" class="w-8 h-8 rounded-full mr-2 ml-4">
+        <img :src="generateUrl(user.avatar)" alt="" class="w-8 h-8 rounded-full mr-2" :title="user.name">
       </template>
     </div>
 
     <div id="message-box" class="h-50-vh overflow-y-auto">
-      <div class="mb-6">
-        <message v-for="(message, index) in messages" :key="index" :message="message" :user="user" :index="index" @deleted="deleteMessage"></message>
+      <div class="">
+        <message v-for="(message, index) in messages" :key="index" :message="message" :user="user" :index="index" @deleted="deleteMessage" :last="messages.length === (index + 1)"></message>
+      </div>
+      <div v-if="messages.length === 0" class="flex flex-col justify-center items-center">
+        <div class="text-gray-600 text-lg text-center py-8">
+          Start communicating with your team member
+        </div>
+        <img src="/image/work_chat.svg" alt="direct message" class="w-96">
       </div>
     </div>
 
-    <div class="relative bg-grey-light">
+    <div v-if="authenticated" class="relative bg-gray-200">
       <div class="static text-center p-8">
         <div class="relative">
           <user-suggestion-box
@@ -29,9 +35,9 @@
             :suggestionHighlightDirection="suggestionHighlightDirection"
             :suggestionHighlightDirectionInverted="true"
             @selected="userSelected"
-            class="absolute mb-2 w-full pin-b"></user-suggestion-box>
+            class="absolute mb-2 w-full bottom-0"></user-suggestion-box>
         </div>
-        <textarea class="static textarea resize-none rounded w-full p-4 text-grey-darker"
+        <textarea class="static textarea resize-none rounded w-full p-4 text-gray-800"
           id="send-message"
           :style="{height: messageTextareaHeight}"
           ref="messageTextarea"
@@ -49,11 +55,14 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 import userSuggestionBox from './userSuggestionBox'
 import message from './message'
+
 export default {
   components: {message, userSuggestionBox},
   props: ['resource', 'resourceType', 'activeTab'],
+
   data: () => ({
     messages: [],
     nextPageUrl: null,
@@ -61,7 +70,6 @@ export default {
     messageTextareaHeight: 'auto',
     title: '',
     unreadMessage: 0,
-    members: [],
     name: '',
     mentionStarted: false,
     startIndex: 0,
@@ -70,55 +78,74 @@ export default {
     suggestionSelected: false,
     suggestionShown: false,
     mentions: [],
-    user: user,
-    users: []
+    typingNotificationSent: false,
+    users: [],
+    user,
+    authenticated
   }),
+
   created () {
     EventBus.$on('clear-title-notification', this.clearTitleNotification)
-    axios.get('/members', {
-      params: {
-        resource_type: this.resourceType,
-        resource_id: this.resource.id
-      }
-    })
-      .then((response) => {
-        this.members = response.data.members
-      })
-      .catch((error) => {
-        console.log(error)
-      })
   },
+
   beforeDestroy () {
     EventBus.$off('clear-title-notification', this.clearTitleNotification)
   },
+
   mounted () {
-    axios.get('/messages', {
-      params: {
-        resource_type: this.resourceType,
-        resource_id: this.resource.id
-      }
-    })
-      .then((response) => {
-        this.messages = response.data.messages.data.reverse()
-        this.nextPageUrl = response.data.messages.next_page_url
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+    this.getMessages()
     this.title = document.title
     this.listen()
-    document.getElementById('message-box').scrollTop = document.getElementById('message-box').scrollHeight
+    let messageBoxElement = document.getElementById('message-box')
+    if (messageBoxElement) {
+      messageBoxElement.scrollTop = messageBoxElement.scrollHeight
+    }
   },
+
   updated () {
-    document.getElementById('message-box').scrollTop = document.getElementById('message-box').scrollHeight
+    let messageBoxElement = document.getElementById('message-box')
+    if (messageBoxElement) {
+      messageBoxElement.scrollTop = messageBoxElement.scrollHeight
+    }
   },
+
+computed: {
+    ...mapState({
+      members: state => state.members
+    })
+  },
+
   watch: {
     message (newVal) {
       // increase the height of textarea based on text present there
       this.messageTextareaHeight = newVal ? `${this.$refs.messageTextarea.scrollHeight}px` : 'auto'
+    },
+    activeTab: function () {
+      this.getMessages()
     }
   },
+
   methods: {
+    ...mapActions([
+      'showNotification',
+    ]),
+    getMessages () {
+      if (this.activeTab === 'messages' && this.messages.length < 1) {
+        axios.get('/messages', {
+          params: {
+            group_type: this.resourceType,
+            group_id: this.resource.id
+          }
+        })
+        .then((response) => {
+          this.messages = response.data.messages.data.reverse()
+          this.nextPageUrl = response.data.messages.next_page_url
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+      }
+    },
     sendMessage (e) {
       if (e.shiftKey) {
         this.message = this.message + '\n'
@@ -129,8 +156,8 @@ export default {
         this.message = ''
         axios.post('/messages', {
           message: msg,
-          resource_type: this.resourceType,
-          resource_id: this.resource.id,
+          group_type: this.resourceType,
+          group_id: this.resource.id,
           mentions: this.mentions
         })
           .then((response) => {
@@ -140,7 +167,7 @@ export default {
             }
           })
           .catch((error) => {
-            console.error(error)
+            this.showNotification({type: error.response.data.status, message: error.response.data.message})
           })
       }
     },
@@ -173,6 +200,25 @@ export default {
             document.title = '(' + this.unreadMessage + ') ' + this.title
           }
         })
+        .listenForWhisper('typing', (e) => {
+          this.pushSystemMessage(`${e.name} is typing`)
+          setTimeout(() => {
+            this.messages.pop()
+          }, 4000)
+        })
+    },
+    typing () {
+      if (! this.typingNotificationSent) {
+        Echo.join(this.resourceType + '.' + this.resource.id)
+          .whisper('typing', {
+            name: this.user.name
+          })
+        this.typingNotificationSent = true
+        setTimeout(this.setTypingNotification, 4000)
+      }
+    },
+    setTypingNotification () {
+      this.typingNotificationSent = false
     },
     clearTitleNotification () {
       document.title = this.title
@@ -192,6 +238,9 @@ export default {
       })
     },
     checkForMention (e) {
+      if (this.message.length > 2) {
+        this.typing()
+      }
       if (e.key === "@") {
         this.suggestionShown = true
         this.mentionStarted = true

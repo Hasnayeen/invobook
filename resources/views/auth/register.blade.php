@@ -17,7 +17,7 @@
 
 @slot('script')
 <script type="text/javascript">
-    window.url = "{{ url('/register/' . $token) }}"
+    window.url = "{{ $token }}"
     window.errors = <?php echo json_encode($errors->toArray()); ?>
 </script>
 <script src="{{ mix('/js/auth/register.min.js') }}"></script>

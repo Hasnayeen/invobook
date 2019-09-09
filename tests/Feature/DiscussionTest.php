@@ -3,26 +3,34 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\Notification;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class DiscussionTest extends TestCase
 {
+    public function setUp(): void
+    {
+        parent::setUp();
+        Notification::fake();
+        $this->project = factory(\App\Core\Models\Project::class)->create(['owner_id' => $this->user->id]);
+        $this->actingAs($this->user);
+        resolve('Authorization')->setupDefaultPermissions($this->project);
+        $this->project->members()->save($this->user);
+    }
+
     /** @test */
     public function user_with_permission_can_create_new_discussion()
     {
-        $project = factory(\App\Models\Project::class)->create();
-        $category = factory(\App\Models\Category::class)->create();
-        $permission = Permission::create(['name' => 'create discussion.project->' . $project->id]);
-        $this->user->givePermissionTo($permission);
+        $category = factory(\App\Core\Models\Category::class)->create();
 
-        $this->actingAs($this->user)->post('discussions', [
+        $this->post('discussions', [
             'name'                => 'New article',
             'category_id'         => $category->id,
             'content'             => '<h1>Big heading</h1><p>And some <strong>bold text</strong></p>',
             'raw_content'         => '{"ops":[{"insert":"Big Heading"},{"attributes":{"header":1},"insert":"\n"},{"insert":"And some "},{"attributes":{"bold":true},"insert":"bold text"},{"insert":"\n"}]}',
             'draft'               => false,
-            'discussionable_type' => 'project',
-            'discussionable_id'   => $project->id,
+            'group_type'          => 'project',
+            'group_id'            => $this->project->id,
         ])->assertJsonFragment([
             'status'              => 'success',
             'message'             => 'New discussion post has been created',
@@ -30,7 +38,7 @@ class DiscussionTest extends TestCase
             'content'             => '<h1>Big heading</h1><p>And some <strong>bold text</strong></p>',
             'raw_content'         => '{"ops":[{"insert":"Big Heading"},{"attributes":{"header":1},"insert":"\n"},{"insert":"And some "},{"attributes":{"bold":true},"insert":"bold text"},{"insert":"\n"}]}',
             'discussionable_type' => 'project',
-            'discussionable_id'   => $project->id,
+            'discussionable_id'   => $this->project->id,
         ]);
 
         $this->assertDatabaseHas('discussions', [
@@ -38,42 +46,39 @@ class DiscussionTest extends TestCase
             'content'             => '<h1>Big heading</h1><p>And some <strong>bold text</strong></p>',
             'raw_content'         => '{"ops":[{"insert":"Big Heading"},{"attributes":{"header":1},"insert":"\n"},{"insert":"And some "},{"attributes":{"bold":true},"insert":"bold text"},{"insert":"\n"}]}',
             'discussionable_type' => 'project',
-            'discussionable_id'   => $project->id,
+            'discussionable_id'   => $this->project->id,
         ]);
     }
 
-    /**
-     * @expectedException Illuminate\Auth\Access\AuthorizationException
-     * @test */
+    /** @test */
     public function user_without_permission_cant_create_new_discussion()
     {
-        $project = factory(\App\Models\Project::class)->create();
-        $category = factory(\App\Models\Category::class)->create();
-        Permission::create(['name' => 'create discussion.project->' . $project->id]);
+        $this->expectException(AuthorizationException::class);
+        $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
+        $category = factory(\App\Core\Models\Category::class)->create();
 
-        $this->actingAs($this->user)->post('discussions', [
+        $this->actingAs($user)->post('discussions', [
             'name'                => 'New article',
             'category_id'         => $category->id,
             'content'             => '<h1>Big heading</h1><p>And some <strong>bold text</strong></p>',
             'raw_content'         => '{"ops":[{"insert":"Big Heading"},{"attributes":{"header":1},"insert":"\n"},{"insert":"And some "},{"attributes":{"bold":true},"insert":"bold text"},{"insert":"\n"}]}',
             'draft'               => false,
-            'discussionable_type' => 'project',
-            'discussionable_id'   => $project->id,
+            'group_type'          => 'project',
+            'group_id'            => $this->project->id,
         ])->assertJsonFragment([
             'status'              => 'error',
         ]);
     }
 
     /** @test */
-    public function user_can_see_all_discussions()
+    public function user_of_a_group_can_see_all_its_discussions()
     {
-        $project = factory(\App\Models\Project::class)->create();
-        $discussions = factory(\App\Models\Discussion::class, 2)->create([
+        $discussions = factory(\App\Core\Models\Discussion::class, 2)->create([
             'discussionable_type' => 'project',
-            'discussionable_id'   => $project->id,
+            'discussionable_id'   => $this->project->id,
         ]);
 
-        $this->actingAs($this->user)->call('GET', '/discussions', ['resource_type' => 'project', 'resource_id' => $project->id])
+        $this->actingAs($this->user)->call('GET', '/discussions', ['group_type' => 'project', 'group_id' => $this->project->id])
              ->assertJsonFragment([
                  'status'  => 'success',
                  'total'   => 2,
@@ -85,14 +90,33 @@ class DiscussionTest extends TestCase
     }
 
     /** @test */
+    public function user_not_member_of_group_cant_see_all_its_discussions()
+    {
+        $this->expectException(AuthorizationException::class);
+        $user = factory(\App\Core\Models\User::class)->create();
+        $discussions = factory(\App\Core\Models\Discussion::class, 2)->create([
+            'discussionable_type' => 'project',
+            'discussionable_id'   => $this->project->id,
+        ]);
+
+        $this->actingAs($user)->call('GET', '/discussions', ['group_type' => 'project', 'group_id' => $this->project->id]);
+    }
+
+    /** @test */
     public function user_with_permission_can_delete_a_discussion()
     {
-        $discussion = factory(\App\Models\Discussion::class)->create();
+        $discussion = factory(\App\Core\Models\Discussion::class)->create([
+            'discussionable_type' => 'project',
+            'discussionable_id'   => $this->project->id,
+        ]);
 
-        $permission = Permission::create(['name' => 'delete discussion.' . $discussion->discussionable_type . '->' . $discussion->discussionable->id]);
-        $this->user->givePermissionTo($permission);
-
-        $this->actingAs($this->user)->delete("/discussions/{$discussion->id}")
+        $this->actingAs($this->user)->delete(
+            "/discussions/{$discussion->id}",
+            [
+                'group_type' => $discussion->discussionable_type,
+                'group_id'   => $discussion->discussionable_id,
+            ]
+        )
              ->assertJsonFragment([
                 'status'  => 'success',
                 'message' => 'The discussion has been deleted',
@@ -102,13 +126,11 @@ class DiscussionTest extends TestCase
     /** @test */
     public function user_can_delete_his_own_discussion()
     {
-        $user = factory(\App\Models\User::class)->create();
+        $user = factory(\App\Core\Models\User::class)->create();
 
-        $discussion = factory(\App\Models\Discussion::class)->create([
+        $discussion = factory(\App\Core\Models\Discussion::class)->create([
             'posted_by' => $user->id,
         ]);
-
-        Permission::create(['name' => 'delete discussion.' . $discussion->discussionable_type . '->' . $discussion->discussionable->id]);
 
         $this->actingAs($user)->delete("/discussions/{$discussion->id}")
              ->assertJsonFragment([
@@ -117,34 +139,33 @@ class DiscussionTest extends TestCase
              ]);
     }
 
-    /**
-     * @expectedException Illuminate\Auth\Access\AuthorizationException
-     * @test
-     */
+    /** @test */
     public function user_without_permission_cant_delete_a_discussion()
     {
-        $discussion = factory(\App\Models\Discussion::class)->create();
+        $this->expectException(AuthorizationException::class);
+        $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
+        $discussion = factory(\App\Core\Models\Discussion::class)->create();
 
-        Permission::create(['name' => 'delete discussion.' . $discussion->discussionable_type . '->' . $discussion->discussionable->id]);
-
-        $this->actingAs($this->user)->delete("/discussions/{$discussion->id}");
+        $this->actingAs($user)->delete(
+            "/discussions/{$discussion->id}",
+            [
+                'group_type' => $discussion->discussionable_type,
+                'group_id'   => $discussion->discussionable_id,
+            ]
+        );
     }
 
     /** @test */
     public function authorized_user_with_permission_can_update_discussion()
     {
-        $project = factory(\App\Models\Project::class)->create();
-        $discussion = factory(\App\Models\Discussion::class)->create([
+        $discussion = factory(\App\Core\Models\Discussion::class)->create([
             'posted_by'           => $this->user->id,
             'discussionable_type' => 'project',
-            'discussionable_id'   => $project->id,
+            'discussionable_id'   => $this->project->id,
         ]);
-        $category = factory(\App\Models\Category::class)->create();
+        $category = factory(\App\Core\Models\Category::class)->create();
 
-        $permission = Permission::create(['name' => 'edit discussion.project->' . $project->id]);
-        $this->user->givePermissionTo($permission);
-
-        $this->actingAs($this->user)->patch('discussions/'.$discussion->id, [
+        $this->actingAs($this->user)->patch('discussions/' . $discussion->id, [
             'name'                => 'Updated article',
             'category_id'         => $category->id,
             'content'             => '<h1>Medium heading</h1><p>And some <strong>bold text</strong></p>',
@@ -168,36 +189,59 @@ class DiscussionTest extends TestCase
         ]);
     }
 
-    /**
-     * @expectedException Illuminate\Auth\Access\AuthorizationException
-     * @test
-     */
+    /** @test */
     public function user_without_permission_cannot_update_discussion()
     {
-        $project = factory(\App\Models\Project::class)->create();
-        $discussion = factory(\App\Models\Discussion::class)->create([
+        $this->expectException(AuthorizationException::class);
+        $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
+        $discussion = factory(\App\Core\Models\Discussion::class)->create([
             'posted_by'           => $this->user->id,
             'discussionable_type' => 'project',
-            'discussionable_id'   => $project->id,
+            'discussionable_id'   => $this->project->id,
         ]);
-        Permission::create(['name' => 'edit discussion.project->' . $project->id]);
 
-        $this->actingAs($this->user)->patch('discussions/'.$discussion->id, []);
+        $this->actingAs($user)->patch('discussions/' . $discussion->id, [
+            'name'                => 'Updated article',
+            'category_id'         => 1,
+            'content'             => '<h1>Medium heading</h1><p>And some <strong>bold text</strong></p>',
+            'raw_content'         => '{"ops":[{"insert":"Medium Heading"},{"attributes":{"header":1},"insert":"\n"},{"insert":"And some "},{"attributes":{"bold":true},"insert":"bold text"},{"insert":"\n"}]}',
+            'draft'               => true,
+            'group_type'          => 'project',
+            'group_id'            => $this->project->id,
+        ]);
     }
 
-    /**
-     * @expectedException Illuminate\Auth\Access\AuthorizationException
-     * @test
-     */
-    public function unauthorized_user_cannot_update_discussion()
+    /** @test */
+    public function user_of_a_group_can_view_discussion_detail()
     {
-        $project = factory(\App\Models\Project::class)->create();
-        $discussion = factory(\App\Models\Discussion::class)->create([
+        $user = factory(\App\Core\Models\User::class)->create();
+        $discussion = factory(\App\Core\Models\Discussion::class)->create([
             'discussionable_type' => 'project',
-            'discussionable_id'   => $project->id,
+            'discussionable_id'   => $this->project->id,
         ]);
-        Permission::create(['name' => 'edit discussion.project->' . $project->id]);
+        $this->project->members()->save($user);
 
-        $this->actingAs($this->user)->patch('discussions/'.$discussion->id, []);
+        $this->actingAs($user)->call('GET', '/discussions/' . $discussion->id, ['group_type' => 'project', 'group_id' => $this->project->id])
+             ->assertJsonFragment([
+                 'name'    => $discussion->name,
+                 'content' => $discussion->content,
+             ]);
+    }
+
+    /** @test */
+    public function user_not_member_of_group_cant_view_discussion_detail()
+    {
+        $this->expectException(AuthorizationException::class);
+        $user = factory(\App\Core\Models\User::class)->create();
+        $discussion = factory(\App\Core\Models\Discussion::class)->create([
+            'discussionable_type' => 'project',
+            'discussionable_id'   => $this->project->id,
+        ]);
+
+        $this->actingAs($user)->call('GET', '/discussions/' . $discussion->id, ['group_type' => 'project', 'group_id' => $this->project->id])
+             ->assertJsonFragment([
+                 'name'    => $discussion->name,
+                 'content' => $discussion->content,
+             ]);
     }
 }

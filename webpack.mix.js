@@ -10,7 +10,7 @@ class TailwindExtractor {
 }
 
 mix.postCss('resources/assets/css/main.css', 'public/css', [
-  tailwindcss('tailwind.js')
+  require('tailwindcss')
 ]).minify('public/css/main.css')
 
 mix.copy('resources/assets/css/editor.css', 'public/css/editor.css').minify('public/css/editor.css')
@@ -22,6 +22,7 @@ mix.js('resources/assets/js/pages/auth/login.js', 'public/js/auth').minify('publ
   .js('resources/assets/js/pages/teams/single.js', 'public/js/teams').minify('public/js/teams/single.js')
   .js('resources/assets/js/pages/offices/single.js', 'public/js/offices').minify('public/js/offices/single.js')
   .js('resources/assets/js/pages/users/profile.js', 'public/js/users').minify('public/js/users/profile.js')
+  .js('resources/assets/js/pages/users/settings.js', 'public/js/users').minify('public/js/users/settings.js')
   .js('resources/assets/js/pages/admin/index.js', 'public/js/admin').minify('public/js/admin/index.js')
   .js('resources/assets/js/pages/home.js', 'public/js').minify('public/js/home.js')
   .extract(['vue', 'axios', 'luxon'])

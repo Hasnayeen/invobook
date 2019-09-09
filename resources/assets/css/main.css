@@ -1,11 +1,10 @@
-/**
- * This injects Tailwind's base styles, which is a combination of
- * Normalize.css and some additional base styles.
- *
- * You can see the styles here:
- * https://github.com/tailwindcss/tailwindcss/blob/master/css/preflight.css
- */
-@tailwind preflight;
+@tailwind base;
+
+html {
+  font-family: 'Montserrat', sans-serif;
+}
+
+@tailwind components;
 
 /**
  * Here you would add any of your custom component classes; stuff that you'd
@@ -23,22 +22,6 @@
  * @import "components/forms";
  */
 
-.btn {
-    @apply bg-teal text-white text-xl font-medium py-2 px-4 rounded;
-}
-
-.btn:hover {
-    @apply bg-teal-dark;
-}
-
-.checkbox {
-    @apply border-grey border p-2 rounded;
-}
-
-/**
- * This injects all of Tailwind's utility classes, generated based on your
- * config file.
- */
 @tailwind utilities;
 
 /**
@@ -56,58 +39,28 @@
  * @import "utilities/skew-transforms";
  */
 
-@responsive {
-    .mx-1\/40 {
-        margin-left: 2.5%;
-        margin-right: 2.5%;
-    }
-
-    .-mx-1\/40 {
-        margin-left: -2.5%;
-        margin-right: -2.5%;
-    }
-
-    .mx-1\/60 {
-        margin-left: 1.66%;
-        margin-right: 1.66%;
-    }
-
-    .-mx-1\/60 {
-        margin-left: -1.66%;
-        margin-right: -1.66%;
-    }
-
-    .mx-1\/20 {
-        margin-left: 5%;
-        margin-right: 5%;
-    }
-
-    .-mx-1\/20 {
-        margin-left: -5%;
-        margin-right: -5%;
-    }
-}
-
  .resize-none {
      resize: none;
- }
-
- .order-1 {
-     order: 1;
  }
 
  .h-50-vh {
      height: 50vh;
  }
 
- .text-shadow {
-     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+ .h-70-vh {
+     height: 50vh;
  }
 
- .bg-button-primary {
-     background-image: linear-gradient(to bottom, #4dc0b5 0%, #4eb5c1 50%, #4e9ec1 100%);
+ .checkbox {
+     @apply hidden;
  }
 
- .bg-button-alert {
-     background-image: linear-gradient(to bottom, #ef9152 0%, #ef7452 50%, #ef5852 100%);
+ .checkbox + label::before {
+     @apply inline-block w-5 h-5 mr-1 -mb-1 border-blue-300 border-2 rounded;
+     content: '';
+ }
+
+ .checkbox:checked + label::before {
+     @apply bg-indigo-500;
+     content: '';
  }

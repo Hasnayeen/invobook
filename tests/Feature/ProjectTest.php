@@ -3,18 +3,25 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Models\User;
-use App\Models\Project;
-use App\Exceptions\UserIsNotMember;
-use Spatie\Permission\Models\Permission;
+use App\Core\Models\Project;
+use App\Core\Exceptions\UserIsNotMember;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Auth\Access\AuthorizationException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ProjectTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
-        $this->project = factory('App\Models\Project')->create();
+        $this->project = factory('App\Core\Models\Project')->create();
+    }
+
+    /** @test */
+    public function projects_route_should_return_404_page()
+    {
+        $this->expectException(NotFoundHttpException::class);
+        $this->actingAs($this->user)->get('offices/');
     }
 
     /** @test */
@@ -26,13 +33,11 @@ class ProjectTest extends TestCase
         $this->actingAs($this->user)->get('projects/' . $id)->assertSee('New Project');
     }
 
-    /**
-     * @expectedException Illuminate\Auth\Access\AuthorizationException
-     * @test
-     */
+    /** @test */
     public function user_without_permission_cant_see_project_page()
     {
-        $user = factory(\App\Models\User::class)->create();
+        $this->expectException(AuthorizationException::class);
+        $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
         $this->user_with_permission_can_create_project();
         $id = Project::where('name', 'New Project')->first()->id;
 
@@ -50,20 +55,13 @@ class ProjectTest extends TestCase
             'name'   => 'New Project',
         ]);
         $this->assertDatabaseHas('projects', ['name' => 'New Project', 'description' => 'Description for new project', 'owner_id' => $this->user->id]);
-
-        $id = Project::where('name', 'New Project')->first()->id;
-        $this->assertTrue($this->user->hasPermissionTo('view project->' . $id));
-        $this->assertTrue($this->user->hasPermissionTo('edit project->' . $id));
-        $this->assertTrue($this->user->hasPermissionTo('delete project->' . $id));
     }
 
-    /**
-     * @test
-     * @expectedException Illuminate\Auth\Access\AuthorizationException
-     * */
+    /** @test */
     public function user_without_permission_cant_create_project()
     {
-        $user = factory('App\Models\User')->create();
+        $this->expectException(AuthorizationException::class);
+        $user = factory('App\Core\Models\User')->create(['role_id' => 5]);
 
         $this->actingAs($user)->post('projects', [
             'name'        => 'New Project',
@@ -75,13 +73,12 @@ class ProjectTest extends TestCase
     public function add_user_to_project()
     {
         Notification::fake();
-        Permission::create(['name' => 'view project->' . $this->project->id]);
 
-        $user = factory('App\Models\User')->create();
+        $user = factory('App\Core\Models\User')->create();
         $this->actingAs($this->user)->post('/members', [
             'user_id'       => $user->id,
-            'resource_type' => 'project',
-            'resource_id'   => $this->project->id,
+            'group_type'    => 'project',
+            'group_id'      => $this->project->id,
         ])->assertJson([
             'status'  => 'success',
             'message' => 'User added to the project',
@@ -108,13 +105,11 @@ class ProjectTest extends TestCase
              ]);
     }
 
-    /**
-     * @expectedException Illuminate\Auth\Access\AuthorizationException
-     * @test
-     */
+    /** @test */
     public function user_without_permission_cant_delete_a_project()
     {
-        $user = factory(\App\Models\User::class)->create();
+        $this->expectException(AuthorizationException::class);
+        $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
 
         $this->user_with_permission_can_create_project();
 
@@ -134,8 +129,8 @@ class ProjectTest extends TestCase
 
         $this->actingAs($this->user)->delete('/members', [
             'user_id'       => $user->id,
-            'resource_type' => 'project',
-            'resource_id'   => $this->project->id,
+            'group_type'    => 'project',
+            'group_id'      => $this->project->id,
         ])->assertJson([
             'status'  => 'success',
             'message' => 'User removed from the project',
@@ -150,22 +145,44 @@ class ProjectTest extends TestCase
         $this->assertEmpty($this->project->fresh()->members);
     }
 
-    /**
-     * @expectedException App\Exceptions\UserIsNotMember
-     * @test
-     */
+    /** @test */
     public function cannot_remove_user_from_project_if_not_a_member()
     {
         $this->expectException(UserIsNotMember::class);
 
-        Permission::create(['name' => 'view project->' . $this->project->id]);
-        $user = factory('App\Models\User')->create();
+        $user = factory('App\Core\Models\User')->create();
 
         $this->actingAs($this->user)
              ->delete('/members', [
                  'user_id'       => $user->id,
-                 'resource_type' => 'project',
-                 'resource_id'   => $this->project->id,
+                 'group_type'    => 'project',
+                 'group_id'      => $this->project->id,
              ])->dump();
+    }
+
+    /** @test */
+    public function admin_can_make_project_public()
+    {
+        $this->actingAs($this->user)
+             ->post('public-projects/' . $this->project->id)
+             ->assertJsonFragment([
+                 'status'  => 'success',
+                 'message' => localize('project.Project has been made public'),
+             ]);
+        $this->assertDatabaseHas('projects', ['id' => $this->project->id, 'public' => true]);
+    }
+
+    /** @test */
+    public function admin_can_make_project_private()
+    {
+        $this->actingAs($this->user)
+             ->post('public-projects/' . $this->project->id);
+
+        $this->delete('public-projects/' . $this->project->id)
+             ->assertJsonFragment([
+                 'status'  => 'success',
+                 'message' => localize('project.Project has been made private'),
+             ]);
+        $this->assertDatabaseHas('projects', ['id' => $this->project->id, 'public' => false]);
     }
 }

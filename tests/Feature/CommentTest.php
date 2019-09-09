@@ -3,10 +3,11 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Models\Discussion;
-use Spatie\Permission\Models\Permission;
+use App\Core\Models\Discussion;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class CommentTest extends TestCase
 {
@@ -15,16 +16,11 @@ class CommentTest extends TestCase
      */
     private static $endpoint = '/comments';
 
-    public function setUp()
-    {
-        parent::setUp();
-    }
-
     /** @test */
     public function user_can_create_comment()
     {
-        factory(Discussion::class)->create(['id' => 1]);
         $this->actingAs($this->user);
+        factory(Discussion::class)->create(['id' => 1]);
 
         $response = $this->post(
             self::$endpoint,
@@ -99,10 +95,14 @@ class CommentTest extends TestCase
     /** @test */
     public function user_can_see_all_comment()
     {
-        $discussion = factory(\App\Models\Discussion::class)->create();
-        $comments = factory(\App\Models\Comment::class, 3)->create(['commentable_type' => 'discussion', 'commentable_id' => $discussion->id]);
+        $this->actingAs($this->user);
+        $project = factory(\App\Core\Models\Project::class)->create(['owner_id' => $this->user->id]);
+        $this->actingAs($this->user);
+        resolve('Authorization')->setupDefaultPermissions($project);
+        $discussion = factory(\App\Core\Models\Discussion::class)->create(['discussionable_type' => 'project', 'discussionable_id' => $project->id]);
+        $comments = factory(\App\Core\Models\Comment::class, 3)->create(['commentable_type' => 'discussion', 'commentable_id' => $discussion->id]);
 
-        $this->actingAs($this->user)->call('GET', self::$endpoint, ['commentable_type' => 'discussion', 'commentable_id' => $discussion->id])
+        $this->call('GET', self::$endpoint, ['commentable_type' => 'discussion', 'commentable_id' => $discussion->id, 'group_type' => $discussion->discussionable_type, 'group_id' => $discussion->discussionable_id])
              ->assertJsonFragment([
                  'status'           => 'success',
                  'body'             => $comments[0]->body,
@@ -116,48 +116,70 @@ class CommentTest extends TestCase
     /** @test */
     public function user_can_delete_his_own_comment()
     {
-        $user = factory(\App\Models\User::class)->create();
+        $user = factory(\App\Core\Models\User::class)->create();
 
-        $comment = factory(\App\Models\Comment::class)->create([
+        $this->actingAs($user);
+        $comment = factory(\App\Core\Models\Comment::class)->create([
             'user_id'          => $user->id,
             'body'             => 'Comment body',
             'commentable_type' => 'task',
             'commentable_id'   => 1,
         ]);
 
-        $this->actingAs($user)->delete("/comments/{$comment->id}")
+        $this->delete("/comments/{$comment->id}")
              ->assertJsonFragment([
                 'status'  => 'success',
-                'message' => 'misc.Comment has been deleted',
-             ]);
-    }
-
-    /** @test */
-    public function user_with_permission_can_delete_a_comment()
-    {
-        $comment = factory(\App\Models\Comment::class)->create();
-
-        $permission = Permission::create(['name' => 'delete comment.' . $comment->commentable_type . '->' . $comment->commentable_id]);
-
-        $this->user->givePermissionTo($permission);
-
-        $this->actingAs($this->user)->delete("/comments/{$comment->id}")
-             ->assertJsonFragment([
-                'status'  => 'success',
-                'message' => 'misc.Comment has been deleted',
+                'message' => 'Comment has been deleted',
              ]);
     }
 
     /**
-     * @expectedException Illuminate\Auth\Access\AuthorizationException
      * @test
-     */
+     * */
+    public function user_with_permission_can_delete_a_comment()
+    {
+        Notification::fake();
+        $project = factory(\App\Core\Models\Project::class)->create(['owner_id' => $this->user->id]);
+        $this->actingAs($this->user);
+        resolve('Authorization')->setupDefaultPermissions($project);
+        $comment = factory(\App\Core\Models\Comment::class)->create([
+            'commentable_type' => 'task',
+            'commentable_id'   => factory(\App\Core\Models\Task::class)->create([
+                'taskable_type' => 'project',
+                'taskable_id'   => $project->id,
+            ]),
+        ]);
+
+        $this->post('members', [
+            'user_id'       => $this->user->id,
+            'group_type'    => $comment->commentable->taskable_type,
+            'group_id'      => $comment->commentable->taskable_id,
+        ]);
+
+        $this->actingAs($this->user)
+             ->delete(
+                 "/comments/{$comment->id}",
+                ['group_type' => $comment->commentable->taskable_type, 'group_id' => $comment->commentable->taskable_id]
+             )
+             ->assertJsonFragment([
+                'status'  => 'success',
+                'message' => 'Comment has been deleted',
+             ]);
+    }
+
+    /** @test */
     public function user_without_permission_cant_delete_a_comment()
     {
-        $comment = factory(\App\Models\Comment::class)->create();
+        $this->expectException(AuthorizationException::class);
+        $this->actingAs($this->user);
+        $comment = factory(\App\Core\Models\Comment::class)->create([
+            'commentable_type' => 'task',
+            'commentable_id'   => factory(\App\Core\Models\Task::class),
+        ]);
 
-        Permission::create(['name' => 'delete comment.' . $comment->commentable_type . '->' . $comment->commentable_id]);
-
-        $this->actingAs($this->user)->delete("/comments/{$comment->id}");
+        $this->delete(
+                "/comments/{$comment->id}",
+                ['group_type' => $comment->commentable->taskable_type, 'group_id' => $comment->commentable->taskable_id]
+             );
     }
 }

@@ -1,10 +1,8 @@
 <?php
 
 use Carbon\Carbon;
-use App\Models\User;
+use App\Core\Models\User;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 
 class AdminUserSeeder extends Seeder
 {
@@ -20,15 +18,11 @@ class AdminUserSeeder extends Seeder
             'username'   => 'admin',
             'email'      => 'admin@example.com',
             'active'     => 1,
+            'role_id'    => 1,
             'password'   => bcrypt('secret'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
-        $role = Role::where('name', 'owner')->first();
-        $user->assignRole($role);
-        $permissions = Permission::all();
-        $permissions = $permissions->pluck('id')->toArray();
-        $role->givePermissionTo($permissions);
 
         // Guest User
         $user = User::create([
@@ -36,11 +30,10 @@ class AdminUserSeeder extends Seeder
             'username'   => 'guest',
             'email'      => 'guest@example.com',
             'active'     => 1,
+            'role_id'    => 5,
             'password'   => bcrypt('guestpass'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
-        $role = Role::where('name', 'guest')->first();
-        $user->assignRole($role);
     }
 }

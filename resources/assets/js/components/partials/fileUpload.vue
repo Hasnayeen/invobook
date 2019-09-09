@@ -3,12 +3,14 @@
     <div>
       <label for="file-upload"></label>
       <input type="file" name="file-upload" ref="files" @change="filesSelected" class="hidden" multiple>
-      <button @click="selectFiles" class="bg-teal-light text-white p-3 rounded shadow-md">Upload Files</button>
+      <button @click="selectFiles" class="bg-teal-400 text-white p-3 rounded shadow-md">Upload Files</button>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   props: {
     resourceType: {
@@ -23,7 +25,11 @@ export default {
   data: () => ({
     files: []
   }),
+
   methods: {
+    ...mapActions([
+      'showNotification',
+    ]),
     selectFiles () {
       this.$refs.files.click()
     },
@@ -34,8 +40,8 @@ export default {
         let file = this.files[i]
         formData.append('files[' + i + ']', file)
       }
-      formData.append('fileable_type', this.resourceType)
-      formData.append('fileable_id', this.resourceId)
+      formData.append('group_type', this.resourceType)
+      formData.append('group_id', this.resourceId)
       this.submitFiles(formData)
     },
     submitFiles (formData) {
@@ -47,10 +53,11 @@ export default {
           }
         })
         .then((response) => {
-          EventBus.$emit('notification', response.data.message, response.data.status)
+          this.$emit('on-success', true)
+          this.showNotification({type: response.data.status, message: response.data.message})
         })
         .catch((error) => {
-          EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+          this.showNotification({type: error.response.data.status, message: error.response.data.message})
         })
     }
   }

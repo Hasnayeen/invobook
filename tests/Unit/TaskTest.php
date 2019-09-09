@@ -3,23 +3,21 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
-use App\Models\Task;
+use App\Core\Models\Task;
 
 class TaskTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
-        $this->task = factory(\App\Models\Task::class)->create();
-
-        create_permissions($this->task->taskable);
+        $this->task = factory(\App\Core\Models\Task::class)->create();
     }
 
     /** @test */
     public function a_task_can_have_subtask()
     {
-        $subtask = factory(\App\Models\Task::class)->create();
+        $subtask = factory(\App\Core\Models\Task::class)->create();
 
         $this->task->subtasks()->save($subtask);
 
@@ -29,7 +27,7 @@ class TaskTest extends TestCase
     /** @test */
     public function when_retrieving_a_task_subtasks_will_be_eager_loaded_automatically()
     {
-        $subtask = factory(\App\Models\Task::class)->create();
+        $subtask = factory(\App\Core\Models\Task::class)->create();
 
         $this->task->subtasks()->save($subtask);
 

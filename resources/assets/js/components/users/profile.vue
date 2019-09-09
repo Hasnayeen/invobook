@@ -1,16 +1,18 @@
 <template>
-  <div class="flex flex-col mx-4 md:mx-auto my-8 max-w-md">
+  <div class="">
     <template v-if="user.id === authUser.id">
-      <div class="bg-white rounded shadow flex flex-row text-center text-grey-darker">
-        <div @click="activateTab('profile')" class="w-1/2 p-4" :class="[(activeTab === 'profile') ? 'text-white bg-teal-light' : 'cursor-pointer']">
-          {{ 'Profile' | localize }}
+      <div class="flex flex-col mx-4 md:mx-auto my-8 max-w-xl">
+        <div class="bg-white rounded shadow flex flex-row text-center text-gray-800">
+          <div @click="activateTab('profile')" class="w-1/2 p-4" :class="[(activeTab === 'profile') ? 'text-white bg-teal-400 rounded-l' : 'cursor-pointer']">
+            {{ 'Profile' | localize }}
+          </div>
+          <div @click="activateTab('account')" class="w-1/2 p-4" :class="[(activeTab === 'account') ? 'text-white bg-teal-400 rounded-r' : 'cursor-pointer']">
+            {{ 'Account' | localize }}
+          </div>
         </div>
-        <div @click="activateTab('account')" class="w-1/2 p-4" :class="[(activeTab === 'account') ? 'text-white bg-teal-light' : 'cursor-pointer']">
-          {{ 'Account' | localize }}
-        </div>
+        <account v-if="activeTab === 'account'" :user="authUser"></account>
+        <own v-if="activeTab === 'profile'" :user="authUser" :timezones="timezones" :locales="locales"></own>
       </div>
-      <account v-if="activeTab === 'account'" :user="authUser"></account>
-      <own v-if="activeTab === 'profile'" :user="authUser" :timezones="timezones" :locales="locales"></own>
     </template>
     <other v-else :user="user"></other>
   </div>
