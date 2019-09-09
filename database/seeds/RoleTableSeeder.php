@@ -1,7 +1,7 @@
 <?php
 
+use App\Core\Models\Role;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
 
 class RoleTableSeeder extends Seeder
 {
@@ -12,12 +12,10 @@ class RoleTableSeeder extends Seeder
      */
     public function run()
     {
-        app()['cache']->forget('spatie.permission.cache');
-
-        Role::create(['name' => 'owner', 'deletable' => false]);
-        Role::create(['name' => 'admin']);
-        Role::create(['name' => 'member']);
-        Role::create(['name' => 'client']);
-        Role::create(['name' => 'guest']);
+        Role::create(['name' => 'Owner', 'slug' => 'owner']);
+        Role::create(['name' => 'Admin', 'slug' => 'admin']);
+        Role::create(['name' => 'Member', 'slug' => 'member']);
+        Role::create(['name' => 'Client', 'slug' => 'client']);
+        Role::create(['name' => 'Guest', 'slug' => 'guest']);
     }
 }

@@ -1,8 +1,13 @@
 import Vuex from 'vuex'
+import notification from './modules/notification'
 
 window.Vue.use(Vuex)
 
 export default new Vuex.Store({
+  modules: {
+    notification
+  },
+
   state: {
     home: data,
     loading: false
@@ -42,13 +47,13 @@ export default new Vuex.Store({
         .then((response) => {
           if (response.data.status === 'success') {
             commit('toggleLoading', false)
-            EventBus.$emit('notification', response.data.message, response.data.status)
+            this.dispatch('showNotification', { type: response.data.status, message: response.data.message })
             commit('addProject', response.data.project)
           }
         })
         .catch((error) => {
           commit('toggleLoading', false)
-          EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+          this.dispatch('showNotification', { type: error.response.data.status, message: error.response.data.message })
         })
     },
     removeProject ({ commit }, data) {
@@ -56,12 +61,12 @@ export default new Vuex.Store({
       axios.delete(`/projects/${data.id}`)
         .then((response) => {
           commit('toggleLoading', false)
-          EventBus.$emit('notification', response.data.message, response.data.status)
+          this.dispatch('showNotification', { type: response.data.status, message: response.data.message })
           commit('removeProject', data.index)
         })
         .catch((error) => {
           commit('toggleLoading', false)
-          EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+          this.dispatch('showNotification', { type: error.response.data.status, message: error.response.data.message })
         })
     },
     addTeam ({ commit }, formData) {
@@ -70,21 +75,21 @@ export default new Vuex.Store({
         description: formData.description
       }).then((response) => {
         if (response.data.status === 'success') {
-          EventBus.$emit('notification', response.data.message, response.data.status)
+          this.dispatch('showNotification', { type: response.data.status, message: response.data.message })
           commit('addTeam', response.data.team)
         }
       }).catch((error) => {
-        EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+        this.dispatch('showNotification', {type: error.response.data.status, message: error.response.data.message})
       })
     },
     removeTeam ({ commit }, data) {
       axios.delete(`/teams/${data.id}`)
         .then((response) => {
           commit('deleteTeam', data.index)
-          EventBus.$emit('notification', response.data.message, response.data.status)
+          this.dispatch('showNotification', { type: response.data.status, message: response.data.message })
         })
         .catch((error) => {
-          EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+          this.dispatch('showNotification', {type: error.response.data.status, message: error.response.data.message})
         })
     },
     addOffice ({ commit }, formData) {
@@ -94,22 +99,22 @@ export default new Vuex.Store({
       })
         .then((response) => {
           if (response.data.status === 'success') {
-            EventBus.$emit('notification', response.data.message, response.data.status)
+            this.dispatch('showNotification', { type: response.data.status, message: response.data.message })
             commit('addOffice', response.data.office)
           }
         })
         .catch((error) => {
-          EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+          this.dispatch('showNotification', {type: error.response.data.status, message: error.response.data.message})
         })
     },
     removeOffice ({ commit }, data) {
       axios.delete(`/offices/${data.id}`)
         .then((response) => {
           commit('removeOffice', data.index)
-          EventBus.$emit('notification', response.data.message, response.data.status)
+          this.dispatch('showNotification', { type: response.data.status, message: response.data.message })
         })
         .catch((error) => {
-          EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+          this.dispatch('showNotification', {type: error.response.data.status, message: error.response.data.message})
         })
     }
   }

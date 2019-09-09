@@ -1,72 +1,61 @@
 <template>
-<div :class="{'hidden': (activeColumn !== 'roles')}" class="bg-white rounded-b">
-  <create-role-form :form-shown="createRoleFormShown" @close="closeCreateRoleForm" @role-created="newRoleCreated"></create-role-form>
-  <assign-permission-form :roleId="roleId" :form-shown="assignPermissionFormShown" @close="closeAssignPermissionForm" @permission-assigned="permissionAssigned"></assign-permission-form>
-
-  <div class="mx-4 text-center">
-    <button @click="showCreateRoleForm" class="no-underline p-3 m-8 -mb-4 text-white text-base bg-teal-light rounded shadow-xl">Add New Role</button>
+<div :class="{'hidden': (activeColumn !== 'roles')}" class="bg-gray-100 rounded-b">
+  <!-- Select Role -->
+  <div class="px-6 pb-8 pt-12 rounded-b">
+    <div class="inline font-medium text-gray-700">Select a Role:</div>
+    <template v-for="role in roles">
+      <div @click="selectRole(role)" class="rounded inline border p-3 mx-2 relative cursor-pointer"
+        :class="[selectedRole === role.slug ? 'bg-indigo-100 border-indigo-400 shadow-md' : 'bg-gray-100 border-gray-400']">
+        <font-awesome-icon v-if="selectedRole === role.slug" :icon="faCheckCircle" class="absolute right-0 top-0 -mr-1 -mt-1 text-lg text-indigo-500 bg-white rounded-full"></font-awesome-icon>
+        <span class="cursor-pointer">{{ role.name }}</span>
+      </div>
+    </template>
   </div>
-  <div class="px-6 py-8 flex flex-row flex-wrap justify-center text-grey-darker">
-    <div v-for="(role, index) in roles" class="bg-white shadow-xl w-80 my-4 md:m-6 rounded-lg">
-      <div class="p-4 text-xl uppercase text-indigo bg-grey-lighter rounded-t-lg flex flex-row">
-        {{ role.name }}
-          <div @click="deleteRole(role.id, index)">
-            <i v-if="role.deletable" class="ml-1 pl-1 fas fa-trash-alt cursor-pointer text-base"></i>
-          </div>
+
+  <!-- Roles Permissions Table -->
+  <div class="py-2 bg-white rounded-b">
+    <div v-for="(resource, name, index) in permissions" class="flex flex-row items-center px-12 py-4" :class="[index !== 0 ? 'border-gray-200 border-t' : '']">
+      <div class="text-gray-700 text-xl w-48">
+        {{ name | capitalize | localize }}
       </div>
-      <div class="px-4 pb-2 bg-grey-lighter text-sm flex flex-row">
-        <span>
-          {{ 'Permissions' | localize }}
+      <div v-for="(permission, key) in resource" class="w-32 flex flex-col justify-center items-center">
+        <div class="pb-1">
+          {{ permission.action | capitalize | localize }}
+        </div>
+        <span @click="togglePermission(permission, name, key, permission.enabled)" class="w-5 h-5 rounded cursor-pointer inline flex items-center justify-center" :class="[permission.enabled ? 'bg-teal-500' : 'border-gray-400 border']">
+          <font-awesome-icon v-if="permission.enabled" :icon="faCheck" class="text-xs text-white"></font-awesome-icon>
         </span>
-        <div @click="showAssignPermissionForm(role.id)">
-          <font-awesome-icon :icon="faPlusCircle"
-            class="ml-2 text-indigo cursor-pointer">
-          </font-awesome-icon>
-        </div>
       </div>
-      <div v-if="role.permissions.length > 0" class="flex flex-row flex-wrap m-2">
-        <div v-for="(permission, index) in role.permissions" class="py-1 px-2 m-2 rounded-full font-medium bg-pink text-white text-sm flex flex-row items-center">
-          {{ permission.name }} 
-          <div @click="revokePermission(role.id, permission.id, index)">
-            <font-awesome-icon :icon="faTrashAlt"
-              class="ml-1 pl-1 cursor-pointer">
-            </font-awesome-icon>
-          </div>
-        </div>
-      </div>
-      <div v-else class="py-1 px-2 m-2 font-medium text-grey-darker">
-        {{ 'Don\'t have any permission yet' | localize }}
-      </div>
-    </div>      
+    </div>
   </div>
 </div>
 </template>
 
 <script>
-import createRoleForm from './../forms/createRoleForm'
-import assignPermissionForm from './../forms/assignPermissionForm'
-import { faPlusCircle } from '@fortawesome/free-solid-svg-icons/faPlusCircle'
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons/faTrashAlt'
+import { mapActions } from 'vuex'
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons/faCheckCircle'
+import { faCheck } from '@fortawesome/free-solid-svg-icons/faCheck'
 
 export default {
-  components: {createRoleForm, assignPermissionForm},
   props: {
     activeColumn: {
       required: true,
       type: String
     }
   },
+
   data: () => ({
     roles: [],
-    createRoleFormShown: false,
-    assignPermissionFormShown: false,
-    roleId: 0,
-    faPlusCircle,
-    faTrashAlt
+    permissions: [],
+    roleId: 1,
+    selectedRole: 'owner',
+    faCheckCircle,
+    faCheck,
   }),
-  beforeUpdate () {
+
+  created () {
     if (this.roles.length < 1) {
-      axios.get('/admin/roles')
+      axios.get('/roles')
         .then((response) => {
           this.roles = response.data.roles
         })
@@ -74,49 +63,55 @@ export default {
           console.log(error)
         })
     }
+    if (this.permissions.length < 1) {
+      axios.get('/admin/roles/1/permissions')
+        .then((response) => {
+          this.permissions = response.data.permissions
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
   },
+
   methods: {
-    showCreateRoleForm () {
-      this.createRoleFormShown = true
-    },
-    closeCreateRoleForm () {
-      this.createRoleFormShown = false
-    },
+    ...mapActions([
+      'showNotification',
+    ]),
     newRoleCreated (role) {
       this.roles.push(role)
       this.createRoleFormShown = false
     },
-    deleteRole (id, index) {
-      axios.delete('/admin/roles/' + id)
+    selectRole (role) {
+      this.selectedRole = role.slug
+      this.roleId = role.id
+      axios.get('/admin/roles/' + role.id + '/permissions')
         .then((response) => {
-          this.roles.splice(index, 1)
+          this.permissions = response.data.permissions
         })
         .catch((error) => {
           console.log(error.response.data.message)
         })
     },
-    showAssignPermissionForm (id) {
-      this.roleId = id
-      this.assignPermissionFormShown = true
-    },
-    closeAssignPermissionForm () {
-      this.assignPermissionFormShown = false
-    },
-    permissionAssigned (permission) {
-      if (!this.roles.filter(role => role.id === this.roleId)[0].permissions.some(perm => perm.id === permission.id)) {
-        this.roles.filter(role => role.id === this.roleId)[0].permissions.push(permission)
+    togglePermission (permission, key, index, currentState) {
+      if (currentState) {
+        axios.delete('/admin/roles/' + this.roleId + '/permissions/' + permission.id)
+          .then((response) => {
+            this.permissions[key][index]['enabled'] = !currentState
+          })
+          .catch((error) => {
+            this.showNotification({type: error.response.data.status, message: error.response.data.message})
+          })
+      } else {
+        axios.post('/admin/roles/' + this.roleId + '/permissions/' + permission.id)
+          .then((response) => {
+            this.permissions[key][index]['enabled'] = !currentState
+          })
+          .catch((error) => {
+            this.showNotification({type: error.response.data.status, message: error.response.data.message})
+          })
       }
-      this.assignPermissionFormShown = false
     },
-    revokePermission (roleId, permissionId, index) {
-      axios.delete('/admin/roles/' + roleId + '/permissions', {permission_id: permissionId})
-        .then((response) => {
-          this.roles.filter(role => role.id === roleId)[0].permissions.splice(index, 1)
-        })
-        .catch((error) => {
-          console.log(error.response.data.message)
-        })
-    }
-  }
+  },
 }
 </script>

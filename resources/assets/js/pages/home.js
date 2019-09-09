@@ -1,6 +1,6 @@
 import './../bootstrap'
 import componentMixin from './commonComponent'
-import home from './../components/home.vue'
+import home from './../components/home/index.vue'
 import store from '../store/home'
 
 /* eslint-disable no-unused-vars */

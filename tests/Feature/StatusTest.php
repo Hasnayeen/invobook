@@ -6,15 +6,33 @@ use Tests\TestCase;
 
 class StatusTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
-        $this->status = factory(\App\Models\Status::class)->create();
+        $this->status = factory(\App\Core\Models\Status::class)->create();
     }
 
-    public function test_create_new_status()
+    /** @test */
+    public function user_can_get_all_statuses()
     {
-        $status = factory(\App\Models\Status::class)->make();
+        $status = factory(\App\Core\Models\Status::class, 2)->create();
+        $this->actingAs($this->user)
+             ->get('statuses')
+             ->assertJsonFragment([
+                 'status'  => 'success',
+                 'name'    => $status[0]['name'],
+                 'color'   => $status[0]['color'],
+             ])
+             ->assertJsonFragment([
+                 'name'  => $status[1]['name'],
+                 'color' => $status[1]['color'],
+             ]);
+    }
+
+    /** @test */
+    public function user_can_create_new_status()
+    {
+        $status = factory(\App\Core\Models\Status::class)->make();
 
         $this->actingAs($this->user)->post('/statuses', [
             'name'      => $status->name,

@@ -3,34 +3,40 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Spatie\Permission\Models\Permission;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class TaskTest extends TestCase
 {
     use WithFaker;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
-        $this->task = factory(\App\Models\Task::class)->create();
-        create_permissions($this->task->taskable);
+        $this->task = factory(\App\Core\Models\Task::class)->create(['created_by' => $this->user->id]);
     }
 
     /** @test */
     public function user_with_permission_can_create_new_task()
     {
-        $task = factory(\App\Models\Task::class)->make();
-        $permission = Permission::create(['name' => 'create task.' . $task->taskable_type . '->' . $task->taskable_id]);
-        $this->user->givePermissionTo($permission);
+        $project = factory(\App\Core\Models\Project::class)->create(['owner_id' => $this->user->id]);
+        $task = factory(\App\Core\Models\Task::class)->make([
+            'created_by'    => $this->user->id,
+            'taskable_type' => 'project',
+            'taskable_id'   => $project->id,
+        ]);
+        $this->actingAs($this->user);
+        resolve('Authorization')->setupDefaultPermissions($project);
+        $project->members()->save($this->user);
 
         $this->actingAs($this->user)->post('/tasks', [
             'name'          => $task->name,
             'assigned_to'   => $task->assigned_to,
             'notes'         => $task->notes,
             'due_on'        => $task->due_on,
-            'taskable_type' => $task->taskable_type,
-            'taskable_id'   => $task->taskable_id,
+            'group_type'    => $task->taskable_type,
+            'group_id'      => $task->taskable_id,
         ])->assertJsonFragment([
             'status'        => 'success',
             'message'       => 'New task has been created',
@@ -43,29 +49,45 @@ class TaskTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @expectedException Illuminate\Auth\Access\AuthorizationException
-     * */
-    public function user_without_permission_cant_create_new_task()
+    /** @test */
+    public function due_date_must_be_in_future()
     {
-        $task = factory(\App\Models\Task::class)->make();
-        Permission::create(['name' => 'create task.' . $task->taskable_type . '->' . $task->taskable_id]);
-
+        $this->expectException(ValidationException::class);
+        $task = factory(\App\Core\Models\Task::class)->make();
         $this->actingAs($this->user)->post('/tasks', [
             'name'          => $task->name,
             'assigned_to'   => $task->assigned_to,
             'notes'         => $task->notes,
+            'due_on'        => $this->faker->dateTimeBetween('-1 years', 'now')->format('Y-m-d'),
+            'group_type'    => $task->taskable_type,
+            'group_id'      => $task->taskable_id,
+        ]);
+    }
+
+    /** @test */
+    public function user_without_permission_cant_create_new_task()
+    {
+        $this->expectException(AuthorizationException::class);
+        $user = factory(\App\Core\Models\User::class)->create();
+        $task = factory(\App\Core\Models\Task::class)->make();
+
+        $this->actingAs($user)->post('/tasks', [
+            'name'          => $task->name,
+            'assigned_to'   => $task->assigned_to,
+            'notes'         => $task->notes,
             'due_on'        => $task->due_on,
-            'taskable_type' => $task->taskable_type,
-            'taskable_id'   => $task->taskable_id,
+            'group_type'    => $task->taskable_type,
+            'group_id'      => $task->taskable_id,
         ]);
     }
 
     /** @test */
     public function user_can_see_details_of_a_task()
     {
-        $this->actingAs($this->user)->get('/tasks/' . $this->task->id)
+        $this->actingAs($this->user)->get('/tasks/' . $this->task->id, [
+            'group_type' => $this->task->taskable_type,
+            'group_id'   => $this->task->taskable_id,
+        ])
         ->assertJsonFragment([
             'status'         => 'success',
             'name'           => $this->task->name,
@@ -80,8 +102,10 @@ class TaskTest extends TestCase
     /** @test */
     public function user_can_see_tasks_of_a_group()
     {
-        $project = factory('App\Models\Project')->create();
-        $tasks = factory('App\Models\Task', 3)->create([
+        $project = factory(\App\Core\Models\Project::class)->create(['owner_id' => $this->user]);
+        $this->actingAs($this->user);
+        resolve('Authorization')->setupDefaultPermissions($project);
+        $tasks = factory('App\Core\Models\Task', 3)->create([
             'taskable_type' => 'project',
             'taskable_id'   => $project->id,
         ]);
@@ -94,8 +118,10 @@ class TaskTest extends TestCase
             'name'             => $tasks[2]['name'],
         ]);
 
-        $team = factory('App\Models\Team')->create();
-        $tasks = factory('App\Models\Task', 3)->create([
+        $team = factory(\App\Core\Models\Team::class)->create(['owner_id' => $this->user]);
+        $this->actingAs($this->user);
+        resolve('Authorization')->setupDefaultPermissions($team);
+        $tasks = factory('App\Core\Models\Task', 3)->create([
             'taskable_type' => 'team',
             'taskable_id'   => $team->id,
         ]);
@@ -108,8 +134,10 @@ class TaskTest extends TestCase
             'name'             => $tasks[2]['name'],
         ]);
 
-        $office = factory('App\Models\Office')->create();
-        $tasks = factory('App\Models\Task', 3)->create([
+        $office = factory(\App\Core\Models\Office::class)->create(['owner_id' => $this->user]);
+        $this->actingAs($this->user);
+        resolve('Authorization')->setupDefaultPermissions($office);
+        $tasks = factory('App\Core\Models\Task', 3)->create([
             'taskable_type' => 'office',
             'taskable_id'   => $office->id,
         ]);
@@ -126,38 +154,48 @@ class TaskTest extends TestCase
     /** @test */
     public function user_with_permission_can_delete_a_task()
     {
-        $this->actingAs($this->user)->delete('/tasks/' . $this->task->id)
+        $this->actingAs($this->user)->delete('/tasks/' . $this->task->id, [
+            'group_type' => $this->task->taskable_type,
+            'group_id'   => $this->task->taskable_id,
+        ])
              ->assertJsonFragment([
                  'status'  => 'success',
                  'message' => 'The task has been deleted',
              ]);
     }
 
-    /**
-     * @test
-     * @expectedException Illuminate\Auth\Access\AuthorizationException
-     * */
+    /** @test */
     public function user_without_permission_cant_delete_a_task()
     {
-        $user = factory(\App\Models\User::class)->create();
-        $this->actingAs($user)->delete('/tasks/' . $this->task->id);
+        $this->expectException(AuthorizationException::class);
+        $user = factory(\App\Core\Models\User::class)->create();
+        $this->actingAs($user)->delete('/tasks/' . $this->task->id, [
+            'group_type' => $this->task->taskable_type,
+            'group_id'   => $this->task->taskable_id,
+        ]);
     }
 
     /** @test */
     public function create_new_task_with_status()
     {
-        $task = factory(\App\Models\Task::class)->make();
-        factory(\App\Models\Status::class)->create();
-        $permission = Permission::create(['name' => 'create task.' . $task->taskable_type . '->' . $task->taskable_id]);
-        $this->user->givePermissionTo($permission);
+        $project = factory(\App\Core\Models\Project::class)->create(['owner_id' => $this->user->id]);
+        $task = factory(\App\Core\Models\Task::class)->make([
+            'created_by'    => $this->user->id,
+            'taskable_type' => 'project',
+            'taskable_id'   => $project->id,
+        ]);
+        factory(\App\Core\Models\Status::class)->create();
+        $this->actingAs($this->user);
+        resolve('Authorization')->setupDefaultPermissions($project);
+        $project->members()->save($this->user);
 
         $this->actingAs($this->user)->post('/tasks', [
             'name'          => $task->name,
             'assigned_to'   => $task->assigned_to,
             'notes'         => $task->notes,
             'due_on'        => $task->due_on,
-            'taskable_type' => $task->taskable_type,
-            'taskable_id'   => $task->taskable_id,
+            'group_type'    => 'project',
+            'group_id'      => $project->id,
             'status_id'     => $task->status_id,
         ])->assertJsonFragment([
             'status'        => 'success',
@@ -175,62 +213,54 @@ class TaskTest extends TestCase
     /** @test */
     public function user_with_permission_can_update_a_task()
     {
-        $task = factory(\App\Models\Task::class)->create();
-
-        $permission = Permission::create(['name' => 'edit task.' . $task->taskable_type . '->' . $task->taskable_id]);
-
-        $this->user->givePermissionTo($permission);
+        $task = $this->user->tasks()->first();
+        $this->user_with_permission_can_create_new_task();
 
         $updatedData = [
             'name'          => $this->faker->sentence(6, true),
-            'assigned_to'   => factory(\App\Models\User::class)->create()->id,
+            'assigned_to'   => factory(\App\Core\Models\User::class)->create()->id,
             'notes'         => $this->faker->sentence(20, true),
             'due_on'        => $this->faker->dateTimeBetween('now', '+5 years')->format('Y-m-d'),
             'related_to'    => null,
-            'taskable_type' => 'office',
-            'taskable_id'   => factory(\App\Models\Office::class)->create()->id,
+            'group_type'    => 'office',
+            'group_id'      => factory(\App\Core\Models\Office::class)->create()->id,
         ];
 
         $this->actingAs($this->user)
             ->put("/tasks/{$task->id}", $updatedData)
             ->assertSessionHasNoErrors();
 
-        $this->assertDatabaseHas('tasks', $updatedData);
+        $this->assertDatabaseHas('tasks', [
+            'name'          => $updatedData['name'],
+            'assigned_to'   => $updatedData['assigned_to'],
+            'notes'         => $updatedData['notes'],
+            'due_on'        => $updatedData['due_on'],
+        ]);
     }
 
-    /**
-     * @test
-     * @expectedException Illuminate\Auth\Access\AuthorizationException
-     */
+    /** @test */
     public function user_without_permission_cant_update_a_task()
     {
-        $task = factory(\App\Models\Task::class)->create();
-
-        $permission = Permission::create(['name' => 'edit task.' . $task->taskable_type . '->' . $task->taskable_id]);
+        $this->expectException(AuthorizationException::class);
+        $task = factory(\App\Core\Models\Task::class)->create();
 
         $this->actingAs($this->user)
             ->put("/tasks/{$task->id}", [
                 'name'          => $this->faker->sentence(6, true),
-                'assigned_to'   => factory(\App\Models\User::class)->create()->id,
+                'assigned_to'   => factory(\App\Core\Models\User::class)->create()->id,
                 'notes'         => $this->faker->sentence(20, true),
                 'due_on'        => $this->faker->dateTimeBetween('now', '+5 years')->format('Y-m-d'),
                 'related_to'    => null,
-                'taskable_type' => 'office',
-                'taskable_id'   => factory(\App\Models\Office::class)->create()->id,
+                'group_type'    => 'office',
+                'group_id'      => factory(\App\Core\Models\Office::class)->create()->id,
             ]);
     }
 
-    /**
-     * @test
-     * @expectedException Illuminate\Validation\ValidationException
-     */
+    /** @test */
     public function request_validates_the_data_before_updating_a_task()
     {
-        $task = factory(\App\Models\Task::class)->create();
-
-        $permission = Permission::create(['name' => 'edit task.' . $task->taskable_type . '->' . $task->taskable_id]);
-
-        $this->user->givePermissionTo($permission);
+        $this->expectException(ValidationException::class);
+        $task = factory(\App\Core\Models\Task::class)->create();
 
         $this->actingAs($this->user)
             ->put("/tasks/{$task->id}", [
@@ -245,59 +275,37 @@ class TaskTest extends TestCase
             ->assertSessionHasErrors();
     }
 
+    /** @test */
     public function user_with_permission_can_update_status_of_a_task()
     {
-        $status = factory(\App\Models\Status::class)->create();
+        $status = factory(\App\Core\Models\Status::class)->create();
+        $status2 = factory(\App\Core\Models\Status::class)->create();
 
         $this->task->status()->associate($status)->save();
 
         $this->actingAs($this->user)
-            ->put("tasks/{$this->task->id}/statuses", [
-                'name'    => 'dummy status',
-                'color'   => '#000000',
-            ])
-            ->assertSessionHasNoErrors();
-
-        $this->assertEquals([
-            'name'    => 'dummy status',
-            'color'   => '#000000',
-        ], [
-            'name'  => $this->task->refresh()->status->name,
-            'color' => $this->task->refresh()->status->color,
-        ]);
+             ->put("tasks/{$this->task->id}/statuses/{$status2->id}")
+             ->assertJsonFragment([
+                 'status'  => 'success',
+                 'message' => 'Task status has been updated',
+             ]);
+        $this->assertDatabaseHas('tasks', ['id' => $this->task->id, 'status_id' => $status2->id]);
     }
 
-    /**
-     * @test
-     * @expectedException Illuminate\Auth\Access\AuthorizationException
-     */
+    /** @test */
     public function user_without_permission_cant_update_status_of_a_task()
     {
-        $task = factory(\App\Models\Task::class)->create();
-        $status = factory(\App\Models\Status::class)->create();
+        $this->expectException(AuthorizationException::class);
+        $user = factory(\App\Core\Models\User::class)->create();
+        $status = factory(\App\Core\Models\Status::class)->create();
+        $status2 = factory(\App\Core\Models\Status::class)->create();
 
-        $task->status()->associate($status)->save();
+        $this->task->status()->associate($status)->save();
 
-        Permission::create(['name' => 'edit task.' . $task->taskable_type . '->' . $task->taskable_id]);
-
-        $this->actingAs($this->user)
-            ->put("tasks/{$task->id}/statuses", [
-                'name'    => 'dummy status',
-                'color'   => '#000000',
-            ]);
-    }
-
-    /**
-     * @test
-     * @expectedException Illuminate\Validation\ValidationException
-     */
-    public function request_validates_the_data_before_updating_status_of_a_task()
-    {
-        $this->actingAs($this->user)
-            ->put("tasks/{$this->task->id}/statuses", [
-                'name'    => null,
-                'color'   => 'non-hex-value',
-            ])
-            ->assertSessionHasErrors();
+        $this->actingAs($user)
+             ->put("tasks/{$this->task->id}/statuses/{$status2->id}", [
+                 'group_type' => $this->task->taskable_type,
+                 'group_id'   => $this->task->taskable_id,
+             ]);
     }
 }

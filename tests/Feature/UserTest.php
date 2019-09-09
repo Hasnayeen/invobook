@@ -3,9 +3,8 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Models\User;
+use App\Core\Models\User;
 use Illuminate\Http\UploadedFile;
-use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Testing\WithFaker;
 
@@ -16,7 +15,7 @@ class UserTest extends TestCase
     /** @test */
     public function owner_can_see_all_users_in_admin_page()
     {
-        factory('App\Models\User', 2)->create();
+        factory('App\Core\Models\User', 2)->create();
         $users = User::all(['name', 'username', 'email', 'timezone', 'avatar']);
         $this->actingAs($this->user)->get('admin')
             ->assertSee($users[0]['name'])
@@ -30,7 +29,7 @@ class UserTest extends TestCase
     /** @test */
     public function owner_can_see_all_users()
     {
-        factory('App\Models\User', 2)->create();
+        factory('App\Core\Models\User', 2)->create();
         $users = User::all(['name', 'username', 'email', 'timezone', 'avatar']);
         $this->actingAs($this->user)->get('users')
             ->assertJsonFragment([
@@ -92,16 +91,16 @@ class UserTest extends TestCase
         password_verify('new_password', $this->user->password);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function guest_can_not_see_admin_page()
     {
-        $guest_user = factory(User::class)->create();
-        $guest_role = Role::create(['name' => 'guest']);
-        $guest_user->assignRole($guest_role);
+        $guest = factory(User::class)->create(['role_id' => 5]);
 
-        $this->expectException(\Spatie\Permission\Exceptions\UnauthorizedException::class);
-
-        $this->actingAs($guest_user)->get('admin');
+        $this->actingAs($guest)
+             ->get('admin')
+             ->assertRedirect('/');
     }
 
     /** @test */
@@ -165,5 +164,46 @@ class UserTest extends TestCase
                 'status'  => 'error',
                 'message' => 'Username exists',
             ]);
+    }
+
+    /** @test */
+    public function username_of_guest_user_cant_be_change()
+    {
+        $guest = factory(User::class)->create(['username' => 'guest']);
+        $this->actingAs($guest)->put("users/{$guest->id}/account", [
+            'username' => 'newUsername',
+        ])->assertJson([
+            'status'  => 'error',
+            'message' => 'Username/Password is not updatable for this account',
+        ]);
+
+        $this->assertDatabaseHas('users', ['id' => $guest->id, 'username' => 'guest']);
+    }
+
+    /** @test */
+    public function password_of_guest_user_cant_be_change()
+    {
+        $pass = bcrypt('secret');
+        $guest = factory(User::class)->create([
+            'username' => 'guest',
+            'password' => $pass,
+        ]);
+        $this->actingAs($guest)->put("users/{$guest->id}/account", [
+            'password' => 'new_password',
+        ])->assertJson([
+            'status'  => 'error',
+            'message' => 'Username/Password is not updatable for this account',
+        ]);
+
+        $this->assertDatabaseHas('users', ['id' => $guest->id, 'password' => $pass]);
+    }
+
+    /** @test */
+    public function user_can_view_other_user_profile()
+    {
+        $user = factory(User::class)->create(['name' => 'Guest User']);
+        $response = $this->actingAs($this->user)
+             ->get('users/' . $user->username)
+             ->assertSee('Guest User');
     }
 }

@@ -2,40 +2,56 @@
 <div :class="{'hidden': (activeTab != 'users')}" class="w-full">
   <invite-modal></invite-modal>
 
-  <div class="md:bg-white md:rounded md:shadow text-grey-darkest">
-    <div class="text-center text-3xl md:p-4 text-grey-darker">All Users</div>
-    <div class="hidden md:flex flex-row text-left bg-grey-lighter text-grey-dark p-4">
-      <div class="w-1/6">Avatar</div>
-      <div class="w-1/6">Name</div>
-      <div class="w-1/6">Username</div>
-      <div class="w-1/6">Role</div>
-      <div class="w-1/6">Email</div>
-      <div class="w-1/6">Timezone</div>
-    </div>
-    <div v-for="user in users" class="flex flex-row items-center text-left m-4 md:m-0 md:p-4 bg-teal-lighter md:bg-white rounded md:rounded-none shadow md:shadow-none relative">
-      <div class="absolute pin-t pin-r m-2 text-grey-darker h-full md:flex flex-row items-center md:m-0 md:mr-4">
-        <font-awesome-icon :icon="faEllipsisH" class="cursor-pointer"></font-awesome-icon>
-      </div>
-      <div class="w-1/4 md:w-1/6 px-2 md:px-0"><img class="w-12 h-12 rounded-full" :src="generateUrl(user.avatar)"></div>
-      <div class="w-3/4 md:w-5/6 flex flex-col md:flex-row md:items-center md:px-0 bg-white">
-        <div class="md:w-1/5 text-left text-xl font-semibold text-grey-darker p-2 md:p-0">{{ user.name }}</div>
-        <div class="md:w-2/5 flex flex-row text-sm p-2 md:px-0 bg-grey-lightest md:bg-white">
-          <div class="w-1/2 text-left">@{{ user.username }}</div>
-          <div class="w-1/2 text-right md:text-left">{{ user.role }}</div>
+  <div class="md:rounded text-gray-900">
+    <div class="text-center text-3xl md:p-4 text-gray-800">All Users</div>
+
+    <div class="flex flex-row flex-wrap justify-center lg:mx-4 xxl:mx-0">
+      <div v-for="user in users" class="bg-white rounded-lg shadow m-4 w-64 relative">
+        <div class="w-64 h-32 opacity-25 bg-cover rounded-t"
+          :style="{backgroundImage: 'url(' + generateUrl(user.avatar) + ')'}">
         </div>
-        <div class="md:w-2/5 flex flex-row text-sm p-2 md:px-0 bg-grey-lightest md:bg-white">
-          <div class="w-1/2">{{ user.email }}</div>
-          <div class="w-1/2">{{ user.timezone }}</div>
+        <div class="absolute flex justify-between items-center -mt-10 px-6 w-full">
+          <a v-if="authUserId !== user.id" :href="'/impersonate/take/' + user.id" class="text-indigo-700 bg-indigo-200 flex items-center justify-center w-8 h-8 mx-2 rounded-full cursor-pointer" title="Impersonate User">
+            <font-awesome-icon :icon="faUserSecret" class="cursor-pointer"></font-awesome-icon>
+          </a>
+          <a v-else class="w-8 h-8 mx-2">
+          </a>
+          <a :href="'/users/' + user.username">
+            <div class="w-20 h-20 bg-cover bg-center rounded-full shadow-outline"
+              :style="{backgroundImage: 'url(' + generateUrl(user.avatar) + ')'}"></div>
+          </a>
+          <a href="#" class="text-indigo-700 bg-indigo-200 flex items-center justify-center w-8 h-8 mx-2 rounded-full cursor-pointer"  title="Deactivate User">
+            <font-awesome-icon :icon="faUserSlash" class="cursor-pointer"></font-awesome-icon>
+          </a>
+        </div>
+        <div class="h-10"></div>
+        <div class="p-6 text-gray-700 text-center">
+          <div class="text-2xl leading-tight">
+            {{ user.name }}
+          </div>
+          <div>
+            <a :href="'/users/' + user.username" class="text-blue-500">
+              @{{ user.username }}
+            </a>
+          </div>
+          <div class="text-sm break-words pb-2" :title="user.email">
+            {{ user.email | clip }}
+          </div>
+          <span class="text-sm text-white font-medium bg-indigo-500 px-3 py-1 rounded-full">
+            {{ user.role.name }}
+          </span>
         </div>
       </div>
     </div>
+
   </div>
 </div>  
 </template>
 
 <script>
 import inviteModal from './../partials/inviteModal.vue'
-import { faEllipsisH } from '@fortawesome/free-solid-svg-icons/faEllipsisH'
+import { faUserSecret } from '@fortawesome/free-solid-svg-icons/faUserSecret'
+import { faUserSlash } from '@fortawesome/free-solid-svg-icons/faUserSlash'
 
 export default {
   props: {
@@ -49,7 +65,9 @@ export default {
     }
   },
   data: () => ({
-    faEllipsisH
+    authUserId: authUser.id,
+    faUserSecret,
+    faUserSlash,
   }),
   components: {inviteModal}
 }

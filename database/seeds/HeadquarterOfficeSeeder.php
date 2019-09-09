@@ -1,10 +1,10 @@
 <?php
 
 use Carbon\Carbon;
-use App\Models\User;
-use App\Models\Office;
+use App\Core\Models\User;
+use App\Core\Models\Office;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Permission;
+use App\Authorization\Authorization;
 
 class HeadquarterOfficeSeeder extends Seeder
 {
@@ -24,15 +24,7 @@ class HeadquarterOfficeSeeder extends Seeder
             'owner_id'    => $user->id,
         ]);
         $office = Office::where('name', 'Headquarter')->first();
+        (new Authorization($user))->setupDefaultPermissions($office);
         $user->offices()->attach($office->id);
-        $user->givePermissionTo([
-            Permission::create(['name' => 'view office->' . $office->id]),
-            Permission::create(['name' => 'create discussion.office->' . $office->id]),
-            Permission::create(['name' => 'create task.office->' . $office->id]),
-        ]);
-        $office->huntable()->create([
-            'name'        => $office->name,
-            'description' => $office->description,
-        ]);
     }
 }

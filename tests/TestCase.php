@@ -2,10 +2,8 @@
 
 namespace Tests;
 
-use App\Models\User;
-use Spatie\Permission\Models\Role;
+use App\Core\Models\User;
 use Illuminate\Support\Facades\Artisan;
-use Spatie\Permission\Models\Permission;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -22,23 +20,16 @@ abstract class TestCase extends BaseTestCase
      */
     protected $user;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->app->instance(ExceptionHandler::class, new TestExceptionHandler(app()));
-        $this->createOwner();
-    }
-
-    private function createOwner()
-    {
-        $this->user = factory(\App\Models\User::class)->create();
-        $this->ownerRole = Role::create(['name' => 'owner', 'deletable' => false]);
-        $this->user->assignRole($this->ownerRole);
-
+        $this->user = factory(\App\Core\Models\User::class)->create(['role_id' => 1]);
         Artisan::call('db:seed', ['--class' => 'PermissionTableSeeder']);
+        Artisan::call('db:seed', ['--class' => 'RoleTableSeeder']);
+        Artisan::call('db:seed', ['--class' => 'PermissionSettingsTableSeeder']);
+        Artisan::call('db:seed', ['--class' => 'RoleHasPermissionTableSeeder']);
         Artisan::call('db:seed', ['--class' => 'ServicesTableSeeder']);
-        $permissions = Permission::all();
-        $permissions = $permissions->pluck('id')->toArray();
-        $this->ownerRole->givePermissionTo($permissions);
+        Artisan::call('db:seed', ['--class' => 'StatusesTableSeeder']);
     }
 }

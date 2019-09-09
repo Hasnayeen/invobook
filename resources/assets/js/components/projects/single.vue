@@ -1,78 +1,106 @@
 <template>
-  <div class="container mx-auto px-4 my-6 w-full md:w-md lg:w-lg xl:w-xl xxl:w-2xl">
-    <div class="text-grey-dark font-semibold text-2xl mb-4 flex items-center justify-center">
-      {{project.name}}
-      <span @click="toggleDropdownMenu" v-click-outside="closeDropdownMenu" class="bg-white p-1 text-sm rounded-full shadow ml-4 cursor-pointer flex items-center">
-        <font-awesome-icon :icon="faCog"></font-awesome-icon>
-      </span>
-      <div v-if="dropdownMenuShown" class="relative">
-        <ul class="list-reset bg-white rounded shadow-lg py-2 absolute pin-r mt-4 text-base text-left font-normal whitespace-no-wrap z-10">
-          <li class="px-4 py-2 hover:bg-grey-light cursor-pointer">
-            <a href="#" class="no-underline text-grey-dark" @click.prevent="showMembersListModal">
-              Show All Members
-            </a>
+  <div class="container mx-auto my-6 px-4 md:px-0 w-full md:max-w-2xl lg:max-w-4xl xl:max-w-6xl">
+    <div class="text-gray-600 font-semibold text-2xl mb-4 flex items-center justify-center">
+      <div class="flex justify-center items-center">
+        {{project.name}}
+        <span v-if="authenticated" @click="toggleDropdownMenu" v-click-outside="closeDropdownMenu" class="bg-white p-1 text-sm rounded-full shadow ml-4 cursor-pointer flex items-center">
+          <font-awesome-icon :icon="faCog"></font-awesome-icon>
+        </span>
+      </div>
+      <!-- Dropdown Menu -->
+      <div v-if="authenticated && dropdownMenuShown" class="absolute w-64">
+        <ul class="list-reset bg-white rounded shadow-lg py-2 absolute inset-x-0 mt-6 text-base text-left font-normal whitespace-no-wrap z-30">
+          <li @click="toggleVisibility" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
+            {{ project.public ? 'Make Private' : 'Make Public'}}
           </li>
-          <li @click="showGithubRepoModal" class="px-4 py-2 hover:bg-grey-light cursor-pointer">
-            Connect Github Repository
+          <li v-if="settings.roadmap_enabled" @click="showModal('roadmapModal')" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
+            Roadmap
           </li>
-          <li class="px-4 py-2 hover:bg-grey-light cursor-pointer">
+          <li @click="showModal('memberListModal')" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
+            Show All Members
+          </li>
+          <li @click="showModal('permissionSettingsModal')" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
+            Permissions Settings
+          </li>
+          <li @click="showModal('settingsModal')" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
+            Settings
+          </li>
+          <li class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
             Delete
           </li>
         </ul>
       </div>
     </div>
 
-    <div class="text-grey-dark flex flex-row justify-center items-center">
+    <div class="text-gray-600 flex flex-row justify-center items-center">
       <span class="text-lg">
         Cycle: 
       </span>
-      <span class="p-2 ml-2 bg-grey-lightest shadow rounded cursor-pointer text-sm text-teal-darker">
-        {{startDate}} - {{endDate}}
+      <div v-if="this.selectedCycle" @click="showModal('cycleModal')" class="p-2 ml-2 bg-gray-100 shadow rounded cursor-pointer text-sm text-teal-800 inline">
+        <span v-if="this.selectedCycle.name">
+          {{ this.selectedCycle.name }}
+        </span>
+        <span v-else>
+          {{this.selectedCycle.start_date}} - {{this.selectedCycle.end_date}}
+        </span>
+      </div>
+      <span v-else @click="showModal('cycleModal')" class="p-2 ml-2 bg-gray-100 shadow rounded cursor-pointer text-sm text-teal-800">
+        Click to set a Cycle
       </span>
     </div>
+  
+  <!-- Modals for cycles -->
+  <cycles-modal v-if="currentComponent === 'cycleModal'" resourceType="project" :resourceId="project.id" :currentCycleId="currentCycleId"></cycles-modal>
+  <!-- Modals for cycles -->
 
   <!-- Modals for dropdown menu -->
-    <members-list-modal resourceType="project" :resourceId="project.id" :show="membersListModalShown" :members="project.members" @close="closeMembersListModal" ></members-list-modal>
+    <roadmap-modal v-if="currentComponent === 'roadmapModal'" resourceType="project" :resourceId="project.id" :currentCycleId="currentCycleId"></roadmap-modal>
 
-    <add-member-form v-if="addMemberFormShown" @close="closeAddMemberForm" resourceType="project" :resource="project" @addMember="addMember"></add-member-form>
+    <members-list-modal v-if="currentComponent === 'memberListModal'" resourceType="project" :resourceId="project.id" :members="project.members" ></members-list-modal>
 
-    <show-github-repo entityType="project" :entityId="project.id" v-if="githubRepoModalShown" @close-github-repo-modal="closeGithubRepoModal"></show-github-repo>
+    <add-member-form v-if="currentComponent === 'addMemberForm'" resourceType="project" :resource="project" @addMember="addMember"></add-member-form>
+
+    <permission-settings-modal v-if="currentComponent === 'permissionSettingsModal'" resourceType="project" :resourceId="project.id" ></permission-settings-modal>
+
+    <settings-modal v-if="currentComponent === 'settingsModal'" resourceType="project" :resourceId="project.id" :settings="settings" @update-settings="updateSettings" ></settings-modal>
   <!-- Modals for dropdown menu -->
 
-    <div class="h-16 flex flex-row justify-center items-center px-2">
-      <span @click="showAddMemberForm" class="bg-white shadow w-8 h-8 rounded-full text-teal hover:cursor-pointer text-center p-2">
+    <div class="flex flex-row flex-wrap justify-center items-center px-2 pt-4">
+      <span @click="showModal('addMemberForm')" class="bg-white shadow w-8 h-8 flex justify-center items-center rounded-full text-teal-500 cursor-pointer text-center p-2 mr-1">
         <font-awesome-icon :icon="faPlus"></font-awesome-icon>
       </span>
-      <a v-for="(member, index) in project.members" :href="'/users/' + member.username" class="pl-2">
+      <a v-for="(member, index) in project.members" :href="'/users/' + member.username" class="mx-1">
         <profile-card :user="member"></profile-card>
       </a>
     </div>
 
-    <tab-menu :active="active" @activate="activateTab"></tab-menu>
+    <tab-menu :settings="settings" :active="active" @activate="activateTab"></tab-menu>
 
     <div class="flex flex-row flex-wrap">
-      <taskBoard resourceType="project" :resource="project"  :activeTab="active"></taskBoard>
-      <discussionBoard resourceType="project" :resource="project" :activeTab="active"></discussionBoard>
-      <messagesBoard resourceType="project" :resource="project" :activeTab="active"></messagesBoard>
-      <eventBoard resourceType="projects" :resource="project" :activeTab="active"></eventBoard>
-      <file-board resourceType="projects" :resource="project" :activeTab="active"></file-board>
-      <!-- <messagesBoard resourceType="projects" :resource="project"></messagesBoard>
-      <activity resourceType="projects" :resource="project"></activity> -->
+      <task-board v-if="settings.task_enabled" resourceType="project" :resource="project" :activeTab="active" :activeId="activeId"></task-board>
+      <discussion-board v-if="settings.discussion_enabled" resourceType="project" :resource="project" :activeTab="active" :activeId="activeId"></discussion-board>
+      <messages-board v-if="settings.message_enabled" resourceType="project" :resource="project" :activeTab="active"></messages-board>
+      <event-board v-if="settings.event_enabled" resourceType="project" :resource="project" :activeTab="active"></event-board>
+      <file-board v-if="settings.file_enabled" resourceType="project" :resource="project" :activeTab="active"></file-board>
+      <activity-board resourceType="project" :resourceId="project.id" :activeTab="active"></activity-board>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import taskBoard from './../partials/taskBoard.vue'
 import discussionBoard from './../partials/discussionBoard.vue'
 import messagesBoard from './../partials/messagesBoard.vue'
 import eventBoard from './../partials/eventBoard.vue'
 import fileBoard from './../partials/fileBoard.vue'
-import activity from './../partials/activity.vue'
+import activityBoard from './../partials/activityBoard.vue'
 import addMemberForm from './../partials/addMemberForm.vue'
-import showGithubRepo from './../partials/showGithubRepo.vue'
 import membersListModal from './../partials/membersListModal.vue'
+import permissionSettingsModal from './../partials/permissionSettingsModal.vue'
+import settingsModal from './../partials/settingsModal.vue'
+import cyclesModal from './../partials/cyclesModal.vue'
+import roadmapModal from './../partials/roadmapModal.vue'
 import profileCard from './../partials/profileCard.vue'
 import tabMenu from './../partials/tabMenu.vue'
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus'
@@ -85,52 +113,83 @@ export default {
     messagesBoard,
     eventBoard,
     fileBoard,
-    activity,
+    activityBoard,
     addMemberForm,
     membersListModal,
+    permissionSettingsModal,
+    settingsModal,
+    cyclesModal,
+    roadmapModal,
     profileCard,
     tabMenu,
-    showGithubRepo
   },
+
   data: () => ({
-    addMemberFormShown: false,
-    active: 'tasks',
+    active: '',
+    activeId: 0,
     dropdownMenuShown: false,
-    githubRepoModalShown: false,
-    membersListModalShown: false,
+    settings: project.settings,
+    currentCycleId: null,
+    authenticated,
     faPlus,
     faCog
   }),
+
   created () {
     let tabs = ['tasks', 'discussions', 'messages', 'events', 'files', 'activities']
     let tool = new URL(location.href).searchParams.get('tool')
-    if (tool !== null && tabs.indexOf(tool) !== -1) {
-      this.active = tool
+    let id = new URL(location.href).searchParams.get('id')
+    this.getActiveTool(tool, tabs)
+    if (id !== null) {
+      this.activeId = parseInt(id)
     }
+    this.currentCycleId = this.selectedCycle ? this.selectedCycle.id : null
+    this.getAllCycles()
   },
+
   computed: {
-    startDate: function () {
-      if (this.project.current_cycle) {
-        return window.luxon.DateTime.fromISO(this.project.current_cycle.start_date).toLocaleString(window.luxon.DateTime.DATE_MED)
-      }
-      return 'Set start date'
-    },
-    endDate: function () {
-      if (this.project.current_cycle) {
-        return window.luxon.DateTime.fromISO(this.project.current_cycle.end_date).toLocaleString(window.luxon.DateTime.DATE_MED)
-      }
-      return 'Set end date'
-    },
     ...mapState({
-      project: state => state.project
+      project: state => state.project,
+      selectedCycle: state => state.cycle.selectedCycle,
+      currentComponent: state => state.dropdown.currentComponent
     })
   },
+
   methods: {
-    showAddMemberForm () {
-      this.addMemberFormShown = true
+    ...mapActions([
+      'getCycles',
+      'setCurrentComponent',
+      'closeComponent',
+      'showNotification',
+    ]),
+    showModal (modalName) {
+      this.setCurrentComponent(modalName)
     },
-    closeAddMemberForm () {
-      this.addMemberFormShown = false
+    closeModal () {
+      this.closeComponent()
+    },
+    getActiveTool (tool, tabs = null) {
+      if (tool !== null && tabs.indexOf(tool) !== -1) {
+        this.active = tool
+      } else {
+        if (this.settings.task_enabled) {
+          this.active = 'tasks'
+        } else if (this.settings.discussion_enabled) {
+          this.active = 'discussions'
+        } else if (this.settings.message_enabled) {
+          this.active = 'messages'
+        } else if (this.settings.event_enabled) {
+          this.active = 'events'
+        } else if (this.settings.file_enabled) {
+          this.active = 'files'
+        }
+      }
+    },
+    getAllCycles () {
+      this.getCycles({
+        group_type: 'project',
+        group_id: this.project.id,
+      })
     },
     addMember (data) {
       var messageType
@@ -140,14 +199,8 @@ export default {
       } else {
         messageType = 'error'
       }
-      EventBus.$emit('notification', data.message, messageType)
-      this.addMemberFormShown = false
-    },
-    showMembersListModal () {
-      this.membersListModalShown = true
-    },
-    closeMembersListModal () {
-      this.membersListModalShown = false
+      this.showNotification({type: messageType, message: data.message})
+      this.closeComponent()
     },
     activateTab (tab) {
       if (tab !== this.active) {
@@ -160,12 +213,32 @@ export default {
     closeDropdownMenu () {
       this.dropdownMenuShown = false
     },
-    showGithubRepoModal () {
-      this.githubRepoModalShown = true
+    updateSettings (settings) {
+      this.settings = settings
+      this.getActiveTool(null)
     },
-    closeGithubRepoModal () {
-      this.githubRepoModalShown = false
+    toggleVisibility () {
+      if (this.project.public) {
+        axios.delete('/public-projects/' + this.project.id)
+          .then((response) => {
+            this.project.public = false
+            this.showNotification({type: response.data.status, message: response.data.message})
+          })
+          .catch((error) => {
+            this.showNotification({type: error.response.data.status, message: error.response.data.message})
+          })
+      } else {
+        axios.post('/public-projects/' + this.project.id)
+          .then((response) => {
+            this.project.public = true
+            this.showNotification({type: response.data.status, message: response.data.message})
+          })
+          .catch((error) => {
+            this.showNotification({type: error.response.data.status, message: error.response.data.message})
+          })
+      }
     }
   }
 }
 </script>
+ 

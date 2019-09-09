@@ -3,11 +3,11 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Models\Notification;
+use App\Core\Models\Notification;
 
 class NotificationTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->notifications = factory(Notification::class, 3)->create(['notifiable_id' => $this->user->id]);

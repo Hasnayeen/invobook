@@ -3,8 +3,8 @@
 namespace Tests\Feature\Auth;
 
 use Tests\TestCase;
-use App\Models\User;
-use App\Exceptions\Handler;
+use App\Core\Models\User;
+use App\Core\Exceptions\Handler;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -13,7 +13,7 @@ class LoginTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -149,7 +149,7 @@ class LoginTest extends TestCase
 
         $response->assertRedirect($this->loginRoute());
         $response->assertSessionHasErrors('email');
-        $this->assertContains(
+        $this->assertStringContainsString(
             'Too many login attempts.',
             collect(
                 $response

@@ -1,7 +1,11 @@
 import Echo from 'laravel-echo'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import ClickOutside from 'vue-click-outside'
-import linkify from 'vue-linkify'
+import * as linkify from 'linkifyjs'
+import linkifyElement from 'linkifyjs/element'
+import mention from 'linkifyjs/plugins/mention'
+
+mention(linkify)
 
 window.Vue = require('vue')
 
@@ -14,16 +18,11 @@ window.axios.defaults.headers.common = {
   'X-Requested-With': 'XMLHttpRequest'
 }
 
-/**
- * Echo exposes an expressive API for subscribing to channels and listening
- * for events that are broadcast by Laravel. Echo and event broadcasting
- * allows your team to easily build robust real-time web applications.
- */
-
 if (typeof io !== 'undefined') {
   window.Echo = new Echo({
     broadcaster: 'socket.io',
-    host: window.location.hostname + ':6001'
+    host: window.location.hostname + ':6001',
+    namespace: 'App.Core.Events'
   })
 }
 
@@ -43,9 +42,33 @@ window.Vue.filter('localize', function (value) {
   return window.lang[value] ? window.lang[value] : value
 })
 
-window.Vue.directive('click-outside', ClickOutside)
+window.Vue.filter('capitalize', function (value) {
+  if (!value) return ''
+  value = value.toString()
+  return value.charAt(0).toUpperCase() + value.slice(1)
+})
 
-Vue.directive('linkified', linkify)
+window.Vue.filter('clip', function (value) {
+  if (!value) return ''
+  value = value.toString()
+  return value.substr(0, 20) + '...'
+})
+
+window.Vue.directive('linkify', {
+  inserted: function (el) {
+    linkifyElement(el, {
+      className: 'text-blue-500',
+      formatHref: function (href, type) {
+        if (type === 'mention') {
+          return window.location.origin + '/users' + href
+        }
+        return href
+      }
+    })
+  }
+})
+
+window.Vue.directive('click-outside', ClickOutside)
 
 window.Vue.component('font-awesome-icon', FontAwesomeIcon)
 

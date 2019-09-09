@@ -1,33 +1,36 @@
 <template>
-<div :class="{'hidden': !show}">
-  <div class="absolute container mx-2 md:mx-auto md:w-1/3 bg-grey-lightest rounded shadow-lg z-10" style="top: 10vh;left: 0;right: 0;">
+<div>
+  <div class="absolute container mx-2 md:mx-auto md:w-1/3 bg-gray-100 rounded shadow-lg z-10" style="top: 10vh;left: 0;right: 0;">
     <div class="m-auto flex-col flex">
-        <label class="block uppercase tracking-wide bg-grey-lighter text-grey-dark text-xs font-bold text-center text-lg p-6 rounded" for="user">
+        <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold text-center text-lg p-4 rounded" for="user">
           Members List
         </label>
 
       <ul v-for="(member, index) in members" :key="member.id" class="list-reset">
-        <li class="py-4 px-8 hover:bg-grey-lighter flex flex-row items-center justify-between">
-          <a :href="'/users/' + member.username"  class="no-underline text-grey-darker text-lg">
-            <img :src="generateUrl(member.avatar)" class="rounded-full w-8 h-8 mr-4 align-middle" :alt="'profile pic of ' + member.name">
-            <span>{{ member.name }}</span>
-          </a>
-          <button @click="removeMember(index, member.id)" class="text-red-dark" title="delete">
-            <font-awesome-icon :icon="faTrashAlt" class="ml-1 pl-1 cursor-pointer"></font-awesome-icon>
+        <li class="p-4 py-6 hover:bg-blue-100 bg-white flex flex-row items-center justify-between">
+          <div class="flex flex-row items-center">
+            <a :href="'/users/' + member.username"  class="no-underline text-gray-800 text-lg">
+              <img :src="generateUrl(member.avatar)" class="rounded-full w-8 h-8 mr-4 align-middle" :alt="'profile pic of ' + member.name">
+            </a>
+            <span class="text-xl">{{ member.name }}</span>
+          </div>
+          <button @click="removeMember(index, member.user_id)" class="w-8 h-8 bg-red-200 text-red-700 rounded-full flex justify-center items-center" title="delete">
+            <font-awesome-icon :icon="faTrashAlt" class="cursor-pointer text-sm"></font-awesome-icon>
           </button>
         </li>
       </ul>
 
-      <div class="flex flex-row-reverse p-6 bg-grey-lighter rounded-b">
-        <button @click="closeModal" class="text-red-light hover:font-bold">Close</button>
+      <div class="flex flex-row-reverse p-4 rounded-b">
+        <button @click="closeModal" class="text-red-400 hover:font-bold">Close</button>
       </div>
     </div>
   </div>
-  <div @click="closeModal" class="h-screen w-screen fixed pin bg-grey-darkest opacity-25"></div>
+  <div @click="closeModal" class="h-screen w-screen fixed inset-0 bg-gray-900 opacity-25"></div>
 </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons/faTrashAlt'
 
 export default {
@@ -40,10 +43,6 @@ export default {
       type: Number,
       required: true
     },
-    show: {
-      type: Boolean,
-      default: false
-    },
     members: {
       type: Array,
       required: true
@@ -55,22 +54,26 @@ export default {
   }),
 
   methods: {
+    ...mapActions([
+      'closeComponent',
+      'showNotification'
+    ]),
     closeModal () {
-      this.$emit('close')
+      this.closeComponent()
     },
     removeMember (index, memberId) {
       axios.delete('/members/', {
         params: {
-          user_id: memberId, resource_type: this.resourceType, resource_id: this.resourceId
+          user_id: memberId, group_type: this.resourceType, group_id: this.resourceId
         }
       })
         .then((response) => {
           this.members.splice(index, 1)
           this.closeModal()
-          EventBus.$emit('notification', response.data.message, response.data.status)
+          this.showNotification({type: response.data.status, message: response.data.message})
         })
         .catch((error) => {
-          EventBus.$emit('notification', error.response.data.message, error.response.data.status)
+          this.showNotification({type: error.response.data.status, message: error.response.data.message})
         })
     }
   }
