@@ -1,6 +1,6 @@
 <template>
 <div v-if="taskDetailsShown">
-  <div class="absolute container mx-auto md:max-w-2xl lg:max-w-3xl xl:max-w-4xl z-40 mb-16" style="top: 12vh;left: 0;right: 0;">
+  <div class="fixed container mx-auto md:max-w-2xl lg:max-w-3xl xl:max-w-4xl z-40 mb-16" style="top: 12vh;left: 0;right: 0;">
     <div class="bg-gray-100 rounded shadow-lg py-4">
       <div class="flex flex-row justify-between px-8 pb-2 relative">
         <div @click="closeTaskDetails" class="cursor-pointer">

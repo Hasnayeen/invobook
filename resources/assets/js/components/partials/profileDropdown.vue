@@ -20,6 +20,12 @@
       </span>
       {{ 'Admin' | localize }}
     </a>
+    <a class="px-4 py-2 hover:bg-teal-500 hover:text-white text-gray-600 font-medium no-underline block" @click="showTimer">
+      <span class="w-6 inline-block">
+        <font-awesome-icon :icon="faStopwatch" class="pr-1 font-regular"></font-awesome-icon>
+      </span>
+      {{ 'Timer' | localize }}
+    </a>
     <a v-if="authenticated" class="px-4 py-2 hover:bg-teal-500 hover:text-white text-gray-600 font-medium no-underline block" href="/settings">
       <span class="w-6 inline-block">
         <font-awesome-icon :icon="faCog" class="pr-1 font-regular"></font-awesome-icon>
@@ -47,6 +53,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import {
   faAngleDown,
   faCog,
@@ -54,7 +61,8 @@ import {
   faSignOutAlt,
   faUser,
   faEnvelope,
-  faUserMinus
+  faUserMinus,
+  faStopwatch
 } from '@fortawesome/free-solid-svg-icons'
 
 export default {
@@ -73,9 +81,13 @@ export default {
     faSignOutAlt,
     faUser,
     faUserMinus,
-    faEnvelope
+    faEnvelope,
+    faStopwatch
   }),
   methods: {
+    ...mapActions([
+      'setCurrentComponent'
+    ]),
     logoutUser (event) {
       event.preventDefault()
       document.getElementById('logout-form').submit()
@@ -100,6 +112,10 @@ export default {
         return false
       }
       this.profileDropdownShown = false
+    },
+    showTimer (event) {
+      this.setCurrentComponent('timer')
+      this.hideProfileDropdown(event)
     }
   }
 }

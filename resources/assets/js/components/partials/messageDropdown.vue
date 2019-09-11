@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import { faCircle } from '@fortawesome/free-solid-svg-icons'
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons'
 
@@ -29,9 +29,12 @@ export default {
     'user'
   ]),
   methods: {
+    ...mapActions([
+      'setCurrentComponent'
+    ]),
     showMessageBox () {
       this.unreadMessage = false
-      EventBus.$emit('show-message-box')
+      this.setCurrentComponent('direct-message-box')
     },
     showIndicator () {
       this.unreadMessage = true
