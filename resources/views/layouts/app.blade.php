@@ -52,6 +52,7 @@
             <navbar></navbar>
             <notification-popup></notification-popup>
             <message-box></message-box>
+            <timer></timer>
             @endif
 
 

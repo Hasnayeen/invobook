@@ -1,5 +1,5 @@
 <template>
-<div id="direct-message-box" @focus="clearTitleNotification()" v-if="messageBoxShown" class="">
+<div id="direct-message-box" @focus="clearTitleNotification()" v-if="currentComponent === 'direct-message-box'">
   <div class="fixed top-0 bg-white text-lg rounded mx-auto md:max-w-2xl lg:max-w-4xl xl:max-w-5xl mt-16 md:mt-32 shadow-lg z-40 inset-x-0">
     <div class="bg-white text-2xl text-gray-600 text-center px-8 py-4 rounded-t shadow">
       Your Messages
@@ -60,11 +60,13 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 import message from './message'
 import loadingModal from './loadingModal'
 
 export default {
   components: {message, loadingModal},
+
   data: () => ({
     loading: false,
     authUser: user,
@@ -79,8 +81,8 @@ export default {
     users: [],
     selectedUser: {}
   }),
+
   created () {
-    EventBus.$on('show-message-box', this.showMessageBox)
     axios.get('/unread-direct-messages/users')
       .then((response) => {
         this.users = response.data.users
@@ -100,7 +102,6 @@ export default {
   },
 
   beforeDestroy () {
-    EventBus.$off('show-message-box', this.showMessageBox)
     document.removeEventListener('visibilitychange', this.clearTitleNotification)
   },
 
@@ -111,7 +112,16 @@ export default {
     }
   },
 
+  computed: {
+    ...mapState({
+      currentComponent: state => state.dropdown.currentComponent
+    })
+  },
+
   methods: {
+    ...mapActions([
+      'closeComponent'
+    ]),
     scrollToBottom () {
       this.$nextTick(() => {
         if (document.getElementById("message-box")) {
@@ -120,11 +130,8 @@ export default {
         }
       })
     },
-    showMessageBox () {
-      this.messageBoxShown = true
-    },
     hideMessageBox () {
-      this.messageBoxShown = false
+      this.closeComponent()
     },
     sendMessage (e) {
       if (!this.selectedUser.id) {
