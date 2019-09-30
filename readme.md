@@ -5,7 +5,7 @@
 [![VueJS Version](https://img.shields.io/badge/vue-2.5.13-brightgreen.svg?style=flat)](https://github.com/vuejs/vue)
 [![codecov](https://codecov.io/gh/iluminar/goodwork/branch/master/graph/badge.svg)](https://codecov.io/gh/iluminar/goodwork)
 [![StyleCI](https://styleci.io/repos/81873619/shield?branch=dev&style=flat)](https://styleci.io/repos/81873619)
-[![Join on discord](https://img.shields.io/badge/join%20on-slack-green.svg)](https://discord.gg/4DvTQsc)
+[![Join on discord](https://img.shields.io/badge/join%20on-discord-orange)](https://discord.gg/4DvTQsc)
 [![Join on goodwork](https://img.shields.io/badge/join%20on-goodwork-orange.svg)](https://goodworkfor.life/register/invite-link/ovCPAFpnwIhrvqUrlvynarP9HVRBC5mH)
 
 <img src="public/logos/logo.png" alt="Goodwork" style="max-width:100%;">
@@ -99,9 +99,11 @@ Also you can join the slack channel via this [link](https://join.slack.com/t/ilu
 
 Goodwork is an MIT-licensed open source project with its ongoing development made possible thanks to the support by our amazing backers.
 
-Support the development of "Goodwork" by being a patron
+Support the development of "Goodwork" by being sponsors and backers
 
-<a href="https://www.patreon.com/bePatron?u=19641984"><img alt="become a patron" src="https://c5.patreon.com/external/logo/become_a_patron_button.png" height="35px"></a>
+<a href="https://opencollective.com/goodwork#sponsor"><img alt="become sponsors" src="https://opencollective.com/goodwork/sponsors.svg" height="35px"></a>
+
+<a href="https://opencollective.com/goodwork#sponsor"><img alt="become backers" src="https://opencollective.com/goodwork/backers.svg" height="35px"></a>
 
 You can also fund specific issues on Issuehunt and the money will be distributed to contributors and maintainers.
 
@@ -121,8 +123,7 @@ If you discover a security vulnerability within Goodwork, please send an e-mail 
 
 - [Full Contributors List](https://github.com/iluminar/goodwork/graphs/contributors)
 
-
-[![](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/images/0)](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/links/0)[![](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/images/1)](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/links/1)[![](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/images/2)](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/links/2)[![](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/images/3)](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/links/3)[![](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/images/4)](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/links/4)[![](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/images/5)](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/links/5)[![](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/images/6)](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/links/6)[![](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/images/7)](https://sourcerer.io/fame/Hasnayeen/iluminar/goodwork/links/7)
+![](https://opencollective.com/goodwork/contributors.svg)
 
 ## License <small>[↑Top](#about-goodwork)</small>
 
