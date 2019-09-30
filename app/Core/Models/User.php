@@ -3,12 +3,13 @@
 namespace App\Core\Models;
 
 use App\Core\Utilities\Notifiable;
+use Laravel\Passport\HasApiTokens;
 use Lab404\Impersonate\Models\Impersonate;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable, Impersonate;
+    use Notifiable, Impersonate, HasApiTokens;
 
     protected $fillable = [
         'name', 'username', 'bio', 'designation', 'location', 'avatar', 'active', 'timezone', 'week_start', 'lang', 'email', 'password',
