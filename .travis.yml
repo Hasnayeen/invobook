@@ -14,6 +14,8 @@ services:
 before_script:
   - mysql -e 'CREATE DATABASE goodwork;'
   - php artisan migrate
+  - php artisan passport:install
+  - php artisan passport:keys
   - php artisan serve &
   - sleep 5
   - php artisan config:clear
