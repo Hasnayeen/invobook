@@ -1,7 +1,7 @@
 [![License](http://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/iluminar/goodwork/blob/dev/LICENSE)
 [![Build Status](https://travis-ci.org/iluminar/goodwork.svg?branch=dev)](https://travis-ci.org/iluminar/goodwork)
 [![Stable Version](https://poser.pugx.org/iluminar/goodwork/v/stable)](https://github.com/iluminar/goodwork)
-[![Laravel Version](https://img.shields.io/badge/Laravel-5.8-brightgreen.svg?style=flat)](https://github.com/laravel/laravel)
+[![Laravel Version](https://img.shields.io/badge/Laravel-6.0-brightgreen.svg?style=flat)](https://github.com/laravel/laravel)
 [![VueJS Version](https://img.shields.io/badge/vue-2.5.13-brightgreen.svg?style=flat)](https://github.com/vuejs/vue)
 [![codecov](https://codecov.io/gh/iluminar/goodwork/branch/master/graph/badge.svg)](https://codecov.io/gh/iluminar/goodwork)
 [![StyleCI](https://styleci.io/repos/81873619/shield?branch=dev&style=flat)](https://styleci.io/repos/81873619)
@@ -123,7 +123,7 @@ If you discover a security vulnerability within Goodwork, please send an e-mail 
 
 - [Full Contributors List](https://github.com/iluminar/goodwork/graphs/contributors)
 
-![](https://opencollective.com/goodwork/contributors.svg)
+![](https://opencollective.com/goodwork/contributors.svg?width=890&button=false)
 
 ## License <small>[↑Top](#about-goodwork)</small>
 
