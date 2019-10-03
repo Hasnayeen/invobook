@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Core\Models\User;
+use Laravel\Passport\Passport;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -205,5 +206,17 @@ class UserTest extends TestCase
         $response = $this->actingAs($this->user)
              ->get('users/' . $user->username)
              ->assertSee('Guest User');
+    }
+
+    /** @test */
+    public function get_current_user_for_api_request()
+    {
+        Passport::actingAs($this->user);
+
+        $response = $this->get('api/me');
+
+        $response->assertJson([
+            'username' => $this->user->username,
+        ]);
     }
 }
