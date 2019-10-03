@@ -4,10 +4,10 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Core\Models\User;
+use Laravel\Passport\Passport;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Testing\WithFaker;
-use Laravel\Passport\Passport;
 
 class UserTest extends TestCase
 {
@@ -207,7 +207,7 @@ class UserTest extends TestCase
              ->get('users/' . $user->username)
              ->assertSee('Guest User');
     }
-    
+
     /** @test */
     public function get_current_user_for_api_request()
     {

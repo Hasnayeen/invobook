@@ -9,13 +9,13 @@ use App\Core\Models\Invite;
 use App\Core\Models\Office;
 use Illuminate\Http\Request;
 use App\Core\Mail\UserRegistered;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Core\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Core\Notifications\UserRegistered as UserRegisteredNotification;
-use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
