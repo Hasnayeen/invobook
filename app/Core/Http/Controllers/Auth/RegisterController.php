@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Core\Notifications\UserRegistered as UserRegisteredNotification;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
@@ -77,7 +78,7 @@ class RegisterController extends Controller
             'username' => $data['username'],
             'email'    => $data['email'],
             'active'   => 1,
-            'password' => bcrypt($data['password']),
+            'password' => Hash::make($data['password']),
         ]);
     }
 

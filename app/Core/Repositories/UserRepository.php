@@ -13,8 +13,13 @@ class UserRepository
         $this->model = $user;
     }
 
-    public function getAllUsers($columns = ['id', 'name', 'username', 'avatar'])
+    public function getAllUsers(array $columns = ['id', 'name', 'username', 'avatar'])
     {
         return $this->model->with('role')->get($columns);
+    }
+
+    public function getUserByEmail(string $email)
+    {
+        return $this->model->where('email', $email)->select(['name', 'username', 'bio', 'designation', 'email', 'timezone', 'week_start', 'lang', 'location'])->first();
     }
 }

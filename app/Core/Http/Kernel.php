@@ -59,6 +59,7 @@ class Kernel extends HttpKernel
         'cache.headers'           => \Illuminate\Http\Middleware\SetCacheHeaders::class,
         'can'                     => \Illuminate\Auth\Middleware\Authorize::class,
         'guest'                   => \App\Core\Http\Middleware\RedirectIfAuthenticated::class,
+        'mobile'                  => \App\Core\Http\Middleware\MobileLoginMiddleware::class,
         'signed'                  => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle'                => \Illuminate\Routing\Middleware\ThrottleRequests::class,
     ];
