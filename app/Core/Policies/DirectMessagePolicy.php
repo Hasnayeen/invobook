@@ -19,6 +19,6 @@ class DirectMessagePolicy
      */
     public function delete(User $user, DirectMessage $directMessage)
     {
-        return $user->id == $directMessage->sender_id;
+        return $user->id === $directMessage->sender_id;
     }
 }
