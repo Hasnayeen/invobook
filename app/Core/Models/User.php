@@ -147,6 +147,11 @@ class User extends Authenticatable
         return $this->hasMany(DirectMessage::class, 'receiver_id');
     }
 
+    public function sentDirectMessages()
+    {
+        return $this->hasMany(DirectMessage::class, 'sender_id');
+    }
+
     public function unreadMessagesForAuthUser()
     {
         return $this->hasMany(DirectMessage::class, 'sender_id')->where('receiver_id', auth()->user()->id)->whereNull('read_at');

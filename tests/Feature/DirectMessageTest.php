@@ -6,6 +6,7 @@ use Tests\TestCase;
 use App\Core\Models\User;
 use App\Core\Models\DirectMessage;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class DirectMessageTest extends TestCase
 {
@@ -70,5 +71,37 @@ class DirectMessageTest extends TestCase
              ]);
 
         $this->assertDatabaseMissing('direct_messages', ['receiver_id' => auth()->user()->id, 'sender_id' => $john->id, 'read_at' => null]);
+    }
+
+    /** @test */
+    public function user_can_delete_their_own_direct_message()
+    {
+        Event::fake();
+        $john = factory(User::class)->create();
+        $directMessage = factory(DirectMessage::class)->create(
+            ['sender_id' => $this->user->id, 'receiver_id' => $john->id]
+        );
+        $this->actingAs($this->user)
+             ->delete('/direct-messages/' . $directMessage->id)
+             ->assertJsonFragment(
+                 [
+                     'status' => 'success',
+                 ]
+             );
+
+        $this->assertDatabaseMissing('direct_messages', ['id' => $directMessage->id]);
+    }
+
+    /** @test */
+    public function user_can_not_delete_direct_message_from_other_users()
+    {
+        $this->expectException(AuthorizationException::class);
+        Event::fake();
+        $john = factory(User::class)->create();
+        $directMessage = factory(DirectMessage::class)->create(
+            ['sender_id' => $john->id, 'receiver_id' => $this->user->id]
+        );
+        $this->actingAs($this->user)
+             ->delete('/direct-messages/' . $directMessage->id);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Core\Http\Controllers;
 
+use App\Core\Models\DirectMessage;
 use App\Core\Repositories\DirectMessageRepository;
 use App\Core\Http\Requests\StoreDirectMessageRequest;
 
@@ -38,5 +39,18 @@ class DirectMessageController extends Controller
         } catch (Exception $exception) {
             throw $exception;
         }
+    }
+
+    public function delete(DirectMessage $directMessage)
+    {
+        $this->authorize('delete', $directMessage);
+        $directMessage->delete();
+
+        return response()->json(
+            [
+                'status'  => 'success',
+                'message' => localize('misc.The direct message has been deleted'),
+            ]
+        );
     }
 }
