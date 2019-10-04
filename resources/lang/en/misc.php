@@ -31,6 +31,7 @@ return [
     'Invitation sent successfully'               => 'Invitation sent successfully',
     'Email already exist'                        => 'Email already exist',
     'Account profile are updated'                => 'Account profile are updated',
+    'The direct message has been deleted'        => 'The direct message has been deleted',
     'Tasks'                                      => 'Tasks',
     'Discussions'                                => 'Discussions',
     'Messages'                                   => 'Messages',
