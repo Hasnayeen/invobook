@@ -81,6 +81,11 @@ class UserController extends Controller
         }
     }
 
+    public function me()
+    {
+        return response()->json(app('auth')->guard()->user());
+    }
+
     private function usernameExists($username)
     {
         return (auth()->user()->username !== $username) && User::where('username', $username)->exists();

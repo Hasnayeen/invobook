@@ -1,12 +1,12 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
+namespace App\Core\Http\Controllers;
+
+use Illuminate\Support\Facades\Route;
+use Laravel\Passport\Http\Controllers\AccessTokenController;
+
+Route::post('oauth/token', [AccessTokenController::class, 'issueToken'])->middleware('mobile');
+
+Route::group(['prefix' => 'api', 'middleware' => 'auth:api'], function () {
+    Route::get('me', [UserController::class, 'me']);
+});
