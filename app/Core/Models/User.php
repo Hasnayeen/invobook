@@ -142,7 +142,7 @@ class User extends Authenticatable
         return 'App.User.' . $this->id;
     }
 
-    public function recievedDirectMessages()
+    public function receivedDirectMessages()
     {
         return $this->hasMany(DirectMessage::class, 'receiver_id');
     }
@@ -154,7 +154,7 @@ class User extends Authenticatable
 
     public function unreadDirectMessages()
     {
-        return $this->recievedDirectMessages()->whereNull('read_at');
+        return $this->receivedDirectMessages()->whereNull('read_at');
     }
 
     public function getUnreadDirectMessagesAttribute()
