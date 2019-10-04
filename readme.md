@@ -35,17 +35,17 @@ Self hosted project management and collaboration tool inspired by basecamp.
 
 ## About Goodwork
 
-Goodwork is a simple project management and collaboration tool for software teams. It is open source and [MIT licensed](https://github.com/iluminar/goodwork/blob/dev/LICENSE). Goodwork is a self-hosted software so no dependency on anyone and only you keep your data.
+Goodwork is a simple project management and collaboration tool for software teams. It is open source and [MIT licensed](https://github.com/iluminar/goodwork/blob/dev/LICENSE). Goodwork is a self-hosted software (no dependency on anyone else and only you keep your data).
 
-Goodwork brings you all the components required for your project to run smoothly in one place so that you have single source of truth. Instead of using a collection of tools or service which makes everything messy and hard to find important details from stuff scattered all over the place, Goodwork organizes everything in a central place where everyone in the company knows what to do, knows where things stand and find stuff without having to ask around all the time.
+Goodwork brings you all the components required for your project to run smoothly in one place so that you have single source of truth. Instead of using a collection of tools or service which makes everything messy with important details being hard to find because stuff is scattered all over the place, Goodwork organizes everything in a central place where everyone in the company knows what to do, knows where things stand and where to find stuff without having to ask around.
 
-> Available in 23 language
+> Goodwork is availible in 23 different languages!
 
 [Overview](https://github.com/iluminar/goodwork/wiki/Overview)
 
 ## Demo
 
-You can check out an instance of the application that we use as a guest user using below described email & password. This user has limited permission so you'll only see a handful of the features. Visit this link: https://goodworkfor.life
+You can view a live instance of Goodwork that we use (as a guest user) using the credentials below. This user has limited permission so you'll only see a handful of the features. You can access the demo site at the following URL: https://goodworkfor.life
 
 `email: guest@example.com`
 
@@ -89,9 +89,9 @@ You can check out an instance of the application that we use as a guest user usi
 
 ## Contributing <small>[↑Top](#about-goodwork)</small>
 
-Thank you for considering contributing to the Goodwork! The contribution guide can be found in the [Contribution Guideline](https://github.com/iluminar/goodwork/wiki/Contribution-Guideline).
+Thank you for considering contributing to the Goodwork Project! The contribution guide can be found in the [Contribution Guideline](https://github.com/iluminar/goodwork/wiki/Contribution-Guideline).
 
-You can join goodwork project via this link [link](https://goodworkfor.life/register/invite-link/ovCPAFpnwIhrvqUrlvynarP9HVRBC5mH)
+You can join the Goodwork Project via this link [link](https://goodworkfor.life/register/invite-link/ovCPAFpnwIhrvqUrlvynarP9HVRBC5mH)
 
 Also you can join the slack channel via this [link](https://join.slack.com/t/iluminar/shared_invite/enQtNDY0Mzc3NDkwOTY1LTJhZTNiYmMxZmE4NGU5MTJhODI5OWMyNjc4ZmIyNDVhODRhMGUzNDU0MmM1OGRmZjBiYWM0NjcwNWRjMDJjNTA)
 
@@ -99,11 +99,11 @@ Also you can join the slack channel via this [link](https://join.slack.com/t/ilu
 
 Goodwork is an MIT-licensed open source project with its ongoing development made possible thanks to the support by our amazing backers.
 
-Support the development of "Goodwork" by being sponsors and backers
+Support the development of "Goodwork" by being a sponsor or a backer
 
-<a href="https://opencollective.com/goodwork#sponsor"><img alt="become sponsors" src="https://opencollective.com/goodwork/sponsors.svg" height="35px"></a>
+<a href="https://opencollective.com/goodwork#sponsor"><img alt="become a sponsor" src="https://opencollective.com/goodwork/sponsors.svg" height="35px"></a>
 
-<a href="https://opencollective.com/goodwork#sponsor"><img alt="become backers" src="https://opencollective.com/goodwork/backers.svg" height="35px"></a>
+<a href="https://opencollective.com/goodwork#sponsor"><img alt="become a backer" src="https://opencollective.com/goodwork/backers.svg" height="35px"></a>
 
 You can also fund specific issues on Issuehunt and the money will be distributed to contributors and maintainers.
 
