@@ -4,11 +4,10 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Core\Models\Office;
+use Laravel\Passport\Passport;
 use App\Core\Exceptions\UserIsNotMember;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Auth\Access\AuthorizationException;
-use Laravel\Passport\Passport;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class OfficeTest extends TestCase
 {
