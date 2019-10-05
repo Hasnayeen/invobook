@@ -44,6 +44,6 @@ class MobileLoginMiddleware
 
     private function getCurrentUser($request)
     {
-        return User::where('email', $request->username)->select(['name', 'username', 'bio', 'designation', 'email', 'timezone', 'week_start', 'lang', 'location'])->first();
+        return User::where('email', $request->username)->select(['name', 'username', 'bio', 'designation', 'avatar', 'email', 'timezone', 'week_start', 'lang', 'location'])->first();
     }
 }
