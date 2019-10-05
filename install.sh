@@ -68,6 +68,8 @@ $COMPOSE run --rm -w /var/www laravel_echo_server npm install
 
 $COMPOSE run --rm -w /var/www php php artisan migrate --seed
 
+$COMPOSE run --rm -w /var/www php php artisan passport:install
+
 $COMPOSE run --rm -w /var/www php php artisan route:cache
 
 $COMPOSE run --rm -w /var/www php php artisan storage:link
