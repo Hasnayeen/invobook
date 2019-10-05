@@ -15,7 +15,7 @@ class OfficeController extends Controller
         )->unique();
 
         return response()->json([
-            'status' => 'success',
+            'status'  => 'success',
             'offices' => $offices,
         ]);
     }

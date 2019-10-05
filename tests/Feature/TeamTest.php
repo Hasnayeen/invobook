@@ -30,7 +30,6 @@ class TeamTest extends TestCase
             'name'   => $team->name,
         ]);
 
-
         Passport::actingAs($this->user);
         $this->get('teams/')->assertJsonFragment([
             'status' => 'success',
