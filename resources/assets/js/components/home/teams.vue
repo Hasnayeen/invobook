@@ -44,6 +44,7 @@ export default {
       type: String
     }
   },
+
   data: () => ({
     showCreateTeamForm: false,
     name: '',
@@ -51,13 +52,27 @@ export default {
     user,
     faPlus
   }),
+
+  watch: {
+    activeTab: function () {
+      if (this.activeTab === 'teams') {
+        this.getAllTeams()
+      }
+    }
+  },  
+
   computed: mapState({
-    teams: state => state.home.teams
+    teams: state => state.teams
   }),
+
   methods: {
     ...mapActions([
+      'getTeams',
       'addTeam'
     ]),
+    getAllTeams () {
+      this.getTeams()
+    },
     openCreateTeamModal () {
       this.showCreateTeamForm = true
       this.$nextTick(() => {

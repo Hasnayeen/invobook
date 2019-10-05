@@ -17,18 +17,8 @@ class HomeController extends Controller
     public function index(TaskRepository $repository)
     {
         $currentWork = $repository->userCurrentlyWorkingOn(auth()->user()->id);
-        $projects = auth()->user()->projects->load('members')->concat(
-            Project::where('public', true)->with('members')->get()
-        )->unique();
-        $teams = auth()->user()->teams->load('members')->concat(
-            Team::where('public', true)->with('members')->get()
-        )->unique();
-        $offices = auth()->user()->offices->load('members')->concat(
-            Office::where('public', true)->with('members')->get()
-        )->unique();
-
         auth()->user()->setAppends(['unread_direct_messages']);
 
-        return view('home', ['data' => ['currentWork' => $currentWork, 'projects' => $projects, 'teams' => $teams, 'offices' => $offices]]);
+        return view('home', ['currentWork' => $currentWork]);
     }
 }

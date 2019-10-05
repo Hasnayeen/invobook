@@ -7,6 +7,7 @@ use App\Core\Models\Project;
 use App\Core\Exceptions\UserIsNotMember;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Auth\Access\AuthorizationException;
+use Laravel\Passport\Passport;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ProjectTest extends TestCase
@@ -18,10 +19,23 @@ class ProjectTest extends TestCase
     }
 
     /** @test */
-    public function projects_route_should_return_404_page()
+    public function user_can_see_public_projects_and_projects_which_user_is_member()
     {
-        $this->expectException(NotFoundHttpException::class);
-        $this->actingAs($this->user)->get('offices/');
+        $project = factory('App\Core\Models\Project')->create(['owner_id' => $this->user->id]);
+        $this->actingAs($this->user);
+        resolve('Authorization')->setupDefaultPermissions($project);
+        $project->members()->save($this->user);
+
+        $this->get('projects/')->assertJsonFragment([
+            'status' => 'success',
+            'name'   => $project->name,
+        ]);
+
+        Passport::actingAs($this->user);
+        $this->get('api/projects/')->assertJsonFragment([
+            'status' => 'success',
+            'name'   => $project->name,
+        ]);
     }
 
     /** @test */

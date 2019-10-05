@@ -10,7 +10,14 @@ class TeamController extends Controller
 {
     public function index()
     {
-        abort(404);
+        $teams = auth()->user()->teams->load('members')->concat(
+            Team::where('public', true)->with('members')->get()
+        )->unique();
+
+        return response()->json([
+            'status' => 'success',
+            'teams' => $teams,
+        ]);
     }
 
     public function show(Team $team)

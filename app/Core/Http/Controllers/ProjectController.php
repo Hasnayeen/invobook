@@ -10,7 +10,14 @@ class ProjectController extends Controller
 {
     public function index()
     {
-        abort(404);
+        $projects = auth()->user()->projects->load('members')->concat(
+            Project::where('public', true)->with('members')->get()
+        )->unique();
+
+        return response()->json([
+            'status' => 'success',
+            'projects' => $projects,
+        ]);
     }
 
     public function show(Project $project)
