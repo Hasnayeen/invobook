@@ -10,6 +10,8 @@ Route::post('oauth/token', [AccessTokenController::class, 'issueToken'])->middle
 Route::group(['prefix' => 'api', 'middleware' => 'auth:api'], function () {
     Route::get('me', [UserController::class, 'me']);
 
+    Route::get('home', [HomeController::class, 'index']);
+
     /**********************************
         Project
     **********************************/
