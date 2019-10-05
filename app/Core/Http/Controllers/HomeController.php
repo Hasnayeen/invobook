@@ -2,9 +2,6 @@
 
 namespace App\Core\Http\Controllers;
 
-use App\Core\Models\Team;
-use App\Core\Models\Office;
-use App\Core\Models\Project;
 use App\Core\Repositories\TaskRepository;
 
 class HomeController extends Controller
@@ -18,6 +15,13 @@ class HomeController extends Controller
     {
         $currentWork = $repository->userCurrentlyWorkingOn(auth()->user()->id);
         auth()->user()->setAppends(['unread_direct_messages']);
+
+        if (request()->segment(1) === 'api') {
+            return response()->json([
+                'status'      => 'success',
+                'currentWork' => $currentWork,
+            ]);
+        }
 
         return view('home', ['currentWork' => $currentWork]);
     }

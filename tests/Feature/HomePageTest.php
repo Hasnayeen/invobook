@@ -9,6 +9,7 @@ use App\Core\Models\User;
 use App\Core\Models\Office;
 use App\Core\Models\Project;
 use Illuminate\Support\Facades\Event;
+use Laravel\Passport\Passport;
 
 class HomePageTest extends TestCase
 {
@@ -22,5 +23,12 @@ class HomePageTest extends TestCase
         $this->actingAs($this->user)
              ->get('/')
              ->assertSee($task->name);
+
+        Passport::actingAs($this->user);
+        $this->get('api/home')
+             ->assertJsonFragment([
+                 'status' => 'success',
+                 'name'   => $task->name,
+             ]);
     }
 }
