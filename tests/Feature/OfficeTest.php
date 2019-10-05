@@ -7,6 +7,7 @@ use App\Core\Models\Office;
 use App\Core\Exceptions\UserIsNotMember;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Auth\Access\AuthorizationException;
+use Laravel\Passport\Passport;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class OfficeTest extends TestCase
@@ -18,10 +19,23 @@ class OfficeTest extends TestCase
     }
 
     /** @test */
-    public function offices_route_should_return_404_page()
+    public function user_can_see_public_offices_and_offices_which_user_is_member()
     {
-        $this->expectException(NotFoundHttpException::class);
-        $this->actingAs($this->user)->get('offices/');
+        $office = factory('App\Core\Models\Office')->create(['owner_id' => $this->user->id]);
+        $this->actingAs($this->user);
+        resolve('Authorization')->setupDefaultPermissions($office);
+        $office->members()->save($this->user);
+
+        $this->get('offices/')->assertJsonFragment([
+            'status' => 'success',
+            'name'   => $office->name,
+        ]);
+
+        Passport::actingAs($this->user);
+        $this->get('offices/')->assertJsonFragment([
+            'status' => 'success',
+            'name'   => $office->name,
+        ]);
     }
 
     /** @test */

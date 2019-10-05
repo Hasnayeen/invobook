@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Core\Models\Team;
+use Laravel\Passport\Passport;
 use App\Core\Exceptions\UserIsNotMember;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -14,6 +15,27 @@ class TeamTest extends TestCase
     {
         parent::setUp();
         $this->team = factory('App\Core\Models\Team')->create();
+    }
+
+    /** @test */
+    public function user_can_see_public_teams_and_teams_which_user_is_member()
+    {
+        $team = factory('App\Core\Models\Team')->create(['owner_id' => $this->user->id]);
+        $this->actingAs($this->user);
+        resolve('Authorization')->setupDefaultPermissions($team);
+        $team->members()->save($this->user);
+
+        $this->get('teams/')->assertJsonFragment([
+            'status' => 'success',
+            'name'   => $team->name,
+        ]);
+
+
+        Passport::actingAs($this->user);
+        $this->get('teams/')->assertJsonFragment([
+            'status' => 'success',
+            'name'   => $team->name,
+        ]);
     }
 
     /** @test */

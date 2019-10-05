@@ -78,7 +78,7 @@ export default {
 
   computed: {
     ...mapState({
-      currentWork: state => state.home.currentWork
+      currentWork: state => state.currentWork
     })
   },
 

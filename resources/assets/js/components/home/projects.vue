@@ -42,6 +42,7 @@ export default {
       type: String
     }
   },
+
   data: () => ({
     showCreateProjectForm: false,
     name: '',
@@ -49,13 +50,27 @@ export default {
     user,
     faPlus
   }),
+
+  watch: {
+    activeTab: function () {
+      if (this.activeTab === 'projects') {
+        this.getAllProjects()
+      }
+    }
+  },
+
   computed: mapState({
-    projects: state => state.home.projects
+    projects: state => state.projects
   }),
+
   methods: {
     ...mapActions([
+      'getProjects',
       'addProject'
     ]),
+    getAllProjects () {
+      this.getProjects()
+    },
     openCreateProjectModal () {
       this.showCreateProjectForm = true
       this.$nextTick(() => {

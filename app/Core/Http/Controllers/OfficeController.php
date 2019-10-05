@@ -10,7 +10,14 @@ class OfficeController extends Controller
 {
     public function index()
     {
-        abort(404);
+        $offices = auth()->user()->offices->load('members')->concat(
+            Office::where('public', true)->with('members')->get()
+        )->unique();
+
+        return response()->json([
+            'status' => 'success',
+            'offices' => $offices,
+        ]);
     }
 
     public function show(Office $office)

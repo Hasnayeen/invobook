@@ -34,6 +34,7 @@ import profileCard from './../partials/profileCard.vue'
 export default {
   components: {profileCard},
   props: ['details', 'index'],
+
   data () {
     return {
       project: this.details,
@@ -43,6 +44,7 @@ export default {
       faEllipsisH
     }
   },
+
   methods: {
     ...mapActions([
       'removeProject'
@@ -62,4 +64,3 @@ export default {
   }
 }
 </script>
-
