@@ -5,8 +5,8 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use App\Core\Models\Task;
 use App\Core\Models\Project;
-use Illuminate\Support\Facades\Event;
 use Laravel\Passport\Passport;
+use Illuminate\Support\Facades\Event;
 
 class HomePageTest extends TestCase
 {
