@@ -2,9 +2,6 @@
 
 namespace App\Core\Http\Controllers;
 
-use App\Core\Models\Team;
-use App\Core\Models\Office;
-use App\Core\Models\Project;
 use App\Core\Repositories\TaskRepository;
 
 class HomeController extends Controller

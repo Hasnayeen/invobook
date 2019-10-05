@@ -15,7 +15,7 @@ class ProjectController extends Controller
         )->unique();
 
         return response()->json([
-            'status' => 'success',
+            'status'   => 'success',
             'projects' => $projects,
         ]);
     }
