@@ -12,7 +12,7 @@ return [
     |
     */
 
-    'password' => 'A senha deve ter pelo menos seis caracteres e combinar com a confimação.',
+    'password' => 'A senha deve ter pelo menos seis caracteres e combinar com a confirmação.',
     'reset'    => 'Sua senha foi redefinida!',
     'sent'     => 'Enviamos um e-mail com um link de redefinição de senha!',
     'token'    => 'O token de redefinição de senha é inválido.',

@@ -45,6 +45,15 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($exception instanceof AuthenticationException) {
+            if ($request->segment(1) === 'api') {
+                return response()->json([
+                    'status'   => 'error',
+                    'message'  => 'Unathenticated request',
+                ], 401);
+            }
+        }
+
         if ($exception instanceof AuthorizationException) {
             if ($request->ajax()) {
                 return response()->json([
