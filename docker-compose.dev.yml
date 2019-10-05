@@ -52,7 +52,7 @@ services:
       - php
 
   laravel_echo_server:
-    image: node:boron
+    image: node:12
     hostname: laravel-echo-server
     ports:
       - "6001:6001"
