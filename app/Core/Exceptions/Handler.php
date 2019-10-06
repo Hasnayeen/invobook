@@ -5,7 +5,9 @@ namespace App\Core\Exceptions;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -45,6 +47,15 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($exception instanceof ModelNotFoundException || $exception instanceof HttpException) {
+            if ($request->segment(1) === 'api') {
+                return response()->json([
+                    'status'   => 'error',
+                    'message'  => 'Resource Not found',
+                ], 404);
+            }
+        }
+
         if ($exception instanceof AuthenticationException) {
             if ($request->segment(1) === 'api') {
                 return response()->json([
