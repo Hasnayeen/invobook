@@ -85,7 +85,7 @@ export default {
       'showNotification',
     ]),
     deleteMessage () {
-      axios.delete(`/messages/${this.message.id}`)
+      axios.delete(`/direct-messages/${this.message.id}`)
         .then((response) => {
           this.$emit('deleted', this.index)
           this.dropdownMenuShown = false
