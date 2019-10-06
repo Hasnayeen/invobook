@@ -32,7 +32,7 @@ class OfficeController extends Controller
 
         return response()->json([
             'status'  => 'success',
-            'office' => $office,
+            'office'  => $office,
         ]);
     }
 
