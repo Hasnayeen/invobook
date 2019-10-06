@@ -26,7 +26,6 @@ mix.js('resources/assets/js/pages/auth/login.js', 'public/js/auth').minify('publ
   .js('resources/assets/js/pages/admin/index.js', 'public/js/admin').minify('public/js/admin/index.js')
   .js('resources/assets/js/pages/home.js', 'public/js').minify('public/js/home.js')
   .extract(['vue', 'axios', 'luxon'])
-  .version()
 
 // Full API
 // mix.js(src, output);
@@ -40,7 +39,6 @@ mix.minify('public/js/vendor.js')
 if (!mix.inProduction()) {
   mix.sourceMaps() // Enable sourcemaps
 }
-// mix.version(); // Enable versioning.
 mix.disableNotifications()
 // mix.setPublicPath('path/to/public'); <-- Useful for Node apps.
 // mix.webpackConfig({}); <-- Override webpack.config.js, without editing the file directly.
@@ -58,6 +56,7 @@ mix.webpackConfig(
 )
 
 if (mix.inProduction()) {
+  mix.version(); // Enable versioning.
   mix.webpackConfig({
     plugins: [
       new PurgecssPlugin({
@@ -80,3 +79,10 @@ if (mix.inProduction()) {
     ]
   })
 }
+
+mix.options({
+  hmrOptions: {
+    host: 'localhost',
+    port: 3000
+  }
+})

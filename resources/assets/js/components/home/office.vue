@@ -12,7 +12,7 @@
 			</div>
 		</div>
 		<div class="w-full p-2 h-20 flex flex-col justify-end">
-			<a class="text-pink-500 text-xl no-underline" :href="'/offices/' + office.id">{{ office.name }}</a>
+      <div @click="showOffice(office.id)" class="text-pink-500 text-xl no-underline cursor-pointer">{{ office.name }}</div>
 		</div>
 		<span class="text-gray-500 text-sm w-full px-2 h-20 self-start">{{ office.description }}</span>
 		<div class="border-t w-full h-16 flex flex-row justify-start items-center px-4">
@@ -45,8 +45,12 @@ export default {
   },
   methods: {
     ...mapActions([
+      'getOffice',
       'removeOffice'
     ]),
+    showOffice (id) {
+      this.getOffice(id)
+    },
     toggleMenu () {
       this.dropdownMenuShown = !this.dropdownMenuShown
     },

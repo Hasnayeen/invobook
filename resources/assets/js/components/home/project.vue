@@ -12,7 +12,7 @@
     </div>
   </div>
   <div class="w-full p-2 h-20 flex flex-col justify-end">
-    <a class="text-pink-500 text-xl no-underline" :href="'/projects/' + project.id">{{ project.name }}</a>
+    <div @click="showProject(project.id)" class="text-pink-500 text-xl no-underline cursor-pointer">{{ project.name }}</div>
   </div>
   <span class="text-gray-500 text-sm w-full px-2 h-20 self-start">{{ project.description }}</span>
   <div class="border-t w-full h-16 flex flex-row justify-start items-center px-4">
@@ -34,6 +34,7 @@ import profileCard from './../partials/profileCard.vue'
 export default {
   components: {profileCard},
   props: ['details', 'index'],
+
   data () {
     return {
       project: this.details,
@@ -43,10 +44,16 @@ export default {
       faEllipsisH
     }
   },
+
   methods: {
     ...mapActions([
+      'getProject',
+      'setCurrentView',
       'removeProject'
     ]),
+    showProject (id) {
+      this.getProject(id)
+    },
     toggleMenu () {
       this.dropdownMenuShown = !this.dropdownMenuShown
     },
@@ -62,4 +69,3 @@ export default {
   }
 }
 </script>
-
