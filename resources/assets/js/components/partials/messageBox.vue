@@ -29,7 +29,7 @@
               <img src="/image/dm.svg" alt="direct message" class="w-96">
             </div>
           </div>
-          <message v-for="(message, index) in messages" :key="index" :message="message" :user="authUser" :index="index" @deleted="deleteMessage" :last="messages.length === (index + 1)"></message>
+          <message v-for="(message, index) in messages" :key="index" :message="message" :user="authUser" :index="index" @deleted="deleteMessage" :last="messages.length === (index + 1)" :direct="true"></message>
         </div>
         <div v-else class="flex flex-col items-center justify-center">
           <div class="text-gray-600 text-lg text-center py-16">
