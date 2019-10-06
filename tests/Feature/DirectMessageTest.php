@@ -123,8 +123,8 @@ class DirectMessageTest extends TestCase
         ]);
         $this->assertDatabaseHas('direct_messages', [
             'body'           => 'New Message',
-            'sender_id'      => $john->id,
-            'receiver_id'    => $this->user->id,
+            'sender_id'      => (int) $john->id,
+            'receiver_id'    => (int) $this->user->id,
             'attachment_id'  => null,
             'read_at'        => null,
         ]);
