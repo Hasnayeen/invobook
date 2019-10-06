@@ -1,4 +1,8 @@
 import Vuex from 'vuex'
+import project from './project'
+import team from './team'
+import office from './office'
+import cycle from './modules/cycle'
 import notification from './modules/notification'
 import dropdown from './modules/dropdown'
 import timer from './modules/timer'
@@ -7,6 +11,10 @@ window.Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
+    project,
+    office,
+    team,
+    cycle,
     notification,
     dropdown,
     timer
@@ -17,10 +25,18 @@ export default new Vuex.Store({
     projects: [],
     teams: [],
     offices: [],
+    currentView: 'home',
+    resourceName: '',
     loading: false
   },
 
   mutations: {
+    setCurrentView(state, view) {
+      state.currentView = view
+    },
+    setResourceName(state, name) {
+      state.resourceName = name
+    },
     getProjects(state, projects) {
       state.projects = projects
     },
@@ -54,6 +70,12 @@ export default new Vuex.Store({
   },
 
   actions: {
+    setCurrentView({ commit }, view) {
+      commit('setCurrentView', view)
+    },
+    setResourceName({ commit }, name) {
+      commit('setResourceName', name)
+    },
     getProjects({ commit }) {
       commit('toggleLoading', true)
       axios.get('projects')

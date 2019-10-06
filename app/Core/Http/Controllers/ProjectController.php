@@ -30,7 +30,10 @@ class ProjectController extends Controller
         }
         $project->load('members:user_id,username,avatar,name', 'settings', 'tags:tag_id,label');
 
-        return view('projects.single', ['project' => $project]);
+        return response()->json([
+            'status'  => 'success',
+            'project' => $project,
+        ]);
     }
 
     public function store(StoreProjectRequest $request, ProjectRepository $repository)

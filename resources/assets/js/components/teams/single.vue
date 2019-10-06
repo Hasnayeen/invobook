@@ -126,7 +126,6 @@ export default {
     active: '',
     activeId: 0,
     dropdownMenuShown: false,
-    settings: team.settings,
     currentCycleId: null,
     authenticated,
     faPlus,
@@ -145,7 +144,9 @@ export default {
   },
   computed: {
     ...mapState({
-      team: state => state.team,
+      currentView: state => state.currentView,
+      team: state => state.team.team,
+      settings: state => state.team.team.settings,
       selectedCycle: state => state.cycle.selectedCycle,
       currentComponent: state => state.dropdown.currentComponent
     })

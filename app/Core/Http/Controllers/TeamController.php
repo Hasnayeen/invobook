@@ -30,7 +30,10 @@ class TeamController extends Controller
         }
         $team->load('members:user_id,username,avatar,name', 'settings', 'tags:tag_id,label');
 
-        return view('teams.single', ['team' => $team]);
+        return response()->json([
+            'status'  => 'success',
+            'team' => $team,
+        ]);
     }
 
     public function store(Request $request, TeamRepository $repository)

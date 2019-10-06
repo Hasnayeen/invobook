@@ -30,7 +30,10 @@ class OfficeController extends Controller
         }
         $office->load('members:user_id,username,avatar,name', 'settings', 'tags:tag_id,label');
 
-        return view('offices.single', ['office' => $office]);
+        return response()->json([
+            'status'  => 'success',
+            'office' => $office,
+        ]);
     }
 
     public function store(StoreOfficeRequest $request, OfficeRepository $repository)
