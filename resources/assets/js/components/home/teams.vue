@@ -71,7 +71,9 @@ export default {
       'addTeam'
     ]),
     getAllTeams () {
-      this.getTeams()
+      if (this.teams.length < 1) {
+        this.getTeams()
+      }
     },
     openCreateTeamModal () {
       this.showCreateTeamForm = true

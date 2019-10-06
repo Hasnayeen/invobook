@@ -1,5 +1,5 @@
 <template>
-<div :class="{'hidden': (activeTab != 'projects')}">
+<div :class="{'hidden': (activeTab !== 'projects')}">
     <!-- Create Project Form -->
     <div :class="{'hidden': !showCreateProjectForm}">
         <div class="absolute inset-0 opacity-75 bg-gray-500 z-10"></div>
@@ -69,7 +69,9 @@ export default {
       'addProject'
     ]),
     getAllProjects () {
-      this.getProjects()
+      if (this.projects.length < 1) {
+        this.getProjects()
+      }
     },
     openCreateProjectModal () {
       this.showCreateProjectForm = true

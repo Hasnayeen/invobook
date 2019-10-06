@@ -69,7 +69,9 @@ export default {
       'addOffice'
     ]),
     getAllOffices () {
-      this.getOffices()
+      if (this.offices.length < 1) {
+        this.getOffices()
+      }
     },
     createNewOffice () {
       this.addOffice({name: this.name, description: this.description})
