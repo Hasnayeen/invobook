@@ -1,4 +1,8 @@
 import Vuex from 'vuex'
+import project from './project'
+import team from './team'
+import office from './office'
+import cycle from './modules/cycle'
 import notification from './modules/notification'
 import dropdown from './modules/dropdown'
 import timer from './modules/timer'
@@ -7,17 +11,41 @@ window.Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
+    project,
+    office,
+    team,
+    cycle,
     notification,
     dropdown,
     timer
   },
 
   state: {
-    home: data,
+    currentWork,
+    projects: [],
+    teams: [],
+    offices: [],
+    currentView: 'home',
+    resourceName: '',
     loading: false
   },
 
   mutations: {
+    setCurrentView(state, view) {
+      state.currentView = view
+    },
+    setResourceName(state, name) {
+      state.resourceName = name
+    },
+    getProjects(state, projects) {
+      state.projects = projects
+    },
+    getTeams(state, teams) {
+      state.teams = teams
+    },
+    getOffices(state, offices) {
+      state.offices = offices
+    },
     addProject (state, project) {
       state.home.projects.push(project)
     },
@@ -42,6 +70,54 @@ export default new Vuex.Store({
   },
 
   actions: {
+    setCurrentView({ commit }, view) {
+      commit('setCurrentView', view)
+    },
+    setResourceName({ commit }, name) {
+      commit('setResourceName', name)
+    },
+    getProjects({ commit }) {
+      commit('toggleLoading', true)
+      axios.get('projects')
+        .then((response) => {
+          if (response.data.status === 'success') {
+            commit('toggleLoading', false)
+            commit('getProjects', response.data.projects)
+          }
+        })
+        .catch((error) => {
+          commit('toggleLoading', false)
+          this.dispatch('showNotification', { type: error.response.data.status, message: error.response.data.message })
+      })
+    },
+    getTeams({ commit }) {
+      commit('toggleLoading', true)
+      axios.get('teams')
+        .then((response) => {
+          if (response.data.status === 'success') {
+            commit('toggleLoading', false)
+            commit('getTeams', response.data.teams)
+          }
+        })
+        .catch((error) => {
+          commit('toggleLoading', false)
+          this.dispatch('showNotification', { type: error.response.data.status, message: error.response.data.message })
+      })
+    },
+    getOffices({ commit }) {
+      commit('toggleLoading', true)
+      axios.get('offices')
+        .then((response) => {
+          if (response.data.status === 'success') {
+            commit('toggleLoading', false)
+            commit('getOffices', response.data.offices)
+          }
+        })
+        .catch((error) => {
+          commit('toggleLoading', false)
+          this.dispatch('showNotification', { type: error.response.data.status, message: error.response.data.message })
+      })
+    },
     addProject ({ commit }, formData) {
       commit('toggleLoading', true)
       axios.post('/projects', {

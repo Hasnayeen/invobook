@@ -1,5 +1,5 @@
 <template>
-<div :class="{'hidden': (activeTab != 'projects')}">
+<div :class="{'hidden': (activeTab !== 'projects')}">
     <!-- Create Project Form -->
     <div :class="{'hidden': !showCreateProjectForm}">
         <div class="absolute inset-0 opacity-75 bg-gray-500 z-10"></div>
@@ -42,6 +42,7 @@ export default {
       type: String
     }
   },
+
   data: () => ({
     showCreateProjectForm: false,
     name: '',
@@ -49,13 +50,29 @@ export default {
     user,
     faPlus
   }),
+
+  watch: {
+    activeTab: function () {
+      if (this.activeTab === 'projects') {
+        this.getAllProjects()
+      }
+    }
+  },
+
   computed: mapState({
-    projects: state => state.home.projects
+    projects: state => state.projects
   }),
+
   methods: {
     ...mapActions([
+      'getProjects',
       'addProject'
     ]),
+    getAllProjects () {
+      if (this.projects.length < 1) {
+        this.getProjects()
+      }
+    },
     openCreateProjectModal () {
       this.showCreateProjectForm = true
       this.$nextTick(() => {
