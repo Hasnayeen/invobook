@@ -3,9 +3,12 @@
 return [
     'Profile'               => 'پروفایل',
     'Account'               => 'حساب',
+    'Username'              => 'نام‌کاربری',
     'Name'                  => 'نام',
+    'Designation'           => 'تعیین',
     'Title'                 => 'عنوان ' . config('app.company_name'),
     'Short Bio'             => 'بیوگرافی کوتاه',
+    'Location'              => 'محل زندگی',
     'Time Zone'             => 'منطقه زمانی',
     'First Day of the Week' => 'اولین روز هفته',
     'Language'              => 'زبان',

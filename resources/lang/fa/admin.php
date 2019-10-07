@@ -44,5 +44,7 @@ return [
     'Delete'                         => 'حذف',
     'Default Permission Settings'    => 'تنظیمات اولیه دسترسی',
     'Select a Role'                  => 'یک نقش انتخاب کنید',
-
+    'Settings'                       => 'تنظیمات',
+    'Invitations'                    => 'دعوت‌ها',
+    'Integrations'                   => 'یکپارچه‌سازی ها',
 ];
