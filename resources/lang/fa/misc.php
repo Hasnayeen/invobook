@@ -34,4 +34,7 @@ return [
     'Events'                                     => 'رویدادها',
     'Files'                                      => 'فایل ها',
     'Activities'                                 => 'فعالیت ها',
+    'The discussion has been updated'            => 'گفتگو بروزرسانی شد',
+    'Task has been updated'                      => 'تکلیف بروزرسانی شد',
+    'Task status has been updated'               => 'وضعیت تکلیف بروزرسانی شد',
 ];
