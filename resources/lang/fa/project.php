@@ -4,6 +4,9 @@ return [
     'Create Task'                   => 'ایجاد تکلیف',
     'Create New Post'               => 'ایجاد نوشته',
     'Currently in room'             => 'هم‌اکنون در اتاق',
+    'Create Task'                   => 'تکلیف جدید',
+    'Create New Post'               => 'ایجاد نوشته جدید',
+    'Currently in room'             => 'هم اکنون در اتاق',
     'write your message here'       => 'پیام خود را اینجا بنویسید',
     'Upload Files'                  => 'بارگذاری پرونده‌ها',
     'Project has been made public'  => 'پروژه به صورت عمومی در دسترس قرار گرفت',
@@ -26,5 +29,4 @@ return [
     'Filters'                       => 'فیلترها',
     'Select a User'                 => 'یک کاربر انتخاب کنید',
     'Select a Tag'                  => 'یک برچسب انتخاب کنید',
-
 ];

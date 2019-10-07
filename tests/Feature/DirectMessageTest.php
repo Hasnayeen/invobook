@@ -104,4 +104,31 @@ class DirectMessageTest extends TestCase
         $this->actingAs($this->user)
              ->delete('/direct-messages/' . $directMessage->id);
     }
+
+    /** @test */
+    public function user_can_create_direct_message()
+    {
+        Event::fake();
+        $john = factory(User::class)->create();
+        $this->actingAs($this->user);
+        $this->post('direct-messages/', [
+            'body'           => 'New Message',
+            'receiver_id'    => $john->id,
+            'attachment_id'  => null,
+            'read_at'        => null,
+        ])
+            ->assertJsonFragment([
+            'status'      => 'success',
+            'sender_id'   => $this->user->id,
+            'receiver_id' => $john->id,
+            'body'        => 'New Message',
+        ]);
+        $this->assertDatabaseHas('direct_messages', [
+            'body'           => 'New Message',
+            'sender_id'      => $this->user->id,
+            'receiver_id'    => $john->id,
+            'attachment_id'  => null,
+            'read_at'        => null,
+        ]);
+    }
 }

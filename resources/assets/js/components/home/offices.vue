@@ -50,13 +50,29 @@ export default {
     user,
     faPlus
   }),
+
+  watch: {
+    activeTab: function () {
+      if (this.activeTab === 'offices') {
+        this.getAllOffices()
+      }
+    }
+  },
+
   computed: mapState({
-    offices: state => state.home.offices
+    offices: state => state.offices
   }),
+
   methods: {
     ...mapActions([
+      'getOffices',
       'addOffice'
     ]),
+    getAllOffices () {
+      if (this.offices.length < 1) {
+        this.getOffices()
+      }
+    },
     createNewOffice () {
       this.addOffice({name: this.name, description: this.description})
       this.closeCreateOfficeModal()
