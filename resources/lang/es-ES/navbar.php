@@ -1,7 +1,11 @@
 <?php
 
 return [
-    'Your Profile' => 'Tu Perfil',
-    'Admin'        => 'Admin',
-    'Logout'       => 'Cerrar sesión',
+    'Your Profile'  => 'Perfil',
+    'Your Messages' => 'Mensajes',
+    'Admin'         => 'Administración',
+    'Timer'         => 'Temporizador',
+    'Settings'      => 'Configuración',
+    'Leave User'    => 'Dejar Usuario',
+    'Logout'        => 'Cerrar Sesión',
 ];
