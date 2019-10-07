@@ -67,6 +67,11 @@ export default {
       required: true,
       type: Boolean
     },
+    direct: {
+      required: false,
+      type: Boolean,
+      default: false
+    }
   },
   data: () => ({
     dropdownMenuShown: false,
@@ -85,7 +90,8 @@ export default {
       'showNotification',
     ]),
     deleteMessage () {
-      axios.delete(`/messages/${this.message.id}`)
+      let api = this.direct ? 'direct-messages' : 'messages'
+      axios.delete(`/${api}/${this.message.id}`)
         .then((response) => {
           this.$emit('deleted', this.index)
           this.dropdownMenuShown = false
