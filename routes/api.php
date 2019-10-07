@@ -138,6 +138,8 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth:api'], function () {
 
     Route::post('files', [FileController::class, 'store']);
 
+    Route::delete('files/{file}', [FileController::class, 'delete']);
+
     /**********************************
         Message
      **********************************/

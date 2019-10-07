@@ -6,6 +6,7 @@ use App\Core\Utilities\GroupTrait;
 use App\Core\Repositories\FileRepository;
 use App\Core\Exceptions\InvalidFileFormat;
 use App\Core\Http\Requests\ValidateFileCreation;
+use App\Core\Models\File;
 
 class FileController extends Controller
 {
@@ -88,5 +89,15 @@ class FileController extends Controller
         if (! in_array($type, $allowedType)) {
             throw new InvalidFileFormat();
         }
+    }
+
+    public function delete(File $file)
+    {
+        $this->authorize('delete', $file);
+        $file->delete();
+        return response()->json([
+            'status'  => 'success',
+            'message' => localize('misc.The file has been deleted'),
+        ]);
     }
 }

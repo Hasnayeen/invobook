@@ -43,4 +43,5 @@ return [
     'Events'                                     => 'رویدادها',
     'Files'                                      => 'فایل ها',
     'Activities'                                 => 'فعالیت ها',
+    'The file has been deleted'                  => 'فایل مورد نظر حذف شد'
 ];

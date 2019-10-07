@@ -43,4 +43,5 @@ return [
     'Events'                                              => 'Events',
     'Files'                                               => 'Files',
     'Activities'                                          => 'Activities',
+    'The file has been deleted'                           => 'The file has been deleted'
 ];
