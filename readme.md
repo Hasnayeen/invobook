@@ -45,7 +45,7 @@ Goodwork brings you all the components required for your project to run smoothly
 
 ## Demo
 
-You can view a live instance of Goodwork that we use (as a guest user) using the credentials below. This user has limited permission so you'll only see a handful of the features. You can access the demo site at the following URL: https://goodworkfor.life
+You can test a live instance of Goodwork that we use (as a guest user) using the credentials below. This user has limited permissions so you'll only see a handful of the features. You can access the demo site at the following URL: https://goodworkfor.life
 
 `email: guest@example.com`
 
