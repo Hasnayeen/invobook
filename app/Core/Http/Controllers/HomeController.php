@@ -19,7 +19,7 @@ class HomeController extends Controller
         if (request()->segment(1) === 'api') {
             return response()->json([
                 'status'      => 'success',
-                'currentWork' => $currentWork,
+                'current_work' => $currentWork,
             ]);
         }
 
