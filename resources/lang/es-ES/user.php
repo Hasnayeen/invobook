@@ -3,9 +3,12 @@
 return [
     'Profile'               => 'Perfil',
     'Account'               => 'Cuenta',
+    'Username'              => 'Nombre de Usuario',
     'Name'                  => 'Nombre',
+    'Designation'           => 'Designación',
     'Title'                 => 'Título en ' . config('app.company_name'),
     'Short Bio'             => 'Biografia Corta',
+    'Location'              => 'Ubicación',
     'Time Zone'             => 'Zona Horaria',
     'First Day of the Week' => 'Primer día de la semana',
     'Language'              => 'Idioma',
