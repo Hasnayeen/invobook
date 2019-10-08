@@ -93,7 +93,7 @@ Thank you for considering contributing to the Goodwork Project! The contribution
 
 You can join the Goodwork Project via this link [link](https://goodworkfor.life/register/invite-link/ovCPAFpnwIhrvqUrlvynarP9HVRBC5mH)
 
-Also you can join the slack channel via this [link](https://join.slack.com/t/iluminar/shared_invite/enQtNDY0Mzc3NDkwOTY1LTJhZTNiYmMxZmE4NGU5MTJhODI5OWMyNjc4ZmIyNDVhODRhMGUzNDU0MmM1OGRmZjBiYWM0NjcwNWRjMDJjNTA)
+Also you can join the slack channel via this [link](https://discord.gg/4DvTQsc)
 
 ## Supporting <small>[↑Top](#about-goodwork)</small>
 
