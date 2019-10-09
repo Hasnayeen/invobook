@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'Home'              => 'Inicio',
     'Projects'          => 'Proyectos',
     'Teams'             => 'Equipos',
     'Offices'           => 'Oficinas',
