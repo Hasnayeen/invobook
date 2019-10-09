@@ -6,6 +6,6 @@ return [
     'Admin'         => 'Administración',
     'Timer'         => 'Temporizador',
     'Settings'      => 'Configuraciones',
-    'Leave User'    => 'Abandonar Usuario',        
+    'Leave User'    => 'Abandonar Usuario',
     'Logout'        => 'Cerrar Sesión',
 ];
