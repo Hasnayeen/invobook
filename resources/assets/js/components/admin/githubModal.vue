@@ -6,19 +6,21 @@
           {{ active ? 'Active' : 'Not Set' }}
         </div> -->
         <button @click="showTokenForm" class="bg-teal-600 text-white p-3 rounded">
-          {{ service.active ? 'Reset Token' : 'Set Token' }}
+          {{ (service.active ? 'Reset Token' : 'Set Token') | localize }}
         </button>
-        <a href="https://github.blog/2013-05-16-personal-api-tokens/" class="underline text-blue-500 text-sm pl-4">How to get a personal access token</a>
+        <a href="https://github.blog/2013-05-16-personal-api-tokens/" class="underline text-blue-500 text-sm pl-4">
+          {{ 'How to get a personal access token' | localize }}
+        </a>
       </div>
 
       <div v-if="tokenFormShown">
         <div class="p-8 pt-0">
           <label class="block uppercase tracking-wide text-gray-800 text-xs font-bold mb-2" for="github-access-token">
-            Github Personal Access Token <span class="text-gray-500 capitalize">(required)</span>
+            {{ 'Github Personal Access Token' | localize }} <span class="text-gray-500 capitalize">{{ '(required)' | localize }}</span>
           </label>
           <div class="flex">
             <input name="github-access-token" ref="focusInput" v-model="access_token" class="appearance-none block bg-gray-200 text-gray-800 border border-gray-200 rounded py-3 px-4" type="password" placeholder="*******" required>
-            <button @click="saveToken" class="bg-teal-400 text-white font-medium hover:bg-teal-600 py-3 px-6 ml-4 rounded">Save</button>
+            <button @click="saveToken" class="bg-teal-400 text-white font-medium hover:bg-teal-600 py-3 px-6 ml-4 rounded">{{ 'Save' | localize }}</button>
           </div>
         </div>
       </div>

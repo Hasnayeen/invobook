@@ -37,7 +37,7 @@
         <div>
           <div class="flex items-center text-gray-700">
             <div class="pr-2">
-              Member of 
+              {{ 'Member of' | localize }}
             </div>
             <div v-if="user.projects.length > 0" class="flex items-center px-2">
               <div class="bg-teal-200 text-teal-700 font-bold flex justify-center items-center w-8 h-8 mr-2 rounded-full">{{ user.projects.length }}</div>
