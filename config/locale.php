@@ -34,6 +34,7 @@ return [
         'sv-se' => 'Swedish (Sweden)',
         'th'    => 'Thai (Thai)',
         'tr-TR' => 'Turkish (Turkey)',
+        'vi-VN' => 'Vietnamese',
     ],
 
     /*
