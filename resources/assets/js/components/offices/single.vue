@@ -31,7 +31,7 @@
 
     <div class="text-gray-600 flex flex-row justify-center items-center">
       <span class="text-lg">
-        Cycle: 
+        Cycle:
       </span>
       <div v-if="this.selectedCycle" @click="showCyclesModal" class="p-2 ml-2 bg-gray-100 shadow rounded cursor-pointer text-sm text-teal-800 inline">
         <span v-if="this.selectedCycle.name">
@@ -56,7 +56,7 @@
     <members-list-modal v-if="currentComponent === 'memberListModal'" resourceType="office" :resourceId="office.id" :members="office.members" />
 
     <addMemberForm v-if="currentComponent === 'addMemberForm'"resourceType="office" :resource="office" @addMember="addMember"></addMemberForm>
-    
+
     <permission-settings-modal v-if="currentComponent === 'permissionSettingsModal'" resourceType="office" :resourceId="office.id"></permission-settings-modal>
 
     <settings-modal v-if="currentComponent === 'settingsModal'" resourceType="office" :resourceId="office.id" :settings="settings" @update-settings="updateSettings" ></settings-modal>

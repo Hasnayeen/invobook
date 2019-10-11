@@ -37,7 +37,7 @@
 
       <!-- Select Role -->
       <div class="px-6 pb-8 pt-12 rounded-b">
-        <div class="inline font-medium text-gray-700">Select a Role:</div>
+        <div class="inline font-medium text-gray-700">{{ 'Select a Role' | localize }}:</div>
         <template v-for="role in roles">
           <div @click="selectRole(role)" class="rounded inline border p-3 mx-2 relative cursor-pointer"
             :class="[selectedRole === role.slug ? 'bg-indigo-100 border-indigo-400 shadow-md' : 'bg-gray-100 border-gray-400']">
