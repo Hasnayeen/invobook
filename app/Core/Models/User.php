@@ -166,4 +166,9 @@ class User extends Authenticatable
     {
         return $this->unreadDirectMessages()->exists();
     }
+
+    public function files()
+    {
+        return $this->hasMany(File::class, '');
+    }
 }

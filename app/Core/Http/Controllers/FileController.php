@@ -70,12 +70,6 @@ class FileController extends Controller
     public function delete(File $file)
     {
         $this->authorize('delete', $file);
-//        $group = $this->getGroupModel();
-//        if ($group->notOpenForPublic()) {
-//            abort(401);
-//        } elseif (auth()->user()) {
-//            $this->authorize('delete', $group);
-//        }
         Storage::delete($file->path);
         $file->delete();
 
