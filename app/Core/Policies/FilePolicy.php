@@ -2,9 +2,9 @@
 
 namespace App\Core\Policies;
 
-use App\Authorization\Authorization;
 use App\Core\Models\File;
 use App\Core\Models\User;
+use App\Authorization\Authorization;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class FilePolicy
