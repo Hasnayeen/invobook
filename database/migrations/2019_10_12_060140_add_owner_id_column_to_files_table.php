@@ -14,8 +14,7 @@ class AddOwnerIdColumnToFilesTable extends Migration
     public function up()
     {
         Schema::table('files', function (Blueprint $table) {
-            // TODO: not sure what to default to?
-            $table->integer('owner_id')->default(1)->unsigned()->comment('user id of the owner of the project');
+            $table->integer('owner_id')->default(1)->unsigned()->comment('user id of the owner of the file');
             $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
