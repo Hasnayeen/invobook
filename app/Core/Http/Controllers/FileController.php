@@ -70,7 +70,7 @@ class FileController extends Controller
     public function delete(File $file)
     {
         $this->authorize('delete', $file);
-        Storage::delete($file->path);
+        Storage::disk('public')->delete($file->path);
         $file->delete();
 
         return response()->json(
@@ -101,7 +101,7 @@ class FileController extends Controller
     private function fileIsOfValidType($type)
     {
         $allowedType = ['image/jpeg', 'image/png', 'image/svg', 'gif', 'image/svg+xml', 'application/pdf'];
-        if (! in_array($type, $allowedType)) {
+        if (!in_array($type, $allowedType)) {
             throw new InvalidFileFormat();
         }
     }
