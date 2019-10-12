@@ -110,4 +110,30 @@ class FileTest extends TestCase
                  ],
              ]);
     }
+
+    /** @test */
+    public function user_can_delete_files()
+    {
+        Storage::fake('');
+        $project = factory(Project::class)->create();
+        $fileModel = factory(File::class)->create([
+            'name'          => 'features.pdf',
+            'path'          => 'features.pdf',
+            'owner_id'      => $this->user->id,
+        ]);
+        Storage::fake('')->put('/features.pdf', '%PDF');
+
+        $this->actingAs($this->user);
+        resolve('Authorization')->setupDefaultPermissions($project);
+
+        Storage::disk('public')->assertExists('features.pdf');
+
+        $this->actingAs($this->user)->delete('files/' . $fileModel->id)
+             ->assertJson([
+                 'status'  => 'success',
+                 'message' => 'The file has been deleted',
+             ]);
+
+        Storage::disk('public')->assertMissing('features.pdf');
+    }
 }

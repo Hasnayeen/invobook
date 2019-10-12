@@ -26,4 +26,5 @@ return [
     'Filters'                       => 'Filters',
     'Select a User'                 => 'Select a User',
     'Select a Tag'                  => 'Select a Tag',
+    'The file has been deleted'     => 'The file has been deleted',
 ];

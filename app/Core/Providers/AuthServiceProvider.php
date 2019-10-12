@@ -25,6 +25,7 @@ class AuthServiceProvider extends ServiceProvider
         \App\Core\Models\Permission::class    => \App\Core\Policies\PermissionPolicy::class,
         \App\Core\Models\User::class          => \App\Core\Policies\UserPolicy::class,
         \App\Core\Models\Cycle::class         => \App\Core\Policies\CyclePolicy::class,
+        \App\Core\Models\File::class          => \App\Core\Policies\FilePolicy::class,
     ];
 
     /**
