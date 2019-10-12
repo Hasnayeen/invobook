@@ -147,7 +147,6 @@ class UserRegistrationTest extends TestCase
             'username'              => $this->faker->userName,
             'email'                 => $this->token->email,
             'password'              => 'secret12',
-            'password_confirmation' => 'secret12',
         ];
     }
 }
