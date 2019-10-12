@@ -25,10 +25,6 @@ class FileRepository
      */
     public function create($data)
     {
-        foreach ($data as $file) {
-            $file['owner_id'] = auth()->user()->id;
-        }
-
         return $this->model->insert($data);
     }
 
