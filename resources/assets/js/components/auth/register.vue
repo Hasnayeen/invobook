@@ -27,10 +27,6 @@
           <span class="text-red-400 block pt-2" v-if="errors">{{ errors.password }}</span>
         </p>
         <p class="py-4">
-          <input id="password_confirmation" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800" type="password" name="password_confirmation" placeholder="Confirm Your Password">
-          <span class="text-red-400 block pt-2" v-if="errors">{{ errors.password_confirmation }}</span>
-        </p>
-        <p class="py-4">
           <button type="submit" class="bg-teal-500 hover:bg-teal-600 text-white text-xl font-medium py-2 px-4 rounded">Register</button>
         </p>
       </div>
