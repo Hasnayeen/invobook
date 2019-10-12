@@ -2,7 +2,9 @@
 
 namespace App\Core\Http\Controllers;
 
+use App\Core\Models\File;
 use App\Core\Utilities\GroupTrait;
+use Illuminate\Support\Facades\Storage;
 use App\Core\Repositories\FileRepository;
 use App\Core\Exceptions\InvalidFileFormat;
 use App\Core\Http\Requests\ValidateFileCreation;
@@ -65,6 +67,20 @@ class FileController extends Controller
         return $this->successResponse(null, 'files', $files);
     }
 
+    public function delete(File $file)
+    {
+        $this->authorize('delete', $file);
+        Storage::disk('public')->delete($file->path);
+        $file->delete();
+
+        return response()->json(
+            [
+                'status'  => 'success',
+                'message' => localize('project.The file has been deleted'),
+            ]
+        );
+    }
+
     private function prepareData($file)
     {
         $now = now();
@@ -76,6 +92,7 @@ class FileController extends Controller
         );
         $data['fileable_type'] = request('group_type');
         $data['fileable_id'] = request('group_id');
+        $data['owner_id'] = auth()->user()->id;
         $data['created_at'] = $now;
         $data['updated_at'] = $now;
 

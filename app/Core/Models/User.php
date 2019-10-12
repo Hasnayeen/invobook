@@ -166,4 +166,14 @@ class User extends Authenticatable
     {
         return $this->unreadDirectMessages()->exists();
     }
+
+    public function file()
+    {
+        return $this->hasMany('App\Core\Models\File', 'owner_id');
+    }
+
+    public function files()
+    {
+        return $this->belongsToMany('App\Core\Models\File');
+    }
 }
