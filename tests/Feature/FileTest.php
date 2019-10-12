@@ -134,7 +134,7 @@ class FileTest extends TestCase
             'group_id'   => $fileModel->fileable_id,
         ])
              ->assertJson([
-                 'status' => 'success',
+                 'status'  => 'success',
                  'message' => 'The file has been deleted',
              ]);
 
