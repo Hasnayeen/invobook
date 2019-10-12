@@ -200,6 +200,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('files/{file}', [FileController::class, 'index']);
 
     Route::post('files', [FileController::class, 'store']);
+
+    Route::delete('files/{file}', [FileController::class, 'delete']);
 });
 
     /**********************************
