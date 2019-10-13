@@ -43,7 +43,7 @@
         </div>
       </div>
 
-      <comment-box resourceType="discussion" :resourceId="discussion.id" :show="discussionDetailsShown" class="px-16"></comment-box>
+      <comment-box :show="discussionDetailsShown" class="px-16"></comment-box>
     </div>
     <div class="h-16"></div>
   </div>

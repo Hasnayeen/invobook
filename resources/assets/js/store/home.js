@@ -27,10 +27,16 @@ export default new Vuex.Store({
     offices: [],
     currentView: 'home',
     resourceName: '',
+    groupType: '',
+    groupId: '',
     loading: false
   },
 
   mutations: {
+    setGroup(state, group) {
+      state.groupType = group.type
+      state.groupId = group.id
+    },
     setCurrentView(state, view) {
       state.currentView = view
     },
@@ -70,6 +76,9 @@ export default new Vuex.Store({
   },
 
   actions: {
+    setGroup({ commit }, group) {
+      commit('setGroup', group)
+    },
     setCurrentView({ commit }, view) {
       commit('setCurrentView', view)
     },

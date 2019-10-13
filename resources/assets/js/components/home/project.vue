@@ -48,11 +48,13 @@ export default {
   methods: {
     ...mapActions([
       'getProject',
+      'setGroup',
       'setCurrentView',
       'removeProject'
     ]),
     showProject (id) {
       this.getProject(id)
+      this.setGroup({type: 'project', id: id})
     },
     toggleMenu () {
       this.dropdownMenuShown = !this.dropdownMenuShown

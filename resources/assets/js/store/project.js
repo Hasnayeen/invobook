@@ -2,8 +2,6 @@ export default {
   state: {
     loading: false,
     members: [],
-    groupType: 'project',
-    groupId: null,
     project: null
   },
 

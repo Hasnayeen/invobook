@@ -46,10 +46,12 @@ export default {
   methods: {
     ...mapActions([
       'getTeam',
+      'setGroup',
       'removeTeam'
     ]),
     showTeam (id) {
       this.getTeam(id)
+      this.setGroup({type: 'team', id: id})
     },
     toggleMenu () {
       this.dropdownMenuShown = !this.dropdownMenuShown

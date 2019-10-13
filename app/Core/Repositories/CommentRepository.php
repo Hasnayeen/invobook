@@ -3,6 +3,7 @@
 namespace App\Core\Repositories;
 
 use App\Core\Models\Comment;
+use Illuminate\Database\Eloquent\Collection;
 
 class CommentRepository
 {
@@ -27,16 +28,22 @@ class CommentRepository
     {
         return $this->model->query()->create([
             'user_id'          => auth()->user()->id,
-            'commentable_type' => $data['commentable_type'],
-            'commentable_id'   => $data['commentable_id'],
+            'commentable_type' => $data['group_type'],
+            'commentable_id'   => $data['group_id'],
             'body'             => $data['body'],
         ]);
     }
 
-    public function getAllCommentsWithUser()
+    /**
+     * @param  string $groupType
+     * @param  int    $groupId
+     *
+     * @return Collection
+     */
+    public function getAllCommentsWithUser(string $groupType, int $groupId): Collection
     {
         return $this->model
-            ->where(['commentable_type' => request('commentable_type'), 'commentable_id' => request('commentable_id')])
+            ->where(['commentable_type' => $groupType, 'commentable_id' => $groupId])
             ->with('user:id,name,avatar')
             ->get();
     }

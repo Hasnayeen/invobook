@@ -46,10 +46,12 @@ export default {
   methods: {
     ...mapActions([
       'getOffice',
+      'setGroup',
       'removeOffice'
     ]),
     showOffice (id) {
       this.getOffice(id)
+      this.setGroup({type: 'office', id: id})
     },
     toggleMenu () {
       this.dropdownMenuShown = !this.dropdownMenuShown
