@@ -11,7 +11,7 @@
       </template>
     </div>
 
-    <div id="message-box" class="h-50-vh overflow-y-auto">
+    <div id="message-box">
       <div class="">
         <message v-for="(message, index) in messages" :key="index" :message="message" :user="user" :index="index" @deleted="deleteMessage" :last="messages.length === (index + 1)"></message>
       </div>
@@ -23,8 +23,8 @@
       </div>
     </div>
 
-    <div v-if="authenticated" class="relative bg-gray-200">
-      <div class="static text-center p-8">
+    <div v-if="authenticated" class="fixed bottom-0 w-full message-box-max md:max-w-2xl lg:max-w-4xl xl:max-w-6xl bg-blue-100 p-4 border-t-2">
+      <div class="static text-center">
         <div class="relative">
           <user-suggestion-box
             :users="members"
@@ -37,7 +37,7 @@
             @selected="userSelected"
             class="absolute mb-2 w-full bottom-0"></user-suggestion-box>
         </div>
-        <textarea class="static textarea resize-none rounded w-full p-4 text-gray-800"
+        <textarea class="static textarea resize-none rounded w-full px-4 pt-2 text-gray-800"
           id="send-message"
           :style="{height: messageTextareaHeight}"
           ref="messageTextarea"
@@ -98,14 +98,14 @@ export default {
     this.listen()
     let messageBoxElement = document.getElementById('message-box')
     if (messageBoxElement) {
-      messageBoxElement.scrollTop = messageBoxElement.scrollHeight
+      messageBoxElement.scrollIntoView({behavior: 'smooth', block: 'end'})
     }
   },
 
   updated () {
     let messageBoxElement = document.getElementById('message-box')
     if (messageBoxElement) {
-      messageBoxElement.scrollTop = messageBoxElement.scrollHeight
+      messageBoxElement.scrollIntoView({behavior: 'smooth', block: 'end'})
     }
   },
 

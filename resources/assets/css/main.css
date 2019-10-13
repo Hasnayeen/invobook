@@ -47,10 +47,6 @@ html {
      height: 50vh;
  }
 
- .h-70-vh {
-     height: 50vh;
- }
-
  .checkbox {
      @apply hidden;
  }
@@ -63,4 +59,12 @@ html {
  .checkbox:checked + label::before {
      @apply bg-indigo-500;
      content: '';
+ }
+
+ .tab-sticky-top {
+     top: 3.2rem;
+ }
+
+ .message-box-max {
+     max-width: calc(100vw - 2rem);
  }

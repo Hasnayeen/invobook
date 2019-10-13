@@ -11,7 +11,7 @@
     </div>
   </div>
   <div v-else class="flex flex-row text-gray-800 p-4 border-t"
-    :class="{'pb-12': last, 'bg-gray-100': (message.user.id === user.id)}">
+    :class="{'pb-12': last, '': (message.user.id === user.id)}">
     <div class="flex flex-col items-center relative"
       :class="[(message.user.id === user.id) ? 'flex-col-reverse justify-end' : '']">
       <img :src="generateUrl(message.user.avatar)" :alt="message.user.name" class="w-10 h-10 rounded-full"
@@ -35,7 +35,7 @@
           {{ getTime(message.created_at) }}
         </div>
       </div>
-      <div  class="rounded-lg p-3 pt-0 leading-normal text-gray-800 break-words"
+      <div  class="rounded-lg p-3 pt-0 -mt-2 leading-none text-gray-800 break-words whitespace-pre-line"
         :class="[(message.user_id === user.id) ? 'rounded-tr-none' : 'rounded-tl-none']" v-linkify >
         {{ message.body }}
       </div>
