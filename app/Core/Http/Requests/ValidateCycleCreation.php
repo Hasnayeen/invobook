@@ -24,6 +24,7 @@ class ValidateCycleCreation extends FormRequest
     public function rules()
     {
         return [
+            'name'       => 'required|string',
             'start_date' => 'required|date_format:Y-m-d',
             'end_date'   => 'required|date_format:Y-m-d|after:start_date',
             'group_type' => 'required|string',
