@@ -31,7 +31,7 @@ class CycleController extends Controller
         }
 
         $cycle = Cycle::create([
-            'name'           => $request->name ?? null,
+            'name'           => $request->name,
             'start_date'     => $request->start_date,
             'end_date'       => $request->end_date,
             'cyclable_type'  => $request->group_type,
