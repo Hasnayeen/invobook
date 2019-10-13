@@ -53,6 +53,7 @@ class CycleTest extends TestCase
         ]);
 
         $this->post('/cycles', [
+            'name'       => 'V.1',
             'start_date' => '2019-06-13',
             'end_date'   => '2019-06-21',
             'group_type' => 'project',
@@ -64,6 +65,7 @@ class CycleTest extends TestCase
         ]);
 
         $this->post('/cycles', [
+            'name'       => 'V.2',
             'start_date' => '2019-06-01',
             'end_date'   => '2019-06-21',
             'group_type' => 'project',
@@ -75,6 +77,7 @@ class CycleTest extends TestCase
         ]);
 
         $this->post('/cycles', [
+            'name'       => 'V.3',
             'start_date' => '2019-06-21',
             'end_date'   => '2019-06-29',
             'group_type' => 'project',
@@ -86,6 +89,7 @@ class CycleTest extends TestCase
         ]);
 
         $this->post('/cycles', [
+            'name'       => 'V.4',
             'start_date' => '2019-06-01',
             'end_date'   => '2019-06-29',
             'group_type' => 'project',
