@@ -1,5 +1,5 @@
 <template>
-<div :class="{'hidden': (activeTab != 'offices')}">
+<div>
   <!-- Create Office Form -->
   <div :class="{'hidden': !showCreateOfficeForm}">
     <div class="absolute inset-0 opacity-75 bg-gray-500 z-10"></div>
@@ -37,12 +37,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 export default {
   components: { office },
-  props: {
-    activeTab: {
-      required: true,
-      type: String
-    }
-  },
+
   data: () => ({
     showCreateOfficeForm: false,
     name: '',
@@ -51,12 +46,8 @@ export default {
     faPlus
   }),
 
-  watch: {
-    activeTab: function () {
-      if (this.activeTab === 'offices') {
-        this.getAllOffices()
-      }
-    }
+  created () {
+    this.getAllOffices()
   },
 
   computed: mapState({

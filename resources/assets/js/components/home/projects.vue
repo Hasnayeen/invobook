@@ -1,5 +1,5 @@
 <template>
-<div :class="{'hidden': (activeTab !== 'projects')}">
+<div>
     <!-- Create Project Form -->
     <div :class="{'hidden': !showCreateProjectForm}">
         <div class="absolute inset-0 opacity-75 bg-gray-500 z-10"></div>
@@ -38,7 +38,7 @@ export default {
   components: { project },
   props: {
     activeTab: {
-      required: true,
+      required: false,
       type: String
     }
   },
@@ -51,12 +51,8 @@ export default {
     faPlus
   }),
 
-  watch: {
-    activeTab: function () {
-      if (this.activeTab === 'projects') {
-        this.getAllProjects()
-      }
-    }
+  created () {
+    this.getAllProjects()
   },
 
   computed: mapState({

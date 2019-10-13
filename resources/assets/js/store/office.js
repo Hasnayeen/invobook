@@ -1,9 +1,6 @@
 export default {
   state: {
     loading: false,
-    members: [],
-    groupType: 'office',
-    groupId: null,
     office: null
   },
 
@@ -23,6 +20,7 @@ export default {
           if (response.data.status === 'success') {
             commit('getOffice', response.data.office)
             commit('setResourceName', response.data.office.name)
+            dispatch('getMembers', response.data.office.members)
             commit('toggleLoading', false)
           }
         })

@@ -28,22 +28,22 @@ class CommentRepository
     {
         return $this->model->query()->create([
             'user_id'          => auth()->user()->id,
-            'commentable_type' => $data['group_type'],
-            'commentable_id'   => $data['group_id'],
+            'commentable_type' => $data['commentable_type'],
+            'commentable_id'   => $data['commentable_id'],
             'body'             => $data['body'],
         ]);
     }
 
     /**
-     * @param string $groupType
-     * @param int    $groupId
+     * @param string $commentableType
+     * @param int    $commentableId
      *
      * @return Collection
      */
-    public function getAllCommentsWithUser(string $groupType, int $groupId): Collection
+    public function getAllCommentsWithUser(string $commentableType, int $commentableId): Collection
     {
         return $this->model
-            ->where(['commentable_type' => $groupType, 'commentable_id' => $groupId])
+            ->where(['commentable_type' => $commentableType, 'commentable_id' => $commentableId])
             ->with('user:id,name,avatar')
             ->get();
     }

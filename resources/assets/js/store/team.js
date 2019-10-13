@@ -1,9 +1,6 @@
 export default {
   state: {
     loading: false,
-    members: [],
-    groupType: 'team',
-    groupId: null,
     team: null
   },
 
@@ -23,6 +20,7 @@ export default {
           if (response.data.status === 'success') {
             commit('getTeam', response.data.team)
             commit('setResourceName', response.data.team.name)
+            dispatch('getMembers', response.data.team.members)
             commit('toggleLoading', false)
           }
         })

@@ -29,6 +29,7 @@ export default new Vuex.Store({
     resourceName: '',
     groupType: '',
     groupId: '',
+    members: [],
     loading: false
   },
 
@@ -72,6 +73,9 @@ export default new Vuex.Store({
     },
     toggleLoading (state, status) {
       state.loading = status
+    },
+    getMembers(state, members) {
+      state.members = members
     }
   },
 
@@ -205,6 +209,9 @@ export default new Vuex.Store({
         .catch((error) => {
           this.dispatch('showNotification', {type: error.response.data.status, message: error.response.data.message})
         })
+    },
+    getMembers({ commit }, members) {
+      commit('getMembers', members)
     }
   }
 })

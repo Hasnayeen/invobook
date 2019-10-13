@@ -14,10 +14,14 @@ class OfficeController extends Controller
             Office::where('public', true)->with('members')->get()
         )->unique();
 
-        return response()->json([
-            'status'  => 'success',
-            'offices' => $offices,
-        ]);
+        if (request()->expectsJson()) {
+            return response()->json([
+                'status'   => 'success',
+                'offices' => $offices,
+            ]);
+        }
+
+        return redirect('?group_type=offices');
     }
 
     public function show(Office $office)
@@ -30,10 +34,14 @@ class OfficeController extends Controller
         }
         $office->load('members:user_id,username,avatar,name', 'settings', 'tags:tag_id,label');
 
-        return response()->json([
-            'status'  => 'success',
-            'office'  => $office,
-        ]);
+        if (request()->expectsJson()) {
+            return response()->json([
+                'status'  => 'success',
+                'office'  => $office,
+            ]);
+        }
+
+        return $this->formatRedirect();
     }
 
     public function store(StoreOfficeRequest $request, OfficeRepository $repository)
@@ -66,5 +74,11 @@ class OfficeController extends Controller
             'status'  => 'success',
             'message' => localize('misc.The office has been deleted'),
         ]);
+    }
+
+    private function formatRedirect()
+    {
+        $url = '?group_type=project&group_id=' . request()->segment(2) . '&tool=' . request()->query('tool') . '&id=' . request()->query('id');
+        return redirect($url);
     }
 }

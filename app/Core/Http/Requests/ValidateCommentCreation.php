@@ -26,8 +26,8 @@ class ValidateCommentCreation extends FormRequest
     {
         return [
             'body'             => 'required',
-            'group_type'       => 'required|string',
-            'group_id'         => 'required|integer|exists:' . request('group_type') . 's,id',
+            'commentable_type' => 'required|string',
+            'commentable_id'   => 'required|integer|exists:' . request('commentable_type') . 's,id',
         ];
     }
 }

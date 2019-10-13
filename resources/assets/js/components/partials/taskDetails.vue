@@ -86,7 +86,7 @@
         </div>
       </div>
       <div class="px-2 md:px-8">
-        <comment-box :show="activeColumn === 'comments'"></comment-box>
+        <comment-box :show="activeColumn === 'comments'" resourceType="task" :resourceId="task.id"></comment-box>
         <progress-box :show="activeColumn === 'progress'" resourceType="task" :resourceId="task.id"></progress-box>
       </div>
     </div>

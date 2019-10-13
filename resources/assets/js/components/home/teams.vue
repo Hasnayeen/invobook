@@ -1,5 +1,5 @@
 <template>
-<div :class="{'hidden': (activeTab != 'teams')}">
+<div>
 
   <!-- Create Team Form -->
   <div :class="{'hidden': !showCreateTeamForm}">
@@ -38,12 +38,6 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 export default {
   components: { team },
-  props: {
-    activeTab: {
-      required: true,
-      type: String
-    }
-  },
 
   data: () => ({
     showCreateTeamForm: false,
@@ -53,12 +47,8 @@ export default {
     faPlus
   }),
 
-  watch: {
-    activeTab: function () {
-      if (this.activeTab === 'teams') {
-        this.getAllTeams()
-      }
-    }
+  created () {
+    this.getAllTeams()
   },  
 
   computed: mapState({
