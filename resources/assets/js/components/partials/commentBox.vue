@@ -59,6 +59,14 @@ import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 export default {
   components: {userSuggestionBox},
   props: {
+    resourceType: {
+      required: true,
+      type: String
+    },
+    resourceId: {
+      required: true,
+      type: Number
+    },
     show: {
       required: true,
       type: Boolean
@@ -112,6 +120,8 @@ export default {
       } else {
         axios.post('/comments', {
           body: this.body,
+          commentable_type: this.resourceType,
+          commentable_id: this.resourceId,
           group_type: this.groupType,
           group_id: this.groupId,
           mentions: this.mentions
@@ -176,6 +186,8 @@ export default {
       if (this.comments.length === 0) {
         axios.get('/comments', {
           params: {
+            commentable_type: this.resourceType,
+            commentable_id: this.resourceId,
             group_type: this.groupType,
             group_id: this.groupId
           }

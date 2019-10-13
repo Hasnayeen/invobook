@@ -18,20 +18,20 @@ class OfficeTest extends TestCase
     }
 
     /** @test */
-    public function user_can_see_public_offices_and_offices_which_user_is_member()
+    public function user_can_see_public_offices_and_offices_of_which_user_is_member()
     {
         $office = factory('App\Core\Models\Office')->create(['owner_id' => $this->user->id]);
         $this->actingAs($this->user);
         resolve('Authorization')->setupDefaultPermissions($office);
         $office->members()->save($this->user);
 
-        $this->get('offices/')->assertJsonFragment([
+        $this->json('GET', 'offices/')->assertJsonFragment([
             'status' => 'success',
             'name'   => $office->name,
         ]);
 
         Passport::actingAs($this->user);
-        $this->get('offices/')->assertJsonFragment([
+        $this->json('GET', 'offices/')->assertJsonFragment([
             'status' => 'success',
             'name'   => $office->name,
         ]);
@@ -43,7 +43,12 @@ class OfficeTest extends TestCase
         $this->user_with_permission_can_create_office();
         $id = Office::where('name', 'New Office')->first()->id;
 
-        $this->actingAs($this->user)->get('offices/' . $id)->assertSee('New Office');
+        $this->actingAs($this->user)
+             ->json('GET', 'offices/' . $id)
+             ->assertJsonFragment([
+                 'status' => 'success',
+                 'name'   => 'New Office'
+             ]);
     }
 
     /** @test */

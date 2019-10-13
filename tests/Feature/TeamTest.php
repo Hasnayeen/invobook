@@ -18,20 +18,20 @@ class TeamTest extends TestCase
     }
 
     /** @test */
-    public function user_can_see_public_teams_and_teams_which_user_is_member()
+    public function user_can_see_public_teams_and_teams_of_which_user_is_member()
     {
         $team = factory('App\Core\Models\Team')->create(['owner_id' => $this->user->id]);
         $this->actingAs($this->user);
         resolve('Authorization')->setupDefaultPermissions($team);
         $team->members()->save($this->user);
 
-        $this->get('teams/')->assertJsonFragment([
+        $this->json('GET', 'teams/')->assertJsonFragment([
             'status' => 'success',
             'name'   => $team->name,
         ]);
 
         Passport::actingAs($this->user);
-        $this->get('teams/')->assertJsonFragment([
+        $this->json('GET', 'teams/')->assertJsonFragment([
             'status' => 'success',
             'name'   => $team->name,
         ]);
@@ -43,7 +43,12 @@ class TeamTest extends TestCase
         $this->user_with_permission_can_create_team();
         $id = Team::where('name', 'New Team')->first()->id;
 
-        $this->actingAs($this->user)->get('teams/' . $id)->assertSee('New Team');
+        $this->actingAs($this->user)
+             ->json('GET', 'teams/' . $id)
+             ->assertJsonFragment([
+                 'status' => 'success',
+                 'name'   => 'New Team'
+             ]);
     }
 
     /** @test */

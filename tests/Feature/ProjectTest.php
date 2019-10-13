@@ -18,20 +18,20 @@ class ProjectTest extends TestCase
     }
 
     /** @test */
-    public function user_can_see_public_projects_and_projects_which_user_is_member()
+    public function user_can_see_public_projects_and_projects_of_which_user_is_member()
     {
         $project = factory('App\Core\Models\Project')->create(['owner_id' => $this->user->id]);
         $this->actingAs($this->user);
         resolve('Authorization')->setupDefaultPermissions($project);
         $project->members()->save($this->user);
 
-        $this->get('projects/')->assertJsonFragment([
+        $this->json('GET', 'projects/')->assertJsonFragment([
             'status' => 'success',
             'name'   => $project->name,
         ]);
 
         Passport::actingAs($this->user);
-        $this->get('api/projects/')->assertJsonFragment([
+        $this->json('GET', 'api/projects/')->assertJsonFragment([
             'status' => 'success',
             'name'   => $project->name,
         ]);
@@ -43,7 +43,12 @@ class ProjectTest extends TestCase
         $this->user_with_permission_can_create_project();
         $id = Project::where('name', 'New Project')->first()->id;
 
-        $this->actingAs($this->user)->get('projects/' . $id)->assertSee('New Project');
+        $this->actingAs($this->user)
+             ->json('GET', 'projects/' . $id)
+             ->assertJsonFragment([
+                'status' => 'success',
+                'name'   => 'New Project'
+             ]);
     }
 
     /** @test */

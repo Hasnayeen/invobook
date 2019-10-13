@@ -59,7 +59,7 @@ class CommentController extends Controller
         } elseif (auth()->user()) {
             $this->authorize('view', $group);
         }
-        $comments = $this->repository->getAllCommentsWithUser(request('group_type'), (int) request('group_id'));
+        $comments = $this->repository->getAllCommentsWithUser(request('commentable_type'), (int) request('commentable_id'));
 
         return $this->successResponse(null, 'comments', $comments);
     }

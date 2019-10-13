@@ -1,7 +1,6 @@
 export default {
   state: {
     loading: false,
-    members: [],
     project: null
   },
 
@@ -21,6 +20,7 @@ export default {
           if (response.data.status === 'success') {
             commit('getProject', response.data.project)
             commit('setResourceName', response.data.project.name)
+            dispatch('getMembers', response.data.project.members)
             commit('toggleLoading', false)
           }
         })

@@ -14,10 +14,14 @@ class TeamController extends Controller
             Team::where('public', true)->with('members')->get()
         )->unique();
 
-        return response()->json([
-            'status' => 'success',
-            'teams'  => $teams,
-        ]);
+        if (request()->expectsJson()) {
+            return response()->json([
+                'status'   => 'success',
+                'teams' => $teams,
+            ]);
+        }
+
+        return redirect('?group_type=teams');
     }
 
     public function show(Team $team)
@@ -30,10 +34,14 @@ class TeamController extends Controller
         }
         $team->load('members:user_id,username,avatar,name', 'settings', 'tags:tag_id,label');
 
-        return response()->json([
-            'status'  => 'success',
-            'team'    => $team,
-        ]);
+        if (request()->expectsJson()) {
+            return response()->json([
+                'status'  => 'success',
+                'team'    => $team,
+            ]);
+        }
+
+        return $this->formatRedirect();
     }
 
     public function store(Request $request, TeamRepository $repository)
@@ -66,5 +74,11 @@ class TeamController extends Controller
             'status'  => 'success',
             'message' => localize('misc.The team has been deleted'),
         ]);
+    }
+
+    private function formatRedirect()
+    {
+        $url = '?group_type=project&group_id=' . request()->segment(2) . '&tool=' . request()->query('tool') . '&id=' . request()->query('id');
+        return redirect($url);
     }
 }

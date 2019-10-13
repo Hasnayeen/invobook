@@ -20,14 +20,16 @@ class CommentTest extends TestCase
     public function user_can_create_comment()
     {
         $this->actingAs($this->user);
-        factory(Discussion::class)->create(['id' => 1]);
+        $discussion = factory(Discussion::class)->create();
 
         $response = $this->post(
             self::$endpoint,
             [
                 'body'             => 'Comment body',
+                'commentable_id'   => $discussion->id,
                 'commentable_type' => 'discussion',
-                'commentable_id'   => 1,
+                'group_type'       => $discussion->discussionable_type,
+                'group_id'         => $discussion->discussionable_id,
             ]
         );
 
@@ -97,12 +99,16 @@ class CommentTest extends TestCase
     {
         $this->actingAs($this->user);
         $project = factory(\App\Core\Models\Project::class)->create(['owner_id' => $this->user->id]);
-        $this->actingAs($this->user);
         resolve('Authorization')->setupDefaultPermissions($project);
         $discussion = factory(\App\Core\Models\Discussion::class)->create(['discussionable_type' => 'project', 'discussionable_id' => $project->id]);
         $comments = factory(\App\Core\Models\Comment::class, 3)->create(['commentable_type' => 'discussion', 'commentable_id' => $discussion->id]);
 
-        $this->call('GET', self::$endpoint, ['commentable_type' => 'discussion', 'commentable_id' => $discussion->id, 'group_type' => $discussion->discussionable_type, 'group_id' => $discussion->discussionable_id])
+        $this->call('GET', self::$endpoint, [
+                'commentable_type' => 'discussion',
+                'commentable_id'   => $discussion->id,
+                'group_type'       => 'project',
+                'group_id'         => $project->id
+            ])
              ->assertJsonFragment([
                  'status'           => 'success',
                  'body'             => $comments[0]->body,

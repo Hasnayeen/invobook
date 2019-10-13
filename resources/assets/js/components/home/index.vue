@@ -36,9 +36,9 @@
       </span>
     </div>
     <home :active-tab="currentView"></home>
-    <projects :active-tab="currentView"></projects>
-    <teams :active-tab="currentView"></teams>
-    <offices :active-tab="currentView"></offices>
+    <projects v-if="currentView === 'projects'"></projects>
+    <teams v-if="currentView === 'teams'"></teams>
+    <offices v-if="currentView === 'offices'"></offices>
     
     <div class="h-16 md:hidden"></div>
   </div>
@@ -62,6 +62,12 @@ import office from './../offices/single.vue'
 export default {
   components: {
     home, projects, teams, offices, project, team, office
+  },
+
+  created () {
+    let groupType = new URL(location.href).searchParams.get('group_type')
+    let groupId = new URL(location.href).searchParams.get('group_id')
+    this.loadResource(groupType, groupId)
   },
 
   computed: {
@@ -90,9 +96,71 @@ export default {
   methods: {
     ...mapActions([
       'setCurrentView',
+      'getProject',
+      'getProjects',
+      'getTeam',
+      'getTeams',
+      'getOffice',
+      'getOffices',
+      'setGroup',
     ]),
     setActiveView (view) {
       this.setCurrentView(view)
+    },
+    showProject (id) {
+      this.getProject(id)
+      this.setGroup({type: 'project', id: id})
+    },
+    showTeam (id) {
+      this.getTeam(id)
+      this.setGroup({type: 'team', id: id})
+    },
+    showOffice (id) {
+      this.getOffice(id)
+      this.setGroup({type: 'office', id: id})
+    },
+    getAllProjects () {
+      this.setCurrentView('projects')
+      this.getProjects()
+    },
+    getAllTeams () {
+      this.setCurrentView('teams')
+      this.getTeams()
+    },
+    getAllOffices () {
+      this.setCurrentView('offices')
+      this.getOffices()
+    },
+    loadResource (groupType, groupId = null) {
+      if (['projects', 'teams', 'offices'].includes(groupType)) {
+        switch (groupType) {
+          case 'projects':
+            this.getAllProjects()
+            break;
+          case 'teams':
+            this.getAllTeams()
+            break;
+          case 'offices':
+            this.getAllOffices()
+            break;
+          default:
+            break;
+        }
+      } else {
+        switch (groupType) {
+          case 'project':
+            this.showProject(groupId)
+            break;
+          case 'team':
+            this.showTeam(groupId)
+            break;
+          case 'office':
+            this.showOffice(groupId)
+            break;
+          default:
+            break;
+        }
+      }
     }
   }
 }
