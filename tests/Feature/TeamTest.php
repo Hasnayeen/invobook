@@ -47,7 +47,7 @@ class TeamTest extends TestCase
              ->json('GET', 'teams/' . $id)
              ->assertJsonFragment([
                  'status' => 'success',
-                 'name'   => 'New Team'
+                 'name'   => 'New Team',
              ]);
     }
 

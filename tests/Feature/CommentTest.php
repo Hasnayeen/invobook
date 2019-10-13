@@ -107,7 +107,7 @@ class CommentTest extends TestCase
                 'commentable_type' => 'discussion',
                 'commentable_id'   => $discussion->id,
                 'group_type'       => 'project',
-                'group_id'         => $project->id
+                'group_id'         => $project->id,
             ])
              ->assertJsonFragment([
                  'status'           => 'success',
