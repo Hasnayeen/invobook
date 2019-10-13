@@ -79,6 +79,7 @@ class ProjectController extends Controller
     private function formatRedirect()
     {
         $url = '?group_type=project&group_id=' . request()->segment(2) . '&tool=' . request()->query('tool') . '&id=' . request()->query('id');
+
         return redirect($url);
     }
 }
