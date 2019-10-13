@@ -17,7 +17,7 @@ class TeamController extends Controller
         if (request()->expectsJson()) {
             return response()->json([
                 'status'   => 'success',
-                'teams' => $teams,
+                'teams'    => $teams,
             ]);
         }
 
@@ -79,6 +79,7 @@ class TeamController extends Controller
     private function formatRedirect()
     {
         $url = '?group_type=project&group_id=' . request()->segment(2) . '&tool=' . request()->query('tool') . '&id=' . request()->query('id');
+
         return redirect($url);
     }
 }

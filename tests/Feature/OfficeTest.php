@@ -47,7 +47,7 @@ class OfficeTest extends TestCase
              ->json('GET', 'offices/' . $id)
              ->assertJsonFragment([
                  'status' => 'success',
-                 'name'   => 'New Office'
+                 'name'   => 'New Office',
              ]);
     }
 
