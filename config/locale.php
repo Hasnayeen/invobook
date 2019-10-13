@@ -12,6 +12,7 @@ return [
 
     'lang' => [
         'ar'    => 'Arabic',
+        'bs'    => 'Bosnian',
         'da'    => 'Danish',
         'de'    => 'German',
         'en'    => 'English',
