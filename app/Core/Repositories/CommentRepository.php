@@ -35,8 +35,8 @@ class CommentRepository
     }
 
     /**
-     * @param  string $groupType
-     * @param  int    $groupId
+     * @param string $groupType
+     * @param int    $groupId
      *
      * @return Collection
      */
