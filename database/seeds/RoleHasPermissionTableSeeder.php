@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Core\Models\PermissionSetting;
-use App\Core\Models\RoleHasPermission;
+use App\Base\Models\PermissionSetting;
+use App\Base\Models\RoleHasPermission;
 
 class RoleHasPermissionTableSeeder extends Seeder
 {

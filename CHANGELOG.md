@@ -4,10 +4,15 @@
 
 ### Added
 
+- TaskManager module added and all related code moved there
 - Tag can be created from group page and add/remove them to the group
 - Roadmap tool can be enabled/disabled
 - Group can be made publicly viewable (without account)
 - Added Vietnamese translation
+
+### Changed
+
+- `App\Core` namespace is now `App\Base`
 
 ## v0.9 (2019-06-30)
 

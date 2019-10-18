@@ -9,7 +9,7 @@ class CycleTest extends TestCase
     /** @test */
     public function admin_can_create_new_cycle()
     {
-        $project = factory(\App\Core\Models\Project::class)->create(['owner_id' => $this->user->id]);
+        $project = factory(\App\Base\Models\Project::class)->create(['owner_id' => $this->user->id]);
         $this->actingAs($this->user);
         resolve('Authorization')->setupDefaultPermissions($project);
         $project->members()->save($this->user);
@@ -40,12 +40,12 @@ class CycleTest extends TestCase
     /** @test */
     public function cycle_in_same_group_cant_overlap_another_cycle()
     {
-        $project = factory(\App\Core\Models\Project::class)->create(['owner_id' => $this->user->id]);
+        $project = factory(\App\Base\Models\Project::class)->create(['owner_id' => $this->user->id]);
         $this->actingAs($this->user);
         resolve('Authorization')->setupDefaultPermissions($project);
         $project->members()->save($this->user);
 
-        factory(\App\Core\Models\Cycle::class)->create([
+        factory(\App\Base\Models\Cycle::class)->create([
             'cyclable_type' => 'project',
             'cyclable_id'   => $project->id,
             'start_date'    => '2019-06-10',
@@ -104,15 +104,15 @@ class CycleTest extends TestCase
     /** @test */
     public function user_can_get_all_cycles()
     {
-        $project = factory(\App\Core\Models\Project::class)->create(['owner_id' => $this->user->id]);
-        factory(\App\Core\Models\Cycle::class)->create([
+        $project = factory(\App\Base\Models\Project::class)->create(['owner_id' => $this->user->id]);
+        factory(\App\Base\Models\Cycle::class)->create([
             'name'          => 'June Release Cycle',
             'start_date'    => '2019-06-01',
             'end_date'      => '2019-06-28',
             'cyclable_type' => 'project',
             'cyclable_id'   => $project->id,
         ]);
-        factory(\App\Core\Models\Cycle::class)->create([
+        factory(\App\Base\Models\Cycle::class)->create([
             'name'          => 'July Release Cycle',
             'start_date'    => '2019-07-01',
             'end_date'      => '2019-07-28',

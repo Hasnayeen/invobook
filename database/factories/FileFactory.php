@@ -3,7 +3,7 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 use Carbon\Carbon;
 
-$factory->define(App\Core\Models\File::class, function (Faker\Generator $faker) {
+$factory->define(App\Base\Models\File::class, function (Faker\Generator $faker) {
     $now = Carbon::now();
 
     $filename = $faker->randomElement(['features.pdf', 'foo.png', 'bar.jpg']);
@@ -11,13 +11,13 @@ $factory->define(App\Core\Models\File::class, function (Faker\Generator $faker) 
     $fileableId = null;
     switch ($fileableType) {
         case 'office':
-            $fileableId = factory(App\Core\Models\Office::class)->create()->id;
+            $fileableId = factory(App\Base\Models\Office::class)->create()->id;
             break;
         case 'team':
-            $fileableId = factory(App\Core\Models\Team::class)->create()->id;
+            $fileableId = factory(App\Base\Models\Team::class)->create()->id;
             break;
         case 'project':
-            $fileableId = factory(App\Core\Models\Project::class)->create()->id;
+            $fileableId = factory(App\Base\Models\Project::class)->create()->id;
             break;
         default:
             throw new Exception('Wrong Taskable type');

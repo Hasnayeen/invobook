@@ -2,8 +2,8 @@
 
 /* @var $factory \Illuminate\Database\Eloquent\Factory */
 
-use App\Core\Models\Step;
-use App\Core\Models\Task;
+use App\Base\Models\Step;
+use App\TaskManager\Models\Task;
 use Faker\Generator as Faker;
 
 $factory->define(Step::class, function (Faker $faker) {
