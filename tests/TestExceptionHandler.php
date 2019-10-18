@@ -11,8 +11,4 @@ class TestExceptionHandler extends Handler
     {
         throw $exception;
     }
-
-    public function report(Exception $exception)
-    {
-    }
 }

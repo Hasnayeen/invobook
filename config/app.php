@@ -170,15 +170,21 @@ return [
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
+        Lab404\Impersonate\ImpersonateServiceProvider::class,
 
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        App\Core\Providers\AppServiceProvider::class,
+        App\Core\Providers\AuthServiceProvider::class,
+        App\Core\Providers\BroadcastServiceProvider::class,
+        App\Core\Providers\EventServiceProvider::class,
+        App\Core\Providers\RouteServiceProvider::class,
+
+        /*
+         * Modules Service Providers...
+         */
+        App\Authorization\AuthorizationServiceProvider::class,
     ],
 
     /*

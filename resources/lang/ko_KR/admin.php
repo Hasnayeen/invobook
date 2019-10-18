@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'Users'                          => '유저',
+    'Roles & Permissions'            => '역할 & 권한',
+    'Activities'                     => '활동',
+    'About'                          => 'About',
+    'Roles'                          => '역할들',
+    'Role'                           => '역할',
+    'Permissions'                    => '권한',
+    'Invite New Member'              => '새 멤버 초대',
+    'Add New Role'                   => '새 역할 추가',
+    'Cancel'                         => '취소',
+    'Assign'                         => '할당',
+    'Attach'                         => '첨부',
+    'Filters'                        => '필터들',
+    'Apply'                          => '적용',
+    'Load More'                      => '더 보기',
+    'Check for Updates'              => '업데이트 체크',
+    'Filter by Activity'             => '활동별로 검색하기',
+    'Filter by User'                 => '유저별로 검색하기',
+    'Filter by Date'                 => '날짜별로 검색하기',
+    'Last Updated'                   => '최근 업데이트',
+    'Author'                         => '작성자',
+    'Submit issue & feedback at'     => '이슈 제출 & 피드백은',
+    'Don\'t belongs to any role yet' => '아직 아무 역할 없음',
+    'Don\'t have any permission yet' => '아직 아무 권한 없음',
+];

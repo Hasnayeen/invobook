@@ -1,4 +1,4 @@
-let mix = require('laravel-mix').mix
+let mix = require('laravel-mix')
 var tailwindcss = require('tailwindcss')
 let glob = require('glob-all')
 let PurgecssPlugin = require('purgecss-webpack-plugin')
@@ -10,7 +10,7 @@ class TailwindExtractor {
 }
 
 mix.postCss('resources/assets/css/main.css', 'public/css', [
-  tailwindcss('tailwind.js')
+  require('tailwindcss')
 ]).minify('public/css/main.css')
 
 mix.copy('resources/assets/css/editor.css', 'public/css/editor.css').minify('public/css/editor.css')
@@ -22,10 +22,10 @@ mix.js('resources/assets/js/pages/auth/login.js', 'public/js/auth').minify('publ
   .js('resources/assets/js/pages/teams/single.js', 'public/js/teams').minify('public/js/teams/single.js')
   .js('resources/assets/js/pages/offices/single.js', 'public/js/offices').minify('public/js/offices/single.js')
   .js('resources/assets/js/pages/users/profile.js', 'public/js/users').minify('public/js/users/profile.js')
+  .js('resources/assets/js/pages/users/settings.js', 'public/js/users').minify('public/js/users/settings.js')
   .js('resources/assets/js/pages/admin/index.js', 'public/js/admin').minify('public/js/admin/index.js')
   .js('resources/assets/js/pages/home.js', 'public/js').minify('public/js/home.js')
   .extract(['vue', 'axios', 'luxon'])
-  .version()
 
 // Full API
 // mix.js(src, output);
@@ -39,7 +39,6 @@ mix.minify('public/js/vendor.js')
 if (!mix.inProduction()) {
   mix.sourceMaps() // Enable sourcemaps
 }
-// mix.version(); // Enable versioning.
 mix.disableNotifications()
 // mix.setPublicPath('path/to/public'); <-- Useful for Node apps.
 // mix.webpackConfig({}); <-- Override webpack.config.js, without editing the file directly.
@@ -57,6 +56,7 @@ mix.webpackConfig(
 )
 
 if (mix.inProduction()) {
+  mix.version(); // Enable versioning.
   mix.webpackConfig({
     plugins: [
       new PurgecssPlugin({
@@ -79,3 +79,10 @@ if (mix.inProduction()) {
     ]
   })
 }
+
+mix.options({
+  hmrOptions: {
+    host: 'localhost',
+    port: 3000
+  }
+})

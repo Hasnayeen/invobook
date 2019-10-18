@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'Profile'                                                  => 'Hồ sơ',
+    'Account'                                                  => 'Tài khoản',
+    'Username'                                                 => 'Tên người dùng',
+    'Name'                                                     => 'Tên',
+    'Designation'                                              => 'Cấp bậc',
+    'Title'                                                    => 'Chức vụ tại ' . config('app.company_name'),
+    'Short Bio'                                                => 'Tiểu sử ngắn',
+    'Location'                                                 => 'Vị trí',
+    'Time Zone'                                                => 'Múi giờ',
+    'First Day of the Week'                                    => 'Ngày đầu tiên trong tuần',
+    'Language'                                                 => 'Ngôn ngữ',
+    'Change Your Avatar'                                       => 'Thay đổi hình đại diện của bạn',
+    'Email'                                                    => 'Email',
+    'Current Password'                                         => 'Mật khẩu hiện tại',
+    'New Password'                                             => 'Mật khẩu mới',
+    'Confirm Password'                                         => 'Nhập lại mật khẩu',
+    'Update'                                                   => 'Cập nhật',
+    'Delete Account'                                           => 'Xoá tài khoản',
+    'Preferred Language'                                       => 'Ngôn ngữ ưa thích',
+    'Notification Settings'                                    => 'Cài đặt thông báo',
+    'Email Notifications'                                      => 'Thông báo qua email',
+    'Send email on direct messages'                            => 'Gửi email khi có tin nhắn trực tiếp',
+    'Send email on mention in tasks, discussions and comments' => 'Gửi email khi được nhắc tới trong Công việc, thảo luận và bình luận',
+    'Member of'                                                => 'Thành viên của',
+];

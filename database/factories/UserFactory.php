@@ -2,8 +2,9 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
-$factory->define(App\Models\User::class, function (Faker\Generator $faker) {
+$factory->define(App\Core\Models\User::class, function (Faker\Generator $faker) {
     static $password;
     $now = Carbon::now();
 
@@ -11,6 +12,7 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
         'name'           => $faker->name,
         'username'       => $faker->userName,
         'email'          => $faker->unique()->safeEmail,
+        'role_id'        => $faker->numberBetween(1, 5),
         'bio'            => $faker->sentence(20, true),
         'designation'    => '',
         'avatar'         => '',
@@ -20,6 +22,6 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
         'password'       => $password ?: $password = bcrypt('secret'),
         'created_at'     => $now,
         'updated_at'     => $now,
-        'remember_token' => str_random(10),
+        'remember_token' => Str::random(10),
     ];
 });

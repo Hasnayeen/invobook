@@ -22,6 +22,7 @@ class CreateEventsTable extends Migration
             $table->integer('created_by')->unsigned()->comment('id of the user who created the event');
             $table->string('eventable_type')->comment('office, team or projects');
             $table->integer('eventable_id')->unsigned();
+            $table->integer('cycle_id')->unsigned()->nullable();
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });

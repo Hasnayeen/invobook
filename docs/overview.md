@@ -1,5 +1,5 @@
 #### Overview
-GOODWORK have three major section 
+GOODWORK have three major sections 
 
 - Offices
 - Teams
@@ -18,22 +18,22 @@ Each section constitute of same sub section
 
 1. Offices
 
-An office is an workplace where people works. By default a office named Headquarter is placed. An admin can add as many new office as needed. An office can have few specified users or all.
+An office is a workplace where people work. By default an office named Headquarter is placed. An admin can add as many new office as needed. An office can have as few specified users or as many.
 
 2. Teams
 
-A team is comprised of staff of an organization. Admin can add different types of team based on roles/responsibility. A team may comprise of all user or some.
+A team is comprised of staff of an organization. An admin can add different types of team based on roles/responsibility. A team may comprise of all users or some.
 
 3. Projects
 
-A project is collection of interrelated task to achieve a certain goal. Admin can create as many projects as needed. All user or few specified user may work in a project.
+A project is a collection of interrelated tasks to achieve a certain goal. Admin can create as many projects as needed. All user or few specified user may work on a project.
 
 ### Sub-section
 ***
 
 1. Task Board
 
-A task board consist of several todo items that need to be complete.
+A task board consist of several to-do items that need to be complete.
 
 2. Discussion Board
 

@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'Users'                          => '用户',
+    'Roles & Permissions'            => '职位 & 许可',
+    'Activities'                     => '活动',
+    'About'                          => '关于',
+    'Roles'                          => '职位',
+    'Role'                           => '职位',
+    'Permissions'                    => '许可',
+    'Invite New Member'              => '邀请新的成员',
+    'Add New Role'                   => '添加新的职位',
+    'Cancel'                         => '取消',
+    'Assign'                         => '分配',
+    'Attach'                         => '附加',
+    'Filters'                        => '过滤',
+    'Apply'                          => '申请',
+    'Load More'                      => '加载更多',
+    'Check for Updates'              => '检查更新',
+    'Filter by Activity'             => '过滤活动',
+    'Filter by User'                 => '过滤用户',
+    'Filter by Date'                 => '过滤日期',
+    'Last Updated'                   => '最近更新',
+    'Author'                         => '作者',
+    'Submit issue & feedback at'     => '提交问题 & 反馈在',
+    'Don\'t belongs to any role yet' => '还不属于任何职位',
+    'Don\'t have any permission yet' => '还没有任何许可',
+];
