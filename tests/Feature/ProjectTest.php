@@ -3,9 +3,9 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Core\Models\Project;
+use App\Base\Models\Project;
 use Laravel\Passport\Passport;
-use App\Core\Exceptions\UserIsNotMember;
+use App\Base\Exceptions\UserIsNotMember;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Auth\Access\AuthorizationException;
 
@@ -14,13 +14,13 @@ class ProjectTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->project = factory('App\Core\Models\Project')->create();
+        $this->project = factory('App\Base\Models\Project')->create();
     }
 
     /** @test */
     public function user_can_see_public_projects_and_projects_of_which_user_is_member()
     {
-        $project = factory('App\Core\Models\Project')->create(['owner_id' => $this->user->id]);
+        $project = factory('App\Base\Models\Project')->create(['owner_id' => $this->user->id]);
         $this->actingAs($this->user);
         resolve('Authorization')->setupDefaultPermissions($project);
         $project->members()->save($this->user);
@@ -55,7 +55,7 @@ class ProjectTest extends TestCase
     public function user_without_permission_cant_see_project_page()
     {
         $this->expectException(AuthorizationException::class);
-        $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
+        $user = factory(\App\Base\Models\User::class)->create(['role_id' => 5]);
         $this->user_with_permission_can_create_project();
         $id = Project::where('name', 'New Project')->first()->id;
 
@@ -79,7 +79,7 @@ class ProjectTest extends TestCase
     public function user_without_permission_cant_create_project()
     {
         $this->expectException(AuthorizationException::class);
-        $user = factory('App\Core\Models\User')->create(['role_id' => 5]);
+        $user = factory('App\Base\Models\User')->create(['role_id' => 5]);
 
         $this->actingAs($user)->post('projects', [
             'name'        => 'New Project',
@@ -92,7 +92,7 @@ class ProjectTest extends TestCase
     {
         Notification::fake();
 
-        $user = factory('App\Core\Models\User')->create();
+        $user = factory('App\Base\Models\User')->create();
         $this->actingAs($this->user)->post('/members', [
             'user_id'       => $user->id,
             'group_type'    => 'project',
@@ -127,7 +127,7 @@ class ProjectTest extends TestCase
     public function user_without_permission_cant_delete_a_project()
     {
         $this->expectException(AuthorizationException::class);
-        $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
+        $user = factory(\App\Base\Models\User::class)->create(['role_id' => 5]);
 
         $this->user_with_permission_can_create_project();
 
@@ -168,7 +168,7 @@ class ProjectTest extends TestCase
     {
         $this->expectException(UserIsNotMember::class);
 
-        $user = factory('App\Core\Models\User')->create();
+        $user = factory('App\Base\Models\User')->create();
 
         $this->actingAs($this->user)
              ->delete('/members', [

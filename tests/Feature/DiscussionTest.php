@@ -12,7 +12,7 @@ class DiscussionTest extends TestCase
     {
         parent::setUp();
         Notification::fake();
-        $this->project = factory(\App\Core\Models\Project::class)->create(['owner_id' => $this->user->id]);
+        $this->project = factory(\App\Base\Models\Project::class)->create(['owner_id' => $this->user->id]);
         $this->actingAs($this->user);
         resolve('Authorization')->setupDefaultPermissions($this->project);
         $this->project->members()->save($this->user);
@@ -21,7 +21,7 @@ class DiscussionTest extends TestCase
     /** @test */
     public function user_with_permission_can_create_new_discussion()
     {
-        $category = factory(\App\Core\Models\Category::class)->create();
+        $category = factory(\App\Base\Models\Category::class)->create();
 
         $this->post('discussions', [
             'name'                => 'New article',
@@ -54,8 +54,8 @@ class DiscussionTest extends TestCase
     public function user_without_permission_cant_create_new_discussion()
     {
         $this->expectException(AuthorizationException::class);
-        $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
-        $category = factory(\App\Core\Models\Category::class)->create();
+        $user = factory(\App\Base\Models\User::class)->create(['role_id' => 5]);
+        $category = factory(\App\Base\Models\Category::class)->create();
 
         $this->actingAs($user)->post('discussions', [
             'name'                => 'New article',
@@ -73,7 +73,7 @@ class DiscussionTest extends TestCase
     /** @test */
     public function user_of_a_group_can_see_all_its_discussions()
     {
-        $discussions = factory(\App\Core\Models\Discussion::class, 2)->create([
+        $discussions = factory(\App\Base\Models\Discussion::class, 2)->create([
             'discussionable_type' => 'project',
             'discussionable_id'   => $this->project->id,
         ]);
@@ -93,8 +93,8 @@ class DiscussionTest extends TestCase
     public function user_not_member_of_group_cant_see_all_its_discussions()
     {
         $this->expectException(AuthorizationException::class);
-        $user = factory(\App\Core\Models\User::class)->create();
-        $discussions = factory(\App\Core\Models\Discussion::class, 2)->create([
+        $user = factory(\App\Base\Models\User::class)->create();
+        $discussions = factory(\App\Base\Models\Discussion::class, 2)->create([
             'discussionable_type' => 'project',
             'discussionable_id'   => $this->project->id,
         ]);
@@ -105,7 +105,7 @@ class DiscussionTest extends TestCase
     /** @test */
     public function user_with_permission_can_delete_a_discussion()
     {
-        $discussion = factory(\App\Core\Models\Discussion::class)->create([
+        $discussion = factory(\App\Base\Models\Discussion::class)->create([
             'discussionable_type' => 'project',
             'discussionable_id'   => $this->project->id,
         ]);
@@ -126,9 +126,9 @@ class DiscussionTest extends TestCase
     /** @test */
     public function user_can_delete_his_own_discussion()
     {
-        $user = factory(\App\Core\Models\User::class)->create();
+        $user = factory(\App\Base\Models\User::class)->create();
 
-        $discussion = factory(\App\Core\Models\Discussion::class)->create([
+        $discussion = factory(\App\Base\Models\Discussion::class)->create([
             'posted_by' => $user->id,
         ]);
 
@@ -143,8 +143,8 @@ class DiscussionTest extends TestCase
     public function user_without_permission_cant_delete_a_discussion()
     {
         $this->expectException(AuthorizationException::class);
-        $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
-        $discussion = factory(\App\Core\Models\Discussion::class)->create();
+        $user = factory(\App\Base\Models\User::class)->create(['role_id' => 5]);
+        $discussion = factory(\App\Base\Models\Discussion::class)->create();
 
         $this->actingAs($user)->delete(
             "/discussions/{$discussion->id}",
@@ -158,12 +158,12 @@ class DiscussionTest extends TestCase
     /** @test */
     public function authorized_user_with_permission_can_update_discussion()
     {
-        $discussion = factory(\App\Core\Models\Discussion::class)->create([
+        $discussion = factory(\App\Base\Models\Discussion::class)->create([
             'posted_by'           => $this->user->id,
             'discussionable_type' => 'project',
             'discussionable_id'   => $this->project->id,
         ]);
-        $category = factory(\App\Core\Models\Category::class)->create();
+        $category = factory(\App\Base\Models\Category::class)->create();
 
         $this->actingAs($this->user)->patch('discussions/' . $discussion->id, [
             'name'                => 'Updated article',
@@ -193,8 +193,8 @@ class DiscussionTest extends TestCase
     public function user_without_permission_cannot_update_discussion()
     {
         $this->expectException(AuthorizationException::class);
-        $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
-        $discussion = factory(\App\Core\Models\Discussion::class)->create([
+        $user = factory(\App\Base\Models\User::class)->create(['role_id' => 5]);
+        $discussion = factory(\App\Base\Models\Discussion::class)->create([
             'posted_by'           => $this->user->id,
             'discussionable_type' => 'project',
             'discussionable_id'   => $this->project->id,
@@ -214,8 +214,8 @@ class DiscussionTest extends TestCase
     /** @test */
     public function user_of_a_group_can_view_discussion_detail()
     {
-        $user = factory(\App\Core\Models\User::class)->create();
-        $discussion = factory(\App\Core\Models\Discussion::class)->create([
+        $user = factory(\App\Base\Models\User::class)->create();
+        $discussion = factory(\App\Base\Models\Discussion::class)->create([
             'discussionable_type' => 'project',
             'discussionable_id'   => $this->project->id,
         ]);
@@ -232,8 +232,8 @@ class DiscussionTest extends TestCase
     public function user_not_member_of_group_cant_view_discussion_detail()
     {
         $this->expectException(AuthorizationException::class);
-        $user = factory(\App\Core\Models\User::class)->create();
-        $discussion = factory(\App\Core\Models\Discussion::class)->create([
+        $user = factory(\App\Base\Models\User::class)->create();
+        $discussion = factory(\App\Base\Models\Discussion::class)->create([
             'discussionable_type' => 'project',
             'discussionable_id'   => $this->project->id,
         ]);

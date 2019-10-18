@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Core\Models\Permission;
+use App\Base\Models\Permission;
 
 class PermissionSettingsTest extends TestCase
 {

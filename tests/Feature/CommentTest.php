@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Core\Models\Discussion;
+use App\Base\Models\Discussion;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Validation\ValidationException;
@@ -98,10 +98,10 @@ class CommentTest extends TestCase
     public function user_can_see_all_comment()
     {
         $this->actingAs($this->user);
-        $project = factory(\App\Core\Models\Project::class)->create(['owner_id' => $this->user->id]);
+        $project = factory(\App\Base\Models\Project::class)->create(['owner_id' => $this->user->id]);
         resolve('Authorization')->setupDefaultPermissions($project);
-        $discussion = factory(\App\Core\Models\Discussion::class)->create(['discussionable_type' => 'project', 'discussionable_id' => $project->id]);
-        $comments = factory(\App\Core\Models\Comment::class, 3)->create(['commentable_type' => 'discussion', 'commentable_id' => $discussion->id]);
+        $discussion = factory(\App\Base\Models\Discussion::class)->create(['discussionable_type' => 'project', 'discussionable_id' => $project->id]);
+        $comments = factory(\App\Base\Models\Comment::class, 3)->create(['commentable_type' => 'discussion', 'commentable_id' => $discussion->id]);
 
         $this->call('GET', self::$endpoint, [
                 'commentable_type' => 'discussion',
@@ -122,10 +122,10 @@ class CommentTest extends TestCase
     /** @test */
     public function user_can_delete_his_own_comment()
     {
-        $user = factory(\App\Core\Models\User::class)->create();
+        $user = factory(\App\Base\Models\User::class)->create();
 
         $this->actingAs($user);
-        $comment = factory(\App\Core\Models\Comment::class)->create([
+        $comment = factory(\App\Base\Models\Comment::class)->create([
             'user_id'          => $user->id,
             'body'             => 'Comment body',
             'commentable_type' => 'task',
@@ -145,12 +145,12 @@ class CommentTest extends TestCase
     public function user_with_permission_can_delete_a_comment()
     {
         Notification::fake();
-        $project = factory(\App\Core\Models\Project::class)->create(['owner_id' => $this->user->id]);
+        $project = factory(\App\Base\Models\Project::class)->create(['owner_id' => $this->user->id]);
         $this->actingAs($this->user);
         resolve('Authorization')->setupDefaultPermissions($project);
-        $comment = factory(\App\Core\Models\Comment::class)->create([
+        $comment = factory(\App\Base\Models\Comment::class)->create([
             'commentable_type' => 'task',
-            'commentable_id'   => factory(\App\Core\Models\Task::class)->create([
+            'commentable_id'   => factory(\App\TaskManager\Models\Task::class)->create([
                 'taskable_type' => 'project',
                 'taskable_id'   => $project->id,
             ]),
@@ -178,9 +178,9 @@ class CommentTest extends TestCase
     {
         $this->expectException(AuthorizationException::class);
         $this->actingAs($this->user);
-        $comment = factory(\App\Core\Models\Comment::class)->create([
+        $comment = factory(\App\Base\Models\Comment::class)->create([
             'commentable_type' => 'task',
-            'commentable_id'   => factory(\App\Core\Models\Task::class),
+            'commentable_id'   => factory(\App\TaskManager\Models\Task::class),
         ]);
 
         $this->delete(

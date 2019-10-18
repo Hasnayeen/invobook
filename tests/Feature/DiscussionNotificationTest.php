@@ -3,14 +3,14 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Core\Models\Team;
-use App\Core\Models\User;
-use App\Core\Models\Office;
-use App\Core\Models\Project;
-use App\Core\Models\Discussion;
-use App\Core\Contracts\HasMembers;
+use App\Base\Models\Team;
+use App\Base\Models\User;
+use App\Base\Models\Office;
+use App\Base\Models\Project;
+use App\Base\Models\Discussion;
+use App\Base\Contracts\HasMembers;
 use Illuminate\Support\Facades\Notification;
-use App\Core\Notifications\DiscussionCreatedNotification;
+use App\Base\Notifications\DiscussionCreatedNotification;
 
 class DiscussionNotificationTest extends TestCase
 {
