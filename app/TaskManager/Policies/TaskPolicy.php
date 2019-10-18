@@ -2,8 +2,8 @@
 
 namespace App\TaskManager\Policies;
 
-use App\TaskManager\Models\Task;
 use App\Base\Models\User;
+use App\TaskManager\Models\Task;
 use App\Authorization\Authorization;
 use Illuminate\Auth\Access\HandlesAuthorization;
 

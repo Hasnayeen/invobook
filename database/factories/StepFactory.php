@@ -3,8 +3,8 @@
 /* @var $factory \Illuminate\Database\Eloquent\Factory */
 
 use App\Base\Models\Step;
-use App\TaskManager\Models\Task;
 use Faker\Generator as Faker;
+use App\TaskManager\Models\Task;
 
 $factory->define(Step::class, function (Faker $faker) {
     return [
