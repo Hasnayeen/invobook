@@ -3,10 +3,10 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Core\Models\User;
-use App\Core\Models\Project;
+use App\Base\Models\User;
+use App\Base\Models\Project;
 use Illuminate\Support\Facades\Mail;
-use App\Core\Notifications\BecameNewMember;
+use App\Base\Notifications\BecameNewMember;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Auth\Access\AuthorizationException;
 
@@ -24,18 +24,18 @@ class MemberTest extends TestCase
      * */
     public function get_all_members_of_a_group()
     {
-        $users = factory('App\Core\Models\User', 3)->create();
-        $project = factory('App\Core\Models\Project')->create([
+        $users = factory('App\Base\Models\User', 3)->create();
+        $project = factory('App\Base\Models\Project')->create([
             'owner_id' => $users[0]['id'],
         ]);
         $project->members()->saveMany($users);
 
-        $team = factory('App\Core\Models\Team')->create([
+        $team = factory('App\Base\Models\Team')->create([
             'owner_id' => $users[0]['id'],
         ]);
         $team->members()->saveMany($users);
 
-        $office = factory('App\Core\Models\Office')->create([
+        $office = factory('App\Base\Models\Office')->create([
             'owner_id' => $users[0]['id'],
         ]);
         $office->members()->saveMany($users);
@@ -126,8 +126,8 @@ class MemberTest extends TestCase
     /** @test */
     public function user_with_permission_can_add_member_to_group()
     {
-        $project = factory(\App\Core\Models\Project::class)->create(['owner_id' => $this->user->id]);
-        $user = factory(\App\Core\Models\User::class)->create();
+        $project = factory(\App\Base\Models\Project::class)->create(['owner_id' => $this->user->id]);
+        $user = factory(\App\Base\Models\User::class)->create();
 
         $this->actingAs($this->user)
              ->post('members', [
@@ -145,9 +145,9 @@ class MemberTest extends TestCase
     public function user_without_permission_cant_add_member_to_group()
     {
         $this->expectException(AuthorizationException::class);
-        $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
-        $project = factory(\App\Core\Models\Project::class)->create();
-        $user2 = factory(\App\Core\Models\User::class)->create();
+        $user = factory(\App\Base\Models\User::class)->create(['role_id' => 5]);
+        $project = factory(\App\Base\Models\Project::class)->create();
+        $user2 = factory(\App\Base\Models\User::class)->create();
 
         $res = $this->actingAs($user)
              ->post('members', [
@@ -160,8 +160,8 @@ class MemberTest extends TestCase
     /** @test */
     public function user_with_permission_can_remove_member_to_group()
     {
-        $project = factory(\App\Core\Models\Project::class)->create(['owner_id' => $this->user->id]);
-        $user = factory(\App\Core\Models\User::class)->create();
+        $project = factory(\App\Base\Models\Project::class)->create(['owner_id' => $this->user->id]);
+        $user = factory(\App\Base\Models\User::class)->create();
         $project->members()->save($user);
 
         $this->actingAs($this->user)
@@ -180,9 +180,9 @@ class MemberTest extends TestCase
     public function user_without_permission_cant_remove_member_to_group()
     {
         $this->expectException(AuthorizationException::class);
-        $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
-        $project = factory(\App\Core\Models\Project::class)->create();
-        $user2 = factory(\App\Core\Models\User::class)->create();
+        $user = factory(\App\Base\Models\User::class)->create(['role_id' => 5]);
+        $project = factory(\App\Base\Models\Project::class)->create();
+        $user2 = factory(\App\Base\Models\User::class)->create();
         $project->members()->save($user2);
 
         $res = $this->actingAs($user)

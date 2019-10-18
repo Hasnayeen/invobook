@@ -175,16 +175,17 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Core\Providers\AppServiceProvider::class,
-        App\Core\Providers\AuthServiceProvider::class,
-        App\Core\Providers\BroadcastServiceProvider::class,
-        App\Core\Providers\EventServiceProvider::class,
-        App\Core\Providers\RouteServiceProvider::class,
+        App\Base\Providers\AppServiceProvider::class,
+        App\Base\Providers\AuthServiceProvider::class,
+        App\Base\Providers\BroadcastServiceProvider::class,
+        App\Base\Providers\EventServiceProvider::class,
+        App\Base\Providers\RouteServiceProvider::class,
 
         /*
          * Modules Service Providers...
          */
         App\Authorization\AuthorizationServiceProvider::class,
+        App\TaskManager\TaskManagerServiceProvider::class,
     ],
 
     /*

@@ -3,9 +3,9 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Core\Models\User;
-use App\Core\Models\Project;
-use App\Core\Models\Permission;
+use App\Base\Models\User;
+use App\Base\Models\Project;
+use App\Base\Models\Permission;
 
 class GroupPermissionTest extends TestCase
 {

@@ -3,9 +3,9 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Core\Models\Step;
-use App\Core\Models\Task;
-use App\Core\Models\Project;
+use App\Base\Models\Step;
+use App\TaskManager\Models\Task;
+use App\Base\Models\Project;
 use Illuminate\Support\Facades\Event;
 
 class ProgressTest extends TestCase

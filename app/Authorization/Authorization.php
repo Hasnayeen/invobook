@@ -2,8 +2,8 @@
 
 namespace App\Authorization;
 
-use App\Core\Models\Role;
-use App\Core\Models\User;
+use App\Base\Models\Role;
+use App\Base\Models\User;
 
 class Authorization
 {

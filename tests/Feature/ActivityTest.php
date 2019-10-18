@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use Carbon\Carbon;
 use Tests\TestCase;
-use App\Core\Models\Notification;
+use App\Base\Models\Notification;
 use Spatie\Activitylog\Models\Activity;
 
 class ActivityTest extends TestCase
@@ -12,8 +12,8 @@ class ActivityTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->user2 = factory(\App\Core\Models\User::class)->create(['role_id' => 2]);
-        $this->user3 = factory(\App\Core\Models\User::class)->create(['role_id' => 2]);
+        $this->user2 = factory(\App\Base\Models\User::class)->create(['role_id' => 2]);
+        $this->user3 = factory(\App\Base\Models\User::class)->create(['role_id' => 2]);
     }
 
     /** @test */

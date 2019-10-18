@@ -1,7 +1,7 @@
 <?php
 
 use Carbon\Carbon;
-use App\Core\Models\User;
+use App\Base\Models\User;
 use Illuminate\Database\Seeder;
 
 class AdminUserSeeder extends Seeder
