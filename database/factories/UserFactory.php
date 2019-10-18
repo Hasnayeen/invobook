@@ -4,7 +4,7 @@
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 
-$factory->define(App\Core\Models\User::class, function (Faker\Generator $faker) {
+$factory->define(App\Base\Models\User::class, function (Faker\Generator $faker) {
     static $password;
     $now = Carbon::now();
 

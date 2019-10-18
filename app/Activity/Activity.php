@@ -2,7 +2,7 @@
 
 namespace App\Activity;
 
-use App\Core\Models\Notification;
+use App\Base\Models\Notification;
 
 class Activity
 {

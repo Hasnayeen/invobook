@@ -3,12 +3,12 @@
 use Carbon\Carbon;
 use Faker\Generator as Faker;
 
-$factory->define(App\Core\Models\Notification::class, function (Faker $faker) {
+$factory->define(App\Base\Models\Notification::class, function (Faker $faker) {
     return [
         'id'                => $faker->unique()->word(10),
         'type'              => $faker->word(10),
         'notifiable_type'   => 'user',
-        'notifiable_id'     => factory(\App\Core\Models\User::class)->create()->id,
+        'notifiable_id'     => factory(\App\Base\Models\User::class)->create()->id,
         'read_at'           => null,
         'group_type'        => 'project',
         'group_id'          => 1,
