@@ -2,8 +2,8 @@
 
 namespace App\TaskManager\Notifications;
 
-use App\TaskManager\Models\Task;
 use Illuminate\Bus\Queueable;
+use App\TaskManager\Models\Task;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
