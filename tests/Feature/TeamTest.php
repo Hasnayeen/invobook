@@ -3,16 +3,38 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Models\Team;
-use Spatie\Permission\Models\Permission;
+use App\Core\Models\Team;
+use Laravel\Passport\Passport;
+use App\Core\Exceptions\UserIsNotMember;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class TeamTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
-        $this->team = factory('App\Models\Team')->create();
+        $this->team = factory('App\Core\Models\Team')->create();
+    }
+
+    /** @test */
+    public function user_can_see_public_teams_and_teams_of_which_user_is_member()
+    {
+        $team = factory('App\Core\Models\Team')->create(['owner_id' => $this->user->id]);
+        $this->actingAs($this->user);
+        resolve('Authorization')->setupDefaultPermissions($team);
+        $team->members()->save($this->user);
+
+        $this->json('GET', 'teams/')->assertJsonFragment([
+            'status' => 'success',
+            'name'   => $team->name,
+        ]);
+
+        Passport::actingAs($this->user);
+        $this->json('GET', 'teams/')->assertJsonFragment([
+            'status' => 'success',
+            'name'   => $team->name,
+        ]);
     }
 
     /** @test */
@@ -21,16 +43,19 @@ class TeamTest extends TestCase
         $this->user_with_permission_can_create_team();
         $id = Team::where('name', 'New Team')->first()->id;
 
-        $this->actingAs($this->user)->get('teams/' . $id)->assertSee('New Team');
+        $this->actingAs($this->user)
+             ->json('GET', 'teams/' . $id)
+             ->assertJsonFragment([
+                 'status' => 'success',
+                 'name'   => 'New Team',
+             ]);
     }
 
-    /**
-     * @expectedException Illuminate\Auth\Access\AuthorizationException
-     * @test
-     */
+    /** @test */
     public function user_without_permission_cant_see_team_page()
     {
-        $user = factory(\App\Models\User::class)->create();
+        $this->expectException(AuthorizationException::class);
+        $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
         $this->user_with_permission_can_create_team();
         $id = Team::where('name', 'New Team')->first()->id;
 
@@ -50,20 +75,13 @@ class TeamTest extends TestCase
             'owner_id'    => $this->user->id,
         ]);
         $this->assertDatabaseHas('teams', ['name' => 'New Team', 'description' => 'Team of all new members', 'owner_id' => $this->user->id]);
-
-        $id = Team::where('name', 'New Team')->first()->id;
-        $this->assertTrue($this->user->hasPermissionTo('view team->' . $id));
-        $this->assertTrue($this->user->hasPermissionTo('edit team->' . $id));
-        $this->assertTrue($this->user->hasPermissionTo('delete team->' . $id));
     }
 
-    /**
-     * @expectedException Illuminate\Auth\Access\AuthorizationException
-     * @test
-     */
+    /** @test */
     public function user_without_permission_cant_create_team()
     {
-        $user = factory(\App\Models\User::class)->create();
+        $this->expectException(AuthorizationException::class);
+        $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
 
         $this->actingAs($user)->post('/teams', [
             'name'        => 'New Team',
@@ -75,13 +93,12 @@ class TeamTest extends TestCase
     public function add_user_to_team()
     {
         Notification::fake();
-        Permission::create(['name' => 'view team->' . $this->team->id]);
 
-        $user = factory('App\Models\User')->create();
+        $user = factory('App\Core\Models\User')->create();
         $this->actingAs($this->user)->post('/members', [
             'user_id'       => $user->id,
-            'resource_type' => 'team',
-            'resource_id'   => $this->team->id,
+            'group_type'    => 'team',
+            'group_id'      => $this->team->id,
         ])->assertJson([
             'status'  => 'success',
             'message' => 'User added to the team',
@@ -108,18 +125,84 @@ class TeamTest extends TestCase
              ]);
     }
 
-    /**
-     * @expectedException Illuminate\Auth\Access\AuthorizationException
-     * @test
-     */
+    /** @test */
     public function user_without_permission_cant_delete_a_team()
     {
-        $user = factory(\App\Models\User::class)->create();
+        $this->expectException(AuthorizationException::class);
+        $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
 
         $this->user_with_permission_can_create_team();
 
         $id = Team::where('name', 'New Team')->first()->id;
 
         $this->actingAs($user)->delete('teams/' . $id);
+    }
+
+    /** @test */
+    public function remove_user_from_team()
+    {
+        $this->add_user_to_team();
+
+        $this->assertCount(1, $this->team->members);
+
+        $user = $this->team->members->first();
+
+        $this->actingAs($this->user)->delete('/members', [
+            'user_id'       => $user->id,
+            'group_type'    => 'team',
+            'group_id'      => $this->team->id,
+        ])->assertJson([
+            'status'  => 'success',
+            'message' => 'User removed from the team',
+            'user'    => [
+                'id'       => $user->id,
+                'name'     => $user->name,
+                'username' => $user->username,
+                'avatar'   => $user->avatar,
+            ],
+        ]);
+
+        $this->assertEmpty($this->team->fresh()->members);
+    }
+
+    /** @test */
+    public function cannot_remove_user_from_team_if_not_a_member()
+    {
+        $this->expectException(UserIsNotMember::class);
+
+        $user = factory('App\Core\Models\User')->create();
+
+        $this->actingAs($this->user)
+             ->delete('/members', [
+                 'user_id'       => $user->id,
+                 'group_type'    => 'team',
+                 'group_id'      => $this->team->id,
+             ]);
+    }
+
+    /** @test */
+    public function admin_can_make_team_public()
+    {
+        $this->actingAs($this->user)
+             ->post('public-teams/' . $this->team->id)
+             ->assertJsonFragment([
+                 'status'  => 'success',
+                 'message' => localize('team.Team has been made public'),
+             ]);
+        $this->assertDatabaseHas('teams', ['id' => $this->team->id, 'public' => true]);
+    }
+
+    /** @test */
+    public function admin_can_make_team_private()
+    {
+        $this->actingAs($this->user)
+             ->post('public-teams/' . $this->team->id);
+
+        $this->delete('public-teams/' . $this->team->id)
+             ->assertJsonFragment([
+                 'status'  => 'success',
+                 'message' => localize('team.Team has been made private'),
+             ]);
+        $this->assertDatabaseHas('teams', ['id' => $this->team->id, 'public' => false]);
     }
 }

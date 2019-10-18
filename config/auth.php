@@ -41,7 +41,7 @@ return [
         ],
 
         'api' => [
-            'driver'   => 'token',
+            'driver'   => 'passport',
             'provider' => 'users',
         ],
     ],
@@ -66,7 +66,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model'  => App\Models\User::class,
+            'model'  => App\Core\Models\User::class,
         ],
 
         // 'users' => [
@@ -97,5 +97,21 @@ return [
             'expire'   => 60,
         ],
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Client credentials for mobile app authentication
+    |--------------------------------------------------------------------------
+    |
+    | Mobile app authenticate via password grant token through oauth
+    | server. These credentials are important to add to incoming
+    | request as they cannot be stored securely in the app.
+    |
+     */
+
+     'mobile' => [
+         'client_id'     => env('CLIENT_ID'),
+         'client_secret' => env('CLIENT_SECRET'),
+     ],
 
 ];

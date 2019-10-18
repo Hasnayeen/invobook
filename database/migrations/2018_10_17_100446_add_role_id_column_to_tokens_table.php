@@ -14,7 +14,7 @@ class AddRoleIdColumnToTokensTable extends Migration
     public function up()
     {
         Schema::table('tokens', function (Blueprint $table) {
-            $table->unsignedInteger('role_id')->nullable()->after('email');
+            $table->unsignedInteger('role_id')->default(5)->after('email');
         });
     }
 

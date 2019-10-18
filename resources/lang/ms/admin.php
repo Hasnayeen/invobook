@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'Users'                          => 'Pengguna',
+    'Roles & Permissions'            => 'Peranan & Kebenaran',
+    'Activities'                     => 'Aktiviti',
+    'About'                          => 'Mengenai',
+    'Roles'                          => 'Peranan',
+    'Role'                           => 'Peranan',
+    'Permissions'                    => 'Kebenaran',
+    'Invite New Member'              => 'Jemput Ahli Baru',
+    'Add New Role'                   => 'Tambah Peranan Baru',
+    'Cancel'                         => 'Batalkan',
+    'Assign'                         => 'Berikan',
+    'Attach'                         => 'Lampirkan',
+    'Filters'                        => 'Penapis',
+    'Apply'                          => 'Memohon',
+    'Load More'                      => 'Tambah lagi',
+    'Check for Updates'              => 'Menyemak kemas kini',
+    'Filter by Activity'             => 'Tapis mengikut Aktiviti',
+    'Filter by User'                 => 'Tapis mengikut Pengguna',
+    'Filter by Date'                 => 'Tapis mengikut Tarikh',
+    'Last Updated'                   => 'Dikemaskini Terakhir',
+    'Author'                         => 'Pengarang',
+    'Submit issue & feedback at'     => 'Hantar isu & maklumbalas di',
+    'Don\'t belongs to any role yet' => 'Jangan dimiliki apa-apa peranan',
+    'Don\'t have any permission yet' => 'Tidak ada kebenaran lagi',
+];

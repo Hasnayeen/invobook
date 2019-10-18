@@ -2,49 +2,35 @@
 
 namespace Tests\Feature;
 
-use App\Models\Tag;
 use Tests\TestCase;
-use App\Models\Task;
-use Spatie\Permission\Models\Permission;
+use App\Core\Models\Tag;
+use App\Core\Models\Task;
+use App\Core\Models\Project;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class TagTest extends TestCase
 {
     /** @test */
-    public function user_with_permission_can_add_a_tag_to_a_task()
+    public function user_with_permission_can_create_tag()
     {
-        $task = factory(Task::class)->create();
-
-        $permission = Permission::create(['name' => "edit {$task->taskable_type}->{$task->taskable_id}"]);
-        $this->user->givePermissionTo($permission);
-
-        $this->actingAs($this->user)->post("tasks/{$task->id}/tags", [
+        $this->actingAs($this->user)->post('tags', [
             'label' => 'dummy',
         ])->assertJsonFragment([
             'status'  => 'success',
-            'message' => 'Tag has been added to the task',
+            'message' => 'Tag has been created',
             'label'   => 'dummy',
         ]);
 
-        $tag = Tag::where('label', 'dummy')->first();
-
-        $this->assertEquals('dummy', $tag->label);
-        $this->assertDatabaseHas('task_tags', [
-            'task_id' => $task->id,
-            'tag_id'  => $tag->id,
-        ]);
+        $this->assertDatabaseHas('tags', ['label' => 'dummy']);
     }
 
-    /**
-     * @test
-     * @expectedException Illuminate\Auth\Access\AuthorizationException
-     */
-    public function user_without_permission_can_not_add_a_tag_to_a_task()
+    /** @test */
+    public function user_without_permission_can_not_create_tag()
     {
-        $task = factory(Task::class)->create();
-
-        $permission = Permission::create(['name' => "edit {$task->taskable_type}->{$task->taskable_id}"]);
-
-        $this->actingAs($this->user)->post("tasks/{$task->id}/tags", [
+        $this->expectException(AuthorizationException::class);
+        $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
+        $this->actingAs($user)->post('tags', [
             'label' => 'dummy',
         ]);
     }
@@ -52,18 +38,21 @@ class TagTest extends TestCase
     /** @test */
     public function user_can_add_a_existing_tag_to_a_task()
     {
+        $project = factory(Project::class)->create(['owner_id' => $this->user->id]);
+        $task = factory(Task::class)->create(['taskable_type' => 'project', 'taskable_id' => $project->id]);
         $tag = factory(Tag::class)->create();
-        $task = factory(Task::class)->create();
 
-        $permission = Permission::create(['name' => "edit {$task->taskable_type}->{$task->taskable_id}"]);
-        $this->user->givePermissionTo($permission);
+        $this->actingAs($this->user);
+        resolve('Authorization')->setupDefaultPermissions($project);
+        $project->members()->save($this->user);
 
-        $this->actingAs($this->user)->post("tasks/{$task->id}/tags", [
-            'label' => $tag->label,
+        $this->post("tasks/{$task->id}/tags", [
+            'labels'     => $tag->id,
+            'group_type' => $task->taskable_type,
+            'group_id'   => $task->taskable_id,
         ])->assertJsonFragment([
             'status'  => 'success',
             'message' => 'Tag has been added to the task',
-            'label'   => $tag->label,
         ]);
 
         $this->assertDatabaseHas('task_tags', [
@@ -73,17 +62,22 @@ class TagTest extends TestCase
     }
 
     /** @test */
-    public function user_with_permission_can_delete_a_tag_from_a_task()
+    public function user_with_permission_can_detach_a_tag_from_a_task()
     {
+        $project = factory(Project::class)->create(['owner_id' => $this->user->id]);
+        $task = factory(Task::class)->create(['taskable_type' => 'project', 'taskable_id' => $project->id]);
         $tag = factory(Tag::class)->create();
-        $task = factory(Task::class)->create();
+
+        $this->actingAs($this->user);
+        resolve('Authorization')->setupDefaultPermissions($project);
+        $project->members()->save($this->user);
 
         $task->tags()->attach($tag);
 
-        $permission = Permission::create(['name' => "edit {$task->taskable_type}->{$task->taskable_id}"]);
-        $this->user->givePermissionTo($permission);
-
-        $this->actingAs($this->user)->delete("tasks/{$task->id}/tags/{$tag->id}")
+        $this->delete("tasks/{$task->id}/tags/{$tag->id}", [
+            'group_type' => $task->taskable_type,
+            'group_id'   => $task->taskable_id,
+        ])
             ->assertJsonFragment([
                 'status'  => 'success',
                 'message' => 'Tag has been deleted from the task',
@@ -95,19 +89,46 @@ class TagTest extends TestCase
         ]);
     }
 
-    /**
-     * @test
-     * @expectedException Illuminate\Auth\Access\AuthorizationException
-     */
-    public function user_without_permission_can_not_delete_a_tag_from_a_task()
+    /** @test */
+    public function user_without_permission_can_not_detach_a_tag_from_a_task()
     {
+        $this->expectException(AuthorizationException::class);
+        $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
         $tag = factory(Tag::class)->create();
         $task = factory(Task::class)->create();
 
         $task->tags()->attach($tag);
 
-        $permission = Permission::create(['name' => "edit {$task->taskable_type}->{$task->taskable_id}"]);
+        $this->actingAs($user)->delete("tasks/{$task->id}/tags/{$tag->id}", [
+            'group_type' => $task->taskable_type,
+            'group_id'   => $task->taskable_id,
+        ]);
+    }
 
-        $this->actingAs($this->user)->delete("tasks/{$task->id}/tags/{$tag->id}");
+    /** @test */
+    public function authenticated_user_can_access_all_tags()
+    {
+        $tag = factory(Tag::class)->create();
+
+        $this->actingAs($this->user)
+            ->get('/tags')
+            ->assertJsonFragment([
+                'status' => 'success',
+                'total'  => 1,
+                'tags'   => [
+                    [
+                        'id'    => $tag->id,
+                        'label' => $tag->label,
+                    ],
+                ],
+            ]);
+    }
+
+    /** @test */
+    public function guest_user_cant_access_all_tags()
+    {
+        $this->expectException(AuthenticationException::class);
+
+        $this->get('/tags');
     }
 }

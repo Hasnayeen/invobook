@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'Users'                          => 'Brugere',
+    'Roles & Permissions'            => 'Roller og tilladelser',
+    'Activities'                     => 'Aktiviteter',
+    'About'                          => 'Om',
+    'Roles'                          => 'Roller',
+    'Role'                           => 'rolle',
+    'Permissions'                    => 'Tilladelser',
+    'Invite New Member'              => 'Inviter nyt medlem',
+    'Add New Role'                   => 'Tilføj ny rolle',
+    'Cancel'                         => 'Afbestille',
+    'Assign'                         => 'Tildel',
+    'Attach'                         => 'Vedhæft',
+    'Filters'                        => 'filtre',
+    'Apply'                          => 'ansøge',
+    'Load More'                      => 'Indlæs mere',
+    'Check for Updates'              => 'Søg efter opdateringer',
+    'Filter by Activity'             => 'Filtrer efter aktivitet',
+    'Filter by User'                 => 'Filtrer efter bruger',
+    'Filter by Date'                 => 'Filtrer efter dato',
+    'Last Updated'                   => 'Sidst opdateret',
+    'Author'                         => 'Forfatter',
+    'Submit issue & feedback at'     => 'Indsend problem og tilbagemelding på',
+    'Don\'t belongs to any role yet' => 'Tilhører ikke nogen rolle endnu',
+    'Don\'t have any permission yet' => 'Har endnu ingen tilladelse',
+];

@@ -3,39 +3,29 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Models\Team;
-use App\Models\User;
-use App\Models\Office;
-use App\Models\Project;
+use App\Core\Models\Task;
+use App\Core\Models\Project;
+use Laravel\Passport\Passport;
+use Illuminate\Support\Facades\Event;
 
 class HomePageTest extends TestCase
 {
     /** @test */
-    public function show_latest_three_projects_teams_and_offices()
+    public function user_can_see_current_work_in_progress_assigned_to_them()
     {
-        $projects = factory(Project::class, 3)->create(['office_id' => null, 'team_id' => null]);
-        $teams = factory(Team::class, 3)->create(['office_id' => null]);
-        $offices = factory(Office::class, 3)->create();
-
-        $this->actingAs($this->user)
-            ->get('/')
-            ->assertStatus(200)
-            ->assertSee($projects[0]->name)
-            ->assertSee($teams[0]->name);
-    }
-
-    /** @test */
-    public function user_can_see_members_of_projects_teams()
-    {
+        Event::fake();
         $project = factory(Project::class)->create(['office_id' => null, 'team_id' => null]);
-        $users = factory(User::class, 5)->create();
-        $project->members()->attach($users->map(function ($user) {
-            return $user->id;
-        }));
+        $project->members()->attach($this->user->id);
+        $task = factory(Task::class)->create(['taskable_type' => 'project', 'taskable_id' => $project->id, 'assigned_to' => $this->user->id, 'status_id' => 2]);
         $this->actingAs($this->user)
-            ->get('/')
-            ->assertSee($users[0]->name)
-            ->assertSee($users[1]->name)
-            ->assertSee($users[2]->name);
+             ->get('/')
+             ->assertSee($task->name);
+
+        Passport::actingAs($this->user);
+        $this->get('api/home')
+             ->assertJsonFragment([
+                 'status' => 'success',
+                 'name'   => $task->name,
+             ]);
     }
 }

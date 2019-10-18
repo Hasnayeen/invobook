@@ -14,3 +14,7 @@ npm-debug.log
 docker.env
 /storage/framework/testing
 .vscode
+/storage/*.index
+.DS_Store
+.phpunit.result.cache
+*.swp

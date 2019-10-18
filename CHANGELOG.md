@@ -1,9 +1,59 @@
 # Release Notes
 
+## v0.10 (Yet to release)
+
+### Added
+
+- Tag can be created from group page and add/remove them to the group
+- Roadmap tool can be enabled/disabled
+- Group can be made publicly viewable (without account)
+- Added Vietnamese translation
+
+## v0.9 (2019-06-30)
+
+### Added
+
+- New Authorization module
+- New permission system
+- File upload option in file section
+- Direct messaging to user functionality
+- Mentioning user functionality in comment & message
+- New cycle (release based) functionality
+- Roadmap feature
+- Show who's online currently in dm box
+- Show activity in project/team/office page
+- New admin middleware
+- Tool enable/disable option in project/team/office
+- Endpoint to list all tags
+- Endpoint to create categories
+- Endpoint to check if username exists
+- Added `localize` helper function
+- Shareable invite link option for registration
+- Impersonate user feature for owner
+- Owner/admin can remove user from project/team/office
+- Update discussion posts
+- Indicator for new notification and direct message
+- Finnish translation
+- Simplified Chinese translation
+
+### Changed
+
+- Upgraded to Laravel 5.8
+- Upgraded to TailwindCSS 1.0
+- Everything under `App` namespace is now moved to `App\Core` namespace
+- Image option in discussion post has been changed (url embed instead of base64)
+
+### Removed
+
+- Removed `spatie/laravel-permission` package
+- Removed `spatie/laravel-activitylog` package
+- Removed `vue-linkify` npm package
+
 ## v0.8 (2018-10-18)
 
 ### Added
 
+- Added swedish translation
 - Added `LocalizationMiddleware` & `locale` config ([issue-211](https://github.com/iluminar/goodwork/issues/211))
 - Added `lang` column in `users` table ([issue-211](https://github.com/iluminar/goodwork/issues/211))
 - Added `localize` filter in global Vue ([issue-211](https://github.com/iluminar/goodwork/issues/211))

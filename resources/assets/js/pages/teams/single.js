@@ -1,12 +1,14 @@
 import './../../bootstrap'
+import componentMixin from './../commonComponent'
 import single from './../../components/teams/single.vue'
-import navbar from './../../components/partials/navbar.vue'
-import notificationPopup from './../../components/partials/notificationPopup.vue'
+import store from './../../store/team'
 
 /* eslint-disable no-unused-vars */
 const app = new Vue({
   el: '#app',
+  mixins: [componentMixin],
   components: {
-    single, navbar, notificationPopup
-  }
+    single
+  },
+  store
 })
