@@ -31,7 +31,6 @@ Route::middleware(['web', 'auth'])->group(function () {
     **********************************/
 
 Route::group(['prefix' => 'api', 'middleware' => 'api, auth:api'], function () {
-
     Route::get('tasks', [TaskController::class, 'index']);
 
     Route::post('tasks', [TaskController::class, 'store']);
