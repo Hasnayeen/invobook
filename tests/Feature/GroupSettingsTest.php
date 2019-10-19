@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Core\Models\Project;
+use App\Project\Models\Project;
 
 class GroupSettingsTest extends TestCase
 {

@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto my-6 px-4 md:px-0 w-full md:max-w-2xl lg:max-w-4xl xl:max-w-6xl">
+  <div class="container mx-auto my-4 px-4 md:px-0 w-full md:max-w-2xl lg:max-w-4xl xl:max-w-6xl">
     <div class="text-gray-600 font-semibold text-2xl mb-4 flex items-center justify-center">
       <div class="flex justify-center items-center">
         {{project.name}}

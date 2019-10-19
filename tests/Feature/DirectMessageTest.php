@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Core\Models\User;
-use App\Core\Models\DirectMessage;
+use App\Base\Models\User;
+use App\Base\Models\DirectMessage;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Access\AuthorizationException;
 

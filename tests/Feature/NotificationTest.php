@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Core\Models\Notification;
+use App\Base\Models\Notification;
 
 class NotificationTest extends TestCase
 {

@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'Home'              => 'المنزل',
     'Projects'          => 'المشاريع',
     'Teams'             => 'الفرق',
     'Offices'           => 'المكاتب',

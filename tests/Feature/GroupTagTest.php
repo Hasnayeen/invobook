@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Core\Models\Tag;
-use App\Core\Models\Project;
+use App\Base\Models\Tag;
+use App\Project\Models\Project;
 
 class GroupTagTest extends TestCase
 {
