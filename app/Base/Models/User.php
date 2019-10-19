@@ -2,6 +2,7 @@
 
 namespace App\Base\Models;
 
+use App\Project\Models\Project;
 use App\TaskManager\Models\Task;
 use App\Base\Utilities\Notifiable;
 use Laravel\Passport\HasApiTokens;
@@ -42,12 +43,12 @@ class User extends Authenticatable
 
     public function project()
     {
-        return $this->hasMany('App\Base\Models\Project', 'owner_id');
+        return $this->hasMany(Project::class, 'owner_id');
     }
 
     public function projects()
     {
-        return $this->belongsToMany('App\Base\Models\Project');
+        return $this->belongsToMany(Project::class);
     }
 
     public function office()
@@ -170,11 +171,11 @@ class User extends Authenticatable
 
     public function file()
     {
-        return $this->hasMany('App\Base\Models\File', 'owner_id');
+        return $this->hasMany(File::class, 'owner_id');
     }
 
     public function files()
     {
-        return $this->belongsToMany('App\Base\Models\File');
+        return $this->belongsToMany(File::class);
     }
 }

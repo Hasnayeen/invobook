@@ -9,7 +9,7 @@ class CycleTest extends TestCase
     /** @test */
     public function admin_can_create_new_cycle()
     {
-        $project = factory(\App\Base\Models\Project::class)->create(['owner_id' => $this->user->id]);
+        $project = factory(\App\Project\Models\Project::class)->create(['owner_id' => $this->user->id]);
         $this->actingAs($this->user);
         resolve('Authorization')->setupDefaultPermissions($project);
         $project->members()->save($this->user);
@@ -40,7 +40,7 @@ class CycleTest extends TestCase
     /** @test */
     public function cycle_in_same_group_cant_overlap_another_cycle()
     {
-        $project = factory(\App\Base\Models\Project::class)->create(['owner_id' => $this->user->id]);
+        $project = factory(\App\Project\Models\Project::class)->create(['owner_id' => $this->user->id]);
         $this->actingAs($this->user);
         resolve('Authorization')->setupDefaultPermissions($project);
         $project->members()->save($this->user);
@@ -104,7 +104,7 @@ class CycleTest extends TestCase
     /** @test */
     public function user_can_get_all_cycles()
     {
-        $project = factory(\App\Base\Models\Project::class)->create(['owner_id' => $this->user->id]);
+        $project = factory(\App\Project\Models\Project::class)->create(['owner_id' => $this->user->id]);
         factory(\App\Base\Models\Cycle::class)->create([
             'name'          => 'June Release Cycle',
             'start_date'    => '2019-06-01',

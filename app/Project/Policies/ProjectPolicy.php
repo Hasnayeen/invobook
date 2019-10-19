@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Base\Policies;
+namespace App\Project\Policies;
 
 use App\Base\Models\User;
-use App\Base\Models\Project;
+use App\Project\Models\Project;
 use App\Authorization\Authorization;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -15,7 +15,7 @@ class ProjectPolicy
      * Determine whether the user can view the project.
      *
      * @param  \App\Base\Models\User $user
-     * @param  \App\Base\Project     $project
+     * @param  \App\Project\Project  $project
      * @return mixed
      */
     public function view(User $user, Project $project)
@@ -38,7 +38,7 @@ class ProjectPolicy
      * Determine whether the user can delete the project.
      *
      * @param  \App\Base\Models\User $user
-     * @param  \App\Base\Project     $project
+     * @param  \App\Project\Project  $project
      * @return mixed
      */
     public function delete(User $user, Project $project)
@@ -50,7 +50,7 @@ class ProjectPolicy
      * Determine whether the user can change the project settings.
      *
      * @param  \App\Base\Models\User $user
-     * @param  \App\Base\Project     $project
+     * @param  \App\Project\Project  $project
      * @return mixed
      */
     public function settings(User $user, Project $project)

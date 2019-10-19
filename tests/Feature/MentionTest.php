@@ -43,7 +43,7 @@ class MentionTest extends TestCase
     /** @test */
     public function user_can_mention_other_user_when_creating_task()
     {
-        $project = factory(\App\Base\Models\Project::class)->create(['owner_id' => $this->user->id]);
+        $project = factory(\App\Project\Models\Project::class)->create(['owner_id' => $this->user->id]);
         $task = factory(Task::class)->make([
             'group_type' => 'project',
             'group_id'   => $project->id,
@@ -171,7 +171,7 @@ class MentionTest extends TestCase
 
     private function prepareDataForMessageTest()
     {
-        $project = factory('App\Base\Models\Project')->create(['owner_id' => $this->user->id]);
+        $project = factory('App\Project\Models\Project')->create(['owner_id' => $this->user->id]);
         $project->members()->attach($this->user);
         $this->actingAs($this->user);
         resolve('Authorization')->setupDefaultPermissions($project);

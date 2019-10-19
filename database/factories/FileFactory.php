@@ -17,7 +17,7 @@ $factory->define(App\Base\Models\File::class, function (Faker\Generator $faker) 
             $fileableId = factory(App\Base\Models\Team::class)->create()->id;
             break;
         case 'project':
-            $fileableId = factory(App\Base\Models\Project::class)->create()->id;
+            $fileableId = factory(App\Project\Models\Project::class)->create()->id;
             break;
         default:
             throw new Exception('Wrong Taskable type');

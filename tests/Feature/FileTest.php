@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Base\Models\File;
-use App\Base\Models\Project;
+use App\Project\Models\Project;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use App\Base\Exceptions\InvalidFileFormat;

@@ -4,7 +4,7 @@ namespace App\Base\Utilities;
 
 use App\Base\Models\Team;
 use App\Base\Models\Office;
-use App\Base\Models\Project;
+use App\Project\Models\Project;
 
 trait GroupTrait
 {

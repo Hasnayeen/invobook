@@ -13,7 +13,7 @@ $factory->define(App\Base\Models\Message::class, function (Faker $faker) {
             $messageable_id = factory(App\Base\Models\Team::class)->create()->id;
             break;
         case 'project':
-            $messageable_id = factory(App\Base\Models\Project::class)->create()->id;
+            $messageable_id = factory(App\Project\Models\Project::class)->create()->id;
             break;
         default:
             throw new Exception('Wrong Taskable type');

@@ -4,7 +4,7 @@ namespace Tests\Unit;
 
 use Tests\TestCase;
 use App\Base\Models\Cycle;
-use App\Base\Models\Project;
+use App\Project\Models\Project;
 
 class EntityTest extends TestCase
 {

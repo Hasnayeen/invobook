@@ -2,11 +2,11 @@
 
 namespace App\Base\Providers;
 
-use App\Base\Models\Project;
+use App\Project\Models\Project;
 use App\Base\Models\Discussion;
 use App\TaskManager\Models\Task;
 use App\Base\Models\DirectMessage;
-use App\Base\Observers\ProjectObserver;
+use App\Project\Observers\ProjectObserver;
 use App\Base\Observers\DiscussionObserver;
 use App\TaskManager\Observers\TaskObserver;
 use App\Base\Observers\DirectMessageObserver;

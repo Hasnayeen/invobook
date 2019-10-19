@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Base\Observers;
+namespace App\Project\Observers;
 
-use App\Base\Models\Project;
-use App\Base\Models\ProjectSetting;
+use App\Project\Models\Project;
+use App\Project\Models\ProjectSetting;
 
 class ProjectObserver
 {

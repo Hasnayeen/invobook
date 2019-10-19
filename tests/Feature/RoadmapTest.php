@@ -5,7 +5,7 @@ namespace Tests\Feature;
 use Carbon\Carbon;
 use Tests\TestCase;
 use App\Base\Models\Cycle;
-use App\Base\Models\Project;
+use App\Project\Models\Project;
 use App\Base\Models\Discussion;
 
 class RoadmapTest extends TestCase

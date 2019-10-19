@@ -98,7 +98,7 @@ class CommentTest extends TestCase
     public function user_can_see_all_comment()
     {
         $this->actingAs($this->user);
-        $project = factory(\App\Base\Models\Project::class)->create(['owner_id' => $this->user->id]);
+        $project = factory(\App\Project\Models\Project::class)->create(['owner_id' => $this->user->id]);
         resolve('Authorization')->setupDefaultPermissions($project);
         $discussion = factory(\App\Base\Models\Discussion::class)->create(['discussionable_type' => 'project', 'discussionable_id' => $project->id]);
         $comments = factory(\App\Base\Models\Comment::class, 3)->create(['commentable_type' => 'discussion', 'commentable_id' => $discussion->id]);
@@ -145,7 +145,7 @@ class CommentTest extends TestCase
     public function user_with_permission_can_delete_a_comment()
     {
         Notification::fake();
-        $project = factory(\App\Base\Models\Project::class)->create(['owner_id' => $this->user->id]);
+        $project = factory(\App\Project\Models\Project::class)->create(['owner_id' => $this->user->id]);
         $this->actingAs($this->user);
         resolve('Authorization')->setupDefaultPermissions($project);
         $comment = factory(\App\Base\Models\Comment::class)->create([

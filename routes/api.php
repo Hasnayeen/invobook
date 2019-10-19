@@ -13,20 +13,6 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth:api'], function () {
     Route::get('home', [HomeController::class, 'index']);
 
     /**********************************
-        Project
-    **********************************/
-
-    Route::get('projects/', [ProjectController::class, 'index']);
-
-    Route::post('projects', [ProjectController::class, 'store']);
-
-    Route::delete('projects/{project}', [ProjectController::class, 'delete']);
-
-    Route::post('public-projects/{project}', [PublicProjectController::class, 'store']);
-
-    Route::delete('public-projects/{project}', [PublicProjectController::class, 'delete']);
-
-    /**********************************
         Office
     **********************************/
 
