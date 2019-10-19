@@ -28,6 +28,7 @@
         "codedungeon/phpunit-result-printer": "^0.26.2",
         "facade/ignition": "^1.4",
         "filp/whoops": "^2.0",
+        "friendsofphp/php-cs-fixer": "^2.15",
         "fzaninotto/faker": "^1.4",
         "laravel/telescope": "^2.0",
         "mockery/mockery": "^1.0",
@@ -40,7 +41,7 @@
         "classmap": [
             "database/seeds",
             "database/factories"
-        ],        
+        ],
         "files": [
             "app/Base/Utilities/helpers.php"
         ],
@@ -52,7 +53,7 @@
         "psr-4": {
             "Tests\\": "tests/"
         }
-    },    
+    },
     "scripts": {
         "post-root-package-install": [
             "php -r \"file_exists('.env') || copy('.env.example', '.env');\""
@@ -67,7 +68,9 @@
         "post-install": [
             "php artisan storage:link",
             "php artisan route:cache"
-        ]
+        ],
+        "cs": "php-cs-fixer fix --dry-run -v --diff",
+        "cs-fix": "php-cs-fixer fix"
     },
     "extra": {
         "laravel": {
