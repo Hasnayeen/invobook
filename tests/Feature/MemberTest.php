@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Base\Notifications\BecameNewMember;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Support\Facades\Event;
 
 class MemberTest extends TestCase
 {
@@ -16,6 +17,7 @@ class MemberTest extends TestCase
     {
         parent::setUp();
         Mail::fake();
+        Event::fake();
     }
 
     /**
