@@ -3,9 +3,9 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Core\Models\Tag;
-use App\Core\Models\Task;
-use App\Core\Models\Project;
+use App\Base\Models\Tag;
+use App\Project\Models\Project;
+use App\TaskManager\Models\Task;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Auth\Access\AuthorizationException;
 
@@ -29,7 +29,7 @@ class TagTest extends TestCase
     public function user_without_permission_can_not_create_tag()
     {
         $this->expectException(AuthorizationException::class);
-        $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
+        $user = factory(\App\Base\Models\User::class)->create(['role_id' => 5]);
         $this->actingAs($user)->post('tags', [
             'label' => 'dummy',
         ]);
@@ -93,7 +93,7 @@ class TagTest extends TestCase
     public function user_without_permission_can_not_detach_a_tag_from_a_task()
     {
         $this->expectException(AuthorizationException::class);
-        $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
+        $user = factory(\App\Base\Models\User::class)->create(['role_id' => 5]);
         $tag = factory(Tag::class)->create();
         $task = factory(Task::class)->create();
 

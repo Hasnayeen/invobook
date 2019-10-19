@@ -3,8 +3,8 @@
 namespace Tests\Feature\Auth;
 
 use Tests\TestCase;
-use App\Core\Models\User;
-use App\Core\Exceptions\Handler;
+use App\Base\Models\User;
+use App\Base\Exceptions\Handler;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Password;

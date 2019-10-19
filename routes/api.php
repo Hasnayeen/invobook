@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Http\Controllers;
+namespace App\Base\Http\Controllers;
 
 use Illuminate\Support\Facades\Route;
 use Laravel\Passport\Http\Controllers\AccessTokenController;
@@ -11,20 +11,6 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth:api'], function () {
     Route::get('me', [UserController::class, 'me']);
 
     Route::get('home', [HomeController::class, 'index']);
-
-    /**********************************
-        Project
-    **********************************/
-
-    Route::get('projects/', [ProjectController::class, 'index']);
-
-    Route::post('projects', [ProjectController::class, 'store']);
-
-    Route::delete('projects/{project}', [ProjectController::class, 'delete']);
-
-    Route::post('public-projects/{project}', [PublicProjectController::class, 'store']);
-
-    Route::delete('public-projects/{project}', [PublicProjectController::class, 'delete']);
 
     /**********************************
         Office
@@ -107,26 +93,6 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth:api'], function () {
     Route::post('events', [EventController::class, 'store']);
 
     Route::get('events/{event}', [EventController::class, 'index']);
-
-    /**********************************
-        Task
-    **********************************/
-
-    Route::get('tasks', [TaskController::class, 'index']);
-
-    Route::post('tasks', [TaskController::class, 'store']);
-
-    Route::get('tasks/{task}', [TaskController::class, 'show']);
-
-    Route::put('tasks/{task}', [TaskController::class, 'update']);
-
-    Route::delete('tasks/{task}', [TaskController::class, 'delete']);
-
-    Route::put('tasks/{task}/statuses/{status}', [TaskStatusController::class, 'update']);
-
-    Route::get('tasks/{task}/steps/', [TaskProgressController::class, 'index']);
-
-    Route::post('tasks/{task}/steps/', [TaskProgressController::class, 'store']);
 
     /**********************************
         File
@@ -213,10 +179,6 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth:api'], function () {
     Route::get('tags', [TagController::class, 'index']);
 
     Route::post('tags', [TagController::class, 'store']);
-
-    Route::post('tasks/{task}/tags', [TaskTagController::class, 'store']);
-
-    Route::delete('tasks/{task}/tags/{tag}', [TaskTagController::class, 'delete']);
 
     /**********************************
         Notification

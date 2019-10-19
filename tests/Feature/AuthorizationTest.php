@@ -3,9 +3,9 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Core\Models\Role;
-use App\Core\Models\Permission;
-use App\Core\Exceptions\OwnerPermissionCantBeRevoked;
+use App\Base\Models\Role;
+use App\Base\Models\Permission;
+use App\Base\Exceptions\OwnerPermissionCantBeRevoked;
 
 class AuthorizationTest extends TestCase
 {
