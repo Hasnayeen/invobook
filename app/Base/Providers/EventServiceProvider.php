@@ -2,12 +2,12 @@
 
 namespace App\Base\Providers;
 
-use App\Project\Models\Project;
 use App\Base\Models\Discussion;
+use App\Project\Models\Project;
 use App\TaskManager\Models\Task;
 use App\Base\Models\DirectMessage;
-use App\Project\Observers\ProjectObserver;
 use App\Base\Observers\DiscussionObserver;
+use App\Project\Observers\ProjectObserver;
 use App\TaskManager\Observers\TaskObserver;
 use App\Base\Observers\DirectMessageObserver;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
