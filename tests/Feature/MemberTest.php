@@ -6,10 +6,10 @@ use Tests\TestCase;
 use App\Base\Models\User;
 use App\Project\Models\Project;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Event;
 use App\Base\Notifications\BecameNewMember;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Support\Facades\Event;
 
 class MemberTest extends TestCase
 {
