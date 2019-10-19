@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Base\Http\Controllers;
+namespace App\Project\Controllers;
 
-use App\Base\Models\Project;
+use App\Project\Models\Project;
+use App\Base\Http\Controllers\Controller;
 
 class PublicProjectController extends Controller
 {

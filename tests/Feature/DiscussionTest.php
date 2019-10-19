@@ -12,7 +12,7 @@ class DiscussionTest extends TestCase
     {
         parent::setUp();
         Notification::fake();
-        $this->project = factory(\App\Base\Models\Project::class)->create(['owner_id' => $this->user->id]);
+        $this->project = factory(\App\Project\Models\Project::class)->create(['owner_id' => $this->user->id]);
         $this->actingAs($this->user);
         resolve('Authorization')->setupDefaultPermissions($this->project);
         $this->project->members()->save($this->user);

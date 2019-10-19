@@ -53,24 +53,6 @@ Route::impersonate();
 Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('auth');
 
     /**********************************
-        Project
-    **********************************/
-
-Route::get('projects/{project}', [ProjectController::class, 'show']);
-
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('projects', [ProjectController::class, 'index']);
-
-    Route::post('projects', [ProjectController::class, 'store']);
-
-    Route::delete('projects/{project}', [ProjectController::class, 'delete']);
-
-    Route::post('public-projects/{project}', [PublicProjectController::class, 'store']);
-
-    Route::delete('public-projects/{project}', [PublicProjectController::class, 'delete']);
-});
-
-    /**********************************
         Team
     **********************************/
 

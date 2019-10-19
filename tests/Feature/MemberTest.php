@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Base\Models\User;
-use App\Base\Models\Project;
+use App\Project\Models\Project;
 use Illuminate\Support\Facades\Mail;
 use App\Base\Notifications\BecameNewMember;
 use Illuminate\Support\Facades\Notification;
@@ -25,7 +25,7 @@ class MemberTest extends TestCase
     public function get_all_members_of_a_group()
     {
         $users = factory('App\Base\Models\User', 3)->create();
-        $project = factory('App\Base\Models\Project')->create([
+        $project = factory('App\Project\Models\Project')->create([
             'owner_id' => $users[0]['id'],
         ]);
         $project->members()->saveMany($users);
@@ -126,7 +126,7 @@ class MemberTest extends TestCase
     /** @test */
     public function user_with_permission_can_add_member_to_group()
     {
-        $project = factory(\App\Base\Models\Project::class)->create(['owner_id' => $this->user->id]);
+        $project = factory(\App\Project\Models\Project::class)->create(['owner_id' => $this->user->id]);
         $user = factory(\App\Base\Models\User::class)->create();
 
         $this->actingAs($this->user)
@@ -146,7 +146,7 @@ class MemberTest extends TestCase
     {
         $this->expectException(AuthorizationException::class);
         $user = factory(\App\Base\Models\User::class)->create(['role_id' => 5]);
-        $project = factory(\App\Base\Models\Project::class)->create();
+        $project = factory(\App\Project\Models\Project::class)->create();
         $user2 = factory(\App\Base\Models\User::class)->create();
 
         $res = $this->actingAs($user)
@@ -160,7 +160,7 @@ class MemberTest extends TestCase
     /** @test */
     public function user_with_permission_can_remove_member_to_group()
     {
-        $project = factory(\App\Base\Models\Project::class)->create(['owner_id' => $this->user->id]);
+        $project = factory(\App\Project\Models\Project::class)->create(['owner_id' => $this->user->id]);
         $user = factory(\App\Base\Models\User::class)->create();
         $project->members()->save($user);
 
@@ -181,7 +181,7 @@ class MemberTest extends TestCase
     {
         $this->expectException(AuthorizationException::class);
         $user = factory(\App\Base\Models\User::class)->create(['role_id' => 5]);
-        $project = factory(\App\Base\Models\Project::class)->create();
+        $project = factory(\App\Project\Models\Project::class)->create();
         $user2 = factory(\App\Base\Models\User::class)->create();
         $project->members()->save($user2);
 

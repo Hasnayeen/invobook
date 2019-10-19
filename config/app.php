@@ -185,6 +185,7 @@ return [
          * Modules Service Providers...
          */
         App\Authorization\AuthorizationServiceProvider::class,
+        App\Project\ProjectServiceProvider::class,
         App\TaskManager\TaskManagerServiceProvider::class,
     ],
 

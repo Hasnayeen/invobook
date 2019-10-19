@@ -3,7 +3,7 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 use Carbon\Carbon;
 
-$factory->define(App\Base\Models\Project::class, function (Faker\Generator $faker) {
+$factory->define(App\Project\Models\Project::class, function (Faker\Generator $faker) {
     $now = Carbon::now();
 
     return [

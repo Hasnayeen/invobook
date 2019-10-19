@@ -20,7 +20,7 @@ class TaskTest extends TestCase
     /** @test */
     public function user_with_permission_can_create_new_task()
     {
-        $project = factory(\App\Base\Models\Project::class)->create(['owner_id' => $this->user->id]);
+        $project = factory(\App\Project\Models\Project::class)->create(['owner_id' => $this->user->id]);
         $task = factory(\App\TaskManager\Models\Task::class)->make([
             'created_by'    => $this->user->id,
             'taskable_type' => 'project',
@@ -102,7 +102,7 @@ class TaskTest extends TestCase
     /** @test */
     public function user_can_see_tasks_of_a_group()
     {
-        $project = factory(\App\Base\Models\Project::class)->create(['owner_id' => $this->user]);
+        $project = factory(\App\Project\Models\Project::class)->create(['owner_id' => $this->user]);
         $this->actingAs($this->user);
         resolve('Authorization')->setupDefaultPermissions($project);
         $tasks = factory('App\TaskManager\Models\Task', 3)->create([
@@ -178,7 +178,7 @@ class TaskTest extends TestCase
     /** @test */
     public function create_new_task_with_status()
     {
-        $project = factory(\App\Base\Models\Project::class)->create(['owner_id' => $this->user->id]);
+        $project = factory(\App\Project\Models\Project::class)->create(['owner_id' => $this->user->id]);
         $task = factory(\App\TaskManager\Models\Task::class)->make([
             'created_by'    => $this->user->id,
             'taskable_type' => 'project',

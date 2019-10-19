@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\TaskManager\Models\Task;
-use App\Base\Models\Project;
+use App\Project\Models\Project;
 use Laravel\Passport\Passport;
 use Illuminate\Support\Facades\Event;
 

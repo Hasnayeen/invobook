@@ -2,6 +2,7 @@
 
 namespace App\Base\Models;
 
+use App\TaskManager\Models\Task;
 use Illuminate\Database\Eloquent\Model;
 
 class Group extends Model
@@ -13,17 +14,17 @@ class Group extends Model
 
     public function messages()
     {
-        return $this->morphMany(\App\Base\Models\Message::class, 'messageable');
+        return $this->morphMany(Message::class, 'messageable');
     }
 
     public function tasks()
     {
-        return $this->morphMany(\App\Base\Models\Task::class, 'taskable');
+        return $this->morphMany(Task::class, 'taskable');
     }
 
     public function tags()
     {
-        return $this->morphToMany(\App\Base\Models\Tag::class, 'taggable', 'group_tag');
+        return $this->morphToMany(Tag::class, 'taggable', 'group_tag');
     }
 
     public function getCurrentCycleAttribute()

@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Base\Models\Tag;
-use App\Base\Models\Project;
+use App\Project\Models\Project;
 
 class GroupTagTest extends TestCase
 {

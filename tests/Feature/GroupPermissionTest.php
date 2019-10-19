@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Base\Models\User;
-use App\Base\Models\Project;
+use App\Project\Models\Project;
 use App\Base\Models\Permission;
 
 class GroupPermissionTest extends TestCase

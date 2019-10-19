@@ -15,7 +15,7 @@ $factory->define(App\Base\Models\Discussion::class, function (Faker $faker) {
             $discussionableId = factory(App\Base\Models\Team::class)->create()->id;
             break;
         case 'project':
-            $discussionableId = factory(App\Base\Models\Project::class)->create()->id;
+            $discussionableId = factory(App\Project\Models\Project::class)->create()->id;
             break;
         default:
             throw new Exception('Wrong Taskable type');

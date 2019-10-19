@@ -17,7 +17,7 @@ class MessageTest extends TestCase
         $user2 = factory('App\Base\Models\User')->create();
 
         // Test for projects
-        $project = factory(\App\Base\Models\Project::class)->create(['owner_id' => $this->user]);
+        $project = factory(\App\Project\Models\Project::class)->create(['owner_id' => $this->user]);
         $this->actingAs($this->user);
         resolve('Authorization')->setupDefaultPermissions($project);
         $user1Messages = factory('App\Base\Models\Message', 2)->create([
@@ -106,7 +106,7 @@ class MessageTest extends TestCase
     {
         Event::fake();
 
-        $project = factory('App\Base\Models\Project')->create(['owner_id' => $this->user->id]);
+        $project = factory('App\Project\Models\Project')->create(['owner_id' => $this->user->id]);
         $project->members()->attach($this->user);
         $this->actingAs($this->user);
         resolve('Authorization')->setupDefaultPermissions($project);
@@ -142,7 +142,7 @@ class MessageTest extends TestCase
     {
         $this->expectException(AuthorizationException::class);
         $user = factory(\App\Base\Models\User::class)->create(['role_id' => 5]);
-        $project = factory('App\Base\Models\Project')->create(['owner_id' => $this->user->id]);
+        $project = factory('App\Project\Models\Project')->create(['owner_id' => $this->user->id]);
         $project->members()->attach($this->user);
         $this->actingAs($this->user);
         resolve('Authorization')->setupDefaultPermissions($project);
@@ -157,7 +157,7 @@ class MessageTest extends TestCase
     /** @test */
     public function user_can_delete_message()
     {
-        $project = factory('App\Base\Models\Project')->create(['owner_id' => $this->user->id]);
+        $project = factory('App\Project\Models\Project')->create(['owner_id' => $this->user->id]);
 
         $message = factory('App\Base\Models\Message')->create([
             'user_id'          => $this->user->id,
@@ -179,7 +179,7 @@ class MessageTest extends TestCase
     {
         Event::fake();
 
-        $project = factory(\App\Base\Models\Project::class)->create(['owner_id' => $this->user->id]);
+        $project = factory(\App\Project\Models\Project::class)->create(['owner_id' => $this->user->id]);
 
         $message = Message::create([
             'body'             => 'New Message',
