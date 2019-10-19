@@ -3,10 +3,10 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\TaskManager\Models\Task;
 use App\Base\Models\User;
 use App\Base\Models\Comment;
 use App\Base\Models\Message;
+use App\TaskManager\Models\Task;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Event;
 use App\Base\Notifications\YouWereMentioned;

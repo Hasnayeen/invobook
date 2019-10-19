@@ -3,9 +3,9 @@
 namespace App\TaskManager\Observers;
 
 use App\TaskManager\Models\Task;
-use App\TaskManager\Notifications\TaskCreated;
 use App\Base\Utilities\GetRecipientsTrait;
 use Illuminate\Support\Facades\Notification;
+use App\TaskManager\Notifications\TaskCreated;
 
 class TaskObserver
 {
