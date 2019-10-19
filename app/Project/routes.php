@@ -9,19 +9,17 @@ use Illuminate\Support\Facades\Route;
 **********************************/
 
 Route::middleware('web')->group(function () {
-    
     Route::get('projects/{project}', [ProjectController::class, 'show']);
-    
-    Route::middleware(['auth'])->group(function () {
 
+    Route::middleware(['auth'])->group(function () {
         Route::get('projects', [ProjectController::class, 'index']);
-    
+
         Route::post('projects', [ProjectController::class, 'store']);
-    
+
         Route::delete('projects/{project}', [ProjectController::class, 'delete']);
-    
+
         Route::post('public-projects/{project}', [PublicProjectController::class, 'store']);
-    
+
         Route::delete('public-projects/{project}', [PublicProjectController::class, 'delete']);
     });
 });
@@ -31,7 +29,6 @@ Route::middleware('web')->group(function () {
 **********************************/
 
 Route::middleware(['api', 'auth:api'])->prefix('api')->group(function () {
-
     Route::get('projects/', [ProjectController::class, 'index']);
 
     Route::post('projects', [ProjectController::class, 'store']);
