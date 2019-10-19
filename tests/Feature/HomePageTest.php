@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Project\Models\Project;
 use Laravel\Passport\Passport;
+use App\Project\Models\Project;
 use App\TaskManager\Models\Task;
 use Illuminate\Support\Facades\Event;
 

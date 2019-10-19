@@ -4,8 +4,8 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Base\Models\Tag;
-use App\TaskManager\Models\Task;
 use App\Project\Models\Project;
+use App\TaskManager\Models\Task;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Auth\Access\AuthorizationException;
 

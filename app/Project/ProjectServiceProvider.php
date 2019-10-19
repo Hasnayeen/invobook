@@ -13,7 +13,6 @@ class ProjectServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
     }
 
     /**
