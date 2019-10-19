@@ -18,3 +18,4 @@ docker.env
 .DS_Store
 .phpunit.result.cache
 *.swp
+.php_cs.cache
