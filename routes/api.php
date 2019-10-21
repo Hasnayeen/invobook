@@ -12,18 +12,6 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth:api'], function () {
 
     Route::get('home', [HomeController::class, 'index']);
 
-    // Office
-
-    Route::get('offices/', [OfficeController::class, 'index']);
-
-    Route::post('offices', [OfficeController::class, 'store']);
-
-    Route::delete('offices/{office}', [OfficeController::class, 'delete']);
-
-    Route::post('public-offices/{office}', [PublicOfficeController::class, 'store']);
-
-    Route::delete('public-offices/{office}', [PublicOfficeController::class, 'delete']);
-
     // Group (Project/Team/Office)
 
     Route::get('groups/settings', [GroupSettingsController::class, 'index']);

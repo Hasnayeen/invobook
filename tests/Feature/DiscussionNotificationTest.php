@@ -5,7 +5,7 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use App\Base\Models\User;
 use App\Team\Models\Team;
-use App\Base\Models\Office;
+use App\Office\Models\Office;
 use App\Base\Models\Discussion;
 use App\Project\Models\Project;
 use App\Base\Contracts\HasMembers;

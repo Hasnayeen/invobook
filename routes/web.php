@@ -53,24 +53,6 @@ Route::impersonate();
 Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('auth');
 
     /**********************************
-        Office
-     **********************************/
-
-Route::get('offices/{office}', [OfficeController::class, 'show']);
-
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('offices', [OfficeController::class, 'index']);
-
-    Route::post('offices', [OfficeController::class, 'store']);
-
-    Route::delete('offices/{office}', [OfficeController::class, 'delete']);
-
-    Route::post('public-offices/{office}', [PublicOfficeController::class, 'store']);
-
-    Route::delete('public-offices/{office}', [PublicOfficeController::class, 'delete']);
-});
-
-    /**********************************
         Group (Project/Team/Office)
      **********************************/
 

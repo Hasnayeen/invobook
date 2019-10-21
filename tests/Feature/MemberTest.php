@@ -37,7 +37,7 @@ class MemberTest extends TestCase
         ]);
         $team->members()->saveMany($users);
 
-        $office = factory('App\Base\Models\Office')->create([
+        $office = factory('App\Office\Models\Office')->create([
             'owner_id' => $users[0]['id'],
         ]);
         $office->members()->saveMany($users);

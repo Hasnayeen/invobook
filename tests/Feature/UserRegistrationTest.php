@@ -6,7 +6,7 @@ use Tests\TestCase;
 use App\Base\Models\User;
 use App\Base\Models\Token;
 use App\Base\Models\Invite;
-use App\Base\Models\Office;
+use App\Office\Models\Office;
 use Illuminate\Support\Str;
 use App\Base\Mail\UserRegistered;
 use Illuminate\Support\Facades\Mail;

@@ -3,7 +3,7 @@
 namespace App\Base\Utilities;
 
 use App\Team\Models\Team;
-use App\Base\Models\Office;
+use App\Office\Models\Office;
 use App\Project\Models\Project;
 
 trait GroupTrait

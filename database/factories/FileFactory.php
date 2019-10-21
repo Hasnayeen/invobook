@@ -11,7 +11,7 @@ $factory->define(App\Base\Models\File::class, function (Faker\Generator $faker) 
     $fileableId = null;
     switch ($fileableType) {
         case 'office':
-            $fileableId = factory(App\Base\Models\Office::class)->create()->id;
+            $fileableId = factory(App\Office\Models\Office::class)->create()->id;
 
             break;
         case 'team':

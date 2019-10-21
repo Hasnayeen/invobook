@@ -2,7 +2,7 @@
 
 use Carbon\Carbon;
 use App\Base\Models\User;
-use App\Base\Models\Office;
+use App\Office\Models\Office;
 use Illuminate\Database\Seeder;
 use App\Authorization\Authorization;
 

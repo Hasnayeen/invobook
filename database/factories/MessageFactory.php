@@ -7,7 +7,7 @@ $factory->define(App\Base\Models\Message::class, function (Faker $faker) {
     $messageable_id = null;
     switch ($messageable_type) {
         case 'office':
-            $messageable_id = factory(App\Base\Models\Office::class)->create()->id;
+            $messageable_id = factory(App\Office\Models\Office::class)->create()->id;
 
             break;
         case 'team':

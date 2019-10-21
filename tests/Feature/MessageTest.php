@@ -73,7 +73,7 @@ class MessageTest extends TestCase
         ]);
 
         // Test for offices
-        $office = factory('App\Base\Models\Office')->create(['owner_id' => $this->user]);
+        $office = factory('App\Office\Models\Office')->create(['owner_id' => $this->user]);
         $this->actingAs($this->user);
         resolve('Authorization')->setupDefaultPermissions($office);
         $user1Messages = factory('App\Base\Models\Message', 2)->create([

@@ -1,7 +1,12 @@
 <?php
 
-namespace App\Base\Models;
+namespace App\Office\Models;
 
+use App\Base\Models\Role;
+use App\Base\Models\User;
+use App\Base\Models\Cycle;
+use App\Base\Models\Group;
+use App\Base\Models\Permission;
 use App\Base\Contracts\HasMembers;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
@@ -16,7 +21,7 @@ class Office extends Group implements HasMembers
      */
     public function members(): BelongsToMany
     {
-        return $this->belongsToMany(\App\Base\Models\User::class, 'office_user', 'office_id', 'user_id');
+        return $this->belongsToMany(User::class, 'office_user', 'office_id', 'user_id');
     }
 
     public function cycles()

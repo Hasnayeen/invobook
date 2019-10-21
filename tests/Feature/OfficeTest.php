@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Base\Models\Office;
+use App\Office\Models\Office;
 use Laravel\Passport\Passport;
 use App\Base\Exceptions\UserIsNotMember;
 use Illuminate\Support\Facades\Notification;
@@ -14,13 +14,13 @@ class OfficeTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->office = factory('App\Base\Models\Office')->create();
+        $this->office = factory('App\Office\Models\Office')->create();
     }
 
     /** @test */
     public function user_can_see_public_offices_and_offices_of_which_user_is_member()
     {
-        $office = factory('App\Base\Models\Office')->create(['owner_id' => $this->user->id]);
+        $office = factory('App\Office\Models\Office')->create(['owner_id' => $this->user->id]);
         $this->actingAs($this->user);
         resolve('Authorization')->setupDefaultPermissions($office);
         $office->members()->save($this->user);

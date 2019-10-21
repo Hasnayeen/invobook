@@ -3,6 +3,7 @@
 namespace App\Base\Models;
 
 use App\Team\Models\Team;
+use App\Office\Models\Office;
 use App\Project\Models\Project;
 use App\TaskManager\Models\Task;
 use App\Base\Utilities\Notifiable;
@@ -54,12 +55,12 @@ class User extends Authenticatable
 
     public function office()
     {
-        return $this->hasMany('App\Base\Models\Office', 'owner_id');
+        return $this->hasMany(Office::class, 'owner_id');
     }
 
     public function offices()
     {
-        return $this->belongsToMany('App\Base\Models\Office');
+        return $this->belongsToMany(Office::class);
     }
 
     public function comments()
