@@ -36,8 +36,9 @@ class OfficeController extends Controller
 
         if (request()->expectsJson()) {
             return response()->json([
-                'status'  => 'success',
-                'office'  => $office,
+                'status'        => 'success',
+                'office'        => $office,
+                'current_cycle' => $office->current_cycle,
             ]);
         }
 
