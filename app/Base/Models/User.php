@@ -2,6 +2,7 @@
 
 namespace App\Base\Models;
 
+use App\Team\Models\Team;
 use App\Project\Models\Project;
 use App\TaskManager\Models\Task;
 use App\Base\Utilities\Notifiable;
@@ -33,12 +34,12 @@ class User extends Authenticatable
 
     public function team()
     {
-        return $this->hasMany('App\Base\Models\Team', 'owner_id');
+        return $this->hasMany(Team::class, 'owner_id');
     }
 
     public function teams()
     {
-        return $this->belongsToMany('App\Base\Models\Team');
+        return $this->belongsToMany(Team::class);
     }
 
     public function project()

@@ -12,9 +12,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth:api'], function () {
 
     Route::get('home', [HomeController::class, 'index']);
 
-    /**********************************
-        Office
-    **********************************/
+    // Office
 
     Route::get('offices/', [OfficeController::class, 'index']);
 
@@ -26,23 +24,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth:api'], function () {
 
     Route::delete('public-offices/{office}', [PublicOfficeController::class, 'delete']);
 
-    /**********************************
-        Team
-    **********************************/
-
-    Route::get('teams/', [TeamController::class, 'index']);
-
-    Route::post('teams', [TeamController::class, 'store']);
-
-    Route::delete('teams/{team}', [TeamController::class, 'delete']);
-
-    Route::post('public-teams/{team}', [PublicTeamController::class, 'store']);
-
-    Route::delete('public-teams/{team}', [PublicTeamController::class, 'delete']);
-
-    /**********************************
-        Group (Project/Team/Office)
-     **********************************/
+    // Group (Project/Team/Office)
 
     Route::get('groups/settings', [GroupSettingsController::class, 'index']);
 
@@ -60,9 +42,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth:api'], function () {
 
     Route::delete('groups/tags/{tag}', [GroupTagsController::class, 'delete']);
 
-    /**********************************
-        Member
-     **********************************/
+    // Member
 
     Route::get('members', [MemberController::class, 'index']);
 
@@ -70,9 +50,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth:api'], function () {
 
     Route::delete('members', [MemberController::class, 'destroy']);
 
-    /**********************************
-        Discussion
-     **********************************/
+    // Discussion
 
     Route::get('discussions', [DiscussionController::class, 'index']);
 
@@ -84,9 +62,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth:api'], function () {
 
     Route::delete('discussions/{discussion}', [DiscussionController::class, 'delete']);
 
-    /**********************************
-        Event
-     **********************************/
+    // Event
 
     Route::get('events', [EventController::class, 'index']);
 
@@ -94,9 +70,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth:api'], function () {
 
     Route::get('events/{event}', [EventController::class, 'index']);
 
-    /**********************************
-        File
-    **********************************/
+    // File
 
     Route::get('files', [FileController::class, 'index']);
 
@@ -104,9 +78,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth:api'], function () {
 
     Route::post('files', [FileController::class, 'store']);
 
-    /**********************************
-        Message
-     **********************************/
+    // Message
 
     Route::get('messages', [MessageController::class, 'index']);
 
@@ -120,9 +92,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth:api'], function () {
 
     Route::delete('messages/{message}', [MessageController::class, 'delete']);
 
-    /**********************************
-        Comment
-    **********************************/
+    // Comment
 
     Route::get('/comments', [CommentController::class, 'index']);
 
@@ -130,39 +100,29 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth:api'], function () {
 
     Route::delete('/comments/{comment}', [CommentController::class, 'delete']);
 
-    /**********************************
-        Cycle
-    **********************************/
+    // Cycle
 
     Route::get('cycles', [CycleController::class, 'index']);
 
     Route::post('cycles', [CycleController::class, 'store']);
 
-    /**********************************
-        Status
-    **********************************/
+    // Status
 
     Route::get('statuses', [StatusController::class, 'index']);
 
     Route::post('statuses', [StatusController::class, 'store']);
 
-    /**********************************
-        Category
-    **********************************/
+    // Category
 
     Route::get('categories', [CategoryController::class, 'index']);
 
     Route::post('categories', [CategoryController::class, 'store']);
 
-    /**********************************
-        Roadmap
-    **********************************/
+    // Roadmap
 
     Route::get('cycles/{cycle}/roadmap', [RoadmapController::class, 'show']);
 
-    /**********************************
-        Direct Message
-     **********************************/
+    // Direct Message
 
     Route::get('direct-messages', [DirectMessageController::class, 'index']);
 
@@ -172,25 +132,19 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth:api'], function () {
 
     Route::put('unread-direct-messages/{user}', [UserUnreadDirectMessageController::class, 'update']);
 
-    /**********************************
-        Tags
-    **********************************/
+    // Tags
 
     Route::get('tags', [TagController::class, 'index']);
 
     Route::post('tags', [TagController::class, 'store']);
 
-    /**********************************
-        Notification
-    **********************************/
+    // Notification
 
     Route::get('notifications', [NotificationController::class, 'index']);
 
     Route::put('notifications', [NotificationController::class, 'update']);
 
-    /**********************************
-        User
-    **********************************/
+    // User
 
     Route::get('users', [UserController::class, 'index']);
 
@@ -204,9 +158,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth:api'], function () {
 
     Route::post('users/{user}/avatar', [UserAvatarController::class, 'store']);
 
-    /**********************************
-        Github Service
-    **********************************/
+    // Github Service
 
     Route::get('services/github/repos', [GithubRepoController::class, 'index']);
 
@@ -214,17 +166,13 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth:api'], function () {
 
     Route::post('services/github/connected-repos', [ConnectedGithubRepoController::class, 'store']);
 
-    /**********************************
-        Role
-    **********************************/
+    // Role
 
     Route::get('roles', [RoleController::class, 'index']);
 
     Route::get('activities', [ActivityController::class, 'index']);
 
-    /**********************************
-        Settings
-    **********************************/
+    // Settings
 
     Route::get('settings', function () {
         return view('users.settings');

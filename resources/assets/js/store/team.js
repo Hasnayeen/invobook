@@ -5,13 +5,13 @@ export default {
   },
 
   mutations: {
-    getTeam(state, team) {
+    getTeam (state, team) {
       state.team = team
-    },
+    }
   },
 
   actions: {
-    async getTeam({ dispatch, commit }, teamId) {
+    async getTeam ({ dispatch, commit }, teamId) {
       commit('toggleLoading', true)
       await axios.get(
         'teams/' + teamId
@@ -31,6 +31,6 @@ export default {
         })
 
       dispatch('setCurrentView', 'team')
-    },
+    }
   }
 }

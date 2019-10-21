@@ -30,9 +30,10 @@ class BackupRestore extends Command
 
     private $time = null;
 
-    /* Dependacy variables */
+    // Dependacy variables
 
     protected $database;
+
     protected $storage;
 
     /**

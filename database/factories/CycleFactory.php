@@ -9,12 +9,15 @@ $factory->define(App\Base\Models\Cycle::class, function (Faker\Generator $faker)
     switch ($cyclable_type) {
         case 'office':
             $cyclable_id = factory(App\Base\Models\Office::class)->create()->id;
+
             break;
         case 'team':
-            $cyclable_id = factory(App\Base\Models\Team::class)->create()->id;
+            $cyclable_id = factory(App\Team\Models\Team::class)->create()->id;
+
             break;
         case 'project':
             $cyclable_id = factory(App\Project\Models\Project::class)->create()->id;
+
             break;
         default:
             throw new Exception('Wrong Cycleable type');

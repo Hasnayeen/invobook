@@ -165,7 +165,7 @@ class CommentTest extends TestCase
         $this->actingAs($this->user)
              ->delete(
                  "/comments/{$comment->id}",
-                ['group_type' => $comment->commentable->taskable_type, 'group_id' => $comment->commentable->taskable_id]
+                 ['group_type' => $comment->commentable->taskable_type, 'group_id' => $comment->commentable->taskable_id]
              )
              ->assertJsonFragment([
                 'status'  => 'success',
@@ -184,8 +184,8 @@ class CommentTest extends TestCase
         ]);
 
         $this->delete(
-                "/comments/{$comment->id}",
-                ['group_type' => $comment->commentable->taskable_type, 'group_id' => $comment->commentable->taskable_id]
-             );
+            "/comments/{$comment->id}",
+            ['group_type' => $comment->commentable->taskable_type, 'group_id' => $comment->commentable->taskable_id]
+        );
     }
 }

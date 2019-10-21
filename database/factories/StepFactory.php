@@ -1,6 +1,6 @@
 <?php
 
-/* @var $factory \Illuminate\Database\Eloquent\Factory */
+// @var $factory \Illuminate\Database\Eloquent\Factory
 
 use App\Base\Models\Step;
 use Faker\Generator as Faker;

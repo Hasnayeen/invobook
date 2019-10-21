@@ -1,23 +1,23 @@
 export default {
   state: {
-    currentComponent: '',
+    currentComponent: ''
   },
 
   mutations: {
-    setCurrentComponent(state, component) {
+    setCurrentComponent (state, component) {
       state.currentComponent = component
     },
-    closeComponent(state) {
+    closeComponent (state) {
       state.currentComponent = ''
-    },
+    }
   },
 
   actions: {
-    setCurrentComponent({ commit }, component) {
+    setCurrentComponent ({ commit }, component) {
       commit('setCurrentComponent', component)
     },
-    closeComponent({ commit }) {
+    closeComponent ({ commit }) {
       commit('closeComponent')
-    },
+    }
   }
 }

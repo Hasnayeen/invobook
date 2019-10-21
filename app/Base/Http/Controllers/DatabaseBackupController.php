@@ -10,6 +10,7 @@ use Illuminate\Contracts\Filesystem\Factory as Filesystem;
 class DatabaseBackupController extends Controller
 {
     protected $artisan;
+
     protected $storage;
 
     public function __construct(Filesystem $storage, Artisan $artisan)

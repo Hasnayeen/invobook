@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Base\Policies;
+namespace App\Team\Policies;
 
-use App\Base\Models\Team;
 use App\Base\Models\User;
+use App\Team\Models\Team;
 use App\Authorization\Authorization;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -15,7 +15,7 @@ class TeamPolicy
      * Determine whether the user can view the team.
      *
      * @param  \App\Base\Models\User $user
-     * @param  \App\Base\Team        $team
+     * @param  \App\Team\Models\Team $team
      * @return mixed
      */
     public function view(User $user, Team $team)
@@ -38,7 +38,7 @@ class TeamPolicy
      * Determine whether the user can delete the team.
      *
      * @param  \App\Base\Models\User $user
-     * @param  \App\Base\Team        $team
+     * @param  \App\Team\Models\Team $team
      * @return mixed
      */
     public function delete(User $user, Team $team)
@@ -50,7 +50,7 @@ class TeamPolicy
      * Determine whether the user can change the team settings.
      *
      * @param  \App\Base\Models\User $user
-     * @param  \App\Base\Team        $team
+     * @param  \App\Team\Models\Team $team
      * @return mixed
      */
     public function settings(User $user, Team $team)
