@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Base\Http\Controllers;
+namespace App\Office\Controllers;
 
-use App\Base\Models\Office;
-use App\Base\Repositories\OfficeRepository;
-use App\Base\Http\Requests\StoreOfficeRequest;
+use App\Office\Models\Office;
+use App\Base\Http\Controllers\Controller;
+use App\Office\Requests\StoreOfficeRequest;
+use App\Office\Repositories\OfficeRepository;
 
 class OfficeController extends Controller
 {

@@ -134,7 +134,7 @@ class TaskTest extends TestCase
             'name'             => $tasks[2]['name'],
         ]);
 
-        $office = factory(\App\Base\Models\Office::class)->create(['owner_id' => $this->user]);
+        $office = factory(\App\Office\Models\Office::class)->create(['owner_id' => $this->user]);
         $this->actingAs($this->user);
         resolve('Authorization')->setupDefaultPermissions($office);
         $tasks = factory('App\TaskManager\Models\Task', 3)->create([
@@ -223,7 +223,7 @@ class TaskTest extends TestCase
             'due_on'        => $this->faker->dateTimeBetween('now', '+5 years')->format('Y-m-d'),
             'related_to'    => null,
             'group_type'    => 'office',
-            'group_id'      => factory(\App\Base\Models\Office::class)->create()->id,
+            'group_id'      => factory(\App\Office\Models\Office::class)->create()->id,
         ];
 
         $this->actingAs($this->user)
@@ -252,7 +252,7 @@ class TaskTest extends TestCase
                 'due_on'        => $this->faker->dateTimeBetween('now', '+5 years')->format('Y-m-d'),
                 'related_to'    => null,
                 'group_type'    => 'office',
-                'group_id'      => factory(\App\Base\Models\Office::class)->create()->id,
+                'group_id'      => factory(\App\Office\Models\Office::class)->create()->id,
             ]);
     }
 

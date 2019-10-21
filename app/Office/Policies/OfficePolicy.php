@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Base\Policies;
+namespace App\Office\Policies;
 
 use App\Base\Models\User;
-use App\Base\Models\Office;
+use App\Office\Models\Office;
 use App\Authorization\Authorization;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -15,7 +15,7 @@ class OfficePolicy
      * Determine whether the user can view the office.
      *
      * @param  \App\Base\Models\User   $user
-     * @param  \App\Base\Models\Office $office
+     * @param  \App\Office\Models\Office $office
      * @return mixed
      */
     public function view(User $user, Office $office)
@@ -38,7 +38,7 @@ class OfficePolicy
      * Determine whether the user can delete the office.
      *
      * @param  \App\Base\Models\User   $user
-     * @param  \App\Base\Models\Office $office
+     * @param  \App\Office\Models\Office $office
      * @return mixed
      */
     public function delete(User $user, Office $office)
@@ -50,7 +50,7 @@ class OfficePolicy
      * Determine whether the user can change the office settings.
      *
      * @param  \App\Base\Models\User   $user
-     * @param  \App\Base\Models\Office $office
+     * @param  \App\Office\Models\Office $office
      * @return mixed
      */
     public function settings(User $user, Office $office)

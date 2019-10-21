@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Base\Repositories;
+namespace App\Office\Repositories;
 
-use App\Base\Models\Office;
+use App\Office\Models\Office;
 
 class OfficeRepository
 {

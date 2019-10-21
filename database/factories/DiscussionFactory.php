@@ -9,7 +9,7 @@ $factory->define(App\Base\Models\Discussion::class, function (Faker $faker) {
     $discussionableId = null;
     switch ($discussionableType) {
         case 'office':
-            $discussionableId = factory(App\Base\Models\Office::class)->create()->id;
+            $discussionableId = factory(App\Office\Models\Office::class)->create()->id;
 
             break;
         case 'team':

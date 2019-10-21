@@ -8,7 +8,7 @@ $factory->define(App\Base\Models\Cycle::class, function (Faker\Generator $faker)
     $cyclable_id = null;
     switch ($cyclable_type) {
         case 'office':
-            $cyclable_id = factory(App\Base\Models\Office::class)->create()->id;
+            $cyclable_id = factory(App\Office\Models\Office::class)->create()->id;
 
             break;
         case 'team':

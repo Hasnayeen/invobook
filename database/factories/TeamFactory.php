@@ -21,7 +21,7 @@ $factory->defineAs(App\Team\Models\Team::class, 'withOffice', function (Faker\Ge
     return [
         'name'        => $faker->word,
         'description' => $faker->sentence,
-        'office_id'   => factory(App\Base\Models\Office::class)->create()->id,
+        'office_id'   => factory(App\Office\Models\Office::class)->create()->id,
         'created_at'  => $now,
         'updated_at'  => $now,
         'owner_id'    => factory(App\Base\Models\User::class)->create()->id,

@@ -8,7 +8,7 @@ $factory->define(App\TaskManager\Models\Task::class, function (Faker\Generator $
     $taskable_id = null;
     switch ($taskable_type) {
         case 'office':
-            $taskable_id = factory(App\Base\Models\Office::class)->create()->id;
+            $taskable_id = factory(App\Office\Models\Office::class)->create()->id;
 
             break;
         case 'team':
