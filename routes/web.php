@@ -4,7 +4,9 @@ namespace App\Base\Http\Controllers;
 
 use Illuminate\Support\Facades\Route;
 
-// Login
+/**********************************
+    Login
+**********************************/
 
 Route::get('login', [Auth\LoginController::class, 'showLoginForm']);
 
@@ -12,7 +14,9 @@ Route::post('login', [Auth\LoginController::class, 'login']);
 
 Route::post('logout', [Auth\LoginController::class, 'logout']);
 
-// Password
+/**********************************
+    Password
+**********************************/
 
 Route::post('password/email', [Auth\ForgotPasswordController::class, 'sendResetLinkEmail']);
 
@@ -22,7 +26,9 @@ Route::post('password/reset', [Auth\ResetPasswordController::class, 'reset']);
 
 Route::get('password/reset/{token}', [Auth\ResetPasswordController::class, 'showResetForm'])->name('password.reset');
 
-// Registration
+/**********************************
+    Registration
+**********************************/
 
 Route::post('register/invite-link', [InvitationController::class, 'store'])->middleware(['auth', 'admin']);
 
@@ -38,13 +44,17 @@ Route::get('register/{token}', [Auth\RegisterController::class, 'showRegistratio
 
 Route::post('register/{token}', [Auth\RegisterController::class, 'confirmNewRegistration']);
 
-// Impersonate User
+/**********************************
+    Impersonate User
+**********************************/
 
 Route::impersonate();
 
 Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('auth');
 
-    // Office
+    /**********************************
+        Office
+     **********************************/
 
 Route::get('offices/{office}', [OfficeController::class, 'show']);
 
@@ -60,7 +70,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('public-offices/{office}', [PublicOfficeController::class, 'delete']);
 });
 
-    // Group (Project/Team/Office)
+    /**********************************
+        Group (Project/Team/Office)
+     **********************************/
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('groups/settings', [GroupSettingsController::class, 'index']);
@@ -80,7 +92,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('groups/tags/{tag}', [GroupTagsController::class, 'delete']);
 });
 
-    // Member
+    /**********************************
+        Member
+     **********************************/
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('members', [MemberController::class, 'index']);
@@ -90,7 +104,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('members', [MemberController::class, 'destroy']);
 });
 
-    // Discussion
+    /**********************************
+        Discussion
+     **********************************/
 
 Route::get('discussions', [DiscussionController::class, 'index']);
 
@@ -104,7 +120,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('discussions/{discussion}', [DiscussionController::class, 'delete']);
 });
 
-    // Event
+    /**********************************
+        Event
+     **********************************/
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('events', [EventController::class, 'index']);
@@ -114,7 +132,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('events/{event}', [EventController::class, 'index']);
 });
 
-    // File
+    /**********************************
+        File
+    **********************************/
 
 Route::get('files', [FileController::class, 'index']);
 
@@ -126,7 +146,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('files/{file}', [FileController::class, 'delete']);
 });
 
-    // Message
+    /**********************************
+        Message
+     **********************************/
 
 Route::get('messages', [MessageController::class, 'index']);
 
@@ -142,7 +164,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('messages/{message}', [MessageController::class, 'delete']);
 });
 
-    // Comment
+    /**********************************
+        Comment
+    **********************************/
 
 Route::get('/comments', [CommentController::class, 'index']);
 
@@ -152,30 +176,40 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/comments/{comment}', [CommentController::class, 'delete']);
 });
 
-// Cycle
+/**********************************
+    Cycle
+**********************************/
 
 Route::get('cycles', [CycleController::class, 'index']);
 
 Route::post('cycles', [CycleController::class, 'store'])->middleware('auth');
 
-// Status
+/**********************************
+    Status
+**********************************/
 
 Route::get('statuses', [StatusController::class, 'index']);
 
 Route::post('statuses', [StatusController::class, 'store'])->middleware('auth');
 
 Route::group(['middleware' => 'auth'], function () {
-    // Category
+    /**********************************
+        Category
+    **********************************/
 
     Route::get('categories', [CategoryController::class, 'index']);
 
     Route::post('categories', [CategoryController::class, 'store']);
 
-    // Roadmap
+    /**********************************
+        Roadmap
+    **********************************/
 
     Route::get('cycles/{cycle}/roadmap', [RoadmapController::class, 'show']);
 
-    // Direct Message
+    /**********************************
+        Direct Message
+     **********************************/
 
     Route::get('direct-messages', [DirectMessageController::class, 'index']);
 
@@ -185,19 +219,25 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::put('unread-direct-messages/{user}', [UserUnreadDirectMessageController::class, 'update']);
 
-    // Tags
+    /**********************************
+        Tags
+    **********************************/
 
     Route::get('tags', [TagController::class, 'index']);
 
     Route::post('tags', [TagController::class, 'store']);
 
-    // Notification
+    /**********************************
+        Notification
+    **********************************/
 
     Route::get('notifications', [NotificationController::class, 'index']);
 
     Route::put('notifications', [NotificationController::class, 'update']);
 
-    // User
+    /**********************************
+        User
+    **********************************/
 
     Route::get('users', [UserController::class, 'index']);
 
@@ -211,7 +251,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('users/{user}/avatar', [UserAvatarController::class, 'store']);
 
-    // Github Service
+    /**********************************
+        Github Service
+    **********************************/
 
     Route::get('services/github/repos', [GithubRepoController::class, 'index']);
 
@@ -219,20 +261,26 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('services/github/connected-repos', [ConnectedGithubRepoController::class, 'store']);
 
-    // Role
+    /**********************************
+        Role
+    **********************************/
 
     Route::get('roles', [RoleController::class, 'index']);
 
     Route::get('activities', [ActivityController::class, 'index']);
 
-    // Settings
+    /**********************************
+        Settings
+    **********************************/
 
     Route::get('settings', function () {
         return view('users.settings');
     });
 });
 
-    // Admin
+    /**********************************
+        Admin
+    **********************************/
 
 Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function () {
     Route::get('/', [AdminController::class, 'index']);
@@ -255,7 +303,9 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function 
 
     Route::get('check-for-update', [AboutController::class, 'checkForUpdate']);
 
-    // Database Backup in dropbox
+    /**********************************
+        Database Backup in dropbox
+    **********************************/
     Route::get('check-dropbox-setup', [DatabaseBackupController::class, 'checkDropboxSetup']);
 
     Route::get('take-backup', [DatabaseBackupController::class, 'takeBackupToDropbox']);

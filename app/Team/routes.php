@@ -4,7 +4,9 @@ namespace App\Team\Controllers;
 
 use Illuminate\Support\Facades\Route;
 
-// Web
+/**********************************
+    Web
+**********************************/
 
 Route::middleware('web')->group(function () {
     Route::get('teams/{team}', [TeamController::class, 'show']);
@@ -22,7 +24,9 @@ Route::middleware('web')->group(function () {
     });
 });
 
-// Api
+/**********************************
+    Api
+**********************************/
 
 Route::middleware(['api', 'auth:api'])->prefix('api')->group(function () {
     Route::get('teams/', [TeamController::class, 'index']);
