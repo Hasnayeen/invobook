@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Base\Http\Controllers;
+namespace App\Team\Controllers;
 
-use App\Base\Models\Team;
+use App\Team\Models\Team;
+use App\Base\Http\Controllers\Controller;
 
 class PublicTeamController extends Controller
 {

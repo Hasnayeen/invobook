@@ -2,7 +2,7 @@
 
 namespace App\Base\Utilities;
 
-use App\Base\Models\Team;
+use App\Team\Models\Team;
 use App\Base\Models\Office;
 use App\Project\Models\Project;
 

@@ -21,7 +21,7 @@ export default new Vuex.Store({
   },
 
   state: {
-    currentWork,
+    currentWork, // eslint-disable-line
     projects: [],
     teams: [],
     offices: [],
@@ -34,23 +34,23 @@ export default new Vuex.Store({
   },
 
   mutations: {
-    setGroup(state, group) {
+    setGroup (state, group) {
       state.groupType = group.type
       state.groupId = group.id
     },
-    setCurrentView(state, view) {
+    setCurrentView (state, view) {
       state.currentView = view
     },
-    setResourceName(state, name) {
+    setResourceName (state, name) {
       state.resourceName = name
     },
-    getProjects(state, projects) {
+    getProjects (state, projects) {
       state.projects = projects
     },
-    getTeams(state, teams) {
+    getTeams (state, teams) {
       state.teams = teams
     },
-    getOffices(state, offices) {
+    getOffices (state, offices) {
       state.offices = offices
     },
     addProject (state, project) {
@@ -74,22 +74,22 @@ export default new Vuex.Store({
     toggleLoading (state, status) {
       state.loading = status
     },
-    getMembers(state, members) {
+    getMembers (state, members) {
       state.members = members
     }
   },
 
   actions: {
-    setGroup({ commit }, group) {
+    setGroup ({ commit }, group) {
       commit('setGroup', group)
     },
-    setCurrentView({ commit }, view) {
+    setCurrentView ({ commit }, view) {
       commit('setCurrentView', view)
     },
-    setResourceName({ commit }, name) {
+    setResourceName ({ commit }, name) {
       commit('setResourceName', name)
     },
-    getProjects({ commit }) {
+    getProjects ({ commit }) {
       commit('toggleLoading', true)
       axios.get('projects')
         .then((response) => {
@@ -101,9 +101,9 @@ export default new Vuex.Store({
         .catch((error) => {
           commit('toggleLoading', false)
           this.dispatch('showNotification', { type: error.response.data.status, message: error.response.data.message })
-      })
+        })
     },
-    getTeams({ commit }) {
+    getTeams ({ commit }) {
       commit('toggleLoading', true)
       axios.get('teams')
         .then((response) => {
@@ -115,9 +115,9 @@ export default new Vuex.Store({
         .catch((error) => {
           commit('toggleLoading', false)
           this.dispatch('showNotification', { type: error.response.data.status, message: error.response.data.message })
-      })
+        })
     },
-    getOffices({ commit }) {
+    getOffices ({ commit }) {
       commit('toggleLoading', true)
       axios.get('offices')
         .then((response) => {
@@ -129,7 +129,7 @@ export default new Vuex.Store({
         .catch((error) => {
           commit('toggleLoading', false)
           this.dispatch('showNotification', { type: error.response.data.status, message: error.response.data.message })
-      })
+        })
     },
     addProject ({ commit }, formData) {
       commit('toggleLoading', true)
@@ -172,7 +172,7 @@ export default new Vuex.Store({
           commit('addTeam', response.data.team)
         }
       }).catch((error) => {
-        this.dispatch('showNotification', {type: error.response.data.status, message: error.response.data.message})
+        this.dispatch('showNotification', { type: error.response.data.status, message: error.response.data.message })
       })
     },
     removeTeam ({ commit }, data) {
@@ -182,7 +182,7 @@ export default new Vuex.Store({
           this.dispatch('showNotification', { type: response.data.status, message: response.data.message })
         })
         .catch((error) => {
-          this.dispatch('showNotification', {type: error.response.data.status, message: error.response.data.message})
+          this.dispatch('showNotification', { type: error.response.data.status, message: error.response.data.message })
         })
     },
     addOffice ({ commit }, formData) {
@@ -197,7 +197,7 @@ export default new Vuex.Store({
           }
         })
         .catch((error) => {
-          this.dispatch('showNotification', {type: error.response.data.status, message: error.response.data.message})
+          this.dispatch('showNotification', { type: error.response.data.status, message: error.response.data.message })
         })
     },
     removeOffice ({ commit }, data) {
@@ -207,10 +207,10 @@ export default new Vuex.Store({
           this.dispatch('showNotification', { type: response.data.status, message: response.data.message })
         })
         .catch((error) => {
-          this.dispatch('showNotification', {type: error.response.data.status, message: error.response.data.message})
+          this.dispatch('showNotification', { type: error.response.data.status, message: error.response.data.message })
         })
     },
-    getMembers({ commit }, members) {
+    getMembers ({ commit }, members) {
       commit('getMembers', members)
     }
   }

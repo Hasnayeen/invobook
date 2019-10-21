@@ -118,7 +118,7 @@ class TaskTest extends TestCase
             'name'             => $tasks[2]['name'],
         ]);
 
-        $team = factory(\App\Base\Models\Team::class)->create(['owner_id' => $this->user]);
+        $team = factory(\App\Team\Models\Team::class)->create(['owner_id' => $this->user]);
         $this->actingAs($this->user);
         resolve('Authorization')->setupDefaultPermissions($team);
         $tasks = factory('App\TaskManager\Models\Task', 3)->create([

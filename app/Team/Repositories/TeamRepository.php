@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Base\Repositories;
+namespace App\Team\Repositories;
 
-use App\Base\Models\Team;
+use App\Team\Models\Team;
 
 class TeamRepository
 {

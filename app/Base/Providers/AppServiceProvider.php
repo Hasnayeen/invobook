@@ -16,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Relation::morphMap([
             'project'    => 'App\Project\Models\Project',
-            'team'       => 'App\Base\Models\Team',
+            'team'       => 'App\Team\Models\Team',
             'office'     => 'App\Base\Models\Office',
             'task'       => 'App\TaskManager\Models\Task',
             'event'      => 'App\Base\Models\Event',

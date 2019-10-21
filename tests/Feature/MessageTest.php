@@ -45,7 +45,7 @@ class MessageTest extends TestCase
         ]);
 
         // Test for teams
-        $team = factory('App\Base\Models\Team')->create(['owner_id' => $this->user]);
+        $team = factory('App\Team\Models\Team')->create(['owner_id' => $this->user]);
         $this->actingAs($this->user);
         resolve('Authorization')->setupDefaultPermissions($team);
         $user1Messages = factory('App\Base\Models\Message', 2)->create([

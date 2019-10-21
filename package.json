@@ -66,6 +66,11 @@
         ]
     },
     "standard": {
+        "ignore": [
+            "public/",
+            "webpack.config.js",
+            "webpack.mix.js"
+        ],
         "globals": [
             "Vue",
             "axios",

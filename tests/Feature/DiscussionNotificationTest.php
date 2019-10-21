@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Base\Models\Team;
 use App\Base\Models\User;
+use App\Team\Models\Team;
 use App\Base\Models\Office;
 use App\Base\Models\Discussion;
 use App\Project\Models\Project;
@@ -74,12 +74,14 @@ class DiscussionNotificationTest extends TestCase
 
         // All members of group are notified
         Notification::assertSentTo(
-            $users, DiscussionCreatedNotification::class
+            $users,
+            DiscussionCreatedNotification::class
         );
 
         // Author of the discussion is not notified
         Notification::assertNotSentTo(
-            [$this->user], DiscussionCreatedNotification::class
+            [$this->user],
+            DiscussionCreatedNotification::class
         );
     }
 }

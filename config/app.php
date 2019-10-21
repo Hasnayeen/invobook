@@ -187,6 +187,7 @@ return [
          */
         App\Authorization\AuthorizationServiceProvider::class,
         App\Project\ProjectServiceProvider::class,
+        App\Team\TeamServiceProvider::class,
         App\TaskManager\TaskManagerServiceProvider::class,
     ],
 

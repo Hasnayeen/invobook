@@ -32,7 +32,7 @@ class MemberTest extends TestCase
         ]);
         $project->members()->saveMany($users);
 
-        $team = factory('App\Base\Models\Team')->create([
+        $team = factory('App\Team\Models\Team')->create([
             'owner_id' => $users[0]['id'],
         ]);
         $team->members()->saveMany($users);
