@@ -2,8 +2,8 @@
 
 namespace App\Team\Policies;
 
-use App\Team\Models\Team;
 use App\Base\Models\User;
+use App\Team\Models\Team;
 use App\Authorization\Authorization;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -15,7 +15,7 @@ class TeamPolicy
      * Determine whether the user can view the team.
      *
      * @param  \App\Base\Models\User $user
-     * @param  \App\Team\Models\Team        $team
+     * @param  \App\Team\Models\Team $team
      * @return mixed
      */
     public function view(User $user, Team $team)
