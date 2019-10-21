@@ -53,24 +53,6 @@ Route::impersonate();
 Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('auth');
 
     /**********************************
-        Team
-    **********************************/
-
-Route::get('teams/{team}', [TeamController::class, 'show']);
-
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('teams', [TeamController::class, 'index']);
-
-    Route::post('teams', [TeamController::class, 'store']);
-
-    Route::delete('teams/{team}', [TeamController::class, 'delete']);
-
-    Route::post('public-teams/{team}', [PublicTeamController::class, 'store']);
-
-    Route::delete('public-teams/{team}', [PublicTeamController::class, 'delete']);
-});
-
-    /**********************************
         Office
      **********************************/
 

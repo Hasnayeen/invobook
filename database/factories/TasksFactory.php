@@ -11,7 +11,7 @@ $factory->define(App\TaskManager\Models\Task::class, function (Faker\Generator $
             $taskable_id = factory(App\Base\Models\Office::class)->create()->id;
             break;
         case 'team':
-            $taskable_id = factory(App\Base\Models\Team::class)->create()->id;
+            $taskable_id = factory(App\Team\Models\Team::class)->create()->id;
             break;
         case 'project':
             $taskable_id = factory(App\Project\Models\Project::class)->create()->id;

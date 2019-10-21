@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Base\Models\Team;
+use App\Team\Models\Team;
 use App\Base\Models\User;
 use App\Base\Models\Office;
 use App\Base\Models\Discussion;

@@ -3,7 +3,7 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 use Carbon\Carbon;
 
-$factory->define(App\Base\Models\Team::class, function (Faker\Generator $faker) {
+$factory->define(App\Team\Models\Team::class, function (Faker\Generator $faker) {
     $now = Carbon::now();
 
     return [
@@ -15,7 +15,7 @@ $factory->define(App\Base\Models\Team::class, function (Faker\Generator $faker) 
     ];
 });
 
-$factory->defineAs(App\Base\Models\Team::class, 'withOffice', function (Faker\Generator $faker) {
+$factory->defineAs(App\Team\Models\Team::class, 'withOffice', function (Faker\Generator $faker) {
     $now = Carbon::now();
 
     return [

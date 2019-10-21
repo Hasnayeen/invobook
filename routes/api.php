@@ -27,20 +27,6 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth:api'], function () {
     Route::delete('public-offices/{office}', [PublicOfficeController::class, 'delete']);
 
     /**********************************
-        Team
-    **********************************/
-
-    Route::get('teams/', [TeamController::class, 'index']);
-
-    Route::post('teams', [TeamController::class, 'store']);
-
-    Route::delete('teams/{team}', [TeamController::class, 'delete']);
-
-    Route::post('public-teams/{team}', [PublicTeamController::class, 'store']);
-
-    Route::delete('public-teams/{team}', [PublicTeamController::class, 'delete']);
-
-    /**********************************
         Group (Project/Team/Office)
      **********************************/
 
