@@ -2,8 +2,8 @@
 
 namespace App\Base\Http\Controllers;
 
-use App\Base\Jobs\BackupDatabase;
 use Illuminate\Http\Request;
+use App\Base\Jobs\BackupDatabase;
 use Illuminate\Contracts\Console\Kernel as Artisan;
 use Illuminate\Contracts\Filesystem\Factory as Filesystem;
 
@@ -30,7 +30,7 @@ class DatabaseBackupController extends Controller
         BackupDatabase::dispatch();
 
         return response()->json([
-            'status' => 'success',
+            'status'  => 'success',
             'message' => 'Database backup process has been started',
         ]);
     }
