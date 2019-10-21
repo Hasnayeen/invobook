@@ -74,12 +74,14 @@ class DiscussionNotificationTest extends TestCase
 
         // All members of group are notified
         Notification::assertSentTo(
-            $users, DiscussionCreatedNotification::class
+            $users,
+            DiscussionCreatedNotification::class
         );
 
         // Author of the discussion is not notified
         Notification::assertNotSentTo(
-            [$this->user], DiscussionCreatedNotification::class
+            [$this->user],
+            DiscussionCreatedNotification::class
         );
     }
 }

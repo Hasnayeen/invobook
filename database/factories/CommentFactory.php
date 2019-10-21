@@ -8,9 +8,11 @@ $factory->define(App\Base\Models\Comment::class, function (Faker $faker) {
     switch ($commentable_type) {
         case 'discussion':
             $commentable_id = factory(App\Base\Models\Discussion::class)->create()->id;
+
             break;
         case 'task':
             $commentable_id = factory(App\TaskManager\Models\Task::class)->create()->id;
+
             break;
         default:
             throw new Exception('Wrong commentable type');

@@ -4,9 +4,7 @@ namespace App\TaskManager\Controllers;
 
 use Illuminate\Support\Facades\Route;
 
-/**********************************
-    Web
-**********************************/
+// Web
 
 Route::middleware('web')->group(function () {
     Route::get('tasks', [TaskController::class, 'index']);
@@ -32,9 +30,7 @@ Route::middleware('web')->group(function () {
     });
 });
 
-/**********************************
-    Api
-**********************************/
+// Api
 
 Route::middleware(['api', 'auth:api'])->prefix('api')->group(function () {
     Route::get('tasks', [TaskController::class, 'index']);
