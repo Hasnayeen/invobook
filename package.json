@@ -66,6 +66,9 @@
         ]
     },
     "standard": {
+        "ignore": [
+            "public/"
+        ],
         "globals": [
             "Vue",
             "axios",
