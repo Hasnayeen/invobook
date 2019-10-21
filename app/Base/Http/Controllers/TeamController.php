@@ -36,8 +36,9 @@ class TeamController extends Controller
 
         if (request()->expectsJson()) {
             return response()->json([
-                'status'  => 'success',
-                'team'    => $team,
+                'status'        => 'success',
+                'team'          => $team,
+                'current_cycle' => $team->current_cycle,
             ]);
         }
 

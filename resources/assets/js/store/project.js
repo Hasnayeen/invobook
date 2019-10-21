@@ -21,6 +21,7 @@ export default {
             commit('getProject', response.data.project)
             commit('setResourceName', response.data.project.name)
             dispatch('getMembers', response.data.project.members)
+            dispatch('selectCycle', response.data.current_cycle)
             commit('toggleLoading', false)
           }
         })

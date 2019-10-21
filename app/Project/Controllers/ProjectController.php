@@ -37,8 +37,9 @@ class ProjectController extends Controller
 
         if (request()->expectsJson()) {
             return response()->json([
-                'status'  => 'success',
-                'project' => $project,
+                'status'        => 'success',
+                'project'       => $project,
+                'current_cycle' => $project->current_cycle,
             ]);
         }
 
