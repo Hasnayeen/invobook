@@ -49,7 +49,7 @@ return PhpCsFixer\Config::create()
         // Ensure single space between function's argument and its typehint.
         'function_typehint_space' => true,
         // Single-line comments and multi-line comments with only one line of actual content should use the `//` syntax.
-        'single_line_comment_style' => true,
+        'single_line_comment_style' => false,
         // Convert `heredoc` to `nowdoc` where possible.
         'heredoc_to_nowdoc' => true,
         // Include/Require and file path should be divided with a single space. File path should not be placed under brackets.
