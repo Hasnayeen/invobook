@@ -14,7 +14,7 @@ class OfficePolicy
     /**
      * Determine whether the user can view the office.
      *
-     * @param  \App\Base\Models\User   $user
+     * @param  \App\Base\Models\User     $user
      * @param  \App\Office\Models\Office $office
      * @return mixed
      */
@@ -37,7 +37,7 @@ class OfficePolicy
     /**
      * Determine whether the user can delete the office.
      *
-     * @param  \App\Base\Models\User   $user
+     * @param  \App\Base\Models\User     $user
      * @param  \App\Office\Models\Office $office
      * @return mixed
      */
@@ -49,7 +49,7 @@ class OfficePolicy
     /**
      * Determine whether the user can change the office settings.
      *
-     * @param  \App\Base\Models\User   $user
+     * @param  \App\Base\Models\User     $user
      * @param  \App\Office\Models\Office $office
      * @return mixed
      */
