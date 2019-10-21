@@ -180,6 +180,7 @@ return [
         App\Base\Providers\BroadcastServiceProvider::class,
         App\Base\Providers\EventServiceProvider::class,
         App\Base\Providers\RouteServiceProvider::class,
+        App\Base\Providers\DropboxFilesystemServiceProvider::class,
 
         /*
          * Modules Service Providers...
