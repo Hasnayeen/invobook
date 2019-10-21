@@ -14,7 +14,7 @@ export default new Vuex.Store({
 
   state: {
     loading: false,
-    users
+    users // eslint-disable-line
   },
 
   mutations: {

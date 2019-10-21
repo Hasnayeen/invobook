@@ -67,7 +67,9 @@
     },
     "standard": {
         "ignore": [
-            "public/"
+            "public/",
+            "webpack.config.js",
+            "webpack.mix.js"
         ],
         "globals": [
             "Vue",
