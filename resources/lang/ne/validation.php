@@ -22,7 +22,7 @@ return [
     'array'                => ':attribute एर्रे हुनुपर्दछ।',
     'before'               => ':attribute अघि मिति हुनुपर्दछ :date।',
     'before_or_equal'      => ':attribute अघिल्लो वा बराबर मिति हुनुपर्दछ :date।',
-    'between'              =>  [
+    'between'              => [
                                     'numeric' => ':attribute बीचमा हुनुपर्दछ :min र :max।',
                                     'file'    => ':attribute बीचमा हुनुपर्दछ :min र :max किलोबाइट्स।',
                                     'string'  => ':attribute बीचमा हुनुपर्दछ :min र :max पात्रहरू।',
@@ -47,7 +47,7 @@ return [
     'integer'              => ':attribute पूर्णांक हुनुपर्दछ।',
     'ip'                   => ':attribute एक मान्य आईपी ठेगाना हुनुपर्दछ।',
     'json'                 => ':attribute एक मान्य JSON स्ट्रि be हुनुपर्दछ।',
-    'max'                  =>   [
+    'max'                  => [
                                     'numeric' => ':attribute भन्दा ठूलो नहुन सक्छ :max।',
                                     'file'    => ':attribute भन्दा ठूलो नहुन सक्छ :max किलोबाइट्स।',
                                     'string'  => ':attribute भन्दा ठूलो नहुन सक्छ :max पात्रहरू।',
@@ -55,7 +55,7 @@ return [
                                 ],
     'mimes'                => ':attribute प्रकारको फाईल हुनुपर्दछ: :values।',
     'mimetypes'            => ':attribute प्रकारको फाईल हुनुपर्दछ: :values।',
-    'min'                  =>   [
+    'min'                  => [
                                     'numeric' => ':attribute कम्तिमा हुनु पर्छ :min।',
                                     'file'    => ':attribute कम्तिमा हुनु पर्छ :min किलोबाइट्स।',
                                     'string'  => ':attribute कम्तिमा हुनु पर्छ :min पात्रहरू।',
@@ -73,7 +73,7 @@ return [
     'required_without'     => ':attribute क्षेत्र आवश्यक हुन्छ जब :values उपस्थित छैन।',
     'required_without_all' => ':attribute फिल्ड आवश्यक छ जब कुनै पनि होइन :values उपस्थित छन्।',
     'same'                 => ':attribute र :other मिल्नै पर्छ।',
-    'size'                 =>   [
+    'size'                 => [
                                     'numeric' => ':attribute हुनै पर्छ :size।',
                                     'file'    => ':attribute हुनै पर्छ :size किलोबाइट्स।',
                                     'string'  => ':attribute हुनै पर्छ :size पात्रहरू।',
