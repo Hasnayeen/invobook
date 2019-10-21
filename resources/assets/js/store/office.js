@@ -5,13 +5,13 @@ export default {
   },
 
   mutations: {
-    getOffice(state, office) {
+    getOffice (state, office) {
       state.office = office
-    },
+    }
   },
 
   actions: {
-    async getOffice({ dispatch, commit }, officeId) {
+    async getOffice ({ dispatch, commit }, officeId) {
       commit('toggleLoading', true)
       await axios.get(
         'offices/' + officeId
@@ -31,6 +31,6 @@ export default {
         })
 
       dispatch('setCurrentView', 'office')
-    },
+    }
   }
 }

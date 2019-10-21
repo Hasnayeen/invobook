@@ -5,13 +5,13 @@ export default {
   },
 
   mutations: {
-    getProject(state, project) {
+    getProject (state, project) {
       state.project = project
-    },
+    }
   },
 
   actions: {
-    async getProject({ dispatch, commit }, projectId) {
+    async getProject ({ dispatch, commit }, projectId) {
       commit('toggleLoading', true)
       await axios.get(
         'projects/' + projectId
@@ -31,6 +31,6 @@ export default {
         })
 
       dispatch('setCurrentView', 'project')
-    },
+    }
   }
 }

@@ -18,8 +18,8 @@ export default new Vuex.Store({
   },
 
   mutations: {
-    toggleLoading(state, status) {
+    toggleLoading (state, status) {
       state.loading = status
     }
-  },
+  }
 })
