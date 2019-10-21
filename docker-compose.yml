@@ -44,13 +44,15 @@ services:
     hostname: redis
 
   worker:
-    image: php:7.2-cli
+    build:
+      context: .
+      dockerfile: docker/worker.Dockerfile
     volumes:
       - ./:/var/www
     links:
       - db
     working_dir: /var/www
-    command: bash -c "apt-get update && docker-php-ext-install pdo_mysql && php artisan queue:work redis --sleep=1 --tries=1"
+    command: bash -c "php artisan queue:work redis --sleep=1 --tries=1"
     depends_on:
       - php
     restart: always
