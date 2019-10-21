@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'Profile'                                                  => 'প্রোফাইল',
+    'Account'                                                  => 'একাউন্ট',
+    'Username'                                                 => 'ব্যবহারকারীর নাম',
+    'Name'                                                     => 'নাম',
+    'Designation'                                              => 'পদবী',
+    'Title'                                                    => 'খেতাব ' . config('app.company_name'),
+    'Short Bio'                                                => 'শর্ট বায়ো',
+    'Location'                                                 => 'অবস্থান',
+    'Time Zone'                                                => 'টাইম জোন',
+    'First Day of the Week'                                    => 'সপ্তাহের প্রথম দিন',
+    'Language'                                                 => 'ভাষা',
+    'Change Your Avatar'                                       => 'আপনার অবতার পরিবর্তন করুন',
+    'Email'                                                    => 'ইমেইল',
+    'Current Password'                                         => 'বর্তমান পাসওয়ার্ড',
+    'New Password'                                             => 'নতুন পাসওয়ার্ড',
+    'Confirm Password'                                         => 'পাসওয়ার্ড নিশ্চিত করুন',
+    'Update'                                                   => 'আধুনিকীকরণ',
+    'Delete Account'                                           => 'একাউন্ট বিলোপ করুন',
+    'Preferred Language'                                       => 'পছন্দের ভাষা',
+    'Notification Settings'                                    => 'প্রজ্ঞাপন বিন্যাসন',
+    'Email Notifications'                                      => 'ইমেইল বিজ্ঞপ্তি',
+    'Send email on direct messages'                            => 'সরাসরি বার্তাসমূহে ইমেইল প্রেরণ করুন',
+    'Send email on mention in tasks, discussions and comments' => 'কাজ, আলোচনা এবং মন্তব্যগুলিতে উল্লিখিত ইমেইল প্রেরণ করুন',
+    'Member of'                                                => 'সদস্য',
+];
