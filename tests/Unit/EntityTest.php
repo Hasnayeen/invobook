@@ -3,8 +3,8 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
-use App\Core\Models\Cycle;
-use App\Core\Models\Project;
+use App\Base\Models\Cycle;
+use App\Project\Models\Project;
 
 class EntityTest extends TestCase
 {

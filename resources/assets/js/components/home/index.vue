@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div class="md:container md:mx-auto md:px-4 mt-8 flex justify-center">
+  <div class="md:container md:mx-auto md:px-4 mt-4 flex justify-center">
     <div class="bg-white shadow rounded flex justify-center flex-grow-0 px-4 py-1 text-sm">
       <div @click="setActiveView('home')" class="text-gray-700 hover:text-blue-700 cursor-pointer">
         Home

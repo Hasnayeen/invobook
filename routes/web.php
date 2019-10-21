@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Http\Controllers;
+namespace App\Base\Http\Controllers;
 
 use Illuminate\Support\Facades\Route;
 
@@ -51,24 +51,6 @@ Route::post('register/{token}', [Auth\RegisterController::class, 'confirmNewRegi
 Route::impersonate();
 
 Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('auth');
-
-    /**********************************
-        Project
-    **********************************/
-
-Route::get('projects/{project}', [ProjectController::class, 'show']);
-
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('projects', [ProjectController::class, 'index']);
-
-    Route::post('projects', [ProjectController::class, 'store']);
-
-    Route::delete('projects/{project}', [ProjectController::class, 'delete']);
-
-    Route::post('public-projects/{project}', [PublicProjectController::class, 'store']);
-
-    Route::delete('public-projects/{project}', [PublicProjectController::class, 'delete']);
-});
 
     /**********************************
         Team
@@ -169,28 +151,6 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
     /**********************************
-        Task
-    **********************************/
-
-Route::get('tasks', [TaskController::class, 'index']);
-
-Route::group(['middleware' => 'auth'], function () {
-    Route::post('tasks', [TaskController::class, 'store']);
-
-    Route::get('tasks/{task}', [TaskController::class, 'show']);
-
-    Route::put('tasks/{task}', [TaskController::class, 'update']);
-
-    Route::delete('tasks/{task}', [TaskController::class, 'delete']);
-
-    Route::put('tasks/{task}/statuses/{status}', [TaskStatusController::class, 'update']);
-
-    Route::get('tasks/{task}/steps/', [TaskProgressController::class, 'index']);
-
-    Route::post('tasks/{task}/steps/', [TaskProgressController::class, 'store']);
-});
-
-    /**********************************
         File
     **********************************/
 
@@ -285,10 +245,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('tags', [TagController::class, 'store']);
 
-    Route::post('tasks/{task}/tags', [TaskTagController::class, 'store']);
-
-    Route::delete('tasks/{task}/tags/{tag}', [TaskTagController::class, 'delete']);
-
     /**********************************
         Notification
     **********************************/
@@ -364,4 +320,15 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function 
     Route::put('services/{service}', [ServiceController::class, 'update']);
 
     Route::get('check-for-update', [AboutController::class, 'checkForUpdate']);
+
+    /**********************************
+        Database Backup in dropbox
+    **********************************/
+    Route::get('check-dropbox-setup', [DatabaseBackupController::class, 'checkDropboxSetup']);
+
+    Route::get('take-backup', [DatabaseBackupController::class, 'takeBackupToDropbox']);
+
+    Route::get('backup-list', [DatabaseBackupController::class, 'backupFileLists']);
+
+    Route::post('backup-restore', [DatabaseBackupController::class, 'backupRestore']);
 });

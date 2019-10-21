@@ -2,7 +2,7 @@ export default {
   state: {
     cycles: [],
     selectedCycle: null,
-    // selectedCycleId: current_cycle ? current_cycle.id : 0,
+    selectedCycleId: 0,
   },
 
   mutations: {

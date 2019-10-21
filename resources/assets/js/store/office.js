@@ -21,6 +21,7 @@ export default {
             commit('getOffice', response.data.office)
             commit('setResourceName', response.data.office.name)
             dispatch('getMembers', response.data.office.members)
+            dispatch('selectCycle', response.data.current_cycle)
             commit('toggleLoading', false)
           }
         })

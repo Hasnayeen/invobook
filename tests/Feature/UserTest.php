@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Core\Models\User;
+use App\Base\Models\User;
 use Laravel\Passport\Passport;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -16,7 +16,7 @@ class UserTest extends TestCase
     /** @test */
     public function owner_can_see_all_users_in_admin_page()
     {
-        factory('App\Core\Models\User', 2)->create();
+        factory('App\Base\Models\User', 2)->create();
         $users = User::all(['name', 'username', 'email', 'timezone', 'avatar']);
         $this->actingAs($this->user)->get('admin')
             ->assertSee($users[0]['name'])
@@ -30,7 +30,7 @@ class UserTest extends TestCase
     /** @test */
     public function owner_can_see_all_users()
     {
-        factory('App\Core\Models\User', 2)->create();
+        factory('App\Base\Models\User', 2)->create();
         $users = User::all(['name', 'username', 'email', 'timezone', 'avatar']);
         $this->actingAs($this->user)->get('users')
             ->assertJsonFragment([

@@ -3,18 +3,18 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Core\Models\User;
-use App\Core\Models\Token;
-use App\Core\Models\Invite;
-use App\Core\Models\Office;
+use App\Base\Models\User;
+use App\Base\Models\Token;
+use App\Base\Models\Invite;
+use App\Base\Models\Office;
 use Illuminate\Support\Str;
-use App\Core\Mail\UserRegistered;
+use App\Base\Mail\UserRegistered;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use App\Core\Notifications\UserRegistered as UserRegisteredNotification;
+use App\Base\Notifications\UserRegistered as UserRegisteredNotification;
 
 class UserRegistrationTest extends TestCase
 {
