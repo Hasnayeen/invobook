@@ -239,9 +239,7 @@ Route::group(['middleware' => 'auth'], function () {
         Settings
     **********************************/
 
-    Route::get('settings', function () {
-        return view('users.settings');
-    });
+    Route::view('settings', 'users.settings');
 });
 
     /**********************************
