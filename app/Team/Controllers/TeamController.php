@@ -51,7 +51,7 @@ class TeamController extends Controller
         try {
             $this->authorize('create', Team::class);
             $request->validate([
-                'name' => 'required|max:255',
+                'name'        => 'required|max:255',
                 'description' => 'required|max:255'
             ]);
             $team = $repository->createNewTeam($request->all());
