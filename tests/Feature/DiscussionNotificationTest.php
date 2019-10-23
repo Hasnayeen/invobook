@@ -6,11 +6,11 @@ use Tests\TestCase;
 use App\Base\Models\User;
 use App\Team\Models\Team;
 use App\Office\Models\Office;
-use App\Base\Models\Discussion;
 use App\Project\Models\Project;
 use App\Base\Contracts\HasMembers;
+use App\Discussion\Models\Discussion;
 use Illuminate\Support\Facades\Notification;
-use App\Base\Notifications\DiscussionCreatedNotification;
+use App\Discussion\Notifications\DiscussionCreatedNotification;
 
 class DiscussionNotificationTest extends TestCase
 {

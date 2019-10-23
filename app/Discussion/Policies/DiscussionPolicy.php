@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Base\Policies;
+namespace App\Discussion\Policies;
 
 use App\Base\Models\User;
-use App\Base\Models\Discussion;
 use App\Authorization\Authorization;
+use App\Discussion\Models\Discussion;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class DiscussionPolicy
@@ -26,7 +26,7 @@ class DiscussionPolicy
      * Determine whether the user can view the app models discussion.
      *
      * @param  \App\Base\Models\User       $user
-     * @param  \App\Base\Models\Discussion $discussion
+     * @param  \App\Discussion\Models\Discussion $discussion
      * @return mixed
      */
     public function view(User $user, Discussion $discussion)
@@ -38,7 +38,7 @@ class DiscussionPolicy
      * Determine whether the user can update the app models discussion.
      *
      * @param  \App\Base\Models\User       $user
-     * @param  \App\Base\Models\Discussion $discussion
+     * @param  \App\Discussion\Models\Discussion $discussion
      * @return mixed
      */
     public function update(User $user, Discussion $discussion)
@@ -50,7 +50,7 @@ class DiscussionPolicy
      * Determine whether the user can delete the app models discussion.
      *
      * @param  \App\Base\Models\User       $user
-     * @param  \App\Base\Models\Discussion $discussion
+     * @param  \App\Discussion\Models\Discussion $discussion
      * @return mixed
      */
     public function delete(User $user, Discussion $discussion)

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Base\Repositories;
+namespace App\Discussion\Repositories;
 
-use App\Base\Models\Discussion;
+use App\Discussion\Models\Discussion;
 
 class DiscussionRepository
 {

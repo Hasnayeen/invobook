@@ -3,7 +3,7 @@
 namespace App\Base\Http\Controllers;
 
 use App\Base\Models\Cycle;
-use App\Base\Models\Discussion;
+use App\Discussion\Models\Discussion;
 
 class RoadmapController extends Controller
 {

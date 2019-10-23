@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Base\Observers;
+namespace App\Discussion\Observers;
 
-use App\Base\Models\Discussion;
+use App\Discussion\Models\Discussion;
 use App\Base\Utilities\GetRecipientsTrait;
 use Illuminate\Support\Facades\Notification;
-use App\Base\Notifications\DiscussionCreatedNotification;
+use App\Discussion\Notifications\DiscussionCreatedNotification;
 
 class DiscussionObserver
 {

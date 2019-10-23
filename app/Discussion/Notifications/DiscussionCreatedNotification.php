@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Base\Notifications;
+namespace App\Discussion\Notifications;
 
 use Illuminate\Bus\Queueable;
-use App\Base\Models\Discussion;
 use Illuminate\Foundation\Auth\User;
+use App\Discussion\Models\Discussion;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;

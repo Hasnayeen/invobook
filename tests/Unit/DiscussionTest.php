@@ -12,7 +12,7 @@ class DiscussionTest extends TestCase
     {
         parent::setUp();
         $this->actingAs($this->user);
-        $this->discussion = factory(\App\Base\Models\Discussion::class)->create();
+        $this->discussion = factory(\App\Discussion\Models\Discussion::class)->create();
     }
 
     /** @test */

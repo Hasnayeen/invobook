@@ -7,7 +7,7 @@ $factory->define(App\Base\Models\Comment::class, function (Faker $faker) {
     $commentable_id = null;
     switch ($commentable_type) {
         case 'discussion':
-            $commentable_id = factory(App\Base\Models\Discussion::class)->create()->id;
+            $commentable_id = factory(App\Discussion\Models\Discussion::class)->create()->id;
 
             break;
         case 'task':

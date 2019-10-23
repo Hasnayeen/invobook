@@ -20,7 +20,7 @@ class AppServiceProvider extends ServiceProvider
             'office'     => 'App\Office\Models\Office',
             'task'       => 'App\TaskManager\Models\Task',
             'event'      => 'App\Base\Models\Event',
-            'discussion' => 'App\Base\Models\Discussion',
+            'discussion' => 'App\Discussion\Models\Discussion',
             'user'       => 'App\Base\Models\User',
             'comment'    => 'App\Base\Models\Comment',
             'mention'    => 'App\Base\Models\Mention',

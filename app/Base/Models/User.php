@@ -8,6 +8,7 @@ use App\Project\Models\Project;
 use App\TaskManager\Models\Task;
 use App\Base\Utilities\Notifiable;
 use Laravel\Passport\HasApiTokens;
+use App\Discussion\Models\Discussion;
 use Lab404\Impersonate\Models\Impersonate;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
