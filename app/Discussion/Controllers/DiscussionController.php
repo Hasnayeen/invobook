@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Base\Http\Controllers;
+namespace App\Discussion\Controllers;
 
-use App\Base\Models\Discussion;
 use App\Base\Utilities\GroupTrait;
-use App\Base\Repositories\DiscussionRepository;
-use App\Base\Http\Requests\UpdateDiscussionRequest;
-use App\Base\Http\Requests\ValidateDiscussionCreation;
+use App\Discussion\Models\Discussion;
+use App\Base\Http\Controllers\Controller;
+use App\Discussion\Requests\UpdateDiscussionRequest;
+use App\Discussion\Repositories\DiscussionRepository;
+use App\Discussion\Requests\ValidateDiscussionCreation;
 
 class DiscussionController extends Controller
 {

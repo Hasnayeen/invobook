@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Base\Http\Requests;
+namespace App\Discussion\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,10 +24,10 @@ class UpdateDiscussionRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'                => 'required|string|max:255',
-            'content'             => 'required|string',
-            'raw_content'         => 'required|string',
-            'category_id'         => 'required|integer|exists:categories,id',
+            'name'        => 'required|string|max:255',
+            'content'     => 'required|string',
+            'raw_content' => 'required|string',
+            'category_id' => 'required|integer|exists:categories,id',
         ];
     }
 }

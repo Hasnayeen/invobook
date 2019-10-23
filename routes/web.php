@@ -87,22 +87,6 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
     /**********************************
-        Discussion
-     **********************************/
-
-Route::get('discussions', [DiscussionController::class, 'index']);
-
-Route::group(['middleware' => 'auth'], function () {
-    Route::post('discussions', [DiscussionController::class, 'store']);
-
-    Route::get('discussions/{discussion}', [DiscussionController::class, 'show']);
-
-    Route::patch('discussions/{discussion}', [DiscussionController::class, 'update']);
-
-    Route::delete('discussions/{discussion}', [DiscussionController::class, 'delete']);
-});
-
-    /**********************************
         Event
      **********************************/
 

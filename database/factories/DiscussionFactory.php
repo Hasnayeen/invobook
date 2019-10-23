@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Base\Models\Discussion::class, function (Faker $faker) {
+$factory->define(App\Discussion\Models\Discussion::class, function (Faker $faker) {
     $fakeHeading = $faker->word;
     $fakeBoldWord = $faker->word;
     $discussionableType = $faker->randomElement(['office', 'team', 'project']);

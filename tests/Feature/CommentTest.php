@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Base\Models\Discussion;
+use App\Discussion\Models\Discussion;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Validation\ValidationException;
@@ -100,7 +100,7 @@ class CommentTest extends TestCase
         $this->actingAs($this->user);
         $project = factory(\App\Project\Models\Project::class)->create(['owner_id' => $this->user->id]);
         resolve('Authorization')->setupDefaultPermissions($project);
-        $discussion = factory(\App\Base\Models\Discussion::class)->create(['discussionable_type' => 'project', 'discussionable_id' => $project->id]);
+        $discussion = factory(\App\Discussion\Models\Discussion::class)->create(['discussionable_type' => 'project', 'discussionable_id' => $project->id]);
         $comments = factory(\App\Base\Models\Comment::class, 3)->create(['commentable_type' => 'discussion', 'commentable_id' => $discussion->id]);
 
         $this->call('GET', self::$endpoint, [

@@ -38,18 +38,6 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth:api'], function () {
 
     Route::delete('members', [MemberController::class, 'destroy']);
 
-    // Discussion
-
-    Route::get('discussions', [DiscussionController::class, 'index']);
-
-    Route::post('discussions', [DiscussionController::class, 'store']);
-
-    Route::get('discussions/{discussion}', [DiscussionController::class, 'show']);
-
-    Route::patch('discussions/{discussion}', [DiscussionController::class, 'update']);
-
-    Route::delete('discussions/{discussion}', [DiscussionController::class, 'delete']);
-
     // Event
 
     Route::get('events', [EventController::class, 'index']);

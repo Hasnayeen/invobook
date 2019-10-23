@@ -1,7 +1,10 @@
 <?php
 
-namespace App\Base\Models;
+namespace App\Discussion\Models;
 
+use App\Base\Models\User;
+use App\Base\Models\Comment;
+use App\Base\Models\Category;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
@@ -24,7 +27,7 @@ class Discussion extends Model
 
     public function creator()
     {
-        return $this->belongsTo(\App\Base\Models\User::class, 'posted_by');
+        return $this->belongsTo(User::class, 'posted_by');
     }
 
     public function getDateAttribute()
@@ -34,7 +37,7 @@ class Discussion extends Model
 
     public function category()
     {
-        return $this->belongsTo(\App\Base\Models\Category::class);
+        return $this->belongsTo(Category::class);
     }
 
     /**
