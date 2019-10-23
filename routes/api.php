@@ -149,5 +149,4 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth:api'], function () {
     Route::get('activities', [ActivityController::class, 'index']);
 
     // Settings
-
 });
