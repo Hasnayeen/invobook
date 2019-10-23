@@ -150,7 +150,4 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth:api'], function () {
 
     // Settings
 
-    Route::get('settings', function () {
-        return view('users.settings');
-    });
 });
