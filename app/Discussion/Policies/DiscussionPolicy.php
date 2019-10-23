@@ -25,7 +25,7 @@ class DiscussionPolicy
     /**
      * Determine whether the user can view the app models discussion.
      *
-     * @param  \App\Base\Models\User       $user
+     * @param  \App\Base\Models\User             $user
      * @param  \App\Discussion\Models\Discussion $discussion
      * @return mixed
      */
@@ -37,7 +37,7 @@ class DiscussionPolicy
     /**
      * Determine whether the user can update the app models discussion.
      *
-     * @param  \App\Base\Models\User       $user
+     * @param  \App\Base\Models\User             $user
      * @param  \App\Discussion\Models\Discussion $discussion
      * @return mixed
      */
@@ -49,7 +49,7 @@ class DiscussionPolicy
     /**
      * Determine whether the user can delete the app models discussion.
      *
-     * @param  \App\Base\Models\User       $user
+     * @param  \App\Base\Models\User             $user
      * @param  \App\Discussion\Models\Discussion $discussion
      * @return mixed
      */
