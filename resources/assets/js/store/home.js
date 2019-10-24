@@ -54,22 +54,22 @@ export default new Vuex.Store({
       state.offices = offices
     },
     addProject (state, project) {
-      state.home.projects.push(project)
+      state.projects.push(project)
     },
     addTeam (state, team) {
-      state.home.teams.push(team)
+      state.teams.push(team)
     },
     addOffice (state, office) {
-      state.home.offices.push(office)
+      state.offices.push(office)
     },
     removeProject (state, index) {
-      state.home.projects.splice(index, 1)
+      state.projects.splice(index, 1)
     },
     removeTeam (state, index) {
-      state.home.teams.splice(index, 1)
+      state.teams.splice(index, 1)
     },
     removeOffice (state, index) {
-      state.home.offices.splice(index, 1)
+      state.offices.splice(index, 1)
     },
     toggleLoading (state, status) {
       state.loading = status
@@ -145,6 +145,8 @@ export default new Vuex.Store({
           }
         })
         .catch((error) => {
+          console.log(error);
+          
           commit('toggleLoading', false)
           this.dispatch('showNotification', { type: error.response.data.status, message: error.response.data.message })
         })
