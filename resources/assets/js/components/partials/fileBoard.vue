@@ -7,16 +7,7 @@
 
     <div class="">
       <ul class="flex flex-row flex-wrap justify-center list-reset">
-        <li v-for="file in files" class="rounded-lg w-80 flex flex-col justify-center items-center m-6 shadow-md cursor-pointer">
-          <div class="bg-gray-800 w-full overflow-hidden h-48 flex justify-center items-center rounded-t-lg">
-            <img :src="'/storage/' + file.path" alt="" class="h-full">
-          </div>
-          <div class="bg-white w-full flex-grow flex items-center justify-center text-center rounded-b-lg p-4 text-sm text-gray-800">
-            <div class="w-full truncate" :title="file.name">
-              {{ file.name }}
-            </div>
-          </div>
-        </li>
+        <file v-for="(file, index) in files" :file="file" :key="file.id" :index="index" @deleted="deleteFile" ></file>
       </ul>
     </div>
 
@@ -36,8 +27,11 @@ import {
   faFilePdf
 } from '@fortawesome/free-solid-svg-icons'
 import fileUpload from './fileUpload'
+import file from './file'
+
 export default {
-  components: {fileUpload},
+  components: {fileUpload, file},
+
   props: {
     resource: {
       required: true,
@@ -52,22 +46,28 @@ export default {
       type: String
     }
   },
+
   data: () => ({
     files: [],
+    dropdownMenuShown: false,
+    user,
     authenticated,
     faEllipsisH,
     faFileAlt,
     faFileImage,
     faFilePdf
   }),
+
   mounted () {
     this.getAllFiles()
   },
+
   watch: {
     activeTab: function () {
       this.getAllFiles(false)
     }
   },
+
   methods: {
     getAllFiles (uploaded = false) {
       if (this.activeTab === 'files' && (this.files.length === 0 || uploaded)) {
@@ -84,7 +84,10 @@ export default {
             console.log(error)
           })
       }
-    }
+    },
+    deleteFile (index) {
+      this.files.splice(index, 1)
+    },
   }
 }
 </script>
