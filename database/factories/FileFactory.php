@@ -30,6 +30,7 @@ $factory->define(App\Base\Models\File::class, function (Faker\Generator $faker) 
         'name'          => $filename,
         'path'          => '/' . $filename,
         'hash'          => $faker->md5,
+        'mime_type'     => $faker->mimeType,
         'fileable_type' => $fileableType,
         'fileable_id'   => $fileableId,
         'created_at'    => $now,

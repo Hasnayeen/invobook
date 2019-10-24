@@ -145,8 +145,8 @@ export default new Vuex.Store({
           }
         })
         .catch((error) => {
-          console.log(error);
-          
+          console.log(error)
+
           commit('toggleLoading', false)
           this.dispatch('showNotification', { type: error.response.data.status, message: error.response.data.message })
         })

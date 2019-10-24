@@ -1,7 +1,8 @@
 <template>
-<li class="rounded-lg w-80 flex flex-col justify-center items-center m-6 shadow-md cursor-pointer">
+<div class="rounded-lg w-80 flex flex-col justify-center items-center m-6 shadow-md cursor-pointer">
   <div class="bg-gray-800 w-full overflow-hidden h-48 flex justify-center items-center rounded-t-lg">
-    <img :src="'/storage/' + file.path" alt="" class="h-full">
+    <font-awesome-icon v-if="file.mime_type === 'application/pdf'" :icon="faFilePdf" class="w-full text-6xl text-white"></font-awesome-icon>
+    <img v-else :src="'/storage/' + file.path" alt="" class="w-full">
   </div>
   <div class="bg-gray-100 w-full flex-grow flex items-center justify-center text-center rounded-b-lg p-4 text-sm text-gray-800">
     <div class="w-full truncate" :title="file.name">
@@ -18,12 +19,12 @@
       </div>
     </div>
   </div>
-</li>
+</div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
-import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
+import { faEllipsisH, faFilePdf } from '@fortawesome/free-solid-svg-icons'
 
 export default {
   props: {
@@ -41,6 +42,7 @@ export default {
     dropdownMenuShown: false,
     user,
     faEllipsisH,
+    faFilePdf,
   }),
 
   methods: {

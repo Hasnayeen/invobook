@@ -47,6 +47,10 @@ html {
      height: 50vh;
  }
 
+ .h-80-vh {
+     height: 80vh;
+ }
+
  .checkbox {
      @apply hidden;
  }

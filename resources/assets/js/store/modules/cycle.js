@@ -40,7 +40,7 @@ export default {
           console.log(error)
         })
     },
-    selectCycle({ commit }, cycle) {
+    selectCycle ({ commit }, cycle) {
       if (cycle !== null) {
         commit('selectCycle', cycle)
         commit('selectCycleId', cycle.id)
