@@ -40,9 +40,11 @@ export default {
           console.log(error)
         })
     },
-    selectCycle ({ commit }, cycle) {
-      commit('selectCycle', cycle)
-      commit('selectCycleId', cycle.id)
+    selectCycle({ commit }, cycle) {
+      if (cycle !== null) {
+        commit('selectCycle', cycle)
+        commit('selectCycleId', cycle.id)
+      }
     }
   }
 }
