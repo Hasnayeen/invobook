@@ -29,5 +29,4 @@ class TeamRequest extends FormRequest
             'description' => 'required|max:255',
         ];
     }
-
 }
