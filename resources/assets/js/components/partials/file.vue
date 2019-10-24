@@ -1,6 +1,6 @@
 <template>
-<div class="rounded-lg w-80 flex flex-col justify-center items-center m-6 shadow-md cursor-pointer">
-  <div class="bg-gray-800 w-full overflow-hidden h-48 flex justify-center items-center rounded-t-lg">
+<div class="rounded-lg w-80 flex flex-col justify-center items-center m-6 shadow-md">
+  <div @click="showFile" class="bg-gray-800 w-full overflow-hidden h-48 flex justify-center items-center rounded-t-lg cursor-pointer">
     <font-awesome-icon v-if="file.mime_type === 'application/pdf'" :icon="faFilePdf" class="w-full text-6xl text-white"></font-awesome-icon>
     <img v-else :src="'/storage/' + file.path" alt="" class="w-full">
   </div>
@@ -49,6 +49,9 @@ export default {
     ...mapActions([
       'showNotification',
     ]),
+    showFile () {
+      this.$emit('show', this.index)
+    },
     deleteFile () {
       axios.delete(`/files/${this.file.id}`)
         .then((response) => {

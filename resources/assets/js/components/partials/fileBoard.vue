@@ -9,10 +9,11 @@
 
     <div class="">
       <ul class="flex flex-row flex-wrap justify-center list-reset">
-        <li v-for="(file, index) in files" @click="showFile(index)" :key="file.id">
+        <li v-for="(file, index) in files" :key="file.id">
           <file
             :file="file"
             :index="index"
+            @show="showFile"
             @deleted="deleteFile" ></file>
         </li>
       </ul>
