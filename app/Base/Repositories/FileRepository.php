@@ -38,6 +38,7 @@ class FileRepository
                         'fileable_type' => request('group_type'),
                         'fileable_id'   => request('group_id'),
                     ])
+                    ->with('owner:id,name,avatar,username')
                     ->get();
     }
 

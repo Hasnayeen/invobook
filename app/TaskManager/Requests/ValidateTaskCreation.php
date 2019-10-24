@@ -23,7 +23,6 @@ class ValidateTaskCreation extends FormRequest
      */
     public function rules()
     {
-        // dd(request()->all());
         return [
             'name'        => 'required|max:255',
             'assigned_to' => 'nullable|exists:users,id',

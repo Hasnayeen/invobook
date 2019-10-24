@@ -1,5 +1,7 @@
 <template>
 <div v-if="activeTab === 'files'" class="w-full">
+  <file-modal v-if="file" :fileModalShown="fileModalShown" :file="file" @close="closeFileModal"></file-modal>
+
   <div>
     <div v-if="authenticated" class="flex justify-center pb-4">
       <file-upload :resourceType="resourceType" :resourceId="resource.id" @on-success="getAllFiles"></file-upload>
@@ -7,7 +9,12 @@
 
     <div class="">
       <ul class="flex flex-row flex-wrap justify-center list-reset">
-        <file v-for="(file, index) in files" :file="file" :key="file.id" :index="index" @deleted="deleteFile" ></file>
+        <li v-for="(file, index) in files" @click="showFile(index)" :key="file.id">
+          <file
+            :file="file"
+            :index="index"
+            @deleted="deleteFile" ></file>
+        </li>
       </ul>
     </div>
 
@@ -20,17 +27,12 @@
 </template>
 
 <script>
-import {
-  faEllipsisH,
-  faFileAlt,
-  faFileImage,
-  faFilePdf
-} from '@fortawesome/free-solid-svg-icons'
 import fileUpload from './fileUpload'
+import fileModal from './fileModal'
 import file from './file'
 
 export default {
-  components: {fileUpload, file},
+  components: {fileUpload, fileModal, file},
 
   props: {
     resource: {
@@ -49,13 +51,12 @@ export default {
 
   data: () => ({
     files: [],
+    file: {},
+    fileModalShown: false,
+    index: null,
     dropdownMenuShown: false,
     user,
     authenticated,
-    faEllipsisH,
-    faFileAlt,
-    faFileImage,
-    faFilePdf
   }),
 
   mounted () {
@@ -88,6 +89,14 @@ export default {
     deleteFile (index) {
       this.files.splice(index, 1)
     },
+    showFile (index) {
+      this.file = this.files[index]
+      this.index = index
+      this.fileModalShown = true
+    },
+    closeFileModal () {
+      this.fileModalShown = false
+    }
   }
 }
 </script>
