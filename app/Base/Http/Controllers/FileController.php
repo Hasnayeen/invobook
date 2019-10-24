@@ -92,6 +92,7 @@ class FileController extends Controller
         );
         $data['fileable_type'] = request('group_type');
         $data['fileable_id'] = request('group_id');
+        $data['mime_type'] = $file->getMimeType();
         $data['owner_id'] = auth()->user()->id;
         $data['created_at'] = $now;
         $data['updated_at'] = $now;
