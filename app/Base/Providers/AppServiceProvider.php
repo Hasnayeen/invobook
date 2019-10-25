@@ -2,6 +2,7 @@
 
 namespace App\Base\Providers;
 
+use App\Base\Utilities\GithubConnection;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
@@ -38,6 +39,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(\Illuminate\Notifications\Channels\DatabaseChannel::class, function ($app) {
             return new \App\Base\Utilities\DatabaseNotificationChannel();
         });
+
+        $this->app->bind('github', GithubConnection::class);
 
         if ($this->app->environment() === 'local') {
             $this->app->register(\Laravel\Telescope\TelescopeServiceProvider::class);

@@ -3,12 +3,9 @@
 namespace App\Base\Http\Controllers;
 
 use App\Base\Models\GithubRepo;
-use App\Base\Utilities\GithubTrait;
 
 class IssueController extends Controller
 {
-    use GithubTrait;
-
     public function index()
     {
         $params = request()->only(['group_type', 'group_id']);
@@ -26,7 +23,7 @@ class IssueController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'issues' => $this->getRepoIssues($repo->github_repo_id),
+            'issues' => app('github')->getRepoIssues($repo->github_repo_id),
         ]);
     }
 }

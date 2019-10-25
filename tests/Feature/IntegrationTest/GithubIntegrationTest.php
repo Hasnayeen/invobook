@@ -9,6 +9,37 @@ use App\Project\Models\Project;
 
 class GithubIntegrationTest extends TestCase
 {
+    private $githubToken;
+
+    public function setUp():void
+    {
+        parent::setUp();
+
+        $this->githubToken = env('GITHUB_TOKEN');
+        if (!empty($this->githubToken)) {
+            $this->app->instance('github', new TestGithubConnection);
+        } else {
+            $this->app->instance('github', new FakeGithubConnection);
+        }
+    }
+
+    /** @test */
+    public function user_can_get_repos()
+    {
+        $this->assertNotEmpty(app('github')->getUserRepos(), 'No repos found. Might be false-positive.');
+    }
+
+    /** @test */
+    public function user_can_get_github_issues()
+    {
+        $githubRepoId = env('GITHUB_REPO_ID');
+        if(!empty($this->githubToken) && empty($githubRepoId)) {
+            $this->markTestSkipped('Github access token `GITHUB_TOKEN` is set but GITHUB_REPO_ID is not set');
+        }
+
+        $this->assertNotEmpty(app('github')->getRepoIssues($githubRepoId), 'No issues found in repo. Might be false-positive.');
+    }
+
     /** @test */
     public function user_can_get_all_connected_github_repo()
     {

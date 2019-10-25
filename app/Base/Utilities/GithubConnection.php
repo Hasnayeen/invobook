@@ -9,11 +9,11 @@ use App\Base\Models\Service;
 /**
  * Expose methods to interact with Github GraphQL API.
  */
-trait GithubTrait
+class GithubConnection
 {
-    private $token;
+    protected $token;
 
-    private function getAccessToken()
+    protected function getAccessToken()
     {
         if ($this->token) {
             return $this->token;
@@ -29,7 +29,7 @@ trait GithubTrait
         return $this->token;
     }
 
-    private function getUserRepos()
+    public function getUserRepos()
     {
         return $this->call('query {
                     viewer {
@@ -44,7 +44,7 @@ trait GithubTrait
                 }');
     }
 
-    private function getRepoIssues($repositoryId)
+    public function getRepoIssues($repositoryId)
     {
         return $this->call('query {
                       node(id: "' . $repositoryId . '") {
