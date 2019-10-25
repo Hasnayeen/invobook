@@ -235,8 +235,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('activities', [ActivityController::class, 'index']);
 
-    Route::get('issues', [IssueController::class, 'index']);
-
     /**********************************
         Settings
     **********************************/

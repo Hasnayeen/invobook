@@ -37,11 +37,6 @@
     <font-awesome-icon :icon="faBolt" class="text-2xl"></font-awesome-icon>
     <span class="hidden md:block text-xs font-regular">{{ 'Activities' | localize }}</span>
   </div>
-  <div v-if="authenticated" @click="activateThisTab('issues')"
-    :class="[(active === 'issues') ? 'text-teal-600 font-semibold border-teal-500 border-b-2 pb-2 -mb-2' : 'cursor-pointer', 'text-center w-1/6 flex-grow']">
-    <font-awesome-icon :icon="faBolt" class="text-2xl"></font-awesome-icon>
-    <span class="hidden md:block text-xs font-regular">{{ 'Issues' | localize }}</span>
-  </div>
 </div>
 </template>
 

@@ -83,7 +83,6 @@
       <event-board v-if="settings.event_enabled" resourceType="project" :resource="project" :activeTab="active"></event-board>
       <file-board v-if="settings.file_enabled" resourceType="project" :resource="project" :activeTab="active"></file-board>
       <activity-board resourceType="project" :resourceId="project.id" :activeTab="active"></activity-board>
-      <issue-board resourceType="project" :resourceId="project.id" :resource="project" :activeTab="active"></issue-board>
     </div>
   </div>
 </template>
@@ -95,7 +94,6 @@ import discussionBoard from './../partials/discussionBoard.vue'
 import messagesBoard from './../partials/messagesBoard.vue'
 import eventBoard from './../partials/eventBoard.vue'
 import fileBoard from './../partials/fileBoard.vue'
-import issueBoard from './../partials/issueBoard.vue'
 import activityBoard from './../partials/activityBoard.vue'
 import addMemberForm from './../partials/addMemberForm.vue'
 import membersListModal from './../partials/membersListModal.vue'
@@ -115,7 +113,6 @@ export default {
     messagesBoard,
     eventBoard,
     fileBoard,
-    issueBoard,
     activityBoard,
     addMemberForm,
     membersListModal,
@@ -138,7 +135,7 @@ export default {
   }),
 
   created () {
-    let tabs = ['tasks', 'discussions', 'messages', 'events', 'files', 'activities', 'issues']
+    let tabs = ['tasks', 'discussions', 'messages', 'events', 'files', 'activities']
     let tool = new URL(location.href).searchParams.get('tool')
     let id = new URL(location.href).searchParams.get('id')
     this.getActiveTool(tool, tabs)
