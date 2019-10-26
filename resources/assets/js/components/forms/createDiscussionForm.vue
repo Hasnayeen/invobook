@@ -115,14 +115,13 @@ export default {
           imageUpload: {
             upload: file => {
               let formData = new FormData()
-              formData.append('files[0]', file)
+              formData.append('file', file)
               formData.append('group_type', this.resourceType)
               formData.append('group_id', this.resourceId)
-              formData.append('for_editor', true)
               
               // return a Promise that resolves in a link to the uploaded image
               return new Promise((resolve, reject) => {
-                axios.post('/files',
+                axios.post('/discussions/files',
                   formData,
                   {
                     headers: {
@@ -134,6 +133,8 @@ export default {
                     resolve(response.data.url)
                   })
                   .catch((error) => {
+                    console.error(error);
+                    
                     this.showNotification({type: error.response.data.status, message: error.response.data.message})
                   })
               });

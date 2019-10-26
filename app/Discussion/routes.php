@@ -14,6 +14,8 @@ Route::middleware('web')->group(function () {
     Route::group(['middleware' => 'auth'], function () {
         Route::post('discussions', [DiscussionController::class, 'store']);
 
+        Route::post('discussions/files', [DiscussionFileController::class, 'store']);
+
         Route::get('discussions/{discussion}', [DiscussionController::class, 'show']);
 
         Route::patch('discussions/{discussion}', [DiscussionController::class, 'update']);
