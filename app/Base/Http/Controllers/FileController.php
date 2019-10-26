@@ -4,6 +4,7 @@ namespace App\Base\Http\Controllers;
 
 use App\Base\Models\File;
 use App\Base\Utilities\GroupTrait;
+use App\Base\Utilities\FileUtilities;
 use Illuminate\Support\Facades\Storage;
 use App\Base\Repositories\FileRepository;
 use App\Base\Exceptions\InvalidFileFormat;
@@ -11,7 +12,7 @@ use App\Base\Http\Requests\ValidateFileCreation;
 
 class FileController extends Controller
 {
-    use GroupTrait;
+    use GroupTrait, FileUtilities;
 
     public function store(ValidateFileCreation $request, FileRepository $repository)
     {
@@ -28,14 +29,6 @@ class FileController extends Controller
                 }
             }
             $repository->create($files);
-
-            if ($request->get('for_editor')) {
-                return response()->json([
-                    'status'  => 'success',
-                    'message' => 'Files uploaded successfully',
-                    'url'     => url('storage/' . $files[0]['path']),
-                ]);
-            }
 
             return response()->json([
                 'status'  => 'success',
@@ -79,25 +72,6 @@ class FileController extends Controller
                 'message' => localize('project.The file has been deleted'),
             ]
         );
-    }
-
-    private function prepareData($file)
-    {
-        $now = now();
-        $data['name'] = $file->getClientOriginalName();
-        $data['path'] = $file->storeAs(
-            '/',
-            $data['name'],
-            ['disk' => 'public']
-        );
-        $data['fileable_type'] = request('group_type');
-        $data['fileable_id'] = request('group_id');
-        $data['mime_type'] = $file->getMimeType();
-        $data['owner_id'] = auth()->user()->id;
-        $data['created_at'] = $now;
-        $data['updated_at'] = $now;
-
-        return $data;
     }
 
     private function fileIsOfValidType($type)

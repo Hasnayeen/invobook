@@ -3,6 +3,9 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use App\Project\Models\Project;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Auth\Access\AuthorizationException;
 
@@ -243,5 +246,53 @@ class DiscussionTest extends TestCase
                  'name'    => $discussion->name,
                  'content' => $discussion->content,
              ]);
+    }
+
+    /** @test */
+    public function user_can_add_file_to_discussion()
+    {
+        Storage::fake('');
+        $project = factory(Project::class)->create();
+        $file = UploadedFile::fake()->create('features.png');
+
+        $this->actingAs($this->user)
+             ->post('discussions/files', [
+                 'file'         => $file,
+                 'group_type'    => 'project',
+                 'group_id'      => $project->id,
+             ])
+             ->assertJsonFragment([
+                 'status'  => 'success',
+                 'message' => 'Files uploaded successfully',
+                 'url'     => url('storage/' . $file->name),
+             ]);
+        Storage::disk('public')->assertExists('features.png');
+    }
+
+    /** @test */
+    public function user_can_add_already_uploaded_file_to_discussion()
+    {
+        Storage::fake('');
+        $project = factory(Project::class)->create();
+        $file = UploadedFile::fake()->create('features.png');
+
+        $this->actingAs($this->user)->post('files', [
+            'files'         => [$file],
+            'group_type'    => 'project',
+            'group_id'      => $project->id,
+        ]);
+
+        $this->actingAs($this->user)
+             ->post('discussions/files', [
+                 'file'         => $file,
+                 'group_type'    => 'project',
+                 'group_id'      => $project->id,
+             ])
+             ->assertJsonFragment([
+                 'status'  => 'success',
+                 'message' => 'Files uploaded successfully',
+                 'url'     => url('storage/' . $file->name),
+             ]);
+        Storage::disk('public')->assertExists('features.png');
     }
 }
