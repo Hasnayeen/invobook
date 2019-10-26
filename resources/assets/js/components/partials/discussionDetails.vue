@@ -86,6 +86,11 @@ export default {
     }
   },
 
+  mounted () {
+    let topElement = document.getElementById('app')
+    topElement.scrollIntoView({behavior: "smooth", block: "start"})
+  },
+
   methods: {
     ...mapActions([
       'showNotification',
