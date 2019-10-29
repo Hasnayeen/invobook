@@ -19,8 +19,11 @@
       <div v-if="(message.user.id === user.id)" @click="toggleMessageMenu" v-click-outside="hideMessageMenu" class="cursor-pointer">
         <font-awesome-icon :icon="faEllipsisH" class="text-gray-500"></font-awesome-icon>
       </div>
-      <div v-if="(message.user.id === user.id) && dropdownMenuShown" class="absolute rounded shadow-lg top-0 mt-16 mr-2 p-3 text-gray-800 bg-white hover:bg-indigo-200 left-0 z-10">
-        <div @click="deleteMessage()" class="cursor-pointer">
+      <div v-if="(message.user.id === user.id) && dropdownMenuShown" class="absolute rounded shadow-lg top-0 mt-16 mr-2 p-3 text-gray-800 bg-white left-0 z-10">
+        <div @click="editMessage()" class="cursor-pointer hover:bg-indigo-200">
+          Edit
+        </div>
+        <div @click="deleteMessage()" class="cursor-pointer hover:bg-indigo-200">
           Delete
         </div>
       </div>
@@ -89,6 +92,22 @@ export default {
     ...mapActions([
       'showNotification',
     ]),
+    editMessage() {
+        this.$emit('edit', this.index)
+    },
+    updateMessage() {
+      let api = this.direct ? 'direct-messages' : 'messages'
+      axios.put(`/${api}/${this.message.id}`)
+        .then((response) => {
+          this.$emit('edited', this.index)
+          this.dropdownMenuShown = false
+          this.showNotification({type: response.data.status, message: response.data.message})
+        })
+        .catch((error) => {
+          this.dropdownMenuShown = false
+          this.showNotification({type: error.response.data.status, message: error.response.data.message})
+        })
+    },
     deleteMessage () {
       let api = this.direct ? 'direct-messages' : 'messages'
       axios.delete(`/${api}/${this.message.id}`)
