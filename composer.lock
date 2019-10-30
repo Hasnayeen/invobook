@@ -998,16 +998,16 @@
         },
         {
             "name": "lab404/laravel-impersonate",
-            "version": "1.4.1",
+            "version": "1.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/404labfr/laravel-impersonate.git",
-                "reference": "8b07d122793cbfc27103a1345dae75b97cbd7a44"
+                "reference": "c1e6ce93eab6ccb916175c13da0f62baaa9718c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/404labfr/laravel-impersonate/zipball/8b07d122793cbfc27103a1345dae75b97cbd7a44",
-                "reference": "8b07d122793cbfc27103a1345dae75b97cbd7a44",
+                "url": "https://api.github.com/repos/404labfr/laravel-impersonate/zipball/c1e6ce93eab6ccb916175c13da0f62baaa9718c2",
+                "reference": "c1e6ce93eab6ccb916175c13da0f62baaa9718c2",
                 "shasum": ""
             },
             "require": {
@@ -1030,7 +1030,10 @@
             "autoload": {
                 "psr-4": {
                     "Lab404\\Impersonate\\": "src/"
-                }
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1054,7 +1057,7 @@
                 "plugin",
                 "user"
             ],
-            "time": "2019-09-04T13:56:51+00:00"
+            "time": "2019-10-29T10:02:07+00:00"
         },
         {
             "name": "laravel/framework",
