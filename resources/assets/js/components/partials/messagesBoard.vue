@@ -13,7 +13,7 @@
 
     <div id="message-box">
       <div class="">
-        <message v-for="(message, index) in messages" :key="index" :message="message" :user="user" :index="index" @deleted="deleteMessage" @edit="editMessage" :last="messages.length === (index + 1)"></message>
+        <message v-for="(message, index) in messages" :key="message.body" :message="message" :user="user" :index="index" @deleted="deleteMessage" @edit="editMessage" :last="messages.length === (index + 1)"></message>
       </div>
       <div v-if="messages.length === 0" class="flex flex-col justify-center items-center">
         <div class="text-gray-600 text-lg text-center py-8">
@@ -121,7 +121,7 @@ computed: {
       // increase the height of textarea based on text present there
       this.messageTextareaHeight = newVal ? `${this.$refs.messageTextarea.scrollHeight}px` : 'auto'
     },
-    activeTab: function () {
+    activeTab() {
       this.getMessages()
     }
   },
