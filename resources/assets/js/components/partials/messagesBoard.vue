@@ -248,6 +248,7 @@ computed: {
       this.unreadMessage = 0
     },
     editMessage (index) {
+      document.getElementById('send-message').focus()
       this.editing = {
         message: this.messages[index],
         messageIndex: index,

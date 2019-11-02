@@ -16,14 +16,14 @@
       :class="[(message.user.id === user.id) ? 'flex-col-reverse justify-end' : '']">
       <img :src="generateUrl(message.user.avatar)" :alt="message.user.name" class="w-10 h-10 rounded-full"
         :class="[(message.user.id === user.id) ? 'order-1' : '']">
-      <div v-if="(message.user.id === user.id)" @click="toggleMessageMenu" v-click-outside="hideMessageMenu" class="cursor-pointer">
+      <div v-if="(message.user.id === user.id)" tabindex="0" @keypress.enter="toggleMessageMenu" @click="toggleMessageMenu" v-click-outside="hideMessageMenu" class="cursor-pointer">
         <font-awesome-icon :icon="faEllipsisH" class="text-gray-500"></font-awesome-icon>
       </div>
-      <div v-if="(message.user.id === user.id) && dropdownMenuShown" class="absolute rounded shadow-lg top-0 mt-16 mr-2 p-3 text-gray-800 bg-white left-0 z-10">
-        <div @click="editMessage()" class="cursor-pointer hover:bg-indigo-200">
+      <div v-if="(message.user.id === user.id) && dropdownMenuShown" class="absolute rounded shadow-xl top-0 mt-16 mr-2 py-2 text-gray-800 bg-indigo-200 left-0 z-10">
+        <div tabindex="0" @click="editMessage()" @keydown.enter="editMessage()" class="cursor-pointer hover:bg-white px-4 py-2">
           Edit
         </div>
-        <div @click="deleteMessage()" class="cursor-pointer hover:bg-indigo-200">
+        <div tabindex="0" @click="deleteMessage()" @keydown.enter="deleteMessage()" class="cursor-pointer hover:bg-white px-4 py-2">
           Delete
         </div>
       </div>
