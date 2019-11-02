@@ -7,13 +7,13 @@
         {{ 'Currently in room' | localize }}:
       </div>
       <template v-for="user in users">
-        <img :src="generateUrl(user.avatar)" alt="" class="w-8 h-8 rounded-full mr-2" :title="user.name">
+        <img :src="generateUrl(user.avatar)" alt="" class="w-8 h-8 rounded-full mr-2" :title="user.name" :key="user.id">
       </template>
     </div>
 
     <div id="message-box">
       <div class="">
-        <message v-for="(message, index) in messages" :key="index" :message="message" :user="user" :index="index" @deleted="deleteMessage" :last="messages.length === (index + 1)"></message>
+        <message v-for="(message, index) in messages" :key="message.body" :message="message" :user="user" :index="index" @deleted="deleteMessage" @edit="editMessage" :last="messages.length === (index + 1)"></message>
       </div>
       <div v-if="messages.length === 0" class="flex flex-col justify-center items-center">
         <div class="text-gray-600 text-lg text-center py-8">
@@ -81,7 +81,8 @@ export default {
     typingNotificationSent: false,
     users: [],
     user,
-    authenticated
+    authenticated,
+    editing: {}
   }),
 
   created () {
@@ -120,7 +121,7 @@ computed: {
       // increase the height of textarea based on text present there
       this.messageTextareaHeight = newVal ? `${this.$refs.messageTextarea.scrollHeight}px` : 'auto'
     },
-    activeTab: function () {
+    activeTab() {
       this.getMessages()
     }
   },
@@ -154,8 +155,31 @@ computed: {
       } else if (this.message.length > 0) {
         var msg = this.message
         this.message = ''
+        if(this.editing.hasOwnProperty('messageIndex')) {
+          this.sendEditedMessage(msg)
+        } else {
+          this.sendNewMessage(msg)
+        }
+      }
+    },
+    sendEditedMessage(message) {
+        axios.put('/messages/' + this.editing.message.id, {
+          message: message,
+        })
+        .then((response) => {
+            if (response.data.status === 'success') {
+              response.data.message.user = user
+              this.messages.splice(this.editing.messageIndex, 1, response.data.message)
+              this.editing = {}
+            }
+          })
+          .catch((error) => {
+            this.showNotification({type: error.response.data.status, message: error.response.data.message})
+        })
+    },
+    sendNewMessage(message) {
         axios.post('/messages', {
-          message: msg,
+          message: message,
           group_type: this.resourceType,
           group_id: this.resource.id,
           mentions: this.mentions
@@ -168,8 +192,7 @@ computed: {
           })
           .catch((error) => {
             this.showNotification({type: error.response.data.status, message: error.response.data.message})
-          })
-      }
+        })
     },
     listen () {
       Echo.join(this.resourceType + '.' + this.resource.id)
@@ -223,6 +246,14 @@ computed: {
     clearTitleNotification () {
       document.title = this.title
       this.unreadMessage = 0
+    },
+    editMessage (index) {
+      document.getElementById('send-message').focus()
+      this.editing = {
+        message: this.messages[index],
+        messageIndex: index,
+      }
+      this.message =  this.messages[index].body
     },
     deleteMessage (index) {
       this.messages.splice(index, 1)
