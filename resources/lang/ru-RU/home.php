@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'Home'              => 'Домашняя',
     'Projects'          => 'Проекты',
     'Teams'             => 'Команды',
     'Offices'           => 'Офисы',
