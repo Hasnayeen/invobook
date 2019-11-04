@@ -668,10 +668,10 @@
   dependencies:
     "@fortawesome/fontawesome-common-types" "^0.2.25"
 
-"@fortawesome/vue-fontawesome@^0.1.7":
-  version "0.1.7"
-  resolved "https://registry.yarnpkg.com/@fortawesome/vue-fontawesome/-/vue-fontawesome-0.1.7.tgz#121867297cafd141af78c67d92ab9f1ad4b7328b"
-  integrity sha512-YCw2Q2m4fxzyFsPOH3uDYMoJztTD+pT+AAyse4LFpbdrBg+r8ueaVT8BFnXEjrGwMDJJeXrwJ5AOC6q/JWBI4w==
+"@fortawesome/vue-fontawesome@^0.1.8":
+  version "0.1.8"
+  resolved "https://registry.yarnpkg.com/@fortawesome/vue-fontawesome/-/vue-fontawesome-0.1.8.tgz#615347c56d285eb634315f59fe4f4156e4eee8b4"
+  integrity sha512-SdFiUD+vFDA/xKuEbnQTVrK8FDxoV0eyQaiHxmCcjAc0+vQe0Kf6oGm28opNPIt8MTgKWR3+Yg3xXP455Ae4tQ==
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
