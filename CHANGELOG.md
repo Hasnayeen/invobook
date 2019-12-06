@@ -17,6 +17,7 @@
 - Added Bosnian translation
 - Added Bengali translation
 - Added Nepali translation
+- Added possibility to edit messages on the messageboard
 
 ### Changed
 
