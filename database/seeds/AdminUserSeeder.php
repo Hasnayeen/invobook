@@ -1,7 +1,7 @@
 <?php
 
 use Carbon\Carbon;
-use App\Core\Models\User;
+use App\Base\Models\User;
 use Illuminate\Database\Seeder;
 
 class AdminUserSeeder extends Seeder
@@ -13,7 +13,7 @@ class AdminUserSeeder extends Seeder
      */
     public function run()
     {
-        $user = User::create([
+        User::create([
             'name'       => 'Admin',
             'username'   => 'admin',
             'email'      => 'admin@example.com',
@@ -25,7 +25,7 @@ class AdminUserSeeder extends Seeder
         ]);
 
         // Guest User
-        $user = User::create([
+        User::create([
             'name'       => 'Guest',
             'username'   => 'guest',
             'email'      => 'guest@example.com',

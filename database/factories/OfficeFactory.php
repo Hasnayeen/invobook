@@ -3,7 +3,7 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 use Carbon\Carbon;
 
-$factory->define(App\Core\Models\Office::class, function (Faker\Generator $faker) {
+$factory->define(App\Office\Models\Office::class, function (Faker\Generator $faker) {
     $now = Carbon::now();
 
     return [
@@ -11,6 +11,6 @@ $factory->define(App\Core\Models\Office::class, function (Faker\Generator $faker
         'description' => $faker->sentence,
         'created_at'  => $now,
         'updated_at'  => $now,
-        'owner_id'    => factory(App\Core\Models\User::class)->create()->id,
+        'owner_id'    => factory(App\Base\Models\User::class)->create()->id,
     ];
 });

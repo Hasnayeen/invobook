@@ -21,6 +21,11 @@
       <font-awesome-icon :icon="faCog" class="text-xl md:text-2xl"></font-awesome-icon>
       <span class="block text-xs font-regular">{{ 'Settings' | localize }}</span>
     </div>
+    <div @click="activateThisTab('database')"
+      :class="[(active === 'database') ? 'text-teal-600 font-semibold border-teal-500 border-b-2 pb-4 -mb-2 md:-mb-3' : 'cursor-pointer', 'text-center w-1/2']">
+      <font-awesome-icon :icon="faDatabase" class="text-xl md:text-2xl"></font-awesome-icon>
+      <span class="block text-xs font-regular">{{ 'Database' | localize }}</span>
+    </div>
     <div @click="activateThisTab('about')"
       :class="[(active === 'about') ? 'text-teal-600 font-semibold border-teal-500 border-b-2 pb-4 -mb-2 md:-mb-3' : 'cursor-pointer', 'text-center w-1/2']">
       <font-awesome-icon :icon="faInfoCircle" class="text-xl md:text-2xl"></font-awesome-icon>
@@ -34,6 +39,7 @@
     <activityBoard :activeTab="active"></activityBoard>
     <aboutBoard :activeTab="active"></aboutBoard>
     <settingsBoard :activeTab="active"></settingsBoard>
+    <databaseActions :activeTab="active"></databaseActions>
   </div>
 </div>
 </template>
@@ -45,21 +51,24 @@ import authBoard from './authBoard.vue'
 import usersBoard from './usersBoard.vue'
 import activityBoard from './activityBoard.vue'
 import settingsBoard from './settingsBoard.vue'
+import databaseActions from './databaseActions.vue'
 import { faBolt } from '@fortawesome/free-solid-svg-icons/faBolt'
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons/faInfoCircle'
 import { faLockOpen } from '@fortawesome/free-solid-svg-icons/faLockOpen'
 import { faCog } from '@fortawesome/free-solid-svg-icons/faCog'
 import { faUser } from '@fortawesome/free-solid-svg-icons/faUser'
+import { faDatabase } from '@fortawesome/free-solid-svg-icons/faDatabase'
 
 export default {
-  components: {aboutBoard, authBoard, usersBoard, activityBoard, settingsBoard},
+  components: {aboutBoard, authBoard, usersBoard, activityBoard, settingsBoard, databaseActions},
   data: () => ({
     active: 'users',
     faBolt,
     faInfoCircle,
     faLockOpen,
     faCog,
-    faUser
+    faUser,
+    faDatabase
   }),
   computed: {
     ...mapState({

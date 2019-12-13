@@ -3,9 +3,9 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Core\Models\Message;
-use App\Core\Events\MessageCreated;
-use App\Core\Events\MessageUpdated;
+use App\Base\Models\Message;
+use App\Base\Events\MessageCreated;
+use App\Base\Events\MessageUpdated;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Access\AuthorizationException;
 
@@ -14,18 +14,18 @@ class MessageTest extends TestCase
     /** @test */
     public function user_can_read_message_of_a_group()
     {
-        $user2 = factory('App\Core\Models\User')->create();
+        $user2 = factory('App\Base\Models\User')->create();
 
         // Test for projects
-        $project = factory(\App\Core\Models\Project::class)->create(['owner_id' => $this->user]);
+        $project = factory(\App\Project\Models\Project::class)->create(['owner_id' => $this->user]);
         $this->actingAs($this->user);
         resolve('Authorization')->setupDefaultPermissions($project);
-        $user1Messages = factory('App\Core\Models\Message', 2)->create([
+        $user1Messages = factory('App\Base\Models\Message', 2)->create([
             'user_id'          => $this->user->id,
             'messageable_type' => 'project',
             'messageable_id'   => $project->id,
         ]);
-        $user2Messages = factory('App\Core\Models\Message', 3)->create([
+        $user2Messages = factory('App\Base\Models\Message', 3)->create([
             'user_id'          => $user2->id,
             'messageable_type' => 'project',
             'messageable_id'   => $project->id,
@@ -45,15 +45,15 @@ class MessageTest extends TestCase
         ]);
 
         // Test for teams
-        $team = factory('App\Core\Models\Team')->create(['owner_id' => $this->user]);
+        $team = factory('App\Team\Models\Team')->create(['owner_id' => $this->user]);
         $this->actingAs($this->user);
         resolve('Authorization')->setupDefaultPermissions($team);
-        $user1Messages = factory('App\Core\Models\Message', 2)->create([
+        $user1Messages = factory('App\Base\Models\Message', 2)->create([
             'user_id'          => $this->user->id,
             'messageable_type' => 'team',
             'messageable_id'   => $team->id,
         ]);
-        $user2Messages = factory('App\Core\Models\Message', 3)->create([
+        $user2Messages = factory('App\Base\Models\Message', 3)->create([
             'user_id'          => $user2->id,
             'messageable_type' => 'team',
             'messageable_id'   => $team->id,
@@ -73,15 +73,15 @@ class MessageTest extends TestCase
         ]);
 
         // Test for offices
-        $office = factory('App\Core\Models\Office')->create(['owner_id' => $this->user]);
+        $office = factory('App\Office\Models\Office')->create(['owner_id' => $this->user]);
         $this->actingAs($this->user);
         resolve('Authorization')->setupDefaultPermissions($office);
-        $user1Messages = factory('App\Core\Models\Message', 2)->create([
+        $user1Messages = factory('App\Base\Models\Message', 2)->create([
             'user_id'          => $this->user->id,
             'messageable_type' => 'office',
             'messageable_id'   => $office->id,
         ]);
-        $user2Messages = factory('App\Core\Models\Message', 3)->create([
+        $user2Messages = factory('App\Base\Models\Message', 3)->create([
             'user_id'          => $user2->id,
             'messageable_type' => 'office',
             'messageable_id'   => $office->id,
@@ -106,7 +106,7 @@ class MessageTest extends TestCase
     {
         Event::fake();
 
-        $project = factory('App\Core\Models\Project')->create(['owner_id' => $this->user->id]);
+        $project = factory('App\Project\Models\Project')->create(['owner_id' => $this->user->id]);
         $project->members()->attach($this->user);
         $this->actingAs($this->user);
         resolve('Authorization')->setupDefaultPermissions($project);
@@ -141,8 +141,8 @@ class MessageTest extends TestCase
     public function user_without_permission_cant_create_message()
     {
         $this->expectException(AuthorizationException::class);
-        $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
-        $project = factory('App\Core\Models\Project')->create(['owner_id' => $this->user->id]);
+        $user = factory(\App\Base\Models\User::class)->create(['role_id' => 5]);
+        $project = factory('App\Project\Models\Project')->create(['owner_id' => $this->user->id]);
         $project->members()->attach($this->user);
         $this->actingAs($this->user);
         resolve('Authorization')->setupDefaultPermissions($project);
@@ -157,9 +157,9 @@ class MessageTest extends TestCase
     /** @test */
     public function user_can_delete_message()
     {
-        $project = factory('App\Core\Models\Project')->create(['owner_id' => $this->user->id]);
+        $project = factory('App\Project\Models\Project')->create(['owner_id' => $this->user->id]);
 
-        $message = factory('App\Core\Models\Message')->create([
+        $message = factory('App\Base\Models\Message')->create([
             'user_id'          => $this->user->id,
             'messageable_type' => 'project',
             'messageable_id'   => $project->id,
@@ -179,7 +179,7 @@ class MessageTest extends TestCase
     {
         Event::fake();
 
-        $project = factory(\App\Core\Models\Project::class)->create(['owner_id' => $this->user->id]);
+        $project = factory(\App\Project\Models\Project::class)->create(['owner_id' => $this->user->id]);
 
         $message = Message::create([
             'body'             => 'New Message',

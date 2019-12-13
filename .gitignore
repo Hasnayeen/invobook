@@ -17,3 +17,5 @@ docker.env
 /storage/*.index
 .DS_Store
 .phpunit.result.cache
+*.swp
+.php_cs.cache

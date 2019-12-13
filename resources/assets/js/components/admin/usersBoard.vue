@@ -3,7 +3,7 @@
   <invite-modal></invite-modal>
 
   <div class="md:rounded text-gray-900">
-    <div class="text-center text-3xl md:p-4 text-gray-800">All Users</div>
+    <div class="text-center text-3xl md:p-4 text-gray-800">{{ 'All Users' | localize }}</div>
 
     <div class="flex flex-row flex-wrap justify-center lg:mx-4 xxl:mx-0">
       <div v-for="user in users" class="bg-white rounded-lg shadow m-4 w-64 relative">
@@ -11,7 +11,10 @@
           :style="{backgroundImage: 'url(' + generateUrl(user.avatar) + ')'}">
         </div>
         <div class="absolute flex justify-between items-center -mt-10 px-6 w-full">
-          <a v-if="authUserId !== user.id" :href="'/impersonate/take/' + user.id" class="text-indigo-700 bg-indigo-200 flex items-center justify-center w-8 h-8 mx-2 rounded-full cursor-pointer" title="Impersonate User">
+          <a v-if="authUserId !== user.id" :href="'/impersonate/take/' + user.id"
+             :title="'Impersonate User' | localize"
+             class="text-indigo-700 bg-indigo-200 flex items-center justify-center w-8 h-8 mx-2 rounded-full cursor-pointer"
+          >
             <font-awesome-icon :icon="faUserSecret" class="cursor-pointer"></font-awesome-icon>
           </a>
           <a v-else class="w-8 h-8 mx-2">
@@ -20,7 +23,11 @@
             <div class="w-20 h-20 bg-cover bg-center rounded-full shadow-outline"
               :style="{backgroundImage: 'url(' + generateUrl(user.avatar) + ')'}"></div>
           </a>
-          <a href="#" class="text-indigo-700 bg-indigo-200 flex items-center justify-center w-8 h-8 mx-2 rounded-full cursor-pointer"  title="Deactivate User">
+          <a
+             :title="'Deactivate User' | localize"
+             href="#"
+             class="text-indigo-700 bg-indigo-200 flex items-center justify-center w-8 h-8 mx-2 rounded-full cursor-pointer"
+          >
             <font-awesome-icon :icon="faUserSlash" class="cursor-pointer"></font-awesome-icon>
           </a>
         </div>
@@ -45,7 +52,7 @@
     </div>
 
   </div>
-</div>  
+</div>
 </template>
 
 <script>

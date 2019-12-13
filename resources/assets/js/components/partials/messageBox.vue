@@ -6,7 +6,7 @@
     </div>
     <div class="flex flex-row">
       <div class="bg-blue-200">
-        <div class="overflow-auto overflow-y-scroll overflow-x-hidden h-70-vh w-16 lg:w-20 xxl:w-24">
+        <div class="overflow-auto overflow-y-scroll overflow-x-hidden h-50-vh w-16 lg:w-20 xxl:w-24">
           <div @click="selectUserMessage(user, index)"
             v-for="(user, index) in users"
             v-if="user.id !== authUser.id"
@@ -18,7 +18,7 @@
         </div>
       </div>
 
-      <div id="message-box" class="flex-grow h-70-vh overflow-y-auto">
+      <div id="message-box" class="flex-grow h-50-vh overflow-y-auto">
         <div v-if="selectedUser.id" class="w-full h-full">
           <div v-if="messages.length < 1" class="w-full h-full">
             <loading-modal :localLoadingState="loading"></loading-modal>
@@ -29,7 +29,7 @@
               <img src="/image/dm.svg" alt="direct message" class="w-96">
             </div>
           </div>
-          <message v-for="(message, index) in messages" :key="index" :message="message" :user="authUser" :index="index" @deleted="deleteMessage" :last="messages.length === (index + 1)"></message>
+          <message v-for="(message, index) in messages" :key="index" :message="message" :user="authUser" :index="index" @deleted="deleteMessage" :last="messages.length === (index + 1)" :direct="true"></message>
         </div>
         <div v-else class="flex flex-col items-center justify-center">
           <div class="text-gray-600 text-lg text-center py-16">

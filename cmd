@@ -21,6 +21,10 @@ if [ $# -gt 0 ];then
     elif [[ "$1" == "mysql" ]]; then
         shift 1
         $COMPOSE run --rm -w / db mysql "$@"
+    elif [[ "$1" == "restart" ]]; then
+        shift 1
+        $COMPOSE stop
+        $COMPOSE start
     else
         $COMPOSE "$@"
     fi

@@ -1,0 +1,31 @@
+name: standardjs
+
+on:
+  pull_request:
+    paths-ignore:
+      - 'public/**'
+
+jobs:
+  standardjs:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+      if: github.base_ref	 == 'dev'
+      with:
+        fetch-depth: 1
+
+    - name: StandardJs
+      uses: jopereyral/standardjs-action@master
+      if: github.base_ref	 == 'dev'
+      with:
+        args: --fix
+
+    - name: Commit changed files
+      uses: stefanzweifel/git-auto-commit-action@v2.1.0
+      if: github.base_ref	 == 'dev'
+      with:
+        commit_message: Apply standardjs changes
+        branch: ${{ github.head_ref }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

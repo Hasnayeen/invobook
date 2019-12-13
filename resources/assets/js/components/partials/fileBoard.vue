@@ -1,5 +1,7 @@
 <template>
 <div v-if="activeTab === 'files'" class="w-full">
+  <file-modal v-if="file" :fileModalShown="fileModalShown" :file="file" @close="closeFileModal"></file-modal>
+
   <div>
     <div v-if="authenticated" class="flex justify-center pb-4">
       <file-upload :resourceType="resourceType" :resourceId="resource.id" @on-success="getAllFiles"></file-upload>
@@ -7,11 +9,12 @@
 
     <div class="">
       <ul class="flex flex-row flex-wrap justify-center list-reset">
-        <li v-for="file in files" class="rounded-lg w-80 flex flex-col justify-center items-center m-6 shadow-md cursor-pointer">
-          <div class="bg-gray-200 w-full h-48 flex justify-center items-center rounded-lg">
-            <img :src="'/storage/' + file.path" alt="" class="h-full w-full rounded-t-lg">
-          </div>
-          <div class="bg-white w-full flex-grow flex items-center justify-center text-center rounded-b-lg p-4 text-sm text-gray-800">{{ file.name }}</div>
+        <li v-for="(file, index) in files" :key="file.id">
+          <file
+            :file="file"
+            :index="index"
+            @show="showFile"
+            @deleted="deleteFile" ></file>
         </li>
       </ul>
     </div>
@@ -25,15 +28,13 @@
 </template>
 
 <script>
-import {
-  faEllipsisH,
-  faFileAlt,
-  faFileImage,
-  faFilePdf
-} from '@fortawesome/free-solid-svg-icons'
 import fileUpload from './fileUpload'
+import fileModal from './fileModal'
+import file from './file'
+
 export default {
-  components: {fileUpload},
+  components: {fileUpload, fileModal, file},
+
   props: {
     resource: {
       required: true,
@@ -48,22 +49,27 @@ export default {
       type: String
     }
   },
+
   data: () => ({
     files: [],
+    file: {},
+    fileModalShown: false,
+    index: null,
+    dropdownMenuShown: false,
+    user,
     authenticated,
-    faEllipsisH,
-    faFileAlt,
-    faFileImage,
-    faFilePdf
   }),
+
   mounted () {
     this.getAllFiles()
   },
+
   watch: {
     activeTab: function () {
       this.getAllFiles(false)
     }
   },
+
   methods: {
     getAllFiles (uploaded = false) {
       if (this.activeTab === 'files' && (this.files.length === 0 || uploaded)) {
@@ -80,6 +86,17 @@ export default {
             console.log(error)
           })
       }
+    },
+    deleteFile (index) {
+      this.files.splice(index, 1)
+    },
+    showFile (index) {
+      this.file = this.files[index]
+      this.index = index
+      this.fileModalShown = true
+    },
+    closeFileModal () {
+      this.fileModalShown = false
     }
   }
 }

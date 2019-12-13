@@ -14,14 +14,14 @@ class TaskTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->task = factory(\App\Core\Models\Task::class)->create(['created_by' => $this->user->id]);
+        $this->task = factory(\App\TaskManager\Models\Task::class)->create(['created_by' => $this->user->id]);
     }
 
     /** @test */
     public function user_with_permission_can_create_new_task()
     {
-        $project = factory(\App\Core\Models\Project::class)->create(['owner_id' => $this->user->id]);
-        $task = factory(\App\Core\Models\Task::class)->make([
+        $project = factory(\App\Project\Models\Project::class)->create(['owner_id' => $this->user->id]);
+        $task = factory(\App\TaskManager\Models\Task::class)->make([
             'created_by'    => $this->user->id,
             'taskable_type' => 'project',
             'taskable_id'   => $project->id,
@@ -53,7 +53,7 @@ class TaskTest extends TestCase
     public function due_date_must_be_in_future()
     {
         $this->expectException(ValidationException::class);
-        $task = factory(\App\Core\Models\Task::class)->make();
+        $task = factory(\App\TaskManager\Models\Task::class)->make();
         $this->actingAs($this->user)->post('/tasks', [
             'name'          => $task->name,
             'assigned_to'   => $task->assigned_to,
@@ -68,8 +68,8 @@ class TaskTest extends TestCase
     public function user_without_permission_cant_create_new_task()
     {
         $this->expectException(AuthorizationException::class);
-        $user = factory(\App\Core\Models\User::class)->create();
-        $task = factory(\App\Core\Models\Task::class)->make();
+        $user = factory(\App\Base\Models\User::class)->create();
+        $task = factory(\App\TaskManager\Models\Task::class)->make();
 
         $this->actingAs($user)->post('/tasks', [
             'name'          => $task->name,
@@ -102,10 +102,10 @@ class TaskTest extends TestCase
     /** @test */
     public function user_can_see_tasks_of_a_group()
     {
-        $project = factory(\App\Core\Models\Project::class)->create(['owner_id' => $this->user]);
+        $project = factory(\App\Project\Models\Project::class)->create(['owner_id' => $this->user]);
         $this->actingAs($this->user);
         resolve('Authorization')->setupDefaultPermissions($project);
-        $tasks = factory('App\Core\Models\Task', 3)->create([
+        $tasks = factory('App\TaskManager\Models\Task', 3)->create([
             'taskable_type' => 'project',
             'taskable_id'   => $project->id,
         ]);
@@ -118,10 +118,10 @@ class TaskTest extends TestCase
             'name'             => $tasks[2]['name'],
         ]);
 
-        $team = factory(\App\Core\Models\Team::class)->create(['owner_id' => $this->user]);
+        $team = factory(\App\Team\Models\Team::class)->create(['owner_id' => $this->user]);
         $this->actingAs($this->user);
         resolve('Authorization')->setupDefaultPermissions($team);
-        $tasks = factory('App\Core\Models\Task', 3)->create([
+        $tasks = factory('App\TaskManager\Models\Task', 3)->create([
             'taskable_type' => 'team',
             'taskable_id'   => $team->id,
         ]);
@@ -134,10 +134,10 @@ class TaskTest extends TestCase
             'name'             => $tasks[2]['name'],
         ]);
 
-        $office = factory(\App\Core\Models\Office::class)->create(['owner_id' => $this->user]);
+        $office = factory(\App\Office\Models\Office::class)->create(['owner_id' => $this->user]);
         $this->actingAs($this->user);
         resolve('Authorization')->setupDefaultPermissions($office);
-        $tasks = factory('App\Core\Models\Task', 3)->create([
+        $tasks = factory('App\TaskManager\Models\Task', 3)->create([
             'taskable_type' => 'office',
             'taskable_id'   => $office->id,
         ]);
@@ -168,7 +168,7 @@ class TaskTest extends TestCase
     public function user_without_permission_cant_delete_a_task()
     {
         $this->expectException(AuthorizationException::class);
-        $user = factory(\App\Core\Models\User::class)->create();
+        $user = factory(\App\Base\Models\User::class)->create();
         $this->actingAs($user)->delete('/tasks/' . $this->task->id, [
             'group_type' => $this->task->taskable_type,
             'group_id'   => $this->task->taskable_id,
@@ -178,13 +178,13 @@ class TaskTest extends TestCase
     /** @test */
     public function create_new_task_with_status()
     {
-        $project = factory(\App\Core\Models\Project::class)->create(['owner_id' => $this->user->id]);
-        $task = factory(\App\Core\Models\Task::class)->make([
+        $project = factory(\App\Project\Models\Project::class)->create(['owner_id' => $this->user->id]);
+        $task = factory(\App\TaskManager\Models\Task::class)->make([
             'created_by'    => $this->user->id,
             'taskable_type' => 'project',
             'taskable_id'   => $project->id,
         ]);
-        factory(\App\Core\Models\Status::class)->create();
+        factory(\App\Base\Models\Status::class)->create();
         $this->actingAs($this->user);
         resolve('Authorization')->setupDefaultPermissions($project);
         $project->members()->save($this->user);
@@ -218,12 +218,12 @@ class TaskTest extends TestCase
 
         $updatedData = [
             'name'          => $this->faker->sentence(6, true),
-            'assigned_to'   => factory(\App\Core\Models\User::class)->create()->id,
+            'assigned_to'   => factory(\App\Base\Models\User::class)->create()->id,
             'notes'         => $this->faker->sentence(20, true),
             'due_on'        => $this->faker->dateTimeBetween('now', '+5 years')->format('Y-m-d'),
             'related_to'    => null,
             'group_type'    => 'office',
-            'group_id'      => factory(\App\Core\Models\Office::class)->create()->id,
+            'group_id'      => factory(\App\Office\Models\Office::class)->create()->id,
         ];
 
         $this->actingAs($this->user)
@@ -242,17 +242,17 @@ class TaskTest extends TestCase
     public function user_without_permission_cant_update_a_task()
     {
         $this->expectException(AuthorizationException::class);
-        $task = factory(\App\Core\Models\Task::class)->create();
+        $task = factory(\App\TaskManager\Models\Task::class)->create();
 
         $this->actingAs($this->user)
             ->put("/tasks/{$task->id}", [
                 'name'          => $this->faker->sentence(6, true),
-                'assigned_to'   => factory(\App\Core\Models\User::class)->create()->id,
+                'assigned_to'   => factory(\App\Base\Models\User::class)->create()->id,
                 'notes'         => $this->faker->sentence(20, true),
                 'due_on'        => $this->faker->dateTimeBetween('now', '+5 years')->format('Y-m-d'),
                 'related_to'    => null,
                 'group_type'    => 'office',
-                'group_id'      => factory(\App\Core\Models\Office::class)->create()->id,
+                'group_id'      => factory(\App\Office\Models\Office::class)->create()->id,
             ]);
     }
 
@@ -260,7 +260,7 @@ class TaskTest extends TestCase
     public function request_validates_the_data_before_updating_a_task()
     {
         $this->expectException(ValidationException::class);
-        $task = factory(\App\Core\Models\Task::class)->create();
+        $task = factory(\App\TaskManager\Models\Task::class)->create();
 
         $this->actingAs($this->user)
             ->put("/tasks/{$task->id}", [
@@ -278,8 +278,8 @@ class TaskTest extends TestCase
     /** @test */
     public function user_with_permission_can_update_status_of_a_task()
     {
-        $status = factory(\App\Core\Models\Status::class)->create();
-        $status2 = factory(\App\Core\Models\Status::class)->create();
+        $status = factory(\App\Base\Models\Status::class)->create();
+        $status2 = factory(\App\Base\Models\Status::class)->create();
 
         $this->task->status()->associate($status)->save();
 
@@ -296,9 +296,9 @@ class TaskTest extends TestCase
     public function user_without_permission_cant_update_status_of_a_task()
     {
         $this->expectException(AuthorizationException::class);
-        $user = factory(\App\Core\Models\User::class)->create();
-        $status = factory(\App\Core\Models\Status::class)->create();
-        $status2 = factory(\App\Core\Models\Status::class)->create();
+        $user = factory(\App\Base\Models\User::class)->create();
+        $status = factory(\App\Base\Models\Status::class)->create();
+        $status2 = factory(\App\Base\Models\Status::class)->create();
 
         $this->task->status()->associate($status)->save();
 

@@ -6,7 +6,7 @@ services:
     ports:
       - "${APP_PORT}:443"
     volumes:
-      - ./site.conf:/etc/nginx/conf.d/default.conf
+      - ./docker/site.conf:/etc/nginx/conf.d/default.conf
       - ./:/var/www
       - "${SSL_CERT_DIR}:/etc/ssl/certs"
     links:
@@ -18,7 +18,7 @@ services:
   php:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: docker/php.Dockerfile
     volumes:
       - ./:/var/www
     links:
@@ -44,29 +44,33 @@ services:
     hostname: redis
 
   worker:
-    image: php:7.2-cli
+    build:
+      context: .
+      dockerfile: docker/worker.Dockerfile
     volumes:
       - ./:/var/www
     links:
       - db
     working_dir: /var/www
-    command: bash -c "apt-get update && docker-php-ext-install pdo_mysql && php artisan queue:work redis --sleep=1 --tries=1"
+    command: bash -c "php artisan queue:work redis --sleep=1 --tries=1"
     depends_on:
       - php
     restart: always
 
   laravel_echo_server:
-    image: node:boron
+    build:
+      context: .
+      dockerfile: docker/echo-server.Dockerfile
     hostname: laravel-echo-server
     ports:
       - "6001:6001"
     volumes:
       - ./laravel-echo-server.json:/usr/src/app/laravel-echo-server.json
       - ./:/var/www
-      - ./echo-server.sh:/usr/src/app/echo-server.sh
+      - ./docker/echo-server.sh:/usr/src/app/echo-server.sh
       - "${SSL_CERT_DIR}:/etc/ssl/certs"
     working_dir: /usr/src/app
-    command: bash -c "npm install -g laravel-echo-server && cd /usr/src/app && ./echo-server.sh"
+    command: bash -c "./echo-server.sh"
     depends_on:
       - redis
     restart: always

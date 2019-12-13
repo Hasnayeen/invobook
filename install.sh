@@ -40,7 +40,7 @@ fi
 domain=$(awk 'BEGIN{FS="=";RS="\n"}{if($1 == "SSL_CERT_DOMAIN") print $2}' .env)
 
 # Replace the domain in site.conf file
-sed -i -e "s/example.com/$domain/g" site.conf
+sed -i -e "s/example.com/$domain/g" docker/site.conf
 
 if [[ $# -gt 0 && local -eq "local" ]]
 then
@@ -68,11 +68,13 @@ $COMPOSE run --rm -w /var/www laravel_echo_server npm install
 
 $COMPOSE run --rm -w /var/www php php artisan migrate --seed
 
+$COMPOSE run --rm -w /var/www php php artisan passport:install
+
 $COMPOSE run --rm -w /var/www php php artisan route:cache
 
 $COMPOSE run --rm -w /var/www php php artisan storage:link
 
-git checkout site.conf
+git checkout docker/site.conf
 
 echo ""
 echo "${green}Installation complete.${reset}"
