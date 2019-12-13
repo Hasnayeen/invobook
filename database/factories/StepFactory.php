@@ -1,10 +1,10 @@
 <?php
 
-/* @var $factory \Illuminate\Database\Eloquent\Factory */
+// @var $factory \Illuminate\Database\Eloquent\Factory
 
-use App\Core\Models\Step;
-use App\Core\Models\Task;
+use App\Base\Models\Step;
 use Faker\Generator as Faker;
+use App\TaskManager\Models\Task;
 
 $factory->define(Step::class, function (Faker $faker) {
     return [

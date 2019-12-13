@@ -4,8 +4,8 @@ namespace Tests\Feature\IntegrationTest;
 
 use Tests\TestCase;
 use Illuminate\Support\Str;
-use App\Core\Models\Project;
-use App\Core\Models\GithubRepo;
+use App\Base\Models\GithubRepo;
+use App\Project\Models\Project;
 
 class GithubIntegrationTest extends TestCase
 {

@@ -11,16 +11,19 @@
     </div>
   </div>
   <div v-else class="flex flex-row text-gray-800 p-4 border-t"
-    :class="{'pb-12': last, 'bg-gray-100': (message.user.id === user.id)}">
+    :class="{'pb-12': last, '': (message.user.id === user.id)}">
     <div class="flex flex-col items-center relative"
       :class="[(message.user.id === user.id) ? 'flex-col-reverse justify-end' : '']">
       <img :src="generateUrl(message.user.avatar)" :alt="message.user.name" class="w-10 h-10 rounded-full"
         :class="[(message.user.id === user.id) ? 'order-1' : '']">
-      <div v-if="(message.user.id === user.id)" @click="toggleMessageMenu" v-click-outside="hideMessageMenu" class="cursor-pointer">
+      <div v-if="(message.user.id === user.id)" tabindex="0" @keypress.enter="toggleMessageMenu" @click="toggleMessageMenu" v-click-outside="hideMessageMenu" class="cursor-pointer">
         <font-awesome-icon :icon="faEllipsisH" class="text-gray-500"></font-awesome-icon>
       </div>
-      <div v-if="(message.user.id === user.id) && dropdownMenuShown" class="absolute rounded shadow-lg top-0 mt-16 mr-2 p-3 text-gray-800 bg-white hover:bg-indigo-200 left-0 z-10">
-        <div @click="deleteMessage()" class="cursor-pointer">
+      <div v-if="(message.user.id === user.id) && dropdownMenuShown" class="absolute rounded shadow-xl top-0 mt-16 mr-2 py-2 text-gray-800 bg-indigo-200 left-0 z-10">
+        <div tabindex="0" @click="editMessage()" @keydown.enter="editMessage()" class="cursor-pointer hover:bg-white px-4 py-2">
+          Edit
+        </div>
+        <div tabindex="0" @click="deleteMessage()" @keydown.enter="deleteMessage()" class="cursor-pointer hover:bg-white px-4 py-2">
           Delete
         </div>
       </div>
@@ -35,7 +38,7 @@
           {{ getTime(message.created_at) }}
         </div>
       </div>
-      <div  class="rounded-lg p-3 pt-0 leading-normal text-gray-800 break-words"
+      <div  class="rounded-lg p-3 pt-0 -mt-2 leading-none text-gray-800 break-words whitespace-pre-line"
         :class="[(message.user_id === user.id) ? 'rounded-tr-none' : 'rounded-tl-none']" v-linkify >
         {{ message.body }}
       </div>
@@ -67,6 +70,11 @@ export default {
       required: true,
       type: Boolean
     },
+    direct: {
+      required: false,
+      type: Boolean,
+      default: false
+    }
   },
   data: () => ({
     dropdownMenuShown: false,
@@ -84,8 +92,25 @@ export default {
     ...mapActions([
       'showNotification',
     ]),
+    editMessage() {
+        this.$emit('edit', this.index)
+    },
+    updateMessage() {
+      let api = this.direct ? 'direct-messages' : 'messages'
+      axios.put(`/${api}/${this.message.id}`)
+        .then((response) => {
+          this.$emit('edited', this.index)
+          this.dropdownMenuShown = false
+          this.showNotification({type: response.data.status, message: response.data.message})
+        })
+        .catch((error) => {
+          this.dropdownMenuShown = false
+          this.showNotification({type: error.response.data.status, message: error.response.data.message})
+        })
+    },
     deleteMessage () {
-      axios.delete(`/messages/${this.message.id}`)
+      let api = this.direct ? 'direct-messages' : 'messages'
+      axios.delete(`/${api}/${this.message.id}`)
         .then((response) => {
           this.$emit('deleted', this.index)
           this.dropdownMenuShown = false

@@ -2,19 +2,22 @@
 
 use Carbon\Carbon;
 
-$factory->define(App\Core\Models\Cycle::class, function (Faker\Generator $faker) {
+$factory->define(App\Base\Models\Cycle::class, function (Faker\Generator $faker) {
     $now = Carbon::now();
     $cyclable_type = $faker->randomElement(['office', 'team', 'project']);
     $cyclable_id = null;
     switch ($cyclable_type) {
         case 'office':
-            $cyclable_id = factory(App\Core\Models\Office::class)->create()->id;
+            $cyclable_id = factory(App\Office\Models\Office::class)->create()->id;
+
             break;
         case 'team':
-            $cyclable_id = factory(App\Core\Models\Team::class)->create()->id;
+            $cyclable_id = factory(App\Team\Models\Team::class)->create()->id;
+
             break;
         case 'project':
-            $cyclable_id = factory(App\Core\Models\Project::class)->create()->id;
+            $cyclable_id = factory(App\Project\Models\Project::class)->create()->id;
+
             break;
         default:
             throw new Exception('Wrong Cycleable type');

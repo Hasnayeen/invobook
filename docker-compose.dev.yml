@@ -6,7 +6,7 @@ services:
     ports:
       - "${APP_PORT}:80"
     volumes:
-      - ./site.dev.conf:/etc/nginx/conf.d/default.conf
+      - ./docker/site.dev.conf:/etc/nginx/conf.d/default.conf
       - ./:/var/www
     links:
       - php
@@ -16,7 +16,7 @@ services:
   php:
     build:
       context: .
-      dockerfile: dev.Dockerfile
+      dockerfile: docker/dev.php.Dockerfile
     volumes:
       - ./:/var/www
     links:
@@ -41,27 +41,31 @@ services:
     hostname: redis
 
   worker:
-    image: php:7.2-cli
+    build:
+      context: .
+      dockerfile: docker/worker.Dockerfile
     volumes:
       - ./:/var/www
     links:
       - db
     working_dir: /var/www
-    command: bash -c "apt-get update && docker-php-ext-install pdo_mysql bcmath && php artisan queue:work redis --sleep=1 --tries=1"
+    command: bash -c "php artisan queue:work redis --sleep=1 --tries=1"
     depends_on:
       - php
 
   laravel_echo_server:
-    image: node:boron
+    build:
+      context: .
+      dockerfile: docker/echo-server.Dockerfile
     hostname: laravel-echo-server
     ports:
       - "6001:6001"
     volumes:
       - ./laravel-echo-server.dev.json:/usr/src/app/laravel-echo-server.json
-      - ./echo-server.sh:/usr/src/app/echo-server.sh
+      - ./docker/echo-server.sh:/usr/src/app/echo-server.sh
       - ./:/var/www
     working_dir: /usr/src/app
-    command: bash -c "npm install -g laravel-echo-server && cd /usr/src/app && ./echo-server.sh"
+    command: bash -c "./echo-server.sh"
     depends_on:
       - redis
 

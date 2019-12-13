@@ -122,6 +122,8 @@ export default {
           body: this.body,
           commentable_type: this.resourceType,
           commentable_id: this.resourceId,
+          group_type: this.groupType,
+          group_id: this.groupId,
           mentions: this.mentions
         })
           .then((response) => {

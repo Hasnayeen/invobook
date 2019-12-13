@@ -1,7 +1,7 @@
 <?php
 
 use Carbon\Carbon;
-use App\Core\Models\Permission;
+use App\Base\Models\Permission;
 use Illuminate\Database\Seeder;
 
 class PermissionTableSeeder extends Seeder

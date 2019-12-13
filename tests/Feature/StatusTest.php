@@ -3,19 +3,20 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use App\Base\Models\Status;
 
 class StatusTest extends TestCase
 {
     public function setUp(): void
     {
         parent::setUp();
-        $this->status = factory(\App\Core\Models\Status::class)->create();
+        $this->status = factory(Status::class)->create();
     }
 
     /** @test */
     public function user_can_get_all_statuses()
     {
-        $status = factory(\App\Core\Models\Status::class, 2)->create();
+        $status = factory(Status::class, 2)->create();
         $this->actingAs($this->user)
              ->get('statuses')
              ->assertJsonFragment([
@@ -32,7 +33,7 @@ class StatusTest extends TestCase
     /** @test */
     public function user_can_create_new_status()
     {
-        $status = factory(\App\Core\Models\Status::class)->make();
+        $status = factory(Status::class)->make();
 
         $this->actingAs($this->user)->post('/statuses', [
             'name'      => $status->name,

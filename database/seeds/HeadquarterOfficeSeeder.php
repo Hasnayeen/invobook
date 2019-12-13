@@ -1,8 +1,8 @@
 <?php
 
 use Carbon\Carbon;
-use App\Core\Models\User;
-use App\Core\Models\Office;
+use App\Base\Models\User;
+use App\Office\Models\Office;
 use Illuminate\Database\Seeder;
 use App\Authorization\Authorization;
 

@@ -1,11 +1,16 @@
 <template>
-  <div v-if="loading || localLoadingState" :class="{'fixed': loading}" class="w-full h-full bg-gray-400 opacity-75 z-50 flex flex-row items-center justify-center">
-    <div class="dots w-32 flex flex-row justify-between items-center">
-      <div class="w-8 h-8 bg-pink-500"></div>
-      <div class="w-8 h-8 bg-pink-500"></div>
-      <div class="w-8 h-8 bg-pink-500"></div>
+<div v-if="loading || localLoadingState">
+  <div :class="{'fixed': loading}" class="h-screen w-screen z-50 flex flex-row items-center justify-center">
+    <div class="bg-white p-8 rounded-lg">
+      <div class="dots w-32 flex flex-row justify-between items-center">
+        <div class="w-8 h-8 bg-pink-500"></div>
+        <div class="w-8 h-8 bg-pink-500"></div>
+        <div class="w-8 h-8 bg-pink-500"></div>
+      </div>
     </div>
   </div>
+  <div class="h-screen w-screen fixed inset-0 bg-gray-900 opacity-25 z-10"></div>
+</div>
 </template>
 
 <script>

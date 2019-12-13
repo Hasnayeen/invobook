@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Http\Controllers;
+namespace App\Base\Http\Controllers;
 
 use Illuminate\Support\Facades\Route;
 
@@ -53,60 +53,6 @@ Route::impersonate();
 Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('auth');
 
     /**********************************
-        Project
-    **********************************/
-
-Route::get('projects/{project}', [ProjectController::class, 'show']);
-
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('projects', [ProjectController::class, 'index']);
-
-    Route::post('projects', [ProjectController::class, 'store']);
-
-    Route::delete('projects/{project}', [ProjectController::class, 'delete']);
-
-    Route::post('public-projects/{project}', [PublicProjectController::class, 'store']);
-
-    Route::delete('public-projects/{project}', [PublicProjectController::class, 'delete']);
-});
-
-    /**********************************
-        Team
-    **********************************/
-
-Route::get('teams/{team}', [TeamController::class, 'show']);
-
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('teams', [TeamController::class, 'index']);
-
-    Route::post('teams', [TeamController::class, 'store']);
-
-    Route::delete('teams/{team}', [TeamController::class, 'delete']);
-
-    Route::post('public-teams/{team}', [PublicTeamController::class, 'store']);
-
-    Route::delete('public-teams/{team}', [PublicTeamController::class, 'delete']);
-});
-
-    /**********************************
-        Office
-     **********************************/
-
-Route::get('offices/{office}', [OfficeController::class, 'show']);
-
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('offices', [OfficeController::class, 'index']);
-
-    Route::post('offices', [OfficeController::class, 'store']);
-
-    Route::delete('offices/{office}', [OfficeController::class, 'delete']);
-
-    Route::post('public-offices/{office}', [PublicOfficeController::class, 'store']);
-
-    Route::delete('public-offices/{office}', [PublicOfficeController::class, 'delete']);
-});
-
-    /**********************************
         Group (Project/Team/Office)
      **********************************/
 
@@ -141,22 +87,6 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
     /**********************************
-        Discussion
-     **********************************/
-
-Route::get('discussions', [DiscussionController::class, 'index']);
-
-Route::group(['middleware' => 'auth'], function () {
-    Route::post('discussions', [DiscussionController::class, 'store']);
-
-    Route::get('discussions/{discussion}', [DiscussionController::class, 'show']);
-
-    Route::patch('discussions/{discussion}', [DiscussionController::class, 'update']);
-
-    Route::delete('discussions/{discussion}', [DiscussionController::class, 'delete']);
-});
-
-    /**********************************
         Event
      **********************************/
 
@@ -169,28 +99,6 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
     /**********************************
-        Task
-    **********************************/
-
-Route::get('tasks', [TaskController::class, 'index']);
-
-Route::group(['middleware' => 'auth'], function () {
-    Route::post('tasks', [TaskController::class, 'store']);
-
-    Route::get('tasks/{task}', [TaskController::class, 'show']);
-
-    Route::put('tasks/{task}', [TaskController::class, 'update']);
-
-    Route::delete('tasks/{task}', [TaskController::class, 'delete']);
-
-    Route::put('tasks/{task}/statuses/{status}', [TaskStatusController::class, 'update']);
-
-    Route::get('tasks/{task}/steps/', [TaskProgressController::class, 'index']);
-
-    Route::post('tasks/{task}/steps/', [TaskProgressController::class, 'store']);
-});
-
-    /**********************************
         File
     **********************************/
 
@@ -200,6 +108,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('files/{file}', [FileController::class, 'index']);
 
     Route::post('files', [FileController::class, 'store']);
+
+    Route::delete('files/{file}', [FileController::class, 'delete']);
 });
 
     /**********************************
@@ -210,6 +120,8 @@ Route::get('messages', [MessageController::class, 'index']);
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('direct-messages', [DirectMessageController::class, 'index']);
+
+    Route::delete('direct-messages/{directMessage}', [DirectMessageController::class, 'delete']);
 
     Route::post('messages', [MessageController::class, 'store']);
 
@@ -281,10 +193,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('tags', [TagController::class, 'store']);
 
-    Route::post('tasks/{task}/tags', [TaskTagController::class, 'store']);
-
-    Route::delete('tasks/{task}/tags/{tag}', [TaskTagController::class, 'delete']);
-
     /**********************************
         Notification
     **********************************/
@@ -331,9 +239,7 @@ Route::group(['middleware' => 'auth'], function () {
         Settings
     **********************************/
 
-    Route::get('settings', function () {
-        return view('users.settings');
-    });
+    Route::view('settings', 'users.settings');
 });
 
     /**********************************
@@ -360,4 +266,15 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function 
     Route::put('services/{service}', [ServiceController::class, 'update']);
 
     Route::get('check-for-update', [AboutController::class, 'checkForUpdate']);
+
+    /**********************************
+        Database Backup in dropbox
+    **********************************/
+    Route::get('check-dropbox-setup', [DatabaseBackupController::class, 'checkDropboxSetup']);
+
+    Route::get('take-backup', [DatabaseBackupController::class, 'takeBackupToDropbox']);
+
+    Route::get('backup-list', [DatabaseBackupController::class, 'backupFileLists']);
+
+    Route::post('backup-restore', [DatabaseBackupController::class, 'backupRestore']);
 });

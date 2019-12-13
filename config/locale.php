@@ -12,6 +12,8 @@ return [
 
     'lang' => [
         'ar'    => 'Arabic',
+        'bn'    => 'Bengali',
+        'bs'    => 'Bosnian',
         'da'    => 'Danish',
         'de'    => 'German',
         'en'    => 'English',
@@ -27,6 +29,7 @@ return [
         'jp'    => 'Japanese',
         'la'    => 'Latin',
         'ms'    => 'Malay',
+        'ne'    => 'Nepali',
         'nl-NL' => 'Dutch (Netherlands)',
         'pl'    => 'Polish',
         'pt-BR' => 'Portuguese (Brazil)',
@@ -34,6 +37,7 @@ return [
         'sv-se' => 'Swedish (Sweden)',
         'th'    => 'Thai (Thai)',
         'tr-TR' => 'Turkish (Turkey)',
+        'vi-VN' => 'Vietnamese',
     ],
 
     /*

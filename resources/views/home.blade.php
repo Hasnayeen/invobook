@@ -6,7 +6,7 @@
 
 @slot('script')
 <script>
-    let data = <?php echo json_encode($data); ?>
+    let currentWork = <?php echo json_encode($currentWork); ?>
 </script>
 <script>
     window.errors = <?php echo json_encode($errors->toArray()); ?>

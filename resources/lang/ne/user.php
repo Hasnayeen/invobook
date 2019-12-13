@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'Profile'                                                  => 'प्रोफाइल',
+    'Account'                                                  => 'खाता',
+    'Username'                                                 => 'प्रयोगकर्ता नाम',
+    'Name'                                                     => 'नाम',
+    'Designation'                                              => 'पदनाम',
+    'Title'                                                    => 'शीर्षक ' . config('app.company_name'),
+    'Short Bio'                                                => 'छोटो बायो',
+    'Location'                                                 => 'स्थान',
+    'Time Zone'                                                => 'समय क्षेत्र',
+    'First Day of the Week'                                    => 'हप्ताको पहिलो दिन',
+    'Language'                                                 => 'भाषा',
+    'Change Your Avatar'                                       => 'तपाईंको अवतार परिवर्तन गर्नुहोस्',
+    'Email'                                                    => 'ईमेल',
+    'Current Password'                                         => 'वर्तमान पासवर्ड',
+    'New Password'                                             => 'नया पासवर्ड',
+    'Confirm Password'                                         => 'पासवर्ड सुनिश्चित गर्नुहोस',
+    'Update'                                                   => 'अद्यावधिक गर्नुहोस्',
+    'Delete Account'                                           => 'खाता मेटाउनुहोस्',
+    'Preferred Language'                                       => 'रुचाइएको भाषा',
+    'Notification Settings'                                    => 'सूचना सेटिंग्स',
+    'Email Notifications'                                      => 'ईमेल सूचनाहरू',
+    'Send email on direct messages'                            => 'प्रत्यक्ष सन्देशहरूमा ईमेल पठाउनुहोस्',
+    'Send email on mention in tasks, discussions and comments' => 'कार्यहरू, छलफल र टिप्पणीहरूमा उल्लेखित ईमेल पठाउनुहोस्',
+    'Member of'                                                => 'सदस्य को',
+];

@@ -3,14 +3,14 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Core\Models\Team;
-use App\Core\Models\User;
-use App\Core\Models\Office;
-use App\Core\Models\Project;
-use App\Core\Models\Discussion;
-use App\Core\Contracts\HasMembers;
+use App\Base\Models\User;
+use App\Team\Models\Team;
+use App\Office\Models\Office;
+use App\Project\Models\Project;
+use App\Base\Contracts\HasMembers;
+use App\Discussion\Models\Discussion;
 use Illuminate\Support\Facades\Notification;
-use App\Core\Notifications\DiscussionCreatedNotification;
+use App\Discussion\Notifications\DiscussionCreatedNotification;
 
 class DiscussionNotificationTest extends TestCase
 {
@@ -74,12 +74,14 @@ class DiscussionNotificationTest extends TestCase
 
         // All members of group are notified
         Notification::assertSentTo(
-            $users, DiscussionCreatedNotification::class
+            $users,
+            DiscussionCreatedNotification::class
         );
 
         // Author of the discussion is not notified
         Notification::assertNotSentTo(
-            [$this->user], DiscussionCreatedNotification::class
+            [$this->user],
+            DiscussionCreatedNotification::class
         );
     }
 }

@@ -3,8 +3,9 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Core\Models\Team;
-use App\Core\Exceptions\UserIsNotMember;
+use App\Team\Models\Team;
+use Laravel\Passport\Passport;
+use App\Base\Exceptions\UserIsNotMember;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Auth\Access\AuthorizationException;
 
@@ -13,7 +14,27 @@ class TeamTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->team = factory('App\Core\Models\Team')->create();
+        $this->team = factory(Team::class)->create();
+    }
+
+    /** @test */
+    public function user_can_see_public_teams_and_teams_of_which_user_is_member()
+    {
+        $team = factory(Team::class)->create(['owner_id' => $this->user->id]);
+        $this->actingAs($this->user);
+        resolve('Authorization')->setupDefaultPermissions($team);
+        $team->members()->save($this->user);
+
+        $this->json('GET', 'teams/')->assertJsonFragment([
+            'status' => 'success',
+            'name'   => $team->name,
+        ]);
+
+        Passport::actingAs($this->user);
+        $this->json('GET', 'teams/')->assertJsonFragment([
+            'status' => 'success',
+            'name'   => $team->name,
+        ]);
     }
 
     /** @test */
@@ -22,14 +43,19 @@ class TeamTest extends TestCase
         $this->user_with_permission_can_create_team();
         $id = Team::where('name', 'New Team')->first()->id;
 
-        $this->actingAs($this->user)->get('teams/' . $id)->assertSee('New Team');
+        $this->actingAs($this->user)
+             ->json('GET', 'teams/' . $id)
+             ->assertJsonFragment([
+                 'status' => 'success',
+                 'name'   => 'New Team',
+             ]);
     }
 
     /** @test */
     public function user_without_permission_cant_see_team_page()
     {
         $this->expectException(AuthorizationException::class);
-        $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
+        $user = factory(\App\Base\Models\User::class)->create(['role_id' => 5]);
         $this->user_with_permission_can_create_team();
         $id = Team::where('name', 'New Team')->first()->id;
 
@@ -55,7 +81,7 @@ class TeamTest extends TestCase
     public function user_without_permission_cant_create_team()
     {
         $this->expectException(AuthorizationException::class);
-        $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
+        $user = factory(\App\Base\Models\User::class)->create(['role_id' => 5]);
 
         $this->actingAs($user)->post('/teams', [
             'name'        => 'New Team',
@@ -68,7 +94,7 @@ class TeamTest extends TestCase
     {
         Notification::fake();
 
-        $user = factory('App\Core\Models\User')->create();
+        $user = factory('App\Base\Models\User')->create();
         $this->actingAs($this->user)->post('/members', [
             'user_id'       => $user->id,
             'group_type'    => 'team',
@@ -103,7 +129,7 @@ class TeamTest extends TestCase
     public function user_without_permission_cant_delete_a_team()
     {
         $this->expectException(AuthorizationException::class);
-        $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
+        $user = factory(\App\Base\Models\User::class)->create(['role_id' => 5]);
 
         $this->user_with_permission_can_create_team();
 
@@ -144,7 +170,7 @@ class TeamTest extends TestCase
     {
         $this->expectException(UserIsNotMember::class);
 
-        $user = factory('App\Core\Models\User')->create();
+        $user = factory('App\Base\Models\User')->create();
 
         $this->actingAs($this->user)
              ->delete('/members', [

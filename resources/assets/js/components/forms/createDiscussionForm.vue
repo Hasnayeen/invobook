@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div :class="{'hidden': !formShown}" class="absolute container mx-auto mb-8 w-5/6 md:w-md lg:w-lg xl:w-xl z-10" style="top: 12vh;left: 0;right: 0;">
+  <div :class="{'hidden': !formShown}" class="absolute container mx-auto mb-8 w-5/6 md:w-md lg:w-lg xl:w-xl z-30" style="top: 12vh;left: 0;right: 0;">
     <div class="bg-white rounded shadow-lg">
       <div class="">
         <div class="px-8 pt-8 bg-gray-200 rounded-t">
@@ -60,7 +60,7 @@
     <div class="h-16"></div>
   </div>
 
-  <div @click="closeEditor" :class="{'hidden': !formShown}" class="h-screen w-screen fixed inset-0 bg-gray-900 opacity-25"></div>
+  <div @click="closeEditor" :class="{'hidden': !formShown}" class="h-screen w-screen fixed inset-0 bg-gray-900 opacity-25 z-20"></div>
 </div>
 </template>
 
@@ -115,14 +115,13 @@ export default {
           imageUpload: {
             upload: file => {
               let formData = new FormData()
-              formData.append('files[0]', file)
+              formData.append('file', file)
               formData.append('group_type', this.resourceType)
               formData.append('group_id', this.resourceId)
-              formData.append('for_editor', true)
               
               // return a Promise that resolves in a link to the uploaded image
               return new Promise((resolve, reject) => {
-                axios.post('/files',
+                axios.post('/discussions/files',
                   formData,
                   {
                     headers: {
@@ -134,6 +133,8 @@ export default {
                     resolve(response.data.url)
                   })
                   .catch((error) => {
+                    console.error(error);
+                    
                     this.showNotification({type: error.response.data.status, message: error.response.data.message})
                   })
               });

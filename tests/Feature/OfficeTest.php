@@ -3,25 +3,38 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Core\Models\Office;
-use App\Core\Exceptions\UserIsNotMember;
+use App\Office\Models\Office;
+use Laravel\Passport\Passport;
+use App\Base\Exceptions\UserIsNotMember;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Auth\Access\AuthorizationException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class OfficeTest extends TestCase
 {
     public function setUp(): void
     {
         parent::setUp();
-        $this->office = factory('App\Core\Models\Office')->create();
+        $this->office = factory('App\Office\Models\Office')->create();
     }
 
     /** @test */
-    public function offices_route_should_return_404_page()
+    public function user_can_see_public_offices_and_offices_of_which_user_is_member()
     {
-        $this->expectException(NotFoundHttpException::class);
-        $this->actingAs($this->user)->get('offices/');
+        $office = factory('App\Office\Models\Office')->create(['owner_id' => $this->user->id]);
+        $this->actingAs($this->user);
+        resolve('Authorization')->setupDefaultPermissions($office);
+        $office->members()->save($this->user);
+
+        $this->json('GET', 'offices/')->assertJsonFragment([
+            'status' => 'success',
+            'name'   => $office->name,
+        ]);
+
+        Passport::actingAs($this->user);
+        $this->json('GET', 'offices/')->assertJsonFragment([
+            'status' => 'success',
+            'name'   => $office->name,
+        ]);
     }
 
     /** @test */
@@ -30,14 +43,19 @@ class OfficeTest extends TestCase
         $this->user_with_permission_can_create_office();
         $id = Office::where('name', 'New Office')->first()->id;
 
-        $this->actingAs($this->user)->get('offices/' . $id)->assertSee('New Office');
+        $this->actingAs($this->user)
+             ->json('GET', 'offices/' . $id)
+             ->assertJsonFragment([
+                 'status' => 'success',
+                 'name'   => 'New Office',
+             ]);
     }
 
     /** @test */
     public function user_without_permission_cant_see_office_page()
     {
         $this->expectException(AuthorizationException::class);
-        $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
+        $user = factory(\App\Base\Models\User::class)->create(['role_id' => 5]);
         $this->user_with_permission_can_create_office();
         $id = Office::where('name', 'New Office')->first()->id;
 
@@ -64,7 +82,7 @@ class OfficeTest extends TestCase
     public function user_without_permission_cant_create_office()
     {
         $this->expectException(AuthorizationException::class);
-        $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
+        $user = factory(\App\Base\Models\User::class)->create(['role_id' => 5]);
 
         $this->actingAs($user)->post('/offices', [
             'name'        => 'New Office',
@@ -90,7 +108,7 @@ class OfficeTest extends TestCase
     public function user_without_permission_cant_delete_a_office()
     {
         $this->expectException(AuthorizationException::class);
-        $user = factory(\App\Core\Models\User::class)->create(['role_id' => 5]);
+        $user = factory(\App\Base\Models\User::class)->create(['role_id' => 5]);
 
         $this->user_with_permission_can_create_office();
 
@@ -103,7 +121,7 @@ class OfficeTest extends TestCase
     public function remove_user_from_office()
     {
         Notification::fake();
-        $user = factory('App\Core\Models\User')->create(['role_id' => 3]);
+        $user = factory('App\Base\Models\User')->create(['role_id' => 3]);
         $this->office->members()->save($user);
 
         $this->assertCount(1, $this->office->members);
@@ -131,7 +149,7 @@ class OfficeTest extends TestCase
     {
         $this->expectException(UserIsNotMember::class);
 
-        $user = factory('App\Core\Models\User')->create();
+        $user = factory('App\Base\Models\User')->create();
 
         $this->actingAs($this->user)
              ->delete('/members', [

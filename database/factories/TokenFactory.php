@@ -1,7 +1,7 @@
 <?php
 
-use App\Core\Models\Role;
-use App\Core\Models\Token;
+use App\Base\Models\Role;
+use App\Base\Models\Token;
 use Faker\Generator as Faker;
 
 $factory->define(Token::class, function (Faker $faker) {
