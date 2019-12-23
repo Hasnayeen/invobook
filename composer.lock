@@ -795,16 +795,16 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "6.5.0",
+            "version": "6.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "dbc2bc3a293ed6b1ae08a3651e2bfd213d19b6a5"
+                "reference": "43ece0e75098b7ecd8d13918293029e555a50f82"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/dbc2bc3a293ed6b1ae08a3651e2bfd213d19b6a5",
-                "reference": "dbc2bc3a293ed6b1ae08a3651e2bfd213d19b6a5",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/43ece0e75098b7ecd8d13918293029e555a50f82",
+                "reference": "43ece0e75098b7ecd8d13918293029e555a50f82",
                 "shasum": ""
             },
             "require": {
@@ -858,7 +858,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2019-12-07T18:20:45+00:00"
+            "time": "2019-12-23T11:57:10+00:00"
         },
         {
             "name": "guzzlehttp/promises",
@@ -4894,12 +4894,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "f60b71616e14b4498d2a743e2a4f931d06331447"
+                "reference": "6034c2af01e264652a060e57f1e0288b4038a31a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/f60b71616e14b4498d2a743e2a4f931d06331447",
-                "reference": "f60b71616e14b4498d2a743e2a4f931d06331447",
+                "url": "https://api.github.com/repos/composer/composer/zipball/6034c2af01e264652a060e57f1e0288b4038a31a",
+                "reference": "6034c2af01e264652a060e57f1e0288b4038a31a",
                 "shasum": ""
             },
             "require": {
@@ -4966,7 +4966,7 @@
                 "dependency",
                 "package"
             ],
-            "time": "2019-12-19T13:23:55+00:00"
+            "time": "2019-12-22T11:46:13+00:00"
         },
         {
             "name": "composer/semver",
