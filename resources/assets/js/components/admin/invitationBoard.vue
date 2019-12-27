@@ -94,16 +94,16 @@ export default {
       copyText.focus()
       copyText.select()
       document.execCommand("copy")
-      this.showNotification({type: 'Link copied to clipboard', message: 'success'})
+      this.showNotification({type: 'success', message: 'Link copied to clipboard'})
     },
     generateLink () {
       if (this.roleId === 0) {
-        this.showNotification({type: 'A role must be selected', message: 'error'})
+        this.showNotification({type: 'error', message: 'A role must be selected'})
         return false
       }
       axios.post('/register/invite-link', {
           role_id: this.roleId,
-          expiry_date: luxon.DateTime.fromJSDate(this.expiryDate).toFormat('y-L-d')
+          expiry_date: (this.expiryDate != '') ? luxon.DateTime.fromJSDate(this.expiryDate).toFormat('y-L-d') : ''
         })
         .then((response) => {
           this.shareableLink = response.data.link
