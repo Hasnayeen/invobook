@@ -1336,16 +1336,16 @@
         },
         {
             "name": "laravel/passport",
-            "version": "v8.0.2",
+            "version": "v8.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/passport.git",
-                "reference": "952722f4f1817485bd30190e45fe4dc87ba67441"
+                "reference": "e45ac135c94f72ff77dbc61de97762b35cb76048"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/passport/zipball/952722f4f1817485bd30190e45fe4dc87ba67441",
-                "reference": "952722f4f1817485bd30190e45fe4dc87ba67441",
+                "url": "https://api.github.com/repos/laravel/passport/zipball/e45ac135c94f72ff77dbc61de97762b35cb76048",
+                "reference": "e45ac135c94f72ff77dbc61de97762b35cb76048",
                 "shasum": ""
             },
             "require": {
@@ -1403,7 +1403,7 @@
                 "oauth",
                 "passport"
             ],
-            "time": "2019-11-26T17:35:30+00:00"
+            "time": "2019-12-30T22:20:25+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -4894,12 +4894,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "f60b71616e14b4498d2a743e2a4f931d06331447"
+                "reference": "6034c2af01e264652a060e57f1e0288b4038a31a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/f60b71616e14b4498d2a743e2a4f931d06331447",
-                "reference": "f60b71616e14b4498d2a743e2a4f931d06331447",
+                "url": "https://api.github.com/repos/composer/composer/zipball/6034c2af01e264652a060e57f1e0288b4038a31a",
+                "reference": "6034c2af01e264652a060e57f1e0288b4038a31a",
                 "shasum": ""
             },
             "require": {
@@ -4966,7 +4966,7 @@
                 "dependency",
                 "package"
             ],
-            "time": "2019-12-19T13:23:55+00:00"
+            "time": "2019-12-22T11:46:13+00:00"
         },
         {
             "name": "composer/semver",
