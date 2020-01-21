@@ -30,6 +30,7 @@ export default new Vuex.Store({
     groupType: '',
     groupId: '',
     members: [],
+    breadcrumb: ['home'],
     loading: false
   },
 
@@ -40,6 +41,11 @@ export default new Vuex.Store({
     },
     setCurrentView (state, view) {
       state.currentView = view
+    },
+    updateBreadcrumb(state, view) {
+      if (!state.breadcrumb.includes(view)) {
+        state.breadcrumb.splice(1, 1, view)
+      }
     },
     setResourceName (state, name) {
       state.resourceName = name
@@ -85,6 +91,9 @@ export default new Vuex.Store({
     },
     setCurrentView ({ commit }, view) {
       commit('setCurrentView', view)
+    },
+    updateBreadcrumb ({ commit }, view) {
+      commit('updateBreadcrumb', view)
     },
     setResourceName ({ commit }, name) {
       commit('setResourceName', name)

@@ -55,7 +55,7 @@
         </div>
         <div class="flex flex-row justify-between py-4 px-8 bg-grey-lighter rounded">
           <button @click="closeModal" class="text-red-lighter hover:font-bold hover:text-red-light">Close</button>
-          <button v-if="!output.length" @click="restore" class="bg-teal-light text-white font-medium hover:bg-teal-dark py-2 px-4 rounded">
+          <button v-if="!output.length" @click="restore" class="bg-indigo-light text-white font-medium hover:bg-indigo-dark py-2 px-4 rounded">
             <font-awesome-icon v-if="loading == 'restoring'" :icon="faSpinner" class="text-xl md:text-2xl" spin></font-awesome-icon>
             <span v-else>
               Restore

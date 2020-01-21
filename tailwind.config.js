@@ -6,7 +6,7 @@ module.exports = {
     screens: {
       sm: '576px', // 36rem
       md: '768px', // 48rem
-      lg: '992px', // 62rem
+      lg: '1056px', // 66rem
       xl: '1200px', // 75rem
       xxl: '1440px' // 90rem
     },
@@ -147,6 +147,7 @@ module.exports = {
       48: '12rem',
       56: '14rem',
       64: '16rem',
+      68: '17rem',
       72: '18rem',
       80: '20rem',
       88: '22rem',
@@ -328,11 +329,11 @@ module.exports = {
       md: '28rem',
       lg: '32rem',
       xl: '36rem',
-      '2xl': '42rem',
-      '3xl': '48rem',
-      '4xl': '56rem',
-      '5xl': '64rem',
-      '6xl': '72rem',
+      '2xl': '42rem', // 672px
+      '3xl': '48rem', // 768px
+      '4xl': '56rem', // 896px
+      '5xl': '66rem', // 1056px
+      '6xl': '72rem', // 1152px
       full: '100%'
     },
     minHeight: {

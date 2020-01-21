@@ -32,7 +32,16 @@ window.Vue.mixin({
       if (!value) return 'http://' + window.location.host + '/image/avatar.jpg'
       value = value.toString()
       return window.location.protocol + '//' + window.location.host + '/' + value
-    }
+    },
+    updateUrl: function (groupType, groupId = null) {
+      if (history.pushState && groupId !== null) {
+        let newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?group_type=' + groupType + '&group_id=' + groupId
+        window.history.pushState({ path: newurl }, '', newurl)
+      } else if (history.pushState) {
+        let newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?group_type=' + groupType
+        window.history.pushState({ path: newurl }, '', newurl)
+      }
+    },
   }
 })
 

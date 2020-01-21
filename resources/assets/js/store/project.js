@@ -7,6 +7,9 @@ export default {
   mutations: {
     getProject (state, project) {
       state.project = project
+    },
+    updateProjectSettings(state, settings) {
+      state.project.settings = settings
     }
   },
 
@@ -31,6 +34,9 @@ export default {
         })
 
       dispatch('setCurrentView', 'project')
+    },
+    updateProjectSettings({ commit }, settings) {
+      commit('updateProjectSettings', settings)
     }
   }
 }

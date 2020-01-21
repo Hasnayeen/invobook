@@ -11,7 +11,7 @@
 
     <title>{{ config('app.name', 'GOODWORK') }} | {{ $title }}</title>
 
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap" rel="stylesheet"> 
+    <!-- <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap" rel="stylesheet">  -->
     <link href="{{ mix('css/main.min.css') }}" rel="stylesheet">
 
     @yield('style')
@@ -46,7 +46,7 @@
 <body class="bg-gray-200 text-gray-700">
     <main>
         <div id="app">
-            <div class="h-1" style="background: linear-gradient(to right, #4DC0B5, #3490DC);"></div>
+            <div class="h-1 sticky top-0" style="background: linear-gradient(to right, #8497EC, #3958E3);"></div>
             @if (!Auth::guest())
             <loading-modal></loading-modal>
             <navbar></navbar>

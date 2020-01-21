@@ -23,7 +23,7 @@
     </div>
     <div class="flex flex-row justify-between py-4 px-8 bg-gray-200 rounded">
       <button @click="closeCreateForm" class="text-red-300 hover:font-bold hover:text-red-400">Cancel</button>
-      <button @click="createCycle" class="bg-teal-400 text-white font-medium hover:bg-teal-600 py-4 px-8 rounded">Create</button>
+      <button @click="createCycle" class="bg-indigo-400 text-white font-medium hover:bg-indigo-600 py-4 px-8 rounded">Create</button>
     </div>
   </div>
 

@@ -10,10 +10,10 @@
       <h1 class="text-center text-gray-700 font-semibold text-5xl py-4">{{ currentTime }}</h1>
       <div class="mx-8">
         <div class="h-1 bg-gray-400 rounded"></div>
-        <div class="h-1 bg-teal-500 rounded -mt-1" style="width: 0%;"></div>
+        <div class="h-1 bg-indigo-500 rounded -mt-1" style="width: 0%;"></div>
       </div>
       <div class="px-4 py-8">
-        <button @click="startCountdown" class="px-4 py-2 mx-4 rounded border border-teal-500 font-semibold text-teal-700 start" type="button">Start</button>
+        <button @click="startCountdown" class="px-4 py-2 mx-4 rounded border border-indigo-500 font-semibold text-indigo-700 start" type="button">Start</button>
         <button @click="pauseCountdown" class="px-4 py-2 mx-4 rounded border" type="button">Pause</button>
         <button @click="resetCountdown" class="px-4 py-2 mx-4 rounded border" type="button">Reset</button>
         <button @click="activateBreak" class="px-4 py-2 mx-4 rounded border" type="button">Break</button>

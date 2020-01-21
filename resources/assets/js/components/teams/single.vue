@@ -1,79 +1,94 @@
 <template>
-  <div class="container mx-auto my-6 px-4 md:px-0 w-full md:max-w-2xl lg:max-w-4xl xl:max-w-6xl">
-    <div class="text-gray-600 font-semibold text-2xl mb-4 flex items-center justify-center">
-      {{ team.name }}
-      <span v-if="authenticated" @click="toggleDropdownMenu" v-click-outside="closeDropdownMenu" class="bg-white p-1 text-sm rounded-full shadow ml-4 cursor-pointer flex items-center">
-        <font-awesome-icon :icon="faCog"></font-awesome-icon>
-      </span>
-      <!-- Dropdown Menu -->
-      <div v-if="authenticated && dropdownMenuShown" class="relative">
-        <ul class="list-reset bg-white rounded shadow-lg py-2 absolute right-0 mt-4 text-base text-left font-normal whitespace-no-wrap z-30">
-          <li @click="toggleVisibility" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
-            {{ team.public ? 'Make Private' : 'Make Public'}}
-          </li>
-          <li v-if="settings.roadmap_enabled" @click="showModal('roadmapModal')" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
-            Roadmap
-          </li>
-          <li @click="showModal('memberListModal')" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
+<div>
+  <tab-menu :settings="settings" :active="active" @activate="activateTab"></tab-menu>
+  <div class="container mx-auto my-4 px-4 w-full md:max-w-3xl lg:max-w-4xl xl:max-w-6xl">
+
+    <div class="border border-gray-300 bg-white rounded-lg px-8 py-4">
+      <div class="text-gray-600 font-semibold text-3xl flex items-center justify-center relative">
+        <div class="flex justify-between items-center w-full">
+          <div class="flex flex-col">
+            <div class="text-xs font-normal text-gray-700 flex">
+              <div v-for="(place, index) in breadcrumb" @click="setActiveView(place)" class="mr-1 cursor-pointer">{{ place | capitalize }} > </div>
+              {{team.name}}
+            </div>
+            {{team.name}}
+          </div>
+          <!-- Cycle -->
+          <div class="text-gray-600 flex items-center text-sm border rounded-full">
+            <span class="border-r py-1 px-3">
+              Cycle
+            </span>
+            <div v-if="this.selectedCycle" @click="showModal('cycleModal')" class="px-3 py-1 cursor-pointer rounded-r-full bg-indigo-100 text-indigo-700 inline">
+              <span v-if="this.selectedCycle.name">
+                {{ this.selectedCycle.name }}
+              </span>
+              <span v-else>
+                {{this.selectedCycle.start_date}} - {{this.selectedCycle.end_date}}
+              </span>
+            </div>
+            <span v-else @click="showModal('cycleModal')" class="px-3 py-1 cursor-pointer rounded-r-full bg-indigo-100 text-indigo-700">
+              Click to set a Cycle
+            </span>
+          </div>
+          <!-- Cycle -->
+        </div>
+
+        <!-- Dropdown Menu -->
+        <div v-if="authenticated && dropdownMenuShown" class="absolute w-64 right-0">
+          <ul class="list-reset bg-white rounded shadow-2xl py-2 absolute inset-x-0 mt-6 text-base text-left font-normal whitespace-no-wrap z-30">
+            <li @click="toggleVisibility" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
+              {{ team.public ? 'Make Private' : 'Make Public'}}
+            </li>
+            <li v-if="settings.roadmap_enabled" @click="showModal('roadmapModal')" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
+              Roadmap
+            </li>
+            <li @click="showModal('memberListModal')" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
               Show All Members
-          </li>
-          <li @click="showModal('permissionSettingsModal')" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
-            Permissions Settings
-          </li>
-          <li @click="showModal('settingsModal')" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
-            Settings
-          </li>
-          <li class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
-            Delete
-          </li>
-        </ul>
+            </li>
+            <li @click="showModal('permissionSettingsModal')" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
+              Permissions Settings
+            </li>
+            <li @click="showModal('settingsModal')" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
+              Settings
+            </li>
+            <li class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
+              Delete
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    <!-- Modals for cycles -->
+    <cycles-modal v-if="currentComponent === 'cycleModal'" resourceType="team" :resourceId="team.id" :currentCycleId="currentCycleId"></cycles-modal>
+    <!-- Modals for cycles -->
+
+    <!-- Modals for dropdown menu -->
+      <roadmap-modal v-if="currentComponent === 'roadmapModal'" resourceType="team" :resourceId="team.id" :currentCycleId="currentCycleId"></roadmap-modal>
+
+      <members-list-modal v-if="currentComponent === 'memberListModal'" resourceType="team" :resourceId="team.id" :members="team.members" ></members-list-modal>
+
+      <add-member-form v-if="currentComponent === 'addMemberForm'" resourceType="team" :resource="team" @addMember="addMember"></add-member-form>
+
+      <permission-settings-modal v-if="currentComponent === 'permissionSettingsModal'" resourceType="team" :resourceId="team.id" ></permission-settings-modal>
+
+      <settings-modal v-if="currentComponent === 'settingsModal'" resourceType="team" :resourceId="team.id" :settings="settings" @update-settings="updateSettings" ></settings-modal>
+    <!-- Modals for dropdown menu -->
+
+      <div class="flex justify-between items-center w-full">
+        <div class="flex flex-row flex-wrap items-center pt-2">
+          <span @click="showModal('addMemberForm')" class="bg-indigo-500 shadow-xl w-8 h-8 flex justify-center items-center rounded-full text-indigo-500 cursor-pointer text-center p-2 mr-1">
+            <font-awesome-icon :icon="faPlus" class="text-white"></font-awesome-icon>
+          </span>
+          <a v-for="(member, index) in team.members" :href="'/users/' + member.username" class="mx-1">
+            <profile-card :user="member"></profile-card>
+          </a>
+        </div>
+        <span v-if="authenticated" @click="toggleDropdownMenu" v-click-outside="closeDropdownMenu" class="bg-white p-2 text-sm rounded border border-gray-400 ml-4 cursor-pointer flex items-center">
+          <font-awesome-icon :icon="faCog" class="mr-2"></font-awesome-icon>
+          Settings
+        </span>
       </div>
     </div>
-
-    <div class="text-gray-600 flex flex-row justify-center items-center">
-      <span class="text-lg">
-        Cycle: 
-      </span>
-      <div v-if="this.selectedCycle" @click="showCyclesModal" class="p-2 ml-2 bg-gray-100 shadow rounded cursor-pointer text-sm text-teal-800 inline">
-        <span v-if="this.selectedCycle.name">
-          {{ this.selectedCycle.name }}
-        </span>
-        <span v-else>
-          {{this.selectedCycle.start_date}} - {{this.selectedCycle.end_date}}
-        </span>
-      </div>
-      <span v-else @click="showModal('cycleModal')" class="p-2 ml-2 bg-gray-100 shadow rounded cursor-pointer text-sm text-teal-800">
-        Click to set a Cycle
-      </span>
-    </div>
-
-  <!-- Modals for cycles -->
-  <cycles-modal v-if="currentComponent === 'cycleModal'" resourceType="team" :resourceId="team.id" :currentCycleId="currentCycleId"></cycles-modal>
-  <!-- Modals for cycles -->
-
-  <!-- Modals for dropdown menu -->
-    <roadmap-modal v-if="currentComponent === 'roadmapModal'" resourceType="team" :resourceId="team.id" :currentCycleId="currentCycleId"></roadmap-modal>
-
-    <members-list-modal v-if="currentComponent === 'memberListModal'" resourceType="team" :resourceId="team.id" :members="team.members" />
-
-    <addMemberForm v-if="currentComponent === 'addMemberForm'" resourceType="team" :resource="team" @addMember="addMember"></addMemberForm>
-    
-    <permission-settings-modal v-if="currentComponent === 'permissionSettingsModal'" resourceType="team" :resourceId="team.id"></permission-settings-modal>
-
-    <settings-modal v-if="currentComponent === 'settingsModal'" resourceType="team" :resourceId="team.id" :settings="settings" @update-settings="updateSettings" ></settings-modal>
-  <!-- Modals for dropdown menu -->
-
-    <div class="flex flex-row flex-wrap justify-center items-center px-2 pt-4">
-      <span @click="showModal('addMemberForm')" class="bg-white shadow w-8 h-8 flex justify-center items-center rounded-full text-teal-500 cursor-pointer text-center p-2 mr-1">
-        <font-awesome-icon :icon="faPlus"></font-awesome-icon>
-      </span>
-      <a v-for="(member, index) in team.members" :href="'/users/' + member.username" class="mx-1">
-        <profile-card :user="member"></profile-card>
-      </a>
-      <span v-if="team.members.length > 5" class="bg-gray-200 border-teal-500 border p-2 rounded-full">{{ team.members.length - 5 }}+</span>
-    </div>
-
-    <tab-menu :settings="settings" :active="active" @activate="activateTab"></tab-menu>
 
     <div class="flex flex-row flex-wrap justify-center">
       <task-board v-if="settings.task_enabled" resourceType="team" :resource="team" :activeTab="active" :activeId="activeId"></task-board>
@@ -84,6 +99,7 @@
       <activity-board resourceType="team" :resourceId="team.id" :activeTab="active"></activity-board>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -139,12 +155,14 @@ export default {
     if (id !== null) {
       this.activeId = parseInt(id)
     }
+    this.updateBreadcrumb('teams')
     this.currentCycleId = this.selectedCycle ? this.selectedCycle.id : null
     this.getAllCycles()
   },
   computed: {
     ...mapState({
       currentView: state => state.currentView,
+      breadcrumb: state => state.breadcrumb,
       team: state => state.team.team,
       settings: state => state.team.team.settings,
       selectedCycle: state => state.cycle.selectedCycle,
@@ -153,11 +171,18 @@ export default {
   },
   methods: {
     ...mapActions([
+      'setCurrentView',
       'getCycles',
       'setCurrentComponent',
       'closeComponent',
       'showNotification',
+      'updateBreadcrumb',
+      'updateTeamSettings',
     ]),
+    setActiveView (view) {
+      this.updateUrl(view)
+      this.setCurrentView(view)
+    },
     showModal (modalName) {
       this.setCurrentComponent(modalName)
     },
@@ -240,7 +265,7 @@ export default {
       this.settingsModalShown = false
     },
     updateSettings (settings) {
-      this.settings = settings
+      this.updateTeamSettings(settings)
       this.getActiveTool(null)
     },
     showCyclesModal () {

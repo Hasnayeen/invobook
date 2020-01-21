@@ -1,6 +1,6 @@
 <template>
   <div v-if="activeTab === 'home'">
-    <div class="bg-white rounded shadow p-8">
+    <div class="bg-white rounded-lg shadow p-8">
       <div class="text-xl">
         What's on your plate today ⬇️
       </div>
@@ -8,7 +8,7 @@
       <a v-if="currentWork.length !== 0" :href="'/' + currentWork[0].taskable_type + 's/' + currentWork[0].taskable_id + '?tool=tasks&id=' + currentWork[0].id" class="block mt-4 p-4 rounded-lg bg-gray-100 border-2 border-indigo-300 cursor-pointer">
         <div class="flex items-center">
           <div class="pr-2 text-sm">Due on: </div>
-          <div class="text-sm rounded-full px-3 py-1 bg-teal-200 text-teal-700 font-semibold inline">
+          <div class="text-sm rounded-full px-3 py-1 bg-indigo-200 text-indigo-700 font-semibold inline">
             {{ dueOn(currentWork[0].due_on) }}
           </div>
         </div>
@@ -50,7 +50,7 @@
         <div class="text-base mr-2">
           Other tasks in progress
         </div>
-        <div class="text-xs font-bold bg-teal-600 text-white flex items-center justify-center w-6 h-6 rounded-full">{{ currentWork.length - 1 }}</div>
+        <div class="text-xs font-bold bg-indigo-600 text-white flex items-center justify-center w-6 h-6 rounded-full">{{ currentWork.length - 1 }}</div>
       </div>
       <a :href="'/' + task.taskable_type + 's/' + task.taskable_id + '?tool=tasks&id=' + task.id" v-if="index !== 0" v-for="(task, index) in currentWork" class="block bg-gray-100 rounded shadow px-4 py-2 my-4">
         <div class="text-blue-500 text-sm cursor-pointer">

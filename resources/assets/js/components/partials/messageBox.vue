@@ -13,7 +13,7 @@
             class="relative p-2 lg:p-4"
             :class="{'bg-white': user.id === selectedUser.id, 'jelly bg-white': user.unread_messages_for_auth_user_count > 0}">
             <img class="w-10 lg:w-12 h-10 lg:h-12 rounded-full cursor-pointer" :title="user.name" :src="generateUrl(user.avatar)">
-            <div :class="[user.online ? 'bg-teal-500' : 'bg-gray-500']" :title="[user.online ? 'online' : 'offline']" class="absolute w-4 h-4 rounded-full border-2 border-white mb-2 mr-2 lg:mb-4 lg:mr-4 right-0 bottom-0"></div>
+            <div :class="[user.online ? 'bg-indigo-500' : 'bg-gray-500']" :title="[user.online ? 'online' : 'offline']" class="absolute w-4 h-4 rounded-full border-2 border-white mb-2 mr-2 lg:mb-4 lg:mr-4 right-0 bottom-0"></div>
           </div>
         </div>
       </div>

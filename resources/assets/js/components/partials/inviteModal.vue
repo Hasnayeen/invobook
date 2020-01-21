@@ -1,6 +1,6 @@
 <template>
 <div class="mb-4 text-center">
-  <button @click="openModal" class="no-underline p-2 my-4 mb-0 bg-white text-base text-teal-500 rounded shadow">
+  <button @click="openModal" class="no-underline p-2 my-4 mb-0 bg-white text-base text-indigo-500 rounded shadow">
     {{ 'Invite New Member' | localize }}
   </button>
   <div :class="{'hidden': !showInviteMemberForm}">
@@ -22,7 +22,7 @@
       </p>
       <div class="flex flex-row justify-between pt-8 bg-gray-200 rounded">
         <button @click="closeModal" class="text-red-400 hover:font-bold">{{ 'Cancel' | localize }}</button>
-        <button @click="sendInvitation" class="bg-teal-400 text-white font-medium hover:bg-teal-600 py-3 px-4 rounded">{{ 'Send Invitation' | localize }}</button>
+        <button @click="sendInvitation" class="bg-indigo-400 text-white font-medium hover:bg-indigo-600 py-3 px-4 rounded">{{ 'Send Invitation' | localize }}</button>
       </div>
     </div>
   </div>

@@ -1,45 +1,41 @@
 <template>
-<div class="px-4 border-l flex items-center cursor-pointer p-4">
+<div class="flex items-center cursor-pointer">
   <div id="profile-dropdown" class="flex flex-row items-center" @click="toggleProfileDropdown" v-click-outside="hideProfileDropdown">
-    <img class="w-10 h-10 rounded-full md:mr-2" :src="generateUrl(user.avatar)">
-    <span class="text-gray-800 text-base no-underline hidden md:block">
-      {{ user.name }}
-      <font-awesome-icon :icon="faAngleDown"></font-awesome-icon>
-    </span>
+    <img class="w-8 h-8 rounded-full" :src="generateUrl(user.avatar)">
   </div>
-  <div v-if="profileDropdownShown" id="profile-menu" class="absolute bg-white w-48 right-0 mr-2 py-1 shadow-lg rounded z-50" style="top:3.5rem;">
-    <a class="px-4 py-2 hover:bg-teal-500 hover:text-white no-underline text-gray-600 block font-medium" :href="profileUrl">
+  <div v-if="profileDropdownShown" id="profile-menu" class="absolute bg-white w-48 -ml-32 mr-2 py-1 shadow-lg rounded z-50" style="top:3.5rem;">
+    <a class="px-4 py-2 hover:bg-indigo-500 hover:text-white no-underline text-gray-600 block font-medium" :href="profileUrl">
       <span class="w-6 inline-block">
         <font-awesome-icon :icon="faUser" class="pr-1"></font-awesome-icon>
       </span>
       {{ 'Your Profile' | localize }}
     </a>
-    <a class="px-4 py-2 hover:bg-teal-500 hover:text-white text-gray-600 font-medium no-underline block" href="/admin">
+    <a class="px-4 py-2 hover:bg-indigo-500 hover:text-white text-gray-600 font-medium no-underline block" href="/admin">
       <span class="w-6 inline-block">
         <font-awesome-icon :icon="faShieldAlt" class="pr-1 font-regular"></font-awesome-icon>
       </span>
       {{ 'Admin' | localize }}
     </a>
-    <a class="px-4 py-2 hover:bg-teal-500 hover:text-white text-gray-600 font-medium no-underline block" @click="showTimer">
+    <a class="px-4 py-2 hover:bg-indigo-500 hover:text-white text-gray-600 font-medium no-underline block" @click="showTimer">
       <span class="w-6 inline-block">
         <font-awesome-icon :icon="faStopwatch" class="pr-1 font-regular"></font-awesome-icon>
       </span>
       {{ 'Timer' | localize }}
     </a>
-    <a v-if="authenticated" class="px-4 py-2 hover:bg-teal-500 hover:text-white text-gray-600 font-medium no-underline block" href="/settings">
+    <a v-if="authenticated" class="px-4 py-2 hover:bg-indigo-500 hover:text-white text-gray-600 font-medium no-underline block" href="/settings">
       <span class="w-6 inline-block">
         <font-awesome-icon :icon="faCog" class="pr-1 font-regular"></font-awesome-icon>
       </span>
       {{ 'Settings' | localize }}
     </a>
     <span class="block border-t"></span>
-    <a v-if="impersonating" class="px-4 py-2 hover:bg-teal-500 hover:text-white text-gray-600 font-medium no-underline block" href="/impersonate/leave">
+    <a v-if="impersonating" class="px-4 py-2 hover:bg-indigo-500 hover:text-white text-gray-600 font-medium no-underline block" href="/impersonate/leave">
       <span class="w-6 inline-block">
         <font-awesome-icon :icon="faUserMinus" class="pr-1 font-regular"></font-awesome-icon>
       </span>
       {{ 'Leave User' | localize }}
     </a>
-    <a class="px-4 py-2 hover:bg-teal-500 hover:text-white text-gray-600 font-medium no-underline block" :href="url.logout" @click="logoutUser">
+    <a class="px-4 py-2 hover:bg-indigo-500 hover:text-white text-gray-600 font-medium no-underline block" :href="url.logout" @click="logoutUser">
       <span class="w-6 inline-block">
         <font-awesome-icon :icon="faSignOutAlt" class="pr-1 font-regular"></font-awesome-icon>
       </span>

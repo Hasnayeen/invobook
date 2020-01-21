@@ -1,41 +1,43 @@
 <template>
-<div class="flex flex-row justify-around my-4 pt-4 pb-2 bg-white shadow rounded text-gray-600 sticky tab-sticky-top z-20">
-  <div v-if="settings.task_enabled" @click="activateThisTab('tasks')"
-    :class="[(active === 'tasks') ? 'text-teal-600 font-semibold border-teal-500 border-b-2 pb-2 -mb-2' : 'cursor-pointer', 'text-center w-1/6 flex-grow']">
-    <font-awesome-icon :icon="faTasks" class="text-2xl"></font-awesome-icon>
-    <span class="hidden md:block text-xs font-regular">{{ 'Tasks' | localize }}</span>
-  </div>
-  <div v-if="settings.discussion_enabled" @click="activateThisTab('discussions')"
-    :class="[(active === 'discussions') ? 'text-teal-600 font-semibold border-teal-500 border-b-2 pb-2 -mb-2' : 'cursor-pointer', 'text-center w-1/6 flex-grow']">
-    <font-awesome-icon :icon="faClipboardList" class="text-2xl"></font-awesome-icon>
-    <span class="hidden md:block text-xs font-regular">{{ 'Discussions' | localize }}</span>
-  </div>
-  <div v-if="settings.message_enabled" @click="onMessagesTabClicked"
-    :class="[(active === 'messages') ? 'text-teal-600 font-semibold border-teal-500 border-b-2 pb-2 -mb-2' : 'cursor-pointer', 'text-center w-1/6 flex-grow']">
-    <span class="relative inline-block">
-      <font-awesome-icon :icon="faComments" class="text-2xl"></font-awesome-icon>
-      <font-awesome-icon :icon="faCircle"
-        v-if="displayUnreadMessageBadge"
-        class="absolute text-xs text-teal-500"
-        style="right:-3px; top:-6px;">
-      </font-awesome-icon>
-    </span>
-    <span class="hidden md:block text-xs font-regular">{{ 'Messages' | localize }}</span>
-  </div>
-  <div v-if="settings.event_enabled" @click="activateThisTab('events')"
-    :class="[(active === 'events') ? 'text-teal-600 font-semibold border-teal-500 border-b-2 pb-2 -mb-2' : 'cursor-pointer', 'text-center w-1/6 flex-grow']">
-    <font-awesome-icon :icon="faCalendarAlt" class="text-2xl"></font-awesome-icon>
-    <span class="hidden md:block text-xs font-regular">{{ 'Events' | localize }}</span>
-  </div>
-  <div v-if="settings.file_enabled" @click="activateThisTab('files')"
-    :class="[(active === 'files') ? 'text-teal-600 font-semibold border-teal-500 border-b-2 pb-2 -mb-2' : 'cursor-pointer', 'text-center w-1/6 flex-grow']">
-    <font-awesome-icon :icon="faFileAlt" class="text-2xl"></font-awesome-icon>
-    <span class="hidden md:block text-xs font-regular">{{ 'Files' | localize }}</span>
-  </div>
-  <div v-if="authenticated" @click="activateThisTab('activities')"
-    :class="[(active === 'activities') ? 'text-teal-600 font-semibold border-teal-500 border-b-2 pb-2 -mb-2' : 'cursor-pointer', 'text-center w-1/6 flex-grow']">
-    <font-awesome-icon :icon="faBolt" class="text-2xl"></font-awesome-icon>
-    <span class="hidden md:block text-xs font-regular">{{ 'Activities' | localize }}</span>
+<div class="pt-4 pb-2 bg-white shadow text-gray-600 sticky tab-sticky-top z-20">
+  <div class="mx-auto px-4 w-full sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl flex">
+    <div v-if="settings.task_enabled" @click="activateThisTab('tasks')"
+      :class="[(active === 'tasks') ? 'text-indigo-600 font-semibold border-indigo-500 border-b-2 pb-2 -mb-2' : 'cursor-pointer', 'text-center mr-8 flex justify-center items-center']">
+      <font-awesome-icon :icon="faTasks" class="sm:hidden md:inline mr-2"></font-awesome-icon>
+      <span class="hidden sm:block font-regular">{{ 'Tasks' | localize }}</span>
+    </div>
+    <div v-if="settings.discussion_enabled" @click="activateThisTab('discussions')"
+      :class="[(active === 'discussions') ? 'text-indigo-600 font-semibold border-indigo-500 border-b-2 pb-2 -mb-2' : 'cursor-pointer', 'text-center mr-8 flex justify-center items-center']">
+      <font-awesome-icon :icon="faClipboardList" class="sm:hidden md:inline mr-2"></font-awesome-icon>
+      <span class="hidden sm:block font-regular">{{ 'Discussions' | localize }}</span>
+    </div>
+    <div v-if="settings.message_enabled" @click="onMessagesTabClicked"
+      :class="[(active === 'messages') ? 'text-indigo-600 font-semibold border-indigo-500 border-b-2 pb-2 -mb-2' : 'cursor-pointer', 'text-center mr-8 flex justify-center items-center']">
+      <span class="relative inline-block">
+        <font-awesome-icon :icon="faComments" class="sm:hidden md:inline mr-2"></font-awesome-icon>
+        <font-awesome-icon :icon="faCircle"
+          v-if="displayUnreadMessageBadge"
+          class="absolute text-xs text-indigo-500"
+          style="right:-3px; top:-6px;">
+        </font-awesome-icon>
+      </span>
+      <span class="hidden sm:block font-regular">{{ 'Messages' | localize }}</span>
+    </div>
+    <div v-if="settings.event_enabled" @click="activateThisTab('events')"
+      :class="[(active === 'events') ? 'text-indigo-600 font-semibold border-indigo-500 border-b-2 pb-2 -mb-2' : 'cursor-pointer', 'text-center mr-8 flex justify-center items-center']">
+      <font-awesome-icon :icon="faCalendarAlt" class="sm:hidden md:inline mr-2"></font-awesome-icon>
+      <span class="hidden sm:block font-regular">{{ 'Events' | localize }}</span>
+    </div>
+    <div v-if="settings.file_enabled" @click="activateThisTab('files')"
+      :class="[(active === 'files') ? 'text-indigo-600 font-semibold border-indigo-500 border-b-2 pb-2 -mb-2' : 'cursor-pointer', 'text-center mr-8 flex justify-center items-center']">
+      <font-awesome-icon :icon="faFileAlt" class="sm:hidden md:inline mr-2"></font-awesome-icon>
+      <span class="hidden sm:block font-regular">{{ 'Files' | localize }}</span>
+    </div>
+    <div v-if="authenticated" @click="activateThisTab('activities')"
+      :class="[(active === 'activities') ? 'text-indigo-600 font-semibold border-indigo-500 border-b-2 pb-2 -mb-2' : 'cursor-pointer', 'text-center mr-8 flex justify-center items-center']">
+      <font-awesome-icon :icon="faBolt" class="sm:hidden md:inline mr-2"></font-awesome-icon>
+      <span class="hidden sm:block font-regular">{{ 'Activities' | localize }}</span>
+    </div>
   </div>
 </div>
 </template>

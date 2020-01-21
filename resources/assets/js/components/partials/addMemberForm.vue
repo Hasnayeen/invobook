@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div class="absolute container mx-2 md:mx-auto md:w-1/3 bg-white rounded shadow-lg z-10" style="top: 10vh;left: 0;right: 0;">
+  <div class="absolute container mx-2 md:mx-auto md:w-1/3 bg-white rounded shadow-lg z-50" style="top: 20vh;left: 0;right: 0;">
     <div class="p-4">
       <div class="p-4">
         <label class="block uppercase tracking-wide text-xs font-bold text-center text-lg mb-4" for="user">
@@ -21,7 +21,7 @@
     </div>
     <div class="flex flex-row justify-between py-4 px-8 bg-gray-200 rounded">
       <button @click="closeAddMemberForm" class="text-red-lighter hover:font-bold hover:text-red-400">Cancel</button>
-      <button @click="addMember" class="bg-teal-400 text-white font-medium hover:bg-teal-600 py-4 px-8 rounded">
+      <button @click="addMember" class="bg-indigo-400 text-white font-medium hover:bg-indigo-600 py-4 px-8 rounded">
         <template v-if="loading">
           <font-awesome-icon :icon="faSpinner" spin></font-awesome-icon>
         </template>
@@ -29,7 +29,7 @@
       </button>
     </div>
   </div>
-  <div class="h-screen w-screen fixed inset-0 bg-gray-900 opacity-25"></div>
+  <div class="h-screen w-screen fixed inset-0 bg-gray-900 opacity-25 z-40"></div>
 </div>
 </template>
 
