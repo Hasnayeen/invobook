@@ -3,7 +3,6 @@
 namespace App\Base\Events;
 
 use App\Base\Models\Message;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
