@@ -1,8 +1,8 @@
 <template>
 <div class="md:bg-white container md:mx-4 md:mx-auto md:shadow-lg rounded md:mt-32 flex md:flex-row flex-col md:max-w-2xl lg:max-w-4xl justify-between">
   <div class="md:w-1/2 text-center px-8 py-4 md:block">
-    <div class="text-teal-500 font-bold text-4xl md:pt-8">GOODWORK</div>
-    <p class="text-teal-500 text-xl"> Sensible Approach to Work & Collaboration for Software Teams </p>
+    <div class="text-indigo-500 font-bold text-4xl md:pt-8">GOODWORK</div>
+    <p class="text-indigo-500 text-xl"> Sensible Approach to Work & Collaboration for Software Teams </p>
     <img src="/image/register.svg" alt="work desk" class="pt-16 hidden md:block">
   </div>
   <div class=""></div>
@@ -27,7 +27,7 @@
           <span class="text-red-400 block pt-2" v-if="errors">{{ errors.password }}</span>
         </p>
         <p class="py-4">
-          <button type="submit" class="bg-teal-500 hover:bg-teal-600 text-white text-xl font-medium py-2 px-4 rounded">Register</button>
+          <button type="submit" class="bg-indigo-500 hover:bg-indigo-600 text-white text-xl font-medium py-2 px-4 rounded">Register</button>
         </p>
       </div>
     </form>

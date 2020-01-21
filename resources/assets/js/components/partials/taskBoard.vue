@@ -4,18 +4,19 @@
 
   <task-details v-if="task" :index="index" :resourceType="resourceType" :resourceId="resource.id" :task="task" :taskDetailsShown="taskDetailsShown" :statuses="statuses" @status-change="updateStatus" @delete="deleteTask" @close="closeTaskDetails"></task-details>
 
-  <div v-if="authenticated" class="text-center mb-4">
-    <button @click="showCreateTaskForm" class="no-underline p-3 my-4 bg-white text-center text-base text-teal-500 rounded shadow">{{ 'Create Task' | localize }}</button>
+  <div v-if="authenticated" class="my-4">
+    <button @click="showCreateTaskForm" class="no-underline px-3 py-2 my-4 bg-white text-center text-base text-white bg-indigo-500 border border-indigo-500 rounded shadow">{{ 'Create Task' | localize }}</button>
+    <button @click="toggleFilter" class="no-underline px-3 py-2 m-4 text-center text-base rounded bg-white border border-gray-500">
+      <font-awesome-icon :icon="faFilter"
+        class="pointer-events-none items-center text-gray-600 mr-1">
+      </font-awesome-icon>
+      {{ 'Filter' | localize }}
+    </button>
   </div>
 
   <!-- Task Filters -->
-  <div class="border-indigo-300 border-2 shadow rounded px-8 py-4 my-4">
-    <div class="flex justify-between items-center">
-      <div></div>
-      <div class="text-gray-700 text-lg ">{{ 'Filters' |localize }}</div>
-      <div @click="toggleFilter" class="w-8 text-xs text-blue-700 font-medium cursor-pointer">{{ filterShown ? 'Hide' : 'Show' }}</div>
-    </div>
-    <div v-if="filterShown" class="border-t-2">
+  <div v-if="filterShown" class="mb-8">
+    <div class="border-t border-b border-gray-400">
       <div class="pb-1 pt-2">Status</div>
       <div class="inline-flex rounded shadow">
         <div
@@ -30,7 +31,7 @@
         <div class="p-4 pl-0">
           <div class="pb-1 flex justify-between items-center">
             <div class="">Assigned To</div>
-            <div @click="clearUserFilter" class="text-xs font-medium border-b border-teal-500 cursor-pointer">Clear</div>
+            <div @click="clearUserFilter" class="text-xs font-medium border-b border-indigo-500 cursor-pointer">Clear</div>
           </div>
           <div class="flex flex-row items-center relative w-64">
             <select v-model="userFilter" class="w-full block appearance-none bg-white border border-gray-500 rounded text-gray-800 py-1 px-4 pr-8">
@@ -47,7 +48,7 @@
         <div class="p-4">
           <div class="pb-1 flex justify-between items-center">
             <div class="">Tags</div>
-            <div @click="clearTagFilter" class="text-xs font-medium border-b border-teal-500 cursor-pointer">Clear</div>
+            <div @click="clearTagFilter" class="text-xs font-medium border-b border-indigo-500 cursor-pointer">Clear</div>
           </div>
           <div class="flex flex-row items-center relative w-64">
             <select v-model="tagFilter" class="w-full block appearance-none bg-white border border-gray-500 rounded text-gray-800 py-1 px-4 pr-8">
@@ -64,7 +65,7 @@
         <div class="p-4">
           <div class="pb-1 flex justify-between items-center">
             <div class="">Due On</div>
-            <div @click="clearDateFilter" class="text-xs font-medium border-b border-teal-500 cursor-pointer">Clear</div>
+            <div @click="clearDateFilter" class="text-xs font-medium border-b border-indigo-500 cursor-pointer">Clear</div>
           </div>
           <datepicker v-model="dateFilter" ref="dueOnDate" placeholder="Select Date" format="yyyy-MM-dd" input-class="w-full block appearance-none bg-white border border-gray-500 rounded text-gray-800 py-1 px-4 pr-8" wrapper-class=""></datepicker>
         </div>
@@ -73,8 +74,8 @@
   </div>
   <!-- Task Filters -->
 
-  <div class="flex flex-row flex-wrap items-start lg:-mx-2 xl:mx-0">
-    <div v-for="(task, index) in tasks" @click="showTaskDetails(index)" :key="task.id" class="bg-white rounded shadow my-4 md:mx-6 lg:mx-2 xl:mx-4 p-4 w-full md:w-72 xl:w-64  cursor-pointer">
+  <div class="flex flex-row flex-wrap items-start lg:justify-between lg:-mx-2 xl:-mx-4 lg:-mt-4">
+    <div v-for="(task, index) in tasks" @click="showTaskDetails(index)" :key="task.id" class="bg-white rounded shadow my-4 md:mx-6 lg:mx-2 xl:mx-4 p-4 w-full md:w-72 lg:w-64  cursor-pointer">
       <div class="flex justify-between items-center">
         <p class="text-xs text-gray-700 flex flex-col">
           <span class="w-10 border-t-4" :style="'border-color:' + task.status.color"></span>
@@ -105,6 +106,7 @@ import taskDetails from './../partials/taskDetails.vue'
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons/faQuestionCircle'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons/faChevronDown'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons/faSpinner'
+import { faFilter } from '@fortawesome/free-solid-svg-icons/faFilter'
 
 export default {
   components: {createTaskForm, taskDetails, Datepicker},
@@ -142,7 +144,8 @@ export default {
     authenticated,
     faQuestionCircle,
     faChevronDown,
-    faSpinner
+    faSpinner,
+    faFilter
   }),
 
   async created () {

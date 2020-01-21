@@ -12,7 +12,7 @@
         <a @click="chooseCycle(cycle)" class="flex flex-col items-center px-8 py-4 cursor-pointer" :class="{'bg-blue-100': selectedCycleId === cycle.id}">
           <div class="text-xl text-blue-600 font-medium">
             {{ cycle.name }}
-            <span v-if="currentCycleId === cycle.id" class="absolute px-2 ml-1 bg-teal-500 text-white text-xs font-semibold rounded-full">current</span>
+            <span v-if="currentCycleId === cycle.id" class="absolute px-2 ml-1 bg-indigo-500 text-white text-xs font-semibold rounded-full">current</span>
           </div>
           <div class="flex flex-row justify-center">
             <div>

@@ -13,7 +13,7 @@
       </header>
 
       <div class="flex flex-row text-gray-800 bg-white">
-        <div class="w-1/2 px-4 py-2 flex flex-row items-center border-teal-500 border-b">
+        <div class="w-1/2 px-4 py-2 flex flex-row items-center border-indigo-500 border-b">
           <div class="flex flex-col">
             <div class="font-semibold pb-1">
               Roles
@@ -56,7 +56,7 @@
             <div class="pb-1">
               {{ permission.action | capitalize | localize }}
             </div>
-            <span @click="togglePermission(permission, name, key, permission.enabled)" class="w-5 h-5 rounded cursor-pointer inline flex items-center justify-center" :class="[permission.enabled ? 'bg-teal-500' : 'border-gray-400 border']">
+            <span @click="togglePermission(permission, name, key, permission.enabled)" class="w-5 h-5 rounded cursor-pointer inline flex items-center justify-center" :class="[permission.enabled ? 'bg-indigo-500' : 'border-gray-400 border']">
               <font-awesome-icon v-if="permission.enabled" :icon="faCheck" class="text-xs text-white"></font-awesome-icon>
             </span>
           </div>

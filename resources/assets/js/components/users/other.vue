@@ -40,7 +40,7 @@
               {{ 'Member of' | localize }}
             </div>
             <div v-if="user.projects.length > 0" class="flex items-center px-2">
-              <div class="bg-teal-200 text-teal-700 font-bold flex justify-center items-center w-8 h-8 mr-2 rounded-full">{{ user.projects.length }}</div>
+              <div class="bg-indigo-200 text-indigo-700 font-bold flex justify-center items-center w-8 h-8 mr-2 rounded-full">{{ user.projects.length }}</div>
               <span>{{user.projects.length > 1 ? 'projects' : 'project'}}</span>
             </div>
             <div v-if="user.projects.length > 0 && user.teams.length > 0" class="flex items-center px-2">
@@ -53,7 +53,7 @@
           </div>
           <div class="pt-4 -mx-2 flex flex-wrap">
             <div v-for="project in user.projects" class="px-2 py-4">
-              <a :href="'/projects/' + project.id" class="bg-teal-400 text-white rounded-full font-medium px-3 py-2 no-underline">
+              <a :href="'/projects/' + project.id" class="bg-indigo-400 text-white rounded-full font-medium px-3 py-2 no-underline">
                 {{project.name}}
               </a>
             </div>

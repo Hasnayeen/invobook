@@ -9,10 +9,10 @@
           <div class="flex items-start p-4">
             <div class="border-l border-gray-400 -my-8 self-stretch"></div>
             <div class="self-center flex items-center">
-              <div :class="[currentCycleId === cycle.cycle_id ? 'bg-teal-500' : 'bg-gray-500']" class="rounded-full w-2 h-2 -ml-1 z-10"></div>
+              <div :class="[currentCycleId === cycle.cycle_id ? 'bg-indigo-500' : 'bg-gray-500']" class="rounded-full w-2 h-2 -ml-1 z-10"></div>
               <div class="border-t border-gray-400 w-8 -ml-1"></div>
             </div>
-            <div :class="[currentCycleId === cycle.cycle_id ? 'text-teal-500 border-teal-500' : 'text-gray-800 border-gray-800']" class="border rounded px-4 py-2">
+            <div :class="[currentCycleId === cycle.cycle_id ? 'text-indigo-500 border-indigo-500' : 'text-gray-800 border-gray-800']" class="border rounded px-4 py-2">
               {{ key }}
             </div>
           </div>

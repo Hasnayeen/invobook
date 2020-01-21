@@ -3,7 +3,7 @@
     <div>
       <label for="file-upload"></label>
       <input type="file" name="file-upload" ref="files" @change="filesSelected" class="hidden" multiple>
-      <button @click="selectFiles" class="bg-teal-400 text-white p-3 rounded shadow-md">Upload Files</button>
+      <button @click="selectFiles" class="bg-indigo-400 text-white p-3 rounded shadow-md">Upload Files</button>
     </div>
   </div>
 </template>

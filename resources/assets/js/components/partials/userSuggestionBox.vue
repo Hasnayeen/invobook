@@ -5,7 +5,7 @@
       v-for="(user, index) in sortedUsers"
       :key="index"
       class="autocomplete-result flex items-center bg-white p-1 cursor-pointer hover:bg-gray-400"
-      :class="{ 'text-white bg-teal-500 hover:bg-teal-600': index === highlightIndex, 'rounded-t-lg': index === 0 && suggestionHighlightDirectionInverted, 'rounded-b-lg': index === sortedUsers.length-1 && !suggestionHighlightDirectionInverted }">
+      :class="{ 'text-white bg-indigo-500 hover:bg-indigo-600': index === highlightIndex, 'rounded-t-lg': index === 0 && suggestionHighlightDirectionInverted, 'rounded-b-lg': index === sortedUsers.length-1 && !suggestionHighlightDirectionInverted }">
       <div class="mx-2">
         <img :src="'/'+getUserAvatar(user.username)" class="rounded-full align-middle w-8 h-8">
       </div>

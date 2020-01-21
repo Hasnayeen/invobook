@@ -84,7 +84,7 @@
       </div>
     </div>
     <div class="mt-8">
-      <button @click="updateProfile" class="bg-teal-500 hover:bg-teal-600 text-white font-bold p-4 rounded shadow hover:shadow-lg" type="button">
+      <button @click="updateProfile" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold p-4 rounded shadow hover:shadow-lg" type="button">
         {{ 'Update' | localize }}
       </button>
       <div></div>

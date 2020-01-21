@@ -49,11 +49,11 @@
       <div class="flex flex-row justify-between px-8 py-4 bg-white rounded-b">
         <button @click="closeEditor" class="no-underline px-3 py-2 my-4 bg-white text-base text-red-400 rounded border-red-400 border">Cancel</button>
         <div v-if="!this.discussion">
-          <button @click="savePost(true)" class="no-underline px-3 py-2 mr-4 my-4 text-teal-400  text-base bg-white font-medium rounded border-teal-400  border">Save as a Draft</button>
-          <button @click="savePost(false)" class="no-underline px-3 py-2 my-4 bg-teal-400 text-base text-white font-medium rounded">Publish</button>
+          <button @click="savePost(true)" class="no-underline px-3 py-2 mr-4 my-4 text-indigo-400  text-base bg-white font-medium rounded border-indigo-400  border">Save as a Draft</button>
+          <button @click="savePost(false)" class="no-underline px-3 py-2 my-4 bg-indigo-400 text-base text-white font-medium rounded">Publish</button>
         </div>
         <div v-if="this.discussion">
-          <button @click="updatePost()" class="no-underline px-3 py-2 my-4 bg-teal-400 text-base text-white font-medium rounded">Save</button>
+          <button @click="updatePost()" class="no-underline px-3 py-2 my-4 bg-indigo-400 text-base text-white font-medium rounded">Save</button>
         </div>
       </div>
     </div>

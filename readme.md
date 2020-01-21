@@ -8,7 +8,7 @@
 [![Join on discord](https://img.shields.io/badge/join%20on-discord-orange)](https://discord.gg/4DvTQsc)
 [![Join on goodwork](https://img.shields.io/badge/join%20on-goodwork-orange.svg)](https://goodworkfor.life/register/invite-link/ovCPAFpnwIhrvqUrlvynarP9HVRBC5mH)
 
-<img src="public/logos/logo.png" alt="Goodwork" style="max-width:100%;">
+<img src="public/logos/logo_square.png" alt="Goodwork" style="max-width:100%;">
 
 Self hosted project management and collaboration tool inspired by basecamp.
 

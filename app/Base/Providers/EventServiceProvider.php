@@ -10,6 +10,10 @@ use App\Project\Observers\ProjectObserver;
 use App\TaskManager\Observers\TaskObserver;
 use App\Base\Observers\DirectMessageObserver;
 use App\Discussion\Observers\DiscussionObserver;
+use App\Observers\OfficeObserver;
+use App\Observers\TeamObserver;
+use App\Office\Models\Office;
+use App\Team\Models\Team;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -32,5 +36,7 @@ class EventServiceProvider extends ServiceProvider
         Discussion::observe(DiscussionObserver::class);
         DirectMessage::observe(DirectMessageObserver::class);
         Project::observe(ProjectObserver::class);
+        Office::observe(OfficeObserver::class);
+        Team::observe(TeamObserver::class);
     }
 }

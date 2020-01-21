@@ -1,8 +1,8 @@
 <template>
 <div v-if="activeTab === 'messages'" class="w-full">
-  <div class="flex flex-col bg-white mx-auto mt-4 mb-8 shadow rounded">
+  <div class="flex flex-col bg-white mx-auto my-8 shadow rounded-lg">
 
-    <div class="text-gray-600 bg-white shadow p-4 text-xl flex flex-row items-center z-10">
+    <div class="text-gray-600 bg-white shadow p-4 text-xl flex flex-row items-center z-10 rounded-t-lg">
       <div class="pr-2">
         {{ 'Currently in room' | localize }}:
       </div>
@@ -11,7 +11,7 @@
       </template>
     </div>
 
-    <div id="message-box">
+    <div id="message-box" class="h-50-vh overflow-auto">
       <div class="">
         <message v-for="(message, index) in messages" :key="message.body" :message="message" :user="user" :index="index" @deleted="deleteMessage" @edit="editMessage" :last="messages.length === (index + 1)"></message>
       </div>
@@ -23,7 +23,7 @@
       </div>
     </div>
 
-    <div v-if="authenticated" class="fixed bottom-0 w-full message-box-max md:max-w-2xl lg:max-w-4xl xl:max-w-6xl bg-blue-100 p-4 border-t-2">
+    <div v-if="authenticated" class="w-full message-box-max md:max-w-2xl lg:max-w-4xl xl:max-w-6xl p-4 border-t-2 rounded-b-lg">
       <div class="static text-center">
         <div class="relative">
           <user-suggestion-box
@@ -37,17 +37,24 @@
             @selected="userSelected"
             class="absolute mb-2 w-full bottom-0"></user-suggestion-box>
         </div>
-        <textarea class="static textarea resize-none rounded w-full px-4 pt-2 text-gray-800"
-          id="send-message"
-          :style="{height: messageTextareaHeight}"
-          ref="messageTextarea"
-          :placeholder="'write your message here' | localize"
-          rows=1
-          v-model="message"
-          @keyup="checkForMention($event)"
-          @keydown="mentionHighlightMove($event)"
-          @keydown.enter.prevent="sendMessage($event)"
-          @focus="clearTitleNotification()"></textarea>
+        <div class="flex justify-between">
+          <textarea class="static textarea resize-none rounded w-full px-4 pt-2 text-gray-800"
+            id="send-message"
+            :style="{height: messageTextareaHeight}"
+            ref="messageTextarea"
+            :placeholder="'write your message here' | localize"
+            rows=1
+            v-model="message"
+            @keyup="checkForMention($event)"
+            @keydown="mentionHighlightMove($event)"
+            @keydown.enter.prevent="sendMessage($event)"
+            @focus="clearTitleNotification()"></textarea>
+          <div @click="sendMessage" class="bg-indigo-500 rounded-full px-3 flex items-center cursor-pointer">
+            <font-awesome-icon :icon="faPaperPlane"
+              class="items-center text-white mr-1">
+            </font-awesome-icon>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -58,6 +65,7 @@
 import { mapState, mapActions } from 'vuex'
 import userSuggestionBox from './userSuggestionBox'
 import message from './message'
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 
 export default {
   components: {message, userSuggestionBox},
@@ -82,7 +90,8 @@ export default {
     users: [],
     user,
     authenticated,
-    editing: {}
+    editing: {},
+    faPaperPlane
   }),
 
   created () {

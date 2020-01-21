@@ -4,7 +4,7 @@
     <div class="text-gray-600 text-xl pr-2">
       Comments 
     </div>
-    <div class="rounded-full bg-teal-500 flex items-center justify-center w-8 h-8">
+    <div class="rounded-full bg-indigo-500 flex items-center justify-center w-8 h-8">
       <span class="text-white text-sm font-semibold">{{ comments.length }}</span>
     </div>
   </div>

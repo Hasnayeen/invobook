@@ -87,7 +87,7 @@
             </div>
           </div>
           <div v-if="tagSuggestionShown && availableTags.length !== 0" class="shadow-md border py-1 rounded-b">
-            <div @click="addTag(tag)" v-for="tag in availableTags" class="px-4 py-2 cursor-pointer -mt-1 hover:bg-teal-400 hover:text-white">
+            <div @click="addTag(tag)" v-for="tag in availableTags" class="px-4 py-2 cursor-pointer -mt-1 hover:bg-indigo-400 hover:text-white">
               {{ tag.label }}
             </div>
           </div>
@@ -95,8 +95,8 @@
       </div>
       <div class="flex flex-row justify-between py-4 px-8 bg-gray-200 rounded">
         <button @click="closeCreateTaskForm" class="text-red-300 hover:font-bold hover:text-red-400">Cancel</button>
-        <button v-if="task" @click="updateTask" class="bg-teal-400 text-white font-medium hover:bg-teal-600 py-4 px-8 rounded">Save</button>
-        <button v-else @click="createTask" class="bg-teal-400 text-white font-medium hover:bg-teal-600 py-4 px-8 rounded">Create</button>
+        <button v-if="task" @click="updateTask" class="bg-indigo-400 text-white font-medium hover:bg-indigo-600 py-4 px-8 rounded">Save</button>
+        <button v-else @click="createTask" class="bg-indigo-400 text-white font-medium hover:bg-indigo-600 py-4 px-8 rounded">Create</button>
       </div>
     </div>
     <div class="h-16"></div>

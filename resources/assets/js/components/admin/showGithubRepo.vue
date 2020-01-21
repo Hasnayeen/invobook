@@ -10,8 +10,8 @@
           {{ repository.name ? repository.name : repository.repo_name }}
         </div>
         <div>
-          <button v-if="repository.github_repo_id" @click="connectGithubRepo(repository.id, repository.name)" class="text-teal-600 font-semibold text-sm border border-teal-400  p-2 rounded">Disconnect</button>
-          <button v-else @click="connectGithubRepo(repository.id, repository.name)" class="text-teal-600 font-semibold text-sm border border-teal-400  p-2 rounded">Connect</button>
+          <button v-if="repository.github_repo_id" @click="connectGithubRepo(repository.id, repository.name)" class="text-indigo-600 font-semibold text-sm border border-indigo-400  p-2 rounded">Disconnect</button>
+          <button v-else @click="connectGithubRepo(repository.id, repository.name)" class="text-indigo-600 font-semibold text-sm border border-indigo-400  p-2 rounded">Connect</button>
         </div>
       </li>
     </ul>

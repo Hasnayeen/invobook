@@ -1,15 +1,16 @@
 <template>
-  <nav class="bg-white flex flex-row justify-between h-12 md:px-4 shadow sticky top-0 z-50">
-    <a class="flex items-center text-teal-500 text-2xl font-bold md:font-normal no-underline h-12 w-16 md:w-32" :href="url.site">
-      <img :src="generateUrl('logos/logo_square.svg')" alt="" class="w-full h-full block">
-      <span class="text-gray-700 font-bold hidden md:block">GOODWORK</span>
-    </a>
+  <nav class="bg-white h-12 border-b sticky top-0 z-40">
+    <div class="sm:container sm:mx-auto px-4 sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl flex flex-row justify-between h-full">
+      <a class="flex items-center text-indigo-500 text-2xl font-bold md:font-normal no-underline h-12" :href="url.site">
+        <img :src="generateUrl('logos/logo.svg')" alt="" class="h-full py-1 block">
+      </a>
 
-    <div class="md:flex">
-      <div class="flex flex-row border-l h-full">
-        <notification-dropdown></notification-dropdown>
-        <message-dropdown></message-dropdown>
-        <profile-dropdown></profile-dropdown>
+      <div class="md:flex">
+        <div class="flex flex-row h-full">
+          <notification-dropdown></notification-dropdown>
+          <message-dropdown></message-dropdown>
+          <profile-dropdown></profile-dropdown>
+        </div>
       </div>
     </div>
   </nav>

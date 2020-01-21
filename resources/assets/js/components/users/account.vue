@@ -53,7 +53,7 @@
         </div>
       </div>
       <div class="my-6 px-8">
-        <a @click="update" class="font-bold rounded shadow bg-teal-400 p-4 text-white hover:shadow-lg hover:font-bold hover:bg-teal-600 no-underline" href="#">
+        <a @click="update" class="font-bold rounded shadow bg-indigo-400 p-4 text-white hover:shadow-lg hover:font-bold hover:bg-indigo-600 no-underline" href="#">
           {{ 'Update' | localize }}
         </a>
       </div>

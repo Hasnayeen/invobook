@@ -1,7 +1,7 @@
 <template>
   <div v-if="show">
     <div>
-      <button @click="toggleForm" class="no-underline px-3 py-2 my-4 bg-white text-center text-base text-teal-500 rounded shadow">{{ 'Add New Step' | localize }}</button>
+      <button @click="toggleForm" class="no-underline px-3 py-2 my-4 bg-white text-center text-base text-indigo-500 rounded shadow">{{ 'Add New Step' | localize }}</button>
       <div v-if="formShown" class="border-2 border-indigo-300 bg-white p-4 rounded">
         <div @click="toggleForm" class="flex justify-end">
           <font-awesome-icon :icon="faTimesCircle" class="text-base text-red-500 cursor-pointer"></font-awesome-icon>
@@ -18,7 +18,7 @@
             <label for="unknown">Step is not clear yet and have unknown</label>
           </div>
         </div>
-        <button @click="saveStep" class="px-4 py-2 text-white text-center text-base font-semibold bg-teal-600 rounded">{{ 'Save' | localize }}</button>
+        <button @click="saveStep" class="px-4 py-2 text-white text-center text-base font-semibold bg-indigo-600 rounded">{{ 'Save' | localize }}</button>
       </div>
     </div>
     <div>
