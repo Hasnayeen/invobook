@@ -1127,16 +1127,16 @@
         },
         {
             "name": "lab404/laravel-impersonate",
-            "version": "1.4.3",
+            "version": "1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/404labfr/laravel-impersonate.git",
-                "reference": "c1e6ce93eab6ccb916175c13da0f62baaa9718c2"
+                "reference": "7c4d5345a76aedf58d38fc986ec933b10685909a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/404labfr/laravel-impersonate/zipball/c1e6ce93eab6ccb916175c13da0f62baaa9718c2",
-                "reference": "c1e6ce93eab6ccb916175c13da0f62baaa9718c2",
+                "url": "https://api.github.com/repos/404labfr/laravel-impersonate/zipball/7c4d5345a76aedf58d38fc986ec933b10685909a",
+                "reference": "7c4d5345a76aedf58d38fc986ec933b10685909a",
                 "shasum": ""
             },
             "require": {
@@ -1146,7 +1146,9 @@
             "require-dev": {
                 "orchestra/database": "^3.8 | ^4.0",
                 "orchestra/testbench": "^3.8 | ^4.0",
-                "phpunit/phpunit": "^7.5 | ^8.0"
+                "phpunit/phpunit": "^7.5 | ^8.0",
+                "symfony/http-foundation": ">=4.3.8",
+                "symfony/mime": ">=4.3.8"
             },
             "type": "library",
             "extra": {
@@ -1186,7 +1188,7 @@
                 "plugin",
                 "user"
             ],
-            "time": "2019-10-29T10:02:07+00:00"
+            "time": "2020-01-02T15:27:10+00:00"
         },
         {
             "name": "laravel/framework",
