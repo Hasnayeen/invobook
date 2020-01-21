@@ -3,7 +3,6 @@
 namespace App\Base\Http\Controllers;
 
 use App\Base\Models\Role;
-use Illuminate\Http\Request;
 use App\Base\Models\Permission;
 use App\Base\Exceptions\OwnerPermissionCantBeRevoked;
 
