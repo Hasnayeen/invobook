@@ -4443,16 +4443,16 @@
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v4.4.2",
+            "version": "v4.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "be330f919bdb395d1e0c3f2bfb8948512d6bdd99"
+                "reference": "7cfa470bc3b1887a7b2a47c0a702a84ad614fa92"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/be330f919bdb395d1e0c3f2bfb8948512d6bdd99",
-                "reference": "be330f919bdb395d1e0c3f2bfb8948512d6bdd99",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/7cfa470bc3b1887a7b2a47c0a702a84ad614fa92",
+                "reference": "7cfa470bc3b1887a7b2a47c0a702a84ad614fa92",
                 "shasum": ""
             },
             "require": {
@@ -4515,7 +4515,7 @@
                 "debug",
                 "dump"
             ],
-            "time": "2019-12-18T13:41:29+00:00"
+            "time": "2020-01-04T13:00:46+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
@@ -5803,16 +5803,16 @@
         },
         {
             "name": "laravel/telescope",
-            "version": "v2.1.3",
+            "version": "v2.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/telescope.git",
-                "reference": "7fd3dc40684d1d035676cf48a5ecc98dc8ef7089"
+                "reference": "d6b8c40e2cc1102fb7ed40ecf841bd09d712ab67"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/telescope/zipball/7fd3dc40684d1d035676cf48a5ecc98dc8ef7089",
-                "reference": "7fd3dc40684d1d035676cf48a5ecc98dc8ef7089",
+                "url": "https://api.github.com/repos/laravel/telescope/zipball/d6b8c40e2cc1102fb7ed40ecf841bd09d712ab67",
+                "reference": "d6b8c40e2cc1102fb7ed40ecf841bd09d712ab67",
                 "shasum": ""
             },
             "require": {
@@ -5862,7 +5862,7 @@
                 "laravel",
                 "monitoring"
             ],
-            "time": "2019-12-19T14:33:58+00:00"
+            "time": "2020-01-21T21:06:27+00:00"
         },
         {
             "name": "league/container",
