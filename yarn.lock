@@ -5847,19 +5847,19 @@ punycode@^2.1.0:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
 
-purgecss-webpack-plugin@^2.0.4:
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/purgecss-webpack-plugin/-/purgecss-webpack-plugin-2.0.4.tgz#db72b6aa985cc570680cbb286a64714e0fa15819"
-  integrity sha512-njQ3gvSpFez9XJM1VMp1vg5l5cjl/QhXiGmH96gxVNp4gtu9YpQDQ18YI70x+txcQZVbsH28y/1Iry+mkhHf8w==
+purgecss-webpack-plugin@^2.0.5:
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/purgecss-webpack-plugin/-/purgecss-webpack-plugin-2.0.5.tgz#6ccd0be4db2011535dfd2f1d56e3d5c6637e2433"
+  integrity sha512-k7NT6FZ/ChzcOZTWtUyqAW+E29n7QEO87WWfwKDF8bjvMXsH5TqK5RvEragDQKT16RaxYCvXZkQ2chvnfFXPIg==
   dependencies:
-    purgecss "^2.0.3"
+    purgecss "^2.0.5"
     webpack "^4.41.2"
     webpack-sources "^1.4.3"
 
-purgecss@^2.0.3:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/purgecss/-/purgecss-2.0.3.tgz#d49eccb10fd28892b841549159db841eea04288a"
-  integrity sha512-prjGGwr1OsBEUpO6zXI5yRx5SuMJxPTHEy0vSvfG8TSr4iFxGQaIRfiMOUVcWEtgjWG/gp77QFSbkPNi88iGgg==
+purgecss@^2.0.5:
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/purgecss/-/purgecss-2.0.5.tgz#b7aa3e3634704aa041d03f007504c303e8c6586e"
+  integrity sha512-VwQoDXImH0pabZ6ivLPCsWuRGd979NEzACaT/P3pWzDVCwHXSgXUM4QDbnMklMawU0r4MrCvdaORM84KJvsCIA==
   dependencies:
     commander "^4.0.0"
     glob "^7.0.0"
