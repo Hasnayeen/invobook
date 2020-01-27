@@ -2972,21 +2972,21 @@
         },
         {
             "name": "spatie/db-dumper",
-            "version": "2.15.0",
+            "version": "2.15.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/db-dumper.git",
-                "reference": "ccb7dd7557cd119b21ea853a893da4d1b0ff08b6"
+                "reference": "e167b8bf925c5da553f885326bb7bfaed3f95d15"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/db-dumper/zipball/ccb7dd7557cd119b21ea853a893da4d1b0ff08b6",
-                "reference": "ccb7dd7557cd119b21ea853a893da4d1b0ff08b6",
+                "url": "https://api.github.com/repos/spatie/db-dumper/zipball/e167b8bf925c5da553f885326bb7bfaed3f95d15",
+                "reference": "e167b8bf925c5da553f885326bb7bfaed3f95d15",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.2",
-                "symfony/process": "^4.2"
+                "symfony/process": "^4.2|^5.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^7.0|^8.0"
@@ -3018,7 +3018,7 @@
                 "mysqldump",
                 "spatie"
             ],
-            "time": "2019-11-11T10:40:42+00:00"
+            "time": "2020-01-24T13:05:20+00:00"
         },
         {
             "name": "spatie/dropbox-api",
@@ -3131,16 +3131,16 @@
         },
         {
             "name": "spatie/laravel-backup",
-            "version": "6.7.6",
+            "version": "6.7.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-backup.git",
-                "reference": "9526cd53072644de6e4850cffaf79376c9a4f2d0"
+                "reference": "c2aeb1685007ee1cc2b3f86c26315aeb32602a93"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/9526cd53072644de6e4850cffaf79376c9a4f2d0",
-                "reference": "9526cd53072644de6e4850cffaf79376c9a4f2d0",
+                "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/c2aeb1685007ee1cc2b3f86c26315aeb32602a93",
+                "reference": "c2aeb1685007ee1cc2b3f86c26315aeb32602a93",
                 "shasum": ""
             },
             "require": {
@@ -3202,20 +3202,20 @@
                 "laravel-backup",
                 "spatie"
             ],
-            "time": "2019-12-12T13:39:26+00:00"
+            "time": "2020-01-27T13:58:27+00:00"
         },
         {
             "name": "spatie/temporary-directory",
-            "version": "1.2.1",
+            "version": "1.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/temporary-directory.git",
-                "reference": "3e51af9a8361f85cffc1fb2c52135f3e064758cc"
+                "reference": "fcb127e615700751dac2aefee0ea2808ff3f5bb1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/temporary-directory/zipball/3e51af9a8361f85cffc1fb2c52135f3e064758cc",
-                "reference": "3e51af9a8361f85cffc1fb2c52135f3e064758cc",
+                "url": "https://api.github.com/repos/spatie/temporary-directory/zipball/fcb127e615700751dac2aefee0ea2808ff3f5bb1",
+                "reference": "fcb127e615700751dac2aefee0ea2808ff3f5bb1",
                 "shasum": ""
             },
             "require": {
@@ -3248,7 +3248,7 @@
                 "spatie",
                 "temporary-directory"
             ],
-            "time": "2019-08-28T06:53:51+00:00"
+            "time": "2019-12-15T18:52:09+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
