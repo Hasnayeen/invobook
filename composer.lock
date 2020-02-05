@@ -1501,16 +1501,16 @@
         },
         {
             "name": "laravel/tinker",
-            "version": "v2.1.0",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/tinker.git",
-                "reference": "d8ce361f2fd979c03e5f66c79d4a95a1c1e68640"
+                "reference": "37579c93271ec30ef099dd633ec7c2de5e5fb112"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/tinker/zipball/d8ce361f2fd979c03e5f66c79d4a95a1c1e68640",
-                "reference": "d8ce361f2fd979c03e5f66c79d4a95a1c1e68640",
+                "url": "https://api.github.com/repos/laravel/tinker/zipball/37579c93271ec30ef099dd633ec7c2de5e5fb112",
+                "reference": "37579c93271ec30ef099dd633ec7c2de5e5fb112",
                 "shasum": ""
             },
             "require": {
@@ -1522,7 +1522,8 @@
                 "symfony/var-dumper": "^4.0|^5.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^8.0"
+                "mockery/mockery": "^1.3.1",
+                "phpunit/phpunit": "^8.0|^9.0"
             },
             "suggest": {
                 "illuminate/database": "The Illuminate Database package (^6.0|^7.0)."
@@ -1560,7 +1561,7 @@
                 "laravel",
                 "psysh"
             ],
-            "time": "2020-01-14T16:58:39+00:00"
+            "time": "2020-02-05T15:00:44+00:00"
         },
         {
             "name": "lcobucci/jwt",
@@ -3314,16 +3315,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v4.4.3",
+            "version": "v4.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "e9ee09d087e2c88eaf6e5fc0f5c574f64d100e4f"
+                "reference": "f512001679f37e6a042b51897ed24a2f05eba656"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/e9ee09d087e2c88eaf6e5fc0f5c574f64d100e4f",
-                "reference": "e9ee09d087e2c88eaf6e5fc0f5c574f64d100e4f",
+                "url": "https://api.github.com/repos/symfony/console/zipball/f512001679f37e6a042b51897ed24a2f05eba656",
+                "reference": "f512001679f37e6a042b51897ed24a2f05eba656",
                 "shasum": ""
             },
             "require": {
@@ -3386,7 +3387,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2020-01-10T21:54:01+00:00"
+            "time": "2020-01-25T12:44:29+00:00"
         },
         {
             "name": "symfony/css-selector",
@@ -4671,16 +4672,16 @@
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v4.4.3",
+            "version": "v4.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "7cfa470bc3b1887a7b2a47c0a702a84ad614fa92"
+                "reference": "46b53fd714568af343953c039ff47b67ce8af8d6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/7cfa470bc3b1887a7b2a47c0a702a84ad614fa92",
-                "reference": "7cfa470bc3b1887a7b2a47c0a702a84ad614fa92",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/46b53fd714568af343953c039ff47b67ce8af8d6",
+                "reference": "46b53fd714568af343953c039ff47b67ce8af8d6",
                 "shasum": ""
             },
             "require": {
@@ -4743,7 +4744,7 @@
                 "debug",
                 "dump"
             ],
-            "time": "2020-01-04T13:00:46+00:00"
+            "time": "2020-01-25T12:44:29+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
@@ -5057,12 +5058,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "88cff792cc6f2fa4df736e9abb612b955b783087"
+                "reference": "f4762ef0216ae435ab053f68e5bcdff966cf8d4f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/88cff792cc6f2fa4df736e9abb612b955b783087",
-                "reference": "88cff792cc6f2fa4df736e9abb612b955b783087",
+                "url": "https://api.github.com/repos/composer/composer/zipball/f4762ef0216ae435ab053f68e5bcdff966cf8d4f",
+                "reference": "f4762ef0216ae435ab053f68e5bcdff966cf8d4f",
                 "shasum": ""
             },
             "require": {
@@ -5129,7 +5130,7 @@
                 "dependency",
                 "package"
             ],
-            "time": "2020-01-18T12:54:01+00:00"
+            "time": "2020-02-04T11:58:34+00:00"
         },
         {
             "name": "composer/semver",
