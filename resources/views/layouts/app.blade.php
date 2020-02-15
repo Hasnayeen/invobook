@@ -63,5 +63,8 @@
     <script src="{{ asset('/js/manifest.js') }}"></script>
     <script src="{{ asset('/js/vendor.min.js') }}"></script>
     {{ $script }}
+
+    @includeIf('plugin-scripts')
+
 </body>
 </html>

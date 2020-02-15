@@ -26,7 +26,7 @@ export default new Vuex.Store({
     teams: [],
     offices: [],
     currentView: 'home',
-    resourceName: '',
+    resourceName: '', // currently showed project/team/office name
     groupType: '',
     groupId: '',
     members: [],

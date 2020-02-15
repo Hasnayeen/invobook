@@ -1,7 +1,7 @@
 <template>
-<div>
+<div id="main-container">
   <div v-if="showHome" class="bg-white shadow">
-    <div class="sm:container sm:mx-auto px-4 w-full sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl flex justify-start mb-8 pb-3 pt-4 text-gray-700">
+    <div id="group-menu" class="sm:container sm:mx-auto px-4 w-full sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl flex justify-start mb-8 pb-3 pt-4 text-gray-700">
       <span @click="setActiveView('home')" class="mr-4 sm:mr-8"
         :class="{'text-indigo-700 font-semibold border-indigo-500 border-b-2 pb-2 -mb-3':(currentView === 'home'), 'cursor-pointer': (currentView != 'home')}">
         {{ 'Home' | localize }}
@@ -20,7 +20,7 @@
       </span>
     </div>
   </div>
-  <div class="sm:container sm:mx-auto px-4 w-full sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl">
+  <div id="content-container" class="sm:container sm:mx-auto px-4 w-full sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl">
     <home :active-tab="currentView"></home>
     <projects v-if="currentView === 'projects'"></projects>
     <teams v-if="currentView === 'teams'"></teams>

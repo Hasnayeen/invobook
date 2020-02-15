@@ -1,5 +1,5 @@
 <template>
-<div v-if="activeTab === 'files'" class="w-full">
+<div id="file-container" v-if="activeTab === 'files'" class="w-full">
   <file-modal v-if="file" :fileModalShown="fileModalShown" :file="file" @close="closeFileModal"></file-modal>
 
   <div>

@@ -38,7 +38,7 @@
   <div class="my-4 pb-1 border-b border-gray-400">
     All Offices ({{ offices.length }})
   </div>
-  <div class="sm:-mx-4 md:-mx-12 lg:-mx-4 xl:-mx-10 flex flex-row flex-wrap justify-start">
+  <div id="offices-list" class="sm:-mx-4 md:-mx-12 lg:-mx-4 xl:-mx-10 flex flex-row flex-wrap justify-start">
     <office v-for="(office, index) in offices" :key="office.id" :index="index" :details="office"></office>
   </div>
 </div>

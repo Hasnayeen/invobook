@@ -1,5 +1,5 @@
 <template>
-<div v-if="activeTab === 'discussions'" class="w-full">
+<div id="discussion-container" v-if="activeTab === 'discussions'" class="w-full">
   <create-discussion-form ref="discussionForm" :resourceId="resource.id" :resourceType="resourceType" :discussion="discussion" @close="closeCreateDiscussionForm" :form-shown="createDiscussionFormShown"></create-discussion-form>
 
   <discussion-details v-if="discussion" :discussionDetailsShown="discussionDetailsShown" :discussion="discussion" :index="index" @close="closeDiscussionDetails" @deleted="deleteDiscussion"></discussion-details>
