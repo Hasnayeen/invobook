@@ -1,10 +1,10 @@
 <template>
-<div class="self-center" v-click-outside="hideNotification">
+<div class="self-center relative" v-click-outside="hideNotification">
   <div id="notification" class="text-indigo-500  text-base no-underline cursor-pointer" @click="toggleNotification">
     <font-awesome-icon :icon="faBell" class="font-bold text-xl"></font-awesome-icon>
     <font-awesome-icon v-if="unreadNotification" :icon="faCircle" class="text-red-500 text-xs absolute top-0 mt-2 -ml-1" aria-hidden="true"></font-awesome-icon>
   </div>
-  <div v-if="notificationShown" class="absolute bg-white w-64 mt-5 mr-8 py-4 shadow-lg rounded z-50" style="right: 5%;">
+  <div v-if="currentComponent === 'notification-dropdown'" class="absolute bg-white w-64 mt-5 -mr-16 right-0 py-4 shadow-lg rounded z-50">
     <a v-if="notifications.length > 0" v-for="notification in notifications" class="flex flex-row items-center list-reset px-4 py-2 text-gray-600 no-underline block" href="#">
       <img class="w-10 h-10 rounded-full mr-2" :src="generateUrl(notification.data.subject.avatar)">
       <div>
@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 import { faCircle } from '@fortawesome/free-solid-svg-icons'
 import { faBell } from '@fortawesome/free-regular-svg-icons'
 
@@ -36,13 +37,13 @@ export default {
   data: () => ({
     token: Laravel.csrfToken,
     url: navUrl,
-    notificationShown: false,
     notifications: [],
     unreadNotification: false,
     user: user,
     faBell,
     faCircle
   }),
+
   created () {
     axios.get('/notifications')
       .then((response) => {
@@ -56,12 +57,24 @@ export default {
         console.log(error.response.data.message)
       })
   },
+
   mounted () {
     this.listen()
   },
+
+  computed: {
+    ...mapState({
+      currentComponent: state => state.dropdown.currentComponent,
+    }),
+  },
+
   methods: {
+    ...mapActions([
+      'setCurrentComponent',
+      'closeComponent'
+    ]),
     toggleNotification (event) {
-      if (this.notificationShown) {
+      if (this.currentComponent === 'notification-dropdown') {
         document.body.removeEventListener('keyup', this.hideNotification)
         this.hideNotification(event)
       } else {
@@ -70,10 +83,7 @@ export default {
       }
     },
     showNotification (event) {
-      this.notificationShown = true
-      if (this.profileDropdownShown) {
-        this.profileDropdownShown = false
-      }
+      this.setCurrentComponent('notification-dropdown')
       if (this.unreadNotification) {
         this.notificationRead()
         this.unreadNotification = false
@@ -83,7 +93,9 @@ export default {
       if (event.type === 'keyup' && event.key !== 'Escape') {
         return false
       }
-      this.notificationShown = false
+      if (this.currentComponent === 'notification-dropdown') {
+        this.closeComponent('')
+      }
     },
     listen () {
       Echo.private('App.User.' + this.user.id)

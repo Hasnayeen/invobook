@@ -5,11 +5,5 @@
         "psr-4": {
             "Goodwork\\Plugins\\": ""
         }
-    },
-    "scripts": {
-        "post-autoload-dump": [
-            "Goodwork\\Plugins\\ComposerScripts::postAutoloadDump",
-            "@php ../artisan plugin:discover"
-        ]
     }
 }

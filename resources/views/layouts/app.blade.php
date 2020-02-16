@@ -64,7 +64,11 @@
     <script src="{{ asset('/js/vendor.min.js') }}"></script>
     {{ $script }}
 
-    @includeIf('plugin-scripts')
+    @foreach (glob(base_path() . '/resources/views/plugin-scripts/global/*.blade.php') as $file)
+        @include('plugin-scripts.global.' . basename(str_replace('.blade.php', '', $file)))
+    @endforeach
+    
+    @stack('plugin-scripts')
 
 </body>
 </html>
