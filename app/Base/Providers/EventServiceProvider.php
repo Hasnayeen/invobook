@@ -2,18 +2,18 @@
 
 namespace App\Base\Providers;
 
+use App\Team\Models\Team;
+use App\Office\Models\Office;
+use App\Observers\TeamObserver;
 use App\Project\Models\Project;
 use App\TaskManager\Models\Task;
+use App\Observers\OfficeObserver;
 use App\Base\Models\DirectMessage;
 use App\Discussion\Models\Discussion;
 use App\Project\Observers\ProjectObserver;
 use App\TaskManager\Observers\TaskObserver;
 use App\Base\Observers\DirectMessageObserver;
 use App\Discussion\Observers\DiscussionObserver;
-use App\Observers\OfficeObserver;
-use App\Observers\TeamObserver;
-use App\Office\Models\Office;
-use App\Team\Models\Team;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider

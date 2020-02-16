@@ -257,7 +257,7 @@ class DiscussionTest extends TestCase
 
         $this->actingAs($this->user)
              ->post('discussions/files', [
-                 'file'         => $file,
+                 'file'          => $file,
                  'group_type'    => 'project',
                  'group_id'      => $project->id,
              ])
@@ -284,7 +284,7 @@ class DiscussionTest extends TestCase
 
         $this->actingAs($this->user)
              ->post('discussions/files', [
-                 'file'         => $file,
+                 'file'          => $file,
                  'group_type'    => 'project',
                  'group_id'      => $project->id,
              ])

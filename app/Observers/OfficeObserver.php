@@ -10,7 +10,7 @@ class OfficeObserver
     /**
      * Handle the office "created" event.
      *
-     * @param  \App\Office  $office
+     * @param  \App\Office $office
      * @return void
      */
     public function created(Office $office)
