@@ -39,7 +39,7 @@
   <div class="my-4 pb-1 border-b border-gray-400">
     All Projects ({{ projects.length }})
   </div>
-  <div class="sm:-mx-4 md:-mx-12 lg:-mx-4 xl:-mx-10 flex flex-row flex-wrap justify-start">
+  <div id="projects-list" class="sm:-mx-4 md:-mx-12 lg:-mx-4 xl:-mx-10 flex flex-row flex-wrap justify-start">
     <project v-for="(project, index) in projects" :key="project.id" :index="index" :details="project"></project>
   </div>
 </div>

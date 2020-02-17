@@ -1,0 +1,9 @@
+{
+    "name": "goodwork/plugins",
+    "description": "Plugins for Goodwork application",
+    "autoload": {
+        "psr-4": {
+            "Goodwork\\Plugins\\": ""
+        }
+    }
+}

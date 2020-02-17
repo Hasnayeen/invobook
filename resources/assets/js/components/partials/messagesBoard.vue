@@ -1,5 +1,5 @@
 <template>
-<div v-if="activeTab === 'messages'" class="w-full">
+<div id="message-container" v-if="activeTab === 'messages'" class="w-full">
   <div class="flex flex-col bg-white mx-auto my-8 shadow rounded-lg">
 
     <div class="text-gray-600 bg-white shadow p-4 text-xl flex flex-row items-center z-10 rounded-t-lg">

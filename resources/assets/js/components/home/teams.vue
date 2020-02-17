@@ -40,7 +40,7 @@
   <div class="my-4 pb-1 border-b border-gray-400">
     All Teams ({{ teams.length }})
   </div>
-  <div class="sm:-mx-4 md:-mx-12 lg:-mx-4 xl:-mx-10 flex flex-row flex-wrap justify-start">
+  <div id="teams-list" class="sm:-mx-4 md:-mx-12 lg:-mx-4 xl:-mx-10 flex flex-row flex-wrap justify-start">
     <team v-for="(team, index) in teams" :key="team.id" :index="index" :details="team"></team>
   </div>
 </div>

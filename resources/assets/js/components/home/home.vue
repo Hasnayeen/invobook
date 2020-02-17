@@ -1,5 +1,5 @@
 <template>
-  <div v-if="activeTab === 'home'">
+  <div id="home-container" v-if="activeTab === 'home'">
     <div class="bg-white rounded-lg shadow p-8">
       <div class="text-xl">
         What's on your plate today ⬇️

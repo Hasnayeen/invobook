@@ -3,7 +3,7 @@
   <tab-menu :settings="settings" :active="active" @activate="activateTab"></tab-menu>
   <div class="container mx-auto my-4 px-4 w-full md:max-w-3xl lg:max-w-4xl xl:max-w-6xl">
 
-    <div class="border border-gray-300 bg-white rounded-lg px-8 py-4">
+    <div id="office-heading" class="border border-gray-300 bg-white rounded-lg px-8 py-4">
       <div class="text-gray-600 font-semibold text-3xl flex items-center justify-center relative">
         <div class="flex justify-between items-center w-full">
           <div class="flex flex-col">

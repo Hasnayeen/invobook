@@ -8,7 +8,7 @@ export default {
     getOffice (state, office) {
       state.office = office
     },
-    updateOfficeSettings(state, settings) {
+    updateOfficeSettings (state, settings) {
       state.office.settings = settings
     }
   },
@@ -35,7 +35,7 @@ export default {
 
       dispatch('setCurrentView', 'office')
     },
-    updateOfficeSettings({ commit }, settings) {
+    updateOfficeSettings ({ commit }, settings) {
       commit('updateOfficeSettings', settings)
     }
   }

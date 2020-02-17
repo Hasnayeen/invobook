@@ -10,7 +10,7 @@ class TeamObserver
     /**
      * Handle the team "created" event.
      *
-     * @param  \App\Team  $team
+     * @param  \App\Team $team
      * @return void
      */
     public function created(Team $team)
