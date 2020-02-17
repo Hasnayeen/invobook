@@ -42,7 +42,7 @@ export default new Vuex.Store({
     setCurrentView (state, view) {
       state.currentView = view
     },
-    updateBreadcrumb(state, view) {
+    updateBreadcrumb (state, view) {
       if (!state.breadcrumb.includes(view)) {
         state.breadcrumb.splice(1, 1, view)
       }
