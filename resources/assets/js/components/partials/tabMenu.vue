@@ -1,5 +1,5 @@
 <template>
-<div class="pt-4 pb-2 bg-white shadow text-gray-600 sticky tab-sticky-top z-20">
+<div id="tools-menu" class="pt-4 pb-2 bg-white shadow text-gray-600 sticky tab-sticky-top z-20">
   <div class="mx-auto px-4 w-full sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl flex">
     <div v-if="settings.task_enabled" @click="activateThisTab('tasks')"
       :class="[(active === 'tasks') ? 'text-indigo-600 font-semibold border-indigo-500 border-b-2 pb-2 -mb-2' : 'cursor-pointer', 'text-center mr-8 flex justify-center items-center']">

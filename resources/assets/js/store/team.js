@@ -8,7 +8,7 @@ export default {
     getTeam (state, team) {
       state.team = team
     },
-    updateTeamSettings(state, settings) {
+    updateTeamSettings (state, settings) {
       state.team.settings = settings
     }
   },
@@ -35,7 +35,7 @@ export default {
 
       dispatch('setCurrentView', 'team')
     },
-    updateTeamSettings({ commit }, settings) {
+    updateTeamSettings ({ commit }, settings) {
       commit('updateTeamSettings', settings)
     }
   }

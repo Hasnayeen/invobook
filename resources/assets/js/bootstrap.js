@@ -35,13 +35,13 @@ window.Vue.mixin({
     },
     updateUrl: function (groupType, groupId = null) {
       if (history.pushState && groupId !== null) {
-        let newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?group_type=' + groupType + '&group_id=' + groupId
+        const newurl = window.location.protocol + '//' + window.location.host + window.location.pathname + '?group_type=' + groupType + '&group_id=' + groupId
         window.history.pushState({ path: newurl }, '', newurl)
       } else if (history.pushState) {
-        let newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?group_type=' + groupType
+        const newurl = window.location.protocol + '//' + window.location.host + window.location.pathname + '?group_type=' + groupType
         window.history.pushState({ path: newurl }, '', newurl)
       }
-    },
+    }
   }
 })
 

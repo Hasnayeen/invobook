@@ -1,5 +1,5 @@
 <template>
-<div v-if="activeTab === 'tasks'" class="w-full">
+<div id="task-container" v-if="activeTab === 'tasks'" class="w-full">
   <create-task-form ref="taskform" :resource="resource" :resourceType="resourceType" :form-shown="createTaskFormShown" :tasks="tasks" :task="task" @close="closeCreateTaskForm"></create-task-form>
 
   <task-details v-if="task" :index="index" :resourceType="resourceType" :resourceId="resource.id" :task="task" :taskDetailsShown="taskDetailsShown" :statuses="statuses" @status-change="updateStatus" @delete="deleteTask" @close="closeTaskDetails"></task-details>

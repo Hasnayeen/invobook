@@ -8,7 +8,7 @@ export default {
     getProject (state, project) {
       state.project = project
     },
-    updateProjectSettings(state, settings) {
+    updateProjectSettings (state, settings) {
       state.project.settings = settings
     }
   },
@@ -35,7 +35,7 @@ export default {
 
       dispatch('setCurrentView', 'project')
     },
-    updateProjectSettings({ commit }, settings) {
+    updateProjectSettings ({ commit }, settings) {
       commit('updateProjectSettings', settings)
     }
   }

@@ -82,7 +82,8 @@
             "expect",
             "jest",
             "it",
-            "EventBus"
+            "EventBus",
+            "history"
         ]
     },
     "plugins": [

@@ -25,7 +25,8 @@
         "pda/pheanstalk": "^4.0",
         "predis/predis": "^1.1",
         "spatie/flysystem-dropbox": "^1.2",
-        "spatie/laravel-backup": "^6.7"
+        "spatie/laravel-backup": "^6.7",
+        "wikimedia/composer-merge-plugin": "^1.4"
     },
     "require-dev": {
         "codedungeon/phpunit-result-printer": "^0.26.2",
@@ -80,6 +81,15 @@
             "dont-discover": [
                 "laravel/telescope"
             ]
+        },
+        "merge-plugin": {
+            "include": [
+                "plugins/composer.json"
+            ],
+            "recurse": false,
+            "replace": true,
+            "merge-dev": true,
+            "merge-extra": true
         }
     },
     "config": {
