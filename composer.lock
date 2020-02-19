@@ -1805,16 +1805,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.63",
+            "version": "1.0.64",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "8132daec326565036bc8e8d1876f77ec183a7bd6"
+                "reference": "d13c43dbd4b791f815215959105a008515d1a2e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/8132daec326565036bc8e8d1876f77ec183a7bd6",
-                "reference": "8132daec326565036bc8e8d1876f77ec183a7bd6",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/d13c43dbd4b791f815215959105a008515d1a2e0",
+                "reference": "d13c43dbd4b791f815215959105a008515d1a2e0",
                 "shasum": ""
             },
             "require": {
@@ -1826,7 +1826,7 @@
             },
             "require-dev": {
                 "phpspec/phpspec": "^3.4",
-                "phpunit/phpunit": "^5.7.10"
+                "phpunit/phpunit": "^5.7.26"
             },
             "suggest": {
                 "ext-fileinfo": "Required for MimeType",
@@ -1885,7 +1885,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2020-01-04T16:30:31+00:00"
+            "time": "2020-02-05T18:14:17+00:00"
         },
         {
             "name": "league/oauth2-server",
@@ -2972,21 +2972,21 @@
         },
         {
             "name": "spatie/db-dumper",
-            "version": "2.15.0",
+            "version": "2.15.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/db-dumper.git",
-                "reference": "ccb7dd7557cd119b21ea853a893da4d1b0ff08b6"
+                "reference": "e167b8bf925c5da553f885326bb7bfaed3f95d15"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/db-dumper/zipball/ccb7dd7557cd119b21ea853a893da4d1b0ff08b6",
-                "reference": "ccb7dd7557cd119b21ea853a893da4d1b0ff08b6",
+                "url": "https://api.github.com/repos/spatie/db-dumper/zipball/e167b8bf925c5da553f885326bb7bfaed3f95d15",
+                "reference": "e167b8bf925c5da553f885326bb7bfaed3f95d15",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.2",
-                "symfony/process": "^4.2"
+                "symfony/process": "^4.2|^5.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^7.0|^8.0"
@@ -3018,7 +3018,7 @@
                 "mysqldump",
                 "spatie"
             ],
-            "time": "2019-11-11T10:40:42+00:00"
+            "time": "2020-01-24T13:05:20+00:00"
         },
         {
             "name": "spatie/dropbox-api",
@@ -3131,16 +3131,16 @@
         },
         {
             "name": "spatie/laravel-backup",
-            "version": "6.7.6",
+            "version": "6.7.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-backup.git",
-                "reference": "9526cd53072644de6e4850cffaf79376c9a4f2d0"
+                "reference": "48f9310a2396db79d396dd63e20f657e8b11ce4e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/9526cd53072644de6e4850cffaf79376c9a4f2d0",
-                "reference": "9526cd53072644de6e4850cffaf79376c9a4f2d0",
+                "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/48f9310a2396db79d396dd63e20f657e8b11ce4e",
+                "reference": "48f9310a2396db79d396dd63e20f657e8b11ce4e",
                 "shasum": ""
             },
             "require": {
@@ -3202,20 +3202,20 @@
                 "laravel-backup",
                 "spatie"
             ],
-            "time": "2019-12-12T13:39:26+00:00"
+            "time": "2020-02-19T16:54:03+00:00"
         },
         {
             "name": "spatie/temporary-directory",
-            "version": "1.2.1",
+            "version": "1.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/temporary-directory.git",
-                "reference": "3e51af9a8361f85cffc1fb2c52135f3e064758cc"
+                "reference": "fcb127e615700751dac2aefee0ea2808ff3f5bb1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/temporary-directory/zipball/3e51af9a8361f85cffc1fb2c52135f3e064758cc",
-                "reference": "3e51af9a8361f85cffc1fb2c52135f3e064758cc",
+                "url": "https://api.github.com/repos/spatie/temporary-directory/zipball/fcb127e615700751dac2aefee0ea2808ff3f5bb1",
+                "reference": "fcb127e615700751dac2aefee0ea2808ff3f5bb1",
                 "shasum": ""
             },
             "require": {
@@ -3248,7 +3248,7 @@
                 "spatie",
                 "temporary-directory"
             ],
-            "time": "2019-08-28T06:53:51+00:00"
+            "time": "2019-12-15T18:52:09+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -3683,7 +3683,7 @@
         },
         {
             "name": "symfony/finder",
-            "version": "v4.4.3",
+            "version": "v4.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
@@ -4290,7 +4290,7 @@
         },
         {
             "name": "symfony/process",
-            "version": "v4.4.3",
+            "version": "v4.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
@@ -5057,12 +5057,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "88cff792cc6f2fa4df736e9abb612b955b783087"
+                "reference": "f154d5c09d69a6338d6a955bf51cc264d0448b3d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/88cff792cc6f2fa4df736e9abb612b955b783087",
-                "reference": "88cff792cc6f2fa4df736e9abb612b955b783087",
+                "url": "https://api.github.com/repos/composer/composer/zipball/f154d5c09d69a6338d6a955bf51cc264d0448b3d",
+                "reference": "f154d5c09d69a6338d6a955bf51cc264d0448b3d",
                 "shasum": ""
             },
             "require": {
@@ -5084,8 +5084,8 @@
                 "symfony/console": "2.8.38"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.8.35 || ^5.7",
-                "phpunit/phpunit-mock-objects": "^2.3 || ^3.0"
+                "phpspec/prophecy": "^1.10",
+                "symfony/phpunit-bridge": "^3.4"
             },
             "suggest": {
                 "ext-openssl": "Enabling the openssl extension allows you to access https URLs for repositories and packages",
@@ -5129,7 +5129,7 @@
                 "dependency",
                 "package"
             ],
-            "time": "2020-01-18T12:54:01+00:00"
+            "time": "2020-02-18T17:03:27+00:00"
         },
         {
             "name": "composer/semver",
