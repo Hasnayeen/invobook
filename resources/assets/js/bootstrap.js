@@ -33,14 +33,17 @@ window.Vue.mixin({
       value = value.toString()
       return window.location.protocol + '//' + window.location.host + '/' + value
     },
-    updateUrl: function (groupType, groupId = null) {
-      if (history.pushState && groupId !== null) {
-        const newurl = window.location.protocol + '//' + window.location.host + window.location.pathname + '?group_type=' + groupType + '&group_id=' + groupId
-        window.history.pushState({ path: newurl }, '', newurl)
-      } else if (history.pushState) {
-        const newurl = window.location.protocol + '//' + window.location.host + window.location.pathname + '?group_type=' + groupType
-        window.history.pushState({ path: newurl }, '', newurl)
+    updateUrl: function (params) {
+      let url = new URL(window.location.href)
+      for (const key in params) {
+        if (url.searchParams.has(key)) {
+          url.searchParams.delete(key)
+        }
+        if (params[key] !== null) {
+          url.searchParams.append(key, params[key])
+        }
       }
+      window.history.pushState({ path: url.href }, '', url.href)
     }
   }
 })

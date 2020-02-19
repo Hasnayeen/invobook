@@ -76,7 +76,11 @@ export default {
       'setGroup',
     ]),
     setActiveView (view) {
-      this.updateUrl(view)
+      if (view === 'home') {
+        this.updateUrl({"group_type": null, "group_id": null, "tool": null})
+      } else {
+        this.updateUrl({"group_type": view, "group_id": null, "tool": null})
+      }
       this.setCurrentView(view)
     },
     showProject (id) {

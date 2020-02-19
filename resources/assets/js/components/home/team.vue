@@ -40,7 +40,7 @@ export default {
       'removeTeam'
     ]),
     showTeam (id) {
-      this.updateUrl('team', id)
+      this.updateUrl({'group_type': 'team', 'group_id': id})
       this.updateBreadcrumb('teams')
       this.getTeam(id)
       this.setGroup({type: 'team', id: id})

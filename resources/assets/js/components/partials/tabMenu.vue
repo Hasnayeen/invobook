@@ -83,6 +83,7 @@ export default {
   },
   methods: {
     activateThisTab (tab) {
+      this.updateUrl({"tool": tab})
       this.$emit('activate', tab)
     },
     isTabActive (tab) {
