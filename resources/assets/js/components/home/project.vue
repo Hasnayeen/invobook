@@ -42,7 +42,7 @@ export default {
       'removeProject'
     ]),
     showProject (id) {
-      this.updateUrl('project', id)
+      this.updateUrl({'group_type': 'project', 'group_id': id})
       this.updateBreadcrumb('projects')
       this.getProject(id)
       this.setGroup({type: 'project', id: id})

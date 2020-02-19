@@ -40,7 +40,7 @@ export default {
       'removeOffice'
     ]),
     showOffice (id) {
-      this.updateUrl('office', id)
+      this.updateUrl({'group_type': 'office', 'group_id': id})
       this.updateBreadcrumb('offices')
       this.getOffice(id)
       this.setGroup({type: 'office', id: id})

@@ -32,31 +32,48 @@
           </div>
           <!-- Cycle -->
         </div>
+      </div>
+
+      <div class="flex justify-between items-center w-full relative">
+        <div class="flex flex-row flex-wrap items-center pt-2">
+          <span @click="showModal('addMemberForm')" class="bg-indigo-500 shadow-xl w-8 h-8 flex justify-center items-center rounded-full text-indigo-500 cursor-pointer text-center p-2 mr-1">
+            <font-awesome-icon :icon="faPlus" class="text-white"></font-awesome-icon>
+          </span>
+          <a v-for="(member, index) in office.members" :href="'/users/' + member.username" class="mx-1">
+            <profile-card :user="member"></profile-card>
+          </a>
+        </div>
+        <!-- Settings Button -->
+        <span v-if="authenticated" @click="toggleDropdownMenu" v-click-outside="closeDropdownMenu" class="bg-white p-2 text-sm rounded border border-gray-400 ml-4 cursor-pointer flex items-center">
+          <font-awesome-icon :icon="faCog" class="mr-2"></font-awesome-icon>
+          Settings
+        </span>
 
         <!-- Dropdown Menu -->
         <div v-if="authenticated && dropdownMenuShown" class="absolute w-64 right-0">
           <ul class="list-reset bg-white rounded shadow-2xl py-2 absolute inset-x-0 mt-6 text-base text-left font-normal whitespace-no-wrap z-30">
-            <li @click="toggleVisibility" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
+            <li @click="toggleVisibility" class="px-4 py-2 hover:bg-indigo-500 hover:text-white text-gray-600 font-medium cursor-pointer">
               {{ office.public ? 'Make Private' : 'Make Public'}}
             </li>
-            <li v-if="settings.roadmap_enabled" @click="showModal('roadmapModal')" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
+            <li v-if="settings.roadmap_enabled" @click="showModal('roadmapModal')" class="px-4 py-2 hover:bg-indigo-500 hover:text-white text-gray-600 font-medium cursor-pointer">
               Roadmap
             </li>
-            <li @click="showModal('memberListModal')" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
+            <li @click="showModal('memberListModal')" class="px-4 py-2 hover:bg-indigo-500 hover:text-white text-gray-600 font-medium cursor-pointer">
               Show All Members
             </li>
-            <li @click="showModal('permissionSettingsModal')" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
+            <li @click="showModal('permissionSettingsModal')" class="px-4 py-2 hover:bg-indigo-500 hover:text-white text-gray-600 font-medium cursor-pointer">
               Permissions Settings
             </li>
-            <li @click="showModal('settingsModal')" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
+            <li @click="showModal('settingsModal')" class="px-4 py-2 hover:bg-indigo-500 hover:text-white text-gray-600 font-medium cursor-pointer">
               Settings
             </li>
-            <li class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
+            <li class="px-4 py-2 hover:bg-indigo-500 hover:text-white text-gray-600 font-medium cursor-pointer">
               Delete
             </li>
           </ul>
         </div>
       </div>
+    </div>
 
     <!-- Modals for cycles -->
     <cycles-modal v-if="currentComponent === 'cycleModal'" resourceType="office" :resourceId="office.id" :currentCycleId="currentCycleId"></cycles-modal>
@@ -73,22 +90,6 @@
 
       <settings-modal v-if="currentComponent === 'settingsModal'" resourceType="office" :resourceId="office.id" :settings="settings" @update-settings="updateSettings" ></settings-modal>
     <!-- Modals for dropdown menu -->
-
-      <div class="flex justify-between items-center w-full">
-        <div class="flex flex-row flex-wrap items-center pt-2">
-          <span @click="showModal('addMemberForm')" class="bg-indigo-500 shadow-xl w-8 h-8 flex justify-center items-center rounded-full text-indigo-500 cursor-pointer text-center p-2 mr-1">
-            <font-awesome-icon :icon="faPlus" class="text-white"></font-awesome-icon>
-          </span>
-          <a v-for="(member, index) in office.members" :href="'/users/' + member.username" class="mx-1">
-            <profile-card :user="member"></profile-card>
-          </a>
-        </div>
-        <span v-if="authenticated" @click="toggleDropdownMenu" v-click-outside="closeDropdownMenu" class="bg-white p-2 text-sm rounded border border-gray-400 ml-4 cursor-pointer flex items-center">
-          <font-awesome-icon :icon="faCog" class="mr-2"></font-awesome-icon>
-          Settings
-        </span>
-      </div>
-    </div>
 
     <div class="flex flex-row flex-wrap justify-center">
       <task-board v-if="settings.task_enabled" resourceType="office" :resource="office" :activeTab="active" :activeId="activeId"></task-board>
@@ -180,7 +181,11 @@ export default {
       'updateOfficeSettings',
     ]),
     setActiveView (view) {
-      this.updateUrl(view)
+      if (view === 'home') {
+        this.updateUrl({"group_type": null, "group_id": null, "tool": null})
+      } else {
+        this.updateUrl({"group_type": view, "group_id": null, "tool": null})
+      }
       this.setCurrentView(view)
     },
     showModal (modalName) {

@@ -74,8 +74,8 @@
   </div>
   <!-- Task Filters -->
 
-  <div class="flex flex-row flex-wrap items-start lg:justify-between lg:-mx-2 xl:-mx-4 lg:-mt-4">
-    <div v-for="(task, index) in tasks" @click="showTaskDetails(index)" :key="task.id" class="bg-white rounded shadow my-4 md:mx-6 lg:mx-2 xl:mx-4 p-4 w-full md:w-72 lg:w-64  cursor-pointer">
+  <div class="flex flex-row flex-wrap items-start lg:-mx-2 xl:-mx-4 lg:-mt-4">
+    <div v-for="(task, index) in tasks" @click="showTaskDetails(index, task.id)" :key="task.id" class="bg-white rounded shadow my-4 md:mx-6 lg:mx-2 xl:mx-4 p-4 w-full md:w-72 lg:w-64  cursor-pointer">
       <div class="flex justify-between items-center">
         <p class="text-xs text-gray-700 flex flex-col">
           <span class="w-10 border-t-4" :style="'border-color:' + task.status.color"></span>
@@ -247,12 +247,14 @@ export default {
         console.error(error)
       }
     },
-    showTaskDetails (index) {
+    showTaskDetails (index, id) {
+      this.updateUrl({"id": id})
       this.index = index
       this.task = this.tasks[index]
       this.taskDetailsShown = true
     },
     closeTaskDetails (editTask = false) {
+      this.updateUrl({"id": null})
       this.taskDetailsShown = false
       if (editTask) {
         this.createTaskFormShown = true

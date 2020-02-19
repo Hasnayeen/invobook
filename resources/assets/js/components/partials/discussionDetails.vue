@@ -1,6 +1,6 @@
 <template>
 <div v-if="discussionDetailsShown">
-  <div class="absolute container mx-auto md:w-5/6 lg:4/5 xl:w-3/4 xxl:w-2/3 z-30 mb-16" style="top: 12vh;left: 0;right: 0;">
+  <div class="absolute container mx-auto px-4 w-full md:max-w-3xl lg:max-w-4xl xl:max-w-6xl z-30 mb-16" style="top: 12vh;left: 0;right: 0;">
     <div class="bg-gray-100 rounded shadow-lg py-8">
       <div class="flex flex-row justify-between relative px-8">
         <div @click="closeDiscussionDetails" class="cursor-pointer">
