@@ -1,77 +1,87 @@
 <template>
 <div v-if="formShown">
-  <div class="absolute container mx-auto w-5/6 md:w-3/5 lg:max-w-5xl z-30" style="top: 12vh;left: 0;right: 0;">
-    <div class="bg-white rounded shadow-lg">
-      <div class="p-4">
-        <div class="p-4">
-          <label class="block uppercase tracking-wide text-gray-800 text-xs font-bold mb-2" for="grid-first-name">
+  <div class="absolute top-0 left-0 right-0 mt-24 container mx-auto px-4 sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl z-30">
+    <div class="bg-gray-100 rounded shadow-lg">
+      <div class="text-2xl text-gray-700 text-center font-semibold px-8 py-6">
+          <div class="text-sm">
             Title <span class="text-gray-500 capitalize">(required)</span>
+          </div>
+          <input ref="focusInput" v-model="name" class="appearance-none block w-full bg-gray-100 text-gray-800 text-center rounded py-3 px-4" type="text" placeholder="Title of your task" required>
+      </div>
+      <div class="bg-white flex flex-row flex-wrap justify-between lg:flex-no-wrap pt-4">
+        <!-- Assignee -->
+        <div>
+          <label class="text-sm text-gray-600 px-8" for="assignee">
+            Assignee
           </label>
-          <input ref="focusInput" v-model="name" class="appearance-none block w-full bg-gray-200 text-gray-800 border border-gray-200 rounded py-3 px-4" type="text" placeholder="New Task" required>
-        </div>
-        <div class="p-4">
-          <label class="block uppercase tracking-wide text-gray-800 text-xs font-bold mb-2" for="grid-first-name">
-            Notes
-          </label>
-          <textarea v-model="notes" class="appearance-none block w-full bg-gray-200 text-gray-800 border border-gray-200 rounded py-3 px-4 resize-none" placeholder="Description" name="notes" rows="2"></textarea>
-        </div>
-        <div class="p-4">
-          <label class="block uppercase tracking-wide text-gray-800 text-xs font-bold mb-2" for="grid-first-name">
-            Assigned To <span class="text-gray-500 capitalize">(required)</span>
-          </label>
-          <div class="flex flex-row items-center">
-            <select v-model="assignedTo" class="w-5/6 block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-800 py-3 px-4 pr-8 rounded" id="user">
-              <option selected disabled hidden>Select User to Add</option>
+          <div class="flex flex-row items-center mx-8 py-2 relative">
+            <select v-model="assignedTo" class="w-40 appearance-none cursor-pointer bg-white text-gray-800 border py-3 pl-4 pr-8 rounded" name="assignee">
+              <option selected="true" disabled="disabled" :value="null">Add assignee</option>
               <template v-for="member in resource.members">
                 <option :value="member.user_id" class="my-2 text-lg">{{ member.name }}</option>
               </template>
             </select>
-            <font-awesome-icon :icon="faChevronDown"
-              class="w-1/6 pointer-events-none flex items-center text-gray-800 -ml-8">
+            <font-awesome-icon :icon="faPlus"
+              class="pointer-events-none flex items-center text-gray-800 absolute right-0 mr-4 pl-1 text-gray-600">
             </font-awesome-icon>
           </div>
         </div>
-        <div class="p-4">
-          <label class="block uppercase tracking-wide text-gray-800 text-xs font-bold mb-2" for="grid-first-name">
-            Due On <span class="text-gray-500 capitalize">(required)</span>
+        <!-- Due Date -->
+        <div>
+          <label class="text-sm text-gray-600 px-8" name="due-date">
+            Due On
           </label>
-          <datepicker v-model="dueOnDate" ref="dueOnDate" :disabled-dates="disabledDates" placeholder="Select Date" format="yyyy-MM-dd" input-class="appearance-none bg-gray-200 text-gray-800 w-full" wrapper-class="appearance-none block w-full bg-gray-200 text-gray-800 border border-gray-200 rounded py-3 px-4"></datepicker>
+          <div class="flex flex-row items-center mx-8 py-2 relative">
+            <datepicker v-model="dueOnDate" ref="dueOnDate" :disabled-dates="disabledDates" placeholder="Select Date" format="yyyy-MM-dd" input-class="appearance-none text-gray-800 w-32" wrapper-class="w-40 appearance-none text-gray-800 border py-3 px-4 rounded"></datepicker>
+          </div>
         </div>
-        <div class="p-4">
-          <label class="block uppercase tracking-wide text-gray-800 text-xs font-bold mb-2" for="grid-first-name">
+        <!-- Cycle -->
+        <div>
+          <label class="text-sm text-gray-600 px-8" for="cycle">
             Cycle
           </label>
-          <div class="flex flex-row items-center">
-            <select v-model="cycleId" class="w-5/6 block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-800 py-3 px-4 pr-8 rounded" id="user">
+          <div class="flex flex-row items-center mx-8 py-2 relative">
+            <select v-model="cycleId" class="w-40 appearance-none cursor-pointer bg-white text-gray-800 border py-3 pl-4 pr-8 rounded" name="cycle">
               <option selected disabled hidden value="">Select a Cycle</option>
               <template v-for="cycle in cycles">
                 <option :value="cycle.id" class="my-2 text-lg">{{ cycle.name ? cycle.name : cycle.start_date + ' - ' + cycle.end_date }}</option>
               </template>
             </select>
             <font-awesome-icon :icon="faChevronDown"
-              class="w-1/6 pointer-events-none flex items-center text-gray-800 -ml-8">
+              class="pointer-events-none flex items-center text-gray-800 absolute right-0 mr-4 pl-1 text-gray-600">
             </font-awesome-icon>
           </div>
         </div>
-        <div class="p-4">
-          <label class="block uppercase tracking-wide text-gray-800 text-xs font-bold mb-2" for="grid-first-name">
+        <!-- Related To -->
+        <div>
+          <label class="text-sm text-gray-600 px-8" for="related-to">
             Related To
           </label>
-          <div class="flex flex-row items-center">
-            <select v-model="relatedTo" class="w-5/6 block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-800 py-3 px-4 pr-8 rounded" id="user">
+          <div class="flex flex-row items-center mx-8 py-2 relative">
+            <select v-model="relatedTo" class="w-40 appearance-none cursor-pointer bg-white text-gray-800 border py-3 pl-4 pr-8 rounded" name="related-to">
               <option selected disabled hidden value="">Select a Task</option>
               <template v-for="otherTask in tasks">
                 <option v-if="!task || (task && otherTask.id !== task.id)" :value="otherTask.id" class="my-2 text-lg">{{ otherTask.name }}</option>
               </template>
             </select>
             <font-awesome-icon :icon="faChevronDown"
-              class="w-1/6 pointer-events-none flex items-center text-gray-800 -ml-8">
+              class="pointer-events-none flex items-center text-gray-800 absolute right-0 mr-4 pl-1 text-gray-600">
             </font-awesome-icon>
           </div>
         </div>
-        <div class="p-4" v-click-outside="dontShowTags">
+      </div>
+      <div class="px-8 py-4 bg-white">
+        <label class="text-sm text-gray-600" for="description">
+          Description
+        </label>
+        <div class="py-2">
+          <textarea v-model="notes" class="appearance-none block w-full text-gray-800 border border-gray-200 rounded py-3 px-4 resize-none" placeholder="Description" name="description" rows="2"></textarea>
+        </div>
+      </div>
+      <div class="px-8 py-4 bg-white">
+        <div class="" v-click-outside="dontShowTags">
           <label class="block uppercase tracking-wide text-gray-800 text-xs font-bold mb-2" for="tags">Tags</label>
-          <div class="p-2 border rounded bg-gray-100">
+          <div class="p-2 rounded">
             <div class="flex flex-row flex-wrap">
               <div v-for="tag in tags" class="flex items-center mx-1 my-1 py-1 px-3 bg-indigo-200 font-semibold text-indigo-700 rounded-full">
                 <span class="text-sm">
@@ -83,7 +93,9 @@
                 @focus="showTags"
                 type="text"
                 name="tags"
-                class="text-gray-700 bg-gray-100 w-24 p-1 my-1 flex-grow">
+                class="text-indigo-700 bg-indigo-100 rounded-full w-24 p-1 px-2 m-1 cursor-pointer"
+                value="+ Add Tag"
+                readonly>
             </div>
           </div>
           <div v-if="tagSuggestionShown && availableTags.length !== 0" class="shadow-md border py-1 rounded-b">
@@ -93,10 +105,10 @@
           </div>
         </div>
       </div>
-      <div class="flex flex-row justify-between py-4 px-8 bg-gray-200 rounded">
-        <button @click="closeCreateTaskForm" class="text-red-300 hover:font-bold hover:text-red-400">Cancel</button>
-        <button v-if="task" @click="updateTask" class="bg-indigo-400 text-white font-medium hover:bg-indigo-600 py-4 px-8 rounded">Save</button>
-        <button v-else @click="createTask" class="bg-indigo-400 text-white font-medium hover:bg-indigo-600 py-4 px-8 rounded">Create</button>
+      <div class="flex flex-row justify-end py-6 px-8 bg-gray-100 rounded">
+        <button @click="closeCreateTaskForm" class="border border-gray-400 bg-white text-gray-700 font-medium py-2 px-4 mr-4 rounded">Cancel</button>
+        <button v-if="task" @click="updateTask" class="bg-indigo-600 text-white font-medium py-2 px-4 rounded">Save</button>
+        <button v-else @click="createTask" class="bg-indigo-600 text-white font-medium py-2 px-4 rounded">Create</button>
       </div>
     </div>
     <div class="h-16"></div>
@@ -109,8 +121,7 @@
 <script>
 import Datepicker from 'vuejs-datepicker'
 import { mapState, mapActions } from 'vuex'
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons/faChevronDown'
-import { faTimesCircle } from '@fortawesome/free-solid-svg-icons/faTimesCircle'
+import { faChevronDown, faTimesCircle, faPlus } from '@fortawesome/free-solid-svg-icons'
 
 export default {
   components: {Datepicker},
@@ -153,6 +164,7 @@ export default {
     tagSuggestionShown: false,
     faChevronDown,
     faTimesCircle,
+    faPlus,
   }),
 
   watch: {
