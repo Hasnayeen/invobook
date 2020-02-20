@@ -177,6 +177,7 @@ export default {
       })
         .then((response) => {
           this.availableTags.push(response.data.tag)
+          this.label = ''
           this.createFormShown = false
           this.showNotification({type: response.data.status, message: response.data.message})
         })

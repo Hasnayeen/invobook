@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div :class="{'hidden': !formShown}" class="absolute container mx-auto mb-8 w-5/6 md:w-md lg:w-lg xl:w-xl z-30" style="top: 12vh;left: 0;right: 0;">
+  <div :class="{'hidden': !formShown}" class="absolute top-0 left-0 right-0 mt-24 container mx-auto mb-8 w-5/6 md:w-md lg:w-lg xl:w-xl z-30">
     <div class="bg-white rounded shadow-lg">
       <div class="">
         <div class="px-8 pt-8 bg-gray-200 rounded-t">

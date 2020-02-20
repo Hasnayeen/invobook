@@ -156,6 +156,7 @@ export default {
     if (id !== null) {
       this.activeId = parseInt(id)
     }
+    this.updateUrl({'tool': this.active})
     this.updateBreadcrumb('offices')
     this.currentCycleId = this.selectedCycle ? this.selectedCycle.id : null
     this.getAllCycles()
