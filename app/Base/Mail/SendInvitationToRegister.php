@@ -31,6 +31,10 @@ class SendInvitationToRegister extends Mailable
     public function build(Request $request)
     {
         $token = encrypt($request->role);
+        $emailAlreadyInvited = Token::where('email', $request->email)->first();
+        if ($emailAlreadyInvited) {
+            $emailAlreadyInvited->delete();
+        }
         Token::create(['token' => $token, 'email' => $request->email, 'role_id'=> $request->role]);
         $setting = Setting::first();
 
