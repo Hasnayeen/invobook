@@ -12,19 +12,19 @@
       <div class="">
         <p class="py-4">
           <input id="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800" type="text" name="name" placeholder="Full Name">
-          <span class="text-red-400 block pt-2" v-if="errors">{{ errors.name }}</span>
+          <span class="text-red-700 block pt-2" v-if="errors">{{ errors.name }}</span>
         </p>
         <p class="py-4">
           <input id="username" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800" type="text" name="username" placeholder="Username">
-          <span class="text-red-400 block pt-2" v-if="errors">{{ errors.username }}</span>
+          <span class="text-red-700 block pt-2" v-if="errors">{{ errors.username }}</span>
         </p>
         <p class="py-4">
           <input id="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800" type="text" name="email" placeholder="E-mail">
-          <span class="text-red-400 block pt-2" v-if="errors">{{ errors.email }}</span>
+          <span class="text-red-700 block pt-2" v-if="errors">{{ errors.email }}</span>
         </p>
         <p class="py-4">
           <input id="password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800" type="password" name="password" placeholder="Password">
-          <span class="text-red-400 block pt-2" v-if="errors">{{ errors.password }}</span>
+          <span class="text-red-700 block pt-2" v-if="errors">{{ errors.password }}</span>
         </p>
         <p class="py-4">
           <button type="submit" class="bg-indigo-500 hover:bg-indigo-600 text-white text-xl font-medium py-2 px-4 rounded">Register</button>

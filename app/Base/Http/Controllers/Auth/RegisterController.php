@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Base\Notifications\UserRegistered as UserRegisteredNotification;
+use Illuminate\Support\Facades\Log;
 
 class RegisterController extends Controller
 {
@@ -90,7 +91,7 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm($token)
     {
-        if (Token::where('token', decrypt($token))->exists()) {
+        if (Token::where('token', $token)->exists()) {
             return view('auth.register', ['token' => url('register/' . $token)]);
         }
 
