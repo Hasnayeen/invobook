@@ -5700,10 +5700,10 @@ postcss-value-parser@^3.0.0, postcss-value-parser@^3.3.0, postcss-value-parser@^
   resolved "https://registry.yarnpkg.com/postcss-value-parser/-/postcss-value-parser-3.3.1.tgz#9ff822547e2893213cf1c30efa51ac5fd1ba8281"
   integrity sha512-pISE66AbVkp4fDQ7VHBwRNXzAAKJjw4Vw7nWI/+Q3vuly7SNfgYXvm6i5IgFylHGK5sP/xHAbB7N49OS4gWNyQ==
 
-postcss@7.0.26:
-  version "7.0.26"
-  resolved "https://registry.yarnpkg.com/postcss/-/postcss-7.0.26.tgz#5ed615cfcab35ba9bbb82414a4fa88ea10429587"
-  integrity sha512-IY4oRjpXWYshuTDFxMVkJDtWIk2LhsTlu8bZnbEJA4+bYT16Lvpo8Qv6EvDumhYRgzjZl489pmsY3qVgJQ08nA==
+postcss@7.0.27:
+  version "7.0.27"
+  resolved "https://registry.yarnpkg.com/postcss/-/postcss-7.0.27.tgz#cc67cdc6b0daa375105b7c424a85567345fc54d9"
+  integrity sha512-WuQETPMcW9Uf1/22HWUWP9lgsIC+KEHg2kozMflKjbeUtw9ujvFX6QmIfozaErDkmLWS9WEnEdEe6Uo9/BNTdQ==
   dependencies:
     chalk "^2.4.2"
     source-map "^0.6.1"
@@ -5841,23 +5841,23 @@ punycode@^2.1.0:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
 
-purgecss-webpack-plugin@^2.0.5:
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/purgecss-webpack-plugin/-/purgecss-webpack-plugin-2.0.5.tgz#6ccd0be4db2011535dfd2f1d56e3d5c6637e2433"
-  integrity sha512-k7NT6FZ/ChzcOZTWtUyqAW+E29n7QEO87WWfwKDF8bjvMXsH5TqK5RvEragDQKT16RaxYCvXZkQ2chvnfFXPIg==
+purgecss-webpack-plugin@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/purgecss-webpack-plugin/-/purgecss-webpack-plugin-2.1.0.tgz#c53d73123e4f9f9d98bf17bcfbf4f4e228bcfeec"
+  integrity sha512-zbcGmlQ/RwI3tIFegZKE0KhP/G9I+IUbEgQkwEF/xkj4MBLODgy5Vg3sV/B1iAKD2jAoyfWYH+TjPd5nVgGslw==
   dependencies:
-    purgecss "^2.0.5"
+    purgecss "^2.1.0"
     webpack "^4.41.2"
     webpack-sources "^1.4.3"
 
-purgecss@^2.0.5:
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/purgecss/-/purgecss-2.0.5.tgz#b7aa3e3634704aa041d03f007504c303e8c6586e"
-  integrity sha512-VwQoDXImH0pabZ6ivLPCsWuRGd979NEzACaT/P3pWzDVCwHXSgXUM4QDbnMklMawU0r4MrCvdaORM84KJvsCIA==
+purgecss@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/purgecss/-/purgecss-2.1.0.tgz#6da655d166073824efe2532b0c6466c740d939d6"
+  integrity sha512-QnXhowNjeWo9vNnGES2LVzDXdRR/8EvG/O03m4bYOWfAX0ShmG/Pmj7brVtVBy2eaaRAmNy23L+GBc4SpDFUeQ==
   dependencies:
     commander "^4.0.0"
     glob "^7.0.0"
-    postcss "7.0.26"
+    postcss "7.0.27"
     postcss-selector-parser "^6.0.2"
 
 q@^1.1.2:
