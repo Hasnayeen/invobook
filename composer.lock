@@ -7,34 +7,6 @@
     "content-hash": "85c7804dd8a5dce17bead63489fa7da3",
     "packages": [
         {
-            "name": "Markamerling/Hospitality",
-            "version": "dev-master",
-            "dist": {
-                "type": "path",
-                "url": "./plugins/Hospitality",
-                "reference": "f2d7a9b59259d13483300ba66231eb3e7e808852"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Markamerling\\Hospitality\\HospitalityServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Markamerling\\Hospitality\\": "src/"
-                }
-            },
-            "authors": [
-                {
-                    "name": "Nehal Hasnayeen",
-                    "email": "searching.nehal@gmail.com"
-                }
-            ]
-        },
-        {
             "name": "defuse/php-encryption",
             "version": "v2.2.1",
             "source": {
@@ -8943,9 +8915,6 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "markamerling/hospitality": 20
-    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
