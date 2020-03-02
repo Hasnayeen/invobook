@@ -5,7 +5,7 @@
     <font-awesome-icon v-if="unreadNotification" :icon="faCircle" class="text-red-500 text-xs absolute -mt-1 -ml-1" aria-hidden="true"></font-awesome-icon>
   </div>
   <div v-if="currentComponent === 'notification-dropdown'" class="absolute bg-white w-72 flex flex-col mt-5 -mr-16 right-0 shadow-lg rounded z-50">
-    <div v-if="notifications.length > 0" class="h-128 overflow-y-scroll">
+    <div v-if="notifications.length > 0" class="h-128 overflow-y-auto">
       <div v-for="notification in notifications" class="flex flex-row items-center px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer border-b" href="#">
         <div class="w-16 self-start my-2">
           <img class="w-10 h-10 rounded-full mr-2" :src="generateUrl(notification.data.subject.avatar)">
