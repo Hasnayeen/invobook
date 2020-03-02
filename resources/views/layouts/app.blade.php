@@ -46,7 +46,6 @@
 <body class="bg-gray-200 text-gray-700">
     <main>
         <div id="app">
-            <div class="h-1 sticky top-0" style="background: linear-gradient(to right, #8497EC, #3958E3);"></div>
             @if (!Auth::guest())
             <loading-modal></loading-modal>
             <navbar></navbar>
