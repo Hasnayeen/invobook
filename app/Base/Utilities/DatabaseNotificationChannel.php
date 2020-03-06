@@ -18,6 +18,8 @@ class DatabaseNotificationChannel extends DatabaseChannel
     {
         return [
             'id'         => $notification->id,
+            'model_name' => $this->getData($notifiable, $notification)['object_type'],
+            'model_id'   => $this->getData($notifiable, $notification)['object_id'],
             'type'       => get_class($notification),
             'group_type' => $notification->groupType ?? null,
             'group_id'   => $notification->groupId ?? null,
