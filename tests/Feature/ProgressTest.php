@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Base\Models\Step;
 use App\Project\Models\Project;
+use App\TaskManager\Models\Step;
 use App\TaskManager\Models\Task;
 use Illuminate\Support\Facades\Event;
 

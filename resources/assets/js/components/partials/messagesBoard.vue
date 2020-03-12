@@ -119,7 +119,7 @@ export default {
     }
   },
 
-computed: {
+ computed: {
     ...mapState({
       members: state => state.members
     })

@@ -13,10 +13,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Base\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use App\Base\Utilities\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Notification;
-use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Base\Notifications\UserRegistered as UserRegisteredNotification;
-use Illuminate\Support\Facades\Log;
 
 class RegisterController extends Controller
 {

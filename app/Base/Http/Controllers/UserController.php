@@ -2,6 +2,7 @@
 
 namespace App\Base\Http\Controllers;
 
+use Exception;
 use DateTimeZone;
 use App\Base\Models\User;
 use Illuminate\Http\Request;
@@ -25,7 +26,10 @@ class UserController extends Controller
     {
         try {
             $this->authorize('invite', User::class);
-            if (! User::where('email', $request->email)->first()) {
+            $data = $request->validate([
+                'email' => 'required|email',
+            ]);
+            if (! User::where('email', $data['email'])->first()) {
                 Mail::to($request->email)
                     ->send(new SendInvitationToRegister());
 
