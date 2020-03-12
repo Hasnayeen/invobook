@@ -275,6 +275,7 @@ export default {
         axios.delete('/projects/' + this.project.id)
           .then((response) => {
             this.showNotification({type: response.data.status, message: response.data.message})
+            window.location.href = '/'
           })
           .catch((error) => {
             this.showNotification({type: error.response.data.status, message: error.response.data.message})
