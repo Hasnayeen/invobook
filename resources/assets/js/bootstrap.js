@@ -34,7 +34,7 @@ window.Vue.mixin({
       return window.location.protocol + '//' + window.location.host + '/' + value
     },
     updateUrl: function (params) {
-      let url = new URL(window.location.href)
+      const url = new URL(window.location.href)
       for (const key in params) {
         if (url.searchParams.has(key)) {
           url.searchParams.delete(key)
