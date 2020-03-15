@@ -1,7 +1,7 @@
 language: php
 
 php:
-  - '7.2'
+  - '7.4'
 
 install:
   - composer install --no-interaction --prefer-dist --no-suggest
