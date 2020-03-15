@@ -2,10 +2,10 @@
 
 namespace App\Base\Utilities\Auth;
 
-use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Auth\Events\Verified;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Auth\Events\Verified;
+use Illuminate\Auth\Access\AuthorizationException;
 
 trait VerifiesEmails
 {
@@ -27,10 +27,9 @@ trait VerifiesEmails
     /**
      * Mark the authenticated user's email address as verified.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     *
+     * @param  \Illuminate\Http\Request                       $request
      * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @return \Illuminate\Http\Response
      */
     public function verify(Request $request)
     {
@@ -64,12 +63,11 @@ trait VerifiesEmails
     /**
      * The user has been verified.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return mixed
      */
     protected function verified(Request $request)
     {
-        //
     }
 
     /**
