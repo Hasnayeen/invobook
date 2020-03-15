@@ -8,8 +8,8 @@ $factory->define(Token::class, function (Faker $faker) {
     $role = Role::first();
 
     return [
-        'token'   => random_bytes(10),
-        'email'   => $faker->safeEmail,
+        'token'   => encrypt(3),
+        'email'   => $faker->unique()->safeEmail,
         'role_id' => $faker->numberBetween(1, 5),
     ];
 });

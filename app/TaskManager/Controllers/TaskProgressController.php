@@ -2,7 +2,7 @@
 
 namespace App\TaskManager\Controllers;
 
-use App\Base\Models\Step;
+use App\TaskManager\Models\Step;
 use App\TaskManager\Models\Task;
 use App\Base\Http\Controllers\Controller;
 

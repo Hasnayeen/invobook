@@ -1,4 +1,4 @@
-FROM php:7.2-fpm
+FROM php:7.4-fpm
 
 LABEL Description="This image is used to setup Goodwork application"
 

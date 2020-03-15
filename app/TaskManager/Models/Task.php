@@ -3,7 +3,6 @@
 namespace App\TaskManager\Models;
 
 use App\Base\Models\Tag;
-use App\Base\Models\Step;
 use App\Base\Models\User;
 use App\Base\Models\Status;
 use App\Base\Models\Mention;
