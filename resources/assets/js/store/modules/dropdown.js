@@ -1,6 +1,6 @@
 export default {
   state: {
-    currentComponent: 'direct-message-box'
+    currentComponent: ''
   },
 
   mutations: {
