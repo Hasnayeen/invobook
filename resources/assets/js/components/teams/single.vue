@@ -312,7 +312,7 @@ export default {
       .catch((error) => {
         this.showNotification({type: error.response.data.status, message: error.response.data.message})
       })
-}
+    }
   }
 }
 </script>
