@@ -67,7 +67,7 @@
             <li @click="showModal('settingsModal')" class="px-4 py-2 hover:bg-indigo-500 hover:text-white text-gray-600 font-medium cursor-pointer">
               Settings
             </li>
-            <li class="px-4 py-2 hover:bg-indigo-500 hover:text-white text-gray-600 font-medium cursor-pointer">
+            <li @click="deleteOffice" class="px-4 py-2 hover:bg-indigo-500 hover:text-white text-gray-600 font-medium cursor-pointer">
               Delete
             </li>
           </ul>
@@ -267,6 +267,16 @@ export default {
             this.showNotification({type: error.response.data.status, message: error.response.data.message})
           })
       }
+    },
+    deleteOffice () {
+    axios.delete('/offices/' + this.office.id)
+      .then((response) => {
+        this.showNotification({type: response.data.status, message: response.data.message})
+        window.location.href = '/'
+      })
+      .catch((error) => {
+        this.showNotification({type: error.response.data.status, message: error.response.data.message})
+      })
     }
   }
 }
