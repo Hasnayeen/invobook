@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Base\Models\PermissionSetting;
 use App\Base\Models\RoleHasPermission;
+use Carbon\Carbon;
 
 class RoleHasPermissionTableSeeder extends Seeder
 {
@@ -13,10 +14,16 @@ class RoleHasPermissionTableSeeder extends Seeder
      */
     public function run()
     {
+        $now = Carbon::now();
+
         $permissions = PermissionSetting::where('group_related', false)->get();
-        RoleHasPermission::insert($permissions->each(function ($item, $key) {
-            unset($item->id);
-            unset($item->group_related);
+        RoleHasPermission::insert($permissions->map(function ($item, $key) use ($now) {
+            return [
+                "role_id" => $item->role_id,
+                "permission_id" => $item->permission_id,
+                "created_at" => $now,
+                "updated_at" => $now,
+            ];
         })->toArray());
     }
 }
