@@ -128,7 +128,7 @@ export default {
       this.dropdownMenuShown = false
     },
     showDate (createdAt) {
-      let createdDay = luxon.DateTime.fromSQL(createdAt).toLocaleString(luxon.DateTime.DATE_MED)
+      let createdDay = luxon.DateTime.fromISO(createdAt).toLocaleString(luxon.DateTime.DATE_MED)
       if (day === null || day !== createdDay) {
         day = createdDay
         return true
@@ -136,13 +136,13 @@ export default {
       return false
     },
     getDate (createdAt) {
-      return luxon.DateTime.fromSQL(createdAt).toLocaleString(luxon.DateTime.DATE_MED)
+      return luxon.DateTime.fromISO(createdAt).toLocaleString(luxon.DateTime.DATE_MED)
     },
     getTime (createdAt) {
       if (this.user.timezone) {
-        return luxon.DateTime.fromSQL(createdAt, {zone: 'UTC'}).setZone(this.user.timezone).toLocaleString(luxon.DateTime.TIME_SIMPLE)
+        return luxon.DateTime.fromISO(createdAt).setZone(this.user.timezone).toLocaleString(luxon.DateTime.TIME_SIMPLE)
       }
-      return luxon.DateTime.fromSQL(createdAt, {zone: 'UTC'}).setZone('local').toLocaleString(luxon.DateTime.TIME_SIMPLE)
+      return luxon.DateTime.fromISO(createdAt).setZone('local').toLocaleString(luxon.DateTime.TIME_SIMPLE)
     }
   }
 }

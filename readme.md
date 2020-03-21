@@ -1,10 +1,9 @@
 [![License](http://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/iluminar/goodwork/blob/dev/LICENSE)
 [![Build Status](https://travis-ci.org/iluminar/goodwork.svg?branch=dev)](https://travis-ci.org/iluminar/goodwork)
 [![Stable Version](https://poser.pugx.org/iluminar/goodwork/v/stable)](https://github.com/iluminar/goodwork)
-[![Laravel Version](https://img.shields.io/badge/Laravel-6.0-brightgreen.svg?style=flat)](https://github.com/laravel/laravel)
-[![VueJS Version](https://img.shields.io/badge/vue-2.5.13-brightgreen.svg?style=flat)](https://github.com/vuejs/vue)
+[![Laravel Version](https://img.shields.io/badge/Laravel-7.0-brightgreen.svg?style=flat)](https://github.com/laravel/laravel)
+[![VueJS Version](https://img.shields.io/badge/vue-2.5-brightgreen.svg?style=flat)](https://github.com/vuejs/vue)
 [![codecov](https://codecov.io/gh/iluminar/goodwork/branch/master/graph/badge.svg)](https://codecov.io/gh/iluminar/goodwork)
-[![StyleCI](https://styleci.io/repos/81873619/shield?branch=dev&style=flat)](https://styleci.io/repos/81873619)
 [![Join on discord](https://img.shields.io/badge/join%20on-discord-orange)](https://discord.gg/4DvTQsc)
 [![Join on goodwork](https://img.shields.io/badge/join%20on-goodwork-orange.svg)](https://goodworkfor.life/register/invite-link/ovCPAFpnwIhrvqUrlvynarP9HVRBC5mH)
 
@@ -59,33 +58,7 @@ You can test a live instance of Goodwork that we use (as a guest user) using the
 
 ## Screenshots <small>[↑Top](#about-goodwork)</small>
 
-![Dashboard](https://i.imgur.com/oPlF1bi.png)
-
-![Create Task Form](https://i.imgur.com/QlkS0IJ.png)
-
-![Task Board](https://i.imgur.com/sfl2hLr.png)
-
-![Task Details](https://i.imgur.com/J6wKeNL.png)
-
-![Discussion Board](https://i.imgur.com/DgsIScx.png)
-
-![Create Discussion Form](https://i.imgur.com/gHKGAjc.png)
-
-![Discussion Details](https://i.imgur.com/NchQpJE.png)
-
-![Files Board](https://i.imgur.com/iaQDmQR.png)
-
-![Message Board](https://i.imgur.com/neakUm5.png)
-
-![Direct Message](https://i.imgur.com/C3kbApV.png)
-
-![Profile Page](https://i.imgur.com/MOS2k8l.png)
-
-![Account Page](https://i.imgur.com/TelYaCs.png)
-
-![Activities](https://i.imgur.com/FfYSOq1.png)
-
-![Roles Board](https://i.imgur.com/TfRMzuf.png)
+![Dashboard](https://i.imgur.com/86mwtxo.png)
 
 ## Contributing <small>[↑Top](#about-goodwork)</small>
 
@@ -96,6 +69,8 @@ You can join the Goodwork Project via this link [link](https://goodworkfor.life/
 Also you can join the slack channel via this [link](https://discord.gg/4DvTQsc)
 
 ## Supporting <small>[↑Top](#about-goodwork)</small>
+
+### Be a sponsor
 
 Goodwork is an MIT-licensed open source project with its ongoing development made possible thanks to the support by our amazing backers.
 
@@ -109,6 +84,10 @@ You can also fund specific issues on Issuehunt and the money will be distributed
 
 [![issuehunt-to-marktext](https://github.com/BoostIO/issuehunt-materials/raw/master/v1/issuehunt-button-v1.svg?sanitize=true)](https://issuehunt.io/repos/81873619)
 
+### Professional Support
+
+If you need professional support or custom functioanlity please send an e-mail to searching.nehal@gmail.com.
+
 ## Security Vulnerabilities <small>[↑Top](#about-goodwork)</small>
 
 If you discover a security vulnerability within Goodwork, please send an e-mail to searching.nehal@gmail.com instead of creating new issue. All security vulnerabilities will be promptly addressed.
@@ -116,8 +95,6 @@ If you discover a security vulnerability within Goodwork, please send an e-mail 
 ## Credits <small>[↑Top](#about-goodwork)</small>
 
 - Author: [Nehal Hasnayeen](https://github.com/Hasnayeen) (https://hasnayeen.github.io)
-
-- Logo Credit: [Nehal Hasnayeen](https://github.com/Hasnayeen) (Improved upon earlier version by [Malcolm Nihlén](https://github.com/scriptcoded))
 
 - Illustrations Credit: [Undraw](https://undraw.co/)
 
