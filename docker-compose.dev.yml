@@ -66,6 +66,7 @@ services:
       - ./laravel-echo-server.dev.json:/usr/src/app/laravel-echo-server.json
       - ./docker/echo-server.sh:/usr/src/app/echo-server.sh
       - ./:/var/www
+      - ./docker/certs:/etc/ssl/certs
     working_dir: /usr/src/app
     command: bash -c "./echo-server.sh"
     depends_on:
