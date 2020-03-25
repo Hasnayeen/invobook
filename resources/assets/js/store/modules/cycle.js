@@ -22,6 +22,10 @@ export default {
       } else {
         state.selectedCycleId = cycleId
       }
+    },
+    refreshedCycle(state){
+      state.selectedCycle = null
+      state.selectedCycleId = 0
     }
   },
 
@@ -45,6 +49,9 @@ export default {
         commit('selectCycle', cycle)
         commit('selectCycleId', cycle.id)
       }
+    },
+    refreshCycle({commit}){
+      commit('refreshedCycle');
     }
   }
 }
