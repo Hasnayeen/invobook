@@ -23,10 +23,10 @@
         </div>
       </div>
     </div>
-    <div v-if="notifications.length === 0" class="px-4 py-2 text-sm text-gray-600 block">No unread notifications. You're all caught up</div>
+    <div v-if="notifications.length === 0" class="px-4 py-2 text-sm text-gray-600 block">{{ 'No unread notifications. You\'re all caught up' | localize }}</div>
     <span class="block border-t"></span>
     <a class="list-reset w-full px-4 py-2 text-blue-400 text-sm text-center no-underline block" href="/notifications">
-      View All
+      {{ 'View All' | localize }}
     </a>
   </div>
 </div>

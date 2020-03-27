@@ -8,7 +8,7 @@
         <div class="flex justify-between items-center w-full">
           <div class="flex flex-col">
             <div class="text-xs font-normal text-gray-700 flex">
-              <div v-for="(place, index) in breadcrumb" @click="setActiveView(place)" class="mr-1 cursor-pointer">{{ place | capitalize }} > </div>
+              <div v-for="(place, index) in breadcrumb" @click="setActiveView(place)" class="mr-1 cursor-pointer">{{ place | capitalize | localize }} > </div>
               {{office.name}}
             </div>
             {{office.name}}
@@ -16,7 +16,7 @@
           <!-- Cycle -->
           <div class="text-gray-600 flex items-center text-sm border rounded-full">
             <span class="border-r py-1 px-3">
-              Cycle
+              {{ 'Cycle' | localize }}
             </span>
             <div v-if="this.selectedCycle" @click="showModal('cycleModal')" class="px-3 py-1 cursor-pointer rounded-r-full bg-indigo-100 text-indigo-700 inline">
               <span v-if="this.selectedCycle.name">
@@ -27,7 +27,7 @@
               </span>
             </div>
             <span v-else @click="showModal('cycleModal')" class="px-3 py-1 cursor-pointer rounded-r-full bg-indigo-100 text-indigo-700">
-              Click to set a Cycle
+              {{ 'Click to set a Cycle' | localize }}
             </span>
           </div>
           <!-- Cycle -->
@@ -46,7 +46,7 @@
         <!-- Settings Button -->
         <span v-if="authenticated" @click="toggleDropdownMenu" v-click-outside="closeDropdownMenu" class="bg-white p-2 text-sm rounded border border-gray-400 ml-4 cursor-pointer flex items-center">
           <font-awesome-icon :icon="faCog" class="mr-2"></font-awesome-icon>
-          Settings
+          {{ 'Settings' | localize }}
         </span>
 
         <!-- Dropdown Menu -->
@@ -56,19 +56,19 @@
               {{ office.public ? 'Make Private' : 'Make Public'}}
             </li>
             <li v-if="settings.roadmap_enabled" @click="showModal('roadmapModal')" class="px-4 py-2 hover:bg-indigo-500 hover:text-white text-gray-600 font-medium cursor-pointer">
-              Roadmap
+              {{ 'Roadmap' | localize }}
             </li>
             <li @click="showModal('memberListModal')" class="px-4 py-2 hover:bg-indigo-500 hover:text-white text-gray-600 font-medium cursor-pointer">
-              Show All Members
+              {{ 'Show All Members' | localize }}
             </li>
             <li @click="showModal('permissionSettingsModal')" class="px-4 py-2 hover:bg-indigo-500 hover:text-white text-gray-600 font-medium cursor-pointer">
-              Permissions Settings
+              {{ 'Permissions Settings' | localize }}
             </li>
             <li @click="showModal('settingsModal')" class="px-4 py-2 hover:bg-indigo-500 hover:text-white text-gray-600 font-medium cursor-pointer">
-              Settings
+              {{ 'Settings' | localize }}
             </li>
             <li @click="deleteOffice" class="px-4 py-2 hover:bg-indigo-500 hover:text-white text-gray-600 font-medium cursor-pointer">
-              Delete
+              {{ 'Delete' | localize }}
             </li>
           </ul>
         </div>

@@ -1,7 +1,7 @@
 <template>
   <div v-if="authenticated && activeTab === 'activities'" class="w-full mx-2 md:mx-auto">
     <div v-if="activities.length === 0" class="flex flex-col items-center pt-8">
-      <div class="pb-8">A timeline of acitivities will show up when people starts working</div>
+      <div class="pb-8">{{ 'A timeline of acitivities will show up when people starts working' | localize }}</div>
       <img src="/image/activity.svg" alt="activities" class="w-96">
     </div>
 
@@ -9,7 +9,7 @@
       <div class="mx-4 py-4 flex flex-row items-center relative">
         <select v-model="activity" class="w-full block appearance-none bg-white border border-gray-500 rounded text-gray-800 py-3 px-4 pr-8">
           <option value="activity" disabled hidden>{{ 'Filter by Activity' | localize }}</option>
-          <option :value="1" class="my-2 text-lg">name</option>
+          <option :value="1" class="my-2 text-lg">{{ 'name' | localize }}</option>
         </select>
         <font-awesome-icon :icon="faChevronDown"
           class="pointer-events-none items-center text-gray-600 absolute right-0 mr-3">
@@ -18,7 +18,7 @@
       <div class="mx-4 py-4 flex flex-row items-center relative">
         <select v-model="user" class="w-full block appearance-none bg-white border border-gray-500 rounded text-gray-800 py-3 px-4 pr-8">
           <option value="user" disabled hidden>{{ 'Filter by User' | localize }}</option>
-          <option :value="2" class="my-2 text-lg">name</option>
+          <option :value="2" class="my-2 text-lg">{{ 'name' | localize }}</option>
         </select>
         <font-awesome-icon :icon="faChevronDown"
           class="w-1/6 pointer-events-none items-center text-gray-600 absolute right-0 mr-3">
@@ -27,7 +27,7 @@
       <div class="mx-4 py-4 flex flex-row items-center relative">
         <select v-model="date" class="w-full block appearance-none bg-white border border-gray-500 rounded text-gray-800 py-3 px-4 pr-8">
           <option value="date" disabled hidden>{{ 'Filter by Date' | localize }}</option>
-          <option :value="3" class="my-2 text-lg">name</option>
+          <option :value="3" class="my-2 text-lg">{{ 'name' | localize }}</option>
         </select>
         <font-awesome-icon :icon="faChevronDown"
           class="w-1/6 pointer-events-none items-center text-gray-600 absolute right-0 mr-3">
