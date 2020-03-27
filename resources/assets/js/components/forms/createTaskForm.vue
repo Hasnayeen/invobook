@@ -156,7 +156,7 @@ export default {
     dueOnDate: null,
     cycleId: null,
     disabledDates: {
-      to: new Date(),
+      to: '',
       from: ''
     },
     tags: [],
@@ -293,10 +293,19 @@ export default {
       this.relatedTo = ''
     },
     changeDueDate(value) {
-      let todayDate = new Date()
       let cycleSelected = this.cycles.find(cycle => cycle.id === value)
+      let todayDate = new Date()
+      let startDate = new Date(cycleSelected.start_date)
+      startDate.setDate(startDate.getDate() + 1)
       let endDate = new Date(cycleSelected.end_date)
       endDate.setDate(endDate.getDate() + 1)
+
+      if(todayDate.getTime() < startDate.getTime()){
+        this.disabledDates.to = new Date(startDate)
+      }else {
+        this.disabledDates.to = new Date(todayDate)
+      }
+
       this.disabledDates.from = new Date(endDate)
       this.dueOnDate = null
     }
