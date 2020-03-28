@@ -295,6 +295,7 @@ export default {
     changeDueDate(value) {
       let cycleSelected = this.cycles.find(cycle => cycle.id === value)
       let todayDate = new Date()
+      todayDate.setDate(todayDate.getDate() - 1)
       let startDate = new Date(cycleSelected.start_date)
       startDate.setDate(startDate.getDate())
       let endDate = new Date(cycleSelected.end_date)
