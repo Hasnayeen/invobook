@@ -296,7 +296,7 @@ export default {
       let cycleSelected = this.cycles.find(cycle => cycle.id === value)
       let todayDate = new Date()
       let startDate = new Date(cycleSelected.start_date)
-      startDate.setDate(startDate.getDate() + 1)
+      startDate.setDate(startDate.getDate())
       let endDate = new Date(cycleSelected.end_date)
       endDate.setDate(endDate.getDate() + 1)
 
