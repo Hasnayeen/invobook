@@ -151,7 +151,9 @@ class RegisterController extends Controller
     protected function registered(Request $request, $user)
     {
         $office = Office::where('name', 'Headquarter')->first();
-        $user->offices()->attach($office->id);
+        if ($office) {
+            $user->offices()->attach($office->id);
+        }
         Mail::to($user->email)
             ->send(new UserRegistered($user));
         Notification::send($this->getRecipients(), new UserRegisteredNotification($user));
