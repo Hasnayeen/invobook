@@ -4,19 +4,19 @@
     <div class="bg-gray-100 rounded shadow-lg">
       <div class="text-2xl text-gray-700 text-center font-semibold px-8 py-6">
           <div class="text-sm">
-            Title <span class="text-gray-500 capitalize">(required)</span>
+            {{'Title' | localize }} <span class="text-gray-500 capitalize">({{'required' | localize }})</span>
           </div>
-          <input ref="focusInput" v-model="name" class="appearance-none block w-full bg-gray-100 text-gray-800 text-center rounded py-3 px-4" type="text" placeholder="Title of your task" required>
+          <input ref="focusInput" v-model="name" class="appearance-none block w-full bg-gray-100 text-gray-800 text-center rounded py-3 px-4" type="text" :placeholder="$options.filters.localize('Title of your task')" required>
       </div>
       <div class="bg-white flex flex-row flex-wrap justify-between lg:flex-no-wrap pt-4">
         <!-- Assignee -->
         <div>
           <label class="text-sm text-gray-600 px-8" for="assignee">
-            Assignee
+            {{'Assignee' | localize }}
           </label>
           <div class="flex flex-row items-center mx-8 py-2 relative">
             <select v-model="assignedTo" class="w-40 appearance-none cursor-pointer bg-white text-gray-800 border py-3 pl-4 pr-8 rounded" name="assignee">
-              <option selected="true" disabled="disabled" :value="null">Add assignee</option>
+              <option selected="true" disabled="disabled" :value="null">{{'Add assignee' | localize }}</option>
               <template v-for="member in resource.members">
                 <option :value="member.user_id" class="my-2 text-lg">{{ member.name }}</option>
               </template>
@@ -29,20 +29,20 @@
         <!-- Due Date -->
         <div>
           <label class="text-sm text-gray-600 px-8" name="due-date">
-            Due On
+            {{'Due On' | localize }}
           </label>
           <div class="flex flex-row items-center mx-8 py-2 relative">
-            <datepicker v-model="dueOnDate" ref="dueOnDate" :disabled-dates="disabledDates" placeholder="Select Date" format="yyyy-MM-dd" input-class="appearance-none text-gray-800 w-32" wrapper-class="w-40 appearance-none text-gray-800 border py-3 px-4 rounded"></datepicker>
+            <datepicker v-model="dueOnDate" ref="dueOnDate" :disabled-dates="disabledDates" :placeholder="$options.filters.localize('Select Date')" format="yyyy-MM-dd" input-class="appearance-none text-gray-800 w-32" wrapper-class="w-40 appearance-none text-gray-800 border py-3 px-4 rounded"></datepicker>
           </div>
         </div>
         <!-- Cycle -->
         <div>
           <label class="text-sm text-gray-600 px-8" for="cycle">
-            Cycle
+              {{'Cycle' | localize }}
           </label>
           <div class="flex flex-row items-center mx-8 py-2 relative">
             <select v-model="cycleId" class="w-40 appearance-none cursor-pointer bg-white text-gray-800 border py-3 pl-4 pr-8 rounded" name="cycle">
-              <option selected disabled hidden value="">Select a Cycle</option>
+              <option selected disabled hidden value="">{{'Select a Cycle' | localize }}</option>
               <template v-for="cycle in cycles">
                 <option :value="cycle.id" class="my-2 text-lg">{{ cycle.name ? cycle.name : cycle.start_date + ' - ' + cycle.end_date }}</option>
               </template>
@@ -55,11 +55,11 @@
         <!-- Related To -->
         <div>
           <label class="text-sm text-gray-600 px-8" for="related-to">
-            Related To
+            {{ 'Related To' | localize }}
           </label>
           <div class="flex flex-row items-center mx-8 py-2 relative">
             <select v-model="relatedTo" class="w-40 appearance-none cursor-pointer bg-white text-gray-800 border py-3 pl-4 pr-8 rounded" name="related-to">
-              <option selected disabled hidden value="">Select a Task</option>
+              <option selected disabled hidden value="">{{'Select a Task' | localize }}</option>
               <template v-for="otherTask in tasks">
                 <option v-if="!task || (task && otherTask.id !== task.id)" :value="otherTask.id" class="my-2 text-lg">{{ otherTask.name }}</option>
               </template>
@@ -72,15 +72,15 @@
       </div>
       <div class="px-8 py-4 bg-white">
         <label class="text-sm text-gray-600" for="description">
-          Description
+          {{ 'Description' | localize }}
         </label>
         <div class="py-2">
-          <textarea v-model="notes" class="appearance-none block w-full text-gray-800 border border-gray-200 rounded py-3 px-4 resize-none" placeholder="Description" name="description" rows="2"></textarea>
+          <textarea v-model="notes" class="appearance-none block w-full text-gray-800 border border-gray-200 rounded py-3 px-4 resize-none" :placeholder="$options.filters.localize('Description')" name="description" rows="2"></textarea>
         </div>
       </div>
       <div class="px-8 py-4 bg-white">
         <div class="" v-click-outside="dontShowTags">
-          <label class="block uppercase tracking-wide text-gray-800 text-xs font-bold mb-2" for="tags">Tags</label>
+          <label class="block uppercase tracking-wide text-gray-800 text-xs font-bold mb-2" for="tags">{{ 'Tags' | localize }}</label>
           <div class="p-2 rounded">
             <div class="flex flex-row flex-wrap">
               <div v-for="tag in tags" class="flex items-center mx-1 my-1 py-1 px-3 bg-indigo-200 font-semibold text-indigo-700 rounded-full">
@@ -94,7 +94,7 @@
                 type="text"
                 name="tags"
                 class="text-indigo-700 bg-indigo-100 rounded-full w-24 p-1 px-2 m-1 cursor-pointer"
-                value="+ Add Tag"
+                :value="`+ ${$options.filters.localize('Add Tag')}`"
                 readonly>
             </div>
           </div>
@@ -106,9 +106,9 @@
         </div>
       </div>
       <div class="flex flex-row justify-end py-6 px-8 bg-gray-100 rounded">
-        <button @click="closeCreateTaskForm" class="border border-gray-400 bg-white text-gray-700 font-medium py-2 px-4 mr-4 rounded">Cancel</button>
-        <button v-if="task" @click="updateTask" class="bg-indigo-600 text-white font-medium py-2 px-4 rounded">Save</button>
-        <button v-else @click="createTask" class="bg-indigo-600 text-white font-medium py-2 px-4 rounded">Create</button>
+        <button @click="closeCreateTaskForm" class="border border-gray-400 bg-white text-gray-700 font-medium py-2 px-4 mr-4 rounded">{{ 'Cancel' | localize }}</button>
+        <button v-if="task" @click="updateTask" class="bg-indigo-600 text-white font-medium py-2 px-4 rounded">{{ 'Save' | localize }}</button>
+        <button v-else @click="createTask" class="bg-indigo-600 text-white font-medium py-2 px-4 rounded">{{ 'Create' | localize }}</button>
       </div>
     </div>
     <div class="h-16"></div>

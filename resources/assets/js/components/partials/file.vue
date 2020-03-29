@@ -14,7 +14,7 @@
       </div>
       <div v-if="(file.owner_id === user.id) && dropdownMenuShown" class="absolute rounded shadow-lg top-0 mt-8 -ml-8 p-3 text-gray-800 bg-white hover:bg-indigo-200 left-0 z-10">
         <div @click="deleteFile" class="cursor-pointer">
-          Delete
+          {{ 'Delete' | localize }}
         </div>
       </div>
     </div>
