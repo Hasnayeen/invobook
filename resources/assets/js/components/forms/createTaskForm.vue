@@ -156,7 +156,8 @@ export default {
     dueOnDate: null,
     cycleId: null,
     disabledDates: {
-      to: new Date()
+      to: '',
+      from: ''
     },
     tags: [],
     availableTags: [],
@@ -175,6 +176,11 @@ export default {
         if (this.task) {
           this.hydrateForm()
         }
+      }
+    },
+    cycleId: function(value, oldValue) {
+      if(value){
+        this.changeDueDate(value)
       }
     }
   },
@@ -285,6 +291,24 @@ export default {
       this.assignedTo = ''
       this.dueOnDate = null
       this.relatedTo = ''
+    },
+    changeDueDate(value) {
+      let cycleSelected = this.cycles.find(cycle => cycle.id === value)
+      let todayDate = new Date()
+      todayDate.setDate(todayDate.getDate() - 1)
+      let startDate = new Date(cycleSelected.start_date)
+      startDate.setDate(startDate.getDate())
+      let endDate = new Date(cycleSelected.end_date)
+      endDate.setDate(endDate.getDate() + 1)
+
+      if(todayDate.getTime() < startDate.getTime()){
+        this.disabledDates.to = new Date(startDate)
+      }else {
+        this.disabledDates.to = new Date(todayDate)
+      }
+
+      this.disabledDates.from = new Date(endDate)
+      this.dueOnDate = null
     }
   },
 }
