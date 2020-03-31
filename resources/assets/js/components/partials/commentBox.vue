@@ -2,7 +2,7 @@
 <div v-if="show">
   <div class="flex flex-row items-center border-b pt-8 pb-2">
     <div class="text-gray-600 text-xl pr-2">
-      Comments 
+      {{ 'Comments' | localize }} 
     </div>
     <div class="rounded-full bg-indigo-500 flex items-center justify-center w-8 h-8">
       <span class="text-white text-sm font-semibold">{{ comments.length }}</span>
@@ -11,7 +11,7 @@
   <div class="py-6">
     <textarea class="static bg-white textarea resize-none rounded w-full p-4 text-gray-800"
       :id="'save-comment'"
-      placeholder="write your comment here"
+      :placeholder="$options.filters.localize('write your comment here')"
       rows=1
       v-model="body"
       @keyup="checkForMention($event)"
@@ -25,12 +25,12 @@
       :suggestionHighlightIndex="suggestionHighlightIndex"
       :suggestionHighlightDirection="suggestionHighlightDirection"
       @selected="userSelected"></user-suggestion-box>
-    <div v-if="name.length < 1" class="absolute text-xs text-gray-600 pt-2">Press enter <span class="bg-gray-500 px-2 py-1 rounded text-white font-bold">↵</span> to save</div>
+    <div v-if="name.length < 1" class="absolute text-xs text-gray-600 pt-2">{{ 'Press enter' | localize }} <span class="bg-gray-500 px-2 py-1 rounded text-white font-bold">↵</span> {{ 'to save' | localize }}</div>
   </div>
   <div>
     <div v-for="(comment, index) in comments" :key="comment.id" class="my-6">
       <div class="text-xs text-gray-600 pb-2 ml-10">
-        {{ comment.user.name }} on {{ comment.date }}
+        {{ comment.user.name }} {{ 'on' | localize }} {{ comment.date }}
       </div>
       <div class="flex flex-row items-center">
         <div class="z-10">

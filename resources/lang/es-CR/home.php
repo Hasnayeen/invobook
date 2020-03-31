@@ -1,0 +1,27 @@
+<?php
+
+return [
+    'Home'                                                     => 'Inicio',
+    'Projects'                                                 => 'Proyectos',
+    'Teams'                                                    => 'Equipos',
+    'Offices'                                                  => 'Oficinas',
+    'Create new project'                                       => 'Crear nuevo proyecto',
+    'Create new team'                                          => 'Crear nuevo equipo',
+    'Create new office'                                        => 'Crear nueva oficina',
+    'What\'s on your plate today'                              => 'Lo que hay en tus penditentes para hoy',
+    'There is currently no work "In Progress" assigned to you' => 'Actualmente no tienes trabajo "En Progreso" asignado',
+    'Due on'                                                   => 'A entregar en',
+    'Progress'                                                 => 'Progreso',
+    'No progress update yet'                                   => 'No hay progreso aun',
+    'Last updated'                                             => 'Última actualización',
+    'Done'                                                     => 'Completo',
+    'Unknown'                                                  => 'Desconocido',
+    'Other tasks in progress'                                  => 'Otras tareas en progreso',
+    'All Projects'                                             => 'Todos los Proyectos',
+    'Title'                                                    => 'Titulo',
+    'Description'                                              => 'Descripcion',
+    'Cancel'                                                   => 'Cancelar',
+    'Create'                                                   => 'Crear',
+    'All Teams'                                                => 'Todos Los Equipos',
+    'All Offices'                                              => 'Todas Las Oficinas',
+];

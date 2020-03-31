@@ -11,8 +11,8 @@
             {{ file.name }}
           </div>
           <div class="text-sm">
-            by
-            <a :href="file.owner.username" class="text-blue-700 font-medium text-base"> {{ file.owner.name }}</a> on 
+            {{ 'by' | localize }}
+            <a :href="file.owner.username" class="text-blue-700 font-medium text-base"> {{ file.owner.name }}</a> {{ 'on' | localize }} 
             <span class="text-base"> {{ file.date }}</span>
           </div>
         </div>

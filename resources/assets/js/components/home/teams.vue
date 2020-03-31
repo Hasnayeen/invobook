@@ -12,19 +12,19 @@
           </div>
         </div>
         <p class="py-2">
-          <label for="title" class="text-sm text-gray-700">Title</label>
+          <label for="title" class="text-sm text-gray-700">{{ 'Title' | localize }}</label>
           <input name="title" ref="focusInput" class="w-full appearance-none border rounded mt-2 py-2 px-3 text-gray-800" type="text" v-model="name">
           <span class="hidden"></span>
         </p>
         <p class="py-2">
-          <label for="description" class="text-sm text-gray-700">Description</label>
+          <label for="description" class="text-sm text-gray-700">{{ 'Description' | localize }}</label>
           <textarea name="description" id="" cols="30" rows="2" v-model="description" class="w-full appearance-none resize-none border rounded mt-2 py-2 px-3 text-gray-800"></textarea>
           <span class="hidden"></span>
         </p>
       </div>
       <div class="flex flex-row justify-end bg-gray-200 p-6 rounded-b-lg">
-        <button @click="closeCreateTeamModal" class="border bg-white py-2 px-3 mr-4 rounded">Cancel</button>
-        <button @click="createTeam" class="bg-indigo-400 text-white font-medium hover:bg-indigo-600 py-2 px-3 rounded">Create</button>
+        <button @click="closeCreateTeamModal" class="border bg-white py-2 px-3 mr-4 rounded">{{ 'Cancel' | localize }}</button>
+        <button @click="createTeam" class="bg-indigo-400 text-white font-medium hover:bg-indigo-600 py-2 px-3 rounded">{{ 'Create' | localize }}</button>
       </div>
     </div>
   </div>
@@ -38,7 +38,7 @@
 
   <!-- Teams -->
   <div class="my-4 pb-1 border-b border-gray-400">
-    All Teams ({{ teams.length }})
+    {{ 'All Teams' | localize }} ({{ teams.length }})
   </div>
   <div id="teams-list" class="sm:-mx-4 md:-mx-12 lg:-mx-4 xl:-mx-10 flex flex-row flex-wrap justify-start">
     <team v-for="(team, index) in teams" :key="team.id" :index="index" :details="team"></team>

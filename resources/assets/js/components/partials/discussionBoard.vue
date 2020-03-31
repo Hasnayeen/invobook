@@ -33,7 +33,7 @@
     </div>
   </div>
   <div v-if="discussions.length === 0" class="flex flex-col items-center pt-8">
-    <div class="pb-4 text-lg">Have an idea or question? Create a Discussion</div>
+    <div class="pb-4 text-lg">{{ 'Have an idea or question? Create a Discussion' | localize }}</div>
     <img src="/image/discussions.svg" alt="discussion post" class="w-80">
   </div>
 </div>

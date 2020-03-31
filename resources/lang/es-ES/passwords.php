@@ -17,5 +17,4 @@ return [
     'sent'     => 'Te hemos enviado un e-mail con el link para reiniciar tu contraseña!',
     'token'    => 'Este token de renicio de contraseña es inválido.',
     'user'     => 'No hemos encontrado ningun usuario con ese e-mail.',
-
 ];

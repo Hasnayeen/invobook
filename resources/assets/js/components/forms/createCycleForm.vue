@@ -4,26 +4,26 @@
     <div class="p-4">
       <div class="p-4">
         <label class="block uppercase tracking-wide text-gray-800 text-xs font-bold mb-2" for="name">
-          Name <span class="text-gray-500 capitalize">(required)</span>
+          {{'Name' | localize }} <span class="text-gray-500 capitalize">({{'required' | localize }})</span>
         </label>
-        <input ref="focusInput" v-model="name" id="name" class="appearance-none block w-full bg-gray-200 text-gray-800 border border-gray-200 rounded py-3 px-4" type="text" placeholder="June Release" required>
+        <input ref="focusInput" v-model="name" id="name" class="appearance-none block w-full bg-gray-200 text-gray-800 border border-gray-200 rounded py-3 px-4" type="text" :placeholder="$options.filters.localize('June Release')" required>
       </div>
       <div class="p-4">
         <label class="block uppercase tracking-wide text-gray-800 text-xs font-bold mb-2" for="start_date">
-          Start Date <span class="text-gray-500 capitalize">(required)</span>
+          {{'Start Date' | localize }} <span class="text-gray-500 capitalize">({{'required' | localize }})</span>
         </label>
-        <datepicker v-model="startDate" ref="startDate" id="start_date" placeholder="Select Date" format="yyyy-MM-dd" input-class="appearance-none bg-gray-200 text-gray-800 w-full" wrapper-class="appearance-none block w-full bg-gray-200 text-gray-800 border border-gray-200 rounded py-3 px-4"></datepicker>
+        <datepicker v-model="startDate" ref="startDate" id="start_date" :placeholder="$options.filters.localize('Select Date')" format="yyyy-MM-dd" input-class="appearance-none bg-gray-200 text-gray-800 w-full" wrapper-class="appearance-none block w-full bg-gray-200 text-gray-800 border border-gray-200 rounded py-3 px-4"></datepicker>
       </div>
       <div class="p-4">
         <label class="block uppercase tracking-wide text-gray-800 text-xs font-bold mb-2" for="end_date">
-          End Date <span class="text-gray-500 capitalize">(required)</span>
+          {{'End Date' | localize }} <span class="text-gray-500 capitalize">({{'required' | localize }})</span>
         </label>
-        <datepicker v-model="endDate" ref="endDate" :disabled-dates="disabledDates" id="end_date" placeholder="Select Date" format="yyyy-MM-dd" input-class="appearance-none bg-gray-200 text-gray-800 w-full" wrapper-class="appearance-none block w-full bg-gray-200 text-gray-800 border border-gray-200 rounded py-3 px-4"></datepicker>
+        <datepicker v-model="endDate" ref="endDate" :disabled-dates="disabledDates" id="end_date" :placeholder="$options.filters.localize('Select Date')" format="yyyy-MM-dd" input-class="appearance-none bg-gray-200 text-gray-800 w-full" wrapper-class="appearance-none block w-full bg-gray-200 text-gray-800 border border-gray-200 rounded py-3 px-4"></datepicker>
       </div>
     </div>
     <div class="flex flex-row justify-between py-4 px-8 bg-gray-200 rounded">
-      <button @click="closeCreateForm" class="text-red-300 hover:font-bold hover:text-red-400">Cancel</button>
-      <button @click="createCycle" class="bg-indigo-400 text-white font-medium hover:bg-indigo-600 py-4 px-8 rounded">Create</button>
+      <button @click="closeCreateForm" class="text-red-300 hover:font-bold hover:text-red-400">{{'Cancel' | localize }}</button>
+      <button @click="createCycle" class="bg-indigo-400 text-white font-medium hover:bg-indigo-600 py-4 px-8 rounded">{{'Create' | localize }}</button>
     </div>
   </div>
 

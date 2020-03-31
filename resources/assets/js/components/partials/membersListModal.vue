@@ -3,7 +3,7 @@
   <div class="absolute container mx-4 md:mx-auto w-full md:max-w-2xl bg-gray-100 rounded shadow-lg z-40" style="top: 10vh;left: 0;right: 0;">
     <div class="m-auto flex-col flex">
         <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold text-center text-lg p-4 rounded" for="user">
-          Members List
+          {{'Members List' | localize }}
         </label>
 
       <ul v-for="(member, index) in members" :key="member.id" class="list-reset">
@@ -21,7 +21,7 @@
       </ul>
 
       <div class="flex flex-row-reverse p-4 rounded-b">
-        <button @click="closeModal" class="text-red-400 hover:font-bold">Close</button>
+        <button @click="closeModal" class="text-red-400 hover:font-bold">{{'Close' | localize }}</button>
       </div>
     </div>
   </div>
