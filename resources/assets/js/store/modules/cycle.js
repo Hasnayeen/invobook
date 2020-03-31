@@ -23,7 +23,7 @@ export default {
         state.selectedCycleId = cycleId
       }
     },
-    refreshedCycle(state){
+    refreshedCycle (state) {
       state.selectedCycle = null
       state.selectedCycleId = 0
     }
@@ -50,8 +50,8 @@ export default {
         commit('selectCycleId', cycle.id)
       }
     },
-    refreshCycle({commit}){
-      commit('refreshedCycle');
+    refreshCycle ({ commit }) {
+      commit('refreshedCycle')
     }
   }
 }
