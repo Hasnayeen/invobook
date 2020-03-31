@@ -1,9 +1,12 @@
 name: Format (PHP)
 
 on:
-  pull_request:
+  push:
+    branches:
+      - dev
     paths:
       - '**.php'
+      - '!vendor/**'
 
 jobs:
   php-cs-fixer:
