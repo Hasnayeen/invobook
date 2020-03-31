@@ -9,7 +9,7 @@ return [
     'Timer'                                          => 'Temporizador',
     'Settings'                                       => 'Configuracion',
     'Leave User'                                     => 'Dejar Usuario',
-    'Tasks'                                          => 'Tareas',               
+    'Tasks'                                          => 'Tareas',
     'Discussions'                                    => 'Discusiones',
     'Messages'                                       => 'Mensajes',
     'Events'                                         => 'Eventos',
