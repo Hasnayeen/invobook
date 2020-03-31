@@ -70,7 +70,7 @@ export default {
         })
     },
     downloadFile () {
-      axios.get(`https://localhost/storage/${this.file.name}`, {responseType: 'blob'})
+      axios.get(`/storage/${this.file.name}`, {responseType: 'blob'})
       .then((response) => {
         const url = window.URL.createObjectURL(new Blob([response.data]));
         const link = document.createElement('a');
