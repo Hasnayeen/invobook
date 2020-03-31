@@ -2,12 +2,13 @@
 <div>
   <tab-menu :settings="settings" :active="active" @activate="activateTab"></tab-menu>
   <div class="container mx-auto my-4 px-4 w-full md:max-w-3xl lg:max-w-4xl xl:max-w-6xl">
+
     <div id="project-heading" class="border border-gray-300 bg-white rounded-lg px-8 py-4">
       <div class="text-gray-600 font-semibold text-3xl flex items-center justify-center relative">
         <div class="flex justify-between items-center w-full">
           <div class="flex flex-col">
             <div class="text-xs font-normal text-gray-700 flex">
-              <div v-for="(place, index) in breadcrumb" @click="setActiveView(place)" class="mr-1 cursor-pointer">{{ place | capitalize }} > </div>
+              <div v-for="(place, index) in breadcrumb" @click="setActiveView(place)" class="mr-1 cursor-pointer">{{ place | capitalize | localize }} > </div>
               {{project.name}}
             </div>
             {{project.name}}
@@ -15,7 +16,7 @@
           <!-- Cycle -->
           <div class="text-gray-600 flex items-center text-sm border rounded-full">
             <span class="border-r py-1 px-3">
-              Cycle
+              {{ 'Cycle' | localize }}
             </span>
             <div v-if="this.selectedCycle" @click="showModal('cycleModal')" class="px-3 py-1 cursor-pointer rounded-r-full bg-indigo-100 text-indigo-700 inline">
               <span v-if="this.selectedCycle.name">
@@ -26,7 +27,7 @@
               </span>
             </div>
             <span v-else @click="showModal('cycleModal')" class="px-3 py-1 cursor-pointer rounded-r-full bg-indigo-100 text-indigo-700">
-              Click to set a Cycle
+              {{ 'Click to set a Cycle' | localize }}
             </span>
           </div>
           <!-- Cycle -->
@@ -46,29 +47,29 @@
         <!-- Settings Button -->
         <span v-if="authenticated" @click="toggleDropdownMenu" v-click-outside="closeDropdownMenu" class="bg-white p-2 text-sm rounded border border-gray-400 ml-4 cursor-pointer flex items-center">
           <font-awesome-icon :icon="faCog" class="mr-2"></font-awesome-icon>
-          Settings
+          {{ 'Settings' | localize }}
         </span>
 
         <!-- Dropdown Menu -->
         <div v-if="authenticated && dropdownMenuShown" class="absolute w-64 right-0">
           <ul class="list-reset bg-white rounded shadow-2xl py-2 absolute inset-x-0 mt-6 text-base text-left font-normal whitespace-no-wrap z-30">
             <li @click="toggleVisibility" class="px-4 py-2 hover:bg-indigo-500 hover:text-white text-gray-600 font-medium cursor-pointer">
-              {{ project.public ? 'Make Private' : 'Make Public'}}
+              {{ project.public ? 'Make Private' : 'Make Public'  | localize}}
             </li>
             <li v-if="settings.roadmap_enabled" @click="showModal('roadmapModal')" class="px-4 py-2 hover:bg-indigo-500 hover:text-white text-gray-600 font-medium cursor-pointer">
-              Roadmap
+              {{ 'Roadmap' | localize }}
             </li>
             <li @click="showModal('memberListModal')" class="px-4 py-2 hover:bg-indigo-500 hover:text-white text-gray-600 font-medium cursor-pointer">
-              Show All Members
+              {{ 'Show All Members' | localize }}
             </li>
             <li @click="showModal('permissionSettingsModal')" class="px-4 py-2 hover:bg-indigo-500 hover:text-white text-gray-600 font-medium cursor-pointer">
-              Permissions Settings
+              {{ 'Permissions Settings' | localize }}
             </li>
             <li @click="showModal('settingsModal')" class="px-4 py-2 hover:bg-indigo-500 hover:text-white text-gray-600 font-medium cursor-pointer">
-              Settings
+              {{ 'Settings' | localize }}
             </li>
             <li @click="deleteProject" class="px-4 py-2 hover:bg-indigo-500 hover:text-white text-gray-600 font-medium cursor-pointer">
-              Delete
+              {{ 'Delete' | localize }}
             </li>
           </ul>
         </div>

@@ -2,7 +2,7 @@
 <div>
   <div class="absolute container mx-auto md:max-w-2xl lg:max-w-4xl xl:max-w-6xl z-40" style="top: 12vh;left: 0;right: 0;">
     <div class="bg-white rounded shadow-lg">
-      <div class="bg-gray-100 p-4 text-gray-700 text-center text-lg font-semibold rounded-t shadow">Roadmap</div>
+      <div class="bg-gray-100 p-4 text-gray-700 text-center text-lg font-semibold rounded-t shadow">{{'Roadmap' | localize }}</div>
 
       <div class="p-4 flex flex-col items-start">
         <template v-for="(cycle, key) in roadmap">
@@ -32,7 +32,7 @@
                       {{ feature.name }}
                     </div>
                     <details v-if="feature.content">
-                      <summary>Show Details</summary>
+                      <summary>{{'Show Details' | localize }}</summary>
                       <div class="py-1" v-html="feature.content"></div>
                     </details>
                   </div>

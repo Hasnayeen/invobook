@@ -5,7 +5,7 @@
       <header class="text-gray-600 p-6 rounded flex flex-row justify-between items-center" for="user">
         <div></div>
         <div class="uppercase tracking-wide font-semibold text-lg">
-          Settings
+          {{'Settings' | localize }}
         </div>
         <div @click="closeModal" class="cursor-pointer">
           <font-awesome-icon :icon="faTimesCircle" class="text-lg text-red-500 opacity-75"></font-awesome-icon>
@@ -35,29 +35,29 @@
               <font-awesome-icon :icon="faTools" class="text-white fa-xs"></font-awesome-icon>
             </div>
             <div class="pl-2 text-lg text-gray-600">
-              Enable/Disable Tools on this {{ resourceType }}
+              {{'Enable/Disable Tools on this' | localize }} {{ resourceType }}
             </div>
           </div>
           <div class="flex">
             <div @click="toggleToolStatus('task_enabled', settings.task_enabled)" class="rounded border px-4 py-2 mx-2 relative cursor-pointer"
               :class="[settings.task_enabled ? 'bg-indigo-100 border-indigo-400 shadow-md' : 'bg-gray-100 border-gray-400']">
-              <span class="cursor-pointer">Task</span>
+              <span class="cursor-pointer">{{'Task' | localize }}</span>
             </div>
             <div @click="toggleToolStatus('discussion_enabled', settings.discussion_enabled)" class="rounded border px-4 py-2 mx-2 relative cursor-pointer"
               :class="[settings.discussion_enabled ? 'bg-indigo-100 border-indigo-400 shadow-md' : 'bg-gray-100 border-gray-400']">
-              <span class="cursor-pointer">Discussion</span>
+              <span class="cursor-pointer">{{'Discussion' | localize }}</span>
             </div>
             <div @click="toggleToolStatus('message_enabled', settings.message_enabled)" class="rounded border px-4 py-2 mx-2 relative cursor-pointer"
               :class="[settings.message_enabled ? 'bg-indigo-100 border-indigo-400 shadow-md' : 'bg-gray-100 border-gray-400']">
-              <span class="cursor-pointer">Message</span>
+              <span class="cursor-pointer">{{'Message' | localize }}</span>
             </div>
             <div @click="toggleToolStatus('event_enabled', settings.event_enabled)" class="rounded border px-4 py-2 mx-2 relative cursor-pointer"
               :class="[settings.event_enabled ? 'bg-indigo-100 border-indigo-400 shadow-md' : 'bg-gray-100 border-gray-400']">
-              <span class="cursor-pointer">Event</span>
+              <span class="cursor-pointer">{{'Event' | localize }}</span>
             </div>
             <div @click="toggleToolStatus('file_enabled', settings.file_enabled)" class="rounded border px-4 py-2 mx-2 relative cursor-pointer"
               :class="[settings.file_enabled ? 'bg-indigo-100 border-indigo-400 shadow-md' : 'bg-gray-100 border-gray-400']">
-              <span class="cursor-pointer">File</span>
+              <span class="cursor-pointer">{{'File' | localize }}</span>
             </div>
           </div>
         </div>
@@ -70,13 +70,13 @@
               <font-awesome-icon :icon="faTools" class="text-white fa-xs"></font-awesome-icon>
             </div>
             <div class="pl-2 text-lg text-gray-600">
-              Enable/Disable Roadmap option on this {{ resourceType }}
+              {{'Enable/Disable Roadmap option on this' | localize }} {{ resourceType }}
             </div>
           </div>
           <div class="flex">
             <div @click="toggleToolStatus('roadmap_enabled', settings.roadmap_enabled)" class="rounded border px-4 py-2 mx-2 relative cursor-pointer"
               :class="[settings.roadmap_enabled ? 'bg-indigo-100 border-indigo-400 shadow-md' : 'bg-gray-100 border-gray-400']">
-              <span class="cursor-pointer">Roadmap</span>
+              <span class="cursor-pointer">{{'Roadmap' | localize }}</span>
             </div>
           </div>
         </div>

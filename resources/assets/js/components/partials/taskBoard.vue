@@ -17,21 +17,21 @@
   <!-- Task Filters -->
   <div v-if="filterShown" class="mb-8">
     <div class="border-t border-b border-gray-400">
-      <div class="pb-1 pt-2">Status</div>
+      <div class="pb-1 pt-2">{{'Status' | localize }}</div>
       <div class="inline-flex rounded shadow">
         <div
           v-for="(status, index) in statuses"
           @click="selectStatusFilter(status.id)"
           class="p-2 cursor-pointer"
           :class="[statusFilter === status.id ? 'bg-indigo-200 text-indigo-800 font-medium' : 'bg-gray-100', index === 0 ? 'rounded-l' : 'border-l-2', index + 1 === statuses.length ? 'rounded-r' : '']">
-          {{ status.name }}
+          {{ status.name | localize  }}
         </div>
       </div>
       <div class="flex flex-row flex-wrap text-gray-700">
         <div class="p-4 pl-0">
           <div class="pb-1 flex justify-between items-center">
-            <div class="">Assigned To</div>
-            <div @click="clearUserFilter" class="text-xs font-medium border-b border-indigo-500 cursor-pointer">Clear</div>
+            <div class="">{{'Assigned To' | localize }}</div>
+            <div @click="clearUserFilter" class="text-xs font-medium border-b border-indigo-500 cursor-pointer">{{'Clear' | localize }}</div>
           </div>
           <div class="flex flex-row items-center relative w-64">
             <select v-model="userFilter" class="w-full block appearance-none bg-white border border-gray-500 rounded text-gray-800 py-1 px-4 pr-8">
@@ -47,8 +47,8 @@
         </div>
         <div class="p-4">
           <div class="pb-1 flex justify-between items-center">
-            <div class="">Tags</div>
-            <div @click="clearTagFilter" class="text-xs font-medium border-b border-indigo-500 cursor-pointer">Clear</div>
+            <div class="">{{'Tags' | localize }}</div>
+            <div @click="clearTagFilter" class="text-xs font-medium border-b border-indigo-500 cursor-pointer">{{'Clear' | localize }}</div>
           </div>
           <div class="flex flex-row items-center relative w-64">
             <select v-model="tagFilter" class="w-full block appearance-none bg-white border border-gray-500 rounded text-gray-800 py-1 px-4 pr-8">
@@ -64,10 +64,10 @@
         </div>
         <div class="p-4">
           <div class="pb-1 flex justify-between items-center">
-            <div class="">Due On</div>
-            <div @click="clearDateFilter" class="text-xs font-medium border-b border-indigo-500 cursor-pointer">Clear</div>
+            <div class=""> {{ 'Due On' | localize }} </div>
+            <div @click="clearDateFilter" class="text-xs font-medium border-b border-indigo-500 cursor-pointer">{{'Clear' | localize }}</div>
           </div>
-          <datepicker v-model="dateFilter" ref="dueOnDate" placeholder="Select Date" format="yyyy-MM-dd" input-class="w-full block appearance-none bg-white border border-gray-500 rounded text-gray-800 py-1 px-4 pr-8" wrapper-class=""></datepicker>
+          <datepicker v-model="dateFilter" ref="dueOnDate" :placeholder="$options.filters.localize('Select Date')" format="yyyy-MM-dd" input-class="w-full block appearance-none bg-white border border-gray-500 rounded text-gray-800 py-1 px-4 pr-8" wrapper-class=""></datepicker>
         </div>
       </div>
     </div>
@@ -79,7 +79,7 @@
       <div class="flex justify-between items-center">
         <p class="text-xs text-gray-700 flex flex-col">
           <span class="w-10 border-t-4" :style="'border-color:' + task.status.color"></span>
-          <span class="text-xs">Due on</span>
+          <span class="text-xs">{{'Due on' | localize }}</span>
           <span class="text-sm text-indigo-700 font-medium">{{dueOn(task.due_on)}}</span>
         </p>
         <img v-if="task.assigned_to" :src="generateUrl(task.user.avatar)" class="rounded-full w-8 h-8" :title="task.user.name">
@@ -91,7 +91,7 @@
     </div>
   </div>
   <div v-if="tasks.length === 0" class="flex flex-col items-center pt-8">
-    <div class="pb-4">Don't you have Task to do? Go ahead, create one</div>
+    <div class="pb-4">{{'Don\'t you have Task to do? Go ahead, create one' | localize }}</div>
     <img src="/image/tasks.svg" alt="task list" class="w-96">
   </div>
 

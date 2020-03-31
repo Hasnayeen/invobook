@@ -4,11 +4,11 @@
     <div class="p-4">
       <div class="p-4">
         <label class="block uppercase tracking-wide text-xs font-bold text-center text-lg mb-4" for="user">
-          Add Member
+          {{'Add Member' | localize }}
         </label>
         <div class="flex flex-row items-center">
           <select v-model="newMember" class="w-5/6 block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-800 py-3 px-4 pr-8 rounded" id="user">
-            <option selected disabled hidden>Select User to Add</option>
+            <option selected disabled hidden>{{'Select User to Add' | localize }}</option>
             <template v-for="user in users">
               <option :value="user.id" class="my-2 text-lg">{{ user.name }}</option>
             </template>
@@ -20,12 +20,12 @@
       </div>
     </div>
     <div class="flex flex-row justify-between py-4 px-8 bg-gray-200 rounded">
-      <button @click="closeAddMemberForm" class="text-red-lighter hover:font-bold hover:text-red-400">Cancel</button>
+      <button @click="closeAddMemberForm" class="text-red-lighter hover:font-bold hover:text-red-400">{{'Cancel' | localize }}</button>
       <button @click="addMember" class="bg-indigo-400 text-white font-medium hover:bg-indigo-600 py-4 px-8 rounded">
         <template v-if="loading">
           <font-awesome-icon :icon="faSpinner" spin></font-awesome-icon>
         </template>
-        Add
+        {{'Add' | localize }}
       </button>
     </div>
   </div>
