@@ -1,10 +1,11 @@
 <template>
 <div>
+  
   <!-- Cycles List -->
   <div v-if="!createFormShown" class="absolute container mx-auto w-5/6 md:w-3/5 lg:w-2/5 bg-white rounded shadow-lg z-40" style="top: 12vh;left: 0;right: 0;">
     <div class="py-4">
       <div v-if="cycles.length === 0" class="flex flex-col items-center pt-4">
-        No cycle found! Create a New Cycle
+        {{ 'No cycle found! Create a New Cycle' | localize }}
         <img src="/image/cycle.svg" alt="calender" class="w-96">
       </div>
       <div v-for="(cycle, index) in cycles" :key="cycle.id">
@@ -12,7 +13,7 @@
         <a @click="chooseCycle(cycle)" class="flex flex-col items-center px-8 py-4 cursor-pointer" :class="{'bg-blue-100': selectedCycleId === cycle.id}">
           <div class="text-xl text-blue-600 font-medium">
             {{ cycle.name }}
-            <span v-if="currentCycleId === cycle.id" class="absolute px-2 ml-1 bg-indigo-500 text-white text-xs font-semibold rounded-full">current</span>
+            <span v-if="currentCycleId === cycle.id" class="absolute px-2 ml-1 bg-indigo-500 text-white text-xs font-semibold rounded-full">{{'current' | localize }}</span>
           </div>
           <div class="flex flex-row justify-center">
             <div>
@@ -27,8 +28,10 @@
       </div>
     </div>
     <div class="flex justify-between p-8 bg-gray-100 rounded-b">
-      <button @click="showCreateForm" class="text-blue-500 underline">Create New Cycle</button>
-      <button @click="closeModal" class="text-red-400">Close</button>
+      <button @click="showCreateForm" class="text-blue-500 underline">
+        {{'Create New Cycle' | localize }}
+      </button>
+      <button @click="closeModal" class="text-red-400">{{'Close' | localize }}</button>
     </div>
   </div>
 

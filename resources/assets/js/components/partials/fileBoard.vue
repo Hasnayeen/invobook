@@ -20,7 +20,7 @@
     </div>
 
     <div v-if="files.length === 0" class="flex flex-col items-center">
-      <div class="pb-4">Wanna share some resource with your teammates? Upload it then.</div>
+      <div class="pb-4">{{ 'Wanna share some resource with your teammates? Upload it then.' | localize }}</div>
       <img src="/image/files.svg" alt="files" class="w-80">
     </div>
   </div>

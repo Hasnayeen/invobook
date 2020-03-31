@@ -17,6 +17,7 @@ return [
         'da'    => 'Danish',
         'de'    => 'German',
         'en'    => 'English',
+        'es-CR' => 'Spanish (Costa Rica)',
         'es-ES' => 'Spanish (Spain)',
         'es-MX' => 'Spanish (Mexican)',
         'fa'    => 'Farsi',
