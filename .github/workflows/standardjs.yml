@@ -1,7 +1,9 @@
 name: standardjs
 
 on:
-  pull_request:
+  push:
+    branches:
+      - dev
     paths-ignore:
       - 'public/**'
 
