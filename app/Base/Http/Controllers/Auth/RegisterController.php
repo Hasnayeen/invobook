@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Base\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use App\Base\Utilities\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Notification;
-use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Base\Notifications\UserRegistered as UserRegisteredNotification;
 
 class RegisterController extends Controller
@@ -59,7 +59,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name'     => 'required|string|max:255',
-            'username' => 'required|string|max:255|unique:users',
+            'username' => 'required|string|alpha_dash|max:255|unique:users',
             'email'    => 'required|email|max:255|unique:users',
             'password' => 'required|min:8',
         ]);
@@ -90,7 +90,7 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm($token)
     {
-        if (Token::where('token', decrypt($token))->exists()) {
+        if (Token::where('token', $token)->exists()) {
             return view('auth.register', ['token' => url('register/' . $token)]);
         }
 
@@ -103,7 +103,7 @@ class RegisterController extends Controller
      */
     public function confirmNewRegistration(Request $request, $token)
     {
-        $token = Token::where('token', decrypt($token))->first();
+        $token = Token::where('token', $token)->first();
         if ($token && ($token->email === $request->email)) {
             $this->register($request, $token);
 
@@ -151,7 +151,9 @@ class RegisterController extends Controller
     protected function registered(Request $request, $user)
     {
         $office = Office::where('name', 'Headquarter')->first();
-        $user->offices()->attach($office->id);
+        if ($office) {
+            $user->offices()->attach($office->id);
+        }
         Mail::to($user->email)
             ->send(new UserRegistered($user));
         Notification::send($this->getRecipients(), new UserRegisteredNotification($user));

@@ -11,11 +11,11 @@
         </div>
       </div>
       <div class="border-half mt-4 mb-8">
-      </div>
+      </div>  
       <div class="mb-4 px-8">
         <label class="block text-gray-800 text-sm font-bold mb-2" for="username">
           {{ 'Username' | localize }}
-          <span v-if="!usernameAvailable" class="text-red-400 font-normal text-sm">(Username taken. Please try again)</span>
+          <span v-if="!usernameAvailable" class="text-red-400 font-normal text-sm">({{ 'Username taken. Please try again' | localize }})</span>
         </label>
         <div class="relative">
           <input @keyup="checkUsernameAvailability" v-model='user.username' class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800" id="username" type="text" placeholder="Nehal Hasnayeen">
@@ -53,7 +53,7 @@
         </div>
       </div>
       <div class="my-6 px-8">
-        <a @click="update" class="font-bold rounded shadow bg-teal-400 p-4 text-white hover:shadow-lg hover:font-bold hover:bg-teal-600 no-underline" href="#">
+        <a @click="update" class="font-bold rounded shadow bg-indigo-400 p-4 text-white hover:shadow-lg hover:font-bold hover:bg-indigo-600 no-underline" href="#">
           {{ 'Update' | localize }}
         </a>
       </div>

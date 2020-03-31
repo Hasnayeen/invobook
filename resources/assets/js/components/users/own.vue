@@ -20,13 +20,13 @@
       <label class="block text-gray-600 text-sm font-bold mb-2" for="title">
         {{ 'Designation' | localize }}
       </label>
-      <input v-model='user.designation' class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700" id="title" type="text" placeholder="Developer">
+      <input v-model='user.designation' class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700" id="title" type="text" :placeholder="$options.filters.localize('Developer')">
     </div>
     <div class="mb-6">
       <label class="block text-gray-600 text-sm font-bold mb-2" for="title">
         {{ 'Short Bio' | localize }}
       </label>
-      <textarea v-model='user.bio' class="shadow appearance-none resize-none border rounded w-full py-2 px-3 text-gray-700" id="bio" type="text" rows="3" placeholder="About Yourself"></textarea>
+      <textarea v-model='user.bio' class="shadow appearance-none resize-none border rounded w-full py-2 px-3 text-gray-700" id="bio" type="text" rows="3" :placeholder="$options.filters.localize('About Yourself')"></textarea>
     </div>
     <div class="mb-6">
       <label class="block text-gray-600 text-sm font-bold mb-2" for="title">
@@ -55,13 +55,13 @@
       </label>
       <div class="relative">
         <select v-model='user.week_start' class="shadow appearance-none border rounded w-full px-3 py-2 text-gray-700 bg-gray-200" id="weekstart">
-          <option>Saturday</option>
-          <option>Sunday</option>
-          <option>Monday</option>
-          <option>Tuesday</option>
-          <option>Wednesday</option>
-          <option>Thursday</option>
-          <option>Friday</option>
+          <option>{{ 'Saturday' | localize }}</option>
+          <option>{{ 'Sunday' | localize }}</option>
+          <option>{{ 'Monday' | localize }}</option>
+          <option>{{ 'Tuesday' | localize }}</option>
+          <option>{{ 'Wednesday' | localize }}</option>
+          <option>{{ 'Thursday' | localize }}</option>
+          <option>{{ 'Friday' | localize }}</option>
         </select>
         <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
@@ -84,7 +84,7 @@
       </div>
     </div>
     <div class="mt-8">
-      <button @click="updateProfile" class="bg-teal-500 hover:bg-teal-600 text-white font-bold p-4 rounded shadow hover:shadow-lg" type="button">
+      <button @click="updateProfile" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold p-4 rounded shadow hover:shadow-lg" type="button">
         {{ 'Update' | localize }}
       </button>
       <div></div>

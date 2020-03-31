@@ -2,6 +2,7 @@
 
 namespace App\Base\Http\Controllers;
 
+use Exception;
 use App\Base\Models\DirectMessage;
 use App\Base\Repositories\DirectMessageRepository;
 use App\Base\Http\Requests\StoreDirectMessageRequest;
@@ -35,6 +36,21 @@ class DirectMessageController extends Controller
             return response()->json([
                 'status'  => 'success',
                 'message' => $message,
+            ]);
+        } catch (Exception $exception) {
+            throw $exception;
+        }
+    }
+
+    public function update(StoreDirectMessageRequest $request, DirectMessage $directMessage)
+    {
+        try {
+            $directMessage->update(['body' => $request->get('body')]);
+            $directMessage->load('user');
+
+            return response()->json([
+                'status'  => 'success',
+                'message' => $directMessage,
             ]);
         } catch (Exception $exception) {
             throw $exception;

@@ -5,7 +5,7 @@
       <header class="bg-gray-200 text-gray-600 p-6 rounded flex flex-row justify-between items-center" for="user">
         <div></div>
         <div class="uppercase tracking-wide font-semibold text-lg">
-          Permission Settings
+          {{'Permissions Settings' | localize }}
         </div>
         <div @click="closeModal" class="cursor-pointer">
           <font-awesome-icon :icon="faTimesCircle" class="text-lg text-red-500 opacity-75"></font-awesome-icon>
@@ -13,23 +13,23 @@
       </header>
 
       <div class="flex flex-row text-gray-800 bg-white">
-        <div class="w-1/2 px-4 py-2 flex flex-row items-center border-teal-500 border-b">
+        <div class="w-1/2 px-4 py-2 flex flex-row items-center border-indigo-500 border-b">
           <div class="flex flex-col">
             <div class="font-semibold pb-1">
-              Roles
+              {{'Roles' | localize }}
             </div>
             <div class="text-xs">
-              Set permission for a specific role
+              {{'Set permission for a specific role' | localize }}
             </div>
           </div>
         </div>
         <div class="w-1/2 px-4 py-2 flex flex-row items-center cursor-pointer">
           <div class="flex flex-col">
             <div class="font-semibold pb-1">
-              Users
+              {{'Users' | localize }}
             </div>
             <div class="text-xs">
-              Set permission for an individual user
+              {{'Set permission for an individual user' | localize }}
             </div>
           </div>
         </div>
@@ -42,7 +42,7 @@
           <div @click="selectRole(role)" class="rounded inline border p-3 mx-2 relative cursor-pointer"
             :class="[selectedRole === role.slug ? 'bg-indigo-100 border-indigo-400 shadow-md' : 'bg-gray-100 border-gray-400']">
             <font-awesome-icon v-if="selectedRole === role.slug" :icon="faCheckCircle" class="absolute right-0 top-0 -mr-1 -mt-1 text-lg text-indigo-500 bg-white rounded-full"></font-awesome-icon>
-            <span class="cursor-pointer">{{ role.name }}</span>
+            <span class="cursor-pointer">{{ role.name | localize }}</span>
           </div>
         </template>
       </div>
@@ -56,7 +56,7 @@
             <div class="pb-1">
               {{ permission.action | capitalize | localize }}
             </div>
-            <span @click="togglePermission(permission, name, key, permission.enabled)" class="w-5 h-5 rounded cursor-pointer inline flex items-center justify-center" :class="[permission.enabled ? 'bg-teal-500' : 'border-gray-400 border']">
+            <span @click="togglePermission(permission, name, key, permission.enabled)" class="w-5 h-5 rounded cursor-pointer inline flex items-center justify-center" :class="[permission.enabled ? 'bg-indigo-500' : 'border-gray-400 border']">
               <font-awesome-icon v-if="permission.enabled" :icon="faCheck" class="text-xs text-white"></font-awesome-icon>
             </span>
           </div>

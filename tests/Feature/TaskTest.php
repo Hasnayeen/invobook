@@ -67,7 +67,6 @@ class TaskTest extends TestCase
     /** @test */
     public function user_without_permission_cant_create_new_task()
     {
-        $this->expectException(AuthorizationException::class);
         $user = factory(\App\Base\Models\User::class)->create();
         $task = factory(\App\TaskManager\Models\Task::class)->make();
 
@@ -78,6 +77,9 @@ class TaskTest extends TestCase
             'due_on'        => $task->due_on,
             'group_type'    => $task->taskable_type,
             'group_id'      => $task->taskable_id,
+        ])->assertJsonFragment([
+            'status'  => 'error',
+            'message' => 'This action is unauthorized.',
         ]);
     }
 

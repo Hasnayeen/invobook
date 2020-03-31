@@ -12,7 +12,6 @@ use App\Base\Mail\UserRegistered;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Notification;
-use Illuminate\Contracts\Encryption\DecryptException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use App\Base\Notifications\UserRegistered as UserRegisteredNotification;
 
@@ -26,7 +25,7 @@ class UserRegistrationTest extends TestCase
     {
         parent::setUp();
 
-        $this->token = factory(Token::class)->create();
+        $this->token = factory(Token::class)->create(['email' => 'test@example.com']);
         Mail::fake();
         Notification::fake();
     }
@@ -34,7 +33,7 @@ class UserRegistrationTest extends TestCase
     /** @test */
     public function guest_with_valid_token_can_access_registration_form()
     {
-        $this->get('/register/' . encrypt($this->token->token))
+        $this->get('/register/' . $this->token->token)
             ->assertOk();
     }
 
@@ -43,7 +42,7 @@ class UserRegistrationTest extends TestCase
     {
         $invalidToken = $this->faker->sha256;
 
-        $this->expectException(DecryptException::class);
+        $this->expectException(HttpException::class);
 
         $this->get("/register/{$invalidToken}")
             ->assertStatus('403');
@@ -73,7 +72,7 @@ class UserRegistrationTest extends TestCase
     {
         $invalidToken = $this->faker->sha256;
 
-        $this->expectException(DecryptException::class);
+        $this->expectException(HttpException::class);
 
         $newUser = $this->get_fake_user_data();
 
@@ -137,14 +136,14 @@ class UserRegistrationTest extends TestCase
             'name' => 'Headquarter',
         ]);
 
-        return $this->post('/register/' . encrypt($this->token->token), $newUser);
+        return $this->post('/register/' . $this->token->token, $newUser);
     }
 
     private function get_fake_user_data()
     {
         return [
             'name'                  => $this->faker->name,
-            'username'              => $this->faker->userName,
+            'username'              => 'guestUserName',
             'email'                 => $this->token->email,
             'password'              => 'secret12',
         ];

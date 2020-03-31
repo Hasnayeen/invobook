@@ -1,78 +1,95 @@
 <template>
-  <div class="container mx-auto my-6 px-4 md:px-0 w-full md:max-w-2xl lg:max-w-4xl xl:max-w-6xl">
-    <div class="text-gray-600 font-semibold text-2xl mb-4 flex items-center justify-center">
-      {{office.name}}
-      <span v-if="authenticated" @click="toggleDropdownMenu" v-click-outside="closeDropdownMenu" class="bg-white p-1 text-sm rounded-full shadow ml-4 cursor-pointer flex items-center">
-        <font-awesome-icon :icon="faCog"></font-awesome-icon>
-      </span>
-      <div v-if="authenticated && dropdownMenuShown" class="relative">
-        <ul class="list-reset bg-white rounded shadow-lg py-2 absolute right-0 mt-4 text-base text-left font-normal whitespace-no-wrap z-30">
-          <li @click="toggleVisibility" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
-            {{ office.public ? 'Make Private' : 'Make Public'}}
-          </li>
-          <li v-if="settings.roadmap_enabled" @click="showModal('roadmapModal')" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
-            Roadmap
-          </li>
-          <li @click="showModal('memberListModal')" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
-            Show All Members
-          </li>
-          <li @click="showModal('permissionSettingsModal')" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
-            Permissions Settings
-          </li>
-          <li @click="showModal('settingsModal')" class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
-            Settings
-          </li>
-          <li class="px-4 py-2 hover:bg-gray-400 cursor-pointer">
-            Delete
-          </li>
-        </ul>
+<div>
+  <tab-menu :settings="settings" :active="active" @activate="activateTab"></tab-menu>
+  <div class="container mx-auto my-4 px-4 w-full md:max-w-3xl lg:max-w-4xl xl:max-w-6xl">
+
+    <div id="office-heading" class="border border-gray-300 bg-white rounded-lg px-8 py-4">
+      <div class="text-gray-600 font-semibold text-3xl flex items-center justify-center relative">
+        <div class="flex justify-between items-center w-full">
+          <div class="flex flex-col">
+            <div class="text-xs font-normal text-gray-700 flex">
+              <div v-for="(place, index) in breadcrumb" @click="setActiveView(place)" class="mr-1 cursor-pointer">{{ place | capitalize | localize }} > </div>
+              {{office.name}}
+            </div>
+            {{office.name}}
+          </div>
+          <!-- Cycle -->
+          <div class="text-gray-600 flex items-center text-sm border rounded-full">
+            <span class="border-r py-1 px-3">
+              {{ 'Cycle' | localize }}
+            </span>
+            <div v-if="this.selectedCycle" @click="showModal('cycleModal')" class="px-3 py-1 cursor-pointer rounded-r-full bg-indigo-100 text-indigo-700 inline">
+              <span v-if="this.selectedCycle.name">
+                {{ this.selectedCycle.name }}
+              </span>
+              <span v-else>
+                {{this.selectedCycle.start_date}} - {{this.selectedCycle.end_date}}
+              </span>
+            </div>
+            <span v-else @click="showModal('cycleModal')" class="px-3 py-1 cursor-pointer rounded-r-full bg-indigo-100 text-indigo-700">
+              {{ 'Click to set a Cycle' | localize }}
+            </span>
+          </div>
+          <!-- Cycle -->
+        </div>
+      </div>
+
+      <div class="flex justify-between items-center w-full relative">
+        <div class="flex flex-row flex-wrap items-center pt-2">
+          <span @click="showModal('addMemberForm')" class="bg-indigo-500 shadow-xl w-8 h-8 flex justify-center items-center rounded-full text-indigo-500 cursor-pointer text-center p-2 mr-1">
+            <font-awesome-icon :icon="faPlus" class="text-white"></font-awesome-icon>
+          </span>
+          <a v-for="(member, index) in office.members" :href="'/users/' + member.username" class="mx-1">
+            <profile-card :user="member"></profile-card>
+          </a>
+        </div>
+        <!-- Settings Button -->
+        <span v-if="authenticated" @click="toggleDropdownMenu" v-click-outside="closeDropdownMenu" class="bg-white p-2 text-sm rounded border border-gray-400 ml-4 cursor-pointer flex items-center">
+          <font-awesome-icon :icon="faCog" class="mr-2"></font-awesome-icon>
+          {{ 'Settings' | localize }}
+        </span>
+
+        <!-- Dropdown Menu -->
+        <div v-if="authenticated && dropdownMenuShown" class="absolute w-64 right-0">
+          <ul class="list-reset bg-white rounded shadow-2xl py-2 absolute inset-x-0 mt-6 text-base text-left font-normal whitespace-no-wrap z-30">
+            <li @click="toggleVisibility" class="px-4 py-2 hover:bg-indigo-500 hover:text-white text-gray-600 font-medium cursor-pointer">
+              {{ office.public ? 'Make Private' : 'Make Public'}}
+            </li>
+            <li v-if="settings.roadmap_enabled" @click="showModal('roadmapModal')" class="px-4 py-2 hover:bg-indigo-500 hover:text-white text-gray-600 font-medium cursor-pointer">
+              {{ 'Roadmap' | localize }}
+            </li>
+            <li @click="showModal('memberListModal')" class="px-4 py-2 hover:bg-indigo-500 hover:text-white text-gray-600 font-medium cursor-pointer">
+              {{ 'Show All Members' | localize }}
+            </li>
+            <li @click="showModal('permissionSettingsModal')" class="px-4 py-2 hover:bg-indigo-500 hover:text-white text-gray-600 font-medium cursor-pointer">
+              {{ 'Permissions Settings' | localize }}
+            </li>
+            <li @click="showModal('settingsModal')" class="px-4 py-2 hover:bg-indigo-500 hover:text-white text-gray-600 font-medium cursor-pointer">
+              {{ 'Settings' | localize }}
+            </li>
+            <li @click="deleteOffice" class="px-4 py-2 hover:bg-indigo-500 hover:text-white text-gray-600 font-medium cursor-pointer">
+              {{ 'Delete' | localize }}
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
 
-    <div class="text-gray-600 flex flex-row justify-center items-center">
-      <span class="text-lg">
-        Cycle:
-      </span>
-      <div v-if="this.selectedCycle" @click="showCyclesModal" class="p-2 ml-2 bg-gray-100 shadow rounded cursor-pointer text-sm text-teal-800 inline">
-        <span v-if="this.selectedCycle.name">
-          {{ this.selectedCycle.name }}
-        </span>
-        <span v-else>
-          {{this.selectedCycle.start_date}} - {{this.selectedCycle.end_date}}
-        </span>
-      </div>
-      <span v-else @click="showModal('cycleModal')" class="p-2 ml-2 bg-gray-100 shadow rounded cursor-pointer text-sm text-teal-800">
-        Click to set a Cycle
-      </span>
-    </div>
+    <!-- Modals for cycles -->
+    <cycles-modal v-if="currentComponent === 'cycleModal'" resourceType="office" :resourceId="office.id" :currentCycleId="currentCycleId"></cycles-modal>
+    <!-- Modals for cycles -->
 
-  <!-- Modals for cycles -->
-  <cycles-modal v-if="currentComponent === 'cycleModal'" resourceType="office" :resourceId="office.id" :currentCycleId="currentCycleId"></cycles-modal>
-  <!-- Modals for cycles -->
+    <!-- Modals for dropdown menu -->
+      <roadmap-modal v-if="currentComponent === 'roadmapModal'" resourceType="office" :resourceId="office.id" :currentCycleId="currentCycleId"></roadmap-modal>
 
-  <!-- Modals for dropdown menu -->
-    <roadmap-modal v-if="currentComponent === 'roadmapModal'" resourceType="office" :resourceId="office.id" :currentCycleId="currentCycleId"></roadmap-modal>
+      <members-list-modal v-if="currentComponent === 'memberListModal'" resourceType="office" :resourceId="office.id" :members="office.members" ></members-list-modal>
 
-    <members-list-modal v-if="currentComponent === 'memberListModal'" resourceType="office" :resourceId="office.id" :members="office.members" />
+      <add-member-form v-if="currentComponent === 'addMemberForm'" resourceType="office" :resource="office" @addMember="addMember"></add-member-form>
 
-    <addMemberForm v-if="currentComponent === 'addMemberForm'"resourceType="office" :resource="office" @addMember="addMember"></addMemberForm>
+      <permission-settings-modal v-if="currentComponent === 'permissionSettingsModal'" resourceType="office" :resourceId="office.id" ></permission-settings-modal>
 
-    <permission-settings-modal v-if="currentComponent === 'permissionSettingsModal'" resourceType="office" :resourceId="office.id"></permission-settings-modal>
-
-    <settings-modal v-if="currentComponent === 'settingsModal'" resourceType="office" :resourceId="office.id" :settings="settings" @update-settings="updateSettings" ></settings-modal>
-  <!-- Modals for dropdown menu -->
-
-    <div class="flex flex-row flex-wrap justify-center items-center px-2 pt-4">
-      <span @click="showModal('addMemberForm')" class="bg-white shadow w-8 h-8 flex justify-center items-center rounded-full text-teal-500 cursor-pointer text-center p-2 mr-1">
-        <font-awesome-icon :icon="faPlus"></font-awesome-icon>
-      </span>
-      <a v-for="(member, index) in office.members" :href="'/users/' + member.username" class="mx-1">
-        <profile-card :user="member"></profile-card>
-      </a>
-      <span v-if="office.members.length > 5" class="bg-gray-200 border-teal-500 border p-2 rounded-full">{{ office.members.length - 5 }}+</span>
-    </div>
-
-    <tab-menu :settings="settings" :active="active" @activate="activateTab"></tab-menu>
+      <settings-modal v-if="currentComponent === 'settingsModal'" resourceType="office" :resourceId="office.id" :settings="settings" @update-settings="updateSettings" ></settings-modal>
+    <!-- Modals for dropdown menu -->
 
     <div class="flex flex-row flex-wrap justify-center">
       <task-board v-if="settings.task_enabled" resourceType="office" :resource="office" :activeTab="active" :activeId="activeId"></task-board>
@@ -83,6 +100,7 @@
       <activity-board resourceType="office" :resourceId="office.id" :activeTab="active"></activity-board>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -138,12 +156,15 @@ export default {
     if (id !== null) {
       this.activeId = parseInt(id)
     }
+    this.updateUrl({'tool': this.active})
+    this.updateBreadcrumb('offices')
     this.currentCycleId = this.selectedCycle ? this.selectedCycle.id : null
     this.getAllCycles()
   },
   computed: {
     ...mapState({
       currentView: state => state.currentView,
+      breadcrumb: state => state.breadcrumb,
       office: state => state.office.office,
       settings: state => state.office.office.settings,
       selectedCycle: state => state.cycle.selectedCycle,
@@ -152,11 +173,22 @@ export default {
   },
   methods: {
     ...mapActions([
+      'setCurrentView',
       'getCycles',
       'setCurrentComponent',
       'closeComponent',
       'showNotification',
+      'updateBreadcrumb',
+      'updateOfficeSettings',
     ]),
+    setActiveView (view) {
+      if (view === 'home') {
+        this.updateUrl({"group_type": null, "group_id": null, "tool": null})
+      } else {
+        this.updateUrl({"group_type": view, "group_id": null, "tool": null})
+      }
+      this.setCurrentView(view)
+    },
     showModal (modalName) {
       this.setCurrentComponent(modalName)
     },
@@ -212,7 +244,7 @@ export default {
       this.dropdownMenuShown = false
     },
     updateSettings (settings) {
-      this.settings = settings
+      this.updateOfficeSettings(settings)
       this.getActiveTool(null)
     },
     toggleVisibility () {
@@ -235,6 +267,16 @@ export default {
             this.showNotification({type: error.response.data.status, message: error.response.data.message})
           })
       }
+    },
+    deleteOffice () {
+    axios.delete('/offices/' + this.office.id)
+      .then((response) => {
+        this.showNotification({type: response.data.status, message: response.data.message})
+        window.location.href = '/'
+      })
+      .catch((error) => {
+        this.showNotification({type: error.response.data.status, message: error.response.data.message})
+      })
     }
   }
 }

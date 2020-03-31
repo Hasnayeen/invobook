@@ -2,6 +2,7 @@
 
 html {
   font-family: 'Montserrat', sans-serif;
+  font-variant-numeric: tabular-nums;
 }
 
 @tailwind components;
@@ -47,6 +48,10 @@ html {
      height: 50vh;
  }
 
+ .h-60-vh {
+     height: 60vh;
+ }
+
  .h-80-vh {
      height: 80vh;
  }
@@ -66,7 +71,7 @@ html {
  }
 
  .tab-sticky-top {
-     top: 3.2rem;
+     top: 3.25rem;
  }
 
  .message-box-max {

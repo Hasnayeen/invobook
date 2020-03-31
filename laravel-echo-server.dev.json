@@ -1,5 +1,5 @@
 {
-	"authHost": "http://nginx",
+	"authHost": "https://nginx",
 	"authEndpoint": "/broadcasting/auth",
 	"clients": [
 		{
@@ -17,11 +17,11 @@
 			"databasePath": "/database/laravel-echo-server.sqlite"
 		}
 	},
-	"devMode": true,
+	"devMode": false,
 	"host": "",
 	"port": "6001",
-	"protocol": "http",
+	"protocol": "https",
 	"socketio": {},
-	"sslCertPath": "",
-	"sslKeyPath": ""
+	"sslCertPath": "/etc/ssl/certs/goodwork.local.crt",
+	"sslKeyPath": "/etc/ssl/certs/goodwork.local.key"
 }

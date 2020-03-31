@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Base\Models;
+namespace App\TaskManager\Models;
 
 use Carbon\Carbon;
-use App\TaskManager\Models\Task;
 use Illuminate\Database\Eloquent\Model;
 
 class Step extends Model

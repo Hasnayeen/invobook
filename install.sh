@@ -4,7 +4,17 @@ red=`tput setaf 1`
 green=`tput setaf 2`
 blue=`tput setaf 4`
 reset=`tput sgr0`
-local=$2
+
+echo -n 'Install for production environment? (Y/n):'
+
+read -n 1 $ans
+
+if [[ ( "$ans" == "Y" ) || ( "$ans" == "y" ) ]]
+then
+  local=''
+else
+  local='local'
+fi
 
 # Check for docker installation
 which docker && docker --version | grep "Docker version"
@@ -36,13 +46,17 @@ else
   exit 1
 fi
 
-# Get domain name for ssl cert file
-domain=$(awk 'BEGIN{FS="=";RS="\n"}{if($1 == "SSL_CERT_DOMAIN") print $2}' .env)
+if [[ $local != "local" ]]
+then
+  # Get domain name for ssl cert file
+  domain=$(awk 'BEGIN{FS="=";RS="\n"}{if($1 == "SSL_CERT_DOMAIN") print $2}' .env)
 
-# Replace the domain in site.conf file
-sed -i -e "s/example.com/$domain/g" site.conf
+  # Replace the domain in site.conf file
+  sed -i -e "s/example.com/$domain/g" docker/site.conf
 
-if [[ $# -gt 0 && local -eq "local" ]]
+fi
+
+if [[ $local == "local" ]]
 then
   COMPOSE="sudo docker-compose -f docker-compose.dev.yml"
 else
@@ -51,7 +65,7 @@ fi
 
 $COMPOSE build php
 
-if [[ $# -gt 0 && local -eq "local" ]]
+if [[ $local == "local" ]]
 then
   $COMPOSE run --rm -w /var/www php composer install
 else
@@ -74,7 +88,7 @@ $COMPOSE run --rm -w /var/www php php artisan route:cache
 
 $COMPOSE run --rm -w /var/www php php artisan storage:link
 
-git checkout site.conf
+git checkout docker/site.conf
 
 echo ""
 echo "${green}Installation complete.${reset}"

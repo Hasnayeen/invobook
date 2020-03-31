@@ -1,61 +1,83 @@
 <template>
 <div id="direct-message-box" @focus="clearTitleNotification()" v-if="currentComponent === 'direct-message-box'">
-  <div class="fixed top-0 bg-white text-lg rounded mx-auto md:max-w-2xl lg:max-w-4xl xl:max-w-5xl mt-16 md:mt-32 shadow-lg z-40 inset-x-0">
-    <div class="bg-white text-2xl text-gray-600 text-center px-8 py-4 rounded-t shadow">
-      Your Messages
-    </div>
-    <div class="flex flex-row">
-      <div class="bg-blue-200">
-        <div class="overflow-auto overflow-y-scroll overflow-x-hidden h-50-vh w-16 lg:w-20 xxl:w-24">
+  <div class="fixed top-0 z-40 inset-x-0 mx-auto sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mt-16 md:mt-24 px-4">
+    <div class="bg-white text-lg rounded shadow-lg">
+      <div class="bg-white text-2xl text-gray-600 px-8 py-4 rounded-t shadow flex items-center justify-between">
+        <div></div>
+        <div>
+          Your Messages
+        </div>
+        <div @click="hideMessageBox()" class="self-end cursor-pointer">
+          <font-awesome-icon :icon="faTimes"
+            class="text-sm">
+          </font-awesome-icon>
+        </div>
+      </div>
+      <div class="bg-gray-200">
+        <div class="flex items-center overflow-x-auto p-2">
           <div @click="selectUserMessage(user, index)"
             v-for="(user, index) in users"
             v-if="user.id !== authUser.id"
-            class="relative p-2 lg:p-4"
-            :class="{'bg-white': user.id === selectedUser.id, 'jelly bg-white': user.unread_messages_for_auth_user_count > 0}">
-            <img class="w-10 lg:w-12 h-10 lg:h-12 rounded-full cursor-pointer" :title="user.name" :src="generateUrl(user.avatar)">
-            <div :class="[user.online ? 'bg-teal-500' : 'bg-gray-500']" :title="[user.online ? 'online' : 'offline']" class="absolute w-4 h-4 rounded-full border-2 border-white mb-2 mr-2 lg:mb-4 lg:mr-4 right-0 bottom-0"></div>
+            class="w-10 h-10 -mr-2 flex-none relative"
+            :style="{zIndex: users.length - index}"
+          >
+            <img
+              :class="[(user.id === selectedUser.id) ? 'border-indigo-500' : 'border-white', user.unread_messages_for_auth_user_count > 0 ? 'jelly border-indigo-500' : '']"
+              class="w-10 h-10 rounded-full border-2 text-white cursor-pointer shadow"
+              :title="user.name"
+              :src="generateUrl(user.avatar)">
+            <div :class="[user.online ? 'bg-indigo-500' : 'bg-gray-500']" :title="[user.online ? 'online' : 'offline']" class="absolute w-4 h-4 rounded-full border-2 border-white right-0 bottom-0"></div>
           </div>
         </div>
       </div>
 
-      <div id="message-box" class="flex-grow h-50-vh overflow-y-auto">
-        <div v-if="selectedUser.id" class="w-full h-full">
-          <div v-if="messages.length < 1" class="w-full h-full">
-            <loading-modal :localLoadingState="loading"></loading-modal>
-            <div v-if="!loading" class="flex flex-col items-center justify-center">
-              <div class="text-gray-600 text-lg text-center py-16">
-                No message yet!!! Say "Hi" to {{ selectedUser.name }}
+      <div class="flex flex-row flex-grow border-t h-60-vh">
+        <div id="message-box" class="flex-grow overflow-y-auto">
+          <div v-if="selectedUser.id" class="w-full h-full">
+            <div v-if="messages.length < 1" class="w-full h-full">
+              <loading-modal :localLoadingState="loading"></loading-modal>
+              <div v-if="!loading" class="flex flex-col items-center justify-center">
+                <div class="text-gray-600 text-lg text-center py-16">
+                  No message yet!!! Say "Hi" to {{ selectedUser.name }}
+                </div>
+                <img src="/image/dm.svg" alt="direct message" class="w-96">
               </div>
-              <img src="/image/dm.svg" alt="direct message" class="w-96">
             </div>
+            <message v-for="(message, index) in messages" :key="message.body" :message="message" :user="authUser" :index="index" @deleted="deleteMessage" @edit="editMessage" :last="messages.length === (index + 1)" :direct="true"></message>
           </div>
-          <message v-for="(message, index) in messages" :key="index" :message="message" :user="authUser" :index="index" @deleted="deleteMessage" :last="messages.length === (index + 1)" :direct="true"></message>
-        </div>
-        <div v-else class="flex flex-col items-center justify-center">
-          <div class="text-gray-600 text-lg text-center py-16">
-            Click on the profile pic on left to see interaction with that user
+          <div v-else class="flex flex-col items-center justify-center">
+            <div class="text-gray-600 text-lg text-center py-16">
+              Click on the profile pic above to see interaction with that user
+            </div>
+            <img src="/image/select.svg" alt="direct message" class="w-64">
           </div>
-          <img src="/image/select.svg" alt="direct message" class="w-64">
         </div>
       </div>
-    </div>
 
-    <div class="relative bg-gray-200">
-      <div class="static text-center p-4">
-        <textarea class="static textarea resize-none rounded w-full p-4 text-gray-800"
-          id="send-message"
-          :style="{height: messageTextareaHeight}"
-          ref="messageTextarea"
-          :placeholder="'write your message here' | localize"
-          rows=1
-          v-model="message"
-          :disabled="isDisabled"
-          @keydown.enter.prevent="sendMessage($event)"></textarea>
+      <div class="relative text-center p-4 border-t">
+        <div v-if="isDisabled" class="absolute left-0 top-0 rounded-b w-full h-full bg-gray-800 opacity-25"></div>
+        <div class="flex justify-between items-center">
+          <textarea
+            class="static textarea resize-none rounded w-full px-4 pt-2 text-gray-800 bg-white"
+            id="send-direct-message"
+            :style="{height: messageTextareaHeight}"
+            ref="messageTextarea"
+            :placeholder="'write your message here' | localize"
+            rows=1
+            v-model="message"
+            :disabled="isDisabled"
+            @keydown.enter.prevent="sendMessage($event)"></textarea>
+          <div @click="sendMessage" class="bg-indigo-500 rounded-full h-10 w-10 flex justify-center items-center cursor-pointer">
+            <font-awesome-icon :icon="faPaperPlane"
+              class="items-center text-white text-sm mr-1">
+            </font-awesome-icon>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <div @click="hideMessageBox" class="h-screen w-screen fixed inset-0 bg-gray-900 opacity-25 z-20"></div>
+  <div @click="hideMessageBox()" class="h-screen w-screen fixed inset-0 bg-gray-900 opacity-25 z-30"></div>
 </div>
 </template>
 
@@ -63,6 +85,7 @@
 import { mapState, mapActions } from 'vuex'
 import message from './message'
 import loadingModal from './loadingModal'
+import { faPaperPlane, faTimes } from '@fortawesome/free-solid-svg-icons'
 
 export default {
   components: {message, loadingModal},
@@ -79,7 +102,10 @@ export default {
     title: '',
     unreadMessage: 0,
     users: [],
-    selectedUser: {}
+    selectedUser: {},
+    editing: {},
+    faPaperPlane,
+    faTimes
   }),
 
   created () {
@@ -120,7 +146,8 @@ export default {
 
   methods: {
     ...mapActions([
-      'closeComponent'
+      'closeComponent',
+      'showNotification',
     ]),
     scrollToBottom () {
       this.$nextTick(() => {
@@ -142,20 +169,43 @@ export default {
       } else if (this.message.length > 0) {
         var msg = this.message
         this.message = ''
-        axios.post('/direct-messages', {
-          body: msg,
-          receiver_id: this.selectedUser.id
-        })
-          .then((response) => {
-            if (response.data.status === 'success') {
-              response.data.message.user = user
-              this.messages.push(response.data.message)
-            }
-          })
-          .catch((error) => {
-            console.log(error)
-          })
+        if(this.editing.hasOwnProperty('messageIndex')) {
+          this.sendEditedMessage(msg)
+        } else {
+          this.sendNewMessage(msg)
+        }
       }
+    },
+    sendEditedMessage (msg) {
+      axios.put('/direct-messages/' + this.editing.message.id, {
+        body: msg,
+        receiver_id: this.selectedUser.id
+      })
+        .then((response) => {
+          if (response.data.status === 'success') {
+            response.data.message.user = user
+            this.messages.splice(this.editing.messageIndex, 1, response.data.message)
+            this.editing = {}
+          }
+        })
+        .catch((error) => {
+          this.showNotification({type: error.response.data.status, message: error.response.data.message})
+        })
+    },
+    sendNewMessage (msg) {
+      axios.post('/direct-messages', {
+        body: msg,
+        receiver_id: this.selectedUser.id
+      })
+        .then((response) => {
+          if (response.data.status === 'success') {
+            response.data.message.user = user
+            this.messages.push(response.data.message)
+          }
+        })
+        .catch((error) => {
+          this.showNotification({type: error.response.data.status, message: error.response.data.message})
+        })
     },
     selectUserMessage (user, index) {
       this.loading = true
@@ -188,6 +238,14 @@ export default {
     },
     deleteMessage (index) {
       this.messages.splice(index, 1)
+    },
+    editMessage (index) {
+      document.getElementById('send-direct-message').focus()
+      this.editing = {
+        message: this.messages[index],
+        messageIndex: index,
+      }
+      this.message =  this.messages[index].body
     },
     listen () {
       Echo.join('global')

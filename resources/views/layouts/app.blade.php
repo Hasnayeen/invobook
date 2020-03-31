@@ -11,7 +11,7 @@
 
     <title>{{ config('app.name', 'GOODWORK') }} | {{ $title }}</title>
 
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap" rel="stylesheet"> 
+    <!-- <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap" rel="stylesheet">  -->
     <link href="{{ mix('css/main.min.css') }}" rel="stylesheet">
 
     @yield('style')
@@ -46,7 +46,6 @@
 <body class="bg-gray-200 text-gray-700">
     <main>
         <div id="app">
-            <div class="h-1" style="background: linear-gradient(to right, #4DC0B5, #3490DC);"></div>
             @if (!Auth::guest())
             <loading-modal></loading-modal>
             <navbar></navbar>
@@ -63,5 +62,12 @@
     <script src="{{ asset('/js/manifest.js') }}"></script>
     <script src="{{ asset('/js/vendor.min.js') }}"></script>
     {{ $script }}
+
+    @foreach (glob(base_path() . '/resources/views/plugin-scripts/global/*.blade.php') as $file)
+        @include('plugin-scripts.global.' . basename(str_replace('.blade.php', '', $file)))
+    @endforeach
+    
+    @stack('plugin-scripts')
+
 </body>
 </html>

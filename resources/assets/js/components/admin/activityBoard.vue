@@ -30,7 +30,7 @@
         </font-awesome-icon>
       </div>
       <div class="mx-4 py-4">
-      <button class="bg-teal-400 text-white font-medium hover:bg-teal-600 py-3 px-8 rounded">
+      <button class="bg-indigo-400 text-white font-medium hover:bg-indigo-600 py-3 px-8 rounded">
         <template v-if="loading">
           <font-awesome-icon :icon="faSpinner" spin></font-awesome-icon>
         </template>
@@ -64,7 +64,7 @@
     </div>
 
     <div class="flex flex-row justify-center mt-16 mb-8">
-      <div class="p-3 bg-white rounded shadow text-teal-500 cursor-pointer">
+      <div class="p-3 bg-white rounded shadow text-indigo-500 cursor-pointer">
         {{ 'Load More' | localize }}
       </div>
     </div>

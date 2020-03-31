@@ -1,21 +1,21 @@
 <template>
 <div>
-  <div :class="{'hidden': !formShown}" class="absolute container mx-auto mb-8 w-5/6 md:w-md lg:w-lg xl:w-xl z-30" style="top: 12vh;left: 0;right: 0;">
+  <div :class="{'hidden': !formShown}" class="absolute top-0 left-0 right-0 mt-24 container mx-auto mb-8 w-5/6 md:w-md lg:w-lg xl:w-xl z-30">
     <div class="bg-white rounded shadow-lg">
       <div class="">
         <div class="px-8 pt-8 bg-gray-200 rounded-t">
           <label class="block uppercase tracking-wide text-gray-800 text-xs font-bold mb-2" for="grid-first-name">
-            Title <span class="text-gray-500 capitalize">(required)</span>
+            {{ 'Title' | localize }} <span class="text-gray-500 capitalize">({{ 'required' | localize }})</span>
           </label>
-          <input ref="inputFocus" v-model="name" class="appearance-none block w-full bg-white text-gray-800 border border-gray-200 rounded py-3 px-4" id="grid-last-name" type="text" placeholder="New Discussion Post" required>
+          <input ref="inputFocus" v-model="name" class="appearance-none block w-full bg-white text-gray-800 border border-gray-200 rounded py-3 px-4" id="grid-last-name" type="text" :placeholder="$options.filters.localize('New Discussion Post')" required>
         </div>
         <div class="px-8 py-4 bg-gray-200">
           <label class="block uppercase tracking-wide text-gray-800 text-xs font-bold mb-2" for="grid-first-name">
-            Category <span class="text-gray-500 capitalize">(required)</span>
+            {{ 'Category' | localize }} <span class="text-gray-500 capitalize">({{ 'required' | localize }})</span>
           </label>
           <div class="flex flex-row items-center">
             <select class="appearance-none block w-full bg-white text-gray-800 border border-gray-200 rounded py-3 px-4" v-model="categoryId">
-              <option value="" disabled>Choose one</option>
+              <option value="" disabled>{{ 'Choose one' | localize }}</option>
               <option :value="category.id" v-for="category in categories">{{ category.name }}</option>
             </select>
             <font-awesome-icon :icon="faChevronDown"
@@ -25,11 +25,11 @@
         </div>
         <div class="px-8 pb-4 bg-gray-200">
           <label class="block uppercase tracking-wide text-gray-800 text-xs font-bold mb-2" for="grid-first-name">
-            Cycle
+            {{ 'Cycle' | localize }}
           </label>
           <div class="flex flex-row items-center">
             <select class="appearance-none block w-full bg-white text-gray-800 border border-gray-200 rounded py-3 px-4" v-model="cycleId">
-              <option value="" select hidden disabled>Choose one</option>
+              <option value="" select hidden disabled>{{ 'Choose one' | localize }}</option>
               <option :value="cycle.id" v-for="cycle in cycles">{{ cycle.name ? cycle.name : cycle.start_date + ' - ' + cycle.end_date }}</option>
             </select>
             <font-awesome-icon :icon="faChevronDown"
@@ -40,20 +40,20 @@
         </div>
         <div class="px-8 pb-8 bg-gray-200">
           <label class="block uppercase tracking-wide text-gray-800 text-xs font-bold mb-2" for="grid-first-name">
-            Body <span class="text-gray-500 capitalize">(required)</span>
+            {{ 'Body' | localize }} <span class="text-gray-500 capitalize">({{ 'required' | localize }})</span>
           </label>
           <div id="editor" class="h-80 bg-white">
           </div>
         </div>
       </div>
       <div class="flex flex-row justify-between px-8 py-4 bg-white rounded-b">
-        <button @click="closeEditor" class="no-underline px-3 py-2 my-4 bg-white text-base text-red-400 rounded border-red-400 border">Cancel</button>
+        <button @click="closeEditor" class="no-underline px-3 py-2 my-4 bg-white text-base text-red-400 rounded border-red-400 border">{{ 'Cancel' | localize }}</button>
         <div v-if="!this.discussion">
-          <button @click="savePost(true)" class="no-underline px-3 py-2 mr-4 my-4 text-teal-400  text-base bg-white font-medium rounded border-teal-400  border">Save as a Draft</button>
-          <button @click="savePost(false)" class="no-underline px-3 py-2 my-4 bg-teal-400 text-base text-white font-medium rounded">Publish</button>
+          <button @click="savePost(true)" class="no-underline px-3 py-2 mr-4 my-4 text-indigo-400  text-base bg-white font-medium rounded border-indigo-400  border">{{ 'Save as a Draft' | localize }}</button>
+          <button @click="savePost(false)" class="no-underline px-3 py-2 my-4 bg-indigo-400 text-base text-white font-medium rounded">{{ 'Publish' | localize }}</button>
         </div>
         <div v-if="this.discussion">
-          <button @click="updatePost()" class="no-underline px-3 py-2 my-4 bg-teal-400 text-base text-white font-medium rounded">Save</button>
+          <button @click="updatePost()" class="no-underline px-3 py-2 my-4 bg-indigo-400 text-base text-white font-medium rounded">{{ 'Save' | localize }}</button>
         </div>
       </div>
     </div>

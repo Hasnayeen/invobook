@@ -18,7 +18,7 @@
     </div>
     <div class="p-2">
       Version: <span class="pl-2 text-xl text-gray-900">{{ version }}</span>
-      <button @click="checkForUpdates" class="no-underline p-4 m-4 mb-0 bg-white text-base text-teal-500 rounded border border-gray-400">
+      <button @click="checkForUpdates" class="no-underline p-4 m-4 mb-0 bg-white text-base text-indigo-500 rounded border border-gray-400">
         {{ 'Check for Updates' | localize }}
         <div v-if="loading" class="inline">
           <font-awesome-icon :icon="faSpinner" spin></font-awesome-icon>

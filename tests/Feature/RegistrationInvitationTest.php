@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use Carbon\Carbon;
-use ErrorException;
 use Tests\TestCase;
 use App\Base\Models\User;
 use App\Base\Models\Invite;
@@ -66,10 +65,12 @@ class RegistrationInvitationTest extends TestCase
     /** @test */
     public function email_needs_to_be_supplied_in_request()
     {
-        $this->expectException(ErrorException::class);
-
         $this->actingAs($this->user);
-        $this->post(self::$endpoint, []);
+        $response = $this->post(self::$endpoint, []);
+        $response->assertJson([
+            'status'  => 'error',
+            'message' => 'The given data was invalid.',
+        ]);
     }
 
     /** @test */

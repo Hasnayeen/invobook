@@ -1,5 +1,5 @@
 <template>
-<div v-if="activeTab === 'files'" class="w-full">
+<div id="file-container" v-if="activeTab === 'files'" class="w-full">
   <file-modal v-if="file" :fileModalShown="fileModalShown" :file="file" @close="closeFileModal"></file-modal>
 
   <div>
@@ -20,7 +20,7 @@
     </div>
 
     <div v-if="files.length === 0" class="flex flex-col items-center">
-      <div class="pb-4">Wanna share some resource with your teammates? Upload it then.</div>
+      <div class="pb-4">{{ 'Wanna share some resource with your teammates? Upload it then.' | localize }}</div>
       <img src="/image/files.svg" alt="files" class="w-80">
     </div>
   </div>

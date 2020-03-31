@@ -1,15 +1,15 @@
 <template>
-<div v-if="activeTab === 'discussions'" class="w-full">
+<div id="discussion-container" v-if="activeTab === 'discussions'" class="w-full">
   <create-discussion-form ref="discussionForm" :resourceId="resource.id" :resourceType="resourceType" :discussion="discussion" @close="closeCreateDiscussionForm" :form-shown="createDiscussionFormShown"></create-discussion-form>
 
   <discussion-details v-if="discussion" :discussionDetailsShown="discussionDetailsShown" :discussion="discussion" :index="index" @close="closeDiscussionDetails" @deleted="deleteDiscussion"></discussion-details>
 
   <div v-if="authenticated" class="text-center">
-    <button @click="showCreateDiscussionForm" class="no-underline p-3 my-4 bg-white text-base text-teal-500 rounded shadow">{{ 'Create New Post' | localize }}</button>
+    <button @click="showCreateDiscussionForm" class="no-underline p-3 my-4 bg-white text-base text-indigo-500 rounded shadow">{{ 'Create New Post' | localize }}</button>
   </div>
-  <div class="flex flex-row flex-wrap items-start lg:-mx-2 xl:-mx-3">
-    <div @click="showDiscussionDetails(index)" v-for="(discussion, index) in discussions" :key="index" class="w-full md:w-72 xl:w-88 my-6 md:m-6 lg:mx-2 xl:mx-5 bg-white shadow-md flex flex-col rounded cursor-pointer">
-      <div class="bg-teal-500 flex flex-col items-start w-full text-white rounded-t p-6 pb-4">
+  <div class="flex flex-row flex-wrap items-start md:-mx-4">
+    <div @click="showDiscussionDetails(index, discussion.id)" v-for="(discussion, index) in discussions" :key="index" class="w-full md:w-88 my-6 md:mx-4 bg-white shadow-md flex flex-col rounded cursor-pointer">
+      <div class="bg-indigo-500 flex flex-col items-start w-full text-white rounded-t p-6 pb-4">
         <div class="text-white text-xl font-semibold">{{ discussion.name }}</div>
         <div class="flex flex-row pt-2">
           <div class="w-10 h-10 mr-2">
@@ -33,7 +33,7 @@
     </div>
   </div>
   <div v-if="discussions.length === 0" class="flex flex-col items-center pt-8">
-    <div class="pb-4 text-lg">Have an idea or question? Create a Discussion</div>
+    <div class="pb-4 text-lg">{{ 'Have an idea or question? Create a Discussion' | localize }}</div>
     <img src="/image/discussions.svg" alt="discussion post" class="w-80">
   </div>
 </div>
@@ -128,12 +128,14 @@ export default {
         console.error(error.response.data.message)
       }
     },
-    showDiscussionDetails (index) {
+    showDiscussionDetails (index, id) {
+      this.updateUrl({"id": id})
       this.index = index
       this.discussion = this.discussions[index]
       this.discussionDetailsShown = true
     },
     closeDiscussionDetails (editDiscussion = false) {
+      this.updateUrl({"id": null})
       this.discussionDetailsShown = false
       if (editDiscussion) {
         this.createDiscussionFormShown = true

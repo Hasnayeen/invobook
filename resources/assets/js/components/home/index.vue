@@ -1,46 +1,30 @@
 <template>
-<div>
-  <div class="md:container md:mx-auto md:px-4 mt-4 flex justify-center">
-    <div class="bg-white shadow rounded flex justify-center flex-grow-0 px-4 py-1 text-sm">
-      <div @click="setActiveView('home')" class="text-gray-700 hover:text-blue-700 cursor-pointer">
-        Home
-      </div>
-      <div v-if="showSecondary || showTertiary" class="flex">
-        <div class="pl-2">➤</div>
-        <div @click="setActiveView(secondaryName)" class="text-gray-700 hover:text-blue-700 cursor-pointer pl-2">{{ secondaryName | capitalize }}</div>
-      </div>
-      <div v-if="showTertiary" class="flex">
-        <div class="pl-2">➤</div>
-        <div class="pl-2">{{ resourceName }}</div>
-      </div>
-    </div>
-  </div>
-
-  <div v-if="showHome" class="md:container md:mx-auto md:px-4 w-full lg:w-3/4 2xl:w-3/5 mt-8">
-    <div class="flex flex-row justify-around mb-8 pb-3 pt-4 bg-white shadow md:rounded text-gray-700">
-      <span @click="setActiveView('home')" class="flex-grow text-center"
-        :class="{'text-teal-800 font-semibold border-teal-500 border-b-2 pb-2 -mb-3':(currentView === 'home'), 'cursor-pointer': (currentView != 'home')}">
+<div id="main-container">
+  <div v-if="showHome" class="bg-white shadow">
+    <div id="group-menu" class="sm:container sm:mx-auto px-4 w-full sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl flex justify-start mb-8 pb-3 pt-4 text-gray-700">
+      <span @click="setActiveView('home')" class="mr-4 sm:mr-8"
+        :class="{'text-indigo-700 font-semibold border-indigo-500 border-b-2 pb-2 -mb-3':(currentView === 'home'), 'cursor-pointer': (currentView != 'home')}">
         {{ 'Home' | localize }}
       </span>
-      <span @click="setActiveView('projects')" class="flex-grow text-center"
-        :class="{'text-teal-800 font-semibold border-teal-500 border-b-2 pb-2 -mb-3':(currentView === 'projects'), 'cursor-pointer': (currentView != 'projects')}">
+      <span @click="setActiveView('projects')" class="mr-4 sm:mr-8"
+        :class="{'text-indigo-700 font-semibold border-indigo-500 border-b-2 pb-2 -mb-3':(currentView === 'projects'), 'cursor-pointer': (currentView != 'projects')}">
         {{ 'Projects' | localize }}
       </span>
-      <span @click="setActiveView('teams')" class="flex-grow text-center"
-        :class="{'text-teal-800 font-semibold border-teal-500 border-b-2 pb-2 -mb-3':(currentView === 'teams'), 'cursor-pointer': (currentView != 'teams')}">
+      <span @click="setActiveView('teams')" class="mr-4 sm:mr-8"
+        :class="{'text-indigo-700 font-semibold border-indigo-500 border-b-2 pb-2 -mb-3':(currentView === 'teams'), 'cursor-pointer': (currentView != 'teams')}">
         {{ 'Teams' | localize }}
       </span>
-      <span @click="setActiveView('offices')" class="flex-grow text-center"
-        :class="{'text-teal-800 font-semibold border-teal-500 border-b-2 pb-2 -mb-3':(currentView === 'offices'), 'cursor-pointer': (currentView != 'offices')}">
+      <span @click="setActiveView('offices')" class="mr-4 sm:mr-8"
+        :class="{'text-indigo-700 font-semibold border-indigo-500 border-b-2 pb-2 -mb-3':(currentView === 'offices'), 'cursor-pointer': (currentView != 'offices')}">
         {{ 'Offices' | localize }}
       </span>
     </div>
+  </div>
+  <div id="content-container" class="sm:container sm:mx-auto px-4 w-full sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl">
     <home :active-tab="currentView"></home>
     <projects v-if="currentView === 'projects'"></projects>
     <teams v-if="currentView === 'teams'"></teams>
     <offices v-if="currentView === 'offices'"></offices>
-    
-    <div class="h-16 md:hidden"></div>
   </div>
 
   <project v-if="currentView === 'project'"></project>
@@ -78,19 +62,6 @@ export default {
     showHome () {
       return ['home', 'projects', 'teams', 'offices'].includes(this.currentView)
     },
-    showSecondary () {
-      return ['projects', 'teams', 'offices'].includes(this.currentView)
-    },
-    secondaryName () {
-      if (this.showSecondary) {
-        return this.currentView
-      } else if (this.showTertiary) {
-        return this.currentView + 's'
-      }
-    },
-    showTertiary () {
-      return ['project', 'team', 'office'].includes(this.currentView)
-    }
   },
 
   methods: {
@@ -105,6 +76,11 @@ export default {
       'setGroup',
     ]),
     setActiveView (view) {
+      if (view === 'home') {
+        this.updateUrl({"group_type": null, "group_id": null, "tool": null})
+      } else {
+        this.updateUrl({"group_type": view, "group_id": null, "tool": null})
+      }
       this.setCurrentView(view)
     },
     showProject (id) {

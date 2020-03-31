@@ -7,6 +7,9 @@ export default {
   mutations: {
     getTeam (state, team) {
       state.team = team
+    },
+    updateTeamSettings (state, settings) {
+      state.team.settings = settings
     }
   },
 
@@ -31,6 +34,9 @@ export default {
         })
 
       dispatch('setCurrentView', 'team')
+    },
+    updateTeamSettings ({ commit }, settings) {
+      commit('updateTeamSettings', settings)
     }
   }
 }

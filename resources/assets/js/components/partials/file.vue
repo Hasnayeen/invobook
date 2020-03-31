@@ -9,13 +9,18 @@
       {{ file.name }}
     </div>
     <div class="relative pl-2">
-      <div v-if="(file.owner_id === user.id)" @click="toggleFileMenu" v-click-outside="hideFileMenu" class="cursor-pointer">
+      <div @click="toggleFileMenu" v-click-outside="hideFileMenu" class="cursor-pointer">
         <font-awesome-icon :icon="faEllipsisH" class="text-white text-xl bg-gray-600 rounded-full p-1"></font-awesome-icon>
       </div>
-      <div v-if="(file.owner_id === user.id) && dropdownMenuShown" class="absolute rounded shadow-lg top-0 mt-8 -ml-8 p-3 text-gray-800 bg-white hover:bg-indigo-200 left-0 z-10">
-        <div @click="deleteFile" class="cursor-pointer">
-          Delete
-        </div>
+      <div v-if="dropdownMenuShown" class="absolute w-32 left-0">
+        <ul class="list-reset bg-white rounded shadow-2xl py-2 absolute inset-x-0 mt-1 text-base text-center font-normal whitespace-no-wrap z-30">
+          <li @click="downloadFile" class="px-4 py-2 text-gray-800 bg-white hover:bg-indigo-200 font-medium cursor-pointer">
+              {{ 'Download' | localize }}
+          </li>
+          <li v-if="(file.owner_id === user.id)" @click="deleteFile" class="px-4 py-2 text-gray-800 bg-white hover:bg-indigo-200 font-medium cursor-pointer">
+              {{ 'Delete' | localize }}
+          </li>  
+          </ul>
       </div>
     </div>
   </div>
@@ -63,6 +68,21 @@ export default {
           this.dropdownMenuShown = false
           this.showNotification({type: error.response.data.status, message: error.response.data.message})
         })
+    },
+    downloadFile () {
+      axios.get(`/storage/${this.file.name}`, {responseType: 'blob'})
+      .then((response) => {
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', this.file.name);
+        document.body.appendChild(link);
+        link.click();
+      })
+      .catch((error) => {
+          this.dropdownMenuShown = false
+          this.showNotification({type: error.response.data.status, message: error.response.data.message})
+      })
     },
     toggleFileMenu () {
       this.dropdownMenuShown = !this.dropdownMenuShown

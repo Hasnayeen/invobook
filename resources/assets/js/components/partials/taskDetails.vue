@@ -1,6 +1,6 @@
 <template>
 <div v-if="taskDetailsShown">
-  <div class="absolute container mx-auto md:max-w-2xl lg:max-w-3xl xl:max-w-4xl z-40 mb-16" style="top: 12vh;left: 0;right: 0;">
+  <div class="absolute top-0 left-0 right-0 mt-24 container mx-auto md:max-w-2xl lg:max-w-3xl xl:max-w-4xl z-40 mb-16">
     <div class="bg-gray-100 rounded shadow-lg py-4">
       <div class="flex flex-row justify-between px-8 pb-2 relative">
         <div @click="closeTaskDetails" class="cursor-pointer">
@@ -11,10 +11,10 @@
         </div>
         <div v-if="dropdownMenuShown" class="absolute rounded shadow-md right-0 top-0 mt-6 mr-4 py-1 text-indigo-800 bg-white">
           <div @click="editTask" class="cursor-pointer hover:bg-indigo-200 px-4 py-2">
-            Edit
+            {{ 'Edit' | localize }}
           </div>
           <div @click="deleteTask" class="cursor-pointer hover:bg-indigo-200 px-4 py-2">
-            Delete
+            {{ 'Delete' | localize }}
           </div>
         </div>
       </div>
@@ -24,7 +24,7 @@
       <div class="bg-white flex flex-row flex-wrap lg:flex-no-wrap justify-between pt-4">
         <div>
           <div class="text-sm text-gray-600 px-8">
-            Assignee
+            {{ 'Assignee' | localize }}
           </div>
           <div class="px-8">
             <a v-if="task.assigned_to" :href="'/users/' + task.user.username" class="py-2">
@@ -35,7 +35,7 @@
         </div>
         <div class="text-center">
           <div class="text-sm text-gray-600 px-8">
-            Due Date
+            {{ 'Due Date' | localize }}
           </div>
           <div class="px-8 py-2 text-gray-900">
             {{ dueOn(task.due_on) }}
@@ -43,46 +43,46 @@
         </div>
         <div class="text-center relative">
           <div class="text-sm text-gray-600 px-8">
-            Status
+            {{ 'Status' | localize }}
           </div>
           <div @click="toggleStatusMenu" v-click-outside="closeStatusMenu" :style="'background-color: ' + task.status.color" class="px-4 py-1 mt-1 text-gray-900 font-semibold rounded-full cursor-pointer">
-            {{ task.status.name }}
+            {{ task.status.name | localize }}
           </div>
           <div v-if="statusMenuShown" class="absolute rounded shadow-md mt-2 py-1 text-left text-indigo-800 bg-gray-900">
             <div v-for="status in statuses"  :style="'color: ' + status.color" @click="changeStatus(status.id)" class="cursor-pointer hover:bg-white font-semibold px-4 py-2">
-              {{ status.name }}
+              {{ status.name | localize }}
             </div>
           </div>
         </div>
         <div class="text-center">
           <div class="text-sm text-gray-600 px-8">
-            Related To
+            {{ 'Related To' | localize }}
           </div>
           <a v-if="task.related_to && task.related" :href="'/' + resourceType + 's/' + resourceId + '?tool=tasks&id=' + task.related_to" class="px-8 py-2 flex items-center justify-center" :class="[task.related_to ? 'text-blue-500 underline' : 'text-gray-600']" :title="task.related.name">
             {{ task.related.name | clip }}
           </a>
-          <span v-else>None</span>
+          <span v-else>{{ 'None' | localize }}</span>
         </div>
       </div>
       <div class="bg-white text-sm text-gray-600 px-8 pt-4">
-        Details
+        {{ 'Details' | localize }}
       </div>
       <div class="bg-white text-gray-900 text-lg px-8 py-2">
         {{ task.notes }}
       </div>
       <div class="bg-white text-sm text-gray-600 px-8 pt-4">
-        Tags
+        {{ 'Tags' | localize }}
       </div>
       <div class="bg-white flex flex-row flex-wrap justify-start px-8 py-2 pb-8">
-        <div v-if="task.tags.length === 0" class="text-gray-700">No Tags</div>
-        <div v-else v-for="tag in task.tags" class="bg-teal-200 px-3 py-1 rounded-full text-teal-800 font-medium text-sm mr-4">{{ tag.label }}</div>
+        <div v-if="task.tags.length === 0" class="text-gray-700">{{ 'No Tags' | localize }}</div>
+        <div v-else v-for="tag in task.tags" class="bg-indigo-200 px-3 py-1 rounded-full text-indigo-800 font-medium text-sm mr-4">{{ tag.label }}</div>
       </div>
       <div class="flex flex-row justify-around bg-gray-200 py-4 text-gray-600 text-center">
-        <div @click="showColumn('comments')" :class="[activeColumn === 'comments' ? 'border-teal-500 text-teal-500 border-b-2 pb-4 -mb-4' : 'cursor-pointer']" class="w-1/2">
-          Comments
+        <div @click="showColumn('comments')" :class="[activeColumn === 'comments' ? 'border-indigo-500 text-indigo-500 border-b-2 pb-4 -mb-4' : 'cursor-pointer']" class="w-1/2">
+          {{ 'Comments' | localize }}
         </div>
-        <div @click="showColumn('progress')" :class="[activeColumn === 'progress' ? 'border-teal-500 text-teal-500 border-b-2 pb-4 -mb-4': 'cursor-pointer']" class="w-1/2">
-          Progress
+        <div @click="showColumn('progress')" :class="[activeColumn === 'progress' ? 'border-indigo-500 text-indigo-500 border-b-2 pb-4 -mb-4': 'cursor-pointer']" class="w-1/2">
+          {{ 'Progress' | localize }}
         </div>
       </div>
       <div class="px-2 md:px-8">
