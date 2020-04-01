@@ -24,7 +24,7 @@
         "axios": "^0.19.0",
         "cross-env": "^6.0.3",
         "fuzzysort": "^1.1.4",
-        "glob-all": "^3.1.0",
+        "glob-all": "^3.2.1",
         "laravel-echo": "^1.6.1",
         "laravel-mix": "^5.0.4",
         "linkifyjs": "^2.1.8",
