@@ -987,16 +987,16 @@
         },
         {
             "name": "ifsnop/mysqldump-php",
-            "version": "v2.8",
+            "version": "v2.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ifsnop/mysqldump-php.git",
-                "reference": "b6919eff87c36b18fe0d4b3a53635df03c8a3b38"
+                "reference": "fc9c119fe5d70af9a685cad6a8ac612fd7589e25"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ifsnop/mysqldump-php/zipball/b6919eff87c36b18fe0d4b3a53635df03c8a3b38",
-                "reference": "b6919eff87c36b18fe0d4b3a53635df03c8a3b38",
+                "url": "https://api.github.com/repos/ifsnop/mysqldump-php/zipball/fc9c119fe5d70af9a685cad6a8ac612fd7589e25",
+                "reference": "fc9c119fe5d70af9a685cad6a8ac612fd7589e25",
                 "shasum": ""
             },
             "require": {
@@ -1038,7 +1038,7 @@
                 "php5",
                 "sql"
             ],
-            "time": "2019-10-29T23:13:43+00:00"
+            "time": "2020-04-03T14:40:40+00:00"
         },
         {
             "name": "jakub-onderka/php-console-color",
@@ -1080,6 +1080,7 @@
                     "email": "jakub.onderka@gmail.com"
                 }
             ],
+            "abandoned": "php-parallel-lint/php-console-color",
             "time": "2018-09-29T17:23:10+00:00"
         },
         {
@@ -1126,6 +1127,7 @@
                 }
             ],
             "description": "Highlight PHP code in terminal",
+            "abandoned": "php-parallel-lint/php-console-highlighter",
             "time": "2018-09-29T18:48:56+00:00"
         },
         {
