@@ -4461,10 +4461,10 @@ laravel-echo-server@^1.6.1:
     socket.io "^2.3.0"
     yargs "^15.3.1"
 
-laravel-echo@^1.6.1:
-  version "1.6.1"
-  resolved "https://registry.yarnpkg.com/laravel-echo/-/laravel-echo-1.6.1.tgz#7360a48782f606acd0e6cf6fd429905b59606ae6"
-  integrity sha512-Nj+vg6IwnXh65Oe+HrIrjOFX5xwR1ln9YgdxPWzuYNOuvT4ZimhkmIe5jb7D3muBPVRUoOY9W4c6YgJ4L0L6+Q==
+laravel-echo@^1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/laravel-echo/-/laravel-echo-1.7.0.tgz#066479dbf9350c23a3dc5039b8f546a8cdddb88a"
+  integrity sha512-ZihYxqqhR1FAllsdYLwHHkopyN9pujG4H0p2SIK1r4sTnQnZw+P9WAkDF3QoHJFoCo44AUKWmyw7G/HqWgnObQ==
 
 laravel-mix@^5.0.4:
   version "5.0.4"
