@@ -47,7 +47,7 @@
               <loading-modal :localLoadingState="loading"></loading-modal>
               <a class="cursor-pointer flex flex-col items-center justify-center hover:text-indigo-600 hover:bg-white px-4 py-2" @click="loadPrevMessage">Load Previous Messages</a>
             </div>
-            <message v-for="(message, index) in messages" :key="message.body" :message="message" :user="authUser" :index="parseInt(index)" @deleted="deleteMessage" @edit="editMessage" :last="messages.length === (index + 1)" :direct="true"></message>
+            <message v-for="(message, index) in messages" :key="message.body + parseInt(index)" :message="message" :user="authUser" :index="parseInt(index)" @deleted="deleteMessage" @edit="editMessage" :last="messages.length === (index + 1)" :direct="true"></message>
           </div>
           <div v-else class="flex flex-col items-center justify-center">
             <div class="text-gray-600 text-lg text-center py-16">
@@ -233,6 +233,7 @@ export default {
         }
       })
         .then((response) => {
+          // console.log(response.data.messages)
           this.messages = response.data.messages.data.reverse()
           this.nextPageUrl = response.data.messages.next_page_url
           this.currentPage = response.data.messages.current_page
