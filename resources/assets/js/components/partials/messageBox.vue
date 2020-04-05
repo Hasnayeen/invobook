@@ -233,7 +233,6 @@ export default {
         }
       })
         .then((response) => {
-          // console.log(response.data.messages)
           this.messages = response.data.messages.data.reverse()
           this.nextPageUrl = response.data.messages.next_page_url
           this.currentPage = response.data.messages.current_page
