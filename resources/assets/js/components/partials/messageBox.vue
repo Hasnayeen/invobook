@@ -263,7 +263,7 @@ export default {
         }
       })
         .then((response) => {
-          this.concateAllMessages(response)
+          this.concatAllMessages(response)
           this.nextPageUrl = response.data.messages.next_page_url
           this.currentPage = response.data.messages.current_page
           this.loading = false
@@ -276,7 +276,7 @@ export default {
     loadPrevMessage (){
       this.paginationMessage(this.selectedUser)
     },
-    concateAllMessages (response){
+    concatAllMessages (response){
       let currentMessageArray = JSON.parse(JSON.stringify(response.data.messages.data.reverse()))
       let previousMessagesArray = JSON.parse(JSON.stringify(this.messages))
       
