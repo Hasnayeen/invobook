@@ -74,19 +74,33 @@
   </div>
   <!-- Task Filters -->
 
-  <div class="flex flex-row flex-wrap items-start lg:-mx-2 xl:-mx-4 lg:-mt-4">
-    <div v-for="(task, index) in tasks" @click="showTaskDetails(index, task.id)" :key="task.id" class="bg-white rounded shadow my-4 md:mx-6 lg:mx-2 xl:mx-4 p-4 w-full md:w-72 lg:w-64  cursor-pointer">
-      <div class="flex justify-between items-center">
-        <p class="text-xs text-gray-700 flex flex-col">
-          <span class="w-10 border-t-4" :style="'border-color:' + task.status.color"></span>
-          <span class="text-xs">{{'Due on' | localize }}</span>
-          <span class="text-sm text-indigo-700 font-medium">{{dueOn(task.due_on)}}</span>
-        </p>
-        <img v-if="task.assigned_to" :src="generateUrl(task.user.avatar)" class="rounded-full w-8 h-8" :title="task.user.name">
-        <font-awesome-icon v-else :icon="faQuestionCircle" class="text-gray-500 fa-2x" title="Not Assigned"></font-awesome-icon>
-      </div>
-      <div class="text-gray-700 text-left pt-2">
-        <p class="font-medium text-lg overflow-hidden">{{task.name}}</p>
+  <!-- Task List -->
+  <div v-for="(tasks, name) in groupedTasks">
+    <div class="pb-2 flex items-center font-semibold">
+      <span class="pr-1 text-gray-600">
+        {{ name }}
+      </span>
+      <span class="text-sm">
+        ({{ tasks.length }})
+      </span>
+      <font-awesome-icon :icon="faAngleDoubleRight"
+        class="pointer-events-none items-center text-gray-600 ml-1">
+      </font-awesome-icon>
+    </div>
+    <div class="flex flex-row flex-wrap items-start lg:-mx-2 xl:-mx-4 lg:-mt-4 pb-2">
+      <div v-for="(task, index) in tasks" @click="showTaskDetails(name, index, task.serial, task.id)" :key="task.id" class="bg-white rounded shadow my-4 md:mx-6 lg:mx-2 xl:mx-4 p-4 w-full md:w-72 lg:w-64  cursor-pointer">
+        <div class="flex justify-between items-center">
+          <p class="text-xs text-gray-700 flex flex-col">
+            <span class="w-10 border-t-4" :style="'border-color:' + task.status.color"></span>
+            <span class="text-xs">{{'Due on' | localize }}</span>
+            <span class="text-sm text-indigo-700 font-medium">{{dueOn(task.due_on)}}</span>
+          </p>
+          <img v-if="task.assigned_to" :src="generateUrl(task.user.avatar)" class="rounded-full w-8 h-8" :title="task.user.name">
+          <font-awesome-icon v-else :icon="faQuestionCircle" class="text-gray-500 fa-2x" title="Not Assigned"></font-awesome-icon>
+        </div>
+        <div class="text-gray-700 text-left pt-2">
+          <p class="font-medium text-lg overflow-hidden">{{task.name}}</p>
+        </div>
       </div>
     </div>
   </div>
@@ -94,6 +108,7 @@
     <div class="pb-4">{{'Don\'t you have Task to do? Go ahead, create one' | localize }}</div>
     <img src="/image/tasks.svg" alt="task list" class="w-96">
   </div>
+  <!-- Task List -->
 
 </div>
 </template>
@@ -107,6 +122,7 @@ import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons/faQuestionCi
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons/faChevronDown'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons/faSpinner'
 import { faFilter } from '@fortawesome/free-solid-svg-icons/faFilter'
+import { faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons/faAngleDoubleRight'
 
 export default {
   components: {createTaskForm, taskDetails, Datepicker},
@@ -145,12 +161,12 @@ export default {
     faQuestionCircle,
     faChevronDown,
     faSpinner,
-    faFilter
+    faFilter,
+    faAngleDoubleRight
   }),
 
   async created () {
     this.statuses = await this.getAllStatuses()
-    this.statusFilter = this.statuses.find(x => x.name === "To Do").id
     this.tasks = await this.getAllTasks(true)
     var id = new URL(location.href).searchParams.get('id')
     if (this.tasks) {
@@ -166,6 +182,7 @@ export default {
   },
 
   watch: {
+
     activeTab: function () {
       this.getAllTasks(false)
     },
@@ -191,7 +208,21 @@ export default {
       selectedCycleId: state => state.cycle.selectedCycle ? state.cycle.selectedCycle.id : 0,
       members: state => state.members,
       tags: state => state.tags,
-    })
+    }),
+    groupedTasks: function () {
+      var tasks = this.tasks.map(function (item, index) {
+        item['serial'] = index
+        return item
+      })
+      var tasks = this.tasks.reduce(function(accumulator, currentElement) {
+        let key = (currentElement['status']['name']);
+
+        (accumulator[key] ? accumulator[key] : (accumulator[key] = null || [])).push(currentElement);
+        return accumulator;
+      }, {});
+
+      return tasks
+    }
   },
 
   methods: {
@@ -247,10 +278,10 @@ export default {
         console.error(error)
       }
     },
-    showTaskDetails (index, id) {
+    showTaskDetails (key, index, serial, id) {
       this.updateUrl({"id": id})
-      this.index = index
-      this.task = this.tasks[index]
+      this.index = serial
+      this.task = this.groupedTasks[key][index]
       this.taskDetailsShown = true
     },
     closeTaskDetails (editTask = false) {

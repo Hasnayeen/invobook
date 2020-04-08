@@ -42,7 +42,7 @@ return [
     'Revoke'                                                                   => 'Retirar',
     'Upload'                                                                   => 'Subir',
     'Attach'                                                                   => 'Adjuntar',
-    'Detach'                                                                   => 'Detach',
+    'Detach'                                                                   => 'Desvincular',
     'Invite'                                                                   => 'Invitacion',
     'Filters'                                                                  => 'Filtros',
     'Apply'                                                                    => 'Aplicar',

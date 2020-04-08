@@ -32,8 +32,8 @@
       </div>
 
       <div class="flex flex-row flex-grow border-t h-60-vh">
-        <div id="message-box" class="flex-grow overflow-y-auto">
-          <div v-if="selectedUser.id" class="w-full h-full">
+        <div  class="flex-grow overflow-y-auto">
+          <div id="message-box"  v-if="selectedUser.id" class="w-full h-full">
             <div v-if="messages.length < 1" class="w-full h-full">
               <loading-modal :localLoadingState="loading"></loading-modal>
               <div v-if="!loading" class="flex flex-col items-center justify-center">
@@ -43,7 +43,11 @@
                 <img src="/image/dm.svg" alt="direct message" class="w-96">
               </div>
             </div>
-            <message v-for="(message, index) in messages" :key="message.body" :message="message" :user="authUser" :index="index" @deleted="deleteMessage" @edit="editMessage" :last="messages.length === (index + 1)" :direct="true"></message>
+            <div v-if="currentPage < lastPage">
+              <loading-modal :localLoadingState="loading"></loading-modal>
+              <a class="cursor-pointer flex flex-col items-center justify-center hover:text-indigo-600 hover:bg-white px-4 py-2" @click="loadPrevMessage">Load Previous Messages</a>
+            </div>
+            <message v-for="(message, index) in messages" :key="message.body + parseInt(index)" :message="message" :user="authUser" :index="parseInt(index)" @deleted="deleteMessage" @edit="editMessage" :last="messages.length === (index + 1)" :direct="true"></message>
           </div>
           <div v-else class="flex flex-col items-center justify-center">
             <div class="text-gray-600 text-lg text-center py-16">
@@ -97,6 +101,8 @@ export default {
     message: '',
     messages: [],
     nextPageUrl: null,
+    currentPage: 0,
+    lastPage: 0,
     messageBoxShown: false,
     messageTextareaHeight: 'auto',
     title: '',
@@ -153,7 +159,17 @@ export default {
       this.$nextTick(() => {
         if (document.getElementById("message-box")) {
           var messagesContainer = this.$el.querySelector('#message-box')
-          messagesContainer.scrollTop = messagesContainer.lastElementChild.scrollHeight
+          messagesContainer = messagesContainer.lastElementChild
+          messagesContainer.scrollIntoView()
+        }
+      })
+    },
+    scrollToNthChild (nthChild) {
+      this.$nextTick(() => {
+        if (document.getElementById("message-box")) {
+          var messagesContainer = this.$el.querySelector('#message-box')
+          messagesContainer = messagesContainer.children[nthChild]
+          messagesContainer.scrollIntoView();
         }
       })
     },
@@ -219,6 +235,8 @@ export default {
         .then((response) => {
           this.messages = response.data.messages.data.reverse()
           this.nextPageUrl = response.data.messages.next_page_url
+          this.currentPage = response.data.messages.current_page
+          this.lastPage = response.data.messages.last_page
           this.scrollToBottom()
           this.loading = false
         })
@@ -235,6 +253,47 @@ export default {
           this.loading = false
           console.log(error)
         })
+    },
+    paginationMessage (user) {
+      this.loading = true
+      this.isDisabled = false
+      axios.get(this.nextPageUrl, {
+        params: {
+          receiver_id: user.id
+        }
+      })
+        .then((response) => {
+          this.concatAllMessages(response)
+          this.nextPageUrl = response.data.messages.next_page_url
+          this.currentPage = response.data.messages.current_page
+          this.loading = false
+        })
+        .catch((error) => {
+          this.loading = false
+          console.log(error)
+        })
+    },
+    loadPrevMessage (){
+      this.paginationMessage(this.selectedUser)
+    },
+    concatAllMessages (response){
+      let currentMessageArray = JSON.parse(JSON.stringify(response.data.messages.data.reverse()))
+      let previousMessagesArray = JSON.parse(JSON.stringify(this.messages))
+      
+      let i = 0
+      const result = [];
+
+      currentMessageArray.forEach(arrayObject => result[i++] = arrayObject)
+
+      previousMessagesArray.forEach(arrayObject => result[i++] = arrayObject)
+      
+      this.messages = result
+      i = 0
+  
+      let length = Object.keys(response.data.messages.data).length
+      this.scrollToNthChild(length)
+
+      
     },
     deleteMessage (index) {
       this.messages.splice(index, 1)
