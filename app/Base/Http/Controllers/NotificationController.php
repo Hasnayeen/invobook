@@ -6,20 +6,14 @@ use Illuminate\Http\JsonResponse;
 
 class NotificationController extends Controller
 {
-    /**
-     * @return JsonResponse
-     */
-    public function index()
+    public function index(): JsonResponse
     {
         return response()->json([
             'status'        => 'success',
-            'notifications' => auth()->user()->unreadNotifications,
+            'notifications' => auth()->user()->notifications,
         ]);
     }
 
-    /**
-     * @return JsonResponse
-     */
     public function update(): JsonResponse
     {
         auth()->user()->unreadNotifications->markAsRead();
