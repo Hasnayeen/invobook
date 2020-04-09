@@ -199,6 +199,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('notifications', [NotificationController::class, 'index']);
 
+    Route::get('unread-notifications', [UnreadNotificationController::class, 'index']);
+
     Route::put('notifications', [NotificationController::class, 'update']);
 
     /**********************************
