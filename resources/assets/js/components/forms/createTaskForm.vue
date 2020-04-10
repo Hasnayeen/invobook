@@ -224,7 +224,6 @@ export default {
             }
           })
           .catch((error) => {
-            console.log('lol')
             this.showNotification({type: error.response.data.status, message: error.response.data.message})
           })
       } else {
