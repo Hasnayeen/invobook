@@ -200,32 +200,37 @@ export default {
       'showNotification',
     ]),
     createTask () {
-      axios.post('/tasks', {
-        name: this.name,
-        notes: this.notes,
-        assigned_to: this.assignedTo,
-        related_to: this.relatedTo,
-        cycle_id: this.cycleId !== 0 ? this.cycleId : null,
-        due_on: window.luxon.DateTime.fromISO(this.dueOnDate.toISOString()).toISODate(),
-        labels: this.labels,
-        group_id: this.resource.id,
-        group_type: this.resourceType
-      })
-        .then((response) => {
-          if (response.data.status === 'success') {
-            this.name = ''
-            this.notes = ''
-            this.assignedTo = null
-            this.dueOnDate = null
-            this.relatedTo = ''
-            this.showNotification({type: response.data.status, message: response.data.message})            
-            this.$emit('close', response.data.task)
-          }
+      if(this.dueOnDate !== null){
+        axios.post('/tasks', {
+          name: this.name,
+          notes: this.notes,
+          assigned_to: this.assignedTo,
+          related_to: this.relatedTo,
+          cycle_id: this.cycleId !== 0 ? this.cycleId : null,
+          due_on: window.luxon.DateTime.fromISO(this.dueOnDate.toISOString()).toISODate(),
+          labels: this.labels,
+          group_id: this.resource.id,
+          group_type: this.resourceType
         })
-        .catch((error) => {
-          this.showNotification({type: error.response.data.status, message: error.response.data.message})
-          this.$emit('close')
-        })
+          .then((response) => {
+            if (response.data.status === 'success') {
+              this.name = ''
+              this.notes = ''
+              this.assignedTo = null
+              this.dueOnDate = null
+              this.relatedTo = ''
+              this.showNotification({type: response.data.status, message: response.data.message})            
+              this.$emit('close', response.data.task)
+            }
+          })
+          .catch((error) => {
+            console.log('lol')
+            this.showNotification({type: error.response.data.status, message: error.response.data.message})
+          })
+      } else {
+        this.loading = false
+        this.showNotification({type: 403, message: "Due On is required"})
+      }
     },
     closeCreateTaskForm () {
       this.dehydrateForm()
