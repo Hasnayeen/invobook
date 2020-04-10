@@ -1,9 +1,9 @@
 <template>
   <div v-if="formShown">
     <div class="absolute top-0 left-0 right-0 mt-24 container mx-auto px-4 sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl z-30">
-      <!-- Task Loading Modal -->
+                <!-- Task Loading Modal -->
       <div class="fixed z-50">
-        <task-loading-modal :localLoadingState="loading"></task-loading-modal>
+        <loading-modal :localLoadingState="loading"></loading-modal>
       </div>
       <div class="bg-gray-100 rounded shadow-lg">
         <div class="text-2xl text-gray-700 text-center font-semibold px-8 py-6">
@@ -125,10 +125,10 @@
 import Datepicker from 'vuejs-datepicker'
 import { mapState, mapActions } from 'vuex'
 import { faChevronDown, faTimesCircle, faPlus } from '@fortawesome/free-solid-svg-icons'
-import taskLoadingModal from './../partials/taskLoadingModal'
+import loadingModal from './../partials/loadingModal'
 
 export default {
-  components: {Datepicker, taskLoadingModal},
+  components: {Datepicker, loadingModal},
   props: {
     formShown: {
       required: true,
@@ -206,8 +206,7 @@ export default {
     ]),
     createTask () {
       this.loading = true
-      if(this.dueOnDate !== null){
-        axios.post('/tasks', {
+      axios.post('/tasks', {
         name: this.name,
         notes: this.notes,
         assigned_to: this.assignedTo,
@@ -218,27 +217,22 @@ export default {
         group_id: this.resource.id,
         group_type: this.resourceType
       })
-        .then((response) => {
-          if (response.data.status === 'success') {
-            this.loading = false
-            this.name = ''
-            this.notes = ''
-            this.assignedTo = null
-            this.dueOnDate = null
-            this.relatedTo = ''
-            this.showNotification({type: response.data.status, message: response.data.message})            
-            this.$emit('close', response.data.task)
-          }
-        })
-        .catch((error) => {
+      .then((response) => {
+        if (response.data.status === 'success') {
           this.loading = false
-          this.showNotification({type: error.response.data.status, message: error.response.data.message})
-        })
-      }else{
+          this.name = ''
+          this.notes = ''
+          this.assignedTo = null
+          this.dueOnDate = null
+          this.relatedTo = ''
+          this.showNotification({type: response.data.status, message: response.data.message})            
+          this.$emit('close', response.data.task)
+        }
+      })
+      .catch((error) => {
         this.loading = false
-        this.showNotification({type: 403, message: "Due On is required"})
-      }
-      
+        this.showNotification({type: error.response.data.status, message: error.response.data.message})
+      })
     },
     closeCreateTaskForm () {
       this.dehydrateForm()
