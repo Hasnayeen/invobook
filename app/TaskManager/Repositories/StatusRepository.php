@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Base\Repositories;
+namespace App\TaskManager\Repositories;
 
-use App\Base\Models\Status;
+use App\TaskManager\Models\Status;
 
 class StatusRepository
 {
