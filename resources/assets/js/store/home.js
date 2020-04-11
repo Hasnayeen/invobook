@@ -31,7 +31,8 @@ export default new Vuex.Store({
     groupId: '',
     members: [],
     breadcrumb: ['home'],
-    loading: false
+    loading: false,
+    tags: []
   },
 
   mutations: {
@@ -82,6 +83,9 @@ export default new Vuex.Store({
     },
     getMembers (state, members) {
       state.members = members
+    },
+    getTags (state, tags) {
+      state.tags = tags
     }
   },
 
@@ -223,6 +227,9 @@ export default new Vuex.Store({
     },
     getMembers ({ commit }, members) {
       commit('getMembers', members)
+    },
+    getTags ({ commit }, tags) {
+      commit('getTags', tags)
     }
   }
 })
