@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Base\Http\Controllers;
+namespace App\TaskManager\Controllers;
 
-use App\Base\Models\Status;
-use App\Base\Repositories\StatusRepository;
-use App\Base\Http\Requests\ValidateStatusCreation;
+use App\TaskManager\Models\Status;
+use App\Base\Http\Controllers\Controller;
+use App\TaskManager\Repositories\StatusRepository;
+use App\TaskManager\Http\Requests\ValidateStatusCreation;
 
 class StatusController extends Controller
 {

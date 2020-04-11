@@ -2,7 +2,7 @@
 
 namespace App\TaskManager\Controllers;
 
-use App\Base\Models\Status;
+use App\TaskManager\Models\Status;
 use App\TaskManager\Models\Task;
 use App\Base\Http\Controllers\Controller;
 

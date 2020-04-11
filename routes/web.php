@@ -146,13 +146,6 @@ Route::get('cycles', [CycleController::class, 'index']);
 
 Route::post('cycles', [CycleController::class, 'store'])->middleware('auth');
 
-/**********************************
-    Status
-**********************************/
-
-Route::get('statuses', [StatusController::class, 'index']);
-
-Route::post('statuses', [StatusController::class, 'store'])->middleware('auth');
 
 Route::group(['middleware' => 'auth'], function () {
     /**********************************
