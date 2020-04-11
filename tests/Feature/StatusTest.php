@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Base\Models\Status;
+use App\TaskManager\Models\Status;
 
 class StatusTest extends TestCase
 {

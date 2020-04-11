@@ -186,7 +186,7 @@ class TaskTest extends TestCase
             'taskable_type' => 'project',
             'taskable_id'   => $project->id,
         ]);
-        factory(\App\Base\Models\Status::class)->create();
+        factory(\App\TaskManager\Models\Status::class)->create();
         $this->actingAs($this->user);
         resolve('Authorization')->setupDefaultPermissions($project);
         $project->members()->save($this->user);
@@ -280,8 +280,8 @@ class TaskTest extends TestCase
     /** @test */
     public function user_with_permission_can_update_status_of_a_task()
     {
-        $status = factory(\App\Base\Models\Status::class)->create();
-        $status2 = factory(\App\Base\Models\Status::class)->create();
+        $status = factory(\App\TaskManager\Models\Status::class)->create();
+        $status2 = factory(\App\TaskManager\Models\Status::class)->create();
 
         $this->task->status()->associate($status)->save();
 
@@ -299,8 +299,8 @@ class TaskTest extends TestCase
     {
         $this->expectException(AuthorizationException::class);
         $user = factory(\App\Base\Models\User::class)->create();
-        $status = factory(\App\Base\Models\Status::class)->create();
-        $status2 = factory(\App\Base\Models\Status::class)->create();
+        $status = factory(\App\TaskManager\Models\Status::class)->create();
+        $status2 = factory(\App\TaskManager\Models\Status::class)->create();
 
         $this->task->status()->associate($status)->save();
 
