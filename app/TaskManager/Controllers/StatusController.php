@@ -3,9 +3,9 @@
 namespace App\TaskManager\Controllers;
 
 use App\TaskManager\Models\Status;
-use App\TaskManager\Repositories\StatusRepository;
-use App\TaskManager\Requests\ValidateStatusCreation;
 use App\Base\Http\Controllers\Controller;
+use App\TaskManager\Repositories\StatusRepository;
+use App\TaskManager\Http\Requests\ValidateStatusCreation;
 
 class StatusController extends Controller
 {
