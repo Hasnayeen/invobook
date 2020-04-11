@@ -82,12 +82,6 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth:api'], function () {
 
     Route::post('cycles', [CycleController::class, 'store']);
 
-    // Status
-
-    Route::get('statuses', [StatusController::class, 'index']);
-
-    Route::post('statuses', [StatusController::class, 'store']);
-
     // Category
 
     Route::get('categories', [CategoryController::class, 'index']);
