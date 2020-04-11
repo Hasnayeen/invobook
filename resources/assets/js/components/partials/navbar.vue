@@ -1,5 +1,5 @@
 <template>
-<div class="sticky top-0 z-50">
+<div class="sticky top-0 z-40">
   <div class="h-1" style="background: linear-gradient(to right, #8497EC, #3958E3);"></div>
   <nav class="bg-white h-12 border-b">
     <div class="sm:container sm:mx-auto px-4 sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl flex flex-row justify-between h-full">
