@@ -230,6 +230,9 @@ export default new Vuex.Store({
     },
     getTags ({ commit }, tags) {
       commit('getTags', tags)
+    },
+    toggleLoading({ commit }, state) {
+      commit('toggleLoading', state)
     }
   }
 })
