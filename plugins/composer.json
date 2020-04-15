@@ -3,7 +3,13 @@
     "description": "Plugins for Goodwork application",
     "autoload": {
         "psr-4": {
-            "Goodwork\\Plugins\\": ""
+            "Goodwork\\Plugins\\": "./"
         }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "Goodwork\\Plugins\\ComposerScripts::postAutoloadDump",
+            "@php ../artisan plugin:discover"
+        ]
     }
 }
