@@ -113,8 +113,8 @@
     </div>
     <div class="h-16"></div>
   </div>
-
-  <div @click="closeCreateTaskForm" :class="{'hidden': !formShown}" class="h-screen w-screen fixed inset-0 bg-gray-900 opacity-25 z-20"></div>
+  <div @click="closeCreateTaskForm" :class="{'hidden': !formShown}" class="h-screen w-screen fixed inset-0 bg-gray-900 opacity-25 z-20">
+  </div>
 </div>
 </template>
 
@@ -122,7 +122,6 @@
 import Datepicker from 'vuejs-datepicker'
 import { mapState, mapActions } from 'vuex'
 import { faChevronDown, faTimesCircle, faPlus } from '@fortawesome/free-solid-svg-icons'
-
 export default {
   components: {Datepicker},
   props: {
@@ -165,7 +164,7 @@ export default {
     tagSuggestionShown: false,
     faChevronDown,
     faTimesCircle,
-    faPlus,
+    faPlus
   }),
 
   watch: {
@@ -229,7 +228,6 @@ export default {
             this.showNotification({type: error.response.data.status, message: error.response.data.message})
           })
       } else {
-        this.loading = false
         this.showNotification({type: 403, message: "Due On is required"})
       }
     },

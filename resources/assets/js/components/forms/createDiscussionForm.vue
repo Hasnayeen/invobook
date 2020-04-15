@@ -29,7 +29,8 @@
           </label>
           <div class="flex flex-row items-center">
             <select class="appearance-none block w-full bg-white text-gray-800 border border-gray-200 rounded py-3 px-4" v-model="cycleId">
-              <option value="" select hidden disabled>{{ 'Choose one' | localize }}</option>
+              <option :value="0" selected disabled hidden>{{ 'Choose one' | localize }}</option>
+              <option value="">None</option>
               <option :value="cycle.id" v-for="cycle in cycles">{{ cycle.name ? cycle.name : cycle.start_date + ' - ' + cycle.end_date }}</option>
             </select>
             <font-awesome-icon :icon="faChevronDown"
@@ -176,7 +177,7 @@ export default {
         content: this.quill.root.innerHTML,
         raw_content: JSON.stringify(this.quill.getContents()),
         draft: draft,
-        cycle_id: this.cycleId !== 0 ? this.cycleId : null,
+        cycle_id: ( this.cycleId !== 0) ? this.cycleId : null,
         group_type: this.resourceType,
         group_id: this.resourceId
       })
