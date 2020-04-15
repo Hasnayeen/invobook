@@ -219,6 +219,8 @@ export default {
               this.assignedTo = null
               this.dueOnDate = null
               this.relatedTo = ''
+              this.tags = []
+              this.labels = []
               this.showNotification({type: response.data.status, message: response.data.message})            
               this.$emit('close', response.data.task)
             }
