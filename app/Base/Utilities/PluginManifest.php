@@ -31,6 +31,8 @@ class PluginManifest extends PackageManifest
      */
     public function build()
     {
+        $packages = [];
+
         if ($this->files->exists($path = $this->vendorPath.'/composer/installed.json')) {
             $packages = json_decode($this->files->get($path), true);
         }
