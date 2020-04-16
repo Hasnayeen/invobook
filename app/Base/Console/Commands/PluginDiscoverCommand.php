@@ -19,7 +19,7 @@ class PluginDiscoverCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Rebuild the cached package manifest';
+    protected $description = 'Rebuild the cached plugin manifest';
 
     /**
      * Execute the console command.
@@ -31,10 +31,10 @@ class PluginDiscoverCommand extends Command
     {
         $manifest->build();
 
-        foreach (array_keys($manifest->manifest) as $package) {
-            $this->line("Discovered Package: <info>{$package}</info>");
+        foreach (array_keys($manifest->manifest) as $plugin) {
+            $this->line("Discovered Plugin: <info>{$plugin}</info>");
         }
 
-        $this->info('Package manifest generated successfully.');
+        $this->info('Plugin manifest generated successfully.');
     }
 }
