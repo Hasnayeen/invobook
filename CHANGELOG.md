@@ -18,6 +18,7 @@
 - Added Bengali translation
 - Added Nepali translation
 - Added possibility to edit messages on the messageboard
+- Added application Url Scheme enforcing for reverse proxying (`APP_PROTOCOL` environment variable)
 
 ### Changed
 

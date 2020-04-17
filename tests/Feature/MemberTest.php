@@ -18,6 +18,7 @@ class MemberTest extends TestCase
         parent::setUp();
         Mail::fake();
         Event::fake();
+        Notification::fake();
     }
 
     /**

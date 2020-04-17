@@ -3,11 +3,13 @@
 namespace App\Base\Console\Commands;
 
 use Illuminate\Console\GeneratorCommand;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputArgument;
 
 class ConsoleMakeCommand extends GeneratorCommand
 {
+    use GetRootNamespace;
+
     /**
      * The console command name.
      *
@@ -32,8 +34,8 @@ class ConsoleMakeCommand extends GeneratorCommand
     /**
      * Replace the class name for the given stub.
      *
-     * @param  string  $stub
-     * @param  string  $name
+     * @param  string $stub
+     * @param  string $name
      * @return string
      */
     protected function replaceClass($stub, $name)
@@ -60,7 +62,7 @@ class ConsoleMakeCommand extends GeneratorCommand
     /**
      * Get the default namespace for the class.
      *
-     * @param  string  $rootNamespace
+     * @param  string $rootNamespace
      * @return string
      */
     protected function getDefaultNamespace($rootNamespace)
@@ -88,6 +90,7 @@ class ConsoleMakeCommand extends GeneratorCommand
     protected function getOptions()
     {
         return [
+            ['namespace', 'ns', InputOption::VALUE_OPTIONAL, 'Specify the namespace for the generated class'],
             ['command', null, InputOption::VALUE_OPTIONAL, 'The terminal command that should be assigned', 'command:name'],
         ];
     }
