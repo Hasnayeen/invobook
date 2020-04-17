@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - dev
-    paths-ignore:
-      - 'public/**'
+    paths:
+      - 'resources/**/**.js'
 
 jobs:
   standardjs:
