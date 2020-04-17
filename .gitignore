@@ -19,3 +19,4 @@ docker.env
 .phpunit.result.cache
 *.swp
 .php_cs.cache
+package-lock.json
