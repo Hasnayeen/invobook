@@ -1,0 +1,87 @@
+name: Run Tests (PHP)
+
+on:
+  push:
+    branches:
+      - dev
+  pull_request:
+    branches:
+      - dev
+
+jobs:
+  php-tests:
+    runs-on: ubuntu-latest
+    env:
+      DB_DATABASE: goodwork
+      DB_USERNAME: root
+      DB_PASSWORD: password
+      BROADCAST_DRIVER: redis
+      CACHE_DRIVER: file
+      QUEUE_DRIVER: redis
+      SESSION_DRIVER: file
+    services:
+      db:
+        image: mysql:5.7
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: false
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: goodwork
+        ports:
+          - 3306/tcp
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup php
+        uses: shivammathur/setup-php@v2
+        with:
+            php-version: '7.4'
+            extensions: mbstring, mysql, pdo_mysql, gd, bcmath
+            coverage: none
+
+      - name: Start mysql service
+        run: sudo /etc/init.d/mysql start
+
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Cache composer dependencies
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Install Composer dependencies
+        run: composer install --no-interaction --no-suggest --prefer-dist --optimize-autoloader
+
+      - name: Prepare the application
+        run: |
+          php -r "file_exists('.env') || copy('.env.action', '.env');"
+          php artisan key:generate
+
+      - name: Clear Config
+        run: php artisan config:clear
+
+      - name: Run Migration
+        run: php artisan migrate -v
+        env:
+          DB_PORT: ${{ job.services.db.ports['3306'] }}
+
+      - name: Run Passport
+        run: |
+          php artisan passport:install
+          php artisan passport:keys
+        env:
+          DB_PORT: ${{ job.services.db.ports['3306'] }}
+
+      - name: Test with phpunit
+        run: vendor/bin/phpunit --coverage-clover=clover.xml
+        env:
+          DB_PORT: ${{ job.services.db.ports['3306'] }}
+
+      - name: Coverage Report
+        run: bash <(curl -s https://codecov.io/bash)
