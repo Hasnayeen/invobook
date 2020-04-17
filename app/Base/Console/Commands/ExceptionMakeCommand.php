@@ -7,6 +7,8 @@ use Symfony\Component\Console\Input\InputOption;
 
 class ExceptionMakeCommand extends GeneratorCommand
 {
+    use GetRootNamespace;
+
     /**
      * The console command name.
      *
@@ -76,8 +78,8 @@ class ExceptionMakeCommand extends GeneratorCommand
     protected function getOptions()
     {
         return [
+            ['namespace', 'ns', InputOption::VALUE_OPTIONAL, 'Specify the namespace for the generated class'],
             ['render', null, InputOption::VALUE_NONE, 'Create the exception with an empty render method'],
-
             ['report', null, InputOption::VALUE_NONE, 'Create the exception with an empty report method'],
         ];
     }

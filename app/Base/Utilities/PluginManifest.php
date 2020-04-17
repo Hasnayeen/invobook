@@ -8,6 +8,8 @@ use Illuminate\Foundation\PackageManifest;
 
 class PluginManifest extends PackageManifest
 {
+    protected $plugins = [];
+
     /**
      * Create a new package manifest instance.
      *
@@ -26,20 +28,19 @@ class PluginManifest extends PackageManifest
 
     /**
      * Build the manifest and write it to disk.
-     *
-     * @return void
      */
-    public function build()
+    public function build(): void
     {
-        $packages = [];
-
+        if (!$this->files->exists($this->vendorPath.'/composer/installed.json')) {
+            return;
+        }
         if ($this->files->exists($path = $this->vendorPath.'/composer/installed.json')) {
-            $packages = json_decode($this->files->get($path), true);
+            $plugins = json_decode($this->files->get($path), true);
         }
 
         $ignoreAll = in_array('*', $ignore = $this->packagesToIgnore());
 
-        $this->write(collect($packages)->mapWithKeys(function ($package) {
+        $this->write(collect($plugins)->mapWithKeys(function ($package) {
             return [$this->format($package['name']) => $package['extra']['laravel'] ?? []];
         })->each(function ($configuration) use (&$ignore) {
             $ignore = array_merge($ignore, $configuration['dont-discover'] ?? []);
@@ -51,14 +52,12 @@ class PluginManifest extends PackageManifest
     /**
      * Write the given manifest array to disk.
      *
-     * @param  array  $plugins
-     * @return void
-     *
      * @throws \Exception
      */
-    protected function write(array $plugins)
+    protected function write(array $plugins): void
     {
         $packages = include $this->manifestPath;
+        $this->plugins = $plugins;
         $this->manifest = array_merge($packages, $plugins);
         if (! is_writable($dirname = dirname($this->manifestPath))) {
             throw new Exception("The {$dirname} directory must be present and writable.");
@@ -67,5 +66,10 @@ class PluginManifest extends PackageManifest
         $this->files->replace(
             $this->manifestPath, '<?php return '.var_export($this->manifest, true).';'
         );
+    }
+
+    public function getPlugins(): array
+    {
+        return $this->plugins;
     }
 }

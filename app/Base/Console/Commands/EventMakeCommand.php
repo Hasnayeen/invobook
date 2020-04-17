@@ -6,6 +6,8 @@ use Illuminate\Console\GeneratorCommand;
 
 class EventMakeCommand extends GeneratorCommand
 {
+    use GetRootNamespace;
+
     /**
      * The console command name.
      *
