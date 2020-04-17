@@ -38,4 +38,9 @@ Route::middleware(['api', 'auth:api'])->prefix('api')->group(function () {
     Route::patch('discussions/{discussion}', [DiscussionController::class, 'update']);
 
     Route::delete('discussions/{discussion}', [DiscussionController::class, 'delete']);
+
+    // draft discussion
+
+    Route::get('draft/discussions', [DraftDiscussionController::class, 'index']);
 });
+
