@@ -2,12 +2,14 @@
 
 namespace App\Base\Console\Commands;
 
-use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Str;
+use Illuminate\Console\GeneratorCommand;
 use Symfony\Component\Console\Input\InputOption;
 
 class ListenerMakeCommand extends GeneratorCommand
 {
+    use GetRootNamespace;
+
     /**
      * The console command name.
      *
@@ -32,7 +34,7 @@ class ListenerMakeCommand extends GeneratorCommand
     /**
      * Build the class with the given name.
      *
-     * @param  string  $name
+     * @param  string $name
      * @return string
      */
     protected function buildClass($name)
@@ -77,7 +79,7 @@ class ListenerMakeCommand extends GeneratorCommand
     /**
      * Determine if the class already exists.
      *
-     * @param  string  $rawName
+     * @param  string $rawName
      * @return bool
      */
     protected function alreadyExists($rawName)
@@ -88,7 +90,7 @@ class ListenerMakeCommand extends GeneratorCommand
     /**
      * Get the default namespace for the class.
      *
-     * @param  string  $rootNamespace
+     * @param  string $rootNamespace
      * @return string
      */
     protected function getDefaultNamespace($rootNamespace)
@@ -104,8 +106,8 @@ class ListenerMakeCommand extends GeneratorCommand
     protected function getOptions()
     {
         return [
+            ['namespace', 'ns', InputOption::VALUE_OPTIONAL, 'Specify the namespace for the generated class'],
             ['event', 'e', InputOption::VALUE_OPTIONAL, 'The event class being listened for'],
-
             ['queued', null, InputOption::VALUE_NONE, 'Indicates the event listener should be queued'],
         ];
     }

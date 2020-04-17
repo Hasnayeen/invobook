@@ -9,6 +9,7 @@
     "scripts": {
         "post-autoload-dump": [
             "Goodwork\\Plugins\\ComposerScripts::postAutoloadDump",
+            "@php ../artisan package:discover",
             "@php ../artisan plugin:discover"
         ]
     }
