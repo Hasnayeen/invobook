@@ -2,6 +2,7 @@
 
 namespace App\Base\Providers;
 
+use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
@@ -12,8 +13,10 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(UrlGenerator $url)
     {
+        $url->forceScheme(env('APP_PROTOCOL', "http"));
+
         Relation::morphMap([
             'project'    => 'App\Project\Models\Project',
             'team'       => 'App\Team\Models\Team',
