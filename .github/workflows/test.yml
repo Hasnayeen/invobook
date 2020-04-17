@@ -76,7 +76,9 @@ jobs:
           REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
 
       - name: Run Passport
-        run: php artisan passport:install && php artisan passport:keys
+        run: |
+          php artisan passport:install
+          php artisan passport:keys
         env:
           DB_PORT: ${{ job.services.mysql.ports['3306'] }}
           REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
