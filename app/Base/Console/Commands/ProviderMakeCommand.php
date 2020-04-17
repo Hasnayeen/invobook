@@ -3,9 +3,12 @@
 namespace App\Base\Console\Commands;
 
 use Illuminate\Console\GeneratorCommand;
+use Symfony\Component\Console\Input\InputOption;
 
 class ProviderMakeCommand extends GeneratorCommand
 {
+    use GetRootNamespace;
+
     /**
      * The console command name.
      *
@@ -46,5 +49,17 @@ class ProviderMakeCommand extends GeneratorCommand
     protected function getDefaultNamespace($rootNamespace)
     {
         return $rootNamespace.'\Providers';
+    }
+
+    /**
+     * Get the console command options.
+     *
+     * @return array
+     */
+    protected function getOptions()
+    {
+        return [
+            ['namespace', 'ns', InputOption::VALUE_OPTIONAL, 'Specify the namespace for the generated class'],
+        ];
     }
 }

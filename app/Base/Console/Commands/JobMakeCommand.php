@@ -7,6 +7,8 @@ use Symfony\Component\Console\Input\InputOption;
 
 class JobMakeCommand extends GeneratorCommand
 {
+    use GetRootNamespace;
+
     /**
      * The console command name.
      *
@@ -72,6 +74,7 @@ class JobMakeCommand extends GeneratorCommand
     protected function getOptions()
     {
         return [
+            ['namespace', 'ns', InputOption::VALUE_OPTIONAL, 'Specify the namespace for the generated class'],
             ['sync', null, InputOption::VALUE_NONE, 'Indicates that job should be synchronous'],
         ];
     }

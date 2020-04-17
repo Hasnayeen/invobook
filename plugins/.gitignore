@@ -1,0 +1,4 @@
+*
+vendor
+composer.json
+!.gitignore

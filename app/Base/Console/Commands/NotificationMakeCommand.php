@@ -7,6 +7,8 @@ use Symfony\Component\Console\Input\InputOption;
 
 class NotificationMakeCommand extends GeneratorCommand
 {
+    use GetRootNamespace;
+
     /**
      * The console command name.
      *
@@ -108,8 +110,8 @@ class NotificationMakeCommand extends GeneratorCommand
     protected function getOptions()
     {
         return [
+            ['namespace', 'ns', InputOption::VALUE_OPTIONAL, 'Specify the namespace for the generated class'],
             ['force', 'f', InputOption::VALUE_NONE, 'Create the class even if the notification already exists'],
-
             ['markdown', 'm', InputOption::VALUE_OPTIONAL, 'Create a new Markdown template for the notification'],
         ];
     }
