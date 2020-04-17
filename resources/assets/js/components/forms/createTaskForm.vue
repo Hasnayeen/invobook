@@ -317,8 +317,9 @@ export default {
       
       if (this.editedFirstTask !== true) {
         this.dueOnDate = null
-        this.editedFirstTask =  false
       }
+      
+      this.editedFirstTask =  false
 
     }
   },
