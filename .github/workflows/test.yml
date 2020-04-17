@@ -3,7 +3,7 @@ name: Run Tests (PHP)
 on:
   push:
     branches:
-      - action
+      - dev
   pull_request:
     branches:
       - dev
