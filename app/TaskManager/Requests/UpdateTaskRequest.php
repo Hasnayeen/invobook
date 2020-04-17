@@ -27,7 +27,7 @@ class UpdateTaskRequest extends FormRequest
         return [
             'name'          => ['required', 'max:255', Rule::unique('tasks')->ignore($this->task)],
             'assigned_to'   => 'nullable|exists:users,id',
-            'notes'         => 'string',
+            'notes'         => 'nullable|string',
             'due_on'        => 'required|date_format:Y-m-d',
             'related_to'    => 'nullable|integer',
             'group_type'    => 'required|string|in:project,team,office',
