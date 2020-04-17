@@ -69,19 +69,19 @@ jobs:
       - name: Run Migration
         run: php artisan migrate -v
         env:
-          DB_PORT: ${{ job.services.mysql.ports['3306'] }}
+          DB_PORT: ${{ job.services.db.ports['3306'] }}
 
       - name: Run Passport
         run: |
           php artisan passport:install
           php artisan passport:keys
         env:
-          DB_PORT: ${{ job.services.mysql.ports['3306'] }}
+          DB_PORT: ${{ job.services.db.ports['3306'] }}
 
       - name: Test with phpunit
         run: vendor/bin/phpunit --coverage-clover=clover.xml
         env:
-          DB_PORT: ${{ job.services.mysql.ports['3306'] }}
+          DB_PORT: ${{ job.services.db.ports['3306'] }}
 
       - name: Coverage Report
         run: bash <(curl -s https://codecov.io/bash)
