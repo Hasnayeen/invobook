@@ -60,7 +60,7 @@ jobs:
 
       - name: Prepare the application
         run: |
-          php -r "file_exists('.env') || copy('.env.example', '.env');"
+          php -r "file_exists('.env') || copy('.env.action', '.env');"
           php artisan key:generate
 
       - name: Clear Config
