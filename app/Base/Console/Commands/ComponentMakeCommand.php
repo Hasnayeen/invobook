@@ -2,9 +2,9 @@
 
 namespace App\Base\Console\Commands;
 
-use Illuminate\Console\GeneratorCommand;
-use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Str;
+use Illuminate\Foundation\Inspiring;
+use Illuminate\Console\GeneratorCommand;
 use Symfony\Component\Console\Input\InputOption;
 
 class ComponentMakeCommand extends GeneratorCommand
@@ -74,7 +74,7 @@ class ComponentMakeCommand extends GeneratorCommand
     /**
      * Build the class with the given name.
      *
-     * @param  string  $name
+     * @param  string $name
      * @return string
      */
     protected function buildClass($name)
@@ -121,7 +121,7 @@ class ComponentMakeCommand extends GeneratorCommand
     /**
      * Get the default namespace for the class.
      *
-     * @param  string  $rootNamespace
+     * @param  string $rootNamespace
      * @return string
      */
     protected function getDefaultNamespace($rootNamespace)
