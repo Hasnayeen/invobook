@@ -2,8 +2,8 @@
 
 namespace App\Base\Console\Commands;
 
-use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Str;
+use Illuminate\Console\GeneratorCommand;
 use Symfony\Component\Console\Input\InputOption;
 
 class ModelMakeCommand extends GeneratorCommand
@@ -77,7 +77,7 @@ class ModelMakeCommand extends GeneratorCommand
         $factory = Str::studly(class_basename($this->argument('name')));
 
         $this->call('make:factory', [
-            'name' => "{$factory}Factory",
+            'name'    => "{$factory}Factory",
             '--model' => $this->qualifyClass($this->getNameInput()),
         ]);
     }
@@ -96,7 +96,7 @@ class ModelMakeCommand extends GeneratorCommand
         }
 
         $this->call('make:migration', [
-            'name' => "create_{$table}_table",
+            'name'     => "create_{$table}_table",
             '--create' => $table,
         ]);
     }
@@ -127,16 +127,16 @@ class ModelMakeCommand extends GeneratorCommand
         $modelName = $this->qualifyClass($this->getNameInput());
 
         $this->call('make:controller', array_filter([
-            'name'  => "{$controller}Controller",
+            'name'    => "{$controller}Controller",
             '--model' => $this->option('resource') || $this->option('api') ? $modelName : null,
-            '--api' => $this->option('api'),
+            '--api'   => $this->option('api'),
         ]));
     }
 
     /**
      * Get the default namespace for the class.
      *
-     * @param  string  $rootNamespace
+     * @param  string $rootNamespace
      * @return string
      */
     protected function getDefaultNamespace($rootNamespace)
@@ -159,7 +159,7 @@ class ModelMakeCommand extends GeneratorCommand
     /**
      * Resolve the fully-qualified path to the stub.
      *
-     * @param  string  $stub
+     * @param  string $stub
      * @return string
      */
     protected function resolveStubPath($stub)

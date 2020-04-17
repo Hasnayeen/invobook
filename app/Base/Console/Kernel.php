@@ -2,8 +2,9 @@
 
 namespace App\Base\Console;
 
-use App\Base\Console\Commands\{PluginInstallCommand, PluginDiscoverCommand};
 use Illuminate\Console\Scheduling\Schedule;
+use App\Base\Console\Commands\PluginInstallCommand;
+use App\Base\Console\Commands\PluginDiscoverCommand;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
@@ -15,7 +16,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         PluginDiscoverCommand::class,
-        PluginInstallCommand::class
+        PluginInstallCommand::class,
     ];
 
     /**

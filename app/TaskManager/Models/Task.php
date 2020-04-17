@@ -4,7 +4,6 @@ namespace App\TaskManager\Models;
 
 use App\Base\Models\Tag;
 use App\Base\Models\User;
-use App\TaskManager\Models\Status;
 use App\Base\Models\Mention;
 use Illuminate\Database\Eloquent\Model;
 

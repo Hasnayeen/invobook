@@ -2,11 +2,9 @@
 
 namespace App\Base\Console\Commands;
 
-use Illuminate\Support\Arr;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
-use Symfony\Component\Console\Input\InputOption;
 
 class PluginInstallCommand extends Command
 {
@@ -71,7 +69,7 @@ class PluginInstallCommand extends Command
 
     private function addToJsonSchema(array &$composerJson, array $value): void
     {
-        if (!isset($composerJson['repositories'])) {
+        if (! isset($composerJson['repositories'])) {
             $composerJson['repositories'] = [$value];
         } elseif (array_search($value, $composerJson['repositories']) === false) {
             $composerJson['repositories'][] = $value;
@@ -83,15 +81,16 @@ class PluginInstallCommand extends Command
         if ($url = $this->option('url')) {
             return [
                 'type' => 'vcs',
-                'url'  => $url
+                'url'  => $url,
             ];
         }
+
         return [
             'type' => 'path',
-            'url'  => $this->option('path')
+            'url'  => $this->option('path'),
         ];
     }
-    
+
     private function runComposerCommand(): void
     {
         if ($this->option('url') || $this->option('path')) {
@@ -100,12 +99,13 @@ class PluginInstallCommand extends Command
                 'update',
             ], 'plugins');
             $this->runProcessCommand($process);
+
             return;
         }
         $process = new Process([
             'composer',
             'require',
-            $this->argument('name')
+            $this->argument('name'),
         ], 'plugins');
         $this->runProcessCommand($process);
     }
@@ -127,7 +127,7 @@ class PluginInstallCommand extends Command
 
     private function getComposerJson(): array
     {
-        if(file_exists(base_path('plugins/composer.json'))) {
+        if (file_exists(base_path('plugins/composer.json'))) {
             return json_decode($this->files->get(base_path('/plugins/composer.json')), true);
         }
         $stub = $this->files->get(base_path('/stubs/composer.json.stub'));
@@ -140,7 +140,7 @@ class PluginInstallCommand extends Command
     {
         $process = new Process([
             'composer',
-            'dump'
+            'dump',
         ]);
         $process->run();
     }
