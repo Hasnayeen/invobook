@@ -3,7 +3,7 @@ name: Run Tests (PHP)
 on:
   push:
     branches:
-      - dev
+      - action
   pull_request:
     branches:
       - dev
@@ -20,7 +20,7 @@ jobs:
       QUEUE_DRIVER: redis
       SESSION_DRIVER: file
     services:
-      mysql:
+      db:
         image: mysql:5.7
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: false
