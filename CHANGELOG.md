@@ -22,6 +22,7 @@
 ### Changed
 
 - `App\Core` namespace is now `App\Base`
+- `App\TaskManager\Requests\UpdateTaskRequest` note rule is now nullable
 
 ### Removed
 
