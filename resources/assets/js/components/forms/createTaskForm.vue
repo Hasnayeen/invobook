@@ -153,6 +153,7 @@ export default {
     assignedTo: null,
     relatedTo: '',
     dueOnDate: null,
+    editedFirstTask: '', 
     cycleId: null,
     disabledDates: {
       to: '',
@@ -179,7 +180,7 @@ export default {
     },
     cycleId: function(value, oldValue) {
       if(value){
-        this.changeDueDate(value)
+          this.changeDueDate(value)
       }
     }
   },
@@ -287,7 +288,8 @@ export default {
       this.assignedTo = this.task.assigned_to
       this.relatedTo = this.task.related_to
       this.cycleId = this.selectedCycleId
-      this.dueOnDate = new Date(this.task.due_on)
+      this.dueOnDate = this.task.due_on
+      this.editedFirstTask = true
     },
     dehydrateForm () {
       this.name = ''
@@ -312,7 +314,13 @@ export default {
       }
 
       this.disabledDates.from = new Date(endDate)
-      this.dueOnDate = null
+      
+      if (this.editedFirstTask !== true) {
+        this.dueOnDate = null
+      }
+      
+      this.editedFirstTask =  false
+
     }
   },
 }
