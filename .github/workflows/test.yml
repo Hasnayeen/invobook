@@ -12,7 +12,7 @@ jobs:
   php-tests:
     runs-on: ubuntu-latest
     env:
-      DB_DATABASE: laravel
+      DB_DATABASE: goodwork
       DB_USERNAME: root
       DB_PASSWORD: password
       BROADCAST_DRIVER: redis
@@ -20,7 +20,7 @@ jobs:
       QUEUE_DRIVER: redis
       SESSION_DRIVER: file
     services:
-      mysql:
+      db:
         image: mysql:5.7
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: false
@@ -60,7 +60,7 @@ jobs:
 
       - name: Prepare the application
         run: |
-          php -r "file_exists('.env') || copy('.env.example', '.env');"
+          php -r "file_exists('.env') || copy('.env.action', '.env');"
           php artisan key:generate
 
       - name: Clear Config
@@ -69,19 +69,19 @@ jobs:
       - name: Run Migration
         run: php artisan migrate -v
         env:
-          DB_PORT: ${{ job.services.mysql.ports['3306'] }}
+          DB_PORT: ${{ job.services.db.ports['3306'] }}
 
       - name: Run Passport
         run: |
           php artisan passport:install
           php artisan passport:keys
         env:
-          DB_PORT: ${{ job.services.mysql.ports['3306'] }}
+          DB_PORT: ${{ job.services.db.ports['3306'] }}
 
       - name: Test with phpunit
         run: vendor/bin/phpunit --coverage-clover=clover.xml
         env:
-          DB_PORT: ${{ job.services.mysql.ports['3306'] }}
+          DB_PORT: ${{ job.services.db.ports['3306'] }}
 
       - name: Coverage Report
         run: bash <(curl -s https://codecov.io/bash)

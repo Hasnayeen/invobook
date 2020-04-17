@@ -13,9 +13,9 @@ class PluginManifest extends PackageManifest
     /**
      * Create a new package manifest instance.
      *
-     * @param  \Illuminate\Filesystem\Filesystem  $files
-     * @param  string  $basePath
-     * @param  string  $manifestPath
+     * @param  \Illuminate\Filesystem\Filesystem $files
+     * @param  string                            $basePath
+     * @param  string                            $manifestPath
      * @return void
      */
     public function __construct(Filesystem $files)
@@ -31,7 +31,7 @@ class PluginManifest extends PackageManifest
      */
     public function build(): void
     {
-        if (!$this->files->exists($this->vendorPath.'/composer/installed.json')) {
+        if (! $this->files->exists($this->vendorPath.'/composer/installed.json')) {
             return;
         }
         if ($this->files->exists($path = $this->vendorPath.'/composer/installed.json')) {

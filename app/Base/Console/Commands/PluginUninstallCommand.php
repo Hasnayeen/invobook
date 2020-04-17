@@ -2,7 +2,6 @@
 
 namespace App\Base\Console\Commands;
 
-use Illuminate\Support\Arr;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
@@ -63,7 +62,7 @@ class PluginUninstallCommand extends Command
         unset($composerJson['require'][$this->argument('name')]);
         $this->files->put(base_path('plugins/composer.json'), json_encode($composerJson, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
     }
-    
+
     private function runComposerCommand(): void
     {
         $process = new Process([
@@ -89,8 +88,9 @@ class PluginUninstallCommand extends Command
 
     private function getComposerJson(): ?array
     {
-        if(!file_exists(base_path('plugins/composer.json'))) {
+        if (! file_exists(base_path('plugins/composer.json'))) {
             $this->error('No plugin to uninstall');
+
             return null;
         }
         $composerJson = $this->files->get(base_path('/plugins/composer.json'));
@@ -102,7 +102,7 @@ class PluginUninstallCommand extends Command
     {
         $process = new Process([
             'composer',
-            'dump'
+            'dump',
         ]);
         $process->run();
     }

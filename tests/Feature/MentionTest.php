@@ -19,6 +19,7 @@ class MentionTest extends TestCase
         parent::setUp();
         Event::fake();
         Mail::fake();
+        Notification::fake();
         $this->user2 = factory(User::class)->create(['role_id' => 2]);
         $this->user3 = factory(User::class)->create(['role_id' => 2]);
     }
