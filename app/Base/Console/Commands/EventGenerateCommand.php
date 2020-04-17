@@ -2,9 +2,9 @@
 
 namespace App\Base\Console\Commands;
 
+use Illuminate\Support\Str;
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider;
-use Illuminate\Support\Str;
 
 class EventGenerateCommand extends Command
 {
@@ -43,7 +43,7 @@ class EventGenerateCommand extends Command
     /**
      * Make the event and listeners for the given event.
      *
-     * @param  string  $event
+     * @param  string $event
      * @param  array  $listeners
      * @return void
      */
@@ -61,7 +61,7 @@ class EventGenerateCommand extends Command
     /**
      * Make the listeners for the given event.
      *
-     * @param  string  $event
+     * @param  string $event
      * @param  array  $listeners
      * @return void
      */
