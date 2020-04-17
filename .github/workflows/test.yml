@@ -12,7 +12,7 @@ jobs:
   php-tests:
     runs-on: ubuntu-latest
     env:
-      DB_DATABASE: laravel
+      DB_DATABASE: goodwork
       DB_USERNAME: root
       DB_PASSWORD: password
       BROADCAST_DRIVER: redis
