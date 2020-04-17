@@ -23,7 +23,7 @@ class DraftDiscussionController extends Controller
 
         return response()->json([
             'status'      => 'success',
-            'total'       => count($discussions),
+            'total'       => count($drafDiscussions),
             'draft_discussions' => $drafDiscussions,
         ]);
     }
