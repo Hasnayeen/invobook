@@ -20,3 +20,6 @@ docker.env
 *.swp
 .php_cs.cache
 package-lock.json
+public/js/**/*.js
+!public/js/manifest.js
+!public/js/*/*.min.js
