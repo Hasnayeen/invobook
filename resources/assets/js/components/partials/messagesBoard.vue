@@ -14,10 +14,14 @@
     <div class="h-50-vh overflow-auto">
       <div id="message-box" class="">
         <div v-if="currentPage < lastPage">
-            <loading-modal :localLoadingState="loading"></loading-modal>
             <a class="cursor-pointer flex flex-col items-center justify-center hover:text-indigo-600 hover:bg-white px-4 py-2" @click="paginationMessage">Load Previous Messages</a>
         </div>
         <message v-for="(message, index) in messages" :key="message.body + parseInt(index)" :message="message" :user="user" :index="parseInt(index)" @deleted="deleteMessage" @edit="editMessage" :last="messages.length === (index + 1)"></message>
+        <div class="flex flex-row justify-center h-8">
+          <div class="text-gray-800 text-xs text-center px-4 rounded p-2">
+            {{ notificationMessage }}
+          </div>
+        </div>
       </div>
       <div v-if="messages.length === 0" class="flex flex-col justify-center items-center">
         <div class="text-gray-600 text-lg text-center py-8">
@@ -69,15 +73,15 @@
 import { mapState, mapActions } from 'vuex'
 import userSuggestionBox from './userSuggestionBox'
 import message from './message'
-import loadingModal from './loadingModal'
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 
 export default {
-  components: {message, userSuggestionBox, loadingModal},
+  components: {message, userSuggestionBox},
   props: ['resource', 'resourceType', 'activeTab'],
 
   data: () => ({
     messages: [],
+    notificationMessage: '',
     loading: false,
     nextPageUrl: null,
     currentPage: 0,
@@ -146,6 +150,7 @@ export default {
   methods: {
     ...mapActions([
       'showNotification',
+      'toggleLoading'
     ]),
     scrollToBottom () {
       this.$nextTick(() => {
@@ -233,16 +238,16 @@ export default {
         })
     },
     paginationMessage () {
-      this.loading = true
+      this.toggleLoading(true)
       if (this.activeTab === 'messages' && this.messages.length > 1) {
         axios.get(this.nextPageUrl).then((response) => {
           this.concatAllMessages(response)
           this.nextPageUrl = response.data.messages.next_page_url
           this.currentPage = response.data.messages.current_page
-          this.loading = false
+          this.toggleLoading(false)
         })
         .catch((error) => {
-          this.loading = false
+          this.toggleLoading(false)
           console.log(error)
         })
       }
@@ -331,10 +336,10 @@ export default {
       EventBus.$emit('messagePushed')
     },
     pushSystemMessage (body) {
-      this.pushMessage({
-        body,
-        system: true
-      })
+      this.notificationMessage = body
+      setTimeout(() => {
+        this.notificationMessage = ''
+      }, 3000);
     },
     checkForMention (e) {
       if (this.message.length > 2) {
