@@ -295,4 +295,24 @@ class DiscussionTest extends TestCase
              ]);
         Storage::disk('public')->assertExists('features.png');
     }
+
+    /** @test */
+    public function user_of_a_group_can_see_all_its_draft_discussions()
+    {
+        $draftDiscussions = factory(\App\Discussion\Models\Discussion::class, 2)->create([
+            'discussionable_type' => 'project',
+            'discussionable_id'   => $this->project->id,
+            'draft'               => true,
+        ]);
+
+        $this->actingAs($this->user)->call('GET', '/draft-discussions', ['group_type' => 'project', 'group_id' => $this->project->id])
+             ->assertJsonFragment([
+                 'status'  => 'success',
+                 'total'   => 2,
+                 'name'    => $draftDiscussions[0]->name,
+                 'content' => $draftDiscussions[0]->content,
+                 'name'    => $draftDiscussions[1]->name,
+                 'content' => $draftDiscussions[1]->content,
+             ]);
+    }
 }
