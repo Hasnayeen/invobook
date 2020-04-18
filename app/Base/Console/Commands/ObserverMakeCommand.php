@@ -2,12 +2,14 @@
 
 namespace App\Base\Console\Commands;
 
-use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Str;
+use Illuminate\Console\GeneratorCommand;
 use Symfony\Component\Console\Input\InputOption;
 
 class ObserverMakeCommand extends GeneratorCommand
 {
+    use GetRootNamespace;
+
     /**
      * The console command name.
      *
@@ -32,7 +34,7 @@ class ObserverMakeCommand extends GeneratorCommand
     /**
      * Build the class with the given name.
      *
-     * @param  string  $name
+     * @param  string $name
      * @return string
      */
     protected function buildClass($name)
@@ -59,8 +61,8 @@ class ObserverMakeCommand extends GeneratorCommand
     /**
      * Replace the model for the given stub.
      *
-     * @param  string  $stub
-     * @param  string  $model
+     * @param  string $stub
+     * @param  string $model
      * @return string
      */
     protected function replaceModel($stub, $model)
@@ -91,7 +93,7 @@ class ObserverMakeCommand extends GeneratorCommand
     /**
      * Get the default namespace for the class.
      *
-     * @param  string  $rootNamespace
+     * @param  string $rootNamespace
      * @return string
      */
     protected function getDefaultNamespace($rootNamespace)
@@ -107,6 +109,7 @@ class ObserverMakeCommand extends GeneratorCommand
     protected function getOptions()
     {
         return [
+            ['namespace', 'ns', InputOption::VALUE_OPTIONAL, 'Specify the namespace for the generated class'],
             ['model', 'm', InputOption::VALUE_OPTIONAL, 'The model that the observer applies to.'],
         ];
     }

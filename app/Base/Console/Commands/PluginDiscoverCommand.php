@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Base\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Base\Utilities\PluginManifest;
@@ -23,15 +23,12 @@ class PluginDiscoverCommand extends Command
 
     /**
      * Execute the console command.
-     *
-     * @param  \App\Base\Utilities\PluginManifest  $manifest
-     * @return void
      */
-    public function handle(PluginManifest $manifest)
+    public function handle(PluginManifest $manifest): void
     {
         $manifest->build();
 
-        foreach (array_keys($manifest->manifest) as $plugin) {
+        foreach (array_keys($manifest->getPlugins()) as $plugin) {
             $this->line("Discovered Plugin: <info>{$plugin}</info>");
         }
 

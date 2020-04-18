@@ -37,8 +37,6 @@ Route::middleware('web')->group(function () {
     Route::post('statuses', [StatusController::class, 'store'])->middleware('auth');
 });
 
-
-
 // Api
 
 Route::middleware(['api', 'auth:api'])->prefix('api')->group(function () {
