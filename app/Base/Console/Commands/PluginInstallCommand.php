@@ -52,19 +52,37 @@ class PluginInstallCommand extends Command
      */
     public function handle()
     {
-        $composerJson = $this->getComposerJson();
-        if ($this->option('url') || $this->option('path')) {
+        if ($this->validateArguments()) {
+            $composerJson = $this->getComposerJson();
             $this->addPluginToComposerFile($composerJson);
+            $this->runComposerCommand();
+            $this->dumpAutoloadFile();
         }
-        $this->runComposerCommand();
-        $this->dumpAutoloadFile();
+    }
+
+    private function validateArguments(): bool
+    {
+        if (!$this->argument('name')) {
+            $this->error('Not enough argument (missing: "name").');
+
+            return false;
+        }
+        if (($this->option('url') || $this->option('path')) && !$this->option('require')) {
+            $this->error('Not enough options (missing: "require").');
+
+            return false;
+        }
+
+        return true;
     }
 
     private function addPluginToComposerFile(array &$composerJson): void
     {
-        $composerJson['require'][$this->argument('name')] = $this->option('require');
-        $this->addToJsonSchema($composerJson, $this->getRepositoryValueForPackage());
-        $this->files->put(base_path('plugins/composer.json'), json_encode($composerJson, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+        if ($this->option('url') || $this->option('path')) {
+            $composerJson['require'][$this->argument('name')] = $this->option('require');
+            $this->addToJsonSchema($composerJson, $this->getRepositoryValueForPackage());
+            $this->files->put(base_path('plugins/composer.json'), json_encode($composerJson, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+        }
     }
 
     private function addToJsonSchema(array &$composerJson, array $value): void
