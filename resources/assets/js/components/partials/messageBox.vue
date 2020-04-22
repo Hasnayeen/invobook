@@ -5,7 +5,7 @@
       <div class="bg-white text-2xl text-gray-600 px-8 py-4 rounded-t shadow flex items-center justify-between">
         <div></div>
         <div>
-          Your Messages
+          Messages
         </div>
         <div @click="hideMessageBox()" class="self-end cursor-pointer">
           <font-awesome-icon :icon="faTimes"
@@ -37,7 +37,7 @@
             <div v-if="messages.length < 1" class="w-full h-full">
               <div v-if="!loading" class="flex flex-col items-center justify-center">
                 <div class="text-gray-600 text-lg text-center py-16">
-                  No message yet!!! Say "Hi" to {{ selectedUser.name }}
+                  No messages yet! Say "Hi" to {{ selectedUser.name }}...
                 </div>
                 <img src="/image/dm.svg" alt="direct message" class="w-96">
               </div>
@@ -49,7 +49,7 @@
           </div>
           <div v-else class="flex flex-col items-center justify-center">
             <div class="text-gray-600 text-lg text-center py-16">
-              Click on the profile pic above to see interaction with that user
+              Click a profile picture to see your interactions with that user.
             </div>
             <img src="/image/select.svg" alt="direct message" class="w-64">
           </div>

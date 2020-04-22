@@ -25,7 +25,7 @@
       </div>
       <div v-if="messages.length === 0" class="flex flex-col justify-center items-center">
         <div class="text-gray-600 text-lg text-center py-8">
-          Start communicating with your team member
+          Talk to your team members about {{ resource.name }}.
         </div>
         <img src="/image/work_chat.svg" alt="direct message" class="w-96">
       </div>
