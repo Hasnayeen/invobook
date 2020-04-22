@@ -325,7 +325,8 @@ export default {
 
     },
     updateDueOnDate(edited_dueDate){
-      if(edited_dueDate !== null && edited_dueDate !== '') {
+      let tempDate = window.luxon.DateTime.fromISO(edited_dueDate).toISODate()
+      if(tempDate !== null && tempDate !== '') {
         this.updatedDate = edited_dueDate
       } else {
         this.updatedDate = window.luxon.DateTime.fromISO(edited_dueDate.toISOString()).toISODate()
