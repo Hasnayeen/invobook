@@ -156,7 +156,7 @@ export default {
     editedFirstTask: '', 
     cycleId: null,
     disabledDates: {
-      to: '',
+      to: new Date(),
       from: ''
     },
     tags: [],
@@ -165,7 +165,8 @@ export default {
     tagSuggestionShown: false,
     faChevronDown,
     faTimesCircle,
-    faPlus
+    faPlus,
+    updatedDueOnDate: ''
   }),
 
   watch: {
@@ -241,13 +242,14 @@ export default {
       this.showNotification = false
     },
     updateTask () {
+      this.updateDueOnDate(this.dueOnDate)
       axios.put('/tasks/' + this.task.id, {
         name: this.name,
         notes: this.notes,
         assigned_to: this.assignedTo,
         related_to: this.relatedTo,
         cycle_id: this.cycleId !== 0 ? this.cycleId : null,
-        due_on: window.luxon.DateTime.fromISO(this.dueOnDate.toISOString()).toISODate(),
+        due_on: this.updatedDate,
         labels: this.labels,
         group_id: this.resource.id,
         group_type: this.resourceType
@@ -321,6 +323,14 @@ export default {
       
       this.editedFirstTask =  false
 
+    },
+    updateDueOnDate(edited_dueDate){
+      let tempDate = window.luxon.DateTime.fromISO(edited_dueDate).toISODate()
+      if(tempDate !== null && tempDate !== '') {
+        this.updatedDate = edited_dueDate
+      } else {
+        this.updatedDate = window.luxon.DateTime.fromISO(edited_dueDate.toISOString()).toISODate()
+      }
     }
   },
 }

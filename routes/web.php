@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 /**********************************
     Login
-**********************************/
+ **********************************/
 
 Route::get('login', [Auth\LoginController::class, 'showLoginForm']);
 
@@ -16,7 +16,7 @@ Route::post('logout', [Auth\LoginController::class, 'logout']);
 
 /**********************************
     Password
-**********************************/
+ **********************************/
 
 Route::post('password/email', [Auth\ForgotPasswordController::class, 'sendResetLinkEmail']);
 
@@ -28,7 +28,7 @@ Route::get('password/reset/{token}', [Auth\ResetPasswordController::class, 'show
 
 /**********************************
     Registration
-**********************************/
+ **********************************/
 
 Route::post('register/invite-link', [InvitationController::class, 'store'])->middleware(['auth', 'admin']);
 
@@ -46,15 +46,15 @@ Route::post('register/{token}', [Auth\RegisterController::class, 'confirmNewRegi
 
 /**********************************
     Impersonate User
-**********************************/
+ **********************************/
 
 Route::impersonate();
 
 Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('auth');
 
-    /**********************************
+/**********************************
         Group (Project/Team/Office)
-     **********************************/
+ **********************************/
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('groups/settings', [GroupSettingsController::class, 'index']);
@@ -74,9 +74,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('groups/tags/{tag}', [GroupTagsController::class, 'delete']);
 });
 
-    /**********************************
+/**********************************
         Member
-     **********************************/
+ **********************************/
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('members', [MemberController::class, 'index']);
@@ -86,9 +86,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('members', [MemberController::class, 'destroy']);
 });
 
-    /**********************************
+/**********************************
         Event
-     **********************************/
+ **********************************/
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('events', [EventController::class, 'index']);
@@ -98,9 +98,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('events/{event}', [EventController::class, 'index']);
 });
 
-    /**********************************
+/**********************************
         File
-    **********************************/
+ **********************************/
 
 Route::get('files', [FileController::class, 'index']);
 
@@ -112,9 +112,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('files/{file}', [FileController::class, 'delete']);
 });
 
-    /**********************************
+/**********************************
         Message
-     **********************************/
+ **********************************/
 
 Route::get('messages', [MessageController::class, 'index']);
 
@@ -126,9 +126,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('messages/{message}', [MessageController::class, 'delete']);
 });
 
-    /**********************************
+/**********************************
         Comment
-    **********************************/
+ **********************************/
 
 Route::get('/comments', [CommentController::class, 'index']);
 
@@ -140,7 +140,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 /**********************************
     Cycle
-**********************************/
+ **********************************/
 
 Route::get('cycles', [CycleController::class, 'index']);
 
@@ -149,7 +149,7 @@ Route::post('cycles', [CycleController::class, 'store'])->middleware('auth');
 Route::group(['middleware' => 'auth'], function () {
     /**********************************
         Category
-    **********************************/
+     **********************************/
 
     Route::get('categories', [CategoryController::class, 'index']);
 
@@ -157,7 +157,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     /**********************************
         Roadmap
-    **********************************/
+     **********************************/
 
     Route::get('cycles/{cycle}/roadmap', [RoadmapController::class, 'show']);
 
@@ -179,7 +179,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     /**********************************
         Tags
-    **********************************/
+     **********************************/
 
     Route::get('tags', [TagController::class, 'index']);
 
@@ -187,7 +187,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     /**********************************
         Notification
-    **********************************/
+     **********************************/
 
     Route::get('notifications', [NotificationController::class, 'index']);
 
@@ -197,7 +197,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     /**********************************
         User
-    **********************************/
+     **********************************/
 
     Route::get('users', [UserController::class, 'index']);
 
@@ -213,7 +213,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     /**********************************
         Github Service
-    **********************************/
+     **********************************/
 
     Route::get('services/github/repos', [GithubRepoController::class, 'index']);
 
@@ -223,7 +223,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     /**********************************
         Role
-    **********************************/
+     **********************************/
 
     Route::get('roles', [RoleController::class, 'index']);
 
@@ -231,14 +231,14 @@ Route::group(['middleware' => 'auth'], function () {
 
     /**********************************
         Settings
-    **********************************/
+     **********************************/
 
     Route::view('settings', 'users.settings');
 });
 
-    /**********************************
+/**********************************
         Admin
-    **********************************/
+ **********************************/
 
 Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function () {
     Route::get('/', [AdminController::class, 'index']);
