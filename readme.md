@@ -74,11 +74,18 @@ Also you can join the slack channel via this [link](https://discord.gg/4DvTQsc)
 
 Goodwork is an MIT-licensed open source project with its ongoing development made possible thanks to the support by our amazing backers.
 
-Support the development of "Goodwork" by being a sponsor or a backer
+Support the development of "Goodwork" by being a sponsor
 
-<a href="https://opencollective.com/goodwork#sponsor"><img alt="become a sponsor" src="https://opencollective.com/goodwork/sponsors.svg" height="35px"></a>
+[![Open Collective members by tier](https://img.shields.io/opencollective/tier/goodwork/11430)](https://opencollective.com/goodwork/contribute/breakfast-sponsor-11431/checkout)
+[![Open Collective members by tier](https://img.shields.io/opencollective/tier/goodwork/16328?label=Snack%20Sponsors)](https://opencollective.com/goodwork/contribute/snack-sponsor-16328/checkout)
+[![Open Collective members by tier](https://img.shields.io/opencollective/tier/goodwork/11431)](https://opencollective.com/goodwork/contribute/breakfast-sponsor-11431/checkout)
+[![Open Collective members by tier](https://img.shields.io/opencollective/tier/goodwork/15964?label=Lunch%20Sponsors)](https://opencollective.com/goodwork/contribute/lunch-sponsor-15964/checkout)
+[![Open Collective members by tier](https://img.shields.io/opencollective/tier/goodwork/15962?label=Dinner%20Sponsors)](https://opencollective.com/goodwork/contribute/dinner-sponsor-15962/checkout)
+[![Open Collective members by tier](https://img.shields.io/opencollective/tier/goodwork/15963?label=Feast%20Sponsors)](https://opencollective.com/goodwork/contribute/feast-sponsor-15963/checkout)
 
-<a href="https://opencollective.com/goodwork#sponsor"><img alt="become a backer" src="https://opencollective.com/goodwork/backers.svg" height="35px"></a>
+<a href="https://opencollective.com/goodwork#sponsor"><img alt="become a sponsor" src="https://opencollective.com/goodwork/sponsors.svg?width=890"></a>
+
+<a href="https://opencollective.com/goodwork#sponsor"><img alt="become a backer" src="https://opencollective.com/goodwork/backers.svg?width=890"></a>
 
 You can also fund specific issues on Issuehunt and the money will be distributed to contributors and maintainers.
 

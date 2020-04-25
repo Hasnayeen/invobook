@@ -34,6 +34,9 @@ class LocalizationMiddleware
         } elseif ($response->exception instanceof NotFoundHttpException) {
             $localeData = Lang::get('navbar', [], $locale);
             $this->prepareResponse($localeData, $response);
+        } else {
+            $localeData = Lang::get('auth', [], $locale);
+            $this->prepareResponse($localeData, $response);
         }
 
         return $response;
