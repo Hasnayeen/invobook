@@ -121,7 +121,7 @@ class RegistrationInvitationTest extends TestCase
 
         $this->get($invite->link)
              ->assertOk()
-             ->assertViewIs('auth.register');
+             ->assertSeeText('Register');
     }
 
     /** @test */

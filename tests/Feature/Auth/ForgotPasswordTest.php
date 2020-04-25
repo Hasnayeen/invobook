@@ -50,7 +50,7 @@ class ForgotPasswordTest extends TestCase
 
         $response->assertSuccessful();
 
-        $response->assertViewIs('auth.passwords.email');
+        $response->assertSeeText('Forgot your account’s password or having trouble logging into your account?');
     }
 
     /** @test */

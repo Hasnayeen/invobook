@@ -4,12 +4,12 @@
     <div class="md:bg-white container md:mx-4 md:mx-auto md:shadow-lg rounded md:mt-32 flex md:flex-row flex-col md:max-w-2xl lg:max-w-4xl justify-between">
         <div class="md:w-1/2 text-center md:flex flex-col items-center px-8 py-4">
             <p class="text-teal-500 font-bold text-4xl">GOODWORK</p>
-            <p class="text-teal-500 text-xl"> Sensible Approach to Work & Collaboration for Software Teams </p>
+            <p class="text-teal-500 text-xl">@lang('auth.Sensible Approach to Work & Collaboration for Software Teams')</p>
             <img src="/image/password.svg" alt="work desk" class="pt-4 hidden md:block w-96">
         </div>
         <div class=""></div>
         <div class="w-full md:bg-indigo-100 md:w-1/2 p-8">
-            <h3 class="text-gray-700 font-medium">Reset Password</h3>
+            <h3 class="text-gray-700 font-medium">@lang('auth.Reset Password')</h3>
             @if (session('status'))
                 <div class="alert alert-success">
                     {{ session('status') }}
@@ -39,7 +39,7 @@
                     @endif
                 </p>
                 <p class="py-4">
-                    <button type="submit" class="btn">Reset Password</button>
+                    <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded">@lang('auth.Reset Password')</button>
                 </p>
             </form>
         </div>
