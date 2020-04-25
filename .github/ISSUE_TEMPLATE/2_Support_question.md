@@ -1,7 +1,7 @@
 ---
 name: "🧐 Support Question"
 about: 'This repository is only for reporting bugs or problems. If you need help, see:
-  https://github.com/iluminar/goodwork/wiki'
+  https://github.com/iluminar/goodwork/wiki or ask here https://discord.gg/4DvTQsc'
 
 ---
 
