@@ -4,6 +4,8 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Base\Models\Notification;
+use Illuminate\Support\Facades\Notification as FakeNotification;
+use App\TaskManager\Notifications\TaskStatusUpdated;
 
 class NotificationTest extends TestCase
 {
@@ -11,6 +13,7 @@ class NotificationTest extends TestCase
     {
         parent::setUp();
         $this->notifications = factory(Notification::class, 3)->create(['notifiable_id' => $this->user->id]);
+        $this->task = factory(\App\TaskManager\Models\Task::class)->create(['created_by' => $this->user->id]);
     }
 
     /** @test */
@@ -39,5 +42,16 @@ class NotificationTest extends TestCase
         $this->assertDatabaseMissing('notifications', ['id' => $this->notifications[0]->id, 'read_at' => null]);
         $this->assertDatabaseMissing('notifications', ['id' => $this->notifications[1]->id, 'read_at' => null]);
         $this->assertDatabaseMissing('notifications', ['id' => $this->notifications[2]->id, 'read_at' => null]);
+    }
+
+    /** @test */
+    public function when_task_status_changed_a_notification_should_be_sent_to_the_creator_of_the_task()
+    {
+        FakeNotification::fake();
+
+        $this->user->notify(new TaskStatusUpdated($this->task, $this->user));
+
+        FakeNotification::assertSentTo($this->user, TaskStatusUpdated::class);
+
     }
 }
