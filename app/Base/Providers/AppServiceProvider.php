@@ -15,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(UrlGenerator $url)
     {
-        $url->forceScheme(env('APP_PROTOCOL', "http"));
+        $url->forceScheme(config('app.scheme'));
 
         Relation::morphMap([
             'project'    => 'App\Project\Models\Project',
