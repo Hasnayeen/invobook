@@ -215,13 +215,7 @@ export default {
         })
           .then((response) => {
             if (response.data.status === 'success') {
-              this.name = ''
-              this.notes = ''
-              this.assignedTo = null
-              this.dueOnDate = null
-              this.relatedTo = ''
-              this.tags = []
-              this.labels = []
+              this.dehydrateForm()
               this.showNotification({type: response.data.status, message: response.data.message})            
               this.$emit('close', response.data.task)
             }
@@ -271,9 +265,15 @@ export default {
       this.tagSuggestionShown = false
     },
     addTag (tag) {
-      this.tags.push(tag)
-      this.labels.push(tag.tag_id)
-      this.availableTags = this.availableTags.filter(x => x.tag_id !== tag.tag_id)
+      if(tag.id)  {
+        this.tags.push(this.availableTags.find(x => x.tag_id === tag.id))
+        this.labels.push(tag.id)
+        this.availableTags = this.availableTags.filter(x => x.tag_id !== tag.id)
+      } else {
+        this.tags.push(tag)
+        this.labels.push(tag.tag_id)
+        this.availableTags = this.availableTags.filter(x => x.tag_id !== tag.tag_id)
+      }
     },
     deleteTag (tag) {
       let index = this.tags.indexOf(tag)
@@ -292,13 +292,16 @@ export default {
       this.cycleId = this.selectedCycleId
       this.dueOnDate = this.task.due_on
       this.editedFirstTask = true
+      this.task.tags.forEach(tagData => this.addTag(tagData));
     },
     dehydrateForm () {
       this.name = ''
       this.notes = ''
-      this.assignedTo = ''
+      this.assignedTo = null
       this.dueOnDate = null
       this.relatedTo = ''
+      this.tags = []
+      this.labels = []
     },
     changeDueDate(value) {
       let cycleSelected = this.cycles.find(cycle => cycle.id === value)
