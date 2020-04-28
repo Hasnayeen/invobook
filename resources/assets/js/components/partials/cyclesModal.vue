@@ -6,7 +6,7 @@
     <div class="py-4">
       <div v-if="cycles.length === 0" class="flex flex-col items-center pt-4">
         {{ 'No cycle found! Create a New Cycle' | localize }}
-        <img src="/image/cycle.svg" alt="calender" class="w-96">
+        <img src="/image/cycle.svg" alt="calendar" class="w-96">
       </div>
       <div v-for="(cycle, index) in cycles" :key="cycle.id">
         <div v-if="index !== 0" class="border-b border-gray-200 mx-8"></div>
