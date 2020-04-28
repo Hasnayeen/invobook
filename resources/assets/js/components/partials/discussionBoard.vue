@@ -6,6 +6,8 @@
 
   <div v-if="authenticated" class="text-center">
     <button @click="showCreateDiscussionForm" class="no-underline p-3 my-4 bg-white text-base text-indigo-500 rounded shadow">{{ 'Create New Post' | localize }}</button>
+    <button  v-if="draftPost" @click="getAllDraftDiscussions(true)" class="no-underline ml-2 p-3 my-4 bg-white text-base text-indigo-500 rounded shadow">{{ 'Show Draft Discussions' | localize }}</button>
+    <button v-else @click="getAllDiscussions(true)" class="no-underline ml-2 p-3 my-4 bg-white text-base text-indigo-500 rounded shadow">{{ 'Show Published Discussions' | localize }}</button>
   </div>
   <div class="flex flex-row flex-wrap items-start md:-mx-4">
     <div @click="showDiscussionDetails(index, discussion.id)" v-for="(discussion, index) in discussions" :key="index" class="w-full md:w-88 my-6 md:mx-4 bg-white shadow-md flex flex-col rounded cursor-pointer">
@@ -72,7 +74,8 @@ export default {
     discussion: {},
     discussionDetailsShown: false,
     index: null,
-    authenticated
+    authenticated,
+    draftPost: true
   }),
   async created () {
     await this.getAllDiscussions(true)
@@ -122,6 +125,25 @@ export default {
               cycle_id: this.selectedCycleId !== 0 ? this.selectedCycleId : null
             }})
           this.discussions = data.discussions
+          this.draftPost = true
+          return this.discussions
+        }
+      } catch (error) {
+        console.error(error.response.data.message)
+      }
+    },
+    async getAllDraftDiscussions (update = false && (this.discussions.length < 1 || update)) {
+      try {
+        if (this.activeTab === 'discussions') {
+          let { data } = await axios({
+            url: '/draft-discussions',
+            params: {
+              group_type: this.resourceType,
+              group_id: this.resource.id,
+              cycle_id: this.selectedCycleId !== 0 ? this.selectedCycleId : null
+            }})
+          this.discussions = data.draft_discussions
+          this.draftPost = false
           return this.discussions
         }
       } catch (error) {

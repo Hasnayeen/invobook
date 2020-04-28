@@ -54,7 +54,7 @@
           <button @click="savePost(false)" class="no-underline px-3 py-2 my-4 bg-indigo-400 text-base text-white font-medium rounded">{{ 'Publish' | localize }}</button>
         </div>
         <div v-if="this.discussion">
-          <button @click="updatePost()" class="no-underline px-3 py-2 my-4 bg-indigo-400 text-base text-white font-medium rounded">{{ 'Save' | localize }}</button>
+          <button @click="updatePost(false)" class="no-underline px-3 py-2 my-4 bg-indigo-400 text-base text-white font-medium rounded">{{ 'Save' | localize }}</button>
         </div>
       </div>
     </div>
@@ -215,7 +215,7 @@ export default {
       this.categoryId = this.discussion.category_id
       this.quill.updateContents(JSON.parse(this.discussion.raw_content))
     },
-    updatePost () {
+    updatePost (draft = true) {
       axios.patch('/discussions/' + this.discussion.id, {
         name: this.name,
         category_id: this.categoryId,
@@ -223,7 +223,8 @@ export default {
         raw_content: JSON.stringify(this.quill.getContents()),
         cycle_id: this.cycleId !== 0 ? this.cycleId : null,
         group_type: this.resourceType,
-        group_id: this.resourceId
+        group_id: this.resourceId,
+        draft: draft,
       })
         .then((response) => {
           this.name = ''
