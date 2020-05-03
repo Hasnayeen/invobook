@@ -6,7 +6,7 @@
 
   <div v-if="authenticated" class="text-center">
     <button @click="showCreateDiscussionForm" class="no-underline p-3 my-4 bg-white text-base text-indigo-500 rounded shadow">{{ 'Create New Post' | localize }}</button>
-    <button  v-if="showDraftPost" @click="toogleDiscussions" class="no-underline ml-2 p-3 my-4 bg-white text-base text-indigo-500 rounded shadow">{{ 'Show Draft Discussions' | localize }}</button>
+    <button v-if="showDraftPost" @click="toogleDiscussions" class="no-underline ml-2 p-3 my-4 bg-white text-base text-indigo-500 rounded shadow">{{ 'Show Draft Discussions' | localize }}</button>
     <button v-else @click="toogleDiscussions" class="no-underline ml-2 p-3 my-4 bg-white text-base text-indigo-500 rounded shadow">{{ 'Show Published Discussions' | localize }}</button>
   </div>
   <div class="flex flex-row flex-wrap items-start md:-mx-4">
@@ -90,10 +90,13 @@ export default {
   },
   watch: {
     activeTab: function () {
-      this.getAllDiscussions(false)
+      this.getAllPublishedDiscussions(false)
+      this.getAllDraftDiscussions(false)
     },
     selectedCycleId: function () {
-      this.getAllDiscussions(true)
+      this.getAllPublishedDiscussions(true)
+      this.getAllDraftDiscussions(true)
+      this.showDraftPost = true
     }
   },
   computed: {
