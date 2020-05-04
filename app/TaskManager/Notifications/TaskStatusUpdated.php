@@ -66,11 +66,12 @@ class TaskStatusUpdated extends Notification
     {
         return [
             'subject'     => $this->creator->only(['id', 'name', 'username', 'avatar']),
-            'action'      => 'Update status of ',
+            'action'      => 'changed status of ',
             'object_type' => 'task',
             'object_name' => $this->task->name,
             'object_id'   => $this->task->id,
             'url'         => url($this->groupType . 's/' . $this->groupId . '?tool=tasks&id=' . $this->task->id),
+            'task_status' => ' to ' . $this->task->status->name
         ];
     }
 
