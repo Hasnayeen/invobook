@@ -4334,10 +4334,10 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.3.tgz#07c05034a6c349fa06e24fa35aa76db4580ce4dd"
   integrity sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==
 
-laravel-echo-server@^1.6.1:
-  version "1.6.1"
-  resolved "https://registry.yarnpkg.com/laravel-echo-server/-/laravel-echo-server-1.6.1.tgz#bce06ded2c5d3f32f5e11ad7ba78a1e6ebedc073"
-  integrity sha512-ROxYqokDzRE+ZT7Yv2sIwas9KwbNoh9vQ+mjNQdJqdzMyMvkEL2VZBAsq62J45bqYGIIj1D5D7LYqbD5D8z5gw==
+laravel-echo-server@^1.6.2:
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/laravel-echo-server/-/laravel-echo-server-1.6.2.tgz#c261bf74c2e116322cd64533986755a14b6eec17"
+  integrity sha512-KMDTd286p+dzTy+gh5MrG3VqZERljLnNppKY5eqRPpWYB0lT56SXjMztwQWYju0E9yR7guMAt9Ud0EQTPQtBZw==
   dependencies:
     colors "^1.4.0"
     dotenv "^8.2.0"
