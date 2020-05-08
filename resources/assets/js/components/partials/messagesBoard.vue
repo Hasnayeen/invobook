@@ -298,9 +298,6 @@ export default {
         })
         .listenForWhisper('typing', (e) => {
           this.pushSystemMessage(`${e.name} is typing`)
-          setTimeout(() => {
-            this.messages.pop()
-          }, 4000)
         })
     },
     typing () {
