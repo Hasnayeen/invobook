@@ -28,6 +28,7 @@ return [
         'id'    => 'Bahasa (Indonesia)',
         'it-IT' => 'Italian (Italy)',
         'jp'    => 'Japanese',
+        'ko-Kr' => 'Korean',
         'la'    => 'Latin',
         'ms'    => 'Malay',
         'ne'    => 'Nepali',
@@ -35,10 +36,12 @@ return [
         'pl'    => 'Polish',
         'pt-BR' => 'Portuguese (Brazil)',
         'ru-RU' => 'Russian (Russia)',
+        'sr'    => 'Serbian',
         'sv-se' => 'Swedish (Sweden)',
         'th'    => 'Thai (Thai)',
         'tr-TR' => 'Turkish (Turkey)',
         'vi-VN' => 'Vietnamese',
+        'zh-CN' => 'Simplified Chinese',
     ],
 
     /*
