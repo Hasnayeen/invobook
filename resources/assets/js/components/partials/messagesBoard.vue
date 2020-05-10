@@ -31,7 +31,7 @@
       </div>
     </div>
 
-    <div v-if="authenticated" class="w-full message-box-max md:max-w-2xl lg:max-w-4xl xl:max-w-6xl p-4 border-t-2 rounded-b-lg">
+    <div v-if="authenticated" class="w-full message-box-max lg:max-w-4xl xl:max-w-6xl p-4 border-t-2 rounded-b-lg">
       <div class="static text-center">
         <div class="relative">
           <user-suggestion-box
@@ -57,9 +57,9 @@
             @keydown="mentionHighlightMove($event)"
             @keydown.enter.prevent="sendMessage($event)"
             @focus="clearTitleNotification()"></textarea>
-          <div @click="sendMessage" class="bg-indigo-500 rounded-full px-3 flex items-center cursor-pointer">
+          <div @click="sendMessage" class="bg-indigo-500 flex-shrink-0 rounded-full w-8 h-8 sm:w-12 sm:h-12 px-3 flex justify-center items-center cursor-pointer">
             <font-awesome-icon :icon="faPaperPlane"
-              class="items-center text-white mr-1">
+              class="items-center text-white mr-1 text-xs sm:text-base">
             </font-awesome-icon>
           </div>
         </div>
