@@ -16,6 +16,7 @@
             {{ notification.data.action }}
             <a v-if="notification.data.url" :href="notification.data.url" class="no-underline hover:underline text-blue-400">{{ notification.data.object_name }}</a>
             <a v-else class="no-underline text-blue-400">{{ notification.data.object_name }}</a>
+            {{ notification.data.task_status }}
           </div>
           <div class="py-1 text-xs">
             {{ notification.date }}
