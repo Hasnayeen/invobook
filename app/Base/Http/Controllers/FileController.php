@@ -76,7 +76,7 @@ class FileController extends Controller
 
     private function fileIsOfValidType($type)
     {
-        $allowedType = ['image/jpeg', 'image/png', 'image/svg', 'gif', 'image/svg+xml', 'application/pdf'];
+        $allowedType = ['image/jpeg', 'image/png', 'image/svg', 'gif', 'image/svg+xml', 'application/pdf', 'application/vnd.google-apps.document', 'application/vnd.google-apps.spreadsheet', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.ms-powerpoint', 'application/vnd.openxmlformats-officedocument.presentationml.presentation'];
         if (! in_array($type, $allowedType)) {
             throw new InvalidFileFormat();
         }
