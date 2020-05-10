@@ -1,4 +1,4 @@
-i<?php
+<?php
 $finder = PhpCsFixer\Finder::create()
     ->exclude('vendor')
     ->exclude('bootstrap/cache')
