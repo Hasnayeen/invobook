@@ -4190,16 +4190,16 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.15.0",
+            "version": "v1.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "81ffd3a9c6d707be22e3012b827de1c9775fc5ac"
+                "reference": "fa79b11539418b02fc5e1897267673ba2c19419c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/81ffd3a9c6d707be22e3012b827de1c9775fc5ac",
-                "reference": "81ffd3a9c6d707be22e3012b827de1c9775fc5ac",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/fa79b11539418b02fc5e1897267673ba2c19419c",
+                "reference": "fa79b11539418b02fc5e1897267673ba2c19419c",
                 "shasum": ""
             },
             "require": {
@@ -4211,7 +4211,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.15-dev"
+                    "dev-master": "1.17-dev"
                 }
             },
             "autoload": {
@@ -4245,7 +4245,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2020-03-09T19:04:49+00:00"
+            "time": "2020-05-12T16:47:27+00:00"
         },
         {
             "name": "symfony/polyfill-php72",
@@ -5631,16 +5631,16 @@
         },
         {
             "name": "laravel/telescope",
-            "version": "v3.3.1",
+            "version": "v3.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/telescope.git",
-                "reference": "7ee2149122c6a58d5e6d9b3f2eb0d63511413c01"
+                "reference": "5b458b08c600f2f3122bb87562a87b32b8322393"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/telescope/zipball/7ee2149122c6a58d5e6d9b3f2eb0d63511413c01",
-                "reference": "7ee2149122c6a58d5e6d9b3f2eb0d63511413c01",
+                "url": "https://api.github.com/repos/laravel/telescope/zipball/5b458b08c600f2f3122bb87562a87b32b8322393",
+                "reference": "5b458b08c600f2f3122bb87562a87b32b8322393",
                 "shasum": ""
             },
             "require": {
@@ -5690,7 +5690,7 @@
                 "laravel",
                 "monitoring"
             ],
-            "time": "2020-05-05T18:48:12+00:00"
+            "time": "2020-05-12T20:54:59+00:00"
         },
         {
             "name": "mockery/mockery",
