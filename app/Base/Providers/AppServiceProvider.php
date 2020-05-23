@@ -2,9 +2,11 @@
 
 namespace App\Base\Providers;
 
+use App\Base\Services\MessagingService\SendMessageEmail;
+use App\Base\Services\MessagingService\SendMessageInterface;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Database\Eloquent\Relations\Relation;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -41,6 +43,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(\Illuminate\Notifications\Channels\DatabaseChannel::class, function ($app) {
             return new \App\Base\Utilities\DatabaseNotificationChannel();
         });
+
+        $this->app->bind(SendMessageInterface::class, SendMessageEmail::class);
 
         if ($this->app->environment() === 'local') {
             $this->app->register(\Laravel\Telescope\TelescopeServiceProvider::class);

@@ -10,10 +10,14 @@ use Illuminate\Auth\Access\AuthorizationException;
 
 class DirectMessageTest extends TestCase
 {
+    public function setUp(): void
+    {
+        parent::setUp();
+        Event::fake();
+    }
     /** @test */
     public function user_can_read_direct_message_sent_by_other_user()
     {
-        Event::fake();
         $user = factory(User::class)->create();
         $messages = factory(DirectMessage::class, 5)->create([
             'sender_id'   => $this->user->id,
@@ -45,7 +49,6 @@ class DirectMessageTest extends TestCase
     /** @test */
     public function user_can_get_users_with_unread_message()
     {
-        Event::fake();
         $john = factory(User::class)->create();
         factory(DirectMessage::class)->create(['sender_id' => $john->id, 'receiver_id' => $this->user->id, 'read_at' => null]);
         $this->actingAs($this->user)
@@ -61,7 +64,6 @@ class DirectMessageTest extends TestCase
     /** @test */
     public function when_user_read_unread_message_update_record()
     {
-        Event::fake();
         $john = factory(User::class)->create();
         factory(DirectMessage::class)->create(['sender_id' => $john->id, 'receiver_id' => $this->user->id, 'read_at' => null]);
         $this->actingAs($this->user)
@@ -76,7 +78,6 @@ class DirectMessageTest extends TestCase
     /** @test */
     public function user_can_delete_their_own_direct_message()
     {
-        Event::fake();
         $john = factory(User::class)->create();
         $directMessage = factory(DirectMessage::class)->create(
             ['sender_id' => $this->user->id, 'receiver_id' => $john->id]
@@ -96,7 +97,6 @@ class DirectMessageTest extends TestCase
     public function user_can_not_delete_direct_message_from_other_users()
     {
         $this->expectException(AuthorizationException::class);
-        Event::fake();
         $john = factory(User::class)->create();
         $directMessage = factory(DirectMessage::class)->create(
             ['sender_id' => $john->id, 'receiver_id' => $this->user->id]
@@ -108,7 +108,6 @@ class DirectMessageTest extends TestCase
     /** @test */
     public function user_can_create_direct_message()
     {
-        Event::fake();
         $john = factory(User::class)->create();
         $this->actingAs($this->user);
         $this->post('direct-messages/', [
@@ -129,6 +128,25 @@ class DirectMessageTest extends TestCase
             'receiver_id'    => $john->id,
             'attachment_id'  => null,
             'read_at'        => null,
+        ]);
+    }
+
+    /** @test */
+    public function if_direct_message_updated_date_is_bigger_than_X_amount_of_hours_then_recieved_user_will_be_get_a_mail()
+    {
+        $john = factory(User::class)->create();
+        $this->actingAs($this->user);
+        $this->post('direct-messages/', [
+            'body'           => 'New Message',
+            'receiver_id'    => $john->id,
+            'attachment_id'  => null,
+            'read_at'        => null,
+        ])
+            ->assertJsonFragment([
+            'status'      => 'success',
+            'sender_id'   => $this->user->id,
+            'receiver_id' => $john->id,
+            'body'        => 'New Message',
         ]);
     }
 }
