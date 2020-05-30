@@ -31,5 +31,6 @@ abstract class TestCase extends BaseTestCase
         Artisan::call('db:seed', ['--class' => 'RoleHasPermissionTableSeeder']);
         Artisan::call('db:seed', ['--class' => 'ServicesTableSeeder']);
         Artisan::call('db:seed', ['--class' => 'StatusesTableSeeder']);
+        Artisan::call('db:seed', ['--class' => 'AppSettingTableSeeder']);
     }
 }

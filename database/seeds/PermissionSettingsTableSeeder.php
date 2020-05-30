@@ -60,6 +60,7 @@ class PermissionSettingsTableSeeder extends Seeder
                                  ->where('resource', '!=', 'cycle')
                                  ->where('resource', '!=', 'member')
                                  ->where('resource', '!=', 'permission')
+                                 ->where('resource', '!=', 'app-settings')
                                  ->get();
         foreach ($permissions->toArray() as $permission) {
             PermissionSetting::insert([
