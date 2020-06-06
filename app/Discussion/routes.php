@@ -47,4 +47,3 @@ Route::middleware(['api', 'auth:api'])->prefix('api')->group(function () {
 
     Route::get('draft-discussions', [DraftDiscussionController::class, 'index']);
 });
-

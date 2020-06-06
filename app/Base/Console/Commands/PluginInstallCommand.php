@@ -62,12 +62,12 @@ class PluginInstallCommand extends Command
 
     private function validateArguments(): bool
     {
-        if (!$this->argument('name')) {
+        if (! $this->argument('name')) {
             $this->error('Not enough argument (missing: "name").');
 
             return false;
         }
-        if (($this->option('url') || $this->option('path')) && !$this->option('require')) {
+        if (($this->option('url') || $this->option('path')) && ! $this->option('require')) {
             $this->error('Not enough options (missing: "require").');
 
             return false;
