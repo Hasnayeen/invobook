@@ -59,8 +59,7 @@ class ResetPasswordTest extends TestCase
         $response = $this->get($this->passwordResetGetRoute($token = $this->getValidToken($this->user)));
 
         $response->assertSuccessful();
-        $response->assertViewIs('auth.passwords.reset');
-        $response->assertViewHas('token', $token);
+        $response->assertSeeText('Reset Password');
     }
 
     /** @test */

@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'Your Profile'  => 'Your Profile',
-    'Your Messages' => 'Your Messages',
+    'Your Profile'  => 'Profile',
+    'Your Messages' => 'Messages',
     'Admin'         => 'Admin',
     'Timer'         => 'Timer',
     'Settings'      => 'Settings',

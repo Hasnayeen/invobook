@@ -70,7 +70,7 @@ $ git checkout -b issue[number]
 ```
 
 2. Develop on issue[number] branch, but Do not merge the upstream master with your development branch!!
-3. Run test to ensure all tests are passed before commiting
+3. Run test to ensure all tests are passed before committing
 4. Commit changes to issue[number] branch:
 ``` bash
 $ git add .

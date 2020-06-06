@@ -32,7 +32,7 @@ $factory->define(App\TaskManager\Models\Task::class, function (Faker\Generator $
         'created_by'    => factory(App\Base\Models\User::class)->create()->id,
         'taskable_type' => $taskable_type,
         'taskable_id'   => $taskable_id,
-        'status_id'     => factory(App\Base\Models\Status::class)->create()->id,
+        'status_id'     => factory(\App\TaskManager\Models\Status::class)->create()->id,
         'created_at'    => $now,
         'updated_at'    => $now,
     ];

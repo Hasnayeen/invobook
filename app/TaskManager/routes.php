@@ -28,6 +28,13 @@ Route::middleware('web')->group(function () {
 
         Route::delete('tasks/{task}/tags/{tag}', [TaskTagController::class, 'delete']);
     });
+
+    /**********************************
+        Status
+    **********************************/
+    Route::get('statuses', [StatusController::class, 'index']);
+
+    Route::post('statuses', [StatusController::class, 'store'])->middleware('auth');
 });
 
 // Api
@@ -52,4 +59,10 @@ Route::middleware(['api', 'auth:api'])->prefix('api')->group(function () {
     Route::post('tasks/{task}/tags', [TaskTagController::class, 'store']);
 
     Route::delete('tasks/{task}/tags/{tag}', [TaskTagController::class, 'delete']);
+
+    // Status
+
+    Route::get('statuses', [StatusController::class, 'index']);
+
+    Route::post('statuses', [StatusController::class, 'store']);
 });

@@ -6,6 +6,8 @@
 
   <div v-if="authenticated" class="text-center">
     <button @click="showCreateDiscussionForm" class="no-underline p-3 my-4 bg-white text-base text-indigo-500 rounded shadow">{{ 'Create New Post' | localize }}</button>
+    <button v-if="showDraftPost" @click="toogleDiscussions" class="no-underline ml-2 p-3 my-4 bg-white text-base text-indigo-500 rounded shadow">{{ 'Show Draft Discussions' | localize }}</button>
+    <button v-else @click="toogleDiscussions" class="no-underline ml-2 p-3 my-4 bg-white text-base text-indigo-500 rounded shadow">{{ 'Show Published Discussions' | localize }}</button>
   </div>
   <div class="flex flex-row flex-wrap items-start md:-mx-4">
     <div @click="showDiscussionDetails(index, discussion.id)" v-for="(discussion, index) in discussions" :key="index" class="w-full md:w-88 my-6 md:mx-4 bg-white shadow-md flex flex-col rounded cursor-pointer">
@@ -70,12 +72,16 @@ export default {
     createDiscussionFormShown: false,
     discussions: [],
     discussion: {},
+    draftDiscussions: [],
+    publishedDiscussions: [],
     discussionDetailsShown: false,
     index: null,
-    authenticated
+    authenticated,
+    showDraftPost: true
   }),
   async created () {
-    await this.getAllDiscussions(true)
+    await this.getAllPublishedDiscussions(true)
+    await this.getAllDraftDiscussions(true)
     const id = new URL(location.href).searchParams.get('id')
     this.discussion = this.discussions.find(discussion => discussion.id === parseInt(id))
     if (id) {
@@ -84,10 +90,13 @@ export default {
   },
   watch: {
     activeTab: function () {
-      this.getAllDiscussions(false)
+      this.getAllPublishedDiscussions(false)
+      this.getAllDraftDiscussions(false)
     },
     selectedCycleId: function () {
-      this.getAllDiscussions(true)
+      this.getAllPublishedDiscussions(true)
+      this.getAllDraftDiscussions(true)
+      this.showDraftPost = true
     }
   },
   computed: {
@@ -103,15 +112,21 @@ export default {
       })
     },
     closeCreateDiscussionForm (newDiscussion = null, updatedDiscussion = null) {
-      if (newDiscussion && (this.selectedCycleId === 0 || this.selectedCycleId === newDiscussion.cycle_id)) {
-        this.discussions.push(newDiscussion)
+      if (newDiscussion && !newDiscussion.draft && (this.selectedCycleId === 0 || this.selectedCycleId === newDiscussion.cycle_id)) {
+        this.showDraftPost = false
+        this.publishedDiscussions.push(newDiscussion)
+        this.toogleDiscussions()
+      } else if (newDiscussion && newDiscussion.draft && (this.selectedCycleId === 0 || this.selectedCycleId === newDiscussion.cycle_id)) {
+        this.showDraftPost = true
+        this.draftDiscussions.push(newDiscussion)
+        this.toogleDiscussions()
       } else if (updatedDiscussion && (this.selectedCycleId === 0 || this.selectedCycleId === updatedDiscussion.cycle_id)) {
-        this.discussions.splice(this.index, 1, updatedDiscussion)
+        this.updateDiscussionsData(updatedDiscussion)
       }
       this.createDiscussionFormShown = false
       this.discussion = null
     },
-    async getAllDiscussions (update = false) {
+    async getAllPublishedDiscussions (update = false) {
       try {
         if (this.activeTab === 'discussions' && (this.discussions.length < 1 || update)) {
           let { data } = await axios({
@@ -121,8 +136,26 @@ export default {
               group_id: this.resource.id,
               cycle_id: this.selectedCycleId !== 0 ? this.selectedCycleId : null
             }})
+          this.publishedDiscussions = data.discussions
           this.discussions = data.discussions
           return this.discussions
+        }
+      } catch (error) {
+        console.error(error.response.data.message)
+      }
+    },
+    async getAllDraftDiscussions (update = false) {
+      try {
+        if (this.activeTab === 'discussions'  && (this.discussions.length < 1 || update)) {
+          let { data } = await axios({
+            url: '/draft-discussions',
+            params: {
+              group_type: this.resourceType,
+              group_id: this.resource.id,
+              cycle_id: this.selectedCycleId !== 0 ? this.selectedCycleId : null
+            }})
+          this.draftDiscussions = data.draft_discussions
+          return this.draftDiscussions
         }
       } catch (error) {
         console.error(error.response.data.message)
@@ -145,6 +178,29 @@ export default {
     },
     deleteDiscussion (index) {
       this.discussions.splice(index, 1)
+    },
+    updateDiscussionsData(updatedDiscussion){
+      const foundDiscussion = this.publishedDiscussions.find(disc => disc.id === updatedDiscussion.id);
+
+      if(foundDiscussion) {
+        this.showDraftPost = false
+        this.publishedDiscussions.splice(this.index, 1, updatedDiscussion)
+        this.toogleDiscussions()
+      } else {
+        this.showDraftPost  = true
+        this.publishedDiscussions.push(updatedDiscussion)
+        this.draftDiscussions = this.draftDiscussions.filter(draft => draft.id !== updatedDiscussion.id)
+        this.toogleDiscussions()
+      }
+    },
+    toogleDiscussions() {
+      if(this.showDraftPost === true){
+        this.showDraftPost = false
+        this.discussions = this.draftDiscussions
+      } else {
+        this.showDraftPost = true
+        this.discussions = this.publishedDiscussions
+      }
     }
   },
 }

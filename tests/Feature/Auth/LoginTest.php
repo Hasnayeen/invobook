@@ -36,7 +36,7 @@ class LoginTest extends TestCase
         $response = $this->get($this->loginRoute());
 
         $response->assertSuccessful();
-        $response->assertViewIs('auth.login');
+        $response->assertSeeText('Login');
     }
 
     /** @test */
@@ -44,7 +44,7 @@ class LoginTest extends TestCase
     {
         $response = $this->actingAs($this->user)->get($this->loginRoute());
 
-        $response->assertRedirect('/');
+        $response->assertLocation('/');
     }
 
     /** @test */

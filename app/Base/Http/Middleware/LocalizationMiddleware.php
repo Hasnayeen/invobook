@@ -25,7 +25,7 @@ class LocalizationMiddleware
         $uri = $request->route() ? $request->route()->uri : '';
         $file = config('locale.route_to_file.' . $uri);
 
-        if (! is_null($file)) {
+        if ($file !== null) {
             $localeData = array_merge(Lang::get('navbar', [], $locale), Lang::get($file, [], $locale));
             if ($file === 'home') {
                 $localeData = array_merge(Lang::get('project', [], $locale), $localeData);
@@ -33,6 +33,9 @@ class LocalizationMiddleware
             $this->prepareResponse($localeData, $response);
         } elseif ($response->exception instanceof NotFoundHttpException) {
             $localeData = Lang::get('navbar', [], $locale);
+            $this->prepareResponse($localeData, $response);
+        } else {
+            $localeData = Lang::get('auth', [], $locale);
             $this->prepareResponse($localeData, $response);
         }
 

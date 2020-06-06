@@ -1,5 +1,5 @@
 [![License](http://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/iluminar/goodwork/blob/dev/LICENSE)
-[![Build Status](https://travis-ci.org/iluminar/goodwork.svg?branch=dev)](https://travis-ci.org/iluminar/goodwork)
+![Tests](https://github.com/iluminar/goodwork/workflows/Tests/badge.svg?branch=dev)
 [![Stable Version](https://poser.pugx.org/iluminar/goodwork/v/stable)](https://github.com/iluminar/goodwork)
 [![Laravel Version](https://img.shields.io/badge/Laravel-7.0-brightgreen.svg?style=flat)](https://github.com/laravel/laravel)
 [![VueJS Version](https://img.shields.io/badge/vue-2.5-brightgreen.svg?style=flat)](https://github.com/vuejs/vue)
@@ -38,7 +38,7 @@ Goodwork is a simple project management and collaboration tool for software team
 
 Goodwork brings you all the components required for your project to run smoothly in one place so that you have single source of truth. Instead of using a collection of tools or service which makes everything messy with important details being hard to find because stuff is scattered all over the place, Goodwork organizes everything in a central place where everyone in the company knows what to do, knows where things stand and where to find stuff without having to ask around.
 
-> Goodwork is available in 23 different languages!
+> Goodwork is available in 31 different languages! [list](https://github.com/iluminar/goodwork/wiki/Localization)
 
 [Overview](https://github.com/iluminar/goodwork/wiki/Overview)
 
@@ -74,11 +74,18 @@ Also you can join the slack channel via this [link](https://discord.gg/4DvTQsc)
 
 Goodwork is an MIT-licensed open source project with its ongoing development made possible thanks to the support by our amazing backers.
 
-Support the development of "Goodwork" by being a sponsor or a backer
+Support the development of "Goodwork" by being a sponsor
 
-<a href="https://opencollective.com/goodwork#sponsor"><img alt="become a sponsor" src="https://opencollective.com/goodwork/sponsors.svg" height="35px"></a>
+[![Open Collective members by tier](https://img.shields.io/opencollective/tier/goodwork/11430)](https://opencollective.com/goodwork/contribute/breakfast-sponsor-11431/checkout)
+[![Open Collective members by tier](https://img.shields.io/opencollective/tier/goodwork/16328?label=Snack%20Sponsors)](https://opencollective.com/goodwork/contribute/snack-sponsor-16328/checkout)
+[![Open Collective members by tier](https://img.shields.io/opencollective/tier/goodwork/11431)](https://opencollective.com/goodwork/contribute/breakfast-sponsor-11431/checkout)
+[![Open Collective members by tier](https://img.shields.io/opencollective/tier/goodwork/15964?label=Lunch%20Sponsors)](https://opencollective.com/goodwork/contribute/lunch-sponsor-15964/checkout)
+[![Open Collective members by tier](https://img.shields.io/opencollective/tier/goodwork/15962?label=Dinner%20Sponsors)](https://opencollective.com/goodwork/contribute/dinner-sponsor-15962/checkout)
+[![Open Collective members by tier](https://img.shields.io/opencollective/tier/goodwork/15963?label=Feast%20Sponsors)](https://opencollective.com/goodwork/contribute/feast-sponsor-15963/checkout)
 
-<a href="https://opencollective.com/goodwork#sponsor"><img alt="become a backer" src="https://opencollective.com/goodwork/backers.svg" height="35px"></a>
+<a href="https://opencollective.com/goodwork#sponsor"><img alt="become a sponsor" src="https://opencollective.com/goodwork/sponsors.svg?width=890"></a>
+
+<a href="https://opencollective.com/goodwork#sponsor"><img alt="become a backer" src="https://opencollective.com/goodwork/backers.svg?width=890"></a>
 
 You can also fund specific issues on Issuehunt and the money will be distributed to contributors and maintainers.
 

@@ -113,8 +113,8 @@
     </div>
     <div class="h-16"></div>
   </div>
-
-  <div @click="closeCreateTaskForm" :class="{'hidden': !formShown}" class="h-screen w-screen fixed inset-0 bg-gray-900 opacity-25 z-20"></div>
+  <div @click="closeCreateTaskForm" :class="{'hidden': !formShown}" class="h-screen w-screen fixed inset-0 bg-gray-900 opacity-25 z-20">
+  </div>
 </div>
 </template>
 
@@ -122,7 +122,6 @@
 import Datepicker from 'vuejs-datepicker'
 import { mapState, mapActions } from 'vuex'
 import { faChevronDown, faTimesCircle, faPlus } from '@fortawesome/free-solid-svg-icons'
-
 export default {
   components: {Datepicker},
   props: {
@@ -154,9 +153,10 @@ export default {
     assignedTo: null,
     relatedTo: '',
     dueOnDate: null,
+    editedFirstTask: '', 
     cycleId: null,
     disabledDates: {
-      to: '',
+      to: new Date(),
       from: ''
     },
     tags: [],
@@ -166,6 +166,7 @@ export default {
     faChevronDown,
     faTimesCircle,
     faPlus,
+    updatedDueOnDate: ''
   }),
 
   watch: {
@@ -180,7 +181,7 @@ export default {
     },
     cycleId: function(value, oldValue) {
       if(value){
-        this.changeDueDate(value)
+          this.changeDueDate(value)
       }
     }
   },
@@ -200,32 +201,31 @@ export default {
       'showNotification',
     ]),
     createTask () {
-      axios.post('/tasks', {
-        name: this.name,
-        notes: this.notes,
-        assigned_to: this.assignedTo,
-        related_to: this.relatedTo,
-        cycle_id: this.cycleId !== 0 ? this.cycleId : null,
-        due_on: window.luxon.DateTime.fromISO(this.dueOnDate.toISOString()).toISODate(),
-        labels: this.labels,
-        group_id: this.resource.id,
-        group_type: this.resourceType
-      })
-        .then((response) => {
-          if (response.data.status === 'success') {
-            this.name = ''
-            this.notes = ''
-            this.assignedTo = null
-            this.dueOnDate = null
-            this.relatedTo = ''
-            this.showNotification({type: response.data.status, message: response.data.message})            
-            this.$emit('close', response.data.task)
-          }
+      if(this.dueOnDate !== null){
+        axios.post('/tasks', {
+          name: this.name,
+          notes: this.notes,
+          assigned_to: this.assignedTo,
+          related_to: this.relatedTo,
+          cycle_id: this.cycleId !== 0 ? this.cycleId : null,
+          due_on: window.luxon.DateTime.fromISO(this.dueOnDate.toISOString()).toISODate(),
+          labels: this.labels,
+          group_id: this.resource.id,
+          group_type: this.resourceType
         })
-        .catch((error) => {
-          this.showNotification({type: error.response.data.status, message: error.response.data.message})
-          this.$emit('close')
-        })
+          .then((response) => {
+            if (response.data.status === 'success') {
+              this.dehydrateForm()
+              this.showNotification({type: response.data.status, message: response.data.message})            
+              this.$emit('close', response.data.task)
+            }
+          })
+          .catch((error) => {
+            this.showNotification({type: error.response.data.status, message: error.response.data.message})
+          })
+      } else {
+        this.showNotification({type: 403, message: "Due On is required"})
+      }
     },
     closeCreateTaskForm () {
       this.dehydrateForm()
@@ -236,13 +236,14 @@ export default {
       this.showNotification = false
     },
     updateTask () {
+      this.updateDueOnDate(this.dueOnDate)
       axios.put('/tasks/' + this.task.id, {
         name: this.name,
         notes: this.notes,
         assigned_to: this.assignedTo,
         related_to: this.relatedTo,
         cycle_id: this.cycleId !== 0 ? this.cycleId : null,
-        due_on: window.luxon.DateTime.fromISO(this.dueOnDate.toISOString()).toISODate(),
+        due_on: this.updatedDate,
         labels: this.labels,
         group_id: this.resource.id,
         group_type: this.resourceType
@@ -264,9 +265,15 @@ export default {
       this.tagSuggestionShown = false
     },
     addTag (tag) {
-      this.tags.push(tag)
-      this.labels.push(tag.tag_id)
-      this.availableTags = this.availableTags.filter(x => x.tag_id !== tag.tag_id)
+      if(tag.id)  {
+        this.tags.push(this.availableTags.find(x => x.tag_id === tag.id))
+        this.labels.push(tag.id)
+        this.availableTags = this.availableTags.filter(x => x.tag_id !== tag.id)
+      } else {
+        this.tags.push(tag)
+        this.labels.push(tag.tag_id)
+        this.availableTags = this.availableTags.filter(x => x.tag_id !== tag.tag_id)
+      }
     },
     deleteTag (tag) {
       let index = this.tags.indexOf(tag)
@@ -283,14 +290,18 @@ export default {
       this.assignedTo = this.task.assigned_to
       this.relatedTo = this.task.related_to
       this.cycleId = this.selectedCycleId
-      this.dueOnDate = new Date(this.task.due_on)
+      this.dueOnDate = this.task.due_on
+      this.editedFirstTask = true
+      this.task.tags.forEach(tagData => this.addTag(tagData));
     },
     dehydrateForm () {
       this.name = ''
       this.notes = ''
-      this.assignedTo = ''
+      this.assignedTo = null
       this.dueOnDate = null
       this.relatedTo = ''
+      this.tags = []
+      this.labels = []
     },
     changeDueDate(value) {
       let cycleSelected = this.cycles.find(cycle => cycle.id === value)
@@ -308,7 +319,21 @@ export default {
       }
 
       this.disabledDates.from = new Date(endDate)
-      this.dueOnDate = null
+      
+      if (this.editedFirstTask !== true) {
+        this.dueOnDate = null
+      }
+      
+      this.editedFirstTask =  false
+
+    },
+    updateDueOnDate(edited_dueDate){
+      let tempDate = window.luxon.DateTime.fromISO(edited_dueDate).toISODate()
+      if(tempDate !== null && tempDate !== '') {
+        this.updatedDate = edited_dueDate
+      } else {
+        this.updatedDate = window.luxon.DateTime.fromISO(edited_dueDate.toISOString()).toISODate()
+      }
     }
   },
 }

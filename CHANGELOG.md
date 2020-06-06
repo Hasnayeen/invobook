@@ -18,10 +18,12 @@
 - Added Bengali translation
 - Added Nepali translation
 - Added possibility to edit messages on the messageboard
+- Added application Url Scheme enforcing for reverse proxying (`APP_PROTOCOL` environment variable)
 
 ### Changed
 
 - `App\Core` namespace is now `App\Base`
+- `App\TaskManager\Requests\UpdateTaskRequest` note rule is now nullable
 
 ### Removed
 

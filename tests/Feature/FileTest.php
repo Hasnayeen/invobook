@@ -16,7 +16,7 @@ class FileTest extends TestCase
     {
         Storage::fake('');
         $project = factory(Project::class)->create();
-        $file = UploadedFile::fake()->create('features.pdf');
+        $file = UploadedFile::fake()->create('features.doc');
 
         $this->actingAs($this->user)->post('files', [
             'files'         => [$file],
@@ -27,7 +27,7 @@ class FileTest extends TestCase
                  'status'  => 'success',
                  'message' => 'Files uploaded successfully',
              ]);
-        Storage::disk('public')->assertExists('features.pdf');
+        Storage::disk('public')->assertExists('features.doc');
     }
 
     /** @test */
@@ -36,14 +36,14 @@ class FileTest extends TestCase
         $this->expectException(InvalidFileFormat::class);
         Storage::fake('');
         $project = factory(Project::class)->create();
-        $file = UploadedFile::fake()->create('features.doc');
+        $file = UploadedFile::fake()->create('features.zip');
 
         $this->actingAs($this->user)->post('files', [
             'files'         => [$file],
             'group_type'    => 'project',
             'group_id'      => $project->id,
         ]);
-        Storage::disk('public')->assertMissing('features.doc');
+        Storage::disk('public')->assertMissing('features.zip');
     }
 
     /** @test */

@@ -4,7 +4,7 @@
 
   <task-details v-if="task" :index="index" :resourceType="resourceType" :resourceId="resource.id" :task="task" :taskDetailsShown="taskDetailsShown" :statuses="statuses" @status-change="updateStatus" @delete="deleteTask" @close="closeTaskDetails"></task-details>
 
-  <div v-if="authenticated" class="my-4">
+  <div v-if="authenticated" class="my-4 flex items-center">
     <button @click="showCreateTaskForm" class="no-underline px-3 py-2 my-4 bg-white text-center text-base text-white bg-indigo-500 border border-indigo-500 rounded shadow">{{ 'Create Task' | localize }}</button>
     <button @click="toggleFilter" class="no-underline px-3 py-2 m-4 text-center text-base rounded bg-white border border-gray-500">
       <font-awesome-icon :icon="faFilter"
@@ -12,6 +12,18 @@
       </font-awesome-icon>
       {{ 'Filter' | localize }}
     </button>
+    <div class="bg-white rounded flex items-center">
+      <div :class="{'bg-gray-700 text-white': view === 'row'}" @click="changeView('row')" class="border-r py-2 px-4 cursor-pointer rounded-l">
+        <font-awesome-icon :icon="faThLarge"
+          class="pointer-events-none items-center mr-1">
+        </font-awesome-icon>
+      </div>
+      <div :class="{'bg-gray-700 text-white': view === 'column'}" @click="changeView('column')" class="py-2 px-4 cursor-pointer rounded-r">
+        <font-awesome-icon :icon="faThList"
+          class="pointer-events-none items-center mr-1">
+        </font-awesome-icon>
+      </div>
+    </div>
   </div>
 
   <!-- Task Filters -->
@@ -75,31 +87,33 @@
   <!-- Task Filters -->
 
   <!-- Task List -->
-  <div v-for="(tasks, name) in groupedTasks">
-    <div class="pb-2 flex items-center font-semibold">
-      <span class="pr-1 text-gray-600">
-        {{ name }}
-      </span>
-      <span class="text-sm">
-        ({{ tasks.length }})
-      </span>
-      <font-awesome-icon :icon="faAngleDoubleRight"
-        class="pointer-events-none items-center text-gray-600 ml-1">
-      </font-awesome-icon>
-    </div>
-    <div class="flex flex-row flex-wrap items-start lg:-mx-2 xl:-mx-4 lg:-mt-4 pb-2">
-      <div v-for="(task, index) in tasks" @click="showTaskDetails(name, index, task.serial, task.id)" :key="task.id" class="bg-white rounded shadow my-4 md:mx-6 lg:mx-2 xl:mx-4 p-4 w-full md:w-72 lg:w-64  cursor-pointer">
-        <div class="flex justify-between items-center">
-          <p class="text-xs text-gray-700 flex flex-col">
-            <span class="w-10 border-t-4" :style="'border-color:' + task.status.color"></span>
-            <span class="text-xs">{{'Due on' | localize }}</span>
-            <span class="text-sm text-indigo-700 font-medium">{{dueOn(task.due_on)}}</span>
-          </p>
-          <img v-if="task.assigned_to" :src="generateUrl(task.user.avatar)" class="rounded-full w-8 h-8" :title="task.user.name">
-          <font-awesome-icon v-else :icon="faQuestionCircle" class="text-gray-500 fa-2x" title="Not Assigned"></font-awesome-icon>
-        </div>
-        <div class="text-gray-700 text-left pt-2">
-          <p class="font-medium text-lg overflow-hidden">{{task.name}}</p>
+  <div :class="[ view === 'row' ? '' : 'grid grid-cols-5 gap-4']">
+    <div v-for="(tasks, name) in groupedTasks">
+      <div class="pb-2 flex items-center font-semibold">
+        <span class="pr-1 text-gray-600">
+          {{ name }}
+        </span>
+        <span class="text-sm">
+          ({{ tasks.length }})
+        </span>
+        <font-awesome-icon :icon="faAngleDoubleRight"
+          class="pointer-events-none items-center text-gray-600 ml-1">
+        </font-awesome-icon>
+      </div>
+      <div class="flex flex-row flex-wrap items-start lg:-mx-2 xl:-mx-4 lg:-mt-4 pb-2">
+        <div v-for="(task, index) in tasks" @click="showTaskDetails(name, index, task.serial, task.id)" :key="task.id" class="bg-white rounded shadow my-4 md:mx-6 lg:mx-2 xl:mx-4 p-4 w-full md:w-72 lg:w-64  cursor-pointer">
+          <div class="flex justify-between items-center">
+            <p class="text-xs text-gray-700 flex flex-col">
+              <span class="w-10 border-t-4" :style="'border-color:' + task.status.color"></span>
+              <span class="text-xs">{{'Due on' | localize }}</span>
+              <span class="text-sm text-indigo-700 font-medium">{{dueOn(task.due_on)}}</span>
+            </p>
+            <img v-if="task.assigned_to" :src="generateUrl(task.user.avatar)" class="rounded-full w-8 h-8" :title="task.user.name">
+            <font-awesome-icon v-else :icon="faQuestionCircle" class="text-gray-500 fa-2x" title="Not Assigned"></font-awesome-icon>
+          </div>
+          <div class="text-gray-700 text-left pt-2">
+            <p class="font-medium text-lg overflow-hidden">{{task.name}}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -123,6 +137,8 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons/faChevronDown'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons/faSpinner'
 import { faFilter } from '@fortawesome/free-solid-svg-icons/faFilter'
 import { faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons/faAngleDoubleRight'
+import { faThLarge } from '@fortawesome/free-solid-svg-icons/faThLarge'
+import { faThList } from '@fortawesome/free-solid-svg-icons/faThList'
 
 export default {
   components: {createTaskForm, taskDetails, Datepicker},
@@ -157,12 +173,15 @@ export default {
     userFilter: '',
     tagFilter: '',
     dateFilter: null,
+    view: 'row',
     authenticated,
     faQuestionCircle,
     faChevronDown,
     faSpinner,
     faFilter,
-    faAngleDoubleRight
+    faAngleDoubleRight,
+    faThLarge,
+    faThList
   }),
 
   async created () {
@@ -314,6 +333,9 @@ export default {
     },
     toggleFilter () {
       this.filterShown = ! this.filterShown
+    },
+    changeView (view) {
+      this.view = view
     }
   },
 }

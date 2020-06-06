@@ -5,7 +5,7 @@
       <div class="bg-white text-2xl text-gray-600 px-8 py-4 rounded-t shadow flex items-center justify-between">
         <div></div>
         <div>
-          Your Messages
+          Messages
         </div>
         <div @click="hideMessageBox()" class="self-end cursor-pointer">
           <font-awesome-icon :icon="faTimes"
@@ -35,23 +35,21 @@
         <div  class="flex-grow overflow-y-auto">
           <div id="message-box"  v-if="selectedUser.id" class="w-full h-full">
             <div v-if="messages.length < 1" class="w-full h-full">
-              <loading-modal :localLoadingState="loading"></loading-modal>
               <div v-if="!loading" class="flex flex-col items-center justify-center">
                 <div class="text-gray-600 text-lg text-center py-16">
-                  No message yet!!! Say "Hi" to {{ selectedUser.name }}
+                  No messages yet! Say "Hi" to {{ selectedUser.name }}...
                 </div>
                 <img src="/image/dm.svg" alt="direct message" class="w-96">
               </div>
             </div>
             <div v-if="currentPage < lastPage">
-              <loading-modal :localLoadingState="loading"></loading-modal>
               <a class="cursor-pointer flex flex-col items-center justify-center hover:text-indigo-600 hover:bg-white px-4 py-2" @click="loadPrevMessage">Load Previous Messages</a>
             </div>
             <message v-for="(message, index) in messages" :key="message.body + parseInt(index)" :message="message" :user="authUser" :index="parseInt(index)" @deleted="deleteMessage" @edit="editMessage" :last="messages.length === (index + 1)" :direct="true"></message>
           </div>
           <div v-else class="flex flex-col items-center justify-center">
             <div class="text-gray-600 text-lg text-center py-16">
-              Click on the profile pic above to see interaction with that user
+              Click a profile picture to see your interactions with that user.
             </div>
             <img src="/image/select.svg" alt="direct message" class="w-64">
           </div>
@@ -88,14 +86,12 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import message from './message'
-import loadingModal from './loadingModal'
 import { faPaperPlane, faTimes } from '@fortawesome/free-solid-svg-icons'
 
 export default {
-  components: {message, loadingModal},
+  components: {message},
 
   data: () => ({
-    loading: false,
     authUser: user,
     isDisabled: true,
     message: '',
@@ -154,6 +150,7 @@ export default {
     ...mapActions([
       'closeComponent',
       'showNotification',
+      'toggleLoading'
     ]),
     scrollToBottom () {
       this.$nextTick(() => {
@@ -224,7 +221,7 @@ export default {
         })
     },
     selectUserMessage (user, index) {
-      this.loading = true
+      this.toggleLoading(true)
       this.selectedUser = user
       this.isDisabled = false
       axios.get('/direct-messages', {
@@ -238,24 +235,24 @@ export default {
           this.currentPage = response.data.messages.current_page
           this.lastPage = response.data.messages.last_page
           this.scrollToBottom()
-          this.loading = false
+          this.toggleLoading(false)
         })
         .catch((error) => {
-          this.loading = false
+          this.toggleLoading(false)
           console.log(error)
         })
       axios.put('/unread-direct-messages/' + user.id)
         .then((response) => {
           this.users[index].unread_messages_for_auth_user_count = 0
-          this.loading = false
+          this.toggleLoading(false)
         })
         .catch((error) => {
-          this.loading = false
+          this.toggleLoading(false)
           console.log(error)
         })
     },
     paginationMessage (user) {
-      this.loading = true
+      this.toggleLoading(true)
       this.isDisabled = false
       axios.get(this.nextPageUrl, {
         params: {
@@ -266,10 +263,10 @@ export default {
           this.concatAllMessages(response)
           this.nextPageUrl = response.data.messages.next_page_url
           this.currentPage = response.data.messages.current_page
-          this.loading = false
+          this.toggleLoading(false)
         })
         .catch((error) => {
-          this.loading = false
+          this.toggleLoading(false)
           console.log(error)
         })
     },

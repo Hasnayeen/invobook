@@ -16,6 +16,7 @@
             {{ notification.data.action }}
             <a v-if="notification.data.url" :href="notification.data.url" class="no-underline hover:underline text-blue-400">{{ notification.data.object_name }}</a>
             <a v-else class="no-underline text-blue-400">{{ notification.data.object_name }}</a>
+            {{ notification.data.task_status }}
           </div>
           <div class="py-1 text-xs">
             {{ notification.date }}
@@ -25,7 +26,7 @@
     </div>
     <div v-if="notifications.length === 0" class="px-4 py-2 text-sm text-gray-600 block">{{ 'No unread notifications. You\'re all caught up' | localize }}</div>
     <span class="block border-t"></span>
-    <a class="list-reset w-full px-4 py-2 text-blue-400 text-sm text-center no-underline block" href="/notifications">
+    <a @click="showNotificationBox()" class="list-reset w-full px-4 py-2 text-blue-400 text-sm text-center no-underline block cursor-pointer">
       {{ 'View All' | localize }}
     </a>
   </div>
@@ -49,7 +50,7 @@ export default {
   }),
 
   created () {
-    axios.get('/notifications')
+    axios.get('/unread-notifications')
       .then((response) => {
         this.notifications = response.data.notifications
         let hasUnread = this.notifications.findIndex(notification => notification.read_at === null)
@@ -117,6 +118,9 @@ export default {
         .catch((error) => {
           console.error(error.response.data.message)
         })
+    },
+    showNotificationBox () {
+      this.setCurrentComponent('notification-box')
     }
   }
 }

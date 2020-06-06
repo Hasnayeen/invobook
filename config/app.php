@@ -76,6 +76,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Application Scheme
+    |--------------------------------------------------------------------------
+    |
+    | This scheme is used by the app to generate URLs with proper
+    | scheme. Set this value to `https` if you are using ssl
+    | certificates to serve the app, otherwise use `http`.
+    |
+    */
+
+    'scheme' => env('APP_PROTOCOL', 'https'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Timezone
     |--------------------------------------------------------------------------
     |
@@ -98,7 +111,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => env('APP_LOCALE', 'en'),
 
     /*
     |--------------------------------------------------------------------------

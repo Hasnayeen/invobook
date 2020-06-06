@@ -19,3 +19,11 @@ docker.env
 .phpunit.result.cache
 *.swp
 .php_cs.cache
+package-lock.json
+public/js/**/*.js
+!public/js/manifest.js
+!public/js/*/*.min.js
+public/plugins
+*.apollo.*
+*.apollo
+.rnd

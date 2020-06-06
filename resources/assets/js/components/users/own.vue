@@ -1,7 +1,7 @@
 <template>
 <div class="bg-white rounded shadow py-8 mt-8">
   <div class="flex flex-col items-center">
-    <img :src="avatar" :alt="'Default avatar of ' + user.name" class="w-32 h-32 rounded-full">
+    <img :src="avatar" :alt="'Avatar of ' + user.name" class="w-32 h-32 rounded-full">
     <div class="text-gray-800 text-2xl font-semibold py-4">
       {{user.name}}
     </div>
@@ -84,7 +84,7 @@
       </div>
     </div>
     <div class="mt-8">
-      <button @click="updateProfile" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold p-4 rounded shadow hover:shadow-lg" type="button">
+      <button @click="updateProfile" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold px-4 py-2 rounded shadow hover:shadow-lg" type="button">
         {{ 'Update' | localize }}
       </button>
       <div></div>

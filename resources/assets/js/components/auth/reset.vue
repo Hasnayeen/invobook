@@ -6,7 +6,7 @@
     <div class="card">
       <header class="card-header">
         <p class="card-header-title title has-text-centered">
-        Reset Password
+        {{ 'Reset Password' | localize }}
         </p>
       </header>
       <div class="card-content">
@@ -25,7 +25,7 @@
             <span class="help is-danger" v-if="errors">{{ errors.password_confirmation }}</span>
           </p>
           <p class="control">
-            <button type="submit" class="button is-primary is-fullwidth">Reset Password</button>
+            <button type="submit" class="button is-primary is-fullwidth">{{ 'Reset Password' | localize }}</button>
           </p>
         </div>
       </div>

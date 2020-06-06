@@ -3,7 +3,7 @@
   <form method="post" enctype="multipart/form-data">
     <input type="file" name="avatar" id="avatar" accept="image/*" @change="selectFile" class="hidden">
     <button onclick="document.getElementById('avatar').click(); return false;" 
-      class="bg-transparent text-gray-800 hover:text-indigo-500 py-2 px-4 border border-gray-400 hover:border-indigo-500 rounded">
+      class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold p-4 py-2 rounded shadow hover:shadow-lg">
       {{ 'Change Your Avatar' | localize }}
     </button>
   </form>

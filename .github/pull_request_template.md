@@ -8,6 +8,8 @@
 - [ ] Check your code additions will fail neither code linting checks nor unit test.
 - [ ] Check you added any notable changes to the `CHANGELOG.md` file.
 
+*N.B* Only push atomic PR meaning single feature/update/fix in a PR. Don't combine multiple feature/update/fix in a single PR.
+
 ### Description
 Please describe your pull request.
 

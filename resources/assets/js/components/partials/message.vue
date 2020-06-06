@@ -5,13 +5,8 @@
       {{ getDate(message.created_at) }}
     </div>
   </div>
-  <div v-if="message.system" class="flex flex-row justify-center">
-    <div class="bg-blue-lighter text-gray-800 text-xs text-center px-4 rounded p-2">
-      {{ message.body }}
-    </div>
-  </div>
-  <div v-else class="flex flex-row text-gray-800 p-4 border-t"
-    :class="{'pb-24': last, '': (message.user.id === user.id)}">
+  <div class="flex flex-row text-gray-800 p-4 border-t"
+    :class="{'pb-16': last, '': (message.user.id === user.id)}">
     <div class="flex flex-col items-center relative w-10 flex-shrink-0"
       :class="[(message.user.id === user.id) ? 'flex-col-reverse justify-end' : '']">
       <img :src="generateUrl(message.user.avatar)" :alt="message.user.name" class="w-10 h-10 rounded-full"
@@ -83,8 +78,7 @@ export default {
 
   computed: {
     displayDate () {
-      return !this.message.system &&
-        this.showDate(this.message.created_at)
+      return this.showDate(this.message.created_at)
     }
   },
 
