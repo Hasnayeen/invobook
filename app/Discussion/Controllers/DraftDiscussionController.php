@@ -3,7 +3,6 @@
 namespace App\Discussion\Controllers;
 
 use App\Base\Utilities\GroupTrait;
-use App\Discussion\Models\Discussion;
 use App\Base\Http\Controllers\Controller;
 use App\Discussion\Repositories\DiscussionRepository;
 
@@ -22,10 +21,9 @@ class DraftDiscussionController extends Controller
         $drafDiscussions = $repository->getAllDraftDiscussionWithCreator(request('group_type'), request('group_id'), request('cycle_id'));
 
         return response()->json([
-            'status'      => 'success',
-            'total'       => count($drafDiscussions),
+            'status'            => 'success',
+            'total'             => count($drafDiscussions),
             'draft_discussions' => $drafDiscussions,
         ]);
     }
-
 }
