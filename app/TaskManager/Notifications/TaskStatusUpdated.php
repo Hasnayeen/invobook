@@ -55,7 +55,6 @@ class TaskStatusUpdated extends Notification
         return ['database'];
     }
 
-
     /**
      * Get the array representation of the notification.
      *
@@ -71,8 +70,7 @@ class TaskStatusUpdated extends Notification
             'object_name' => $this->task->name,
             'object_id'   => $this->task->id,
             'url'         => url($this->groupType . 's/' . $this->groupId . '?tool=tasks&id=' . $this->task->id),
-            'task_status' => ' to ' . $this->task->status->name
+            'task_status' => ' to ' . $this->task->status->name,
         ];
     }
-
 }

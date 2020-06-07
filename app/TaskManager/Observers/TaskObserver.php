@@ -3,11 +3,11 @@
 namespace App\TaskManager\Observers;
 
 use App\TaskManager\Models\Task;
+use Illuminate\Support\Facades\Auth;
 use App\Base\Utilities\GetRecipientsTrait;
 use Illuminate\Support\Facades\Notification;
 use App\TaskManager\Notifications\TaskCreated;
 use App\TaskManager\Notifications\TaskStatusUpdated;
-use Illuminate\Support\Facades\Auth;
 
 class TaskObserver
 {
@@ -35,7 +35,7 @@ class TaskObserver
         $creatorId = $task->creator->id;
         $updaterId = Auth::id();
 
-        if($creatorId !== $updaterId && $task->isDirty('status_id') && $updaterId !== null) {
+        if ($creatorId !== $updaterId && $task->isDirty('status_id') && $updaterId !== null) {
             Notification::send($task->creator, new TaskStatusUpdated($task, Auth::user()));
         }
     }
