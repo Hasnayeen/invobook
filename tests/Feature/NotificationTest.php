@@ -4,8 +4,8 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Base\Models\Notification;
-use Illuminate\Support\Facades\Notification as FakeNotification;
 use App\TaskManager\Notifications\TaskStatusUpdated;
+use Illuminate\Support\Facades\Notification as FakeNotification;
 
 class NotificationTest extends TestCase
 {
@@ -52,6 +52,5 @@ class NotificationTest extends TestCase
         $this->user->notify(new TaskStatusUpdated($this->task, $this->user));
 
         FakeNotification::assertSentTo($this->user, TaskStatusUpdated::class);
-
     }
 }
