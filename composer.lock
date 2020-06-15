@@ -1001,16 +1001,16 @@
         },
         {
             "name": "lab404/laravel-impersonate",
-            "version": "1.6.0",
+            "version": "1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/404labfr/laravel-impersonate.git",
-                "reference": "ac3a2bfe056f35b4201b1a06db04af2b3a2905d6"
+                "reference": "c565330d11a0c5bf0279fdbaa6e75c45a3cfe21a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/404labfr/laravel-impersonate/zipball/ac3a2bfe056f35b4201b1a06db04af2b3a2905d6",
-                "reference": "ac3a2bfe056f35b4201b1a06db04af2b3a2905d6",
+                "url": "https://api.github.com/repos/404labfr/laravel-impersonate/zipball/c565330d11a0c5bf0279fdbaa6e75c45a3cfe21a",
+                "reference": "c565330d11a0c5bf0279fdbaa6e75c45a3cfe21a",
                 "shasum": ""
             },
             "require": {
@@ -1062,7 +1062,7 @@
                 "plugin",
                 "user"
             ],
-            "time": "2020-03-03T15:57:38+00:00"
+            "time": "2020-06-15T12:14:38+00:00"
         },
         {
             "name": "laminas/laminas-diactoros",
