@@ -2,12 +2,10 @@
 
 namespace Tests\Feature;
 
-use App\Base\Models\AppSetting;
-use App\Base\Models\User;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Facades\Log;
 use Tests\TestCase;
-use Illuminate\Auth\Access\AuthorizationException;
+use App\Base\Models\User;
+use App\Base\Models\AppSetting;
+use Illuminate\Foundation\Testing\WithFaker;
 
 
 class AppSettingTest extends TestCase
