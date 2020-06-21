@@ -15,13 +15,13 @@
             <p class="py-4">
                 <input id="email" aria-label="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800" type="text" name="email" placeholder="E-mail" value="{{ old('email') }}" autofocus>
                 @error('email')
-                    <span class="text-red-400 block pt-2" v-if="errors.email">{{ $message }}</span>
+                    <span class="text-red-400 block pt-2">{{ $message }}</span>
                 @enderror
             </p>
             <p class="py-4">
                 <input id="password" aria-label="password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800" type="password" name="password" placeholder="Password">
                 @error('password')
-                    <span class="text-red-400 block pt-2" v-if="errors.email">{{ $message }}</span>
+                    <span class="text-red-400 block pt-2">{{ $message }}</span>
                 @enderror
             </p>
             <p class="py-4 text-gray-500">
@@ -33,7 +33,7 @@
             <p class="py-4">
                 <button type="submit" class="bg-indigo-500 hover:bg-indigo-600 text-white text-xl font-medium py-2 px-4 rounded">{{ localize('auth.Login') }}</button>
             </p>
-            <a href="password/reset" class="no-underline text-indigo-500 text-sm">{{ localize('auth.Forgot Your Password?') }}</a>
+            <a href="{{ url('password/reset') }}" class="no-underline text-indigo-500 text-sm">{{ localize('auth.Forgot Your Password?') }}</a>
         </form>
     </div>
 </div>
