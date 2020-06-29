@@ -2,8 +2,8 @@
     <h1 class="h-16 flex items-center font-medium text-2xl text-gray-400">All Users</h1>
     <div class="w-full">
         
-        <div class="md:rounded text-gray-200">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 lg:gap-4 2xl:gap-12">
+        <div class="md:rounded text-gray-200 2xl:max-w-10xl">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-8 lg:gap-4 2xl:gap-12">
                 @foreach ($users as $user)
                     <div class="rounded-lg shadow relative flex flex-col justify-between">
                         <div
@@ -48,19 +48,19 @@
                         <div class="flex justify-between items-center border-t border-indigo-600 rounded-b-md h-16 z-10 bg-indigo-1000 relative">
                             @if (auth()->user()->id !== $user->id)
                                 <a href="{{ url('/impersonate/take/' . $user->id) }}" title="{{ __('Impersonate User') }}" class="text-white p-4 flex items-center justify-center cursor-pointer flex-grow">
-                                    <x-i-s-users class="w-4 h-4" />
+                                    <x-heroicon-s-users class="w-4 h-4" />
                                     <span class="pl-2 text-sm font-semibold">Impersonate</span>
                                 </a>
                             @else
                                 <a title="{{ __('Disabled') }}" class="text-gray-600 p-4 flex items-center justify-center cursor-not-allowed flex-grow">
-                                    <x-i-s-users class="w-4 h-4" />
+                                    <x-heroicon-s-users class="w-4 h-4" />
                                     <span class="pl-2 text-sm font-semibold">Impersonate</span>
                                 </a>
                             @endif
                             <div class="border-l border-indigo-600 h-full"></div>
                             <a title="{{ __('Deactivate User') }}" href="#" 
                                 class="text-white p-4 flex items-center justify-center cursor-pointer flex-grow">
-                                <x-i-s-user-remove class="w-4 h-4" />
+                                <x-heroicon-s-user-remove class="w-4 h-4" />
                                 <span class="pl-2 text-sm font-semibold">Deactivate</span>
                             </a>
                         </div>

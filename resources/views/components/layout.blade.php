@@ -34,11 +34,11 @@
             <x-sidebar />
             <div class="fixed md:hidden flex items-center justify-end h-16 w-full px-4 bg-black z-40">
                 <span @click="{navMenuShown = !navMenuShown}" class="bg-indigo-1000 p-1 rounded cursor-pointer">
-                    <x-i-o-menu class="w-6 h-6 text-white" />
+                    <x-heroicon-o-menu class="w-6 h-6 text-white" />
                 </span>
             </div>
         @endif
-        <main class="w-full xl:max-w-8xl px-4 pb-12 md:px-8 md:ml-16 mt-16 md:mt-0 2xl:mr-auto 2xl:ml-auto">
+        <main class="w-full px-4 pb-12 md:px-8 md:ml-16 mt-16 md:mt-0">
             {{ $slot }}
         </main>
     </div>

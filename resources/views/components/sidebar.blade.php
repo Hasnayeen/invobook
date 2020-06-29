@@ -7,43 +7,43 @@
         </div>
         <div class="text-gray-400">
             <div class="py-4">
-                <a href="" class="flex flex-col items-center py-3 px-4">
+                <a href="" class="flex flex-col items-center py-3 px-4" title="Projects">
                     <span class="bg-indigo-1300 p-2 rounded">
-                        <x-i-o-briefcase />
+                        <x-heroicon-o-briefcase />
                     </span>
                 </a>
-                <a href="" class="flex flex-col items-center py-3 px-4">
+                <a href="" class="flex flex-col items-center py-3 px-4" title="Teams">
                     <span class="bg-indigo-1300 p-2 rounded">
-                        <x-i-o-user-group />
+                        <x-heroicon-o-user-group />
                     </span>
                 </a>
-                <a href="" class="flex flex-col items-center py-3 px-4">
+                <a href="" class="flex flex-col items-center py-3 px-4" title="Offices">
                     <span class="bg-indigo-1300 p-2 rounded">
-                        <x-i-o-office-building />
+                        <x-heroicon-o-office-building />
                     </span>
                 </a>
             </div>
             @if (is_admin_route())
                 <div class="py-4">
-                    <a href="" class="flex flex-col items-center py-3 px-4">
-                    <span class="bg-indigo-1300 p-2 rounded">
-                        <x-i-o-user />
-                    </span>
+                    <a href="" class="flex flex-col items-center py-3 px-4" title="Users">
+                        <span class="bg-indigo-1300 p-2 rounded">
+                            <x-heroicon-o-user />
+                        </span>
                     </a>
-                    <a href="" class="flex flex-col items-center py-3 px-4">
-                    <span class="bg-indigo-1300 p-2 rounded">
-                        <x-i-o-lock-open />
-                    </span>
+                    <a href="" class="flex flex-col items-center py-3 px-4" title="Permissions">
+                        <span class="bg-indigo-1300 p-2 rounded">
+                            <x-heroicon-o-lock-open />
+                        </span>
                     </a>
-                    <a href="" class="flex flex-col items-center py-3 px-4">
-                    <span class="bg-indigo-1300 p-2 rounded">
-                        <x-i-activity-outline fill="currentColor" />
-                    </span>
+                    <a href="" class="flex flex-col items-center py-3 px-4" title="Activities">
+                        <span class="bg-indigo-1300 p-2 rounded">
+                            <x-eva-activity-outline fill="currentColor" />
+                        </span>
                     </a>
-                    <a href="" class="flex flex-col items-center py-3 px-4">
-                    <span class="bg-indigo-1300 p-2 rounded">
-                        <x-i-o-cog />
-                    </span>
+                    <a href="" class="flex flex-col items-center py-3 px-4" title="Settings">
+                        <span class="bg-indigo-1300 p-2 rounded">
+                            <x-heroicon-o-cog />
+                        </span>
                     </a>
                 </div>
             @else
@@ -51,14 +51,14 @@
         </div>
     </div>
     <div class="text-gray-400">
-        <a href="" class="flex flex-col items-center py-3 px-4">
+        <a href="" class="flex flex-col items-center py-3 px-4" title="Notifications">
             <span class="bg-indigo-1300 p-2 rounded">
-                <x-i-bell-outline fill="currentColor" />
+                <x-eva-bell-outline fill="currentColor" />
             </span>
         </a>
-        <a href="" class="flex flex-col items-center py-3 px-4">
+        <a href="" class="flex flex-col items-center py-3 px-4" title="Messages">
             <span class="bg-indigo-1300 p-2 rounded">
-                <x-i-o-mail />
+                <x-heroicon-o-chat />
             </span>
         </a>
         <div class="cursor-pointer mb-2 flex flex-col items-center py-3 px-4">

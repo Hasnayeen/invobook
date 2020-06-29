@@ -26,7 +26,7 @@ module.exports = {
         dark: '0 40px 50px -5px rgba(0, 0, 0, 0.96), 0 30px 30px -10px rgba(0, 0, 0, 0.97)'
       },
       maxWidth: {
-        '8xl': '88rem'
+        '10xl': '104rem'
       },
       screens: {
         '2xl': '1400px'
