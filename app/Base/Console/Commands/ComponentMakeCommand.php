@@ -115,7 +115,7 @@ class ComponentMakeCommand extends GeneratorCommand
      */
     protected function getStub()
     {
-        return __DIR__.'/stubs/view-component.stub';
+        return base_path().'/stubs/view-component.stub';
     }
 
     /**

@@ -61,3 +61,15 @@ if (! function_exists('trim_last_dot')) {
         return substr_replace($text, '', -1);
     }
 }
+
+if (! function_exists('is_admin_route')) {
+    /**
+     * Remove any trailing dot (".") character.
+     *
+     * @return bool
+     */
+    function is_admin_route()
+    {
+        return request()->route()->getPrefix() === '/admin';
+    }
+}

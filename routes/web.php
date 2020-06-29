@@ -243,6 +243,8 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function () {
     Route::get('/', [AdminController::class, 'index']);
 
+    Route::get('/new', [AdminController::class, 'new']);
+
     Route::get('roles/{role}/permissions', [RolePermissionController::class, 'index']);
 
     Route::post('roles/{role}/permissions/{permission}', [RolePermissionController::class, 'store']);

@@ -22,7 +22,6 @@ class Kernel extends HttpKernel
         \App\Base\Http\Middleware\EncryptCookies::class,
         \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
         \Illuminate\Session\Middleware\StartSession::class,
-        \App\Base\Http\Middleware\LocalizationMiddleware::class,
     ];
 
     /**
