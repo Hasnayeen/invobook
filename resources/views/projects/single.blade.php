@@ -1,16 +1,9 @@
-@component('layouts.app')
+<x-layout>
+    <x-slot name="title">{{ $project->name }}</x-slot>
 
-@slot('title') Single Resource View @endslot
+    <x-slot name="script">
+        <script src="//{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>
+    </x-slot>
+    
+</x-layout>
 
-<single></single>
-
-@slot('script')
-<script>
-    let project = {!! json_encode($project) !!}
-    let current_cycle = {!! json_encode($project->current_cycle) !!}
-</script>
-<script src="//{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>
-<script src="{{ mix('/js/projects/single.min.js') }}"></script>
-@endslot
-
-@endcomponent

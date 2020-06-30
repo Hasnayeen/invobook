@@ -8,12 +8,14 @@ class Sidebar extends Component
 {
     public bool $showGroupList = false;
     public bool $isAdminRoute;
+    public bool $isSingleResourceRoute;
     public array $group = [];
     public string $currentMenu = '';
 
     public function mount()
     {
         $this->isAdminRoute = is_admin_route();
+        $this->isSingleResourceRoute = is_single_resource_route();
     }
 
     public function closeGroupList(): void

@@ -64,13 +64,28 @@ if (! function_exists('trim_last_dot')) {
 
 if (! function_exists('is_admin_route')) {
     /**
-     * Check if current route in an admin route.
+     * Check if current route is an admin route.
      *
      * @return bool
      */
     function is_admin_route()
     {
         return request()->route()->getPrefix() === '/admin';
+    }
+}
+
+if (! function_exists('is_single_resource_route')) {
+    /**
+     * Check if current route shows a single Project/Team/Office.
+     *
+     * @return bool
+     */
+    function is_single_resource_route()
+    {
+        return in_array(
+            request()->segment(1),
+            ['projects', 'teams', 'offices']
+        );
     }
 }
 
