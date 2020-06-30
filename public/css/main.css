@@ -624,9 +624,9 @@ html {
   }
 }
 
-@media (min-width: 1400px) {
+@media (min-width: 1720px) {
   .container {
-    max-width: 1400px;
+    max-width: 1720px;
   }
 }
 
@@ -7781,7 +7781,7 @@ html {
 }
 
 .max-w-screen-2xl {
-  max-width: 1400px;
+  max-width: 1720px;
 }
 
 .max-w-10xl {
@@ -25557,7 +25557,7 @@ html {
   }
 
   .sm\:max-w-screen-2xl {
-    max-width: 1400px;
+    max-width: 1720px;
   }
 
   .sm\:max-w-10xl {
@@ -43270,7 +43270,7 @@ html {
   }
 
   .md\:max-w-screen-2xl {
-    max-width: 1400px;
+    max-width: 1720px;
   }
 
   .md\:max-w-10xl {
@@ -60983,7 +60983,7 @@ html {
   }
 
   .lg\:max-w-screen-2xl {
-    max-width: 1400px;
+    max-width: 1720px;
   }
 
   .lg\:max-w-10xl {
@@ -78696,7 +78696,7 @@ html {
   }
 
   .xl\:max-w-screen-2xl {
-    max-width: 1400px;
+    max-width: 1720px;
   }
 
   .xl\:max-w-10xl {
@@ -89273,7 +89273,7 @@ html {
   }
 }
 
-@media (min-width: 1400px) {
+@media (min-width: 1720px) {
   .\32xl\:space-y-0 > :not(template) ~ :not(template) {
     --space-y-reverse: 0;
     margin-top: calc(0px * calc(1 - var(--space-y-reverse)));
@@ -96409,7 +96409,7 @@ html {
   }
 
   .\32xl\:max-w-screen-2xl {
-    max-width: 1400px;
+    max-width: 1720px;
   }
 
   .\32xl\:max-w-10xl {

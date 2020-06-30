@@ -8,4 +8,3 @@
     </x-slot>
     
 </x-layout>
-

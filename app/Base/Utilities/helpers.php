@@ -64,12 +64,24 @@ if (! function_exists('trim_last_dot')) {
 
 if (! function_exists('is_admin_route')) {
     /**
-     * Remove any trailing dot (".") character.
+     * Check if current route in an admin route.
      *
      * @return bool
      */
     function is_admin_route()
     {
         return request()->route()->getPrefix() === '/admin';
+    }
+}
+
+if (! function_exists('user')) {
+    /**
+     * Get current authenticated user.
+     *
+     * @return \App\Base\Models\User
+     */
+    function user()
+    {
+        return auth()->user();
     }
 }
