@@ -23,7 +23,9 @@ module.exports = {
         },
       },
       boxShadow: {
-        dark: '0 40px 50px -5px rgba(0, 0, 0, 0.96), 0 30px 30px -10px rgba(0, 0, 0, 0.97)'
+        dark: '0 1px 3px 0 rgba(0, 0, 0, 0.9), 0 1px 2px 0 rgba(0, 0, 0, 0.9)',
+        'dark-md': '0 4px 6px -1px rgba(0, 0, 0, 1), 0 2px 4px -1px rgba(0, 0, 0, 1)',
+        'dark-2xl': '0 40px 50px -10px rgba(0, 0, 0, 0.96), 0 30px 30px -10px rgba(0, 0, 0, 0.97)'
       },
       maxWidth: {
         '10xl': '104rem'

@@ -16,13 +16,19 @@ class Sidebar extends Component
         $this->isAdminRoute = is_admin_route();
     }
 
-    public function closeGroupList()
+    public function closeGroupList(): void
     {
         $this->showGroupList = false;
+        $this->currentMenu = '';
     }
 
-    public function showGroup(string $type)
+    public function showGroup(string $type): void
     {
+        if ($this->showGroupList && $type === $this->currentMenu) {
+            $this->closeGroupList();
+
+            return;
+        }
         $this->currentMenu = $type;
         switch ($type) {
             case 'project':
@@ -43,17 +49,17 @@ class Sidebar extends Component
         $this->showGroupList = true;
     }
 
-    public function getProjects()
+    public function getProjects(): void
     {
         $this->group = user()->projects->toArray();
     }
     
-    public function getTeams()
+    public function getTeams(): void
     {
         $this->group = user()->teams->toArray();
     }
     
-    public function getOffices()
+    public function getOffices(): void
     {
         $this->group = user()->offices->toArray();
     }

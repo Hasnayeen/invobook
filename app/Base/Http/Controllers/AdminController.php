@@ -13,6 +13,6 @@ class AdminController extends Controller
         ]);
         auth()->user()->setAppends(['unread_direct_messages']);
     
-        return view('admin.new', ['users' => $users]);
+        return view('admin.index', ['users' => $users]);
     }
 }

@@ -1,10 +1,10 @@
 <aside :class="{'flex': navMenuShown, 'hidden': !navMenuShown}" class="md:flex">
-    <div class="bg-indigo-1100 w-16 h-screen max-h-screen fixed z-50 md:flex flex-col justify-between">
+    <div class="bg-indigo-1100 w-16 h-screen max-h-screen fixed z-50 md:flex flex-col justify-between  {{ $showGroupList ? '' : 'shadow-dark-2xl' }}">
         <div>
             <div class="h-16 flex justify-center items-center px-4">
-                <button class="flex items-center text-indigo-500 no-underline">
+                <a href="/" class="flex items-center text-indigo-500 no-underline">
                     <x-logo :size="'w-6 h-6'" />
-                </button>
+                </a>
             </div>
             <div class="text-gray-400">
                 <div class="py-4">
@@ -68,7 +68,7 @@
         </div>
     </div>
     @if ($showGroupList)
-        <div class="bg-indigo-1000 w-64 ml-16 h-screen max-h-screen fixed z-40 md:flex flex-col shadow-dark">
+        <div class="bg-indigo-1000 w-64 ml-16 h-screen max-h-screen fixed z-40 md:flex flex-col shadow-dark-2xl">
             <div class="flex items-center h-16 px-4">
                 <button wire:click="closeGroupList" class="flex items-center focus:outline-none">
                     <x-eva-arrow-back-outline class="w-6 h-6 fill-current"/>
