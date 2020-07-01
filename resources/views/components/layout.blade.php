@@ -29,7 +29,7 @@
     @livewireStyles
 </head>
 <body class="bg-indigo-1300 text-gray-200">
-    <div x-data="{...app()}" id="app" class="flex">
+    <div x-data="{...app()}" x-cloak id="app" class="flex">
         @if (!Auth::guest())
             <div class="fixed md:hidden flex items-center justify-end h-16 w-full px-4 bg-black z-40">
                 <span @click="{navMenuShown = !navMenuShown}" class="bg-indigo-1000 p-1 rounded cursor-pointer">
