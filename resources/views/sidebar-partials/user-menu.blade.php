@@ -9,7 +9,7 @@
             <x-heroicon-o-chat class="w-5 h-5" />
         </span>
     </a>
-    <div class="cursor-pointer mb-2 flex flex-col items-center py-2 px-4">
+    <div @click="userMenuShown = !userMenuShown" class="cursor-pointer mb-2 flex flex-col items-center py-2 px-4">
         <x-avatar :class="'w-8 h-8'" :url="url(auth()->user()->avatar)" />
     </div>
 </div>

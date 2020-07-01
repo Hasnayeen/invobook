@@ -9,7 +9,7 @@
     <meta name="app-version" content="{{ config('app.version') }}">
     <meta name="last-updated" content="{{ application_last_updated() }}">
 
-    <title>{{ $title }} | {{ config('app.name', 'GOODWORK') }}</title>
+    <title>{{ $title }} | {{ config('app.name', 'Goodwork') }}</title>
 
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap" rel="stylesheet">
     <link href="{{ mix('css/main.min.css') }}" rel="stylesheet">
@@ -29,7 +29,7 @@
     @livewireStyles
 </head>
 <body class="bg-indigo-1300 text-gray-200">
-    <div x-data="app()" id="app" class="flex">
+    <div x-data="{...app()}" id="app" class="flex">
         @if (!Auth::guest())
             <div class="fixed md:hidden flex items-center justify-end h-16 w-full px-4 bg-black z-40">
                 <span @click="{navMenuShown = !navMenuShown}" class="bg-indigo-1000 p-1 rounded cursor-pointer">
@@ -45,7 +45,8 @@
 
     <script src="{{ asset('/js/manifest.js') }}"></script>
     <script src="{{ asset('/js/vendor.min.js') }}"></script>
-    {{ $script }}
+    @livewireScripts
+    @stack('script')
 
     @foreach (glob(base_path() . '/resources/views/plugin-scripts/global/*.blade.php') as $file)
         @include('plugin-scripts.global.' . basename(str_replace('.blade.php', '', $file)))
@@ -57,9 +58,12 @@
         function app() {
             return {
                 navMenuShown: false,
+                userMenuShown: false,
             }
         }
+        window.livewire.on('sidebarDomUpdated', () => {
+            document.getElementById('user-extra-menu').classList.add('hidden')
+        })
     </script>
-    @livewireScripts
 </body>
 </html>

@@ -7,7 +7,7 @@ reset=`tput sgr0`
 
 echo -n 'Install for production environment? (Y/n):'
 
-read -n 1 $ans
+read -n 1 ans
 
 if [[ ( "$ans" == "Y" ) || ( "$ans" == "y" ) ]]
 then

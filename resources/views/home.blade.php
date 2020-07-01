@@ -48,8 +48,8 @@
         </div>
     </div>
 
-    <x-slot name="script">
+    @push('script')
         <script src="//{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>
-    </x-slot>
-    
+    @endpush
+
 </x-layout>

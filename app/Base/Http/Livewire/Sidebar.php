@@ -22,6 +22,7 @@ class Sidebar extends Component
     {
         $this->showGroupList = false;
         $this->currentMenu = '';
+        $this->emit('sidebarDomUpdated');
     }
 
     public function showGroup(string $type): void
@@ -49,6 +50,7 @@ class Sidebar extends Component
                 break;
         }
         $this->showGroupList = true;
+        $this->emit('sidebarDomUpdated');
     }
 
     public function getProjects(): void
