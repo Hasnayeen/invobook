@@ -37,7 +37,7 @@ class Sidebar extends Component
             case 'project':
                 $this->getProjects();
                 break;
-            
+
             case 'team':
                 $this->getTeams();
                 break;
@@ -45,7 +45,7 @@ class Sidebar extends Component
             case 'office':
                 $this->getOffices();
                 break;
-            
+
             default:
                 break;
         }
@@ -57,12 +57,12 @@ class Sidebar extends Component
     {
         $this->group = user()->projects->toArray();
     }
-    
+
     public function getTeams(): void
     {
         $this->group = user()->teams->toArray();
     }
-    
+
     public function getOffices(): void
     {
         $this->group = user()->offices->toArray();

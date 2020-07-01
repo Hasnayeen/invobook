@@ -2,10 +2,10 @@
 
 namespace App\TaskManager\Models;
 
+use Carbon\Carbon;
 use App\Base\Models\Tag;
 use App\Base\Models\User;
 use App\Base\Models\Mention;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model

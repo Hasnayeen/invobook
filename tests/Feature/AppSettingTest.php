@@ -7,7 +7,6 @@ use App\Base\Models\User;
 use App\Base\Models\AppSetting;
 use Illuminate\Foundation\Testing\WithFaker;
 
-
 class AppSettingTest extends TestCase
 {
     use WithFaker;
@@ -33,7 +32,7 @@ class AppSettingTest extends TestCase
     /** @test */
     public function user_without_permission_cant_update_app_setting_table()
     {
-        $guest = factory(User::class)->create(['role_id' => 5]);   
+        $guest = factory(User::class)->create(['role_id' => 5]);
         $this->actingAs($guest);
         $this->patch('admin/app-settings/'. $this->appSetting->id, ['status' => false]);
         $this->assertDatabaseMissing('app_settings', ['resource' => 'project', 'status' => false]);
