@@ -25,7 +25,7 @@
         let authenticated = false
     </script>
 
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <script src="{{ asset('js/alpine.min.js') }}" defer></script>
     @livewireStyles
 </head>
 <body class="bg-indigo-1300 text-gray-200">

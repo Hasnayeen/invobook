@@ -10,7 +10,7 @@ class TaskBoard extends Component
 
     public function mount($tasks)
     {
-        $this->groupedTasks = $tasks->load('status', 'user:id,avatar')->groupBy(function ($item) {
+        $this->groupedTasks = $tasks->load('status', 'user:id,avatar,name')->groupBy(function ($item) {
             return $item->status->name;
         })->toArray();
     }

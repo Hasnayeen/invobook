@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Str;
+
 if (! function_exists('application_last_updated')) {
     /**
      * Return the date when the application was last updated.
@@ -98,5 +100,12 @@ if (! function_exists('user')) {
     function user()
     {
         return auth()->user();
+    }
+}
+
+if (! function_exists('str_limit')) {
+    function str_limit(string $text, int $length = 75): string
+    {
+        return Str::limit($text, $length);
     }
 }
