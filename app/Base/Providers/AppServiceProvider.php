@@ -5,6 +5,7 @@ namespace App\Base\Providers;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,6 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(UrlGenerator $url)
     {
+        Schema::defaultStringLength(191);
         $url->forceScheme(config('app.scheme'));
 
         Relation::morphMap([

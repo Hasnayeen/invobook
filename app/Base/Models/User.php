@@ -7,14 +7,13 @@ use App\Office\Models\Office;
 use App\Project\Models\Project;
 use App\TaskManager\Models\Task;
 use App\Base\Utilities\Notifiable;
-use Laravel\Passport\HasApiTokens;
 use App\Discussion\Models\Discussion;
 use Lab404\Impersonate\Models\Impersonate;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable, Impersonate, HasApiTokens;
+    use Notifiable, Impersonate;
 
     protected $fillable = [
         'name', 'username', 'bio', 'designation', 'location', 'avatar', 'active', 'timezone', 'week_start', 'lang', 'email', 'password',
