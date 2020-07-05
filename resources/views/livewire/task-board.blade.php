@@ -17,7 +17,7 @@
                         </span>
                         <x-eva-arrowhead-right-outline class="w-6 h-6 fill-current" />
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 sm:gap-4 2xl:gap-8 row-gap-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 sm:gap-4 2xl:gap-8 row-gap-4">
                         @foreach ($tasks as $task)
                             <div class="bg-black rounded shadow-dark-md p-4 cursor-pointer">
                                 <div class="flex justify-between items-center">

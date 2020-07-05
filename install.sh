@@ -9,11 +9,15 @@ echo -n 'Install for production environment? (Y/n):'
 
 read -n 1 ans
 
+echo ''
+
 if [[ ( "$ans" == "Y" ) || ( "$ans" == "y" ) ]]
 then
   local=''
+  echo 'Installing for production environment'
 else
   local='local'
+  echo 'Installing for local environment'
 fi
 
 # Check for docker installation
@@ -58,9 +62,9 @@ fi
 
 if [[ $local == "local" ]]
 then
-  COMPOSE="sudo docker-compose -f docker-compose.dev.yml"
+  COMPOSE="docker-compose -f docker-compose.dev.yml"
 else
-  COMPOSE="sudo docker-compose"
+  COMPOSE="docker-compose"
 fi
 
 $COMPOSE build php
