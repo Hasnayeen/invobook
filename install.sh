@@ -7,7 +7,7 @@ reset=`tput sgr0`
 
 echo -n 'Install for production environment? (Y/n):'
 
-read -n 1 $ans
+read -n 1 ans
 
 if [[ ( "$ans" == "Y" ) || ( "$ans" == "y" ) ]]
 then
@@ -52,15 +52,15 @@ then
   domain=$(awk 'BEGIN{FS="=";RS="\n"}{if($1 == "SSL_CERT_DOMAIN") print $2}' .env)
 
   # Replace the domain in site.conf file
-  sed -i -e "s/example.com/$domain/g" docker/site.conf
+  sed -i -e "sgoodworkfor.life/$domain/g" docker/site.conf
 
 fi
 
 if [[ $local == "local" ]]
 then
-  COMPOSE="sudo docker-compose -f docker-compose.dev.yml"
+  COMPOSE="docker-compose -f docker-compose.dev.yml"
 else
-  COMPOSE="sudo docker-compose"
+  COMPOSE="docker-compose"
 fi
 
 $COMPOSE build php
@@ -80,7 +80,7 @@ $COMPOSE run --rm -w /var/www php chmod -R 777 /var/www/storage
 
 $COMPOSE run --rm -w /var/www laravel_echo_server npm install
 
-$COMPOSE run --rm -w /var/www php php artisan migrate:fresh --seed
+$COMPOSE run --rm -w /var/www php php artisan migrate:fresh --seed --force
 
 $COMPOSE run --rm -w /var/www php php artisan passport:install
 
