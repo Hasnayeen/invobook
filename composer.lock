@@ -2535,16 +2535,16 @@
         },
         {
             "name": "phpseclib/phpseclib",
-            "version": "2.0.27",
+            "version": "2.0.28",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "34620af4df7d1988d8f0d7e91f6c8a3bf931d8dc"
+                "reference": "d1ca58cf33cb21046d702ae3a7b14fdacd9f3260"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/34620af4df7d1988d8f0d7e91f6c8a3bf931d8dc",
-                "reference": "34620af4df7d1988d8f0d7e91f6c8a3bf931d8dc",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/d1ca58cf33cb21046d702ae3a7b14fdacd9f3260",
+                "reference": "d1ca58cf33cb21046d702ae3a7b14fdacd9f3260",
                 "shasum": ""
             },
             "require": {
@@ -2637,7 +2637,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-04-04T23:17:33+00:00"
+            "time": "2020-07-08T09:08:33+00:00"
         },
         {
             "name": "predis/predis",
@@ -6399,16 +6399,16 @@
         },
         {
             "name": "laravel/telescope",
-            "version": "v3.5.0",
+            "version": "v3.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/telescope.git",
-                "reference": "2e44c32c4e0b2442b118e73116582d1236b621f5"
+                "reference": "a8d2e1106ba655006fde47a0b7ed53851c6398f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/telescope/zipball/2e44c32c4e0b2442b118e73116582d1236b621f5",
-                "reference": "2e44c32c4e0b2442b118e73116582d1236b621f5",
+                "url": "https://api.github.com/repos/laravel/telescope/zipball/a8d2e1106ba655006fde47a0b7ed53851c6398f5",
+                "reference": "a8d2e1106ba655006fde47a0b7ed53851c6398f5",
                 "shasum": ""
             },
             "require": {
@@ -6458,7 +6458,7 @@
                 "laravel",
                 "monitoring"
             ],
-            "time": "2020-05-14T14:45:32+00:00"
+            "time": "2020-07-28T19:12:33+00:00"
         },
         {
             "name": "mockery/mockery",
