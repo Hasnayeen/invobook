@@ -2367,16 +2367,16 @@
         },
         {
             "name": "pda/pheanstalk",
-            "version": "v4.0.1",
+            "version": "v4.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pheanstalk/pheanstalk.git",
-                "reference": "41212671020de91086ace9e6181e69829466f087"
+                "reference": "7fe4547fe62c2fff37e47cc469905dec04d7d352"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pheanstalk/pheanstalk/zipball/41212671020de91086ace9e6181e69829466f087",
-                "reference": "41212671020de91086ace9e6181e69829466f087",
+                "url": "https://api.github.com/repos/pheanstalk/pheanstalk/zipball/7fe4547fe62c2fff37e47cc469905dec04d7d352",
+                "reference": "7fe4547fe62c2fff37e47cc469905dec04d7d352",
                 "shasum": ""
             },
             "require": {
@@ -2384,9 +2384,7 @@
                 "php": ">=7.1.0"
             },
             "require-dev": {
-                "phpdocumentor/phpdocumentor": "^2",
-                "phpunit/phpunit": "^7",
-                "vimeo/psalm": "^2.0"
+                "phpunit/phpunit": "^7"
             },
             "type": "library",
             "autoload": {
@@ -2412,11 +2410,11 @@
                 }
             ],
             "description": "PHP client for beanstalkd queue",
-            "homepage": "https://github.com/pda/pheanstalk",
+            "homepage": "https://github.com/pheanstalk/pheanstalk",
             "keywords": [
                 "beanstalkd"
             ],
-            "time": "2020-01-24T11:16:41+00:00"
+            "time": "2020-07-31T11:08:31+00:00"
         },
         {
             "name": "php-http/message-factory",
