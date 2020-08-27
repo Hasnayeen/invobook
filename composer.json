@@ -32,7 +32,7 @@
         "fzaninotto/faker": "^1.4",
         "laravel/telescope": "^3.0",
         "mockery/mockery": "^1.0",
-        "nunomaduro/collision": "^4.1",
+        "nunomaduro/collision": "^5.0",
         "phpunit/phpunit": "^9.0"
     },
     "autoload": {
