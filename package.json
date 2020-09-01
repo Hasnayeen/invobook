@@ -18,7 +18,7 @@
         "@fortawesome/fontawesome-svg-core": "^1.2.30",
         "@fortawesome/free-regular-svg-icons": "^5.14.0",
         "@fortawesome/free-solid-svg-icons": "^5.14.0",
-        "@fortawesome/vue-fontawesome": "^0.1.10",
+        "@fortawesome/vue-fontawesome": "^2.0.0",
         "axios": "^0.19.0",
         "cross-env": "^6.0.3",
         "fuzzysort": "^1.1.4",
