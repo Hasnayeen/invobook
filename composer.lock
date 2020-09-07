@@ -1078,20 +1078,20 @@
         },
         {
             "name": "lab404/laravel-impersonate",
-            "version": "1.7.0",
+            "version": "1.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/404labfr/laravel-impersonate.git",
-                "reference": "c565330d11a0c5bf0279fdbaa6e75c45a3cfe21a"
+                "reference": "1d1f8e6d8778f451554a49f332f63ce29507d278"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/404labfr/laravel-impersonate/zipball/c565330d11a0c5bf0279fdbaa6e75c45a3cfe21a",
-                "reference": "c565330d11a0c5bf0279fdbaa6e75c45a3cfe21a",
+                "url": "https://api.github.com/repos/404labfr/laravel-impersonate/zipball/1d1f8e6d8778f451554a49f332f63ce29507d278",
+                "reference": "1d1f8e6d8778f451554a49f332f63ce29507d278",
                 "shasum": ""
             },
             "require": {
-                "laravel/framework": "^6.0 | ^7.0",
+                "laravel/framework": "^6.0 | ^7.0 | ^8.0",
                 "php": ">=7.2"
             },
             "require-dev": {
@@ -1123,8 +1123,8 @@
             ],
             "authors": [
                 {
-                    "name": "404lab",
-                    "email": "web@404lab.fr"
+                    "name": "Marceau Casals",
+                    "email": "marceau@casals.fr"
                 }
             ],
             "description": "Laravel Impersonate is a plugin that allows to you to authenticate as your users.",
@@ -1139,7 +1139,7 @@
                 "plugin",
                 "user"
             ],
-            "time": "2020-06-15T12:14:38+00:00"
+            "time": "2020-09-07T16:04:37+00:00"
         },
         {
             "name": "laminas/laminas-diactoros",
