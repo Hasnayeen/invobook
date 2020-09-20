@@ -7,7 +7,7 @@
 [![VueJS Version](https://img.shields.io/badge/vue-2.5-brightgreen.svg?style=flat)](https://github.com/vuejs/vue)
 [![codecov](https://codecov.io/gh/iluminar/goodwork/branch/master/graph/badge.svg)](https://codecov.io/gh/iluminar/goodwork)
 [![Join on discord](https://img.shields.io/badge/join%20on-discord-orange)](https://discord.gg/4DvTQsc)
-[![Join on goodwork](https://img.shields.io/badge/join%20on-goodwork-orange.svg)](https://goodworkfor.life/register/invite-link/ovCPAFpnwIhrvqUrlvynarP9HVRBC5mH)
+[![Join on goodwork](https://img.shields.io/badge/join%20on-goodwork-orange.svg)](https://usegood.work/register/invite-link/ovCPAFpnwIhrvqUrlvynarP9HVRBC5mH)
 
 <img src="public/logos/logo_square.png" alt="Goodwork" style="max-width:100%;">
 
@@ -46,7 +46,7 @@ Goodwork brings you all the components required for your project to run smoothly
 
 ## Demo
 
-You can test a live instance of Goodwork that we use (as a guest user) using the credentials below. This user has limited permissions so you'll only see a handful of the features. You can access the demo site at the following URL: https://goodworkfor.life
+You can test a live instance of Goodwork that we use (as a guest user) using the credentials below. This user has limited permissions so you'll only see a handful of the features. You can access the demo site at the following URL: https://usegood.work
 
 `email: guest@example.com`
 
@@ -66,7 +66,7 @@ You can test a live instance of Goodwork that we use (as a guest user) using the
 
 Thank you for considering contributing to the Goodwork Project! The contribution guide can be found in the [Contribution Guideline](https://github.com/iluminar/goodwork/wiki/Contribution-Guideline).
 
-You can join the Goodwork Project via this link [link](https://goodworkfor.life/register/invite-link/ovCPAFpnwIhrvqUrlvynarP9HVRBC5mH)
+You can join the Goodwork Project via this link [link](https://usegood.work/register/invite-link/ovCPAFpnwIhrvqUrlvynarP9HVRBC5mH)
 
 Also you can join the slack channel via this [link](https://discord.gg/4DvTQsc)
 
