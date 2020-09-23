@@ -1,4 +1,12 @@
 /*!
+ * Pusher JavaScript Library v7.0.0
+ * https://pusher.com/
+ *
+ * Copyright 2020, Pusher
+ * Released under the MIT licence.
+ */
+
+/*!
  * Quill Editor v1.3.7
  * https://quilljs.com/
  * Copyright (c) 2014, Jason Chen
@@ -12,8 +20,8 @@
  * @license  MIT
  */
 
-/**
- * vuex v3.2.0
+/*!
+ * vuex v3.5.1
  * (c) 2020 Evan You
  * @license MIT
  */

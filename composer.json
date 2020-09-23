@@ -14,6 +14,7 @@
     "require": {
         "php": "^7.2.5",
         "ext-gd": "*",
+        "beyondcode/laravel-websockets": "^1.8",
         "doctrine/dbal": "^2.8",
         "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "^6.2",
@@ -23,7 +24,8 @@
         "laravel/passport": "^8.0",
         "laravel/tinker": "^2.0",
         "pda/pheanstalk": "^4.0",
-        "predis/predis": "^1.1"
+        "predis/predis": "^1.1",
+        "pusher/pusher-php-server": "~3.0"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

@@ -1,29 +1,25 @@
 version: '3'
 
 services:
-  nginx:
-    image: nginx
+  caddy:
+    image: caddy:2.1.1
     ports:
+      - "${APP_PORT}:80"
       - 80:80
       - 443:443
     volumes:
-      - ./docker/site.dev.conf:/etc/nginx/conf.d/default.conf
       - ./:/var/www
-      - ./docker/certs:/etc/ssl/certs
-    links:
-      - php
+      - ./docker/dev/Caddyfile:/etc/caddy/Caddyfile
+      - caddy-data:/data
     depends_on:
       - php
 
   php:
     build:
       context: .
-      dockerfile: docker/dev.php.Dockerfile
+      dockerfile: docker/dev/php.Dockerfile
     volumes:
       - ./:/var/www
-    links:
-      - db
-      - redis
     depends_on:
       - db
 
@@ -48,30 +44,25 @@ services:
       dockerfile: docker/worker.Dockerfile
     volumes:
       - ./:/var/www
-    links:
-      - db
     working_dir: /var/www
     command: bash -c "php artisan queue:work redis --sleep=1 --tries=1"
     depends_on:
       - php
 
-  laravel_echo_server:
+  websocket:
     build:
       context: .
-      dockerfile: docker/echo-server.Dockerfile
-    hostname: laravel-echo-server
-    ports:
-      - "6001:6001"
+      dockerfile: docker/websocket.Dockerfile
     volumes:
-      - ./laravel-echo-server.dev.json:/usr/src/app/laravel-echo-server.json
-      - ./docker/echo-server.sh:/usr/src/app/echo-server.sh
       - ./:/var/www
-      - ./docker/certs:/etc/ssl/certs
-    working_dir: /usr/src/app
-    command: bash -c "./echo-server.sh"
+    working_dir: /var/www
+    command: bash -c "php artisan websockets:serve"
     depends_on:
+      - php
       - redis
 
 volumes:
   data-volume:
+    driver: local
+  caddy-data:
     driver: local

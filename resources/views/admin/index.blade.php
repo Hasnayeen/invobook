@@ -8,7 +8,6 @@
 <script>
     let users = <?php echo json_encode($users); ?>
 </script>
-<script src="//{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>
 <script src="{{ mix('/js/admin/index.min.js') }}"></script>
 @endslot
 

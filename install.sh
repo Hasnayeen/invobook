@@ -16,6 +16,8 @@ else
   local='local'
 fi
 
+echo ""
+
 # Check for docker installation
 which docker && docker --version | grep "Docker version"
 
@@ -46,16 +48,6 @@ else
   exit 1
 fi
 
-if [[ $local != "local" ]]
-then
-  # Get domain name for ssl cert file
-  domain=$(awk 'BEGIN{FS="=";RS="\n"}{if($1 == "SSL_CERT_DOMAIN") print $2}' .env)
-
-  # Replace the domain in site.conf file
-  sed -i -e "sgoodworkfor.life/$domain/g" docker/site.conf
-
-fi
-
 if [[ $local == "local" ]]
 then
   COMPOSE="docker-compose -f docker-compose.dev.yml"
@@ -78,8 +70,6 @@ $COMPOSE run --rm -w /var/www php php artisan key:generate
 
 $COMPOSE run --rm -w /var/www php chmod -R 777 /var/www/storage
 
-$COMPOSE run --rm -w /var/www laravel_echo_server npm install
-
 $COMPOSE run --rm -w /var/www php php artisan migrate:fresh --seed --force
 
 $COMPOSE run --rm -w /var/www php php artisan passport:install
@@ -87,8 +77,6 @@ $COMPOSE run --rm -w /var/www php php artisan passport:install
 $COMPOSE run --rm -w /var/www php php artisan route:cache
 
 $COMPOSE run --rm -w /var/www php php artisan storage:link
-
-git checkout docker/site.conf
 
 echo ""
 echo "${green}Installation complete.${reset}"

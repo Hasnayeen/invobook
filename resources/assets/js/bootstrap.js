@@ -4,6 +4,7 @@ import ClickOutside from 'vue-click-outside'
 import * as linkify from 'linkifyjs'
 import linkifyElement from 'linkifyjs/element'
 import mention from 'linkifyjs/plugins/mention'
+window.pusher = require('pusher-js')
 
 mention(linkify)
 
@@ -18,13 +19,17 @@ window.axios.defaults.headers.common = {
   'X-Requested-With': 'XMLHttpRequest'
 }
 
-if (typeof io !== 'undefined') {
-  window.Echo = new Echo({
-    broadcaster: 'socket.io',
-    host: window.location.hostname + ':6001',
-    namespace: 'App.Base.Events'
-  })
-}
+window.Echo = new Echo({
+  broadcaster: 'pusher',
+  key: process.env.MIX_PUSHER_APP_KEY,
+  host: window.location.hostname,
+  wsHost: window.location.hostname,
+  wsPort: 6001,
+  enabledTransports: ['ws', 'wss'],
+  disableStats: true,
+  namespace: 'App.Base.Events',
+  authEndpoint: 'https://goodwork.local/broadcasting/auth'
+})
 
 window.Vue.mixin({
   methods: {

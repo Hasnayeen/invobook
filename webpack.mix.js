@@ -1,17 +1,9 @@
 let mix = require('laravel-mix')
 var tailwindcss = require('tailwindcss')
-let glob = require('glob-all')
-let PurgecssPlugin = require('purgecss-webpack-plugin')
-
-class TailwindExtractor {
-  static extract (content) {
-    return content.match(/[A-Za-z0-9-_:\/]+/g) || []
-  }
-}
 
 mix.postCss('resources/assets/css/main.css', 'public/css', [
-  require('tailwindcss')
-]).minify('public/css/main.css')
+  require('tailwindcss'),
+])
 
 mix.copy('resources/assets/css/editor.css', 'public/css/editor.css').minify('public/css/editor.css')
 
@@ -39,7 +31,6 @@ mix.minify('public/js/vendor.js')
 if (!mix.inProduction()) {
   mix.sourceMaps() // Enable sourcemaps
 }
-mix.disableNotifications()
 // mix.setPublicPath('path/to/public'); <-- Useful for Node apps.
 // mix.webpackConfig({}); <-- Override webpack.config.js, without editing the file directly.
 mix.webpackConfig(
@@ -58,25 +49,7 @@ mix.webpackConfig(
 if (mix.inProduction()) {
   mix.version(); // Enable versioning.
   mix.webpackConfig({
-    plugins: [
-      new PurgecssPlugin({
-
-        // Specify the locations of any files you want to scan for class names.
-        paths: glob.sync([
-          path.join(__dirname, 'resources/views/**/*.blade.php'),
-          path.join(__dirname, 'resources/assets/js/**/*.vue')
-        ]),
-        extractors: [
-          {
-            extractor: TailwindExtractor,
-
-            // Specify the file extensions to include when scanning for
-            // class names.
-            extensions: ['html', 'js', 'php', 'vue']
-          }
-        ]
-      })
-    ]
+    plugins: []
   })
 }
 
