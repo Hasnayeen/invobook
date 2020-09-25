@@ -1,10 +1,13 @@
 <?php
 
+namespace Database\Seeders;
+
 use Carbon\Carbon;
 use App\Base\Models\User;
 use App\Office\Models\Office;
 use Illuminate\Database\Seeder;
 use App\Authorization\Authorization;
+use Illuminate\Support\Facades\DB;
 
 class HeadquarterOfficeSeeder extends Seeder
 {

@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Base\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
-use App\Base\Utilities\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Notification;
 use App\Base\Notifications\UserRegistered as UserRegisteredNotification;
 
@@ -30,7 +29,7 @@ class RegisterController extends Controller
     |
      */
 
-    use RegistersUsers;
+    use \Illuminate\Foundation\Auth\RegistersUsers;
 
     /**
      * Where to redirect users after registration.
