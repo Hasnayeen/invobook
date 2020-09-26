@@ -56,28 +56,7 @@ mix.webpackConfig(
 )
 
 if (mix.inProduction()) {
-  mix.version(); // Enable versioning.
-  mix.webpackConfig({
-    plugins: [
-      new PurgecssPlugin({
-
-        // Specify the locations of any files you want to scan for class names.
-        paths: glob.sync([
-          path.join(__dirname, 'resources/views/**/*.blade.php'),
-          path.join(__dirname, 'resources/assets/js/**/*.vue')
-        ]),
-        extractors: [
-          {
-            extractor: TailwindExtractor,
-
-            // Specify the file extensions to include when scanning for
-            // class names.
-            extensions: ['html', 'js', 'php', 'vue']
-          }
-        ]
-      })
-    ]
-  })
+  mix.version();
 }
 
 mix.options({

@@ -10,7 +10,7 @@ use Tests\TestCase;
 use Illuminate\Auth\Access\AuthorizationException;
 
 
-class AppSettingTest extends TestCase
+class AppSettingTableTest extends TestCase
 {
     use WithFaker;
 
