@@ -1,4 +1,4 @@
-goodwork.local {
+{env.APP_URL} {
     @websockets {
         header Connection *Upgrade*
         header Upgrade    websocket

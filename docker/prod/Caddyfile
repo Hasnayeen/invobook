@@ -1,0 +1,17 @@
+{$APP_URL} {
+    @websockets {
+        header Connection *Upgrade*
+        header Upgrade    websocket
+        path /app*
+    }
+    root * /var/www/public
+    reverse_proxy @websockets websocket:6001
+    php_fastcgi php:9000
+
+    encode gzip
+    file_server
+    log {
+        output file /var/log/access.log
+    }
+    tls internal
+}

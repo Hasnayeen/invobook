@@ -5,12 +5,13 @@ services:
     image: caddy:2.1.1
     ports:
       - "${APP_PORT}:80"
-      - 80:80
       - 443:443
     volumes:
       - ./:/var/www
       - ./docker/dev/Caddyfile:/etc/caddy/Caddyfile
       - caddy-data:/data
+    environment:
+      - "APP_URL=${APP_URL}"
     depends_on:
       - php
 
