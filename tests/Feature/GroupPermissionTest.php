@@ -22,8 +22,6 @@ class GroupPermissionTest extends TestCase
     /** @test */
     public function user_can_see_all_permission_settings_for_role_in_this_group()
     {
-
-
         $this->actingAs($this->user)
              ->call('GET', 'groups/permissions', [
                  'group_type' => 'project',
