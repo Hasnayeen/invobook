@@ -47,10 +47,7 @@ mix.webpackConfig(
 )
 
 if (mix.inProduction()) {
-  mix.version(); // Enable versioning.
-  mix.webpackConfig({
-    plugins: []
-  })
+  mix.version();
 }
 
 mix.options({

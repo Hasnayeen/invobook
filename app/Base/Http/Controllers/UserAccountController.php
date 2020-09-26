@@ -23,7 +23,7 @@ class UserAccountController extends Controller
             $user->username = $request->get('username');
         }
         if ($request->get('new_password')) {
-            $user->password = bcrypt($request->get('new_password'));
+            $user->password = \Illuminate\Support\Facades\Hash::make($request->get('new_password'));
         }
         $user->save();
 

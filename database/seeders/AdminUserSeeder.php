@@ -1,8 +1,11 @@
 <?php
 
+namespace Database\Seeders;
+
 use Carbon\Carbon;
 use App\Base\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class AdminUserSeeder extends Seeder
 {
@@ -19,7 +22,7 @@ class AdminUserSeeder extends Seeder
             'email'      => 'admin@example.com',
             'active'     => 1,
             'role_id'    => 1,
-            'password'   => bcrypt('secret'),
+            'password'   => \Illuminate\Support\Facades\Hash::make('secret'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
@@ -31,7 +34,7 @@ class AdminUserSeeder extends Seeder
             'email'      => 'guest@example.com',
             'active'     => 1,
             'role_id'    => 5,
-            'password'   => bcrypt('guestpass'),
+            'password'   => \Illuminate\Support\Facades\Hash::make('guestpass'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);

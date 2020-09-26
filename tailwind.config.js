@@ -5,6 +5,7 @@ module.exports = {
   },
   purge: [
     './resources/assets/js/**/*.vue',
+    './resources/**/*.js',
     './resources/views/**/*.blade.php'
   ],
   theme: {
@@ -15,6 +16,17 @@ module.exports = {
       borderRadius: {
         xl: '.75rem',
         '2xl': '1rem',
+      },
+      boxShadow: {
+        xs: '0 0 0 1px rgba(0, 0, 0, 0.05)',
+        sm: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+      },
+      screens: {
+        sm: '576px', // 36rem
+        md: '768px', // 48rem
+        lg: '1056px', // 66rem
+        xl: '1200px', // 75rem
+        xxl: '1440px' // 90rem
       },
       spacing: {
         68: '17rem',
@@ -33,7 +45,7 @@ module.exports = {
       zIndex: {
         60: '60'
       }
-    },
+    }
   },
   variants: {},
   plugins: [],

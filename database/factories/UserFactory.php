@@ -19,7 +19,7 @@ $factory->define(App\Base\Models\User::class, function (Faker\Generator $faker) 
         'timezone'       => $faker->timezone,
         'week_start'     => $faker->dayOfWeek,
         'active'         => 1,
-        'password'       => $password ?: $password = bcrypt('secret'),
+        'password'       => $password ?: $password = \Illuminate\Support\Facades\Hash::make('secret'),
         'created_at'     => $now,
         'updated_at'     => $now,
         'remember_token' => Str::random(10),

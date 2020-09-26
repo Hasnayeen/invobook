@@ -17,36 +17,36 @@
         "beyondcode/laravel-websockets": "^1.8",
         "doctrine/dbal": "^2.8",
         "fideloper/proxy": "^4.0",
-        "guzzlehttp/guzzle": "^6.2",
+        "guzzlehttp/guzzle": "^7.0.1",
         "ifsnop/mysqldump-php": "^2.7",
         "lab404/laravel-impersonate": "^1.3",
-        "laravel/framework": "^7.0",
-        "laravel/passport": "^8.0",
+        "laravel/framework": "^8.0",
+        "laravel/legacy-factories": "^1.0",
+        "laravel/passport": "^10.0",
         "laravel/tinker": "^2.0",
+        "laravel/ui": "^3.0",
         "pda/pheanstalk": "^4.0",
         "predis/predis": "^1.1",
         "pusher/pusher-php-server": "~3.0"
     },
     "require-dev": {
-        "facade/ignition": "^2.0",
+        "facade/ignition": "^2.3.6",
         "filp/whoops": "^2.0",
         "friendsofphp/php-cs-fixer": "^2.15",
         "fzaninotto/faker": "^1.4",
-        "laravel/telescope": "^3.0",
+        "laravel/telescope": "^4.0",
         "mockery/mockery": "^1.0",
-        "nunomaduro/collision": "^4.1",
+        "nunomaduro/collision": "^5.0",
         "phpunit/phpunit": "^9.0"
     },
     "autoload": {
-        "classmap": [
-            "database/seeds",
-            "database/factories"
-        ],
         "files": [
             "app/Base/Utilities/helpers.php"
         ],
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
         }
     },
     "autoload-dev": {

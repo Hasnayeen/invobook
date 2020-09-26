@@ -1,9 +1,9 @@
 {
     "/js/manifest.js": "/js/manifest.js?id=4fee8c0502a6266be495",
-    "/js/vendor.js": "/js/vendor.js?id=c0dad26999629ed55c58",
+    "/js/vendor.js": "/js/vendor.js?id=39622d631017cf2f5a34",
     "/js/admin/index.js": "/js/admin/index.js?id=bd89377249d9dd9c812f",
     "/js/auth/login.js": "/js/auth/login.js?id=6b0a163dd529b718be89",
-    "/css/main.css": "/css/main.css?id=1f19b5a68c3f8b565371",
+    "/css/main.css": "/css/main.css?id=b0dfba6dd2d1d2df6372",
     "/js/auth/register.js": "/js/auth/register.js?id=48f628a797c4ae909784",
     "/js/errors/404.js": "/js/errors/404.js?id=c13eebfcea70a78d9c81",
     "/js/home.js": "/js/home.js?id=ef894dfe306492c76d49",
@@ -24,5 +24,5 @@
     "/js/users/settings.min.js": "/js/users/settings.min.js?id=9854d5dbac5c928529ff",
     "/js/admin/index.min.js": "/js/admin/index.min.js?id=bd89377249d9dd9c812f",
     "/js/home.min.js": "/js/home.min.js?id=ef894dfe306492c76d49",
-    "/js/vendor.min.js": "/js/vendor.min.js?id=c0dad26999629ed55c58"
+    "/js/vendor.min.js": "/js/vendor.min.js?id=39622d631017cf2f5a34"
 }
