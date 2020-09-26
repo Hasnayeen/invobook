@@ -72,11 +72,5 @@
 
     </div>
 
-    <livewire:task-board :tasks="$project->tasks" />
-
-    @push('script')
-        <script src="//{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>
-    @endpush
-    
+    <livewire:task-board :tasks="$project->tasks" />    
 </x-layout>
-

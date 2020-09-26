@@ -47,9 +47,4 @@
             </div>
         </div>
     </div>
-
-    @push('script')
-        <script src="//{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>
-    @endpush
-
 </x-layout>

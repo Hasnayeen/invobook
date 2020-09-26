@@ -3,7 +3,6 @@
 namespace App\Base\Http\Controllers\Auth;
 
 use App\Base\Http\Controllers\Controller;
-use App\Base\Utilities\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
 {
@@ -18,7 +17,7 @@ class LoginController extends Controller
     |
      */
 
-    use AuthenticatesUsers;
+    use \Illuminate\Foundation\Auth\AuthenticatesUsers;
 
     /**
      * Where to redirect users after login.

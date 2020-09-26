@@ -3,6 +3,14 @@
 namespace Tests;
 
 use App\Base\Models\User;
+use Database\Seeders\AppSettingTableSeeder;
+use Database\Seeders\PermissionSettingsTableSeeder;
+use Database\Seeders\PermissionTableSeeder;
+use Database\Seeders\RoleHasPermissionTableSeeder;
+use Database\Seeders\RoleTableSeeder;
+use Database\Seeders\ServicesTableSeeder;
+use Database\Seeders\StatusesTableSeeder;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -25,12 +33,13 @@ abstract class TestCase extends BaseTestCase
         parent::setUp();
         $this->app->instance(ExceptionHandler::class, new TestExceptionHandler(app()));
         $this->user = factory(\App\Base\Models\User::class)->create(['role_id' => 1]);
-        Artisan::call('db:seed', ['--class' => 'PermissionTableSeeder']);
-        Artisan::call('db:seed', ['--class' => 'RoleTableSeeder']);
-        Artisan::call('db:seed', ['--class' => 'PermissionSettingsTableSeeder']);
-        Artisan::call('db:seed', ['--class' => 'RoleHasPermissionTableSeeder']);
-        Artisan::call('db:seed', ['--class' => 'ServicesTableSeeder']);
-        Artisan::call('db:seed', ['--class' => 'StatusesTableSeeder']);
-        Artisan::call('db:seed', ['--class' => 'AppSettingTableSeeder']);
+
+        $this->seed(PermissionTableSeeder::class);
+        $this->seed(RoleTableSeeder::class);
+        $this->seed(PermissionSettingsTableSeeder::class);
+        $this->seed(RoleHasPermissionTableSeeder::class);
+        $this->seed(ServicesTableSeeder::class);
+        $this->seed(StatusesTableSeeder::class);
+        $this->seed(AppSettingTableSeeder::class);
     }
 }

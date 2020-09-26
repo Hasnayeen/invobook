@@ -184,7 +184,7 @@ class UserTest extends TestCase
     /** @test */
     public function password_of_guest_user_cant_be_change()
     {
-        $pass = bcrypt('secret');
+        $pass = \Illuminate\Support\Facades\Hash::make('secret');
         $guest = factory(User::class)->create([
             'username' => 'guest',
             'password' => $pass,

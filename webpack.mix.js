@@ -2,8 +2,8 @@ let mix = require('laravel-mix')
 var tailwindcss = require('tailwindcss')
 
 mix.postCss('resources/assets/css/main.css', 'public/css', [
-  require('tailwindcss')
-]).minify('public/css/main.css')
+  require('tailwindcss'),
+])
 
 mix.copy('resources/assets/css/editor.css', 'public/css/editor.css').minify('public/css/editor.css')
 
@@ -21,7 +21,8 @@ mix.minify('public/js/vendor.js')
 if (!mix.inProduction()) {
   mix.sourceMaps() // Enable sourcemaps
 }
-// mix.disableNotifications()
+// mix.setPublicPath('path/to/public'); <-- Useful for Node apps.
+// mix.webpackConfig({}); <-- Override webpack.config.js, without editing the file directly.
 mix.webpackConfig(
   {
     devtool: 'inline-source-map'
@@ -36,10 +37,7 @@ mix.webpackConfig(
 )
 
 if (mix.inProduction()) {
-  mix.version(); // Enable versioning.
-  mix.webpackConfig({
-    plugins: []
-  })
+  mix.version();
 }
 
 mix.options({

@@ -1,10 +1,19 @@
 module.exports = {
+  future: {
+    removeDeprecatedGapUtilities: true,
+    purgeLayersByDefault: true,
+  },
   purge: [
-    './resources/views/**/*.blade.php',
-    './resources/assets/js/**/*.js',
+    './resources/assets/js/**/*.vue',
+    './resources/**/*.js',
+    './resources/views/**/*.blade.php'
   ],
   theme: {
     extend: {
+      screens: {
+        xxl: '1440px' // 90rem
+        '2xl': '1720px'
+      },
       colors: {
         indigo: {
           100: '#ebf4ff',
@@ -22,18 +31,38 @@ module.exports = {
           1300: '#14142B'
         },
       },
+      borderRadius: {
+        xl: '.75rem',
+        '2xl': '1rem',
+      },
       boxShadow: {
+        xs: '0 0 0 1px rgba(0, 0, 0, 0.05)',
+        sm: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
         dark: '0 1px 3px 0 rgba(0, 0, 0, 0.9), 0 1px 2px 0 rgba(0, 0, 0, 0.9)',
         'dark-md': '0 4px 6px -1px rgba(0, 0, 0, 1), 0 2px 4px -1px rgba(0, 0, 0, 1)',
         'dark-2xl': '0 40px 50px -10px rgba(0, 0, 0, 0.96), 0 30px 30px -10px rgba(0, 0, 0, 0.97)'
       },
+      spacing: {
+        68: '17rem',
+        72: '18rem',
+        80: '20rem',
+        88: '22rem',
+        96: '24rem',
+        128: '32rem'
+      },
       maxWidth: {
         '10xl': '104rem'
       },
-      screens: {
-        '2xl': '1720px'
+      width: {
+        md: '708px',
+        lg: '900px',
+        xl: '1140px',
+        '2xl': '1320px'
+      },
+      zIndex: {
+        60: '60'
       }
-    },
+    }
   },
   variants: {},
   plugins: [],

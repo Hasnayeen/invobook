@@ -31,11 +31,19 @@ return [
 
         'pusher' => [
             'driver'  => 'pusher',
-            'key'     => env('PUSHER_KEY'),
-            'secret'  => env('PUSHER_SECRET'),
+            'key'     => env('PUSHER_APP_KEY'),
+            'secret'  => env('PUSHER_APP_SECRET'),
             'app_id'  => env('PUSHER_APP_ID'),
             'options' => [
-
+                'encrypted' => false,
+                'useTLS'    => false,
+                'host'      => 'websocket',
+                'port'      => 6001,
+                'scheme'    => 'http',
+                'curl_options' => [
+                    CURLOPT_SSL_VERIFYHOST => 0,
+                    CURLOPT_SSL_VERIFYPEER => 0,
+                ],
             ],
         ],
 
