@@ -3,7 +3,6 @@
 namespace App\Base\Http\Controllers\Auth;
 
 use App\Base\Http\Controllers\Controller;
-use App\Base\Utilities\Auth\ResetsPasswords;
 
 class ResetPasswordController extends Controller
 {
@@ -18,7 +17,7 @@ class ResetPasswordController extends Controller
     |
      */
 
-    use ResetsPasswords;
+    use \Illuminate\Foundation\Auth\ResetsPasswords;
 
     /**
      * Where to redirect users after resetting their password.
