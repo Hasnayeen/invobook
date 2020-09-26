@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5c0ea986336e3c951a9c329c43d380a2",
+    "content-hash": "ff378ae1bd990dcb59adbf6ee2aa55a0",
     "packages": [
         {
             "name": "beyondcode/laravel-websockets",
@@ -2861,10 +2861,6 @@
                 "secret-key cryptography",
                 "side-channel resistant"
             ],
-            "support": {
-                "issues": "https://github.com/paragonie/sodium_compat/issues",
-                "source": "https://github.com/paragonie/sodium_compat/tree/v1.13.0"
-            },
             "time": "2020-03-20T21:48:09+00:00"
         },
         {
@@ -3628,31 +3624,31 @@
         },
         {
             "name": "pusher/pusher-php-server",
-            "version": "v3.3.1",
+            "version": "v4.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pusher/pusher-http-php.git",
-                "reference": "2279bcd21a608a76f9be1fe0675aa2dd1efb2fa0"
+                "reference": "e75e5715e3b651ec20dee5844095aadefab81acb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pusher/pusher-http-php/zipball/2279bcd21a608a76f9be1fe0675aa2dd1efb2fa0",
-                "reference": "2279bcd21a608a76f9be1fe0675aa2dd1efb2fa0",
+                "url": "https://api.github.com/repos/pusher/pusher-http-php/zipball/e75e5715e3b651ec20dee5844095aadefab81acb",
+                "reference": "e75e5715e3b651ec20dee5844095aadefab81acb",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
                 "paragonie/sodium_compat": "^1.6",
-                "php": "^5.4 || ^7.0",
+                "php": "^7.1",
                 "psr/log": "^1.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.8.35 || ^5.7"
+                "phpunit/phpunit": "^7.2"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0-dev"
+                    "dev-master": "3.4-dev"
                 }
             },
             "autoload": {
@@ -3678,11 +3674,7 @@
                 "rest",
                 "trigger"
             ],
-            "support": {
-                "issues": "https://github.com/pusher/pusher-http-php/issues",
-                "source": "https://github.com/pusher/pusher-http-php/tree/master"
-            },
-            "time": "2019-01-18T12:10:21+00:00"
+            "time": "2020-04-14T15:20:04+00:00"
         },
         {
             "name": "ralouphie/getallheaders",
