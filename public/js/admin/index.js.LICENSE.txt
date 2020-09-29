@@ -1,7 +1,4 @@
 /*!
-<<<<<<< HEAD
- * vuex v3.4.0
-=======
  * Pusher JavaScript Library v7.0.0
  * https://pusher.com/
  *
@@ -11,7 +8,6 @@
 
 /*!
  * vuex v3.5.1
->>>>>>> dev
  * (c) 2020 Evan You
  * @license MIT
  */

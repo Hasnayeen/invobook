@@ -10,5 +10,3 @@
     @endpush
     
 </x-layout>
-
-@endcomponent

@@ -1,4 +1,4 @@
-{$APP_URL} {
+{env.APP_URL} {
     @websockets {
         header Connection *Upgrade*
         header Upgrade    websocket

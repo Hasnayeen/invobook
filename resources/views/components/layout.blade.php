@@ -7,26 +7,19 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="app-version" content="{{ config('app.version') }}">
-    <meta name="last-updated" content="{{ application_last_updated() }}">
 
     <title>{{ $title }} | {{ config('app.name', 'Goodwork') }}</title>
 
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap" rel="stylesheet">
-    <link href="{{ mix('css/main.min.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/main.css') }}" rel="stylesheet">
 
     @yield('style')
 
-    <script>
-        window.Laravel = {!! json_encode([
-            'csrfToken' => csrf_token(),
-        ]) !!};
-        let impersonating = false
-        let user = {}
-        let authenticated = false
-    </script>
-
-    <script src="{{ asset('js/alpine.min.js') }}" defer></script>
     @livewireStyles
+    @bukStyles
+
+    @livewireScripts
+    <script src="{{ asset('js/alpine.min.js') }}" defer></script>
 </head>
 <body class="bg-indigo-1300 text-gray-200">
     <div x-data="{...app()}" x-cloak id="app" class="flex">
@@ -43,9 +36,6 @@
         </main>
     </div>
 
-    <script src="{{ asset('/js/manifest.js') }}"></script>
-    <script src="{{ asset('/js/vendor.min.js') }}"></script>
-    @livewireScripts
     @stack('script')
 
     @foreach (glob(base_path() . '/resources/views/plugin-scripts/global/*.blade.php') as $file)
@@ -53,7 +43,7 @@
     @endforeach
     
     @stack('plugin-scripts')
-
+    @bukScripts
     <script>
         function app() {
             return {

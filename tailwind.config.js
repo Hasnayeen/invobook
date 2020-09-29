@@ -4,14 +4,13 @@ module.exports = {
     purgeLayersByDefault: true,
   },
   purge: [
-    './resources/assets/js/**/*.vue',
     './resources/**/*.js',
     './resources/views/**/*.blade.php'
   ],
   theme: {
     extend: {
       screens: {
-        xxl: '1440px' // 90rem
+        xxl: '1440px', // 90rem
         '2xl': '1720px'
       },
       colors: {
@@ -33,7 +32,7 @@ module.exports = {
       },
       borderRadius: {
         xl: '.75rem',
-        '2xl': '1rem',
+        '2xl': '1rem'
       },
       boxShadow: {
         xs: '0 0 0 1px rgba(0, 0, 0, 0.05)',
@@ -65,5 +64,7 @@ module.exports = {
     }
   },
   variants: {},
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/custom-forms'),
+  ],
 }

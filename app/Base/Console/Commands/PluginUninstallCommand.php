@@ -52,9 +52,23 @@ class PluginUninstallCommand extends Command
         $this->dumpAutoloadFile();
         $composerJson = $this->getComposerJson();
         if ($composerJson) {
+            $this->removePackageFromCacheFile();
+            $this->removeCacheServicesFile();
             $this->removePluginFromComposerFile($composerJson);
             $this->runComposerCommand();
         }
+    }
+
+    private function removePackageFromCacheFile()
+    {
+        $packages = include base_path('bootstrap/cache/packages.php');
+        unset($packages[$this->argument('name')]);
+        $this->files->put(base_path('bootstrap/cache/packages.php'), "<?php return " . var_export($packages, true) . ";");
+    }
+
+    private function removeCacheServicesFile()
+    {
+        $this->files->delete(base_path('bootstrap/cache/services.php'));
     }
 
     private function removePluginFromComposerFile(array &$composerJson): void

@@ -21,11 +21,7 @@
  */
 
 /*!
-<<<<<<< HEAD
- * vuex v3.4.0
-=======
  * vuex v3.5.1
->>>>>>> dev
  * (c) 2020 Evan You
  * @license MIT
  */

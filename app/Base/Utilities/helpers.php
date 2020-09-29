@@ -72,7 +72,7 @@ if (! function_exists('is_admin_route')) {
      */
     function is_admin_route()
     {
-        return request()->route()->getPrefix() === '/admin';
+        return request()->segment(1) === 'admin';
     }
 }
 

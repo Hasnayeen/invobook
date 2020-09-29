@@ -24,7 +24,7 @@ class PluginInstallCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Install a plugin';
 
     /**
      * The filesystem instance.
