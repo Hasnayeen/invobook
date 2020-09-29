@@ -3,7 +3,6 @@
 use BeyondCode\LaravelWebSockets\Dashboard\Http\Middleware\Authorize;
 
 return [
-
     /*
      * Set a custom dashboard configuration
      */
@@ -23,15 +22,15 @@ return [
      */
     'apps' => [
         [
-            'id' => env('PUSHER_APP_ID'),
-            'name' => env('APP_NAME'),
-            'key' => env('PUSHER_APP_KEY'),
-            'secret' => env('PUSHER_APP_SECRET'),
-            'path' => env('PUSHER_APP_PATH'),
-            'host' => env('LARAVEL_WEBSOCKETS_HOST'),
-            'capacity' => null,
+            'id'                     => env('PUSHER_APP_ID'),
+            'name'                   => env('APP_NAME'),
+            'key'                    => env('PUSHER_APP_KEY'),
+            'secret'                 => env('PUSHER_APP_SECRET'),
+            'path'                   => env('PUSHER_APP_PATH'),
+            'host'                   => env('LARAVEL_WEBSOCKETS_HOST'),
+            'capacity'               => null,
             'enable_client_messages' => false,
-            'enable_statistics' => false,
+            'enable_statistics'      => false,
         ],
     ],
 
@@ -49,7 +48,7 @@ return [
      * Leave this empty if you want to accept requests from all hosts.
      */
     'allowed_origins' => [
-        //
+
     ],
 
     /*
@@ -82,7 +81,7 @@ return [
          */
         'model' => \BeyondCode\LaravelWebSockets\Statistics\Models\WebSocketsStatisticsEntry::class,
 
-        /**
+        /*
          * The Statistics Logger will, by default, handle the incoming statistics, store them
          * and then release them into the database on each interval defined below.
          */
