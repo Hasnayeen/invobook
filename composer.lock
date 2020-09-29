@@ -2861,24 +2861,20 @@
                 "secret-key cryptography",
                 "side-channel resistant"
             ],
-            "support": {
-                "issues": "https://github.com/paragonie/sodium_compat/issues",
-                "source": "https://github.com/paragonie/sodium_compat/tree/v1.13.0"
-            },
             "time": "2020-03-20T21:48:09+00:00"
         },
         {
             "name": "pda/pheanstalk",
-            "version": "v4.0.2",
+            "version": "v4.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pheanstalk/pheanstalk.git",
-                "reference": "7fe4547fe62c2fff37e47cc469905dec04d7d352"
+                "reference": "6165573aad525d39b3ac8ae916214cb483a61263"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pheanstalk/pheanstalk/zipball/7fe4547fe62c2fff37e47cc469905dec04d7d352",
-                "reference": "7fe4547fe62c2fff37e47cc469905dec04d7d352",
+                "url": "https://api.github.com/repos/pheanstalk/pheanstalk/zipball/6165573aad525d39b3ac8ae916214cb483a61263",
+                "reference": "6165573aad525d39b3ac8ae916214cb483a61263",
                 "shasum": ""
             },
             "require": {
@@ -2916,7 +2912,7 @@
             "keywords": [
                 "beanstalkd"
             ],
-            "time": "2020-07-31T11:08:31+00:00"
+            "time": "2020-09-22T07:17:48+00:00"
         },
         {
             "name": "php-http/message-factory",
@@ -3678,10 +3674,6 @@
                 "rest",
                 "trigger"
             ],
-            "support": {
-                "issues": "https://github.com/pusher/pusher-http-php/issues",
-                "source": "https://github.com/pusher/pusher-http-php/tree/master"
-            },
             "time": "2019-01-18T12:10:21+00:00"
         },
         {
@@ -4164,6 +4156,7 @@
             "keywords": [
                 "http"
             ],
+            "abandoned": "react/http",
             "time": "2020-01-14T08:36:16+00:00"
         },
         {
