@@ -3,16 +3,14 @@
 namespace Tests;
 
 use App\Base\Models\User;
-use Database\Seeders\AppSettingTableSeeder;
-use Database\Seeders\PermissionSettingsTableSeeder;
-use Database\Seeders\PermissionTableSeeder;
-use Database\Seeders\RoleHasPermissionTableSeeder;
 use Database\Seeders\RoleTableSeeder;
 use Database\Seeders\ServicesTableSeeder;
 use Database\Seeders\StatusesTableSeeder;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Artisan;
+use Database\Seeders\AppSettingTableSeeder;
+use Database\Seeders\PermissionTableSeeder;
 use Illuminate\Contracts\Debug\ExceptionHandler;
+use Database\Seeders\RoleHasPermissionTableSeeder;
+use Database\Seeders\PermissionSettingsTableSeeder;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;

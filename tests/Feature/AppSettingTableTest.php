@@ -2,13 +2,10 @@
 
 namespace Tests\Feature;
 
-use App\Base\Models\AppSetting;
-use App\Base\Models\User;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Facades\Log;
 use Tests\TestCase;
-use Illuminate\Auth\Access\AuthorizationException;
-
+use App\Base\Models\User;
+use App\Base\Models\AppSetting;
+use Illuminate\Foundation\Testing\WithFaker;
 
 class AppSettingTableTest extends TestCase
 {
@@ -35,7 +32,7 @@ class AppSettingTableTest extends TestCase
     /** @test */
     public function user_without_permission_cant_update_app_setting_table()
     {
-        $guest = factory(User::class)->create(['role_id' => 5]);   
+        $guest = factory(User::class)->create(['role_id' => 5]);
         $this->actingAs($guest);
         $this->patch('admin/app-settings/'. $this->appSetting->id, ['status' => false]);
         $this->assertDatabaseMissing('app_settings', ['resource' => 'project', 'status' => false]);

@@ -6,8 +6,8 @@ use Carbon\Carbon;
 use App\Base\Models\User;
 use App\Office\Models\Office;
 use Illuminate\Database\Seeder;
-use App\Authorization\Authorization;
 use Illuminate\Support\Facades\DB;
+use App\Authorization\Authorization;
 
 class HeadquarterOfficeSeeder extends Seeder
 {
