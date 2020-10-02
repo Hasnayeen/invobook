@@ -109,3 +109,16 @@ if (! function_exists('str_limit')) {
         return Str::limit($text, $length);
     }
 }
+
+if (! function_exists('plugins_path')) {
+    /**
+     * Get absolute path to plugins directory.
+     * 
+     * @param string $path
+     * @return string
+     */
+    function plugins_path(string $path = null): string
+    {
+        return $path ? base_path('plugins' . '/' . $path) : base_path('plugins');
+    }
+}

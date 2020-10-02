@@ -1,7 +1,9 @@
 <x-layout>
     <x-slot name="title">{{ $project->name }}</x-slot>
 
-    <div class="relative z-20 pt-8 flex flex-col xl:grid grid-cols-4 2xl:grid-cols-5 xl:gap-4 2xl:gap-8">
+    <livewire:project :project="$project"/>
+
+    {{-- <div class="relative z-20 pt-8 flex flex-col xl:grid grid-cols-4 2xl:grid-cols-5 xl:gap-4 2xl:gap-8">
         <div class="bg-indigo-1100 rounded px-4 sm:px-8 py-4 flex flex-col lg:flex-row justify-between items-start col-span-3 2xl:col-span-4">
             <div class="flex flex-col justify-between h-full">
                 <h1 class="flex items-center font-medium leading-none text-4xl text-gray-400">{{ $project->name }}</h1>
@@ -70,7 +72,5 @@
             </div>
         </div>
 
-    </div>
-
-    <livewire:task-board :tasks="$project->tasks" />    
+    </div> --}}
 </x-layout>

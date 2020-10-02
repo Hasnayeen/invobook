@@ -74,6 +74,9 @@ class PluginUninstallCommand extends Command
     private function removePluginFromComposerFile(array &$composerJson): void
     {
         unset($composerJson['require'][$this->argument('name')]);
+        if (empty($composerJson['require'])) {
+            unset($composerJson['require']);
+        }
         $this->files->put(base_path('plugins/composer.json'), json_encode($composerJson, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
     }
 
@@ -82,6 +85,7 @@ class PluginUninstallCommand extends Command
         $process = new Process([
             'composer',
             'update',
+            '--ansi',
         ], 'plugins');
         $this->runProcessCommand($process);
     }
@@ -117,6 +121,7 @@ class PluginUninstallCommand extends Command
         $process = new Process([
             'composer',
             'dump',
+            '--ansi',
         ]);
         $process->run();
     }

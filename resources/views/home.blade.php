@@ -1,7 +1,9 @@
 <x-layout>
     <x-slot name="title">Home</x-slot>
 
-    <div class="relative z-20">
+    <livewire:app/>
+
+    {{-- <div class="relative z-20">
         <h1 class="h-16 flex items-center font-medium text-2xl text-gray-400">Your Work</h1>
 
         <div class="py-4">
@@ -46,5 +48,5 @@
                 </table>
             </div>
         </div>
-    </div>
+    </div> --}}
 </x-layout>
