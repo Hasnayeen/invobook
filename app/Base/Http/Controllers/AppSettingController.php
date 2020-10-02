@@ -2,9 +2,8 @@
 
 namespace App\Base\Http\Controllers;
 
-use App\Base\Http\Requests\AppSettingRequest;
 use App\Base\Models\AppSetting;
-use Illuminate\Http\Request;
+use App\Base\Http\Requests\AppSettingRequest;
 
 class AppSettingController extends Controller
 {
@@ -18,7 +17,7 @@ class AppSettingController extends Controller
         $appSetting = AppSetting::all();
 
         return response()->json([
-                'status' => 'success',
+                'status'       => 'success',
                 'appSettings'  => $appSetting,
             ]);
     }
@@ -27,13 +26,12 @@ class AppSettingController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Base\Http\Requests\AppSettingRequest $request
-     * @param  \App\Base\Models\AppSetting  $appSetting
+     * @param  \App\Base\Models\AppSetting               $appSetting
      * @return \Illuminate\Http\Response
      */
-
     public function update(AppSettingRequest $request, AppSetting $appSetting)
     {
-         try {
+        try {
             $this->authorize('update', $appSetting);
             $appSetting->update($request->all());
 
@@ -45,5 +43,4 @@ class AppSettingController extends Controller
             throw $exception;
         }
     }
-
 }
