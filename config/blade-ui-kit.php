@@ -3,7 +3,6 @@
 use BladeUIKit\Components;
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Components
@@ -16,31 +15,31 @@ return [
     */
 
     'components' => [
-        'alert' => Components\Alerts\Alert::class,
-        'form-button' => Components\Buttons\FormButton::class,
-        'logout' => Components\Buttons\Logout::class,
-        'carbon' => Components\DateTime\Carbon::class,
-        'countdown' => Components\DateTime\Countdown::class,
-        'easy-mde' => Components\Editors\EasyMDE::class,
-        'trix' => Components\Editors\Trix::class,
-        'error' => Components\Forms\Error::class,
-        'form' => Components\Forms\Form::class,
-        'label' => Components\Forms\Label::class,
-        'input' => Components\Forms\Inputs\Input::class,
-        'checkbox' => Components\Forms\Inputs\Checkbox::class,
+        'alert'        => Components\Alerts\Alert::class,
+        'form-button'  => Components\Buttons\FormButton::class,
+        'logout'       => Components\Buttons\Logout::class,
+        'carbon'       => Components\DateTime\Carbon::class,
+        'countdown'    => Components\DateTime\Countdown::class,
+        'easy-mde'     => Components\Editors\EasyMDE::class,
+        'trix'         => Components\Editors\Trix::class,
+        'error'        => Components\Forms\Error::class,
+        'form'         => Components\Forms\Form::class,
+        'label'        => Components\Forms\Label::class,
+        'input'        => Components\Forms\Inputs\Input::class,
+        'checkbox'     => Components\Forms\Inputs\Checkbox::class,
         'color-picker' => Components\Forms\Inputs\ColorPicker::class,
-        'email' => Components\Forms\Inputs\Email::class,
-        'password' => Components\Forms\Inputs\Password::class,
-        'pikaday' => Components\Forms\Inputs\Pikaday::class,
-        'textarea' => Components\Forms\Inputs\Textarea::class,
-        'html' => Components\Layouts\Html::class,
-        'social-meta' => Components\Layouts\SocialMeta::class,
-        'mapbox' => Components\Maps\Mapbox::class,
-        'markdown' => Components\Markdown\Markdown::class,
-        'toc' => Components\Markdown\ToC::class,
-        'dropdown' => Components\Navigation\Dropdown::class,
-        'cron' => Components\Support\Cron::class,
-        'unsplash' => Components\Support\Unsplash::class,
+        'email'        => Components\Forms\Inputs\Email::class,
+        'password'     => Components\Forms\Inputs\Password::class,
+        'pikaday'      => Components\Forms\Inputs\Pikaday::class,
+        'textarea'     => Components\Forms\Inputs\Textarea::class,
+        'html'         => Components\Layouts\Html::class,
+        'social-meta'  => Components\Layouts\SocialMeta::class,
+        'mapbox'       => Components\Maps\Mapbox::class,
+        'markdown'     => Components\Markdown\Markdown::class,
+        'toc'          => Components\Markdown\ToC::class,
+        'dropdown'     => Components\Navigation\Dropdown::class,
+        'cron'         => Components\Support\Cron::class,
+        'unsplash'     => Components\Support\Unsplash::class,
     ],
 
     /*
@@ -54,7 +53,7 @@ return [
     */
 
     'livewire' => [
-        //
+
     ],
 
     /*

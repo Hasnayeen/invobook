@@ -113,8 +113,8 @@ if (! function_exists('str_limit')) {
 if (! function_exists('plugins_path')) {
     /**
      * Get absolute path to plugins directory.
-     * 
-     * @param string $path
+     *
+     * @param  string $path
      * @return string
      */
     function plugins_path(string $path = null): string

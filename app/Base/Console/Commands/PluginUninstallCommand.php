@@ -63,7 +63,7 @@ class PluginUninstallCommand extends Command
     {
         $packages = include base_path('bootstrap/cache/packages.php');
         unset($packages[$this->argument('name')]);
-        $this->files->put(base_path('bootstrap/cache/packages.php'), "<?php return " . var_export($packages, true) . ";");
+        $this->files->put(base_path('bootstrap/cache/packages.php'), '<?php return ' . var_export($packages, true) . ';');
     }
 
     private function removeCacheServicesFile()
