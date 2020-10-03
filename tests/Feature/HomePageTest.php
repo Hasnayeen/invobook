@@ -12,7 +12,7 @@ class HomePageTest extends TestCase
 {
     /**
      * @todo add test when home page ui done
-     * @test 
+     * @test
      */
     public function user_can_see_current_work_in_progress_assigned_to_them()
     {
