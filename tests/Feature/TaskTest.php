@@ -25,6 +25,7 @@ class TaskTest extends TestCase
             'created_by'    => $this->user->id,
             'taskable_type' => 'project',
             'taskable_id'   => $project->id,
+            'due_on'        => '2022-06-15',
         ]);
         $this->actingAs($this->user);
         resolve('Authorization')->setupDefaultPermissions($project);
@@ -34,7 +35,7 @@ class TaskTest extends TestCase
             'name'          => $task->name,
             'assigned_to'   => $task->assigned_to,
             'notes'         => $task->notes,
-            'due_on'        => $task->due_on,
+            'due_on'        => '2022-06-15',
             'group_type'    => $task->taskable_type,
             'group_id'      => $task->taskable_id,
         ])->assertJsonFragment([
@@ -74,7 +75,7 @@ class TaskTest extends TestCase
             'name'          => $task->name,
             'assigned_to'   => $task->assigned_to,
             'notes'         => $task->notes,
-            'due_on'        => $task->due_on,
+            'due_on'        => '2022-06-15',
             'group_type'    => $task->taskable_type,
             'group_id'      => $task->taskable_id,
         ])->assertJsonFragment([
@@ -185,6 +186,7 @@ class TaskTest extends TestCase
             'created_by'    => $this->user->id,
             'taskable_type' => 'project',
             'taskable_id'   => $project->id,
+            'due_on'        => '2022-06-15',
         ]);
         factory(\App\TaskManager\Models\Status::class)->create();
         $this->actingAs($this->user);
@@ -195,7 +197,7 @@ class TaskTest extends TestCase
             'name'          => $task->name,
             'assigned_to'   => $task->assigned_to,
             'notes'         => $task->notes,
-            'due_on'        => $task->due_on,
+            'due_on'        => '2022-06-15',
             'group_type'    => 'project',
             'group_id'      => $project->id,
             'status_id'     => $task->status_id,
