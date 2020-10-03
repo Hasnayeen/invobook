@@ -18,22 +18,27 @@
                         <x-eva-arrowhead-right-outline class="w-6 h-6 fill-current" />
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 sm:gap-4 2xl:gap-8 row-gap-4">
-                        @foreach ($tasks as $task)
-                            <div class="bg-gray-100 rounded shadow-md p-4 cursor-pointer">
+                        @for ($i = 0; $i < 4; $i++)
+                            @isset($tasks[$i])
+                                
+                        {{-- @foreach ($tasks as $task) --}}
+                            <div class="bg-azure-100 rounded shadow-md p-4 cursor-pointer">
                                 <div class="flex justify-between items-center">
                                     <p class="text-xs text-gray-700 flex flex-col">
                                         <span class="text-xs">{{__('Due on') }}</span>
-                                        <span class="text-sm text-purple-800 font-medium">{{ $task['due_on'] }}</span>
+                                        <span class="text-sm text-purple-800 font-medium">{{ $tasks[$i]['due_on'] }}</span>
                                     </p>
-                                    @if ($task['assigned_to'])
-                                        <img src="{{ url($task['user']['avatar']) }}" class="rounded-full w-8 h-8" title="{{ $task['user']['name'] }}">
+                                    @if ($tasks[$i]['assigned_to'])
+                                        <img src="{{ url($tasks[$i]['user']['avatar']) }}" class="rounded-full w-8 h-8" title="{{ $tasks[$i]['user']['name'] }}">
                                     @endif
                                 </div>
                                 <div class="text-gray-800 text-left pt-2">
-                                    <p class="font-medium text-lg overflow-hidden">{{ str_limit($task['name']) }}</p>
+                                    <p class="font-medium text-lg overflow-hidden">{{ str_limit($tasks[$i]['name']) }}</p>
                                 </div>
                             </div>
-                        @endforeach
+                            @endisset
+                        {{-- @endforeach --}}
+                        @endfor
                     </div>
                 </div>
             @endforeach

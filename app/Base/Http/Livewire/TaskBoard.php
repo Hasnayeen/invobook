@@ -12,7 +12,7 @@ class TaskBoard extends Component
     {
         $this->groupedTasks = $tasks->load('status', 'user:id,avatar,name')->groupBy(function ($item) {
             return $item->status->name;
-        })->toArray();
+        })->sortKeysDesc()->toArray();
     }
 
     public function render()
