@@ -12,7 +12,6 @@ Self hosted project management and collaboration tool inspired by basecamp.
 
 <p align="center">
   <a href="https://github.com/iluminar/goodwork/workflows/Tests"><img src="https://github.com/iluminar/goodwork/workflows/Tests/badge.svg?branch=dev" alt="Build Status"></a>
-  <!-- <a href="https://codecov.io/github/vuejs/vue?branch=dev"><img src="https://img.shields.io/codecov/c/github/vuejs/vue/dev.svg?sanitize=true" alt="Coverage Status"></a> -->
   <a href="https://github.com/iluminar/goodwork"><img src="https://poser.pugx.org/iluminar/goodwork/v/stable" alt="Version"></a>
   <a href="https://github.com/laravel/laravel"><img src="https://img.shields.io/badge/Laravel-8.0-brightgreen.svg?style=flat" alt="Laravel Version"></a>
   <a href="https://github.com/iluminar/goodwork/blob/dev/LICENSE"><img src="http://img.shields.io/badge/license-MIT-brightgreen.svg" alt="License"></a>
@@ -44,6 +43,8 @@ Self hosted project management and collaboration tool inspired by basecamp.
 
 __Notice:__ Project under some major change, don't use on production until stable release
 
+> Tech Stack: Goodwork is build using TALL stack ([Laravel](https://laravel.com/), [Livewire](https://laravel-livewire.com/), [Alpine](https://github.com/alpinejs/alpine), [TailwindCSS](https://tailwindcss.com/))
+
 ## About Goodwork
 
 Goodwork is a simple project management and collaboration tool for software teams. It is open source and [MIT licensed](https://github.com/iluminar/goodwork/blob/dev/LICENSE). Goodwork is a self-hosted software (no dependency on anyone else and only you keep your data).
@@ -70,7 +71,7 @@ You can test a live instance of Goodwork that we use (as a guest user) using the
 
 ## Screenshots <small>[↑Top](#about-goodwork)</small>
 
-![Dashboard](https://i.imgur.com/86mwtxo.png)
+![Dashboard](https://i.imgur.com/aLLdp98.png)
 
 ## Contributing <small>[↑Top](#about-goodwork)</small>
 
@@ -78,7 +79,7 @@ Thank you for considering contributing to the Goodwork Project! The contribution
 
 You can join the Goodwork Project via this link [link](https://goodworkfor.life/register/invite-link/ovCPAFpnwIhrvqUrlvynarP9HVRBC5mH)
 
-Also you can join the slack channel via this [link](https://discord.gg/4DvTQsc)
+Also you can join the discord channel via this [link](https://discord.gg/4DvTQsc)
 
 ## Supporting <small>[↑Top](#about-goodwork)</small>
 
