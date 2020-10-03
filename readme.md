@@ -1,17 +1,25 @@
 ## Sponsored By: <a href="https://zukoni.com"><img src="https://i.imgur.com/kLYHhBM.png" alt="zukoni ui library" style="height: 240;"></a>
 
-[![License](http://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/iluminar/goodwork/blob/dev/LICENSE)
-![Tests](https://github.com/iluminar/goodwork/workflows/Tests/badge.svg?branch=dev)
-[![Stable Version](https://poser.pugx.org/iluminar/goodwork/v/stable)](https://github.com/iluminar/goodwork)
-[![Laravel Version](https://img.shields.io/badge/Laravel-7.0-brightgreen.svg?style=flat)](https://github.com/laravel/laravel)
-[![VueJS Version](https://img.shields.io/badge/vue-2.5-brightgreen.svg?style=flat)](https://github.com/vuejs/vue)
-[![codecov](https://codecov.io/gh/iluminar/goodwork/branch/master/graph/badge.svg)](https://codecov.io/gh/iluminar/goodwork)
-[![Join on discord](https://img.shields.io/badge/join%20on-discord-orange)](https://discord.gg/4DvTQsc)
-[![Join on goodwork](https://img.shields.io/badge/join%20on-goodwork-orange.svg)](https://goodworkfor.life/register/invite-link/ovCPAFpnwIhrvqUrlvynarP9HVRBC5mH)
+<p align="center">
+<img src="public/logos/logo.png" alt="Goodwork" style="margin: auto;">
+</p>
 
-<img src="public/logos/logo_square.png" alt="Goodwork" style="max-width:100%;">
-
+<p align="center">
 Self hosted project management and collaboration tool inspired by basecamp.
+</p>
+
+<p align="center" style="text-align: center;">
+
+<p align="center">
+  <a href="https://github.com/iluminar/goodwork/workflows/Tests"><img src="https://github.com/iluminar/goodwork/workflows/Tests/badge.svg?branch=dev" alt="Build Status"></a>
+  <!-- <a href="https://codecov.io/github/vuejs/vue?branch=dev"><img src="https://img.shields.io/codecov/c/github/vuejs/vue/dev.svg?sanitize=true" alt="Coverage Status"></a> -->
+  <a href="https://github.com/iluminar/goodwork"><img src="https://poser.pugx.org/iluminar/goodwork/v/stable" alt="Version"></a>
+  <a href="https://github.com/laravel/laravel"><img src="https://img.shields.io/badge/Laravel-8.0-brightgreen.svg?style=flat" alt="Laravel Version"></a>
+  <a href="https://github.com/iluminar/goodwork/blob/dev/LICENSE"><img src="http://img.shields.io/badge/license-MIT-brightgreen.svg" alt="License"></a>
+  <a href="https://discord.gg/4DvTQsc"><img src="https://img.shields.io/badge/chat-on%20discord-7289da.svg?sanitize=true" alt="Chat"></a>
+  <a href="https://goodworkfor.life/register/invite-link/ovCPAFpnwIhrvqUrlvynarP9HVRBC5mH"><img src="https://img.shields.io/badge/join%20on-goodwork-orange.svg" alt="Join Goodwork"></a>
+
+</p>
 
 <hr>
 <p align="center">
@@ -34,6 +42,8 @@ Self hosted project management and collaboration tool inspired by basecamp.
 
 <hr>
 
+__Notice:__ Project under some major change, don't use on production until stable release
+
 ## About Goodwork
 
 Goodwork is a simple project management and collaboration tool for software teams. It is open source and [MIT licensed](https://github.com/iluminar/goodwork/blob/dev/LICENSE). Goodwork is a self-hosted software (no dependency on anyone else and only you keep your data).
@@ -46,7 +56,7 @@ Goodwork brings you all the components required for your project to run smoothly
 
 ## Demo
 
-You can test a live instance of Goodwork that we use (as a guest user) using the credentials below. This user has limited permissions so you'll only see a handful of the features. You can access the demo site at the following URL: https://goodworkfor.life
+You can test a live instance of Goodwork that we use (as a guest user) using the credentials below. This user has limited permissions so you'll only see a handful of the features. You can access the demo site at the following URL: https://demo.goodwork.cloud
 
 `email: guest@example.com`
 
