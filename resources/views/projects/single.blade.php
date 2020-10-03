@@ -1,15 +1,6 @@
-@component('layouts.app')
+<x-layout>
+    <x-slot name="title">{{ $project->name }}</x-slot>
 
-@slot('title') Single Resource View @endslot
+    <livewire:project :project="$project"/>
 
-<single></single>
-
-@slot('script')
-<script>
-    let project = {!! json_encode($project) !!}
-    let current_cycle = {!! json_encode($project->current_cycle) !!}
-</script>
-<script src="{{ mix('/js/projects/single.min.js') }}"></script>
-@endslot
-
-@endcomponent
+</x-layout>

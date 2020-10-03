@@ -20,28 +20,28 @@ class AppSettingTableSeeder extends Seeder
         AppSetting::insert([
             [
                 'resource'      => 'project',
-                'status' => true,
+                'status'        => true,
                 'created_at'    => $now,
                 'updated_at'    => $now,
             ],
             [
                 'resource'      => 'team',
-                'status' => true,
+                'status'        => true,
                 'created_at'    => $now,
                 'updated_at'    => $now,
             ],
             [
                 'resource'      => 'office',
-                'status' => true,
+                'status'        => true,
                 'created_at'    => $now,
                 'updated_at'    => $now,
             ],
             [
                 'resource'      => 'direct-message',
-                'status' => true,
+                'status'        => true,
                 'created_at'    => $now,
                 'updated_at'    => $now,
-            ]
+            ],
         ]);
     }
 }

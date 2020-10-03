@@ -1,17 +1,12 @@
-@component('layouts.app')
+<x-layout>
+    <x-slot name="title">404 - Page Not Found</x-slot>
 
-@slot('title') 404 - Page Not Found @endslot
-
-<div class="text-4xl text-gray-700 container mx-auto mt-16 text-center font-bold">
-    <div class="text-teal-500" style="font-size: 16rem">
-        404
+    <div class="text-4xl bg-indigo-1200 text-gray-200 mx-auto flex flex-col items-center justify-center font-bold w-screen h-screen">
+        <div class="bg-indigo-900 w-64 h-64 rounded-full shadow-outline flex justify-center items-center text-6xl font-bold">
+            404
+        </div>
+        <div class="my-8">Page Not Found</div>
+        <a href="{{ url('/') }}" class="bg-white text-indigo-600 no-underline text-lg font-semibold px-8 py-2 rounded-md">← Go To Home</a>
     </div>
-    <div class="mb-8">WHOOPS! Page Not Found</div>
-    <a href="{{ url('/') }}" class="text-teal-500 no-underline text-2xl">← Go To Home</a>
-</div>
 
-@slot('script')
-<script src="{{ mix('/js/errors/404.min.js') }}"></script>
-@endslot
-
-@endcomponent
+</x-layout>

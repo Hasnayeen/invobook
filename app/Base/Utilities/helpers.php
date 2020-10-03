@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Str;
+
 if (! function_exists('application_last_updated')) {
     /**
      * Return the date when the application was last updated.
@@ -59,5 +61,64 @@ if (! function_exists('trim_last_dot')) {
     function trim_last_dot($text)
     {
         return substr_replace($text, '', -1);
+    }
+}
+
+if (! function_exists('is_admin_route')) {
+    /**
+     * Check if current route is an admin route.
+     *
+     * @return bool
+     */
+    function is_admin_route()
+    {
+        return request()->segment(1) === 'admin';
+    }
+}
+
+if (! function_exists('is_single_resource_route')) {
+    /**
+     * Check if current route shows a single Project/Team/Office.
+     *
+     * @return bool
+     */
+    function is_single_resource_route()
+    {
+        return in_array(
+            request()->segment(1),
+            ['projects', 'teams', 'offices']
+        );
+    }
+}
+
+if (! function_exists('user')) {
+    /**
+     * Get current authenticated user.
+     *
+     * @return \App\Base\Models\User
+     */
+    function user()
+    {
+        return auth()->user();
+    }
+}
+
+if (! function_exists('str_limit')) {
+    function str_limit(string $text, int $length = 75): string
+    {
+        return Str::limit($text, $length);
+    }
+}
+
+if (! function_exists('plugins_path')) {
+    /**
+     * Get absolute path to plugins directory.
+     *
+     * @param  string $path
+     * @return string
+     */
+    function plugins_path(string $path = null): string
+    {
+        return $path ? base_path('plugins' . '/' . $path) : base_path('plugins');
     }
 }

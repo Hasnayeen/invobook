@@ -2,13 +2,11 @@
 
 namespace App\Base\Events;
 
-use Illuminate\Broadcasting\Channel;
-use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
-use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Broadcasting\PrivateChannel;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
 class NewMessage implements ShouldBroadcast
 {
@@ -19,6 +17,7 @@ class NewMessage implements ShouldBroadcast
     /**
      * Create a new event instance.
      *
+     * @param  mixed $message
      * @return void
      */
     public function __construct($message)

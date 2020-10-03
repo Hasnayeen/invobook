@@ -48,7 +48,7 @@ class MentionTest extends TestCase
         $task = factory(Task::class)->make([
             'group_type' => 'project',
             'group_id'   => $project->id,
-            // 'due_on'     => '2022-06-15', // let's see if the project survives three year
+            'due_on'     => '2022-06-15', // let's see if the project survives three year
         ]);
         $this->actingAs($this->user);
         resolve('Authorization')->setupDefaultPermissions($project);
@@ -60,7 +60,7 @@ class MentionTest extends TestCase
             'name'             => $task->name,
             'assigned_to'      => $task->assigned_to,
             'notes'            => $task->notes,
-            'due_on'           => $task->due_on,
+            'due_on'           => '2022-06-15',
             'group_type'       => 'project',
             'group_id'         => $project->id,
             'mentions'         => [

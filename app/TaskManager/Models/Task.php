@@ -2,6 +2,7 @@
 
 namespace App\TaskManager\Models;
 
+use Carbon\Carbon;
 use App\Base\Models\Tag;
 use App\Base\Models\User;
 use App\Base\Models\Mention;
@@ -82,5 +83,10 @@ class Task extends Model
     public function steps()
     {
         return $this->hasMany(Step::class)->orderBy('updated_at', 'desc');
+    }
+
+    public function getDueOnAttribute($value)
+    {
+        return Carbon::createFromDate($value)->format('M d');
     }
 }

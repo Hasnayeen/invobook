@@ -53,7 +53,7 @@ Route::impersonate();
 Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('auth');
 
 /**********************************
-        Group (Project/Team/Office)
+    Group (Project/Team/Office)
  **********************************/
 
 Route::group(['middleware' => 'auth'], function () {
@@ -75,7 +75,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 /**********************************
-        Member
+    Member
  **********************************/
 
 Route::group(['middleware' => 'auth'], function () {
@@ -87,7 +87,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 /**********************************
-        Event
+    Event
  **********************************/
 
 Route::group(['middleware' => 'auth'], function () {
@@ -99,7 +99,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 /**********************************
-        File
+    File
  **********************************/
 
 Route::get('files', [FileController::class, 'index']);
@@ -113,7 +113,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 /**********************************
-        Message
+    Message
  **********************************/
 
 Route::get('messages', [MessageController::class, 'index']);
@@ -127,7 +127,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 /**********************************
-        Comment
+    Comment
  **********************************/
 
 Route::get('/comments', [CommentController::class, 'index']);
@@ -237,7 +237,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 /**********************************
-        Admin
+    Admin
  **********************************/
 
 Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function () {

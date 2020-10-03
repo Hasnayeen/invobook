@@ -24,7 +24,7 @@ class PluginInstallCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Install a plugin';
 
     /**
      * The filesystem instance.
@@ -115,6 +115,7 @@ class PluginInstallCommand extends Command
             $process = new Process([
                 'composer',
                 'update',
+                '--ansi',
             ], 'plugins');
             $this->runProcessCommand($process);
 
@@ -124,6 +125,7 @@ class PluginInstallCommand extends Command
             'composer',
             'require',
             $this->argument('name'),
+            '--ansi',
         ], 'plugins');
         $this->runProcessCommand($process);
     }
@@ -159,6 +161,7 @@ class PluginInstallCommand extends Command
         $process = new Process([
             'composer',
             'dump',
+            '--ansi',
         ]);
         $process->run();
     }

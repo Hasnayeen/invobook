@@ -52,14 +52,31 @@ class PluginUninstallCommand extends Command
         $this->dumpAutoloadFile();
         $composerJson = $this->getComposerJson();
         if ($composerJson) {
+            $this->removePackageFromCacheFile();
+            $this->removeCacheServicesFile();
             $this->removePluginFromComposerFile($composerJson);
             $this->runComposerCommand();
         }
     }
 
+    private function removePackageFromCacheFile()
+    {
+        $packages = include base_path('bootstrap/cache/packages.php');
+        unset($packages[$this->argument('name')]);
+        $this->files->put(base_path('bootstrap/cache/packages.php'), '<?php return ' . var_export($packages, true) . ';');
+    }
+
+    private function removeCacheServicesFile()
+    {
+        $this->files->delete(base_path('bootstrap/cache/services.php'));
+    }
+
     private function removePluginFromComposerFile(array &$composerJson): void
     {
         unset($composerJson['require'][$this->argument('name')]);
+        if (empty($composerJson['require'])) {
+            unset($composerJson['require']);
+        }
         $this->files->put(base_path('plugins/composer.json'), json_encode($composerJson, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
     }
 
@@ -68,6 +85,7 @@ class PluginUninstallCommand extends Command
         $process = new Process([
             'composer',
             'update',
+            '--ansi',
         ], 'plugins');
         $this->runProcessCommand($process);
     }
@@ -103,6 +121,7 @@ class PluginUninstallCommand extends Command
         $process = new Process([
             'composer',
             'dump',
+            '--ansi',
         ]);
         $process->run();
     }

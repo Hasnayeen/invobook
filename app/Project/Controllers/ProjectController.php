@@ -31,7 +31,7 @@ class ProjectController extends Controller
             return redirect('login');
         } elseif (auth()->user()) {
             $this->authorize('view', $project);
-            auth()->user()->setAppends(['unread_direct_messages']);
+            user()->setAppends(['unread_direct_messages']);
         }
         $project->load('members:user_id,username,avatar,name', 'settings', 'tags:tag_id,label');
 
@@ -43,7 +43,7 @@ class ProjectController extends Controller
             ]);
         }
 
-        return $this->formatRedirect();
+        return view('projects.single', ['project' => $project]);
     }
 
     public function store(StoreProjectRequest $request, ProjectRepository $repository)
