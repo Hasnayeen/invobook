@@ -57,8 +57,6 @@ services:
     build:
       context: .
       dockerfile: docker/websocket.Dockerfile
-    ports:
-      - "6001:6001"
     volumes:
       - ./:/var/www
     working_dir: /var/www

@@ -13,5 +13,5 @@
     log {
         output file /var/log/access.log
     }
-    tls internal
+    tls {$.APP_CERT_EMAIL}
 }
