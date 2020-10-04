@@ -8,7 +8,7 @@ services:
       - 443:443
     volumes:
       - ./:/var/www
-      - ./docker/dev/Caddyfile:/etc/caddy/Caddyfile
+      - ./docker/prod/Caddyfile:/etc/caddy/Caddyfile
       - caddy-data:/data
     environment:
       - "APP_URL=${APP_URL}"
