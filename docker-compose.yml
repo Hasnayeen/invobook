@@ -12,6 +12,7 @@ services:
       - caddy-data:/data
     environment:
       - "APP_URL=${APP_URL}"
+      - "APP_CERT_EMAIL=${APP_CERT_EMAIL}"
     depends_on:
       - php
     restart: unless-stopped
