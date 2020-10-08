@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap" rel="stylesheet">
     <link href="{{ mix('css/main.css') }}" rel="stylesheet">
 
-    <script src="{{ asset('js/alpine.min.js') }}" defer></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.0/dist/alpine.min.js" defer></script>
 </head>
 <body class="bg-indigo-1100 text-gray-200">
     <div class="container mx-4 md:mx-auto md:shadow-lg rounded-md overflow-hidden md:mt-32 flex md:flex-row flex-col md:max-w-2xl lg:max-w-4xl justify-between">
