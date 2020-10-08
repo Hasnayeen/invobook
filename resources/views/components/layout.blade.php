@@ -50,7 +50,7 @@
     @livewireStyles
 
     @livewireScripts
-    <script src="{{ asset('js/alpine.min.js') }}" defer></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.0/dist/alpine.min.js" defer></script>
 </head>
 <body class="bg-gray-100 text-gray-200">
 
