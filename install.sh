@@ -2,14 +2,16 @@
 
 red=`tput setaf 1`
 green=`tput setaf 2`
+pink=`tput setaf 5`
 blue=`tput setaf 4`
 reset=`tput sgr0`
 
-echo -n 'Install for production environment? (Y/n):'
+echo -n "${blue}Install for production environment? (Y/n):${reset}"
 
 read -n 1 ans
 
 echo ''
+echo "${pink}"
 
 if [[ ( "$ans" == "Y" ) || ( "$ans" == "y" ) ]]
 then
@@ -20,7 +22,15 @@ else
   echo 'Installing for local environment'
 fi
 
-echo ""
+echo "${reset}"
+echo ''
+
+if [[ ! -e docker-compose.yml && ! $local == "local" ]]
+then
+  echo "${pink}Creating docker-compose.yml file...${reset}"
+  cp docker-compose.yml.example docker-compose.yml
+  echo "${green}Created docker-compose.yml file${reset}"
+fi
 
 # Check for docker installation
 which docker && docker --version | grep "Docker version"
@@ -75,8 +85,6 @@ $COMPOSE run --rm -w /var/www php php artisan key:generate
 $COMPOSE run --rm -w /var/www php chmod -R 777 /var/www/storage
 
 $COMPOSE run --rm -w /var/www php php artisan migrate:fresh --seed --force
-
-$COMPOSE run --rm -w /var/www php php artisan passport:install
 
 $COMPOSE run --rm -w /var/www php php artisan route:cache
 

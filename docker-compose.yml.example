@@ -1,0 +1,71 @@
+version: '3'
+
+services:
+  caddy:
+    image: caddy:2.1.1
+    ports:
+      - "${APP_PORT}:80"
+      - 443:443
+    volumes:
+      - ./:/var/www
+      - ./docker/prod/Caddyfile:/etc/caddy/Caddyfile
+      - caddy-data:/data
+    environment:
+      - "APP_URL=${APP_URL}"
+    depends_on:
+      - php
+    restart: unless-stopped
+
+  php:
+    build:
+      context: .
+      dockerfile: docker/prod/php.Dockerfile
+    volumes:
+      - ./:/var/www
+    depends_on:
+      - db
+
+  db:
+    image: mariadb
+    hostname: db
+    environment:
+      - "MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}"
+      - "MYSQL_DATABASE=${DB_DATABASE}"
+      - "MYSQL_USER=${DB_USERNAME}"
+      - "MYSQL_PASSWORD=${DB_PASSWORD}"
+    volumes:
+      - data-volume:/var/lib/mysql
+    restart: always
+
+  redis:
+    image: redis
+    hostname: redis
+
+  worker:
+    build:
+      context: .
+      dockerfile: docker/worker.Dockerfile
+    volumes:
+      - ./:/var/www
+    working_dir: /var/www
+    command: bash -c "php artisan queue:work redis --sleep=1 --tries=1"
+    depends_on:
+      - php
+    restart: always
+
+  websocket:
+    build:
+      context: .
+      dockerfile: docker/websocket.Dockerfile
+    volumes:
+      - ./:/var/www
+    working_dir: /var/www
+    command: bash -c "php artisan websockets:serve"
+    depends_on:
+      - php
+
+volumes:
+  data-volume:
+    driver: local
+  caddy-data:
+    driver: local

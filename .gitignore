@@ -28,3 +28,4 @@ public/plugins
 *.apollo
 .rnd
 *.sql
+docker-compose.yml
