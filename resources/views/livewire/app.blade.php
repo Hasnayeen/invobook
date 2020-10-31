@@ -7,7 +7,7 @@
                 Welcome {{ user()->name }}!
             </div>
             <section>
-
+                {{-- {{ $slot }} --}}
             </section>
         </main>
     </div>

@@ -16,6 +16,11 @@ return [
 
     'class_namespace' => 'App\\Base\\Http\\Livewire',
 
+    'class_namespaces' => [
+        'App\\Base\\Http\\Livewire',
+        'App\\Project\\Livewire',
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | View Path

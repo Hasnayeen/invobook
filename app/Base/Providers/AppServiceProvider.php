@@ -3,8 +3,12 @@
 namespace App\Base\Providers;
 
 use Illuminate\Routing\UrlGenerator;
+use Illuminate\Filesystem\Filesystem;
+use Livewire\Commands\ComponentParser;
+use Livewire\LivewireComponentsFinder;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use App\Base\Utilities\ExtendedLivewireComponentsFinder;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -38,6 +42,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->singleton(LivewireComponentsFinder::class, function () {
+            return new ExtendedLivewireComponentsFinder(
+                new Filesystem,
+                config('livewire.manifest_path') ?: app()->bootstrapPath('cache/livewire-components.php'),
+                collect(config('livewire.class_namespaces'))->map(function ($item) {
+                    return ComponentParser::generatePathFromNamespace($item);
+                })
+            );
+        });
+
         $this->app->bind(\Illuminate\Notifications\Channels\DatabaseChannel::class, function ($app) {
             return new \App\Base\Utilities\DatabaseNotificationChannel();
         });
