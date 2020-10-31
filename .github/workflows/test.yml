@@ -71,13 +71,6 @@ jobs:
         env:
           DB_PORT: ${{ job.services.db.ports['3306'] }}
 
-      - name: Run Passport
-        run: |
-          php artisan passport:install
-          php artisan passport:keys
-        env:
-          DB_PORT: ${{ job.services.db.ports['3306'] }}
-
       - name: Test with phpunit
         run: vendor/bin/phpunit --coverage-clover=clover.xml
         env:
