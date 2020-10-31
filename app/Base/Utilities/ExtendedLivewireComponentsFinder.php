@@ -37,7 +37,7 @@ class ExtendedLivewireComponentsFinder extends LivewireComponentsFinder
 
     protected function getName($class)
     {
-        $classNamespace = collect(config('livewire.class_namespaces'))->filter(fn($x) => strpos($class, $x) !== false)->first();
+        $classNamespace = collect(config('livewire.class_namespaces'))->filter(fn ($x) => strpos($class, $x) !== false)->first();
         $namespace = collect(explode('.', str_replace(['/', '\\'], '.', $classNamespace)))
             ->map([Str::class, 'kebab'])
             ->implode('.');
@@ -56,7 +56,7 @@ class ExtendedLivewireComponentsFinder extends LivewireComponentsFinder
     public function getClassNames()
     {
         return $this->path
-            ->map(function($item) {
+            ->map(function ($item) {
                 return $this->files->allFiles($item);
             })
             ->flatten()

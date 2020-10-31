@@ -46,7 +46,7 @@ class AppServiceProvider extends ServiceProvider
             return new ExtendedLivewireComponentsFinder(
                 new Filesystem,
                 config('livewire.manifest_path') ?: app()->bootstrapPath('cache/livewire-components.php'),
-                collect(config('livewire.class_namespaces'))->map(function($item) {
+                collect(config('livewire.class_namespaces'))->map(function ($item) {
                     return ComponentParser::generatePathFromNamespace($item);
                 })
             );
