@@ -12,7 +12,6 @@ class Home extends Component
     public function mount(TaskRepository $repository)
     {
         $this->currentWork = $repository->userCurrentlyWorkingOn(auth()->user()->id);
-        // dd($this->currentWork);
     }
 
     public function render()
