@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Base\Http\Livewire;
+namespace App\Project\Livewire;
 
 use Livewire\Component;
 use App\Project\Models\Project as ProjectModel;
