@@ -2,12 +2,13 @@
 
 namespace App\Project\Controllers;
 
+use App\Project\Livewire\Project;
 use Illuminate\Support\Facades\Route;
 
 // Web
 
 Route::middleware('web')->group(function () {
-    Route::get('projects/{project}', [ProjectController::class, 'show']);
+    Route::get('projects/{project}', Project::class);
 
     Route::middleware(['auth'])->group(function () {
         Route::get('projects', [ProjectController::class, 'index']);

@@ -68,6 +68,7 @@
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi",
             "@php artisan plugin:discover --ansi",
+            "@php artisan livewire:discover --ansi",
             "@php artisan vendor:publish --force --tag=livewire:assets --ansi"
         ],
         "post-install": [

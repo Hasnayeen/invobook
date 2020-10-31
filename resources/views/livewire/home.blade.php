@@ -1,4 +1,6 @@
 <div>
+    <x-slot name="title">Home</x-slot>
+
     <livewire:header/>
 
     <div class="w-screen h-screen flex flex-col">
@@ -7,8 +9,9 @@
                 Welcome {{ user()->name }}!
             </div>
             <section>
-                {{-- {{ $slot }} --}}
+                <livewire:task-board :tasks="$currentWork" />
             </section>
         </main>
     </div>
+
 </div>
