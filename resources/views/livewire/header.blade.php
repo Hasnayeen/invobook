@@ -3,10 +3,10 @@
         <div class="w-64 h-full flex flex-col">
 
             {{-- Logo --}}
-            <div class="flex items-center space-x-2 p-4">
+            <a href="/" class="flex items-center space-x-2 p-4">
                 <x-logo size="w-10 h-10"/>
                 <span class="text-2xl">Goodwork</span>
-            </div>
+            </a>
 
             {{-- Notification/Message --}}
             <div class="pt-4 flex-grow flex flex-col items-center justify-between">
