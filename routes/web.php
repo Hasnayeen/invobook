@@ -2,6 +2,7 @@
 
 namespace App\Base\Http\Controllers;
 
+use App\Base\Http\Livewire\Home;
 use Illuminate\Support\Facades\Route;
 
 /**********************************
@@ -50,7 +51,7 @@ Route::post('register/{token}', [Auth\RegisterController::class, 'confirmNewRegi
 
 Route::impersonate();
 
-Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('auth');
+Route::get('/', Home::class)->name('home')->middleware('auth');
 
 /**********************************
     Group (Project/Team/Office)

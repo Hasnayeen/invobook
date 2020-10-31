@@ -1,4 +1,6 @@
 <div>
+    <x-slot name="title">{{ $project->name }}</x-slot>
+
     <livewire:header/>
 
     <div class="w-screen h-screen flex flex-col">
