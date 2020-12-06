@@ -21,7 +21,7 @@
         "@fortawesome/vue-fontawesome": "^2.0.0",
         "@tailwindcss/custom-forms": "^0.2.1",
         "axios": "^0.21.0",
-        "cross-env": "^7.0.2",
+        "cross-env": "^7.0.3",
         "fuzzysort": "^1.1.4",
         "glob-all": "^3.2.1",
         "laravel-echo": "^1.8.1",
