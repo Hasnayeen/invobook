@@ -24,8 +24,6 @@ Self hosted project management and collaboration tool inspired by basecamp.
 <p align="center">
 <b><a href="#about-goodwork">Overview</a></b>
 |
-<b><a href="#demo">Demo</a></b>
-|
 <b><a href="#installation">Installation</a></b>
 |
 <b><a href="#screenshots-top">Screenshots</a></b>
@@ -54,14 +52,6 @@ Goodwork brings you all the components required for your project to run smoothly
 > Goodwork is available in 31 different languages! [list](https://github.com/iluminar/goodwork/wiki/Localization)
 
 [Overview](https://github.com/iluminar/goodwork/wiki/Overview)
-
-## Demo
-
-You can test a live instance of Goodwork that we use (as a guest user) using the credentials below. This user has limited permissions so you'll only see a handful of the features. You can access the demo site at the following URL: https://demo.goodwork.cloud
-
-`email: guest@example.com`
-
-`password: guestpass`
 
 ## Installation
 
