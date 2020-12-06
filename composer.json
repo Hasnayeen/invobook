@@ -16,7 +16,7 @@
         "ext-gd": "*",
         "beyondcode/laravel-websockets": "^1.8",
         "blade-ui-kit/blade-heroicons": "^0.2.2",
-        "blade-ui-kit/blade-ui-kit": "^0.1.1",
+        "blade-ui-kit/blade-ui-kit": "^0.2.0",
         "doctrine/dbal": "^2.8",
         "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "^7.0.1",
