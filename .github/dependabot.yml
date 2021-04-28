@@ -1,0 +1,102 @@
+version: 2
+updates:
+- package-ecosystem: composer
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "23:00"
+  open-pull-requests-limit: 10
+  target-branch: dev
+  ignore:
+  - dependency-name: laravel/telescope
+    versions:
+    - 4.4.1
+    - 4.4.2
+    - 4.4.3
+    - 4.4.4
+    - 4.4.5
+    - 4.4.6
+    - 4.4.8
+  - dependency-name: livewire/livewire
+    versions:
+    - 2.3.10
+    - 2.3.14
+    - 2.3.15
+    - 2.3.16
+    - 2.3.17
+    - 2.3.18
+    - 2.3.8
+    - 2.4.0
+    - 2.4.1
+    - 2.4.2
+  - dependency-name: filp/whoops
+    versions:
+    - 2.10.0
+    - 2.11.0
+    - 2.12.0
+    - 2.9.2
+  - dependency-name: phpunit/phpunit
+    versions:
+    - 9.5.1
+    - 9.5.2
+    - 9.5.3
+  - dependency-name: facade/ignition
+    versions:
+    - 2.5.10
+    - 2.5.11
+    - 2.5.12
+    - 2.5.9
+  - dependency-name: laravel/framework
+    versions:
+    - 8.22.1
+  - dependency-name: laravel/ui
+    versions:
+    - 3.2.0
+  - dependency-name: doctrine/dbal
+    versions:
+    - 3.0.0
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "23:00"
+  open-pull-requests-limit: 10
+  target-branch: dev
+  ignore:
+  - dependency-name: webpack
+    versions:
+    - 5.18.0
+    - 5.19.0
+    - 5.20.0
+    - 5.20.1
+    - 5.20.2
+    - 5.21.0
+    - 5.21.2
+    - 5.22.0
+    - 5.23.0
+    - 5.24.0
+    - 5.24.1
+    - 5.24.2
+    - 5.24.3
+    - 5.24.4
+    - 5.25.0
+    - 5.26.0
+    - 5.26.2
+    - 5.26.3
+    - 5.27.0
+    - 5.27.2
+    - 5.28.0
+    - 5.30.0
+    - 5.31.0
+    - 5.31.2
+    - 5.32.0
+    - 5.33.2
+    - 5.35.0
+    - 5.35.1
+  - dependency-name: y18n
+    versions:
+    - 4.0.1
+  - dependency-name: purgecss-webpack-plugin
+    versions:
+    - 4.0.0
+    - 4.0.2
