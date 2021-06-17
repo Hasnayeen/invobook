@@ -24,7 +24,7 @@
         "cross-env": "^7.0.2",
         "fuzzysort": "^1.1.4",
         "glob-all": "^3.2.1",
-        "laravel-echo": "^1.8.1",
+        "laravel-echo": "^1.11.0",
         "laravel-mix": "^5.0.6",
         "linkifyjs": "^2.1.9",
         "luxon": "^1.25.0",
