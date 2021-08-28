@@ -1,3 +1,7 @@
+# __Notice:__ Project is currently paused, do not use
+
+
+
 ## Sponsored By: <a href="https://zukoni.com"><img src="https://i.imgur.com/kLYHhBM.png" alt="zukoni ui library" style="height: 240;"></a>
 
 <p align="center">
@@ -22,7 +26,6 @@ Self hosted project management and collaboration tool inspired by basecamp.
 
 <hr>
 
-# __Notice:__ Project under some major change, do not use until stable release
 
 > Tech Stack: Goodwork is build using TALL stack ([Laravel](https://laravel.com/), [Livewire](https://laravel-livewire.com/), [Alpine](https://github.com/alpinejs/alpine), [TailwindCSS](https://tailwindcss.com/))
 
