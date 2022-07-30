@@ -2835,16 +2835,16 @@
         },
         {
             "name": "pda/pheanstalk",
-            "version": "v4.0.3",
+            "version": "v4.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pheanstalk/pheanstalk.git",
-                "reference": "6165573aad525d39b3ac8ae916214cb483a61263"
+                "reference": "1a43eb97a53144a2e692bce2ea2be721cc9913a4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pheanstalk/pheanstalk/zipball/6165573aad525d39b3ac8ae916214cb483a61263",
-                "reference": "6165573aad525d39b3ac8ae916214cb483a61263",
+                "url": "https://api.github.com/repos/pheanstalk/pheanstalk/zipball/1a43eb97a53144a2e692bce2ea2be721cc9913a4",
+                "reference": "1a43eb97a53144a2e692bce2ea2be721cc9913a4",
                 "shasum": ""
             },
             "require": {
@@ -2884,9 +2884,9 @@
             ],
             "support": {
                 "issues": "https://github.com/pheanstalk/pheanstalk/issues",
-                "source": "https://github.com/pheanstalk/pheanstalk/tree/v4.0.3"
+                "source": "https://github.com/pheanstalk/pheanstalk/tree/v4.0.4"
             },
-            "time": "2020-09-22T07:17:48+00:00"
+            "time": "2021-11-19T15:00:20+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -10052,5 +10052,5 @@
         "ext-gd": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.3.0"
 }
