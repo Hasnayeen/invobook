@@ -29,7 +29,7 @@
         "laravel/ui": "^3.0",
         "livewire/livewire": "^2.2",
         "pda/pheanstalk": "^4.0",
-        "predis/predis": "^1.1",
+        "predis/predis": "^2.0",
         "pusher/pusher-php-server": "~3.0"
     },
     "require-dev": {
