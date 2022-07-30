@@ -3281,10 +3281,10 @@ function-bind@^1.1.1:
   resolved "https://registry.yarnpkg.com/function-bind/-/function-bind-1.1.1.tgz#a56899d3ea3c9bab874bb9773b7c5ede92f4895d"
   integrity sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A==
 
-fuzzysort@^1.1.4:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/fuzzysort/-/fuzzysort-1.1.4.tgz#a0510206ed44532cbb52cf797bf5a3cb12acd4ba"
-  integrity sha512-JzK/lHjVZ6joAg3OnCjylwYXYVjRiwTY6Yb25LvfpJHK8bjisfnZJ5bY8aVWwTwCXgxPNgLAtmHL+Hs5q1ddLQ==
+fuzzysort@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/fuzzysort/-/fuzzysort-2.0.1.tgz#e1bf6abbcfeefd1191900a5f56527aa0508d6934"
+  integrity sha512-SlgbPAq0eQ6JQ1h3l4MNeGH/t9DHKH8GGM0RD/6RhmJrNnSoWt3oIVaiQm9g9BPB+wAhRMeMqlUTbhbd7+Ufcg==
 
 gensync@^1.0.0-beta.1:
   version "1.0.0-beta.1"

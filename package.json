@@ -22,7 +22,7 @@
         "@tailwindcss/custom-forms": "^0.2.1",
         "axios": "^0.21.0",
         "cross-env": "^7.0.2",
-        "fuzzysort": "^1.1.4",
+        "fuzzysort": "^2.0.1",
         "glob-all": "^3.2.1",
         "laravel-echo": "^1.8.1",
         "laravel-mix": "^5.0.6",
