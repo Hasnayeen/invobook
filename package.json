@@ -26,7 +26,7 @@
         "glob-all": "^3.2.1",
         "laravel-echo": "^1.8.1",
         "laravel-mix": "^5.0.6",
-        "linkifyjs": "^2.1.9",
+        "linkifyjs": "^3.0.5",
         "luxon": "^1.25.0",
         "purgecss-webpack-plugin": "^3.0.0",
         "pusher-js": "^7.0.0",
