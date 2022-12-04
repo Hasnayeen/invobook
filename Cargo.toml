@@ -1,13 +1,10 @@
-[package]
-name = "goodwork"
-version = "0.1.0"
+[workspace]
+
+members = [
+    "server"
+]
+
+[workspace.package]
+authors = ["Nehal Hasnayeen"]
+version = "0.0.0"
 edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
-[dependencies]
-axum = "0.6.1"
-tokio = { version = "1.22.0", features = ["macros", "rt-multi-thread"] }
-
-[dev-dependencies]
-axum-test-helper = "0.1.1"

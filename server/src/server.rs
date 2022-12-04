@@ -1,10 +1,9 @@
 extern crate axum;
 
-mod routes;
+pub mod routes;
 mod handlers;
 
-#[tokio::main]
-async fn main() {
+pub async fn start()  {
     let app = routes::app().await;
 
     axum::Server::bind(&"0.0.0.0:4000".parse().unwrap())
