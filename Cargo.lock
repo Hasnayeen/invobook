@@ -926,6 +926,7 @@ dependencies = [
  "axum-test-helper",
  "pretty_assertions",
  "tokio",
+ "tower-http",
  "views",
 ]
 
@@ -1076,7 +1077,13 @@ dependencies = [
  "http",
  "http-body",
  "http-range-header",
+ "httpdate",
+ "mime",
+ "mime_guess",
+ "percent-encoding",
  "pin-project-lite",
+ "tokio",
+ "tokio-util",
  "tower",
  "tower-layer",
  "tower-service",
