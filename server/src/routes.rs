@@ -10,7 +10,7 @@ pub async fn app() -> Router {
 }
 
 fn serve_public_assets() -> MethodRouter {
-    get_service(ServeDir::new("../views/public")).handle_error(|error| async move {
+    get_service(ServeDir::new("./public")).handle_error(|error| async move {
         (
             StatusCode::INTERNAL_SERVER_ERROR,
             format!("Internal Error {}", error),

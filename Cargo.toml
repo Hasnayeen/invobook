@@ -1,6 +1,7 @@
 [workspace]
 resolver = "2"
 members = [
+    "data",
     "server",
     "views",
 ]
@@ -9,3 +10,6 @@ members = [
 authors = ["Nehal Hasnayeen"]
 version = "0.0.0"
 edition = "2021"
+
+[workspace.dependencies]
+chrono = "0.4.23"
