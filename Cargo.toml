@@ -4,6 +4,7 @@ members = [
     "data",
     "server",
     "views",
+    "config",
 ]
 
 [workspace.package]
@@ -13,3 +14,5 @@ edition = "2021"
 
 [workspace.dependencies]
 chrono = "0.4.23"
+serde = { version = "1.0.130", features = ["derive"] }
+lazy_static = "1.4.0"

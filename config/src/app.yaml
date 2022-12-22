@@ -1,0 +1,4 @@
+name: "Larks"
+version: "0.1.0"
+url: "larks.com"
+port: 8080
