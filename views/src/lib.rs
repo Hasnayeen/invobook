@@ -1,19 +1,18 @@
 use askama::Template;
-use data::models::Tag;
+use data::models::Post;
 
 #[derive(Template)]
 #[template(path = "home.html")]
-struct HomeTemplate<'a> {
-    name: &'a str,
-    tag: Tag,
+struct HomeTemplate {
+    post: Post,
 }
 
 #[derive(Template)]
 #[template(path = "404.html")]
 struct NotFoundTemplate {}
 
-pub fn home(tag: Tag) -> String {
-    HomeTemplate { name: "World", tag }.render().unwrap()
+pub fn home(post: Post) -> String {
+    HomeTemplate { post }.render().unwrap()
 }
 
 pub fn not_found() -> String {

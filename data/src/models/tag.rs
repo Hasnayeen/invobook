@@ -1,6 +1,6 @@
 use chrono::{DateTime, Utc};
 
-struct Tag {
+pub struct Tag {
     id: i32,
     name: String,
     slug: String,

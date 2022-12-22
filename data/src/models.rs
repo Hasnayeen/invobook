@@ -1,9 +1,5 @@
-use chrono::{DateTime, Utc};
+mod post;
+mod tag;
+mod user;
 
-pub struct Tag {
-    pub id: i32,
-    pub name: String,
-    pub slug: String,
-    pub created_at: DateTime<Utc>,
-    pub updated_at: DateTime<Utc>,
-}
+pub use self::{post::*, tag::*, user::*};

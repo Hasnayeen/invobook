@@ -1,0 +1,12 @@
+{% macro post(post) %}
+
+<div class="flex p-4 rounded-lg shadow-md bg-white">
+    <img src="https://avatars.githubusercontent.com/u/9433499?v=4" alt="Profile image" class="w-12 h-12 rounded-full object-cover">
+    <div class="ml-4">
+        <h3 class="text-lg font-bold leading-tight text-gray-900">{{ post.owner.name }}</h3>
+        <p class="text-sm font-light leading-tight text-gray-700">{{ post.body }}</p>
+    </div>
+</div>
+
+
+{% endmacro %}

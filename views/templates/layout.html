@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="public/style.css">
 </head>
 <body>
-    {% block content %}{% endblock %}
+    <nav class="bg-white fixed w-full z-10 top-0 shadow">
+        <!-- Navigation content goes here -->
+    </nav>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
 </body>
 </html>

@@ -1,7 +1,21 @@
 {% extends "layout.html" %}
+
+{%- import "components/post.html" as scope -%}
+
 {% block content %}
-<h1 class="text-indigo-500">Home {{ name }}</h1>
-<div>
-    <span>{{ tag.name }}</span>
+<div class="main-content flex items-center justify-center h-full">
+    <div class="w-full max-w-lg py-4 px-6">
+        <ul class="p-4 space-y-4">
+            <li>
+                {% call scope::post(post) %}
+            </li>
+            <li>
+                {% call scope::post(post) %}
+            </li>
+            <li>
+                {% call scope::post(post) %}
+            </li>
+        </ul>
+    </div>
 </div>
 {% endblock %}
