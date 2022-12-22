@@ -8,3 +8,5 @@ edition.workspace = true
 
 [dependencies]
 chrono.workspace = true
+rand = { version = "0.8.5", features = ["std", "std_rng"] }
+rust-argon2 = "1.0.0"

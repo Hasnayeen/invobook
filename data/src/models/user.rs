@@ -1,21 +1,27 @@
+use argon2::Config;
 use chrono::{DateTime, Utc};
+use rand::{Rng, rngs::ThreadRng};
 
 pub struct User {
     id: i32,
     pub name: String,
-    email: String,
+    pub email: String,
     password: String,
-    created_at: DateTime<Utc>,
-    updated_at: DateTime<Utc>,
+    pub created_at: DateTime<Utc>,
+    pub updated_at: DateTime<Utc>,
 }
 
 impl User {
     pub fn new(id: i32, name: String, email: String, password: String) -> Self {
+        let mut rng = ThreadRng::default();
+        let salt: [u8; 32] = rng.gen();
+        let config = Config::default();
+        let hash = argon2::hash_encoded(password.as_bytes(), &salt, &config).unwrap();
         Self {
             id,
             name,
             email,
-            password,
+            password: hash,
             created_at: Utc::now(),
             updated_at: Utc::now(),
         }
