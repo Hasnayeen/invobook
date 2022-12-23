@@ -1,0 +1,6 @@
+namespace: "larks"
+database: "larks"
+username: "username"
+password: "password"
+url: "localhost"
+port: 8000

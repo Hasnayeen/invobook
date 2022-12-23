@@ -1,9 +1,11 @@
 use argon2::Config;
 use chrono::{DateTime, Utc};
 use rand::{Rng, rngs::ThreadRng};
+use serde::{Deserialize, Serialize};
 
+#[derive(Debug, Serialize, Deserialize)]
 pub struct User {
-    id: i32,
+    id: String,
     pub name: String,
     pub email: String,
     password: String,
@@ -12,7 +14,7 @@ pub struct User {
 }
 
 impl User {
-    pub fn new(id: i32, name: String, email: String, password: String) -> Self {
+    pub fn new(id: String, name: String, email: String, password: String) -> Self {
         let mut rng = ThreadRng::default();
         let salt: [u8; 32] = rng.gen();
         let config = Config::default();

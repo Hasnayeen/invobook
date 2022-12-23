@@ -1,27 +1,36 @@
 mod app;
+mod db;
 
 use std::{collections::HashMap, fs};
 use lazy_static::lazy_static;
 use app::App;
+use db::Db;
 
 pub struct Config {
     pub app: App,
+    pub db: Db,
 }
 
 lazy_static! {
-    pub static ref CONFIG: Config = Config { app: App::new() };
+    pub static ref CONFIG: Config = Config { 
+        app: App::new(),
+        db: Db::new(),
+    };
 }
 
-// pub fn get() -> &'static Config {
-//     &*CONFIG
-// }
+fn get_env(prefix: &str) -> HashMap<String, String> {
+    let env: Result<HashMap<String, String>, dotenvy::Error> = dotenvy::from_filename_iter(".env").unwrap().collect();
 
-fn get_env() -> Option<HashMap<String, String>> {
-    let env = dotenvy::from_filename_iter(".env").unwrap().collect();
     if let Ok(map) = env {
-        Some(map)
+        map.into_iter()
+            .filter(|(key, _)| key.starts_with(prefix))
+            .filter(|(_, value)| !value.is_empty())
+            .map(|(key, value)| {
+                (key.replace(prefix, "").to_lowercase(), value)
+            })
+            .collect()
     } else {
-        None
+        HashMap::new()
     }
 }
 

@@ -7,6 +7,10 @@ edition.workspace = true
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+config = { path = "../config" }
 chrono.workspace = true
 rand = { version = "0.8.5", features = ["std", "std_rng"] }
 rust-argon2 = "1.0.0"
+anyhow.workspace = true
+surrealdb-rs = { git = "https://github.com/surrealdb/surrealdb.rs", version = "0.1.0" }
+serde.workspace = true

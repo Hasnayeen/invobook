@@ -16,13 +16,7 @@ impl App {
         let contents = read_config_file("./config/src/app.yaml");
         let mut app: HashMap<String, String> = serde_yaml::from_str(&contents).unwrap();
  
-        let env: HashMap<String, String> = get_env().unwrap()
-            .into_iter()
-            .filter(|(key, _)| key.starts_with("APP_"))
-            .map(|(key, value)| {
-                (key.replace("APP_", "").to_lowercase(), value)
-            })
-            .collect();
+        let env: HashMap<String, String> = get_env("APP_");
         app.extend(env);
         let app_string = serde_yaml::to_string(&app);
         serde_yaml::from_str(&app_string.unwrap()).unwrap()
