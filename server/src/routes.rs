@@ -1,5 +1,9 @@
-use axum::{Router, routing::{get, get_service, MethodRouter}, http::StatusCode};
 use crate::handlers::{home, not_found};
+use axum::{
+    http::StatusCode,
+    routing::{get, get_service, MethodRouter},
+    Router,
+};
 use tower_http::services::ServeDir;
 
 pub async fn app() -> Router {

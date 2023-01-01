@@ -9,6 +9,7 @@ edition.workspace = true
 [dependencies]
 config = { path = "../config" }
 chrono.workspace = true
+tracing.workspace = true
 rand = { version = "0.8.5", features = ["std", "std_rng"] }
 rust-argon2 = "1.0.0"
 anyhow.workspace = true

@@ -17,3 +17,4 @@ chrono = { version = "0.4.23", default-features = false, features = ["clock"] }
 serde = { version = "1.0.130", features = ["derive"] }
 lazy_static = "1.4.0"
 anyhow = "1.0.68"
+tracing = "0.1.37"

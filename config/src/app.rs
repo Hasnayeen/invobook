@@ -15,7 +15,7 @@ impl App {
     pub fn new() -> App {
         let contents = read_config_file("./config/src/app.yaml");
         let mut app: HashMap<String, String> = serde_yaml::from_str(&contents).unwrap();
- 
+
         let env: HashMap<String, String> = get_env("APP_");
         app.extend(env);
         let app_string = serde_yaml::to_string(&app);

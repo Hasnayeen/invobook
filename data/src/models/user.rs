@@ -1,6 +1,6 @@
 use argon2::Config;
 use chrono::{DateTime, Utc};
-use rand::{Rng, rngs::ThreadRng};
+use rand::{rngs::ThreadRng, Rng};
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize)]

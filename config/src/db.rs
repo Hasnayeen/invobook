@@ -17,7 +17,7 @@ impl Db {
     pub fn new() -> Db {
         let contents = read_config_file("./config/src/db.yaml");
         let mut db: HashMap<String, String> = serde_yaml::from_str(&contents).unwrap();
- 
+
         let env: HashMap<String, String> = get_env("DB_");
         db.extend(env);
         let db_string = serde_yaml::to_string(&db);
