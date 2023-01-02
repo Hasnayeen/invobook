@@ -13,12 +13,24 @@ pub fn start() -> WorkerGuard {
         .pretty()
         .with_thread_names(true)
         .with_thread_ids(true)
-        .with_filter(filter::LevelFilter::TRACE);
+        .with_filter(match CONFIG.logging["console"].level {
+            config::logging::Level::Debug => filter::LevelFilter::DEBUG,
+            config::logging::Level::Info => filter::LevelFilter::INFO,
+            config::logging::Level::Warn => filter::LevelFilter::WARN,
+            config::logging::Level::Error => filter::LevelFilter::ERROR,
+            config::logging::Level::Trace => filter::LevelFilter::TRACE,
+        });
     let layer_file = tracing_subscriber::fmt::layer()
         .pretty()
         .json()
         .with_writer(non_blocking)
-        .with_filter(filter::LevelFilter::TRACE);
+        .with_filter(match CONFIG.logging["file"].level {
+            config::logging::Level::Debug => filter::LevelFilter::DEBUG,
+            config::logging::Level::Info => filter::LevelFilter::INFO,
+            config::logging::Level::Warn => filter::LevelFilter::WARN,
+            config::logging::Level::Error => filter::LevelFilter::ERROR,
+            config::logging::Level::Trace => filter::LevelFilter::TRACE,
+        });
     let subscriber = Registry::default().with(stdout_log).with(layer_file);
     subscriber::set_global_default(subscriber).expect("Failed to set global default");
     info!("Logging started");

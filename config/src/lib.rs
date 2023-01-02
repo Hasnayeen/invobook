@@ -1,12 +1,12 @@
 mod app;
 mod db;
-mod logging;
+pub mod logging;
 
 use app::App;
 use db::Db;
 use lazy_static::lazy_static;
 use logging::Logging;
-use std::{collections::HashMap, fs};
+use std::collections::HashMap;
 
 pub struct Config {
     pub app: App,
@@ -43,23 +43,4 @@ lazy_static! {
         db: Db::new(),
         logging: Logging::new(),
     };
-}
-
-fn get_env(prefix: &str) -> HashMap<String, String> {
-    let env: Result<HashMap<String, String>, dotenvy::Error> =
-        dotenvy::from_filename_iter(".env").unwrap().collect();
-
-    if let Ok(map) = env {
-        map.into_iter()
-            .filter(|(key, _)| key.starts_with(prefix))
-            .filter(|(_, value)| !value.is_empty())
-            .map(|(key, value)| (key.replace(prefix, "").to_lowercase(), value))
-            .collect()
-    } else {
-        HashMap::new()
-    }
-}
-
-fn read_config_file(name: &str) -> String {
-    fs::read_to_string(name).unwrap()
 }

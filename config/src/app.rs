@@ -1,7 +1,8 @@
 use std::{collections::HashMap, ops::Index};
 
-use crate::{get_env, read_config_file};
+use crate::Env;
 use serde::{Deserialize, Serialize};
+use tracing::error;
 
 #[derive(Deserialize, Serialize, Debug)]
 pub struct App {
@@ -13,13 +14,14 @@ pub struct App {
 
 impl App {
     pub fn new() -> App {
-        let contents = read_config_file("./config/src/app.yaml");
-        let mut app: HashMap<String, String> = serde_yaml::from_str(&contents).unwrap();
+        let env = Env::new();
 
-        let env: HashMap<String, String> = get_env("APP_");
-        app.extend(env);
-        let app_string = serde_yaml::to_string(&app);
-        serde_yaml::from_str(&app_string.unwrap()).unwrap()
+        Self {
+            name: env.get("APP_NAME", Some("Larks")),
+            version: env.get("APP_VERSION", Some("0.1.0")),
+            url: env.get("APP_URL", Some("http://localhost")),
+            port: env.get("APP_PORT", Some("8080")),
+        }
     }
 }
 
@@ -38,7 +40,10 @@ impl Index<&str> for App {
             "version" => &self.version,
             "url" => &self.url,
             "port" => &self.port,
-            _ => panic!("invalid key"),
+            _ => {
+                error!("invalid key");
+                panic!("invalid key");
+            }
         }
     }
 }

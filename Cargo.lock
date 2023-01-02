@@ -429,6 +429,7 @@ dependencies = [
  "lazy_static",
  "serde",
  "serde_yaml",
+ "tracing",
 ]
 
 [[package]]

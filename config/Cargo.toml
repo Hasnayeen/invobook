@@ -10,3 +10,4 @@ dotenvy = "0.15.6"
 serde.workspace = true
 lazy_static.workspace = true
 serde_yaml = "0.9.16"
+tracing.workspace = true

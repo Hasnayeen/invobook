@@ -1,7 +1,8 @@
-use std::{collections::HashMap, ops::Index};
+use std::ops::Index;
 
-use crate::{get_env, read_config_file};
+use crate::Env;
 use serde::{Deserialize, Serialize};
+use tracing::error;
 
 #[derive(Deserialize, Serialize, Debug)]
 pub struct Db {
@@ -15,13 +16,16 @@ pub struct Db {
 
 impl Db {
     pub fn new() -> Db {
-        let contents = read_config_file("./config/src/db.yaml");
-        let mut db: HashMap<String, String> = serde_yaml::from_str(&contents).unwrap();
+        let env = Env::new();
 
-        let env: HashMap<String, String> = get_env("DB_");
-        db.extend(env);
-        let db_string = serde_yaml::to_string(&db);
-        serde_yaml::from_str(&db_string.unwrap()).unwrap()
+        Self {
+            namespace: env.get("DB_NAMESPACE", Some("larks")),
+            database: env.get("DB_DATABASE", Some("larks")),
+            username: env.get("DB_USERNAME", Some("larks")),
+            password: env.get("DB_PASSWORD", Some("larks")),
+            url: env.get("DB_URL", Some("localhost")),
+            port: env.get("DB_PORT", Some("8000")),
+        }
     }
 }
 
@@ -42,7 +46,10 @@ impl Index<&str> for Db {
             "password" => &self.password,
             "url" => &self.url,
             "port" => &self.port,
-            _ => panic!("invalid key"),
+            _ => {
+                error!("invalid key");
+                panic!("invalid key");
+            }
         }
     }
 }
