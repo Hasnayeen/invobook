@@ -10,7 +10,7 @@ views = { path = "../views" }
 data = { path = "../data" }
 config = { path = "../config" }
 axum = "0.6.1"
-tokio = { version = "1.22.0", features = ["macros", "rt-multi-thread"] }
+tokio = { version = "1.23.1", features = ["macros", "rt-multi-thread"] }
 tower-http = { version = "0.3.5", features = ["fs"] }
 chrono.workspace = true
 tracing.workspace = true
