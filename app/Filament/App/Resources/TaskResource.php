@@ -20,6 +20,7 @@ class TaskResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-list-bullet';
     protected static ?string $navigationGroup = 'Work';
     protected static ?int $navigationSort = 2;
+    public static $count;
 
     public static function form(Form $form): Form
     {
@@ -98,5 +99,20 @@ class TaskResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        if (config('tasks.count')) {
+            return config('tasks.count');
+        }
+        config(['tasks.count' => $count = static::getModel()::count()]);
+
+        return $count;
+    }
+
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'info';
     }
 }

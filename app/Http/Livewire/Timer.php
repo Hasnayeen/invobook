@@ -58,13 +58,13 @@ class Timer extends Component implements HasForms
                             ->relationship('task', 'title'),
                         Select::make('project_id')
                             ->relationship('project', 'name'),
-                        TextInput::make('rate')
+                        TextInput::make('rate_in_cents')
                             ->label('Rate')
                             ->integer()
                             ->datalist(fn () => $this->user->rates->pluck('amount_in_cents')->transform(fn ($item) => $item / 100)->toArray()),
                         TextInput::make('currency')
                             ->label('Currency')
-                            ->datalist(fn () => $this->user->rates->pluck('amount_in_cents')->transform(fn ($item) => $item / 100)->toArray()),
+                            ->datalist(fn () => $this->user->rates->pluck('currency')->unique()->toArray()),
                     ])
             ])
             ->statePath('data')

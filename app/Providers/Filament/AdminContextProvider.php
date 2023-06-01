@@ -8,6 +8,8 @@ use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Pages;
+use Filament\Panel;
+use Filament\PanelProvider;
 use Filament\Support\Color;
 use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
@@ -18,11 +20,11 @@ use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
-class AdminContextProvider extends ContextProvider
+class AdminContextProvider extends PanelProvider
 {
-    public function context(Context $context): Context
+    public function panel(Panel $panel): Panel
     {
-        return $context
+        return $panel
             ->default()
             ->id('admin')
             ->path('admin')

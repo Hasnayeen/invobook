@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 class WorkHourThisMonth extends StatsOverviewWidget
 {
     protected static ?string $pollingInterval = null;
-    protected int | string | array $columnSpan = '2';
+    protected int | string | array $columnSpan = '6';
     protected $result;
     protected $change;
     protected $listeners = ['updateStats' => '$refresh'];
@@ -26,7 +26,7 @@ class WorkHourThisMonth extends StatsOverviewWidget
                 ->color($this->getColor()),
             Card::make('Earnings This Month', $this->totalEarning())
                 ->description($this->avgEarningPerDay() . ' / day')
-                ->descriptionColor('success')
+                ->descriptionColor('info')
                 ->chart(($this->query()->pluck('total_earnings')->toArray()))
                 ->color($this->getColor()),
         ];
@@ -38,8 +38,11 @@ class WorkHourThisMonth extends StatsOverviewWidget
             'minute' => [60, 'seconds'],
             'hour' => [60, 'minutes'],
         ]);
+        $currentMonth = $this->query()->where('month', today()->format('Y-m'));
 
-        return CarbonInterval::make($this->query()->last()->total_seconds . 'seconds')->cascade()->format('%H:%I:%S');
+        return CarbonInterval::make($currentMonth->isNotEmpty() ? $currentMonth->total_seconds : 0 . 'seconds')
+            ->cascade()
+            ->format('%H:%I:%S');
     }
     
     private function query(): Collection
@@ -54,15 +57,13 @@ class WorkHourThisMonth extends StatsOverviewWidget
             ->get();
 
         return $this->result;
-
-        // return WorkSession::where('user_id', auth()->user()->id)
-        //     ->whereBetween('start', [now()->startOfWeek(), now()->endOfWeek()])
-        //     ->sum('duration');
     }
 
     protected function totalEarning()
     {
-        return round($this->query()->last()->total_earnings, 2);
+        $currentMonth = $this->query()->where('month', today()->format('Y-m'));
+
+        return round($currentMonth->isNotEmpty() ? $currentMonth->total_earnings : 0, 2);
     }
 
     protected function avgEarningPerDay()
@@ -76,8 +77,8 @@ class WorkHourThisMonth extends StatsOverviewWidget
             return $this->change;
         }
         $data = clone $this->result;
-        $current = $data->pop()->total_seconds;
-        $previous = $data->pop()->total_seconds;
+        $current = $data->where('month', today()->format('Y-m'))->first()?->total_seconds;
+        $previous = $data->where('month', today()->subMonth()->format('Y-m'))->first()?->total_seconds;
         $this->change = $previous === 0 ? 'N/A' : round((($current - $previous) / $previous) * 100, 2);
 
         return $this->change;

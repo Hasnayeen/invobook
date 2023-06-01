@@ -6,7 +6,7 @@ use App\Filament\App\Pages\Dashboard;
 use App\Models\Team;
 use Filament\Context;
 use Filament\Support\Color;
-use Filament\ContextProvider;
+use Filament\PanelProvider;
 use Filament\Http\Middleware\Authenticate;
 use Illuminate\Session\Middleware\StartSession;
 use App\Filament\App\Pages\Tenancy\RegisterTeam;
@@ -23,14 +23,15 @@ use App\Filament\App\Widgets\CumulativeEarningsPerDay;
 use App\Filament\App\Widgets\EarningsPerDay;
 use App\Filament\App\Widgets\EarningsPerMonth;
 use Filament\Http\Middleware\IdentifyTenant;
+use Filament\Panel;
 
-class AppContextProvider extends ContextProvider
+class AppContextProvider extends PanelProvider
 {
-    public function context(Context $context): Context
+    public function panel(Panel $panel): Panel
     {
-        return $context
+        return $panel
             ->id('app')
-            ->path('/')
+            ->path('app')
             ->primaryColor(Color::Violet)
             ->favicon('/favicon.svg')
             ->tenant(Team::class)
@@ -67,6 +68,7 @@ class AppContextProvider extends ContextProvider
             ])
             ->navigationGroups([
                 'Work',
+                'Billing',
                 'Analytics',
                 'Settings',
             ])

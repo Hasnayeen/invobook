@@ -14,6 +14,7 @@ class EarningsPerMonth extends ChartWidget
     protected static ?string $pollingInterval = null;
     protected static ?string $heading = 'Earnings Per Month';
     protected static ?string $maxHeight = '20rem';
+    protected $result;
 
     protected function getType(): string
     {
@@ -36,7 +37,10 @@ class EarningsPerMonth extends ChartWidget
 
     protected function monthByMonthEarningForLastTwelveMonth()
     {
-        return Trend::model(WorkSession::class)
+        if ($this->result) {
+            return $this->result;
+        }
+        $this->result = Trend::model(WorkSession::class)
             ->between(now()->subMonths(12), now())
             ->perMonth()
             ->sum('duration')
@@ -44,5 +48,7 @@ class EarningsPerMonth extends ChartWidget
                 'month' => DateTime::createFromFormat('!Y-m', $item->date)->format('F'),
                 'total' => round($item->aggregate * 30 / 3600, 2),
             ]);
+        
+        return $this->result;
     }
 }

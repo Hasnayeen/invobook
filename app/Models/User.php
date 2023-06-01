@@ -6,6 +6,7 @@ namespace App\Models;
 
 use Filament\Context;
 use Filament\Models\Contracts\HasTenants;
+use Filament\Panel;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
@@ -57,7 +58,7 @@ class User extends Authenticatable implements HasTenants
         return ['id'];
     }
 
-    public function getTenants(Context $context): Collection
+    public function getTenants(Panel $panel): Collection
     {
         return $this->ownedTeams;
     }
@@ -74,7 +75,7 @@ class User extends Authenticatable implements HasTenants
 
     public function teams(): BelongsToMany
     {
-        return $this->belongsToMany(Team::class, 'team_user', 'user_id', 'team_id');
+        return $this->belongsToMany(Team::class, 'team_user', 'user_id', 'team_id')->using(Member::class);
     }
 
     public function rates(): HasMany

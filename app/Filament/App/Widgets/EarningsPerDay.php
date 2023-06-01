@@ -2,15 +2,14 @@
 
 namespace App\Filament\App\Widgets;
 
-use Carbon\Carbon;
-use App\Support\Trend;
 use App\Models\WorkSession;
+use App\Support\Trend;
 use Filament\Actions\Action;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Form;
-use Filament\Widgets\ChartWidget;
+use Illuminate\Support\Collection;
 
 class EarningsPerDay extends ChartWidgetWithAction implements HasActions
 {
@@ -102,28 +101,23 @@ class EarningsPerDay extends ChartWidgetWithAction implements HasActions
 
     protected function perDayEarning($month = 0)
     {
-        return Trend::model(WorkSession::class)
-            ->between(now()->subMonths($month)->startOfMonth(), now()->subMonths($month)->endOfMonth())
-            ->perDay()
-            ->sum('duration');
+        return $this->query()->whereBetween('date', [
+            today()->subMonths($month)->startOfMonth(),
+            today()->subMonths($month)->endOfMonth()->addDay(),
+        ])->values();
+    }
 
-        // return WorkSession::selectRaw(
-        //         'DAYOFMONTH(start) theDay,
-        //         monthname(start) as theMonth,
-        //         start,
-        //         sum(duration) as duration',
-        //     )->groupBy('theDay', 'theMonth')
-        //     ->get()
-        //     ->transform(fn ($item) => [
-        //         'start' => $item['start'],
-        //         'day' => $item['theDay'],
-        //         'month' => $item['theMonth'],
-        //         'total' => round($item['duration'] * 30 / 3600, 2),
-        //     ])->sortBy('start')
-        //     ->groupBy('month')
-        //     ->transform(fn ($item, $key) => [
-        //         'label' => $key,
-        //         'data' => $item->pluck('total')->toArray(),
-        //     ]);
+    protected function query(): Collection
+    {
+        if (config('widget.query.earnings-per-day')) {
+            return config('widget.query.earnings-per-day');
+        }
+        config(['widget.query.earnings-per-day' => $result = Trend::model(WorkSession::class)
+            ->between(now()->subMonths(12)->startOfMonth(), now()->endOfMonth()->addDay())
+            ->perDay()
+            ->sum('duration')
+        ]);
+
+        return $result;
     }
 }

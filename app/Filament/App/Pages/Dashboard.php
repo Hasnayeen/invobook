@@ -13,7 +13,7 @@ class Dashboard extends BasePage
 
     public function getColumns(): int | string | array
     {
-        return 4;
+        return 9;
     }
 
     protected function getHeaderActions(): array

@@ -39,8 +39,6 @@ class ProjectResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('description'),
-                // Tables\Columns\TextColumn::make('deleted_at')
-                //     ->dateTime(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Created')
                     ->dateTime(),
