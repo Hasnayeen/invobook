@@ -14,7 +14,7 @@ class Task extends Model
     use HasTenantScope;
     use SoftDeletes;
     use HasUlids;
-    
+
     public function uniqueIds(): array
     {
         return ['id'];

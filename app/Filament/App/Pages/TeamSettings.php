@@ -3,17 +3,17 @@
 namespace App\Filament\App\Pages;
 
 use App\Models\Team;
-use Filament\Forms\Form;
-use Filament\Pages\Page;
-use Filament\Facades\Filament;
-use Filament\Forms\Contracts\HasForms;
-use Filament\Forms\Components\TextInput;
 use Filament\Actions\Action;
+use Filament\Facades\Filament;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Fieldset;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Forms\Contracts\HasForms;
+use Filament\Forms\Form;
 use Filament\Notifications\Notification;
 use Filament\Pages\Concerns\InteractsWithFormActions;
+use Filament\Pages\Page;
 
 class TeamSettings extends Page implements HasForms
 {
@@ -22,7 +22,6 @@ class TeamSettings extends Page implements HasForms
 
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
     protected static ?string $navigationLabel = 'Team';
-
     protected static string $view = 'filament.app.pages.team-settings';
     protected static ?string $navigationGroup = 'Settings';
     public Team $team;

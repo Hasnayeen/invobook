@@ -2,24 +2,19 @@
 
 namespace App\Http\Livewire;
 
-use Filament\Forms;
-use App\Models\Task;
-use App\Models\Project;
-use App\Models\Rate;
 use App\Models\User;
-use Livewire\Component;
-use Filament\Forms\Form;
 use App\Models\WorkSession;
 use Carbon\Carbon;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\Grid;
-use Illuminate\Contracts\View\View;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Forms\Contracts\HasForms;
+use Filament\Forms\Form;
 use Filament\Notifications\Notification;
+use Illuminate\Contracts\View\View;
+use Livewire\Component;
 
 class Timer extends Component implements HasForms
 {
@@ -61,11 +56,12 @@ class Timer extends Component implements HasForms
                         TextInput::make('rate_in_cents')
                             ->label('Rate')
                             ->integer()
-                            ->datalist(fn () => $this->user->rates->pluck('amount_in_cents')->transform(fn ($item) => $item / 100)->toArray()),
+                            ->datalist(fn () => $this->user->rates->pluck('amount_in_cents')->transform(fn ($item) => $item / 100)->toArray())
+                            ->dehydrateStateUsing(fn ($value) => $value * 100),
                         TextInput::make('currency')
                             ->label('Currency')
                             ->datalist(fn () => $this->user->rates->pluck('currency')->unique()->toArray()),
-                    ])
+                    ]),
             ])
             ->statePath('data')
             ->model(WorkSession::class);
@@ -88,7 +84,7 @@ class Timer extends Component implements HasForms
 
     public function start(): void
     {
-        if (!$this->session) {
+        if (! $this->session) {
             $this->dispatchBrowserEvent('timer-start');
             $this->create();
         }

@@ -3,7 +3,6 @@
 namespace App\Filament\App\Resources;
 
 use App\Filament\App\Resources\WorkSessionResource\Pages;
-use App\Filament\App\Resources\WorkSessionResource\RelationManagers;
 use App\Filament\App\Resources\WorkSessionResource\Widgets\WorkHourThisMonth;
 use App\Models\WorkSession;
 use Filament\Actions\Action as ModalAction;
@@ -14,12 +13,10 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class WorkSessionResource extends Resource
 {
     protected static ?string $model = WorkSession::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-clock';
     protected static ?string $navigationGroup = 'Work';
     protected static ?string $navigationLabel = 'Sessions';
@@ -105,14 +102,14 @@ class WorkSessionResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [

@@ -115,7 +115,7 @@ class EarningsPerDay extends ChartWidgetWithAction implements HasActions
         config(['widget.query.earnings-per-day' => $result = Trend::model(WorkSession::class)
             ->between(now()->subMonths(12)->startOfMonth(), now()->endOfMonth()->addDay())
             ->perDay()
-            ->sum('duration')
+            ->sum('duration'),
         ]);
 
         return $result;

@@ -11,13 +11,9 @@ use Illuminate\Support\Collection;
 class Trend
 {
     public string $interval;
-
     public Carbon $start;
-
     public Carbon $end;
-
     public string $dateColumn = 'created_at';
-
     public string $dateAlias = 'date';
 
     public function __construct(public Builder $builder)

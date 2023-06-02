@@ -2,10 +2,8 @@
 
 namespace App\Providers;
 
-use Filament\Http\Middleware\IdentifyTenant;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
-use Livewire\Livewire;
 
 class AppServiceProvider extends ServiceProvider
 {

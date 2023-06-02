@@ -2,22 +2,21 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Team;
-use App\Models\User;
-use Livewire\Component;
-use Filament\Forms\Form;
-use Filament\Tables\Table;
-use Filament\Actions\Action;
 use App\Models\TeamInvitation;
-use Filament\Facades\Filament;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Contracts\HasTable;
-use Filament\Forms\Components\TextInput;
-use Filament\Actions\Contracts\HasActions;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Tables\Concerns\InteractsWithTable;
+use App\Models\User;
+use Filament\Actions\Action;
 use Filament\Actions\Concerns\InteractsWithActions;
+use Filament\Actions\Contracts\HasActions;
+use Filament\Facades\Filament;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Forms\Form;
 use Filament\Pages\Concerns\InteractsWithHeaderActions;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Concerns\InteractsWithTable;
+use Filament\Tables\Contracts\HasTable;
+use Filament\Tables\Table;
+use Livewire\Component;
 
 class TeamMembers extends Component implements HasActions, HasTable
 {

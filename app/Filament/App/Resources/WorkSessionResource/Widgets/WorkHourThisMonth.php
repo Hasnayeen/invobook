@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 class WorkHourThisMonth extends StatsOverviewWidget
 {
     protected static ?string $pollingInterval = null;
-    protected int | string | array $columnSpan = '6';
+    protected int|string|array $columnSpan = '6';
     protected $result;
     protected $change;
     protected $listeners = ['updateStats' => '$refresh'];
@@ -20,12 +20,12 @@ class WorkHourThisMonth extends StatsOverviewWidget
     {
         return [
             Card::make('Hours This Month', $this->getData())
-                ->description($this->getChange() . '%')
+                ->description($this->getChange().'%')
                 ->descriptionIcon($this->getIcon())
                 ->chart(($this->query()->pluck('total_seconds')->toArray()))
                 ->color($this->getColor()),
             Card::make('Earnings This Month', $this->totalEarning())
-                ->description($this->avgEarningPerDay() . ' / day')
+                ->description($this->avgEarningPerDay().' / day')
                 ->descriptionColor('info')
                 ->chart(($this->query()->pluck('total_earnings')->toArray()))
                 ->color($this->getColor()),
@@ -40,11 +40,11 @@ class WorkHourThisMonth extends StatsOverviewWidget
         ]);
         $currentMonth = $this->query()->where('month', today()->format('Y-m'));
 
-        return CarbonInterval::make($currentMonth->isNotEmpty() ? $currentMonth->total_seconds : 0 . 'seconds')
+        return CarbonInterval::make(($currentMonth->isNotEmpty() ? $currentMonth->first()->total_seconds : 0).'seconds')
             ->cascade()
             ->format('%H:%I:%S');
     }
-    
+
     private function query(): Collection
     {
         if ($this->result) {
@@ -63,7 +63,7 @@ class WorkHourThisMonth extends StatsOverviewWidget
     {
         $currentMonth = $this->query()->where('month', today()->format('Y-m'));
 
-        return round($currentMonth->isNotEmpty() ? $currentMonth->total_earnings : 0, 2);
+        return round($currentMonth->isNotEmpty() ? $currentMonth->first()->total_earnings : 0, 2);
     }
 
     protected function avgEarningPerDay()

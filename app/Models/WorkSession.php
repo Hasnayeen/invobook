@@ -3,9 +3,8 @@
 namespace App\Models;
 
 use App\Models\Scopes\HasTenantScope;
-use App\Models\Scopes\TenantScope;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class WorkSession extends Model
@@ -27,7 +26,7 @@ class WorkSession extends Model
     {
         return $this->belongsTo(Project::class);
     }
-    
+
     public function rate(): BelongsTo
     {
         return $this->belongsTo(Rate::class);

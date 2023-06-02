@@ -2,11 +2,11 @@
 
 namespace App\Filament\App\Widgets;
 
-use Filament\Widgets\ChartWidget;
+use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
 use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Pages\Concerns\InteractsWithHeaderActions;
+use Filament\Widgets\ChartWidget;
 
 abstract class ChartWidgetWithAction extends ChartWidget implements HasActions
 {

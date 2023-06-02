@@ -2,8 +2,8 @@
 
 namespace App\Filament\App\Widgets;
 
-use App\Support\Trend;
 use App\Models\WorkSession;
+use App\Support\Trend;
 use Filament\Widgets\ChartWidget;
 use Illuminate\Support\Collection;
 
@@ -26,7 +26,7 @@ class CumulativeEarningsPerDay extends ChartWidget
             'datasets' => [
                 [
                     'label' => 'Ideal',
-                    'data' => array_map(fn ($item) => $item * 25,range(1, 31)),
+                    'data' => array_map(fn ($item) => $item * 25, range(1, 31)),
                     'borderColor' => '#00000080',
                     'tension' => 0.5,
                     'pointRadius' => 3,
@@ -128,12 +128,12 @@ class CumulativeEarningsPerDay extends ChartWidget
             today()->subMonths($month)->startOfMonth(),
             today()->subMonths($month)->endOfMonth()->addDay(),
         ])
-        ->values()
-        ->transform(function($item) use (&$total) {
-            $total += $item->aggregate;
+            ->values()
+            ->transform(function ($item) use (&$total) {
+                $total += $item->aggregate;
 
-            return $total;
-        });
+                return $total;
+            });
     }
 
     protected function query(): Collection
@@ -144,7 +144,7 @@ class CumulativeEarningsPerDay extends ChartWidget
         config(['widget.query.earnings-per-day' => $result = Trend::model(WorkSession::class)
             ->between(now()->subMonths(12)->startOfMonth(), now()->endOfMonth()->addDay())
             ->perDay()
-            ->sum('duration')
+            ->sum('duration'),
         ]);
 
         return $result;

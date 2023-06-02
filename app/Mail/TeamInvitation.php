@@ -2,14 +2,13 @@
 
 namespace App\Mail;
 
+use App\Models\TeamInvitation as ModelsTeamInvitation;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
-use Illuminate\Support\Facades\URL;
 use Illuminate\Mail\Mailables\Content;
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Envelope;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use App\Models\TeamInvitation as ModelsTeamInvitation;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\URL;
 
 class TeamInvitation extends Mailable
 {
@@ -20,7 +19,8 @@ class TeamInvitation extends Mailable
      */
     public function __construct(
         public ModelsTeamInvitation $invitation,
-    ) {}
+    ) {
+    }
 
     /**
      * Get the message envelope.

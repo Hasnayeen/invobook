@@ -48,7 +48,7 @@ class EarningsPerMonth extends ChartWidget
                 'month' => DateTime::createFromFormat('!Y-m', $item->date)->format('F'),
                 'total' => round($item->aggregate * 30 / 3600, 2),
             ]);
-        
+
         return $this->result;
     }
 }

@@ -3,20 +3,15 @@
 namespace App\Filament\App\Resources;
 
 use App\Filament\App\Resources\ClientResource\Pages;
-use App\Filament\App\Resources\ClientResource\RelationManagers;
 use App\Models\Client;
-use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ClientResource extends Resource
 {
     protected static ?string $model = Client::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-users';
     protected static ?string $navigationGroup = 'Work';
     protected static ?int $navigationSort = 4;
@@ -45,14 +40,14 @@ class ClientResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -60,5 +55,5 @@ class ClientResource extends Resource
             'create' => Pages\CreateClient::route('/create'),
             'edit' => Pages\EditClient::route('/{record}/edit'),
         ];
-    }    
+    }
 }

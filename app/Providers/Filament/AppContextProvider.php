@@ -3,27 +3,26 @@
 namespace App\Providers\Filament;
 
 use App\Filament\App\Pages\Dashboard;
-use App\Models\Team;
-use Filament\Context;
-use Filament\Support\Color;
-use Filament\PanelProvider;
-use Filament\Http\Middleware\Authenticate;
-use Illuminate\Session\Middleware\StartSession;
 use App\Filament\App\Pages\Tenancy\RegisterTeam;
-use Illuminate\Cookie\Middleware\EncryptCookies;
-use Illuminate\Routing\Middleware\SubstituteBindings;
-use Illuminate\Session\Middleware\AuthenticateSession;
-use Illuminate\View\Middleware\ShareErrorsFromSession;
-use Filament\Http\Middleware\DisableBladeIconComponents;
-use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
-use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use App\Filament\App\Resources\WorkSessionResource\Widgets\WorkHourThisMonth;
 use App\Filament\App\Widgets\CumulativeEarningsPerDay;
 use App\Filament\App\Widgets\EarningsPerDay;
 use App\Filament\App\Widgets\EarningsPerMonth;
+use App\Models\Team;
+use Filament\Http\Middleware\Authenticate;
+use Filament\Http\Middleware\DisableBladeIconComponents;
+use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Http\Middleware\IdentifyTenant;
 use Filament\Panel;
+use Filament\PanelProvider;
+use Filament\Support\Color;
+use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use Illuminate\Cookie\Middleware\EncryptCookies;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Routing\Middleware\SubstituteBindings;
+use Illuminate\Session\Middleware\AuthenticateSession;
+use Illuminate\Session\Middleware\StartSession;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class AppContextProvider extends PanelProvider
 {

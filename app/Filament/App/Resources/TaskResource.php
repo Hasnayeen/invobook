@@ -3,7 +3,6 @@
 namespace App\Filament\App\Resources;
 
 use App\Filament\App\Resources\TaskResource\Pages;
-use App\Filament\App\Resources\TaskResource\RelationManagers;
 use App\Models\Task;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -16,7 +15,6 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class TaskResource extends Resource
 {
     protected static ?string $model = Task::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-list-bullet';
     protected static ?string $navigationGroup = 'Work';
     protected static ?int $navigationSort = 2;
@@ -75,14 +73,14 @@ class TaskResource extends Resource
                 Tables\Actions\RestoreBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -91,8 +89,8 @@ class TaskResource extends Resource
             'view' => Pages\ViewTask::route('/{record}/view'),
             'edit' => Pages\EditTask::route('/{record}/edit'),
         ];
-    }    
-    
+    }
+
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
