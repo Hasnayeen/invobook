@@ -5,9 +5,8 @@ namespace App\Filament\App\Widgets;
 use App\Models\WorkSession;
 use App\Support\Trend;
 use DateTime;
-use Filament\Widgets\ChartWidget;
 
-class EarningsPerMonth extends ChartWidget
+class EarningsPerMonth extends ChartWidgetWithAction
 {
     protected int|string|array $columnSpan = 'full';
     protected static ?int $sort = 2;

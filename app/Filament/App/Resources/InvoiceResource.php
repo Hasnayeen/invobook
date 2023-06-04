@@ -2,21 +2,27 @@
 
 namespace App\Filament\App\Resources;
 
-use App\Filament\App\Resources\InvoiceResource\Pages;
-use App\Models\Invoice;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use App\Models\Invoice;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Laravel\Pennant\Feature;
+use Filament\Resources\Resource;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\App\Resources\InvoiceResource\Pages;
 
 class InvoiceResource extends Resource
 {
     protected static ?string $model = Invoice::class;
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
     protected static ?string $navigationGroup = 'Billing';
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return Feature::active('invoicing');
+    }
 
     public static function form(Form $form): Form
     {

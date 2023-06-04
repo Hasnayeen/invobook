@@ -51,9 +51,11 @@ class TaskResource extends Resource
             // ])
             ->columns([
                 Tables\Columns\TextColumn::make('project.name'),
-                Tables\Columns\TextColumn::make('title'),
+                Tables\Columns\TextColumn::make('title')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('description')
-                    ->limit(25),
+                    ->limit(25)
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('link'),
                 Tables\Columns\TextColumn::make('status'),
                 Tables\Columns\TextColumn::make('created_at')

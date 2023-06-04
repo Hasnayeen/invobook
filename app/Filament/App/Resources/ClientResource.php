@@ -2,12 +2,13 @@
 
 namespace App\Filament\App\Resources;
 
-use App\Filament\App\Resources\ClientResource\Pages;
+use Filament\Tables;
 use App\Models\Client;
 use Filament\Forms\Form;
-use Filament\Resources\Resource;
-use Filament\Tables;
 use Filament\Tables\Table;
+use Laravel\Pennant\Feature;
+use Filament\Resources\Resource;
+use App\Filament\App\Resources\ClientResource\Pages;
 
 class ClientResource extends Resource
 {
@@ -15,6 +16,11 @@ class ClientResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-users';
     protected static ?string $navigationGroup = 'Work';
     protected static ?int $navigationSort = 4;
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return Feature::active('client');
+    }
 
     public static function form(Form $form): Form
     {

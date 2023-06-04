@@ -35,7 +35,7 @@ class Timer extends Component implements HasForms
         $teamRate = Filament::getTenant()->rates->where('user_id', $this->user->id)->first();
         $userRate = $this->user->base->first();
         $this->form->fill([
-            'rate' => $teamRate ? $teamRate->amount_in_cents / 100 : ($userRate ? $userRate->amount_in_cents / 100 : null),
+            'rate_in_cents' => $teamRate ? $teamRate->amount_in_cents / 100 : ($userRate ? $userRate->amount_in_cents / 100 : null),
             'currency' => $teamRate ? $teamRate->currency : ($userRate ? $userRate->currency : null),
         ]);
     }
@@ -56,8 +56,7 @@ class Timer extends Component implements HasForms
                         TextInput::make('rate_in_cents')
                             ->label('Rate')
                             ->integer()
-                            ->datalist(fn () => $this->user->rates->pluck('amount_in_cents')->transform(fn ($item) => $item / 100)->toArray())
-                            ->dehydrateStateUsing(fn ($value) => $value * 100),
+                            ->datalist(fn () => $this->user->rates->pluck('amount_in_cents')->transform(fn ($item) => $item / 100)->toArray()),
                         TextInput::make('currency')
                             ->label('Currency')
                             ->datalist(fn () => $this->user->rates->pluck('currency')->unique()->toArray()),
@@ -76,6 +75,9 @@ class Timer extends Component implements HasForms
             'team_id' => Filament::getTenant()->id,
             'start' => now(),
             'end' => now(),
+            'rate_in_cents' => $data['rate_in_cents'] * 100,
+            'currency' => $data['currency'],
+            'description' => $data['description'] ?? null,
         ]));
         $this->session = $record;
 

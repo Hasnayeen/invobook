@@ -17,12 +17,3 @@ use Illuminate\Support\Facades\Route;
 //     return view('filament.app.pages.profile');
 // })->name('profile');
 
-Route::get('/mailable', function () {
-    $invoice = App\Models\TeamInvitation::find(1);
-
-    return new App\Mail\TeamInvitation($invoice);
-});
-
-Route::get('/team-invitations/{invitation}', function () {
-    return 'ok';
-})->middleware(['signed'])->name('team-invitations.accept');

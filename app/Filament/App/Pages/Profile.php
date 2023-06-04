@@ -18,6 +18,10 @@ use Filament\Notifications\Notification;
 use Filament\Pages\Concerns\InteractsWithFormActions;
 use Filament\Pages\Page;
 
+/**
+ * @property Form $detailsForm
+ * @property Form $rateForm
+ */
 class Profile extends Page implements HasForms
 {
     use InteractsWithForms;
@@ -181,10 +185,10 @@ class Profile extends Page implements HasForms
             }
         }
         if ($this->rateForm->getState()['team']['amount_in_cents'] !== null) {
-            if ($rate = $this->team->rates?->where('user_id', $this->user->id)->first()) {
+            if ($rate = $this->team->rates->where('user_id', $this->user->id)->first()) {
                 $rate->update($this->rateForm->getState()['team']);
             } else {
-                $this->team->rate()->create(
+                $this->team->rates()->create(
                     array_merge(
                         $this->rateForm->getState()['team'],
                         ['user_id' => $this->user->id],

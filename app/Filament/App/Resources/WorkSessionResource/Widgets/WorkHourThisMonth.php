@@ -2,6 +2,7 @@
 
 namespace App\Filament\App\Resources\WorkSessionResource\Widgets;
 
+use App\Models\WorkSession;
 use Carbon\CarbonInterval;
 use Filament\Widgets\StatsOverviewWidget;
 use Filament\Widgets\StatsOverviewWidget\Card;
@@ -51,7 +52,7 @@ class WorkHourThisMonth extends StatsOverviewWidget
             return $this->result;
         }
 
-        $this->result = DB::table('work_sessions')
+        $this->result = WorkSession::where('user_id', auth()->id())
             ->select(DB::raw('DATE_FORMAT(work_sessions.created_at, "%Y-%m") AS month'), DB::raw('SUM(work_sessions.duration) AS total_seconds'), DB::raw('SUM(work_sessions.duration / 3600 * rate_in_cents / 100) AS total_earnings'))
             ->groupBy('month')
             ->get();
@@ -77,9 +78,10 @@ class WorkHourThisMonth extends StatsOverviewWidget
             return $this->change;
         }
         $data = clone $this->result;
-        $current = $data->where('month', today()->format('Y-m'))->first()?->total_seconds;
-        $previous = $data->where('month', today()->subMonth()->format('Y-m'))->first()?->total_seconds;
-        $this->change = $previous === 0 ? 'N/A' : round((($current - $previous) / $previous) * 100, 2);
+        $current = (int) $data->where('month', today()->format('Y-m'))->first()?->total_seconds;
+        $previous = (int) $data->where('month', today()->subMonth()->format('Y-m'))->first()?->total_seconds;
+        $change = $current - $previous;
+        $this->change = ($previous !== 0 && $change !== 0) ? round(($change / $previous) * 100, 2) : 'N/A';
 
         return $this->change;
     }

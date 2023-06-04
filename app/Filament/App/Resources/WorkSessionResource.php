@@ -13,6 +13,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Laravel\Pennant\Feature;
 
 class WorkSessionResource extends Resource
 {
@@ -20,6 +21,11 @@ class WorkSessionResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-clock';
     protected static ?string $navigationGroup = 'Work';
     protected static ?string $navigationLabel = 'Sessions';
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return Feature::active('tracking');
+    }
 
     protected function getHeaderActions(): array
     {
