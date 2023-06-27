@@ -27,7 +27,7 @@ class WorkHourThisMonth extends StatsOverviewWidget
                 ->color($this->getColor()),
             Card::make('Earnings This Month', $this->totalEarning())
                 ->description($this->avgEarningPerDay().' / day')
-                ->descriptionColor('info')
+                ->descriptionColor('warning')
                 ->chart(($this->query()->pluck('total_earnings')->toArray()))
                 ->color($this->getColor()),
         ];

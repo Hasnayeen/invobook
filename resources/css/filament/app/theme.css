@@ -3,21 +3,31 @@
 @config './tailwind.config.js';
 
 @layer components {
-    .filament-main-topbar:first-child {
+    .filament-main-topbar div:first-child {
         @apply max-w-7xl mx-auto;
     }
+
     .filament-main-topbar .filament-icon-button {
         @apply me-4 !important;
     }
+
     .filament-sidebar-nav {
-        @apply border-r;
+        @apply border-r dark:border-gray-700;
     }
 
-    .filament-sidebar-item-active {
-        @apply bg-primary-50;
+    .filament-sidebar-item-active a {
+        @apply bg-primary-100 dark:bg-primary-600/30 dark:text-white;
+    }
+
+    .filament-sidebar-item-active svg {
+        @apply dark:text-white;
+    }
+
+    .filament-tenant-menu + div {
+        @apply -ms-3 -me-3;
     }
 
     .filament-button-outline-primary {
-        @apply bg-white border-primary-500 border-2 shadow-none text-primary-600 hover:bg-primary-50 !important;
+        @apply bg-white dark:bg-gray-800 border-primary-500 dark:border-primary-400 border-2 shadow-none text-primary-600 dark:text-primary-400 hover:bg-primary-50 dark:hover:bg-gray-900 !important;
     }
 }

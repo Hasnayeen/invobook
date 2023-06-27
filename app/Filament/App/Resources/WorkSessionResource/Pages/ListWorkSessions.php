@@ -15,9 +15,10 @@ class ListWorkSessions extends ListRecords
     {
         return [
             Actions\CreateAction::make()
-                ->color('outline')
+                ->extraAttributes(['class' => 'border border-info-200 bg-white !text-info-600 dark:border-info-700 dark:bg-info-900 dark:!text-info-200 hover:bg-info-50 dark:hover:bg-info-800'])
                 ->label('Enter Manually'),
-            StartNewSessionAction::make(),
+            StartNewSessionAction::make()
+                ->extraAttributes(['class' => 'border border-primary-200 bg-white !text-primary-600 dark:border-primary-700 dark:bg-primary-900 dark:!text-primary-200 hover:bg-primary-50 dark:hover:bg-primary-800']),
         ];
     }
 }

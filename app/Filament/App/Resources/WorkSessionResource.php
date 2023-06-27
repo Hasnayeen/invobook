@@ -35,7 +35,7 @@ class WorkSessionResource extends Resource
         return [
             ModalAction::make('start-new-session')
                 ->modalContent(view('filament.app.actions.start-new-session'))
-                ->modalActions([
+                ->modalFooterActions([
                     Action::make('start')
                         ->button()
                         ->size('md')

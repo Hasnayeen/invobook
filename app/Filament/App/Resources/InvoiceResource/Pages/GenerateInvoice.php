@@ -114,7 +114,7 @@ class GenerateInvoice extends Page implements HasTable
                                 Select::make('client_id')
                                     ->options(Filament::getTenant()->clients->pluck('name', 'id')->toArray()),
                                 TextInput::make('vat')
-                                    ->label('VAT/Tax')
+                                    ->label('VAT/TAX')
                                     ->numeric()
                                     ->default(0),
                                 DatePicker::make('issued_on')
