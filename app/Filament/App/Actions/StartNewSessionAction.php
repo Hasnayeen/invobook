@@ -18,7 +18,7 @@ class StartNewSessionAction extends Action
         $this->modalContent(view('filament.app.actions.start-new-session'));
         $this->modalWidth('xl');
 
-        $this->modalActions([
+        $this->modalFooterActions([
             \Filament\GlobalSearch\Actions\Action::make('start')
                 ->button()
                 ->size('md')

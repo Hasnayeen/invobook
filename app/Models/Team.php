@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -15,9 +16,9 @@ class Team extends Model
     use HasUlids;
     use SoftDeletes;
 
-    public function users()
+    public function owner()
     {
-        return $this->belongsToMany(User::class, 'team_user', 'team_id', 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function uniqueIds(): array
@@ -37,6 +38,11 @@ class Team extends Model
 
     public function members(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'team_user', 'user_id', 'team_id')->using(Member::class);
+        return $this->belongsToMany(User::class, 'team_user', 'team_id', 'user_id')->using(Member::class);
+    }
+
+    public function clients(): HasMany
+    {
+        return $this->hasMany(Client::class);
     }
 }

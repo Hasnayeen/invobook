@@ -15,7 +15,7 @@ use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Http\Middleware\IdentifyTenant;
 use Filament\Panel;
 use Filament\PanelProvider;
-use Filament\Support\Color;
+use Filament\Support\Colors\Color;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -23,6 +23,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Illuminate\View\View;
 
 class AppContextProvider extends PanelProvider
 {
@@ -31,7 +32,10 @@ class AppContextProvider extends PanelProvider
         return $panel
             ->id('app')
             ->path('app')
-            ->primaryColor(Color::Violet)
+            ->colors([
+                'primary' => Color::Purple,
+            ])
+            ->viteTheme('resources/css/filament/app/theme.css')
             ->favicon('/favicon.svg')
             ->tenant(Team::class)
             ->login()
@@ -72,6 +76,7 @@ class AppContextProvider extends PanelProvider
                 'Settings',
             ])
             ->sidebarCollapsibleOnDesktop()
-            ->databaseNotifications();
+            ->databaseNotifications()
+            ->renderHook('topbar.start', fn (): View => view('filament.app.hooks.welcome_user'));
     }
 }

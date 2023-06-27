@@ -7,11 +7,14 @@ use App\Filament\App\Resources\WorkSessionResource\Widgets\WorkHourThisMonth;
 use App\Models\WorkSession;
 use Filament\Actions\Action as ModalAction;
 use Filament\Forms;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Form;
 use Filament\GlobalSearch\Actions\Action;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
+use Illuminate\Contracts\Database\Query\Builder as QueryBuilder;
 use Illuminate\Database\Eloquent\Builder;
 use Laravel\Pennant\Feature;
 
@@ -76,10 +79,10 @@ class WorkSessionResource extends Resource
                     ->required(),
                 Forms\Components\TextInput::make('description')
                     ->maxLength(255),
-                Forms\Components\TextInput::make('task_id')
-                    ->maxLength(26),
-                Forms\Components\TextInput::make('project_id')
-                    ->maxLength(26),
+                Forms\Components\Select::make('task_id')
+                    ->relationship('task', 'title'),
+                Forms\Components\Select::make('project_id')
+                    ->relationship('project', 'name'),
             ]);
     }
 
@@ -99,7 +102,24 @@ class WorkSessionResource extends Resource
                 Tables\Columns\TextColumn::make('project.name'),
             ])
             ->filters([
-                //
+                Filter::make('created_at')
+                    ->form([
+                        DatePicker::make('from')
+                            ->default(today()->startOfMonth()),
+                        DatePicker::make('to')
+                            ->default(today()->endOfMonth()),
+                    ])
+                    ->query(function (QueryBuilder $query, array $data): QueryBuilder {
+                        return $query
+                            ->when(
+                                $data['from'],
+                                fn (QueryBuilder $query, $date): QueryBuilder => $query->whereDate('start', '>=', $date),
+                            )
+                            ->when(
+                                $data['to'],
+                                fn (QueryBuilder $query, $date): QueryBuilder => $query->whereDate('start', '<=', $date),
+                            );
+                    })
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

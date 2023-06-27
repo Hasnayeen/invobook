@@ -1,0 +1,23 @@
+@import '../../../../vendor/filament/filament/resources/css/theme.css';
+
+@config './tailwind.config.js';
+
+@layer components {
+    .filament-main-topbar:first-child {
+        @apply max-w-7xl mx-auto;
+    }
+    .filament-main-topbar .filament-icon-button {
+        @apply me-4 !important;
+    }
+    .filament-sidebar-nav {
+        @apply border-r;
+    }
+
+    .filament-sidebar-item-active {
+        @apply bg-primary-50;
+    }
+
+    .filament-button-outline-primary {
+        @apply bg-white border-primary-500 border-2 shadow-none text-primary-600 hover:bg-primary-50 !important;
+    }
+}

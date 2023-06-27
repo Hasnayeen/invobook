@@ -18,6 +18,7 @@ class TaskResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-list-bullet';
     protected static ?string $navigationGroup = 'Work';
     protected static ?int $navigationSort = 2;
+    protected static ?string $recordTitleAttribute = 'title';
     public static $count;
 
     public static function form(Form $form): Form
@@ -30,15 +31,20 @@ class TaskResource extends Resource
                 Forms\Components\TextInput::make('title')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('link')
-                    ->label('Link')
+                Forms\Components\TextInput::make('issue_link')
+                    ->label('Issue')
                     ->hint('Link to the issue on Github')
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('pr_link')
+                    ->label('PR')
+                    ->hint('Link to the pull request on Github')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('status')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\Textarea::make('description')
-                    ->maxLength(65535),
+                    ->maxLength(65535)
+                    ->columnStart(1),
             ]);
     }
 
@@ -56,7 +62,16 @@ class TaskResource extends Resource
                 Tables\Columns\TextColumn::make('description')
                     ->limit(25)
                     ->searchable(),
-                Tables\Columns\TextColumn::make('link'),
+                Tables\Columns\TextColumn::make('issue_link')
+                    ->label('Issue')
+                    ->url(fn ($record) => $record->issue_link)
+                    ->limit(20)
+                    ->openUrlInNewTab(),
+                Tables\Columns\TextColumn::make('pr_link')
+                    ->label('PR')
+                    ->url(fn ($record) => $record->pr_link)
+                    ->limit(20)
+                    ->openUrlInNewTab(),
                 Tables\Columns\TextColumn::make('status'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Created')
@@ -73,6 +88,10 @@ class TaskResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
                 Tables\Actions\ForceDeleteBulkAction::make(),
                 Tables\Actions\RestoreBulkAction::make(),
+            ])
+            ->defaultGroup('status')
+            ->groups([
+                'status',
             ]);
     }
 

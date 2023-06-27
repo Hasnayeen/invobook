@@ -39,8 +39,7 @@
             <span class="border-primary-600 border-2 text-center w-16 py-2 rounded" x-text="secs()"></span>
         </div>
     </div>
-    <form wire:submit.prevent="create">
         {{ $this->form }}
 
-    </form>
+    <x-filament-actions::modals />
 </div>

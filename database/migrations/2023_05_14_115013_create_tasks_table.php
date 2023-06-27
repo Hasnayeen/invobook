@@ -18,7 +18,8 @@ return new class extends Migration
             $table->foreignUlid('team_id')->constrained('teams')->cascadeOnDelete();
             $table->string('title');
             $table->text('description')->nullable();
-            $table->string('link')->nullable();
+            $table->string('issue_link')->nullable();
+            $table->string('pr_link')->nullable();
             $table->string('status');
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
