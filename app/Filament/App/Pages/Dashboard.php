@@ -9,11 +9,6 @@ class Dashboard extends BasePage
 {
     protected static ?string $navigationLabel = 'Home';
 
-    public function getColumns(): int|string|array
-    {
-        return 9;
-    }
-
     protected function getHeaderActions(): array
     {
         return [

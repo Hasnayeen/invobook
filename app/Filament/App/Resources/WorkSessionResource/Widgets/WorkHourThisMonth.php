@@ -12,10 +12,15 @@ use Illuminate\Support\Facades\DB;
 class WorkHourThisMonth extends StatsOverviewWidget
 {
     protected static ?string $pollingInterval = null;
-    protected int|string|array $columnSpan = '6';
+    protected int|string|array $columnSpan = '1';
     protected $result;
     protected $change;
     protected $listeners = ['updateStats' => '$refresh'];
+
+    protected function getColumns(): int
+    {
+        return 2;
+    }
 
     protected function getCards(): array
     {
