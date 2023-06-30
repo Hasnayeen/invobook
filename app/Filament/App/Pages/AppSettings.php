@@ -17,7 +17,7 @@ class AppSettings extends Page implements HasForms
 {
     use InteractsWithForms;
 
-    protected static ?string $navigationIcon = 'heroicon-o-wrench-screwdriver';
+    protected static ?string $navigationIcon = 'lucide-settings-2';
     protected static ?string $navigationLabel = 'App';
     protected static ?string $navigationGroup = 'Settings';
     protected static ?int $navigationSort = 3;

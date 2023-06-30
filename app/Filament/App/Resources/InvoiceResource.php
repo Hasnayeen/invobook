@@ -16,7 +16,7 @@ use App\Filament\App\Resources\InvoiceResource\Pages;
 class InvoiceResource extends Resource
 {
     protected static ?string $model = Invoice::class;
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static ?string $navigationIcon = 'lucide-receipt';
     protected static ?string $navigationGroup = 'Billing';
 
     public static function shouldRegisterNavigation(): bool

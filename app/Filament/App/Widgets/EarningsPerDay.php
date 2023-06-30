@@ -52,7 +52,7 @@ class EarningsPerDay extends ChartWidgetWithAction implements HasActions
     {
         return [
             Action::make('configure')
-                ->icon('heroicon-o-cog-6-tooth')
+                ->icon('lucide-settings')
                 ->iconButton()
                 ->color('secondary')
                 ->size('lg')

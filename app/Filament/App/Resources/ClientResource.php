@@ -18,7 +18,7 @@ use Laravel\Pennant\Feature;
 class ClientResource extends Resource
 {
     protected static ?string $model = Client::class;
-    protected static ?string $navigationIcon = 'heroicon-o-users';
+    protected static ?string $navigationIcon = 'lucide-user-square-2';
     protected static ?string $navigationGroup = 'Work';
     protected static ?int $navigationSort = 4;
 

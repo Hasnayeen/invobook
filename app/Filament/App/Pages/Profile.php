@@ -27,7 +27,7 @@ class Profile extends Page implements HasForms
     use InteractsWithForms;
     use InteractsWithFormActions;
 
-    protected static ?string $navigationIcon = 'heroicon-o-user-circle';
+    protected static ?string $navigationIcon = 'lucide-user-circle';
     protected static string $view = 'filament.app.pages.profile';
     protected static ?string $navigationGroup = 'Settings';
     public ?array $detailsData = [];
@@ -244,17 +244,17 @@ class Profile extends Page implements HasForms
             [
                 'id' => 'detailsForm',
                 'label' => 'Details',
-                'icon' => 'heroicon-o-document-text',
+                'icon' => 'lucide-file-text',
             ],
             [
                 'id' => 'updatePasswordForm',
                 'label' => 'Update Password',
-                'icon' => 'heroicon-o-lock-closed',
+                'icon' => 'lucide-lock',
             ],
             [
                 'id' => 'rateForm',
                 'label' => 'Rate',
-                'icon' => 'heroicon-o-currency-dollar',
+                'icon' => 'lucide-banknote',
             ],
         ];
     }

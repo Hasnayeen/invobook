@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class ProjectResource extends Resource
 {
     protected static ?string $model = Project::class;
-    protected static ?string $navigationIcon = 'heroicon-o-folder';
+    protected static ?string $navigationIcon = 'lucide-folder-open';
     protected static ?string $navigationGroup = 'Work';
     protected static ?int $navigationSort = 3;
     protected static ?string $recordTitleAttribute = 'name';

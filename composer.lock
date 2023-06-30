@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7614e3bec3afcdfd321d2cbf41cc12ab",
+    "content-hash": "e108628cf64bb518451a90532fb00df3",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -881,16 +881,16 @@
         },
         {
             "name": "filament/actions",
-            "version": "v3.0.0-alpha117",
+            "version": "v3.0.0-alpha120",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/actions.git",
-                "reference": "1c9de1bf4c46cfc28054cb0e11e10d733b6c9128"
+                "reference": "a44f0fd78b88a981b6be49a0d1c32a68e7338ca2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/actions/zipball/1c9de1bf4c46cfc28054cb0e11e10d733b6c9128",
-                "reference": "1c9de1bf4c46cfc28054cb0e11e10d733b6c9128",
+                "url": "https://api.github.com/repos/filamentphp/actions/zipball/a44f0fd78b88a981b6be49a0d1c32a68e7338ca2",
+                "reference": "a44f0fd78b88a981b6be49a0d1c32a68e7338ca2",
                 "shasum": ""
             },
             "require": {
@@ -929,20 +929,20 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2023-06-26T15:19:19+00:00"
+            "time": "2023-06-29T14:08:20+00:00"
         },
         {
             "name": "filament/filament",
-            "version": "v3.0.0-alpha117",
+            "version": "v3.0.0-alpha120",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/panels.git",
-                "reference": "9c44b6c71c040a728b9fe956ec90993875590f7f"
+                "reference": "cb685fd046ba152a12a8c439108a324c5ab67c50"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/panels/zipball/9c44b6c71c040a728b9fe956ec90993875590f7f",
-                "reference": "9c44b6c71c040a728b9fe956ec90993875590f7f",
+                "url": "https://api.github.com/repos/filamentphp/panels/zipball/cb685fd046ba152a12a8c439108a324c5ab67c50",
+                "reference": "cb685fd046ba152a12a8c439108a324c5ab67c50",
                 "shasum": ""
             },
             "require": {
@@ -994,20 +994,20 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2023-06-26T15:19:18+00:00"
+            "time": "2023-06-29T14:08:45+00:00"
         },
         {
             "name": "filament/forms",
-            "version": "v3.0.0-alpha117",
+            "version": "v3.0.0-alpha120",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/forms.git",
-                "reference": "5eabaf190a24a33afc27862ea2809b3bf3443112"
+                "reference": "37a47b97369a7134de35a42cc32e47327dfa3fd4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/forms/zipball/5eabaf190a24a33afc27862ea2809b3bf3443112",
-                "reference": "5eabaf190a24a33afc27862ea2809b3bf3443112",
+                "url": "https://api.github.com/repos/filamentphp/forms/zipball/37a47b97369a7134de35a42cc32e47327dfa3fd4",
+                "reference": "37a47b97369a7134de35a42cc32e47327dfa3fd4",
                 "shasum": ""
             },
             "require": {
@@ -1052,20 +1052,20 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2023-06-26T15:19:16+00:00"
+            "time": "2023-06-29T22:14:12+00:00"
         },
         {
             "name": "filament/infolists",
-            "version": "v3.0.0-alpha117",
+            "version": "v3.0.0-alpha120",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/infolists.git",
-                "reference": "7c8bf02f5fdf521365c61f04782503453bc1b5e9"
+                "reference": "71d08ba527f999c895f15f37c795df3028b70200"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/infolists/zipball/7c8bf02f5fdf521365c61f04782503453bc1b5e9",
-                "reference": "7c8bf02f5fdf521365c61f04782503453bc1b5e9",
+                "url": "https://api.github.com/repos/filamentphp/infolists/zipball/71d08ba527f999c895f15f37c795df3028b70200",
+                "reference": "71d08ba527f999c895f15f37c795df3028b70200",
                 "shasum": ""
             },
             "require": {
@@ -1104,20 +1104,20 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2023-06-26T15:19:14+00:00"
+            "time": "2023-06-29T14:08:22+00:00"
         },
         {
             "name": "filament/notifications",
-            "version": "v3.0.0-alpha117",
+            "version": "v3.0.0-alpha120",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/notifications.git",
-                "reference": "f701753f2e6bc270c4bbe462e12150b127c651db"
+                "reference": "64a020227cae8935e6a106fcbadfa51a758d55c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/notifications/zipball/f701753f2e6bc270c4bbe462e12150b127c651db",
-                "reference": "f701753f2e6bc270c4bbe462e12150b127c651db",
+                "url": "https://api.github.com/repos/filamentphp/notifications/zipball/64a020227cae8935e6a106fcbadfa51a758d55c8",
+                "reference": "64a020227cae8935e6a106fcbadfa51a758d55c8",
                 "shasum": ""
             },
             "require": {
@@ -1158,20 +1158,20 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2023-06-26T15:19:12+00:00"
+            "time": "2023-06-29T14:08:35+00:00"
         },
         {
             "name": "filament/support",
-            "version": "v3.0.0-alpha117",
+            "version": "v3.0.0-alpha120",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/support.git",
-                "reference": "c0141f93263e587516317a2eddc0ed9f9302fc2f"
+                "reference": "576b29d3da739de315ac4d25cdcf1bf7aab64800"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/support/zipball/c0141f93263e587516317a2eddc0ed9f9302fc2f",
-                "reference": "c0141f93263e587516317a2eddc0ed9f9302fc2f",
+                "url": "https://api.github.com/repos/filamentphp/support/zipball/576b29d3da739de315ac4d25cdcf1bf7aab64800",
+                "reference": "576b29d3da739de315ac4d25cdcf1bf7aab64800",
                 "shasum": ""
             },
             "require": {
@@ -1213,20 +1213,20 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2023-06-23T08:16:40+00:00"
+            "time": "2023-06-29T22:14:31+00:00"
         },
         {
             "name": "filament/tables",
-            "version": "v3.0.0-alpha117",
+            "version": "v3.0.0-alpha120",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/tables.git",
-                "reference": "5b36775c8bf58fadaede2ea1a2bec5965f6bd1f3"
+                "reference": "cde70eefe30fc8d883fa67999527bba5b7b95ac7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/tables/zipball/5b36775c8bf58fadaede2ea1a2bec5965f6bd1f3",
-                "reference": "5b36775c8bf58fadaede2ea1a2bec5965f6bd1f3",
+                "url": "https://api.github.com/repos/filamentphp/tables/zipball/cde70eefe30fc8d883fa67999527bba5b7b95ac7",
+                "reference": "cde70eefe30fc8d883fa67999527bba5b7b95ac7",
                 "shasum": ""
             },
             "require": {
@@ -1268,20 +1268,20 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2023-06-26T15:19:42+00:00"
+            "time": "2023-06-29T14:09:03+00:00"
         },
         {
             "name": "filament/widgets",
-            "version": "v3.0.0-alpha117",
+            "version": "v3.0.0-alpha120",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/widgets.git",
-                "reference": "57d029ea25cb08fea75f5dbadab0c8178715c4d2"
+                "reference": "78a5f6cde9a20a152695a78fc6e3fcf70b3d8f84"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/widgets/zipball/57d029ea25cb08fea75f5dbadab0c8178715c4d2",
-                "reference": "57d029ea25cb08fea75f5dbadab0c8178715c4d2",
+                "url": "https://api.github.com/repos/filamentphp/widgets/zipball/78a5f6cde9a20a152695a78fc6e3fcf70b3d8f84",
+                "reference": "78a5f6cde9a20a152695a78fc6e3fcf70b3d8f84",
                 "shasum": ""
             },
             "require": {
@@ -1314,7 +1314,7 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2023-06-23T08:16:49+00:00"
+            "time": "2023-06-29T22:14:36+00:00"
         },
         {
             "name": "fruitcake/php-cors",
@@ -1984,16 +1984,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v10.14.0",
+            "version": "v10.14.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "285cdd86a4beb433513b38f41a89b510e0724a3e"
+                "reference": "6f89a2b74b232d8bf2e1d9ed87e311841263dfcb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/285cdd86a4beb433513b38f41a89b510e0724a3e",
-                "reference": "285cdd86a4beb433513b38f41a89b510e0724a3e",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/6f89a2b74b232d8bf2e1d9ed87e311841263dfcb",
+                "reference": "6f89a2b74b232d8bf2e1d9ed87e311841263dfcb",
                 "shasum": ""
             },
             "require": {
@@ -2180,7 +2180,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2023-06-27T13:26:12+00:00"
+            "time": "2023-06-28T14:25:16+00:00"
         },
         {
             "name": "laravel/pennant",
@@ -8413,16 +8413,16 @@
         },
         {
             "name": "nunomaduro/collision",
-            "version": "v7.6.0",
+            "version": "v7.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nunomaduro/collision.git",
-                "reference": "87faf7bc1c42d7fef7c60ec5c143050ce2a6189a"
+                "reference": "69a07197d055456d29911116fca3bc2c985f524b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nunomaduro/collision/zipball/87faf7bc1c42d7fef7c60ec5c143050ce2a6189a",
-                "reference": "87faf7bc1c42d7fef7c60ec5c143050ce2a6189a",
+                "url": "https://api.github.com/repos/nunomaduro/collision/zipball/69a07197d055456d29911116fca3bc2c985f524b",
+                "reference": "69a07197d055456d29911116fca3bc2c985f524b",
                 "shasum": ""
             },
             "require": {
@@ -8435,18 +8435,18 @@
                 "phpunit/phpunit": "<10.1.2"
             },
             "require-dev": {
-                "brianium/paratest": "^7.2.0",
-                "laravel/framework": "^10.13.5",
-                "laravel/pint": "^1.10.2",
-                "laravel/sail": "^1.22.0",
+                "brianium/paratest": "^7.2.2",
+                "laravel/framework": "^10.14.1",
+                "laravel/pint": "^1.10.3",
+                "laravel/sail": "^1.23.0",
                 "laravel/sanctum": "^3.2.5",
                 "laravel/tinker": "^2.8.1",
                 "nunomaduro/larastan": "^2.6.3",
-                "orchestra/testbench-core": "^8.5.7",
-                "pestphp/pest": "^2",
+                "orchestra/testbench-core": "^8.5.8",
+                "pestphp/pest": "^2.8.1",
                 "phpunit/phpunit": "^10.2.2",
                 "sebastian/environment": "^6.0.1",
-                "spatie/laravel-ignition": "^2.1.3"
+                "spatie/laravel-ignition": "^2.2.0"
             },
             "type": "library",
             "extra": {
@@ -8505,7 +8505,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2023-06-15T10:51:08+00:00"
+            "time": "2023-06-29T09:10:16+00:00"
         },
         {
             "name": "nunomaduro/larastan",
@@ -10761,16 +10761,16 @@
         },
         {
             "name": "spatie/backtrace",
-            "version": "1.4.1",
+            "version": "1.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/backtrace.git",
-                "reference": "47794d19e3215ace9e005a8f200cd7cc7be52572"
+                "reference": "483f76a82964a0431aa836b6ed0edde0c248e3ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/backtrace/zipball/47794d19e3215ace9e005a8f200cd7cc7be52572",
-                "reference": "47794d19e3215ace9e005a8f200cd7cc7be52572",
+                "url": "https://api.github.com/repos/spatie/backtrace/zipball/483f76a82964a0431aa836b6ed0edde0c248e3ab",
+                "reference": "483f76a82964a0431aa836b6ed0edde0c248e3ab",
                 "shasum": ""
             },
             "require": {
@@ -10807,7 +10807,7 @@
                 "spatie"
             ],
             "support": {
-                "source": "https://github.com/spatie/backtrace/tree/1.4.1"
+                "source": "https://github.com/spatie/backtrace/tree/1.5.3"
             },
             "funding": [
                 {
@@ -10819,26 +10819,27 @@
                     "type": "other"
                 }
             ],
-            "time": "2023-06-13T14:35:04+00:00"
+            "time": "2023-06-28T12:59:17+00:00"
         },
         {
             "name": "spatie/flare-client-php",
-            "version": "1.3.6",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/flare-client-php.git",
-                "reference": "530ac81255af79f114344286e4275f8869c671e2"
+                "reference": "82138174d5fe2829a7f085a6bdb2a06f6def9f7a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/flare-client-php/zipball/530ac81255af79f114344286e4275f8869c671e2",
-                "reference": "530ac81255af79f114344286e4275f8869c671e2",
+                "url": "https://api.github.com/repos/spatie/flare-client-php/zipball/82138174d5fe2829a7f085a6bdb2a06f6def9f7a",
+                "reference": "82138174d5fe2829a7f085a6bdb2a06f6def9f7a",
                 "shasum": ""
             },
             "require": {
                 "illuminate/pipeline": "^8.0|^9.0|^10.0",
+                "nesbot/carbon": "^2.62.1",
                 "php": "^8.0",
-                "spatie/backtrace": "^1.2",
+                "spatie/backtrace": "^1.5.2",
                 "symfony/http-foundation": "^5.0|^6.0",
                 "symfony/mime": "^5.2|^6.0",
                 "symfony/process": "^5.2|^6.0",
@@ -10855,7 +10856,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.1.x-dev"
+                    "dev-main": "1.3.x-dev"
                 }
             },
             "autoload": {
@@ -10880,7 +10881,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/flare-client-php/issues",
-                "source": "https://github.com/spatie/flare-client-php/tree/1.3.6"
+                "source": "https://github.com/spatie/flare-client-php/tree/1.4.0"
             },
             "funding": [
                 {
@@ -10888,28 +10889,28 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-04-12T07:57:12+00:00"
+            "time": "2023-06-28T11:08:09+00:00"
         },
         {
             "name": "spatie/ignition",
-            "version": "1.8.1",
+            "version": "1.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/ignition.git",
-                "reference": "d8eb8ea1ed27f48a694405cff363746ffd37f13e"
+                "reference": "de24ff1e01814d5043bd6eb4ab36a5a852a04973"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/ignition/zipball/d8eb8ea1ed27f48a694405cff363746ffd37f13e",
-                "reference": "d8eb8ea1ed27f48a694405cff363746ffd37f13e",
+                "url": "https://api.github.com/repos/spatie/ignition/zipball/de24ff1e01814d5043bd6eb4ab36a5a852a04973",
+                "reference": "de24ff1e01814d5043bd6eb4ab36a5a852a04973",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "ext-mbstring": "*",
                 "php": "^8.0",
-                "spatie/backtrace": "^1.4",
-                "spatie/flare-client-php": "^1.1",
+                "spatie/backtrace": "^1.5.3",
+                "spatie/flare-client-php": "^1.4.0",
                 "symfony/console": "^5.4|^6.0",
                 "symfony/var-dumper": "^5.4|^6.0"
             },
@@ -10921,7 +10922,7 @@
                 "phpstan/phpstan-deprecation-rules": "^1.0",
                 "phpstan/phpstan-phpunit": "^1.0",
                 "psr/simple-cache-implementation": "*",
-                "symfony/cache": "^6.2",
+                "symfony/cache": "^6.0",
                 "symfony/process": "^5.4|^6.0",
                 "vlucas/phpdotenv": "^5.5"
             },
@@ -10971,20 +10972,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-06-06T14:14:58+00:00"
+            "time": "2023-06-28T13:24:59+00:00"
         },
         {
             "name": "spatie/laravel-ignition",
-            "version": "2.1.3",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-ignition.git",
-                "reference": "35711943d4725aa80f8033e4f1cb3a6775530b25"
+                "reference": "dd15fbe82ef5392798941efae93c49395a87d943"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-ignition/zipball/35711943d4725aa80f8033e4f1cb3a6775530b25",
-                "reference": "35711943d4725aa80f8033e4f1cb3a6775530b25",
+                "url": "https://api.github.com/repos/spatie/laravel-ignition/zipball/dd15fbe82ef5392798941efae93c49395a87d943",
+                "reference": "dd15fbe82ef5392798941efae93c49395a87d943",
                 "shasum": ""
             },
             "require": {
@@ -10994,7 +10995,7 @@
                 "illuminate/support": "^10.0",
                 "php": "^8.1",
                 "spatie/flare-client-php": "^1.3.5",
-                "spatie/ignition": "^1.5.0",
+                "spatie/ignition": "^1.9",
                 "symfony/console": "^6.2.3",
                 "symfony/var-dumper": "^6.2.3"
             },
@@ -11063,7 +11064,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-05-25T11:30:27+00:00"
+            "time": "2023-06-28T13:51:52+00:00"
         },
         {
             "name": "symfony/yaml",

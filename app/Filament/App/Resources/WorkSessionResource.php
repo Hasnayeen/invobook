@@ -21,7 +21,7 @@ use Laravel\Pennant\Feature;
 class WorkSessionResource extends Resource
 {
     protected static ?string $model = WorkSession::class;
-    protected static ?string $navigationIcon = 'heroicon-o-clock';
+    protected static ?string $navigationIcon = 'lucide-calendar-clock';
     protected static ?string $navigationGroup = 'Work';
     protected static ?string $navigationLabel = 'Sessions';
 

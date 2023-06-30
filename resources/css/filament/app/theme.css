@@ -30,4 +30,8 @@
     .filament-button-outline-primary {
         @apply bg-white dark:bg-gray-800 border-primary-500 dark:border-primary-400 border-2 shadow-none text-primary-600 dark:text-primary-400 hover:bg-primary-50 dark:hover:bg-gray-900 !important;
     }
+
+    .icon {
+        @apply !w-5 !h-5;
+    }
 }

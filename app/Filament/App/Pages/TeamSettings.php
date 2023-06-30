@@ -20,7 +20,7 @@ class TeamSettings extends Page implements HasForms
     use InteractsWithForms;
     use InteractsWithFormActions;
 
-    protected static ?string $navigationIcon = 'heroicon-o-user-group';
+    protected static ?string $navigationIcon = 'lucide-users';
     protected static ?string $navigationLabel = 'Team';
     protected static string $view = 'filament.app.pages.team-settings';
     protected static ?string $navigationGroup = 'Settings';
@@ -80,17 +80,17 @@ class TeamSettings extends Page implements HasForms
             [
                 'id' => 'detailsForm',
                 'label' => 'Details',
-                'icon' => 'heroicon-o-document-text',
+                'icon' => 'lucide-file-text',
             ],
             [
                 'id' => 'members',
                 'label' => 'Members',
-                'icon' => 'heroicon-o-user-group',
+                'icon' => 'lucide-users-2',
             ],
             [
                 'id' => 'statusForm',
                 'label' => 'Status',
-                'icon' => 'heroicon-o-list-bullet',
+                'icon' => 'lucide-list-todo',
             ],
         ];
     }

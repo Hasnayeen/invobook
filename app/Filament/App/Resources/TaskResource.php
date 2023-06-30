@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class TaskResource extends Resource
 {
     protected static ?string $model = Task::class;
-    protected static ?string $navigationIcon = 'heroicon-o-list-bullet';
+    protected static ?string $navigationIcon = 'lucide-layout-list';
     protected static ?string $navigationGroup = 'Work';
     protected static ?int $navigationSort = 2;
     protected static ?string $recordTitleAttribute = 'title';
