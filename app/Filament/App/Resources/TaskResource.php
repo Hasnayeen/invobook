@@ -6,6 +6,10 @@ use App\Filament\App\Resources\TaskResource\Pages;
 use App\Models\Task;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Infolists;
+use Filament\Infolists\Components\Card;
+use Filament\Infolists\Components\Grid;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -28,9 +32,15 @@ class TaskResource extends Resource
                 Forms\Components\Select::make('project_id')
                     ->required()
                     ->relationship('project', 'name'),
+                Forms\Components\Select::make('depends_on')
+                    ->relationship('task', 'title'),
+                Forms\Components\Select::make('assigned_to')
+                    ->relationship('assignedTo', 'name'),
+                Forms\Components\DatePicker::make('due_on'),
                 Forms\Components\TextInput::make('title')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->columnSpanFull(),
                 Forms\Components\TextInput::make('issue_link')
                     ->label('Issue')
                     ->hint('Link to the issue on Github')
@@ -72,7 +82,11 @@ class TaskResource extends Resource
                     ->url(fn ($record) => $record->pr_link)
                     ->limit(20)
                     ->openUrlInNewTab(),
+                Tables\Columns\TextColumn::make('assignedTo.name'),
+                Tables\Columns\TextColumn::make('depends_on'),
                 Tables\Columns\TextColumn::make('status'),
+                Tables\Columns\TextColumn::make('due_on')
+                    ->date(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Created')
                     ->date(),
@@ -92,6 +106,60 @@ class TaskResource extends Resource
             ->defaultGroup('status')
             ->groups([
                 'status',
+            ]);
+    }
+
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->schema([
+                Grid::make(3)
+                    ->schema([
+                        Card::make()
+                            ->columns(4)
+                            ->schema([
+                                Infolists\Components\TextEntry::make('project.name')
+                                    ->inlineLabel()
+                                    ->badge()
+                                    ->color('primary')
+                                    ->columnSpan(1),
+                                Infolists\Components\TextEntry::make('description')
+                                    ->columnSpanFull()
+                                    ->size('lg')
+                                    ->markdown()
+                                    ->prose(),
+                            ])->columnSpan(2),
+                        Grid::make(1)
+                            ->columnSpan(1)
+                            ->schema([
+                                Infolists\Components\Section::make('Status')
+                                    ->schema([
+                                        Infolists\Components\TextEntry::make('status')
+                                            ->inlineLabel()
+                                            ->badge(),
+                                        Infolists\Components\TextEntry::make('assignedTo.name')
+                                            ->inlineLabel()
+                                            ->label('Assignee')
+                                            ->url(fn ($record) => $record->assignedTo->name),
+                                        Infolists\Components\TextEntry::make('due_on')
+                                            ->date()
+                                            ->inlineLabel(),
+                                    ])
+                                    ->columnSpan(1),
+                                Infolists\Components\Section::make('Links')
+                                    ->schema([
+                                        Infolists\Components\TextEntry::make('issue_link')
+                                            ->label('Issue')
+                                            ->url(fn ($record) => $record->issue_link)
+                                            ->openUrlInNewTab(),
+                                        Infolists\Components\TextEntry::make('pr_link')
+                                            ->label('PR')
+                                            ->url(fn ($record) => $record->pr_link)
+                                            ->openUrlInNewTab(),
+                                    ])
+                                    ->columnSpan(1),
+                            ]),
+                    ]),
             ]);
     }
 
