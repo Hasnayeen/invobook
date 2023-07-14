@@ -15,6 +15,7 @@ return new class extends Migration
             $table->ulid('id')->index()->primary();
             $table->string('name')->nullable();
             $table->string('email')->nullable();
+            $table->text('address')->nullable();
             $table->foreignUlid('user_id')->nullable()->constrained('users')->cascadeOnDelete();
             $table->foreignUlid('team_id')->constrained('teams')->cascadeOnDelete();
             $table->timestamps();

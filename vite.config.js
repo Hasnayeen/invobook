@@ -8,6 +8,7 @@ export default defineConfig({
                 'resources/css/app.css',
                 'resources/js/app.js',
                 'resources/css/filament/app/theme.css',
+                'resources/css/template/template.css',
             ],
             refresh: true,
         }),

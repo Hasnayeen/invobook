@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('currency', 3)->nullable();
             $table->foreignUlid('user_id')->constrained('users')->cascadeOnDelete();
             $table->foreignUlid('team_id')->constrained('teams')->cascadeOnDelete();
-            $table->ulid('task_id')->nullable()->index();
-            $table->ulid('project_id')->nullable()->index();
+            $table->foreignUlid('task_id')->nullable()->constrained('tasks')->cascadeOnDelete();
+            $table->foreignUlid('project_id')->nullable()->constrained('projects')->cascadeOnDelete();
             $table->timestamps();
         });
     }

@@ -2,6 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Team;
+use App\Models\User;
+use App\Models\Project;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +20,12 @@ class TaskFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'title' => fake()->sentence(),
+            'description' => fake()->paragraph(),
+            'status' => 'todo',
+            'project_id' => Project::factory(),
+            'team_id' => Team::factory(),
+            'user_id' => auth()->id() ?? User::factory(),
         ];
     }
 }

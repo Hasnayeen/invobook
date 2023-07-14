@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Team;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,10 @@ class ClientFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => fake()->firstName() . ' ' . fake()->lastName(),
+            'address' => fake()->address(),
+            'team_id' => Team::factory(),
+            'user_id' => auth()->id() ?? User::factory(),
         ];
     }
 }

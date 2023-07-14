@@ -7,6 +7,7 @@ use App\Models\Client;
 use Filament\Facades\Filament;
 use Filament\Forms\Form;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Get;
@@ -30,7 +31,7 @@ class ClientResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->columns(2)
+            ->columns(3)
             ->schema([
                 // Toggle::make('registered')
                 //     ->label('Your client already has an account')
@@ -54,12 +55,14 @@ class ClientResource extends Resource
                 TextInput::make('name')
                     ->label('Client name')
                     ->hidden(fn (Get $get) => $get('registered') === true)
-                    ->maxLength(255)
-                    ->columnStart(1),
+                    ->maxLength(255),
                 TextInput::make('email')
                     ->hidden(fn (Get $get) => $get('registered') === true)
                     ->email()
                     ->maxLength(255),
+                Textarea::make('address')
+                    ->hidden(fn (Get $get) => $get('registered') === true)
+                    ->maxLength(65535),
             ]);
     }
 
@@ -71,6 +74,7 @@ class ClientResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('address'),
             ])
             ->filters([
                 //

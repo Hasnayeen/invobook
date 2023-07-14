@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignUlid('user_id')->constrained('users')->cascadeOnDelete();
             $table->foreignUlid('project_id')->constrained('projects')->cascadeOnDelete();
             $table->foreignUlid('team_id')->constrained('teams')->cascadeOnDelete();
-            $table->foreignUlid('depends_on')->nullable()->constrained('tasks')->cascadeOnDelete();
             $table->foreignUlid('assigned_to')->nullable()->constrained('users')->cascadeOnDelete();
             $table->string('title');
             $table->text('description')->nullable();
@@ -26,6 +25,9 @@ return new class extends Migration
             $table->timestamp('due_on')->nullable();
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
+        });
+        Schema::table('tasks', function (Blueprint $table) {
+            $table->foreignUlid('depends_on')->nullable()->constrained('tasks')->cascadeOnDelete();
         });
     }
 

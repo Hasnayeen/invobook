@@ -1,396 +1,113 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>{{ $invoice->name }}</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
-        <style type="text/css" media="screen">
-            html {
-                font-family: sans-serif;
-                line-height: 1.15;
-                margin: 0;
-            }
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-            body {
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-                font-weight: 400;
-                line-height: 1.5;
-                color: #212529;
-                text-align: left;
-                background-color: #fff;
-                font-size: 10px;
-                margin: 36pt;
-            }
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
-            h4 {
-                margin-top: 0;
-                margin-bottom: 0.5rem;
-            }
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
-            p {
-                margin-top: 0;
-                margin-bottom: 1rem;
-            }
+    <!-- Styles -->
+    @vite(['resources/css/template/template.css'])
+</head>
 
-            strong {
-                font-weight: bolder;
-            }
+<body class="w-[21cm] h-[29.7cm]">
+    <div class="font-sans text-gray-900 antialiased px-8 pt-8">
+        <div class="px-4 pb-8 w-full">
+            <!-- nav bar -->
+            <section class="mb-8 w-full flex justify-between items-center">
+                <div>
+                    <div class="space-x-0 text-xl font-semibold">
+                        <span class="text-gray-600 -mr-3">#</span>
+                        <span class="text-gray-800 uppercase pl-2">{{ \Str::limit($invoice->getSerialNumber(), 12, '') }}</span>
+                    </div>
+                    <div class="pt-4">
+                        <div>
+                            <div class="text-xs text-gray-600">Issued on</div>
+                            <h3 class="text-lg font-bold">{{ $invoice->getDate() }}</h3>
+                        </div>
+                        <div>
+                            <div class="text-xs text-gray-600">Due on</div>
+                            <h3 class="text-lg font-bold">{{ $invoice->getPayUntilDate() }}</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex">
+                    <div class="bg-gray-100 p-4 rounded-lg">
+                        <p class="text-sm font-semibold text-gray-600">Invoice for</p>
+                        <h1 class="font-bold text-2xl mb-1">{{ $invoice->buyer->name }}</h1>
+                        <h2 class="text-sm">{{ $invoice->buyer->address ?? '' }}</h2>
+                    </div>
+                </div>
+            </section>
 
-            img {
-                vertical-align: middle;
-                border-style: none;
-            }
+            <!-- summary -->
+            <section class="mb-8">
+                <h1 class="text-xl font-semibold text-gray-600 mb-2">Summary</h1>
+                <div class="border-gray-200 border-b-2 w-full mb-2"></div>
+                <h1 class="text-xl text-gray-800">
+                    @if ($invoice->notes)
+                        {{ $invoice->notes }}
+                    @else
+                        Invoice for [ {{ $invoice->getCustomData()['from'] }} - {{ $invoice->getCustomData()['to'] }} ]
+                    @endif
+                </h1>
+            </section>
+            <!-- table -->
+            @php
+                $showProject = $invoice->items->every(fn ($value) => ! empty($value->project));
+            @endphp
+            <section class="mb-8 rounded-lg overflow-hidden border-2 border-gray-100">
+                <table class="border w-full rounded-xl">
+                    <tr class="border-b text-gray-700">
+                        <th class="uppercase  text-left px-8 py-3">item</th>
+                        @if ($showProject)
+                            <th class="uppercase  text-left pr-8">project</th>
+                        @endif
+                        <th class="uppercase  text-left pr-8">hrs</th>
+                        <th class="uppercase  text-left pr-8 ">rate</th>
+                        <th class="uppercase  text-left  ">subtotal</th>
+                    </tr>
+                    @foreach ($invoice->items as $item)
+                        <tr class="{{ $loop->even ? 'bg-blueGray-50' : '' }} text-xs">
+                            <td class=" text-left pl-8 py-3 pr-20">{{ $item->title }}</td>
+                            @if ($showProject)
+                                <td class="">
+                                    {{ $item->project }}
+                                </td>
+                            @endif
+                            <td class="">{{ $item->hours }}</td>
+                            <td class="">{{ $invoice->formatCurrency($item->price_per_unit) }}</td>
+                            <td class="">{{ $invoice->formatCurrency($item->sub_total_price) }}</td>
+                        </tr>
+                    @endforeach
+                </table>
+            </section>
 
-            table {
-                border-collapse: collapse;
-            }
-
-            th {
-                text-align: inherit;
-            }
-
-            h4, .h4 {
-                margin-bottom: 0.5rem;
-                font-weight: 500;
-                line-height: 1.2;
-            }
-
-            h4, .h4 {
-                font-size: 1.5rem;
-            }
-
-            .table {
-                width: 100%;
-                margin-bottom: 1rem;
-                color: #212529;
-            }
-
-            .table th,
-            .table td {
-                padding: 0.75rem;
-                vertical-align: top;
-            }
-
-            .table.table-items td {
-                border-top: 1px solid #dee2e6;
-            }
-
-            .table thead th {
-                vertical-align: bottom;
-                border-bottom: 2px solid #dee2e6;
-            }
-
-            .mt-5 {
-                margin-top: 3rem !important;
-            }
-
-            .pr-0,
-            .px-0 {
-                padding-right: 0 !important;
-            }
-
-            .pl-0,
-            .px-0 {
-                padding-left: 0 !important;
-            }
-
-            .text-right {
-                text-align: right !important;
-            }
-
-            .text-center {
-                text-align: center !important;
-            }
-
-            .text-uppercase {
-                text-transform: uppercase !important;
-            }
-            * {
-                font-family: "DejaVu Sans";
-            }
-            body, h1, h2, h3, h4, h5, h6, table, th, tr, td, p, div {
-                line-height: 1.1;
-            }
-            .party-header {
-                font-size: 1.5rem;
-                font-weight: 400;
-            }
-            .total-amount {
-                font-size: 12px;
-                font-weight: 700;
-            }
-            .border-0 {
-                border: none !important;
-            }
-            .cool-gray {
-                color: #6B7280;
-            }
-        </style>
-    </head>
-
-    <body>
-        {{-- Header --}}
-        @if($invoice->logo)
-            <img src="{{ $invoice->getLogo() }}" alt="logo" height="100">
-        @endif
-
-        <div style="width: 100%;">
-            <span style="width: 12.5%;">
-                {{ __('invoices::invoice.seller') }}
-            </span>
-            <span style="width: 75%; height: 1px;"></span>
-            <span style="width: 12.5;">
-                {{ __('invoices::invoice.buyer') }}
-            </span>
+            <div class="grid grid-cols-4">
+                <section class="border-2 border-gray-100 rounded-lg col-span-2 col-start-3">
+                    <div class="w-full">
+                        <div class="grid grid-cols-5 items-center border-b">
+                            <span class="col-span-2 py-3 text-right text-lg font-semibold text-gray-500">SUBTOTAL</span>
+                            <span class="col-span-2 col-start-4 text-left text-xl font-bold text-gray-800">{{ $invoice->formatCurrency($invoice->total_amount - $invoice->total_taxes) }}</span>
+                        </div>
+                        <div class="grid grid-cols-5 items-center border-b">
+                            <span class="col-span-2 py-3 text-right text-lg font-semibold text-gray-500">VAT</span>
+                            <span class="col-span-2 col-start-4 text-left text-xl font-bold text-gray-800">{{ $invoice->formatCurrency($invoice->total_taxes) }}</span>
+                        </div>
+                        <div class="grid grid-cols-5 items-center border-b">
+                            <span class="col-span-2 py-3 text-right text-lg font-semibold text-gray-500">TOTAL</span>
+                            <span class="col-span-2 col-start-4 text-left text-xl font-bold text-gray-800">{{ $invoice->formatCurrency($invoice->total_amount) }}</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
         </div>
+    </div>
+</body>
 
-        <table class="table mt-5">
-            <tbody>
-                <tr>
-                    <td class="border-0 pl-0" width="70%">
-                        <h4 class="text-uppercase">
-                            <strong>{{ $invoice->name }}</strong>
-                        </h4>
-                    </td>
-                    <td class="border-0 pl-0">
-                        @if($invoice->status)
-                            <h4 class="text-uppercase cool-gray">
-                                <strong>{{ $invoice->status }}</strong>
-                            </h4>
-                        @endif
-                        <p>{{ __('invoices::invoice.serial') }} <strong>{{ $invoice->getSerialNumber() }}</strong></p>
-                        <p>{{ __('invoices::invoice.date') }}: <strong>{{ $invoice->getDate() }}</strong></p>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
-        {{-- Seller - Buyer --}}
-        <table class="table">
-            <thead>
-                <tr>
-                    <th class="border-0 pl-0 party-header" width="48.5%">
-                        {{ __('invoices::invoice.seller') }}
-                    </th>
-                    <th class="border-0" width="3%"></th>
-                    <th class="border-0 pl-0 party-header">
-                        {{ __('invoices::invoice.buyer') }}
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="px-0">
-                        @if($invoice->seller->name)
-                            <p class="seller-name">
-                                <strong>{{ $invoice->seller->name }}</strong>
-                            </p>
-                        @endif
-
-                        @if($invoice->seller->address)
-                            <p class="seller-address">
-                                {{ __('invoices::invoice.address') }}: {{ $invoice->seller->address }}
-                            </p>
-                        @endif
-
-                        @if($invoice->seller->code)
-                            <p class="seller-code">
-                                {{ __('invoices::invoice.code') }}: {{ $invoice->seller->code }}
-                            </p>
-                        @endif
-
-                        @if($invoice->seller->vat)
-                            <p class="seller-vat">
-                                {{ __('invoices::invoice.vat') }}: {{ $invoice->seller->vat }}
-                            </p>
-                        @endif
-
-                        @if($invoice->seller->phone)
-                            <p class="seller-phone">
-                                {{ __('invoices::invoice.phone') }}: {{ $invoice->seller->phone }}
-                            </p>
-                        @endif
-
-                        @foreach($invoice->seller->custom_fields as $key => $value)
-                            <p class="seller-custom-field">
-                                {{ ucfirst($key) }}: {{ $value }}
-                            </p>
-                        @endforeach
-                    </td>
-                    <td class="border-0"></td>
-                    <td class="px-0">
-                        @if($invoice->buyer->name)
-                            <p class="buyer-name">
-                                <strong>{{ $invoice->buyer->name }}</strong>
-                            </p>
-                        @endif
-
-                        @if($invoice->buyer->address)
-                            <p class="buyer-address">
-                                {{ __('invoices::invoice.address') }}: {{ $invoice->buyer->address }}
-                            </p>
-                        @endif
-
-                        @if($invoice->buyer->code)
-                            <p class="buyer-code">
-                                {{ __('invoices::invoice.code') }}: {{ $invoice->buyer->code }}
-                            </p>
-                        @endif
-
-                        @if($invoice->buyer->vat)
-                            <p class="buyer-vat">
-                                {{ __('invoices::invoice.vat') }}: {{ $invoice->buyer->vat }}
-                            </p>
-                        @endif
-
-                        @if($invoice->buyer->phone)
-                            <p class="buyer-phone">
-                                {{ __('invoices::invoice.phone') }}: {{ $invoice->buyer->phone }}
-                            </p>
-                        @endif
-
-                        @foreach($invoice->buyer->custom_fields as $key => $value)
-                            <p class="buyer-custom-field">
-                                {{ ucfirst($key) }}: {{ $value }}
-                            </p>
-                        @endforeach
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
-        {{-- Table --}}
-        <table class="table table-items">
-            <thead>
-                <tr>
-                    <th scope="col" class="border-0 pl-0">{{ __('invoices::invoice.description') }}</th>
-                    @if($invoice->hasItemUnits)
-                        <th scope="col" class="text-center border-0">{{ __('invoices::invoice.units') }}</th>
-                    @endif
-                    <th scope="col" class="text-center border-0">{{ __('invoices::invoice.quantity') }}</th>
-                    <th scope="col" class="text-right border-0">{{ __('invoices::invoice.price') }}</th>
-                    @if($invoice->hasItemDiscount)
-                        <th scope="col" class="text-right border-0">{{ __('invoices::invoice.discount') }}</th>
-                    @endif
-                    @if($invoice->hasItemTax)
-                        <th scope="col" class="text-right border-0">{{ __('invoices::invoice.tax') }}</th>
-                    @endif
-                    <th scope="col" class="text-right border-0 pr-0">{{ __('invoices::invoice.sub_total') }}</th>
-                </tr>
-            </thead>
-            <tbody>
-                {{-- Items --}}
-                @foreach($invoice->items as $item)
-                <tr>
-                    <td class="pl-0">
-                        {{ $item->title }}
-
-                        @if($item->description)
-                            <p class="cool-gray">{{ $item->description }}</p>
-                        @endif
-                    </td>
-                    @if($invoice->hasItemUnits)
-                        <td class="text-center">{{ $item->units }}</td>
-                    @endif
-                    <td class="text-center">{{ $item->quantity }}</td>
-                    <td class="text-right">
-                        {{ $invoice->formatCurrency($item->price_per_unit) }}
-                    </td>
-                    @if($invoice->hasItemDiscount)
-                        <td class="text-right">
-                            {{ $invoice->formatCurrency($item->discount) }}
-                        </td>
-                    @endif
-                    @if($invoice->hasItemTax)
-                        <td class="text-right">
-                            {{ $invoice->formatCurrency($item->tax) }}
-                        </td>
-                    @endif
-
-                    <td class="text-right pr-0">
-                        {{ $invoice->formatCurrency($item->sub_total_price) }}
-                    </td>
-                </tr>
-                @endforeach
-                {{-- Summary --}}
-                @if($invoice->hasItemOrInvoiceDiscount())
-                    <tr>
-                        <td colspan="{{ $invoice->table_columns - 2 }}" class="border-0"></td>
-                        <td class="text-right pl-0">{{ __('invoices::invoice.total_discount') }}</td>
-                        <td class="text-right pr-0">
-                            {{ $invoice->formatCurrency($invoice->total_discount) }}
-                        </td>
-                    </tr>
-                @endif
-                @if($invoice->taxable_amount)
-                    <tr>
-                        <td colspan="{{ $invoice->table_columns - 2 }}" class="border-0"></td>
-                        <td class="text-right pl-0">{{ __('invoices::invoice.taxable_amount') }}</td>
-                        <td class="text-right pr-0">
-                            {{ $invoice->formatCurrency($invoice->taxable_amount) }}
-                        </td>
-                    </tr>
-                @endif
-                @if($invoice->tax_rate)
-                    <tr>
-                        <td colspan="{{ $invoice->table_columns - 2 }}" class="border-0"></td>
-                        <td class="text-right pl-0">{{ __('invoices::invoice.tax_rate') }}</td>
-                        <td class="text-right pr-0">
-                            {{ $invoice->tax_rate }}%
-                        </td>
-                    </tr>
-                @endif
-                @if($invoice->hasItemOrInvoiceTax())
-                    <tr>
-                        <td colspan="{{ $invoice->table_columns - 2 }}" class="border-0"></td>
-                        <td class="text-right pl-0">{{ __('invoices::invoice.total_taxes') }}</td>
-                        <td class="text-right pr-0">
-                            {{ $invoice->formatCurrency($invoice->total_taxes) }}
-                        </td>
-                    </tr>
-                @endif
-                @if($invoice->shipping_amount)
-                    <tr>
-                        <td colspan="{{ $invoice->table_columns - 2 }}" class="border-0"></td>
-                        <td class="text-right pl-0">{{ __('invoices::invoice.shipping') }}</td>
-                        <td class="text-right pr-0">
-                            {{ $invoice->formatCurrency($invoice->shipping_amount) }}
-                        </td>
-                    </tr>
-                @endif
-                    <tr>
-                        <td colspan="{{ $invoice->table_columns - 2 }}" class="border-0"></td>
-                        <td class="text-right pl-0">{{ __('invoices::invoice.total_amount') }}</td>
-                        <td class="text-right pr-0 total-amount">
-                            {{ $invoice->formatCurrency($invoice->total_amount) }}
-                        </td>
-                    </tr>
-            </tbody>
-        </table>
-
-        @if($invoice->notes)
-            <p>
-                {{ trans('invoices::invoice.notes') }}: {!! $invoice->notes !!}
-            </p>
-        @endif
-
-        <p>
-            {{ trans('invoices::invoice.amount_in_words') }}: {{ $invoice->getTotalAmountInWords() }}
-        </p>
-        <p>
-            {{ trans('invoices::invoice.pay_until') }}: {{ $invoice->getPayUntilDate() }}
-        </p>
-
-        <script type="text/php">
-            if (isset($pdf) && $PAGE_COUNT > 1) {
-                $text = "Page {PAGE_NUM} / {PAGE_COUNT}";
-                $size = 10;
-                $font = $fontMetrics->getFont("Verdana");
-                $width = $fontMetrics->get_text_width($text, $font, $size) / 2;
-                $x = ($pdf->get_width() - $width);
-                $y = $pdf->get_height() - 35;
-                $pdf->page_text($x, $y, $text, $font, $size);
-            }
-        </script>
-    </body>
 </html>

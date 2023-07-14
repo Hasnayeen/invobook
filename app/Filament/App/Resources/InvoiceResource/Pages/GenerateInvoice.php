@@ -23,6 +23,7 @@ use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 class GenerateInvoice extends Page implements HasTable
@@ -44,6 +45,7 @@ class GenerateInvoice extends Page implements HasTable
                     'work_sessions.description',
                     'work_sessions.rate_in_cents',
                     'work_sessions.start',
+                    'tasks.title as task_title',
                     DB::raw('SUM(duration) as total_duration'),
                     DB::raw('ROUND(SUM(duration / 3600 * rate_in_cents / 100)) as subtotal'),
                     DB::raw("COALESCE(tasks.title, work_sessions.description) as item"),
@@ -52,7 +54,7 @@ class GenerateInvoice extends Page implements HasTable
             )
             ->columns([
                 Tables\Columns\TextColumn::make('item')
-                    ->formatStateUsing(fn (Model $record) => $record->task_id ? $record->task->title : $record->description),
+                    ->formatStateUsing(fn (Model $record) => $record->task_id ? $record->task_title : $record->description),
                 Tables\Columns\TextColumn::make('project.name'),
                 Tables\Columns\TextColumn::make('from')
                     ->hidden()
@@ -112,6 +114,7 @@ class GenerateInvoice extends Page implements HasTable
                             ->columns(2)
                             ->schema([
                                 Select::make('client_id')
+                                    ->label('Client')
                                     ->options(Filament::getTenant()->clients->pluck('name', 'id')->toArray()),
                                 TextInput::make('vat')
                                     ->label('VAT/TAX')
@@ -124,6 +127,12 @@ class GenerateInvoice extends Page implements HasTable
                                 TextInput::make('notes')
                                     ->maxLength(255)
                                     ->columnSpan(2),
+                                Select::make('template')
+                                    ->options(Arr::mapWithKeys(
+                                            config('invoices.templates'),
+                                            fn ($item) => [$item => ucfirst($item)]
+                                        ))
+                                    ->default('default'),
                             ])
                     ])
                     ->action(
