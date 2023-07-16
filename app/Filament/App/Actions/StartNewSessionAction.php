@@ -23,18 +23,19 @@ class StartNewSessionAction extends Action
                 ->button()
                 ->size('md')
                 ->label('Start')
+                ->extraAttributes(['class' => 'outline-primary'])
                 ->emitTo('timer', 'timerStarted'),
             \Filament\GlobalSearch\Actions\Action::make('stop')
                 ->button()
                 ->size('md')
                 ->label('Stop')
-                ->color('secondary')
+                ->extraAttributes(['class' => 'outline-secondary'])
                 ->emitTo('timer', 'timerStopped'),
             \Filament\GlobalSearch\Actions\Action::make('discard')
                 ->button()
                 ->size('md')
                 ->label('Discard')
-                ->color('danger')
+                ->extraAttributes(['class' => 'outline-danger'])
                 ->emitTo('timer', 'discardSession'),
         ]);
     }

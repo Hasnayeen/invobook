@@ -140,7 +140,8 @@ class TaskResource extends Resource
                                         Infolists\Components\TextEntry::make('assignedTo.name')
                                             ->inlineLabel()
                                             ->label('Assignee')
-                                            ->url(fn ($record) => $record->assignedTo->name),
+                                            ->default('Not Assigned')
+                                            ->url(fn ($record) => $record->assignedTo?->name ?? '#'),
                                         Infolists\Components\TextEntry::make('due_on')
                                             ->date()
                                             ->inlineLabel(),

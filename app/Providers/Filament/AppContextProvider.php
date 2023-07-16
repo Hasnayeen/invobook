@@ -77,6 +77,7 @@ class AppContextProvider extends PanelProvider
             ])
             ->sidebarCollapsibleOnDesktop()
             ->databaseNotifications()
-            ->renderHook('topbar.start', fn (): View => view('filament.app.hooks.welcome_user'));
+            ->renderHook('topbar.start', fn (): View => view('filament.app.hooks.welcome_user'))
+            ->renderHook('body.start', fn (): View => view('filament.app.hooks.background'));
     }
 }
