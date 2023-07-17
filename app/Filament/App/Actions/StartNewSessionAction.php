@@ -29,7 +29,7 @@ class StartNewSessionAction extends Action
                 ->button()
                 ->size('md')
                 ->label('Stop')
-                ->extraAttributes(['class' => 'outline-secondary'])
+                ->extraAttributes(['class' => 'outline-gray'])
                 ->emitTo('timer', 'timerStopped'),
             \Filament\GlobalSearch\Actions\Action::make('discard')
                 ->button()

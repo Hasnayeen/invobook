@@ -49,9 +49,8 @@ class TaskResource extends Resource
                     ->label('PR')
                     ->hint('Link to the pull request on Github')
                     ->maxLength(255),
-                Forms\Components\TextInput::make('status')
-                    ->required()
-                    ->maxLength(255),
+                Forms\Components\Select::make('status_id')
+                    ->relationship('status', 'name'),
                 Forms\Components\Textarea::make('description')
                     ->maxLength(65535)
                     ->columnStart(1),
@@ -61,10 +60,10 @@ class TaskResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            // ->contentGrid([
-            //     'md' => 2,
-            //     'xl' => 3,
-            // ])
+            ->contentGrid([
+                'md' => 2,
+                'xl' => 3,
+            ])
             ->columns([
                 Tables\Columns\TextColumn::make('project.name'),
                 Tables\Columns\TextColumn::make('title')
@@ -84,7 +83,10 @@ class TaskResource extends Resource
                     ->openUrlInNewTab(),
                 Tables\Columns\TextColumn::make('assignedTo.name'),
                 Tables\Columns\TextColumn::make('depends_on'),
-                Tables\Columns\TextColumn::make('status'),
+                Tables\Columns\TextColumn::make('status.name')
+                    ->badge()
+                    ->color(fn ($record) => $record->status?->color)
+                    ->icon(fn ($record) => $record->status?->icon),
                 Tables\Columns\TextColumn::make('due_on')
                     ->date(),
                 Tables\Columns\TextColumn::make('created_at')
@@ -103,9 +105,9 @@ class TaskResource extends Resource
                 Tables\Actions\ForceDeleteBulkAction::make(),
                 Tables\Actions\RestoreBulkAction::make(),
             ])
-            ->defaultGroup('status')
+            ->defaultGroup('status.name')
             ->groups([
-                'status',
+                'status.name',
             ]);
     }
 
@@ -134,9 +136,11 @@ class TaskResource extends Resource
                             ->schema([
                                 Infolists\Components\Section::make('Status')
                                     ->schema([
-                                        Infolists\Components\TextEntry::make('status')
+                                        Infolists\Components\TextEntry::make('status.name')
                                             ->inlineLabel()
-                                            ->badge(),
+                                            ->badge()
+                                            ->icon(fn ($record) => $record->status?->icon)
+                                            ->color(fn ($record) => $record->status?->color),
                                         Infolists\Components\TextEntry::make('assignedTo.name')
                                             ->inlineLabel()
                                             ->label('Assignee')

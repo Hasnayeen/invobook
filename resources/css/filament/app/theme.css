@@ -31,7 +31,7 @@
         @apply bg-white dark:bg-gray-900 border-primary-500 dark:border-primary-400 border-2 shadow-none text-primary-600 dark:text-primary-400 hover:bg-primary-50 dark:hover:bg-gray-800 !important;
     }
 
-    .filament-button.outline-secondary {
+    .filament-button.outline-gray {
         @apply bg-white dark:bg-gray-900 border-gray-400 dark:border-gray-400 border-2 shadow-none text-gray-600 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-gray-800 !important;
     }
 

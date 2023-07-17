@@ -40,4 +40,9 @@ class Task extends Model
     {
         return $this->belongsTo(User::class, 'assigned_to');
     }
+
+    public function status(): BelongsTo
+    {
+        return $this->belongsTo(Status::class);
+    }
 }

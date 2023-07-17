@@ -88,7 +88,7 @@ class TeamSettings extends Page implements HasForms
                 'icon' => 'lucide-users-2',
             ],
             [
-                'id' => 'statusForm',
+                'id' => 'status',
                 'label' => 'Status',
                 'icon' => 'lucide-list-todo',
             ],

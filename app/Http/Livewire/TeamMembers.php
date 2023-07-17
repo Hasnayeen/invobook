@@ -43,7 +43,7 @@ class TeamMembers extends Component implements HasActions, HasTable
                     ]))
                 ->requiresConfirmation()
                 ->modalHeading('Invite Team Member')
-                ->modalSubheading('Enter the email address of the person you would like to invite to your team.')
+                ->modalDescription('Enter the email address of the person you would like to invite to your team.')
                 ->modalSubmitActionLabel('Send Invitation')
                 ->action(fn (array $data) => $this->invite($data)),
         ];

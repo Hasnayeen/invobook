@@ -16,3 +16,7 @@ use App\Http\Controllers\TemplateController;
 Route::get('templates/{template}', TemplateController::class)
     ->name('templates.preview')
     ->middleware('auth');
+
+Route::get('test', function () {
+    return 'test';
+});

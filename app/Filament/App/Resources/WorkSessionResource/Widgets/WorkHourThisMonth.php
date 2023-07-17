@@ -27,7 +27,7 @@ class WorkHourThisMonth extends StatsOverviewWidget
         return [
             Card::make('Hours This Month', $this->getData())
                 ->description($this->getChange().'%')
-                ->descriptionIcon($this->getIcon())
+                ->descriptionIcon($this->getIcon(), 'before')
                 ->chart(($this->query()->pluck('total_seconds')->toArray()))
                 ->color($this->getColor()),
             Card::make('Earnings This Month', $this->totalEarning())
@@ -88,7 +88,7 @@ class WorkHourThisMonth extends StatsOverviewWidget
         $change = $current - $previous;
         $this->change = ($previous !== 0 && $change !== 0) ? round(($change / $previous) * 100, 2) : 'N/A';
 
-        return $this->change;
+        return abs($this->change);
     }
 
     private function getIcon()

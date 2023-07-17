@@ -34,6 +34,30 @@ class AppContextProvider extends PanelProvider
             ->path('app')
             ->colors([
                 'primary' => Color::Purple,
+                'yellow' => [
+                    500 => Color::Yellow[500],
+                    700 => Color::Yellow[700],
+                ],
+                'teal' => [
+                    500 => Color::Teal[500],
+                    700 => Color::Teal[700],
+                ],
+                'cyan' => [
+                    500 => Color::Cyan[500],
+                    700 => Color::Cyan[700],
+                ],
+                'indigo' => [
+                    500 => Color::Indigo[500],
+                    700 => Color::Indigo[700],
+                ],
+                'purple' => [
+                    500 => Color::Purple[500],
+                    700 => Color::Purple[700],
+                ],
+                'pink' => [
+                    500 => Color::Pink[500],
+                    700 => Color::Pink[700],
+                ],
             ])
             ->viteTheme('resources/css/filament/app/theme.css')
             ->favicon('/favicon.svg')

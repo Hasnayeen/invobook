@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Status;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -21,7 +22,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('issue_link')->nullable();
             $table->string('pr_link')->nullable();
-            $table->string('status');
+            $table->foreignIdFor(Status::class)->nullable()->cascadeOnDelete();
             $table->timestamp('due_on')->nullable();
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
