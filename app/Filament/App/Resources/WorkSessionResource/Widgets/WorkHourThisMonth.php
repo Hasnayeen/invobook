@@ -84,11 +84,11 @@ class WorkHourThisMonth extends StatsOverviewWidget
         }
         $data = clone $this->result;
         $current = (int) $data->where('month', today()->format('Y-m'))->first()?->total_seconds;
-        $previous = (int) $data->where('month', today()->subMonth()->format('Y-m'))->first()?->total_seconds;
+        $previous = (int) $data->where('month', today()->subMonthNoOverflow()->format('Y-m'))->first()?->total_seconds;
         $change = $current - $previous;
         $this->change = ($previous !== 0 && $change !== 0) ? round(($change / $previous) * 100, 2) : 'N/A';
 
-        return abs($this->change);
+        return is_int($this->change) ? abs($this->change) : $this->change;
     }
 
     private function getIcon()

@@ -8,7 +8,7 @@
         "php": "^8.1",
         "blade-ui-kit/blade-icons": "^1.5",
         "brick/money": "0.8.*",
-        "filament/filament": "3.x",
+        "filament/filament": "^3.0",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/breeze": "^1.20",
         "laravel/framework": "^10.8",

@@ -3,39 +3,43 @@
 @config './tailwind.config.js';
 
 @layer components {
-    .filament-main-topbar div:first-child {
-        @apply max-w-7xl mx-auto;
+    .fi-topbar {
+        @apply bg-white dark:bg-gray-900;
     }
 
-    .filament-main-topbar .filament-icon-button {
+    .fi-topbar nav {
+        @apply w-full max-w-7xl mx-auto ring-0;
+    }
+
+    .fi-topbar .fi-icon-button {
         @apply me-4 !important;
     }
 
-    .filament-sidebar-nav {
-        @apply border-r dark:border-gray-700;
-    }
-
-    .filament-sidebar-item-active a {
+    .fi-sidebar-item-active a {
         @apply bg-primary-100 dark:bg-primary-600/30 dark:text-white;
     }
 
-    .filament-sidebar-item-active svg {
+    .fi-sidebar-item a:hover {
+        @apply bg-primary-100 dark:bg-primary-600/30 dark:text-white;
+    }
+
+    .fi-sidebar-item-active svg {
         @apply dark:text-white;
     }
 
-    .filament-tenant-menu + div {
+    .fi-tenant-menu + div {
         @apply -ms-3 -me-3;
     }
 
-    .filament-button.outline-primary {
+    .fi-button.outline-primary {
         @apply bg-white dark:bg-gray-900 border-primary-500 dark:border-primary-400 border-2 shadow-none text-primary-600 dark:text-primary-400 hover:bg-primary-50 dark:hover:bg-gray-800 !important;
     }
 
-    .filament-button.outline-gray {
+    .fi-button.outline-gray {
         @apply bg-white dark:bg-gray-900 border-gray-400 dark:border-gray-400 border-2 shadow-none text-gray-600 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-gray-800 !important;
     }
 
-    .filament-button.outline-danger {
+    .fi-button.outline-danger {
         @apply bg-white dark:bg-gray-900 border-danger-500 dark:border-danger-400 border-2 shadow-none text-danger-600 dark:text-danger-400 hover:bg-primary-50 dark:hover:bg-gray-800 !important;
     }
 

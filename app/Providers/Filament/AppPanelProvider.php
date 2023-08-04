@@ -25,7 +25,7 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Illuminate\View\View;
 
-class AppContextProvider extends PanelProvider
+class AppPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
@@ -101,7 +101,7 @@ class AppContextProvider extends PanelProvider
             ])
             ->sidebarCollapsibleOnDesktop()
             ->databaseNotifications()
-            ->renderHook('topbar.start', fn (): View => view('filament.app.hooks.welcome_user'))
-            ->renderHook('body.start', fn (): View => view('filament.app.hooks.background'));
+            ->renderHook('panels::topbar.start', fn (): View => view('filament.app.hooks.welcome_user'))
+            ->renderHook('panels::body.start', fn (): View => view('filament.app.hooks.background'));
     }
 }
