@@ -31,19 +31,23 @@
         @apply -ms-3 -me-3;
     }
 
-    .fi-button.outline-primary {
+    .outline-primary {
         @apply bg-white dark:bg-gray-900 border-primary-500 dark:border-primary-400 border-2 shadow-none text-primary-600 dark:text-primary-400 hover:bg-primary-50 dark:hover:bg-gray-800 !important;
     }
 
-    .fi-button.outline-gray {
+    .outline-gray {
         @apply bg-white dark:bg-gray-900 border-gray-400 dark:border-gray-400 border-2 shadow-none text-gray-600 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-gray-800 !important;
     }
 
-    .fi-button.outline-danger {
+    .outline-danger {
         @apply bg-white dark:bg-gray-900 border-danger-500 dark:border-danger-400 border-2 shadow-none text-danger-600 dark:text-danger-400 hover:bg-primary-50 dark:hover:bg-gray-800 !important;
     }
 
     .icon {
         @apply !w-5 !h-5;
+    }
+
+    .fi-chart-header div:first-child {
+        flex-grow: 1;
     }
 }

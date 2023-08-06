@@ -5,9 +5,9 @@ namespace App\Providers\Filament;
 use App\Filament\App\Pages\Dashboard;
 use App\Filament\App\Pages\Tenancy\RegisterTeam;
 use App\Filament\App\Resources\WorkSessionResource\Widgets\WorkHourThisMonth;
-use App\Filament\App\Widgets\CumulativeEarningsPerDay;
-use App\Filament\App\Widgets\EarningsPerDay;
-use App\Filament\App\Widgets\EarningsPerMonth;
+use App\Filament\Widgets\CumulativeEarningsPerDay;
+use App\Filament\Widgets\EarningsPerDay;
+use App\Filament\Widgets\EarningsPerMonth;
 use App\Models\Team;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -75,8 +75,8 @@ class AppPanelProvider extends PanelProvider
             ->widgets([
                 WorkHourThisMonth::class,
                 EarningsPerMonth::class,
-                CumulativeEarningsPerDay::class,
                 EarningsPerDay::class,
+                CumulativeEarningsPerDay::class,
             ])
             ->middleware([
                 EncryptCookies::class,

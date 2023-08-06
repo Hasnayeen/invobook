@@ -61,7 +61,7 @@ class EarningsPerDay extends ChartWidgetWithAction implements HasActions
                         Checkbox::make('enable'),
                     ]))
                 ->requiresConfirmation()
-                ->action(fn () => $this->emit('configureEarningsPerDay')),
+                ->action(fn () => $this->dispatch('configureEarningsPerDay')),
         ];
     }
 

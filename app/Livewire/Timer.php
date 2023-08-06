@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use App\Models\User;
 use App\Models\WorkSession;
@@ -87,7 +87,7 @@ class Timer extends Component implements HasForms
     public function start(): void
     {
         if (! $this->session) {
-            $this->dispatchBrowserEvent('timer-start');
+            $this->dispatch('timer-start');
             $this->create();
         }
     }
@@ -95,8 +95,9 @@ class Timer extends Component implements HasForms
     public function stop(): void
     {
         if ($this->session) {
-            $this->dispatchBrowserEvent('timer-stop');
-            $this->emitTo('app.filament.app.resources.work-session-resource.widgets.work-hour-this-month', 'updateStats');
+            $this->dispatch('timer-stop');
+            $this->dispatch('updateStats')
+                ->to('app.filament.app.resources.work-session-resource.widgets.work-hour-this-month');
             $this->save();
             $this->session = null;
         } else {
