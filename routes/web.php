@@ -12,7 +12,3 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-// Route::get('user/profile', function () {
-//     return view('filament.app.pages.profile');
-// })->name('profile');
