@@ -2,19 +2,20 @@
 
 namespace App\Livewire;
 
-use App\Models\User;
-use App\Models\WorkSession;
 use Carbon\Carbon;
+use App\Models\User;
+use Livewire\Component;
+use Filament\Forms\Form;
+use App\Models\WorkSession;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Contracts\HasForms;
-use Filament\Forms\Form;
-use Filament\Notifications\Notification;
 use Illuminate\Contracts\View\View;
-use Livewire\Component;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Contracts\HasForms;
+use Filament\Forms\Components\TextInput;
+use Filament\Notifications\Notification;
+use Illuminate\Database\Eloquent\Builder;
+use Filament\Forms\Concerns\InteractsWithForms;
 
 class Timer extends Component implements HasForms
 {
@@ -49,10 +50,15 @@ class Timer extends Component implements HasForms
                         TextInput::make('description')
                             ->maxLength(255)
                             ->columnSpanFull(),
-                        Select::make('task_id')
-                            ->relationship('task', 'title'),
                         Select::make('project_id')
-                            ->relationship('project', 'name'),
+                            ->relationship('project', 'name')
+                            ->reactive(),
+                        Select::make('task_id')
+                            ->relationship(
+                                name: 'task',
+                                titleAttribute: 'title',
+                                modifyQueryUsing: fn (Builder $query) => $query->where('project_id', $this->form->getState()['project_id']),
+                            ),
                         TextInput::make('rate_in_cents')
                             ->label('Rate')
                             ->integer()

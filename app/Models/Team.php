@@ -45,4 +45,14 @@ class Team extends Model
     {
         return $this->hasMany(Client::class);
     }
+
+    public function projects(): HasMany
+    {
+        return $this->hasMany(Project::class);
+    }
+
+    public function tasks(): HasMany
+    {
+        return $this->hasMany(Task::class);
+    }
 }

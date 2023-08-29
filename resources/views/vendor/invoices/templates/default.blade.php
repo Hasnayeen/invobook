@@ -40,7 +40,13 @@
                     <div class="bg-gray-100 p-4 rounded-lg">
                         <p class="text-sm font-semibold text-gray-600">Invoice for</p>
                         <h1 class="font-bold text-2xl mb-1">{{ $invoice->buyer->name }}</h1>
-                        <h2 class="text-sm">{{ $invoice->buyer->address ?? '' }}</h2>
+                        @php
+                            $buyerAddress = $invoice->buyer->address;
+                            $buyerAddress = explode("\n", $buyerAddress);
+                        @endphp
+                        @foreach ($buyerAddress as $address)
+                            <p class="text-sm">{{ $address }}</p>
+                        @endforeach
                     </div>
                 </div>
             </section>

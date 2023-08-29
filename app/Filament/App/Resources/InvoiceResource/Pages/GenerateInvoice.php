@@ -21,6 +21,7 @@ use Filament\Tables\Table;
 use Filament\Tables\Columns\Summarizers\Sum;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
+use Filament\Tables\Enums\FiltersLayout;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
@@ -102,8 +103,7 @@ class GenerateInvoice extends Page implements HasTable
                                 fn (Builder $query, $date): Builder => $query->whereDate('start', '<=', $date),
                             );
                     })
-            ])
-            ->filtersLayout(Layout::AboveContent)
+                ], layout: FiltersLayout::AboveContent)
             ->headerActions([
                 Action::make('generate')
                     ->label('Generate Invoice')
@@ -137,7 +137,11 @@ class GenerateInvoice extends Page implements HasTable
                     ])
                     ->action(
                         function (Table $table, array $data, GenerateInvoicePdf $generateInvoicePdf) {
-                            $url = $generateInvoicePdf($table->getRecords()->all(), $data, $table->getFilters()['created_at']->getState());
+                            $url = $generateInvoicePdf(
+                                $table->getRecords()->all(),
+                                $data,
+                                $table->getFilters()['created_at']->getState(),
+                            );
                             Notification::make()
                                 ->title('Invoice Generated')
                                 ->body('Your invoice has been generated and is ready for download.')

@@ -5,12 +5,19 @@ namespace App\Filament\Widgets;
 use App\Models\WorkSession;
 use App\Support\Trend;
 use DateTime;
+use Hasnayeen\GlowChart\Chart;
+use Hasnayeen\GlowChart\Enums\ChartType;
+use Hasnayeen\GlowChart\GlowChart;
+use Hasnayeen\GlowChart\Labels;
+use Hasnayeen\GlowChart\Options;
+use Hasnayeen\GlowChart\Series;
+use Hasnayeen\GlowChart\Style;
+use Hasnayeen\GlowChart\Toolbar;
+use Hasnayeen\GlowChart\Xaxis;
+use Hasnayeen\GlowChart\Yaxis;
 use Filament\Forms\Components\DatePicker;
-use Filament\Support\Colors\Color;
-use Illuminate\Support\Carbon;
-use Spatie\Color\Rgb;
 
-class EarningsPerMonth extends ChartWidgetWithAction
+class EarningsPerMonth extends GlowChart
 {
     protected static string $chartId = 'earningsPerMonth';
     protected static ?string $heading = 'Earnings Per Month';
@@ -19,62 +26,50 @@ class EarningsPerMonth extends ChartWidgetWithAction
     protected static bool $deferLoading = true;
     protected $result;
 
-    protected function getOptions(): array
+    protected function getOptions(): Options
     {
-        if (!$this->readyToLoad) {
-            return [];
-        }
-
-        return [
-            'chart' => [
-                'type' => 'area',
-                'height' => 300,
-                'toolbar' => [
-                    'show' => false,
-                ],
-                'animations' => [
-                    'enabled' => true,
-                    'easing' => 'easeinout',
-                    'speed' => 600,
-                    'animateGradually' => [
-                        'enabled' => true,
-                        'delay' => 500
-                    ],
-                    'dynamicAnimation' => [
-                        'enabled' => true,
-                        'speed' => 500
-                    ]
-                ]
-            ],
-            'series' => [
-                [
-                    'name' => 'EarningsPerMonth',
-                    'data' => $this->monthByMonthEarningForLastTwelveMonth()
-                        ->pluck('total')
-                        ->map(fn ($value) => round($value, 0))
-                        ->toArray(),
-                ],
-            ],
-            'xaxis' => [
-                'categories' => $this->monthByMonthEarningForLastTwelveMonth()->pluck('month')->toArray(),
-                'labels' => [
-                    'style' => [
-                        'fontFamily' => 'inherit',
-                    ],
-                ],
-            ],
-            'yaxis' => [
-                'labels' => [
-                    'style' => [
-                        'fontFamily' => 'inherit',
-                    ],
-                ],
-            ],
-            'colors' => [Rgb::fromString('rgb(' . Color::Violet[500] . ')')->toHex()->__toString()],
-            'stroke' => [
-                'curve' => 'smooth',
-            ],
-        ];
+        return Options::make('earningsPerMonth')
+            ->chart(
+                Chart::make(ChartType::Area)
+                    ->height(300)
+                    ->toolbar(
+                        Toolbar::make()
+                            ->show(false)
+                    )
+            )
+            ->series(
+                Series::make()
+                    ->name('Earnings Per Month')
+                    ->data(
+                        $this->monthByMonthEarningForLastTwelveMonth()
+                            ->pluck('total')
+                            ->map(fn ($value, $key) => round($value, 0))
+                            ->toArray(),
+                    ),
+            )
+            ->xaxis(
+                Xaxis::make()
+                    ->categories(
+                        $this->monthByMonthEarningForLastTwelveMonth()->pluck('month')->toArray(),
+                    )
+                    ->labels(
+                        Labels::make()
+                            ->style(
+                                Style::make()
+                                    ->fontFamily('inherit'),
+                            ),
+                    ),
+            )
+            ->yaxis(
+                Yaxis::make()
+                    ->labels(
+                        Labels::make()
+                            ->style(
+                                Style::make()
+                                    ->fontFamily('inherit'),
+                            ),
+                    ),
+            );
     }
 
     protected function monthByMonthEarningForLastTwelveMonth()
@@ -83,7 +78,7 @@ class EarningsPerMonth extends ChartWidgetWithAction
             return $this->result;
         }
         $this->result = Trend::model(WorkSession::class)
-            ->between(Carbon::parse($this->filterFormData['from']), Carbon::parse($this->filterFormData['to']))
+            ->between(now()->subMonths(11), now())
             ->perMonth()
             ->sum('duration')
             ->transform(fn ($item) => [

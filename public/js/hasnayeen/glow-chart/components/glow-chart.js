@@ -1,0 +1,1 @@
+/mnt/work/projects/php/glow-chart/resources/dist/glow-chart.js

@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Team;
 use App\Models\User;
 use App\Models\Project;
+use App\Models\Status;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -22,9 +23,9 @@ class TaskFactory extends Factory
         return [
             'title' => fake()->sentence(),
             'description' => fake()->paragraph(),
-            'status' => 'todo',
+            'status_id' => Status::factory()->for($team = Team::factory()),
             'project_id' => Project::factory(),
-            'team_id' => Team::factory(),
+            'team_id' => $team,
             'user_id' => auth()->id() ?? User::factory(),
         ];
     }

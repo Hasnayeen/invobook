@@ -6,9 +6,19 @@ use Spatie\Color\Rgb;
 use App\Support\Trend;
 use App\Models\WorkSession;
 use Filament\Support\Colors\Color;
+use Hasnayeen\GlowChart\Chart;
+use Hasnayeen\GlowChart\Enums\ChartType;
+use Hasnayeen\GlowChart\GlowChart;
+use Hasnayeen\GlowChart\Labels;
+use Hasnayeen\GlowChart\Options;
+use Hasnayeen\GlowChart\Series;
+use Hasnayeen\GlowChart\Style;
+use Hasnayeen\GlowChart\Toolbar;
+use Hasnayeen\GlowChart\Xaxis;
+use Hasnayeen\GlowChart\Yaxis;
 use Illuminate\Support\Collection;
 
-class CumulativeEarningsPerDay extends ChartWidgetWithAction
+class CumulativeEarningsPerDay extends GlowChart
 {
     protected static string $chartId = 'cumulativeEarningsPerDay';
     protected static ?string $heading = 'Cumulative Earnings Per Day';
@@ -16,32 +26,50 @@ class CumulativeEarningsPerDay extends ChartWidgetWithAction
     protected static ?string $pollingInterval = null;
     protected static bool $deferLoading = true;
 
-    protected function getOptions(): array
+    protected function getOptions(): Options
     {
-        return [
-            'chart' => [
-                'type' => 'line',
-                'height' => 400,
-                'toolbar' => [
-                    'show' => false,
-                ],
-            ],
-            'series' => collect()
-                ->range(0, 11)
-                ->map(
-                    fn ($item) => [
-                        'name' => now()->subMonthsNoOverflow($item)->format('M'),
-                        'data' => $this->perDayEarning($item)->map(fn ($value) => round($value * 30 / 3600, 2)),
-                    ]
-            ),
-            'xaxis' => [
-                'categories' => collect()->range(1, 31),
-            ],
-            'yaxis' => [
-                'tickAmount' => 10,
-                'decimalsInFloat' => 0,
-            ],
-            'colors' => [
+        return Options::make('cumulativeEarningsPerDay')
+            ->chart(
+                Chart::make(ChartType::Line)
+                    ->height(500)
+                    ->toolbar(
+                        Toolbar::make()
+                            ->show(false)
+                    )
+            )
+            ->series(
+                Series::make()
+                    ->data(
+                        collect()
+                            ->range(0, 11)
+                            ->map(
+                                fn ($item) => [
+                                    'name' => now()->subMonthsNoOverflow($item)->format('M'),
+                                    'data' => $this->perDayEarning($item)->map(fn ($value) => round($value * 30 / 3600, 2)),
+                                ]
+                            )
+                            ->toArray(),
+                    ),
+            )
+            ->xaxis(
+                Xaxis::make()
+                    ->categories(
+                        collect()->range(1, 31)->toArray(),
+                    )
+            )
+            ->yaxis(
+                Yaxis::make()
+                    ->tickAmount(10)
+                    ->decimalsInFloat(0)
+                    ->labels(
+                        Labels::make()
+                            ->style(
+                                Style::make()
+                            )
+                            ->rotate(0)
+                    )
+            )
+            ->colors([
                 Rgb::fromString('rgb(' . Color::Amber[500] . ')')->toHex()->__toString(),
                 Rgb::fromString('rgb(' . Color::Blue[500] . ')')->toHex()->__toString(),
                 Rgb::fromString('rgb(' . Color::Cyan[500] . ')')->toHex()->__toString(),
@@ -54,12 +82,7 @@ class CumulativeEarningsPerDay extends ChartWidgetWithAction
                 Rgb::fromString('rgb(' . Color::Pink[500] . ')')->toHex()->__toString(),
                 Rgb::fromString('rgb(' . Color::Purple[500] . ')')->toHex()->__toString(),
                 Rgb::fromString('rgb(' . Color::Red[500] . ')')->toHex()->__toString(),
-            ],
-            'stroke' => [
-                'curve' => 'smooth',
-                'width' => 2,
-            ],
-        ];
+            ]);
     }
 
     protected function perDayEarning($month = 0)
