@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('color');
             $table->string('icon')->nullable();
+            $table->integer('order')->default(0);
             $table->foreignUlid('team_id')->constrained('teams')->cascadeOnDelete();
             $table->timestamps();
         });

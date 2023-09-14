@@ -2,9 +2,8 @@
 
 namespace App\Filament\Widgets;
 
-use Spatie\Color\Rgb;
-use App\Support\Trend;
 use App\Models\WorkSession;
+use App\Support\Trend;
 use Filament\Support\Colors\Color;
 use Hasnayeen\GlowChart\Chart;
 use Hasnayeen\GlowChart\Enums\ChartType;
@@ -12,11 +11,13 @@ use Hasnayeen\GlowChart\GlowChart;
 use Hasnayeen\GlowChart\Labels;
 use Hasnayeen\GlowChart\Options;
 use Hasnayeen\GlowChart\Series;
+use Hasnayeen\GlowChart\Stroke;
 use Hasnayeen\GlowChart\Style;
 use Hasnayeen\GlowChart\Toolbar;
 use Hasnayeen\GlowChart\Xaxis;
 use Hasnayeen\GlowChart\Yaxis;
 use Illuminate\Support\Collection;
+use Spatie\Color\Rgb;
 
 class CumulativeEarningsPerDay extends GlowChart
 {
@@ -69,20 +70,31 @@ class CumulativeEarningsPerDay extends GlowChart
                             ->rotate(0)
                     )
             )
-            ->colors([
-                Rgb::fromString('rgb(' . Color::Amber[500] . ')')->toHex()->__toString(),
-                Rgb::fromString('rgb(' . Color::Blue[500] . ')')->toHex()->__toString(),
-                Rgb::fromString('rgb(' . Color::Cyan[500] . ')')->toHex()->__toString(),
-                Rgb::fromString('rgb(' . Color::Emerald[500] . ')')->toHex()->__toString(),
-                Rgb::fromString('rgb(' . Color::Fuchsia[500] . ')')->toHex()->__toString(),
-                Rgb::fromString('rgb(' . Color::Green[500] . ')')->toHex()->__toString(),
-                Rgb::fromString('rgb(' . Color::Indigo[500] . ')')->toHex()->__toString(),
-                Rgb::fromString('rgb(' . Color::Lime[500] . ')')->toHex()->__toString(),
-                Rgb::fromString('rgb(' . Color::Orange[500] . ')')->toHex()->__toString(),
-                Rgb::fromString('rgb(' . Color::Pink[500] . ')')->toHex()->__toString(),
-                Rgb::fromString('rgb(' . Color::Purple[500] . ')')->toHex()->__toString(),
-                Rgb::fromString('rgb(' . Color::Red[500] . ')')->toHex()->__toString(),
-            ]);
+            ->colors(
+                array_map(
+                    fn ($color) => Rgb::fromString('rgb(' . $color . ')')->toHex()->__toString(),
+                    [
+                        Color::Amber[500],
+                        Color::Blue[500],
+                        Color::Cyan[500],
+                        Color::Emerald[500],
+                        Color::Fuchsia[500],
+                        Color::Green[500],
+                        Color::Indigo[500],
+                        Color::Lime[500],
+                        Color::Orange[500],
+                        Color::Pink[500],
+                        Color::Purple[500],
+                        Color::Red[500],
+                    ]
+                ),
+            )
+            ->stroke(
+                Stroke::make()
+                    ->show(true)
+                    ->curve('smooth')
+                    ->width(2)
+            );
     }
 
     protected function perDayEarning($month = 0)
