@@ -6,9 +6,12 @@ use App\Filament\App\Resources\ProjectResource;
 use App\Models\Project;
 use App\Models\Task;
 use Filament\Infolists\Components\Group;
+use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\RepeatableEntry;
+use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\Split;
 use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Components\TextEntry\TextEntrySize;
 use Filament\Infolists\Concerns\InteractsWithInfolists;
 use Filament\Infolists\Contracts\HasInfolists;
 use Filament\Infolists\Infolist;
@@ -55,24 +58,37 @@ class ViewProject extends Page implements HasInfolists, HasTable
                     ->getState()['tasks']
                     ->sortKeysUsing(fn ($a, $b) => $b <=> $a)
                     ->map(fn ($item, $key) => Group::make([
-                            TextEntry::make($key)
-                                ->view('components.name-with-badge', ['name' => $key, 'count' =>$item->count()]),
-                            RepeatableEntry::make('tasks.' . $key)
-                                ->label('')
-                                ->schema([
-                                    TextEntry::make('title')
-                                        ->label(''),
-                                    TextEntry::make('description')
-                                        ->label(''),
-                                    TextEntry::make('status')
-                                        ->badge()
-                                        ->color(fn ($state) => $state->color)
-                                        ->formatStateUsing(fn ($state) => $state->name)
-                                        ->label(''),
-                                    // TextEntry::make('created_at')
-                                    //     ->label('Created')
-                                    //     ->dateTime(),
-                                ]),
+                        Section::make('')
+                            ->extraAttributes([
+                                'class' => '!bg-black/10 !ring-0 rounded-lg shadow-none kanban-column',
+                            ])
+                            ->schema([
+                                TextEntry::make($key)
+                                    ->view('components.name-with-badge', ['name' => $key, 'count' =>$item->count(), 'color' => $item->first()->status->color]),
+                                RepeatableEntry::make('tasks.' . $key)
+                                    ->label('')
+                                    ->schema([
+                                        TextEntry::make('title')
+                                            ->label('')
+                                            ->url(fn ($record) => route('filament.app.resources.tasks.view', ['tenant' => filament()->getTenant(), 'record' => $record]))
+                                            ->size(TextEntrySize::Large)
+                                            ->extraAttributes([
+                                                'class' => 'font-semibold',
+                                            ]),
+                                        TextEntry::make('description')
+                                            ->label('')
+                                            ->hidden(fn ($record) => ! $record->description),
+                                        ImageEntry::make('assignedTo.avatar')
+                                            ->defaultImageUrl(fn ($record) => 'https://unavatar.io/sindresorhus@gmail.com')
+                                            ->label('')
+                                            ->width('2rem')
+                                            ->height('2rem'),
+                                        TextEntry::make('created_at')
+                                            ->formatStateUsing(fn ($state) => $state->toFormattedDateString())
+                                            ->label('')
+                                            ->size(TextEntrySize::ExtraSmall),
+                                    ]),
+                            ])
                         ])
                     )
                     ->toArray()
@@ -86,6 +102,7 @@ class ViewProject extends Page implements HasInfolists, HasTable
             ->query(Task::query()
                 ->where('project_id', request()->route()->parameter('record'))
                 ->with('status')
+                ->limit(20)
             )
             ->columns([
                 Tables\Columns\TextColumn::make('title')
@@ -112,6 +129,6 @@ class ViewProject extends Page implements HasInfolists, HasTable
                 Tables\Columns\TextColumn::make('due_on')
                     ->date(),
             ])
-            ->defaultGroup('status_id');
+            ->defaultGroup('status.name');
     }
 }
