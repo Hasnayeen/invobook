@@ -13,6 +13,10 @@ Self-hosted app for Time Tracking, Invoice Generation, Project & Client Manageme
     <a href="https://php.net"><img alt="PHP 8.1" src="https://img.shields.io/badge/PHP-8.1-777BB4?style=for-the-badge&logo=php"></a>
 </p>
 
+## Hire me
+
+I'm available for contractual work on this stack (Filament, Laravel, Livewire, AlpineJS, TailwindCSS). Reach me via [email](searching.nehal@gmail.com) or [discord](discordapp.com/users/297318343642447872)
+
 ## About Invobook
 
 Invobook is a self-hosted app to manage team/clients, project & tasks, time tracking, create and sending invoice and more. It is build upon Filament and TALL stack.

@@ -5,13 +5,14 @@ namespace App\Livewire;
 use App\Models\TeamInvitation as TeamInvitationModel;
 use Filament\Facades\Filament;
 use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Forms\Contracts\HasForms;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
 use Livewire\Component;
 
-class TeamInvitation extends Component implements HasTable
+class TeamInvitation extends Component implements HasTable, HasForms
 {
     use InteractsWithTable;
     use InteractsWithForms;

@@ -10,6 +10,7 @@ use Filament\Actions\Contracts\HasActions;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
 use Filament\Pages\Concerns\InteractsWithHeaderActions;
 use Filament\Tables\Columns\TextColumn;
@@ -18,7 +19,7 @@ use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
 use Livewire\Component;
 
-class TeamMembers extends Component implements HasActions, HasTable
+class TeamMembers extends Component implements HasActions, HasTable, HasForms
 {
     use InteractsWithActions;
     use InteractsWithForms;
