@@ -15,7 +15,7 @@ Self-hosted app for Time Tracking, Invoice Generation, Project & Client Manageme
 
 ## Hire me
 
-I'm available for contractual work on this stack (Filament, Laravel, Livewire, AlpineJS, TailwindCSS). Reach me via [email](searching.nehal@gmail.com) or [discord](discordapp.com/users/297318343642447872)
+I'm available for contractual work on this stack (Filament, Laravel, Livewire, AlpineJS, TailwindCSS). Reach me via [email](mailto:searching.nehal@gmail.com) or [discord](https://discordapp.com/users/297318343642447872)
 
 ## About Invobook
 
