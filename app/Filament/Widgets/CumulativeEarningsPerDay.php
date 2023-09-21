@@ -46,7 +46,7 @@ class CumulativeEarningsPerDay extends GlowChart
                             ->map(
                                 fn ($item) => [
                                     'name' => now()->subMonthsNoOverflow($item)->format('M'),
-                                    'data' => $this->perDayEarning($item)->map(fn ($value) => round($value * 30 / 3600, 2)),
+                                    'data' => $this->perDayEarning($item)->map(fn ($value) => round($value, 2)),
                                 ]
                             )
                             ->toArray(),
@@ -121,7 +121,7 @@ class CumulativeEarningsPerDay extends GlowChart
         config(['widget.query.earnings-per-day' => $result = Trend::model(WorkSession::class)
             ->between(now()->subMonths(12)->startOfMonth(), now()->endOfMonth()->addDay())
             ->perDay()
-            ->sum('duration'),
+            ->sum('(duration / 3600) * (rate_in_cents / 100)'),
         ]);
 
         return $result;

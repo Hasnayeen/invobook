@@ -80,10 +80,10 @@ class EarningsPerMonth extends GlowChart
         $this->result = Trend::model(WorkSession::class)
             ->between(now()->subMonths(11), now())
             ->perMonth()
-            ->sum('duration')
+            ->sum('(duration / 3600) * (rate_in_cents / 100)')
             ->transform(fn ($item) => [
                 'month' => DateTime::createFromFormat('!Y-m', $item->date)->format('F'),
-                'total' => round($item->aggregate * 30 / 3600, 2),
+                'total' => round($item->aggregate, 2),
             ]);
 
         return $this->result;
