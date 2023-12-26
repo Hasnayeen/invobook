@@ -66,10 +66,7 @@ class InvoiceResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id'),
-                Tables\Columns\TextColumn::make('user_id'),
-                Tables\Columns\TextColumn::make('team_id'),
-                Tables\Columns\TextColumn::make('client_id'),
+                Tables\Columns\TextColumn::make('client.name'),
                 Tables\Columns\TextColumn::make('summary'),
                 Tables\Columns\TextColumn::make('total_in_cents'),
                 Tables\Columns\TextColumn::make('subtotal_in_cents'),
@@ -124,6 +121,8 @@ class InvoiceResource extends Resource
             'list' => Pages\ListInvoices::route('/list'),
             'create' => Pages\CreateInvoice::route('/create'),
             'edit' => Pages\EditInvoice::route('/{record}/edit'),
+            'settings' => Pages\InvoiceSettings::route('/settings'),
+            'preview' => Pages\InvoiceTemplatePreview::route('{template}/preview'),
         ];
     }
 

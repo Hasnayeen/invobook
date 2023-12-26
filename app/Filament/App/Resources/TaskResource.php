@@ -12,6 +12,7 @@ use Filament\Infolists\Components\Grid;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -53,7 +54,8 @@ class TaskResource extends Resource
                     ->relationship('status', 'name'),
                 Forms\Components\Textarea::make('description')
                     ->maxLength(65535)
-                    ->columnStart(1),
+                    ->columnStart(1)
+                    ->columnSpanFull(),
             ]);
     }
 
@@ -95,6 +97,10 @@ class TaskResource extends Resource
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
+                Filter::make('ToDo')
+                    ->toggle()
+                    ->default()
+                    ->query(fn (Builder $query) => $query->whereRelation('status', 'name', '=', 'To Do')),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
@@ -108,7 +114,8 @@ class TaskResource extends Resource
             ->defaultGroup('status.name')
             ->groups([
                 'status.name',
-            ]);
+            ])
+            ->paginated([20, 50, 100, 'all']);
     }
 
     public static function infolist(Infolist $infolist): Infolist

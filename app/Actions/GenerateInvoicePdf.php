@@ -3,6 +3,7 @@
 namespace App\Actions;
 
 use App\Enums\InvoiceResponseType;
+use App\Filament\App\Resources\InvoiceResource\Pages\InvoiceTemplatePreview;
 use App\Models\Client;
 use App\Models\WorkSession;
 use App\Support\InvoiceItem;
@@ -20,7 +21,7 @@ class GenerateInvoicePdf
         array $data,
         array $timePeriod,
         InvoiceResponseType $resultType = InvoiceResponseType::URL,
-    ): string | View
+    ): string | View | null
     {
         $invoice = Invoice::make('invoice')
             ->template($data['template'] ?? 'default')
@@ -39,20 +40,24 @@ class GenerateInvoicePdf
             ->setCustomData([
                 'from' => Carbon::parse($timePeriod['from'])->toDateString(),
                 'to' => Carbon::parse($timePeriod['to'])->toDateString(),
-            ]);
+                'client_id' => $data['client_id'],
+            ])
+            ->calculate();
 
-        $html = $invoice->calculate()->toHtml();
+        $invoiceModel = CreateInvoice::run($invoice, $buyer);
+        
+        $html = $invoice->toHtml();
 
         return match ($resultType) {
-            InvoiceResponseType::URL => $this->generatePdf($html),
+            InvoiceResponseType::URL => $this->generatePdf(InvoiceTemplatePreview::getUrl(['template' => $data['template'], 'invoice' => $invoiceModel->id])),
             InvoiceResponseType::HTML => $html,
         };
     }
 
-    private function generatePdf(View $html): string
+    private function generatePdf(string $url): string
     {
         $filename = 'invoices/Invoice_example_' . now()->format('Y-m-d H:i') . '.pdf';
-        Browsershot::html($html->render())
+        Browsershot::url($url)
             ->setNodeBinary(config('invoices.node_binary'))
             ->setNpmBinary(config('invoices.npm_binary'))
             ->format('A4')
@@ -71,7 +76,9 @@ class GenerateInvoicePdf
                     ->title($item->item ?? 'N/A')
                     ->pricePerUnit($item->rate_in_cents / 100)
                     ->hours(gmdate('H:i', $item->total_duration))
-                    ->project($item->project?->name)
+                    ->project($item->project?->name, $item->project?->id)
+                    ->task($item->task?->id)
+                    ->totalDuration($item->total_duration)
                     ->subTotalPrice(round($item->subtotal, 0, PHP_ROUND_HALF_UP))
             )->toArray();
     }

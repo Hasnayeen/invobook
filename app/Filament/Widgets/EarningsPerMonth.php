@@ -26,7 +26,7 @@ class EarningsPerMonth extends GlowChart
     protected static bool $deferLoading = true;
     protected $result;
 
-    protected function getOptions(): Options
+    protected function options(Options $options): Options
     {
         return Options::make('earningsPerMonth')
             ->chart(
@@ -36,16 +36,6 @@ class EarningsPerMonth extends GlowChart
                         Toolbar::make()
                             ->show(false)
                     )
-            )
-            ->series(
-                Series::make()
-                    ->name('Earnings Per Month')
-                    ->data(
-                        $this->monthByMonthEarningForLastTwelveMonth()
-                            ->pluck('total')
-                            ->map(fn ($value, $key) => round($value, 0))
-                            ->toArray(),
-                    ),
             )
             ->xaxis(
                 Xaxis::make()
@@ -69,6 +59,17 @@ class EarningsPerMonth extends GlowChart
                                     ->fontFamily('inherit'),
                             ),
                     ),
+            );
+    }
+
+    protected function series(Series $series): Series
+    {
+        return $series
+            ->data(
+                $this->monthByMonthEarningForLastTwelveMonth()
+                    ->pluck('total')
+                    ->map(fn ($value, $key) => round($value, 0))
+                    ->toArray(),
             );
     }
 

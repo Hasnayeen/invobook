@@ -23,7 +23,7 @@ class EarningsPerDay extends GlowChart
     protected static ?string $pollingInterval = null;
     protected static bool $deferLoading = true;
 
-    protected function getOptions(): Options
+    protected function options(Options $options): Options
     {
         return Options::make('EarningsPerDay')
             ->chart(
@@ -34,14 +34,6 @@ class EarningsPerDay extends GlowChart
                             ->show(false)
                     )
             )
-            ->series(
-                Series::make()
-                    ->name('Earnings Per Day')
-                    ->data($this
-                        ->perDayEarning(0)
-                        ->map(fn ($value) => round($value->aggregate, 0))
-                        ->toArray())
-            )
             ->xaxis(
                 Xaxis::make()
                     ->categories(
@@ -50,11 +42,20 @@ class EarningsPerDay extends GlowChart
             );
     }
 
+    protected function series(Series $series): Series
+    {
+        return $series
+            ->data($this
+                ->perDayEarning(0)
+                ->map(fn ($value) => round($value->aggregate, 0))
+                ->toArray());
+    }
+
     protected function perDayEarning($month = 0)
     {
         return $this->query()->whereBetween('date', [
-            today()->subMonths($month)->startOfMonth(),
-            today()->subMonths($month)->endOfMonth()->addDay(),
+            now()->subMonths($month)->startOfMonth()->subDay(),
+            now()->subMonthsNoOverflow($month)->endOfMonth(),
         ])->values();
     }
 
@@ -64,7 +65,7 @@ class EarningsPerDay extends GlowChart
             return config('widget.query.earnings-per-day');
         }
         config(['widget.query.earnings-per-day' => $result = Trend::model(WorkSession::class)
-            ->between(now()->subMonths(12)->startOfMonth(), now()->endOfMonth()->addDay())
+            ->between(now()->subMonths(12)->startOfMonth(), now()->endOfMonth())
             ->perDay()
             ->sum('(duration / 3600) * (rate_in_cents / 100)'),
         ]);

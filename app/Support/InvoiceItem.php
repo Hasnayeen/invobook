@@ -8,10 +8,28 @@ class InvoiceItem extends BaseInvoiceItem
 {
     public string $hours;
     public ?string $project;
+    public ?string $projectId;
+    public ?string $taskId;
+    public ?int $totalDuration;
 
-    public function project(?string $project): self
+    public function totalDuration(?int $totalDuration): self
+    {
+        $this->totalDuration = $totalDuration;
+
+        return $this;
+    }
+
+    public function project(?string $project, ?string $projectId): self
     {
         $this->project = $project;
+        $this->projectId = $projectId;
+
+        return $this;
+    }
+
+    public function task(?string $task): self
+    {
+        $this->taskId = $task;
 
         return $this;
     }

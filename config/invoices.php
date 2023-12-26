@@ -120,5 +120,6 @@ return [
     'templates' => [
         'default',
         'simple',
+        'elegant'
     ]
 ];

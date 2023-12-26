@@ -57,7 +57,9 @@ class Timer extends Component implements HasForms
                             ->relationship(
                                 name: 'task',
                                 titleAttribute: 'title',
-                                modifyQueryUsing: fn (Builder $query) => $query->where('project_id', $this->form->getState()['project_id']),
+                                modifyQueryUsing: fn (Builder $query) => $query
+                                    ->where('project_id', $this->form->getState()['project_id'])
+                                    ->whereRelation('status', 'name', '!=', 'Completed'),
                             ),
                         TextInput::make('rate_in_cents')
                             ->label('Rate')

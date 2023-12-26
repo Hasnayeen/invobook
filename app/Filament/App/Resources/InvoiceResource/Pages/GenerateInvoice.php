@@ -5,6 +5,7 @@ namespace App\Filament\App\Resources\InvoiceResource\Pages;
 use App\Actions\GenerateInvoicePdf;
 use App\Filament\App\Resources\InvoiceResource;
 use App\Models\WorkSession;
+use Filament\Actions\Action as PageAction;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Grid;
@@ -19,6 +20,7 @@ use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\Layout;
 use Filament\Tables\Table;
 use Filament\Tables\Columns\Summarizers\Sum;
+use Filament\Tables\Columns\Summarizers\Summarizer;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Enums\FiltersLayout;
@@ -35,23 +37,14 @@ class GenerateInvoice extends Page implements HasTable
     protected static ?string $title = 'Generate';
     protected static string $view = 'filament.app.resources.invoice-resource.pages.generate-invoice';
 
-    public function table(Table $table): Table
+    public static function table(Table $table): Table
     {
         return $table
             ->query(
-                WorkSession::select(
-                    'work_sessions.id',
-                    'work_sessions.project_id',
-                    'task_id',
-                    'work_sessions.description',
-                    'work_sessions.rate_in_cents',
-                    'work_sessions.start',
-                    'tasks.title as task_title',
-                    DB::raw('SUM(duration) as total_duration'),
-                    DB::raw('ROUND(SUM(duration / 3600 * rate_in_cents / 100)) as subtotal'),
-                    DB::raw("COALESCE(tasks.title, work_sessions.description) as item"),
-                )->leftJoin('tasks', 'tasks.id', '=', 'work_sessions.task_id')
-                ->groupBy('item')
+                WorkSession::query()
+                    ->selectWorkSessions()
+                    ->withSubtotal()
+                    ->withTotalDuration()
             )
             ->columns([
                 Tables\Columns\TextColumn::make('item')
@@ -68,13 +61,19 @@ class GenerateInvoice extends Page implements HasTable
                     ->getStateUsing(fn (Model $record) => gmdate('H:i:s', $record->total_duration))
                     ->summarize([
                         Sum::make()
-                            ->label('Total')
+                            ->label('Total Hrs')
                             ->formatStateUsing(fn ($state) => gmdate('H:i:s', $state)),
                     ]),
                 Tables\Columns\TextColumn::make('rate_in_cents')
                     ->label('Rate')
-                    ->formatStateUsing(fn ($state) => $state / 100),
+                    ->formatStateUsing(fn ($state) => $state / 100)
+                    ->summarize([
+                        Summarizer::make()
+                            ->label('Vat')
+                            ->using(fn ($query): string => 0)
+                    ]),
                 Tables\Columns\TextColumn::make('subtotal')
+                    ->label('Amount')
                     ->getStateUsing(fn (Model $record) => $record->subtotal)
                     ->summarize([
                         Sum::make()
@@ -91,7 +90,8 @@ class GenerateInvoice extends Page implements HasTable
                             ->default(today())
                             ->columnSpan(1),
                     ])
-                    ->columns(2)
+                    ->columns(4)
+                    ->columnSpanFull()
                     ->query(function (Builder $query, array $data): Builder {
                         return $query
                             ->when(
@@ -154,5 +154,15 @@ class GenerateInvoice extends Page implements HasTable
                         }
                     ),
             ]);
+    }
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            PageAction::make('settings')
+                ->icon('heroicon-o-cog')
+                ->outlined()
+                ->url(InvoiceSettings::getUrl()),
+        ];
     }
 }
