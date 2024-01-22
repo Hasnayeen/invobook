@@ -3,10 +3,9 @@
 namespace App\Filament\App\Pages;
 
 use App\Models\Team;
-use Filament\Actions\Action;
 use Filament\Facades\Filament;
-use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Fieldset;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
@@ -18,13 +17,15 @@ use Filament\Pages\Page;
 class TeamSettings extends Page implements HasForms
 {
     use InteractsWithForms;
-    use InteractsWithFormActions;
 
     protected static ?string $navigationIcon = 'lucide-users';
     protected static ?string $navigationLabel = 'Team';
     protected static string $view = 'filament.app.pages.team-settings';
     protected static ?string $navigationGroup = 'Settings';
+
     public Team $team;
+
+    public ?array $data = [];
 
     public function mount(): void
     {
@@ -38,7 +39,7 @@ class TeamSettings extends Page implements HasForms
     {
         return $form
             ->schema([
-                Card::make(['Team Information'])
+                Section::make(['Team Information'])
                     ->columns(2)
                     ->schema([
                         Fieldset::make('Team Information')
@@ -50,7 +51,8 @@ class TeamSettings extends Page implements HasForms
                             ]),
                     ]),
             ])
-            ->model(Filament::getTenant());
+            ->statePath('data')
+            ->model($this->team);
     }
 
     public function create()
@@ -60,38 +62,5 @@ class TeamSettings extends Page implements HasForms
             ->title('Team updated')
             ->body('Your team information has been updated.')
             ->send();
-    }
-
-    /**
-     * @return array<Action | ActionGroup>
-     */
-    public function getFormActions(): array
-    {
-        return [
-            Action::make('save')
-                ->label('Save')
-                ->submit(),
-        ];
-    }
-
-    public function tabs(): array
-    {
-        return [
-            [
-                'id' => 'detailsForm',
-                'label' => 'Details',
-                'icon' => 'lucide-file-text',
-            ],
-            [
-                'id' => 'members',
-                'label' => 'Members',
-                'icon' => 'lucide-users-2',
-            ],
-            [
-                'id' => 'status',
-                'label' => 'Status',
-                'icon' => 'lucide-list-todo',
-            ],
-        ];
     }
 }

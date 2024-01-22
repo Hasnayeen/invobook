@@ -143,7 +143,8 @@ class StatusSetting extends Component implements HasActions, HasForms, HasTable
                 DeleteAction::make()
                     ->requiresConfirmation(true)
                     ->action(fn (Status $status) => $status->delete()),
-            ]);
+            ])
+            ->paginated(false);
     }
 
     private function createStatus($data)

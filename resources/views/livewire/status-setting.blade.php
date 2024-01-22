@@ -1,13 +1,19 @@
 <x-filament::section>
-    <x-filament-panels::header :actions="$this->getCachedHeaderActions()">
-        <x-slot name="heading">
-            {{ __('Statuses') }}
-        </x-slot>
+    <x-slot name="heading">
+        {{ __('Statuses') }}
+    </x-slot>
 
-        <x-slot name="subheading">
-            {{ __('Configure status to use in tasks.') }}
-        </x-slot>
-    </x-filament-panels::header>
+    <x-slot name="description">
+        {{ __('Configure status to use in tasks.') }}
+    </x-slot>
+
+
+    <x-slot name="headerEnd">
+        <x-filament-actions::actions
+            :actions="$this->getCachedHeaderActions()"
+            class="shrink-0"
+        />
+    </x-slot>
 
     {{ $this->table }}
 

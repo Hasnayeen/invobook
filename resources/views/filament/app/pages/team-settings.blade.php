@@ -1,21 +1,44 @@
 <x-filament::page>
-    <x-tabs :tabs="$this->tabs()" active="detailsForm"></x-tabs>
-    <form x-ref="detailsForm" @active-tab.window="$event.detail.propname === 'active' ? ($event.detail.id === 'detailsForm' ? $refs.detailsForm.classList.remove('hidden') : $el.classList.add('hidden')) : null" wire:submit="create" class="space-y-6">
-        {{ $this->form }}
-        <x-filament-actions::actions
-            :actions="$this->getCachedFormActions()"
-            :full-width="$this->hasFullWidthFormActions()"
-        />
-    </form>
+    <div x-data="{ activeTab: 'detailsForm' }" class="space-y-6">
+        <x-filament::tabs label="Content tabs" contained>
+            <x-filament::tabs.item
+                icon="lucide-file-text"
+                alpine-active="activeTab === 'detailsForm'"
+                x-on:click="activeTab = 'detailsForm'"
+            >
+                {{ __('Details') }}
+            </x-filament::tabs.item>
 
-    <div class="hidden" x-ref="members" @active-tab.window="$event.detail.propname === 'active' ? ($event.detail.id === 'members' ? $refs.members.classList.remove('hidden') : $el.classList.add('hidden')) : null">
-        <livewire:team-members />
+            <x-filament::tabs.item
+                icon="lucide-users-2"
+                alpine-active="activeTab === 'members'"
+                x-on:click="activeTab = 'members'"
+            >
+                {{ __('Members') }}
+            </x-filament::tabs.item>
+
+            <x-filament::tabs.item
+                icon="lucide-list-todo"
+                alpine-active="activeTab === 'status'"
+                x-on:click="activeTab = 'status'"
+            >
+                {{ __('Status') }}
+            </x-filament::tabs.item>
+        </x-filament::tabs>
+
+        <form x-ref="detailsForm" :class="activeTab === 'detailsForm' || 'hidden'" wire:submit="create" class="space-y-6">
+            {{ $this->form }}
+            <x-filament::button type="submit">
+                Save
+            </x-filament::button>
+        </form>
+
+        <div x-ref="members" :class="activeTab === 'members' || 'hidden'">
+            <livewire:team-members />
+        </div>
+
+        <div x-ref="status" :class="activeTab === 'status' || 'hidden'">
+            <livewire:status-setting />
+        </div>
     </div>
-
-    <div class="hidden" x-ref="status"
-        @active-tab.window="$event.detail.propname === 'active' ? ($event.detail.id === 'status' ? $refs.status.classList.remove('hidden') : $el.classList.add('hidden')) : null">
-        <livewire:status-setting />
-    </div>
-
-    <x-filament-actions::modals />
 </x-filament::page>

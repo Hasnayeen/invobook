@@ -64,7 +64,7 @@ class ViewProject extends Page implements HasInfolists, HasTable
                             ])
                             ->schema([
                                 TextEntry::make($key)
-                                    ->view('components.name-with-badge', ['name' => $key, 'count' =>$item->count(), 'color' => $item->first()->status->color]),
+                                    ->view('components.name-with-badge', ['name' => $key, 'count' =>$item->count(), 'color' => $item->first()->status?->color]),
                                 RepeatableEntry::make('tasks.' . $key)
                                     ->label('')
                                     ->schema([

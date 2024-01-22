@@ -84,25 +84,12 @@ class TeamMembers extends Component implements HasActions, HasTable, HasForms
             ])
             ->bulkActions([
                 // ...
-            ]);
+            ])
+            ->paginated(false);
     }
 
     public function render()
     {
         return view('livewire.team-members');
-    }
-
-    public function tabs(): array
-    {
-        return [
-            [
-                'id' => 'teamMembers',
-                'label' => 'Active Members',
-            ],
-            [
-                'id' => 'invitations',
-                'label' => 'Invitations',
-            ],
-        ];
     }
 }
