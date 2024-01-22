@@ -7,8 +7,8 @@ use App\Models\User;
 use Brick\Money\ISOCurrencyProvider;
 use Filament\Actions\Action;
 use Filament\Facades\Filament;
-use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Fieldset;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
@@ -68,7 +68,7 @@ class Profile extends Page implements HasForms
     {
         return $form
             ->schema([
-                Card::make(['Details'])
+                Section::make(['Details'])
                     ->schema([
                         Fieldset::make('Personal Information')
                             ->columns(2)
@@ -84,14 +84,14 @@ class Profile extends Page implements HasForms
                     ]),
             ])
             ->statePath('detailsData')
-            ->model(auth()->user());
+            ->model($this->user);
     }
 
     public function updatePasswordForm(Form $form): Form
     {
         return $form
             ->schema([
-                Card::make(['Details'])
+                Section::make(['Details'])
                     ->schema([
                         Fieldset::make('Update Password')
                             ->columns(2)
@@ -117,7 +117,7 @@ class Profile extends Page implements HasForms
     {
         return $form
             ->schema([
-                Card::make(['Details'])
+                Section::make(['Details'])
                     ->schema([
                         Fieldset::make('Default Rate')
                             ->columns(2)
@@ -158,6 +158,11 @@ class Profile extends Page implements HasForms
     public function saveDetails(): void
     {
         $this->user->update($this->detailsData);
+        Notification::make()
+            ->title(__('Success!'))
+            ->body(__('Your personal information has been updated.'))
+            ->success()
+            ->send();
     }
 
     public function savePassword(): void
@@ -197,65 +202,9 @@ class Profile extends Page implements HasForms
             }
         }
         Notification::make()
-            ->title('Rates saved successfully.')
+            ->title(__('Success!'))
+            ->body(__('Rates updated successfully.'))
             ->success()
             ->send();
-    }
-
-    /**
-     * @return array<Action | ActionGroup>
-     */
-    protected function getSaveDetailsFormAction(): array
-    {
-        return [
-            Action::make('save-details')
-                ->label('Save')
-                ->submit('saveDetails'),
-        ];
-    }
-
-    /**
-     * @return array<Action | ActionGroup>
-     */
-    protected function getSavePasswordFormAction(): array
-    {
-        return [
-            Action::make('save-password')
-                ->label('Save')
-                ->submit('savePassword'),
-        ];
-    }
-
-    /**
-     * @return array<Action | ActionGroup>
-     */
-    protected function getSaveRatesFormAction(): array
-    {
-        return [
-            Action::make('save-rates')
-                ->label('Save')
-                ->submit('saveRates'),
-        ];
-    }
-
-    public function tabs(): array
-    {
-        return [
-            [
-                'id' => 'detailsForm',
-                'label' => 'Details',
-                'icon' => 'lucide-file-text',
-            ],
-            [
-                'id' => 'updatePasswordForm',
-                'label' => 'Update Password',
-                'icon' => 'lucide-lock',
-            ],
-            [
-                'id' => 'rateForm',
-                'label' => 'Rate',
-                'icon' => 'lucide-banknote',
-            ],
-        ];
     }
 }

@@ -1,31 +1,50 @@
 <x-filament::page>
-    <x-tabs :tabs="$this->tabs()" active="detailsForm"></x-tabs>
-    <div>
-        <form x-ref="detailsForm" @active-tab.window="$event.detail.id === 'detailsForm' ? $refs.detailsForm.classList.remove('hidden') : $el.classList.add('hidden')" class="space-y-6" wire:submit="saveDetails" wire:ignore.self>
+    <div x-data="{ activeTab: 'detailsForm' }" class="space-y-6">
+        <x-filament::tabs label="Content tabs" contained>
+            <x-filament::tabs.item
+                icon="lucide-file-text"
+                alpine-active="activeTab === 'detailsForm'"
+                x-on:click="activeTab = 'detailsForm'"
+            >
+                {{ __('Details') }}
+            </x-filament::tabs.item>
+
+            <x-filament::tabs.item
+                icon="lucide-lock"
+                alpine-active="activeTab === 'updatePasswordForm'"
+                x-on:click="activeTab = 'updatePasswordForm'"
+            >
+                {{ __('Update Password') }}
+            </x-filament::tabs.item>
+
+            <x-filament::tabs.item
+                icon="lucide-banknote"
+                alpine-active="activeTab === 'rateForm'"
+                x-on:click="activeTab = 'rateForm'"
+            >
+                {{ __('Rate') }}
+            </x-filament::tabs.item>
+        </x-filament::tabs>
+
+        <form x-ref="detailsForm" :class="activeTab === 'detailsForm' || 'hidden'" class="space-y-6" wire:submit="saveDetails">
             {{ $this->detailsForm }}
-            <x-filament-actions::actions
-                class="mt-6"
-                :actions="$this->getSaveDetailsFormAction()"
-                :full-width="$this->hasFullWidthFormActions()"
-            />
+            <x-filament::button type="submit">
+                {{ __('Save') }}
+            </x-filament::button>
         </form>
 
-        <form x-ref="updatePasswordForm" @active-tab.window="$event.detail.id === 'updatePasswordForm' ? $refs.updatePasswordForm.classList.remove('hidden') : $el.classList.add('hidden')" class="space-y-6 hidden" wire:submit="savePassword" wire:ignore.self>
+        <form x-ref="updatePasswordForm" :class="activeTab === 'updatePasswordForm' || 'hidden'" class="space-y-6" wire:submit="savePassword">
             {{ $this->updatePasswordForm }}
-            <x-filament-actions::actions
-                class="mt-6"
-                :actions="$this->getSavePasswordFormAction()"
-                :full-width="$this->hasFullWidthFormActions()"
-            />
+            <x-filament::button type="submit">
+                {{ __('Save') }}
+            </x-filament::button>
         </form>
 
-        <form x-ref="rateForm" @active-tab.window="$event.detail.id === 'rateForm' ? $refs.rateForm.classList.remove('hidden') : $el.classList.add('hidden')" class="space-y-6 hidden" wire:submit="saveRates" wire:ignore.self>
+        <form x-ref="rateForm" :class="activeTab === 'rateForm' || 'hidden'" class="space-y-6" wire:submit="saveRates">
             {{ $this->rateForm }}
-            <x-filament-actions::actions
-                class="mt-6"
-                :actions="$this->getSaveRatesFormAction()"
-                :full-width="$this->hasFullWidthFormActions()"
-            />
+            <x-filament::button type="submit">
+                {{ __('Save') }}
+            </x-filament::button>
         </form>
     </div>
     <x-filament-actions::modals />

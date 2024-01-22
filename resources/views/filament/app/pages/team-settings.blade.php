@@ -29,7 +29,7 @@
         <form x-ref="detailsForm" :class="activeTab === 'detailsForm' || 'hidden'" wire:submit="create" class="space-y-6">
             {{ $this->form }}
             <x-filament::button type="submit">
-                Save
+                {{ __('Save') }}
             </x-filament::button>
         </form>
 
