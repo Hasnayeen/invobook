@@ -59,6 +59,22 @@ Install composer packages
 composer install
 ```
 
+## Docker
+
+Start the production-style stack with:
+
+```sh
+docker compose up -d --build
+```
+
+Open the app at `http://localhost:8080` from the Codespaces terminal/browser, or use the forwarded port URL without appending `:8080` again.
+
+To stop and clean up the stack:
+
+```sh
+docker compose down -v
+```
+
 ## Screenshots <small>[↑Top](#about-invobook)</small>
 
 ![Dashboard]()

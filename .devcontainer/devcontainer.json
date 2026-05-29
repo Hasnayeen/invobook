@@ -1,0 +1,14 @@
+{
+  "name": "invobook",
+  "dockerComposeFile": ["../docker-compose.yaml"],
+  "service": "app",
+  "runServices": ["db", "app"],
+  "workspaceFolder": "/workspaces/invobook",
+  "forwardPorts": [8080],
+  "portsAttributes": {
+    "8080": {
+      "label": "Invobook",
+      "onAutoForward": "openBrowser"
+    }
+  }
+}
