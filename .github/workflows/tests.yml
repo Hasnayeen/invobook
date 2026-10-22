@@ -1,0 +1,114 @@
+name: tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.5
+          tools: composer:v2
+          coverage: xdebug
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Setup Vite+
+        uses: voidzero-dev/setup-vp@v1.21.1
+        with:
+          node-version: 24
+
+      - name: Cache Composer Dependencies
+        uses: actions/cache@v6
+        with:
+          path: vendor
+          key: ${{ runner.os }}-composer-${{ hashFiles('composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Cache Bun Dependencies
+        uses: actions/cache@v6
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-bun-${{ hashFiles('bun.lock', 'package.json') }}
+          restore-keys: ${{ runner.os }}-bun-
+
+      - name: Install Dependencies
+        run: |
+          composer install --no-interaction --prefer-dist --optimize-autoloader --no-progress --no-scripts
+          composer run-script post-autoload-dump
+
+      - name: Copy Environment File
+        run: cp .env.example .env
+
+      - name: Generate Application Key
+        run: php artisan key:generate
+
+      - name: Install Bun Dependencies
+        run: bun install
+
+      - name: Build Assets
+        run: bun run build
+
+      - name: Get Playwright version
+        id: playwright-version
+        run: echo "version=$(bun pm ls 2>/dev/null | grep playwright | head -1 | sed 's/.*@//')" >> $GITHUB_OUTPUT
+
+      - name: Cache Playwright Browsers
+        uses: actions/cache@v6
+        id: playwright-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ steps.playwright-version.outputs.version }}
+
+      - name: Install Playwright Browsers
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: bunx playwright install --with-deps
+
+      - name: Install Playwright System Dependencies
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: bunx playwright install-deps
+
+      - name: Cache Rector
+        uses: actions/cache@v6
+        with:
+          path: tmp/rector
+          key: ${{ runner.os }}-rector-${{ hashFiles('composer.lock') }}
+          restore-keys: ${{ runner.os }}-rector-
+
+      - name: Cache PHPStan
+        uses: actions/cache@v6
+        with:
+          path: tmp/phpstan
+          key: ${{ runner.os }}-phpstan-${{ hashFiles('composer.lock') }}
+          restore-keys: ${{ runner.os }}-phpstan-
+
+      - name: Create Cache Directories
+        run: mkdir -p tmp/rector tmp/phpstan
+
+      - name: Tests
+        run: composer test
+
+      - name: Store Artifacts
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: browser-screenshots
+          path: tests/Browser/Screenshots

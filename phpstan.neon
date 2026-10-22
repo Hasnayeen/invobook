@@ -1,18 +1,19 @@
 includes:
-    - ./vendor/nunomaduro/larastan/extension.neon
+    - vendor/larastan/larastan/extension.neon
+    - vendor/nesbot/carbon/extension.neon
+    - phar://phpstan.phar/conf/bleedingEdge.neon
 
 parameters:
 
     paths:
-        - app/
+        - app
+        - bootstrap/app.php
+        - config
+        - database
+        - public
+        - routes
 
-    # Level 9 is the highest level
-    level: 5
 
-#    ignoreErrors:
-#        - '#PHPDoc tag @var#'
-#
-#    excludePaths:
-#        - ./*/*/FileToBeExcluded.php
-#
-#    checkMissingIterableValueType: false
+    level: max
+
+    tmpDir: tmp/phpstan

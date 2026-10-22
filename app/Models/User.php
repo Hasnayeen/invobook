@@ -1,100 +1,54 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-
-use Filament\Models\Contracts\HasTenants;
-use Filament\Panel;
-use Illuminate\Database\Eloquent\Concerns\HasUlids;
+use Carbon\CarbonInterface;
+use Database\Factories\UserFactory;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Attributes\Hidden;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Collection;
-use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable implements HasTenants
+/**
+ * @property-read string $id
+ * @property-read string $name
+ * @property-read string $email
+ * @property-read CarbonInterface|null $email_verified_at
+ * @property-read string $password
+ * @property-read string|null $remember_token
+ * @property-read CarbonInterface $created_at
+ * @property-read CarbonInterface $updated_at
+ */
+#[Hidden([
+    'password',
+    'remember_token',
+])]
+final class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, HasUlids, Notifiable, SoftDeletes;
+    /** @use HasFactory<UserFactory> */
+    use HasFactory;
+
+    use HasUuids;
+    use Notifiable;
 
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
+     * @return array<string, string>
      */
-    protected $fillable = [
-        'ulid',
-        'name',
-        'email',
-        'password',
-    ];
-
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
-
-    public function uniqueIds(): array
+    public function casts(): array
     {
-        return ['id'];
-    }
-
-    public function getTenants(Panel $panel): Collection
-    {
-        return $this->ownedTeams;
-    }
-
-    public function canAccessTenant(Model $tenant): bool
-    {
-        return $this->ownedTeams->contains($tenant);
-    }
-
-    public function ownedTeams(): HasMany
-    {
-        return $this->hasMany(Team::class, 'user_id');
-    }
-
-    public function teams(): BelongsToMany
-    {
-        return $this->belongsToMany(Team::class, 'team_user', 'user_id', 'team_id')->using(Member::class);
-    }
-
-    public function rates(): HasMany
-    {
-        return $this->hasMany(Rate::class);
-    }
-
-    public function base(): HasMany
-    {
-        return $this->rates()->where('default', true);
-    }
-
-    public function tasks(): HasMany
-    {
-        return $this->hasMany(Task::class);
-    }
-
-    public function addresses(): MorphMany
-    {
-        return $this->morphMany(Address::class, 'addressable');
+        return [
+            'id' => 'string',
+            'name' => 'string',
+            'email' => 'string',
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+            'remember_token' => 'string',
+            'created_at' => 'datetime',
+            'updated_at' => 'datetime',
+        ];
     }
 }

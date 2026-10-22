@@ -1,18 +1,33 @@
 {
     "private": true,
+    "type": "module",
     "scripts": {
-        "dev": "vite",
-        "build": "vite build"
+        "build": "vp build",
+        "dev": "vp dev",
+        "lint": "NODE_OPTIONS='--experimental-strip-types' vp fmt resources/",
+        "test:lint": "NODE_OPTIONS='--experimental-strip-types' vp fmt --check resources/"
     },
     "devDependencies": {
-        "@tailwindcss/forms": "^0.5.3",
-        "@tailwindcss/typography": "^0.5.9",
-        "alpinejs": "^3.4.2",
-        "autoprefixer": "^10.4.14",
-        "laravel-vite-plugin": "^0.7.2",
-        "postcss": "^8.4.31",
-        "tailwindcss": "^3.3.2",
-        "tippy.js": "^6.3.7",
-        "vite": "^4.5.5"
+        "@tailwindcss/vite": "^4.3.3",
+        "concurrently": "^10.0.6",
+        "laravel-vite-plugin": "^3.2.0",
+        "npm-check-updates": "^23.1.1",
+        "playwright": "^1.64.1",
+        "tailwindcss": "^4.3.3",
+        "vite": "npm:@voidzero-dev/vite-plus-core@1.3.0",
+        "vite-plus": "1.3.0"
+    },
+    "overrides": {
+        "vite": "npm:@voidzero-dev/vite-plus-core@1.3.0"
+    },
+    "devEngines": {
+        "packageManager": {
+            "name": "pnpm",
+            "version": "^12.9.0",
+            "onFail": "warn"
+        }
+    },
+    "optionalDependencies": {
+        "@laravel/multiplex": "^0.4.5"
     }
 }

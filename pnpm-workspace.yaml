@@ -1,0 +1,14 @@
+packages:
+  - '.'
+
+# Only install dependency versions published at least one day ago.
+minimumReleaseAge: 1440
+
+ignoreScripts: true
+
+audit:
+  level: low
+
+# Mirrors the "overrides" field in package.json, which pnpm does not read.
+overrides:
+  vite: 'npm:@voidzero-dev/vite-plus-core@1.3.0'
