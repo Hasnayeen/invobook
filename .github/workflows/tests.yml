@@ -32,7 +32,7 @@ jobs:
         uses: oven-sh/setup-bun@v2
 
       - name: Setup Vite+
-        uses: voidzero-dev/setup-vp@v1.21.2
+        uses: voidzero-dev/setup-vp@v1.22.0
         with:
           node-version: 24
 
